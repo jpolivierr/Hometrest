@@ -1,7 +1,6 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 *web.xml
 *.class
+application.properties
 
 # ignore ALL files in ANY directory named temp
 temp/ 
@@ -69,13 +68,6 @@ build/
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
 
 # next.js
 /.next/
