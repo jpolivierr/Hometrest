@@ -9,9 +9,44 @@ Forms
     padding: 2rem !important;
 }
 
-form h2{
-  margin-top: 0rem;
-   margin-bottom: 1.6rem;
+.flex-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.flex-form fieldset input{
+    border-radius: 100px;
+    padding: .5rem 1rem;
+    padding-left: 2.5rem;
+    outline: none;
+}
+
+.flex-form button{
+    margin: 0;
+}
+
+.column-form {
+    display: flex;
+    flex-flow: column;
+    gap: 1.5rem;
+}
+
+.column-form h2{
+    font-size: 2rem;
+}
+
+.column-form fieldset i,
+.flex-form fieldset i{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 16px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 form label{
@@ -34,6 +69,10 @@ form fieldset input{
   border: 1px solid #70879f;
   width: 100%;;
   width: 100%;
+  border-radius: 100px;
+  padding: .5rem 1rem;
+  padding-left: 2.5rem;
+  outline: none;
 }
 
 

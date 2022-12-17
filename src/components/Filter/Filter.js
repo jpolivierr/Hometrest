@@ -3,6 +3,9 @@ import Lists from "../Lists/Lists";
 import Forms from "../Forms/Form";
 import "./style_Filter.css"
 
+//form Fields
+import { template } from "../Forms/JsonFormFields";
+
 //Actions
 import { modalAction } from "../../_state/Actions/actionCollection";
 import { useDispatch } from "react-redux"
@@ -13,41 +16,23 @@ function Filter(){
 
     const {openModal} = bindActionCreators(modalAction, useDispatch())
 
-    const template = {
-        fields : [
-                    {
-                      name: "location",
-                      placeholder : "Location",
-                      stateProp : "merchantName",
-                      class : "search-input",
-                      type: "text",
-                      value: "",
-                      handler: "input",
-                      tag: <i className="fa-solid fa-location-dot"></i>
-                      
-                    },
-                    {
-                      label: "Search",
-                      type: "submit",
-                      value: "",
-                      handler: "submit",
-                      tag: "",
-                      class: "main-btn"
-                      
-                    },
-                 ]
-  }
 
     return (
             <FlexLayout classname ={"container filter"}>    
-               <li onClick={()=>openModal(MODAL_TYPE.SELECT, COMPONENT.RECURRING_CREATE_FORM)} className="more-filter">
+               <li onClick={()=>openModal(MODAL_TYPE.SELECT, COMPONENT.FILTER_FORM)} className="more-filter">
                <i className="fa-solid fa-ellipsis-vertical"></i>
                     Filter
                 </li>      
                 <ul>
                     
                     <li>
-                    <Forms title="" template = {template} actionType={COMPONENT.RECURRING_CREATE_FORM} />
+                    <Forms 
+                            classname="flex-form"
+                            title="" 
+                            template = {template} 
+                            url={URL.GET_PROPERTIES}
+                            method="POST"
+                            />
                     </li>
                 </ul>
                 {/* <Lists classname = "" lists={filterList}/> */}

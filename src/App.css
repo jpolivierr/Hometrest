@@ -36,6 +36,7 @@
     --border-radius: 100px;
     --border-radius-v2: 20px;
     --modal-bk-color: #2a2b2ebf;
+    --animation-second: .2s;
 }
 
 *{
@@ -44,7 +45,7 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
   color: var(--text-color);
-  font-size: .9rem;
+  font-size: 1rem;
 }
 
 li{
@@ -60,7 +61,7 @@ li{
 button{
   border: none;
   border-radius: var(--border-radius);
-  padding: .5rem 1rem;
+  padding: .6rem 1rem;
   font-weight: 600;
   background: var(--main-color);
   cursor: pointer;

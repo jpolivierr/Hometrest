@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux"
 import { bindActionCreators } from "redux"
 import { URL, PATH_TYPE, COMPONENT } from "../../VAR/var"
 
-const Forms = ({title, template, actionType}) =>{
+const Forms = ({classname, title, template, url, method}) =>{
 
     const {fields} = template
     const {dropDown} = useDropDown()
@@ -60,59 +60,34 @@ const Forms = ({title, template, actionType}) =>{
     const handleDropwDown = (name, stateProp) =>{
         setFormInputs({...formInputs, [stateProp] : name})
     }
+
+
        // ********************************************************************
     // Submit actions
     // ********************************************************************
     
-    const submitCreateRecurring = async (e) =>{
-        e.preventDefault()
-        const errorResult = validator.init(".the-recurring-form")
-        if(Object.keys(errorResult).length !== 0){
-             setErrors(errorResult)
-        }else{
-            setErrors(errorResult)
-            const url = URL.CREATE_RECURRING
+    const submitForm = async (e) =>{
+           
+            e.preventDefault()
+        
             let dataCopy = JSON.parse(JSON.stringify(formInputs))
-            dataCopy["clientDate"] = new Date().toLocaleDateString('sv')
 
-            //message to show if created successfully
-            const message = {
-                header: "Success",
-                text : "Created successfully"
-            }
-
-            await sendRequest(PATH_TYPE.RECURRING,"POST",url, dataCopy, message )
+            await sendRequest(method,url, dataCopy )
 
             if(requestState.status === 600){
                 openModal(null)
-                // reset()
-                navigate('/recurring')
             }
             if(requestState.status === 200){
                  openModal(null)
-                //  reset()
-                 navigate('/recurring')
             } 
            
-        }
-
     }
 
-    const getSubmitButton = (e, actionType) =>{
-        switch(actionType){
-            case COMPONENT.RECURRING_CREATE_FORM :
-                  submitCreateRecurring(e)
-                  break
-            default :
-                return null
-        }
-    }
 
     // ********************************************************************
     // set field type
     // ********************************************************************
    const fieldSet = (props, id) =>{
-    console.log(props)
 
     switch(props.type){
         case "text" :
@@ -141,7 +116,7 @@ const Forms = ({title, template, actionType}) =>{
                                 <i className="fa-solid fa-chevron-down"></i>
                        </fieldset>
         case "submit" :
-        return <button key={id} onClick={(e)=> getSubmitButton(e,actionType)} 
+        return <button key={id} onClick={(e)=> submitForm(e)} 
                        className={props.class}>
                         {props.label}
                         {props.tag && props.tag}
@@ -157,7 +132,7 @@ const Forms = ({title, template, actionType}) =>{
     // ********************************************************************
 
     return(
-        <form className="">
+        <form className={classname}>
             <h2>{title}</h2>
 
                 {fields.map((field, index)=>(

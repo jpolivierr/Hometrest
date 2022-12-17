@@ -1,10 +1,17 @@
 import React from 'react';
 import "./style_modal.css"
 
-import { MODAL_TYPE, COMPONENT} from '../../VAR/var';
+import { MODAL_TYPE, COMPONENT, URL} from '../../VAR/var';
 
 //Animation
 import { useAnimation } from '../Animation/useAnimation';
+
+// Form
+import Forms from '../Forms/Form';
+
+// Form fields
+import { filterFields } from '../Forms/JsonFormFields';
+
 //Redux
 import {useSelector} from 'react-redux'
 
@@ -17,7 +24,6 @@ import { modalAction } from '../../_state/Actions/actionCollection';
 
 const Modals = () => {
 
-    const TRANSITION = 200
     const modalState = useSelector(state => state.modalReducer)
     const {openModal} =bindActionCreators(modalAction, useDispatch())
 
@@ -32,8 +38,14 @@ const Modals = () => {
 
     const content =(type)=>{
         switch(type){
-            case COMPONENT.RECURRING_UPDATE_FORM :
-                return null
+            case COMPONENT.FILTER_FORM  :
+                return <Forms 
+                              classname={"column-form"}
+                              title="Search" 
+                              template= {filterFields} 
+                              url={URL.GET_PROPERTIES}
+                              method="POST"
+                              />
             case COMPONENT.RECURRING_CREATE_FORM  :
                 return null
             case COMPONENT.TRANSACTION_CREATE_FORM :

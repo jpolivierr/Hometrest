@@ -10,7 +10,7 @@ export const MODAL_TYPE = {
 }
 
 export const COMPONENT = {
-     RECURRING_UPDATE_FORM : "recurring-update-form",
+     FILTER_FORM : "filter-form",
      RECURRING_CREATE_FORM : "recurring-create-form",
      TRANSACTION_UPDATE_FORM : "transaction-update-form",
      TRANSACTION_CREATE_FORM : "transaction-create-form",
@@ -41,18 +41,6 @@ export const PATH_TYPE = {
 
 export const URL = {
 
-    CREATE_RECURRING : `http://localhost:8080/process/${PATH_TYPE.RECURRING}?type=CREATE`,
-
-    DELETE_RECURRING : `http://localhost:8080/process/${PATH_TYPE.RECURRING}?type=DELETE`,
-
-    UPDATE_RECURRING : `http://localhost:8080/process/${PATH_TYPE.RECURRING}?type=UPDATE`,
-
-    CREATE_TRANSACTION: `http://localhost:8080/process/${PATH_TYPE.TRANSACTION}?type=CREATE`,
-
-    DELETE_TRANSACTION : `http://localhost:8080/process/${PATH_TYPE.TRANSACTION}?type=DELETE`,
-
-    UPDATE_TRANSACTION : `http://localhost:8080/process/${PATH_TYPE.TRANSACTION}?type=UPDATE`,
-
-    GET_ACCCOUNT : `http://localhost:8080/process/${PATH_TYPE.ACCOUNT}`,
+    GET_PROPERTIES : `http://localhost:6080/`,
 
 }

@@ -25,7 +25,7 @@ const useFetchRequest = () =>{
                   }
      }
 
-    const sendRequest = async (type, method, url, data, csData) =>{
+    const sendRequest = async (method, url, data) =>{
         
         setLoading(true)
         
@@ -65,7 +65,7 @@ const useFetchRequest = () =>{
                                             csMessage: ""
                                         }
                         console.log(serverResp)
-                        setRequestStatus(type, serverResp)
+                        // setRequestStatus(type, serverResp)
                         break
                     case 400 :
                         setLoading(false)
