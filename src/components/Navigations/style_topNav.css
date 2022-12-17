@@ -1,0 +1,12 @@
+.top_nav{
+    padding: 1rem 0rem;
+    border-bottom: 1px solid var(--light-silver);
+}
+
+.top_nav ul{
+    display: none;
+}
+
+.top_nav figure h2{
+    font-size: 1rem;
+}

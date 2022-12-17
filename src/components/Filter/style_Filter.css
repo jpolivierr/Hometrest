@@ -1,0 +1,44 @@
+.filter{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0rem;
+}
+
+.filter .more-filter{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    cursor: pointer;
+}
+
+.filter form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.filter form fieldset i{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter form fieldset input{
+    border-radius: 100px;
+    padding: .5rem 1rem;
+    padding-left: 2rem;
+    outline: none;
+}
+
+.filter form button{
+    margin: 0;
+}

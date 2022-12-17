@@ -1,0 +1,152 @@
+.fade-in{
+    animation: FadeIn var(--animation-second) ease forwards ;
+   }
+  
+  @keyframes FadeIn {
+  
+      from{
+        opacity: 0;
+      }
+      to{
+        opacity: 1;
+      }
+     }
+  
+     .closeModal{
+      animation: FadeOut var(--animation-second) ease forwards;
+   }
+  
+  @keyframes FadeOut {
+      from{
+        opacity: 1;
+      }
+      to{
+        opacity: 0;
+      }
+     }
+  
+  
+  .slide-right{
+  animation: SlideRight var(--animation-second) forwards;
+  }
+  @keyframes SlideRight {
+  from{
+      left: -1000px;
+  }
+  to{
+      left: 0;
+  }
+  }
+  
+  .slide-left{
+    animation: SlideLeft var(--animation-second) forwards;
+   }
+  @keyframes SlideLeft {
+      from{
+          left: 0;
+      }
+      to{
+          left: -300px;
+      }
+      } 
+  
+  .slide-up{
+    animation: SlideUp var(--animation-second) ease-in-out forwards;
+  }
+  
+  @keyframes SlideUp {
+      from{
+        opacity: 0;
+        bottom: -300px;
+      }
+      to{
+        opacity: 1;
+       bottom: 0;
+      }
+   }
+  
+  
+  .slide-down{
+    animation: SlideDown var(--animation-second) ease-in-out forwards;
+  }
+  
+  @keyframes SlideDown {
+  from{
+    opacity: 1;
+    bottom: 0;
+  }
+  to{
+    opacity: 0;
+     bottom: -800px;
+  }
+  }
+  
+  .close-down{
+    animation: CloseDown var(--animation-second) ease-in-out forwards;
+  }
+  
+   @keyframes CloseDown {
+      from{
+        bottom: 0;
+      }
+      to{
+       bottom: -500px;
+      }
+    }
+  
+    .float-down{
+      animation: Float-down var(--animation-second) ease-in-out forwards;
+    }
+  
+    @keyframes Float-down {
+      from{
+        top: -50%;
+        opacity: 0;
+      }
+      to{
+        top: 5% ;
+        opacity: 1;
+      }
+    }
+  
+    .float-up{
+      animation: Float-up .1s ease-in-out forwards;
+    }
+  
+    @keyframes Float-up {
+      from{
+        top: 5%;
+        opacity: 1;
+      }
+      to{
+        top: -50%;
+        opacity: 0;
+      }
+    }
+  
+    .slider-down{
+      animation: Slider-Down var(--animation-second) ease-out forwards;
+    }
+  
+    @keyframes Slider-Down {
+  
+        from{
+            height: 0px;
+        }to{
+          height: 215px;
+        }
+      
+    }
+  
+    .slider-up{
+      animation: Slider-Up var(--animation-second) ease-out forwards;
+    }
+  
+    @keyframes Slider-Up {
+        from{
+            height: 215px;
+        }to{
+          height: 0px;
+        }
+      
+    }

@@ -1,0 +1,10 @@
+
+.flex_nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex_list {
+    display: flex;
+}

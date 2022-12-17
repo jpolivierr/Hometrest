@@ -1,38 +1,75 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); 
+
+:root{
+    --shadow: 0px 5px 40px #82bbcc2e;
+    --shadow-hard: 0px 25px 40px #557b867a;
+    --shadow-soft: 10px 0px 50px -30px #4264889c;
+    --shadow-btn: 8px 15px 20px -5px #82bbcc99;
+    --p-size: 1.1rem;
+    --h1-size: 4rem;
+    --h2-size: 3rem;
+    --h3-size: 2rem;
+    --h4-size: 1rem;
+    --h5-size: 1.3rem;
+    --list-size: 1.1rem;
+    --btn-label-size: inherit;
+    --p-weight: 500;
+    --list-weight: 600;
+    --h1-weight: 800;
+    --h2-weight: 800;
+    --h3-weight: 800;
+    --h4-weight: 600;
+    --h5-weight: 600;
+    --label-weight: 600;
+    --btn-label-weight: 800;
+    --text-color: #142149;
+    --text-color-light: #142149a1;
+    --text-color-dark: #050913;
+    --text-color-error: #ff4e4e;
+    --light-blue: #a4e3fd52;
+    --light-blue-v2: #bed4d9;
+    --light-silver:  #e6e9ea;
+    --error-color: #ff000014;
+    --main-color: #ff0965;
+    --secondary-color: #fff9f1;
+    --secondary-color: #fbefdf;
+    --border-radius: 100px;
+    --border-radius-v2: 20px;
+    --modal-bk-color: #2a2b2ebf;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-color);
+  font-size: .9rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+li{
+  list-style: none;
+  font-size: var(--list-size);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container{
+    width: 90%;
+    margin: auto;
+}
+
+button{
+  border: none;
+  border-radius: var(--border-radius);
+  padding: .5rem 1rem;
+  font-weight: 600;
+  background: var(--main-color);
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button i{
+  color: white;
 }
