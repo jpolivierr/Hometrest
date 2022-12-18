@@ -27,6 +27,39 @@ export const filterFields = {
 
                 fields : [
                     {
+                        stateProp : "status",
+                        class : "select-status",
+                        type: "status",
+                        
+                      },
+                      {
+                        label : "Property type",
+                        name: "Property Type",
+                        placeholder : "Location",
+                        stateProp : "propertyType",
+                        class : "property-list-type",
+                        type: "list",
+                        value: "",
+                      },
+                      {
+                        label : "Price",
+                        name: "",
+                        placeholder : "",
+                        stateProp : "prices",
+                        class : "price-options",
+                        type: "price-options",
+                        value: "",
+                      },
+                      {
+                        label : "Bedrooms",
+                        name: "",
+                        placeholder : "",
+                        stateProp : "bedRooms",
+                        class : "bed-options",
+                        type: "bed-options",
+                        value: "",
+                      },
+                    {
                         name: "location",
                         placeholder : "Location",
                         stateProp : "location",

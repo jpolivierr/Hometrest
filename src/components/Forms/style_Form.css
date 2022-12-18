@@ -10,6 +10,7 @@ Forms
 }
 
 .flex-form{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,8 +24,47 @@ Forms
     outline: none;
 }
 
-.flex-form button{
+.flex-form .flex-button{
+    background: #9cbad93d;
+    background: white;
+    border: 1px solid #70879f;
+    color: var(--text-color);
     margin: 0;
+    font-weight: 400;
+}
+
+.flex-form .price-options,
+.flex-form .bed-options{
+    position: absolute;
+    width: 400px;
+    top: 130%;
+    left: 0;
+    box-shadow: 0px 0px 20px #82bbcc54;
+    padding: 1rem;
+}
+
+.flex-form .bed-options{
+    max-width: max-content;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.flex-form .bed-options label{
+    grid-column: 1;
+}
+
+.flex-form .show-prices{
+    display: grid !important;
+}
+
+.flex-form .hide-prices{
+    display: none !important;
+}
+
+.flex-form .select-status,
+.flex-form .property-list-type{
+   display: none;
 }
 
 .column-form {
@@ -34,7 +74,7 @@ Forms
 }
 
 .column-form h2{
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .column-form fieldset i,
@@ -50,9 +90,10 @@ Forms
 }
 
 form label{
-    font-weight: 400;
+    font-weight: 600;
     margin-bottom: .4rem;
-    font-size: .9rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
 }
 
 form fieldset{

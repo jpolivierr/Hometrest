@@ -28,6 +28,27 @@ class Format{
          
     }
 
+    abbreviateNumber(num) {
+        if (num >= 1000 && num < 1000000) {
+          return (num / 1000).toFixed(1) + "k";
+        } else if (num >= 1000000 && num < 1000000000) {
+          return (num / 1000000).toFixed(1) + "m";
+        } else if (num >= 1000000000) {
+          return (num / 1000000000).toFixed(1) + "b";
+        } else {
+          return num;
+        }
+      }
+
+      convertToInt(str) {
+        // Remove the dollar sign and the "k" abbreviation
+        str = str.replace("$", "").replace("k", "");
+      
+        // Convert the string to a number and multiply it by 1000
+        return parseFloat(str) * 1000;
+      }
+      
+
 
 }
 

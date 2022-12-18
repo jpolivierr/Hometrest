@@ -3,8 +3,9 @@ import Lists from "../Lists/Lists";
 import Forms from "../Forms/Form";
 import "./style_Filter.css"
 
+
 //form Fields
-import { template } from "../Forms/JsonFormFields";
+import { template, filterFields } from "../Forms/JsonFormFields";
 
 //Actions
 import { modalAction } from "../../_state/Actions/actionCollection";
@@ -19,7 +20,7 @@ function Filter(){
 
     return (
             <FlexLayout classname ={"container filter"}>    
-               <li onClick={()=>openModal(MODAL_TYPE.SELECT, COMPONENT.FILTER_FORM)} className="more-filter">
+               <li onClick={()=>openModal(MODAL_TYPE.FLOATING, COMPONENT.FILTER_FORM)} className="more-filter">
                <i className="fa-solid fa-ellipsis-vertical"></i>
                     Filter
                 </li>      
@@ -29,7 +30,7 @@ function Filter(){
                     <Forms 
                             classname="flex-form"
                             title="" 
-                            template = {template} 
+                            template = {filterFields} 
                             url={URL.GET_PROPERTIES}
                             method="POST"
                             />

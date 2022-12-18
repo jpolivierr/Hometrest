@@ -3,6 +3,8 @@ import modalReducer from "./modalReducer";
 import serverMessageReducer from "./serverMessageReducer";
 import resetReducer from "./resetReducer";
 import requestStatusReducer from "./requestStatusReducer";
+import filterReducer from "./filterReducer";
+
 
 import {combineReducers} from 'redux'
 
@@ -11,7 +13,8 @@ const reducers = combineReducers({
     modalReducer,
     serverMessageReducer,
     resetReducer,
-    requestStatusReducer
+    requestStatusReducer,
+    filterReducer
 })
 
 export default reducers
