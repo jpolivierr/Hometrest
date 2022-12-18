@@ -4,3 +4,24 @@ export const setPrices = (data) =>{
         payload: data
     }
 }
+
+export const setBeds = (data) =>{
+    return{
+        type: "beds",
+        payload: data
+    }
+}
+
+export const setBaths = (data) =>{
+    return{
+        type: "baths",
+        payload: data
+    }
+}
+
+export const setLocation = (data) =>{
+    return{
+        type: "location",
+        payload: data
+    }
+}

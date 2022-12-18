@@ -2,30 +2,33 @@ import "./style_Form.css"
 import { useState } from "react"
 import Validator from "../../functions/Validator"
 import { useFetchRequest } from "../Request/useFetchRequest"
-import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
 
+import { URL, PATH_TYPE, COMPONENT } from "../../VAR/var"
 import useDropDown from "../DropDown/useDropDown.js"
+
+//reducer
+import { useSelector } from "react-redux"
 
 // Actions
 import { modalAction } from "../../_state/Actions/actionCollection"
+import { filterAction } from "../../_state/Actions/actionCollection"
 import { useDispatch } from "react-redux"
 import { bindActionCreators } from "redux"
 import { NumberFormat } from "../../functions/NumberFormat"
-import { URL, PATH_TYPE, COMPONENT } from "../../VAR/var"
+
+
 
 const Forms = ({classname, title, template, url, method}) =>{
+
+    const filterState = useSelector( state => state.filterReducer)
+    // console.log(filterState)
 
     const {fields} = template
     const {dropDown} = useDropDown()
     const requestState = useSelector(state => state.requestStatusReducer)
-
+    // action functions
     const {openModal} = bindActionCreators(modalAction, useDispatch())
-    const navigate = useNavigate()
-
-    const validator = new Validator()
-
-     const [errors, setErrors] = useState({})
+    const{setPrices, setBeds, setBaths} = bindActionCreators(filterAction, useDispatch())
 
      const { sendRequest} = useFetchRequest()
 
@@ -63,14 +66,10 @@ const Forms = ({classname, title, template, url, method}) =>{
         apartment : false
     })
 
-    const [priceSelected, setPriceSelected] = useState({
-        min: "No minimum",
-        max : "No maximum"
-    })
-
     const [filterDropDown, setFilterDropDown] = useState({
         prices : false,
-        beds : false
+        beds : false,
+        baths : false
     })
 
     const [label, setLabel] = useState({
@@ -80,8 +79,6 @@ const Forms = ({classname, title, template, url, method}) =>{
 
     const handleDrop = (element) =>{
         const filterDropDownClone = {...filterDropDown}
-
-
         for(const key in filterDropDownClone){
             if(key !== element){
                 filterDropDownClone[key] = false
@@ -103,13 +100,39 @@ const Forms = ({classname, title, template, url, method}) =>{
     }
 
     const handlePriceChange = (e, key , stateProp) =>{
-       const priceSelectedClone = {...priceSelected}
+       const priceSelectedClone = {...filterState.prices}
        const value = e.target.value
-       priceSelectedClone[key] = NumberFormat.convertToInt(value) 
-       setPriceSelected({...priceSelected, ...priceSelectedClone})
-       console.log(priceSelectedClone)
-       setFormInputs({...formInputs, [stateProp] : priceSelectedClone})
-       buttonLabel(key, value, "prices")
+
+       if(!NumberFormat.convertToInt(value)){
+        priceSelectedClone[key] = value
+       }else{
+            priceSelectedClone[key] = NumberFormat.convertToInt(value) 
+       }
+            setPrices(priceSelectedClone)
+            setFormInputs({...formInputs, [stateProp] : priceSelectedClone})
+            buttonLabel(key, value, "prices")
+       
+    }
+
+    const PriceText = () =>{
+        const max = filterState.prices.max
+        const min = filterState.prices.min
+
+        if(typeof max !== "number" && typeof min !== "number"){
+            return "Pricing"
+        }
+
+        if(typeof max !== "number" && typeof min === "number"){
+            return NumberFormat.abbreviateNumber(min)
+        }
+
+        if(typeof min !== "number" && typeof max === "number"){
+            return NumberFormat.abbreviateNumber(max)
+        }
+
+        if(typeof min === "number" && typeof max === "number"){
+            return `${NumberFormat.abbreviateNumber(min)} - ${NumberFormat.abbreviateNumber(max)}`
+        }
     }
 
     const handlePropertyType = (type, stateProp) =>{
@@ -149,6 +172,44 @@ const Forms = ({classname, title, template, url, method}) =>{
         setFormInputs({...formInputs, [stateProp] : name})
     }
 
+    const bedLabel = () =>{
+        if(!Number(filterState.beds)){
+            return "Bedrooms"
+        }else{
+            return `+${filterState.beds} ${filterState.beds <=1 ? "Bed" : "Beds"}`
+        }
+    }
+
+    const handleBeds = (e) =>{
+        e.preventDefault()
+        const value = e.target.innerText.replace("+","")
+        const valueNum = Number(e.target.innerText.replace("+",""))
+        if(!valueNum){
+            setBeds(value)
+        }else{
+            setBeds(valueNum)
+        }
+    }
+
+    const bathLabel = () =>{
+        if(!Number(filterState.baths)){
+            return "Bathrooms"
+        }else{
+            return `+${filterState.baths} ${filterState.baths <=1 ? "Bath" : "Baths"}`
+        }
+    }
+
+    const handleBaths = (e) =>{
+        e.preventDefault()
+        const value = e.target.innerText.replace("+","")
+        const valueNum = Number(e.target.innerText.replace("+",""))
+        if(!valueNum){
+            setBaths(value)
+        }else{
+            setBaths(valueNum)
+        }
+    }
+
 
        // ********************************************************************
     // Submit actions
@@ -157,10 +218,8 @@ const Forms = ({classname, title, template, url, method}) =>{
     const submitForm = async (e) =>{
            
             e.preventDefault()
-        
-            let dataCopy = JSON.parse(JSON.stringify(formInputs))
 
-            await sendRequest(method,url, dataCopy )
+            await sendRequest(method,url, filterState)
 
             if(requestState.status === 600){
                 openModal(null)
@@ -171,7 +230,7 @@ const Forms = ({classname, title, template, url, method}) =>{
            
     }
 
-    const prices = [
+    const priceOptions = [
                      10000,
                      20000,
                      30000,
@@ -187,9 +246,17 @@ const Forms = ({classname, title, template, url, method}) =>{
                      450000,
                      500000
                     ]
+
       
     
-
+    const getOption = (value) =>{
+        if(!NumberFormat.abbreviateNumber(value)){
+                return value
+        }else{
+            return NumberFormat.abbreviateNumber(value)
+        }
+       
+    }
 
     // ********************************************************************
     // set field type
@@ -197,54 +264,113 @@ const Forms = ({classname, title, template, url, method}) =>{
    const fieldSet = (props, id) =>{
 
     switch(props.type){
+        case "bath-options" :
+            return <div key={id} style={{position: "relative"}}>
+                 <fieldset className="show-price-for-flex">
+                        <button className="flex-button" onClick={(e)=>{e.preventDefault();handleDrop("baths")}}>
+                            {bathLabel()}
+                        </button>
+                    </fieldset>
+                 <fieldset key={id} className={`${props.class} ${filterDropDown.baths ? "show-prices" : "hide-prices"}`}>
+                        {props.label && props.type !=="submit" && <label>{props.label}</label>}
+                        <button 
+                             className={filterState.baths === "Any"  ? "active-status" : ""}
+                             onClick={(e)=>{handleBaths(e);
+                        }}>Any</button>
+                        <button 
+                             className={filterState.baths === 1  ? "active-status" : ""}
+                             onClick={(e)=>{handleBaths(e);
+                        }}>
+                            +1
+                        </button>
+                        <button              
+                           className={filterState.baths === 2  ? "active-status" : ""}
+                           onClick={(e)=>{
+                            handleBaths(e);
+                        }}>
+                              +2
+                        </button>
+                        <button 
+                           className={filterState.baths === 3  ? "active-status" : ""}
+                           onClick={(e)=>{
+                            handleBaths(e);
+                        }}>
+                            +3
+                        </button>
+                        <button 
+                           className={filterState.baths === 4  ? "active-status" : ""}
+                           onClick={(e)=>{
+                            handleBaths(e);
+                        }}>
+                            +4
+                        </button>
+                        <button 
+                           className={filterState.baths === 5  ? "active-status" : ""}
+                           onClick={(e)=>{
+                            handleBaths(e);
+                        }}>
+                            +5
+                        </button>
+                        <button 
+                           className={filterState.baths === 6  ? "active-status" : ""}
+                           onClick={(e)=>{
+                            handleBaths(e);
+                        }}>
+                            +6
+                        </button>
+                   </fieldset>
+            </div>
         case "bed-options" :
                 return <div key={id} style={{position: "relative"}}>
                      <fieldset className="show-price-for-flex">
                             <button className="flex-button" onClick={(e)=>{e.preventDefault();handleDrop("beds")}}>
-                                {label.beds}
+                                {bedLabel()}
                             </button>
                         </fieldset>
                      <fieldset key={id} className={`${props.class} ${filterDropDown.beds ? "show-prices" : "hide-prices"}`}>
                             {props.label && props.type !=="submit" && <label>{props.label}</label>}
-
                             <button 
-                                 className={status.buy ? "active-status" : ""}
-                                 onClick={(e)=>{handleStatus(e,"buy",props.stateProp);
+                                 className={filterState.beds === "Any"  ? "active-status" : ""}
+                                 onClick={(e)=>{handleBeds(e);
+                            }}>Any</button>
+                            <button 
+                                 className={filterState.beds === 1  ? "active-status" : ""}
+                                 onClick={(e)=>{handleBeds(e);
                             }}>
                                 +1
                             </button>
-                            <button 
-                               className={status.rent ? "active-status" : ""}
+                            <button              
+                               className={filterState.beds === 2  ? "active-status" : ""}
                                onClick={(e)=>{
-                                handleStatus(e,"rent",props.stateProp);
+                                handleBeds(e);
                             }}>
                                   +2
                             </button>
                             <button 
-                               className={status.rent ? "active-status" : ""}
+                               className={filterState.beds === 3  ? "active-status" : ""}
                                onClick={(e)=>{
-                                handleStatus(e,"rent",props.stateProp);
+                                handleBeds(e);
                             }}>
                                 +3
                             </button>
                             <button 
-                               className={status.rent ? "active-status" : ""}
+                               className={filterState.beds === 4  ? "active-status" : ""}
                                onClick={(e)=>{
-                                handleStatus(e,"rent",props.stateProp);
+                                handleBeds(e);
                             }}>
                                 +4
                             </button>
                             <button 
-                               className={status.rent ? "active-status" : ""}
+                               className={filterState.beds === 5  ? "active-status" : ""}
                                onClick={(e)=>{
-                                handleStatus(e,"rent",props.stateProp);
+                                handleBeds(e);
                             }}>
                                 +5
                             </button>
                             <button 
-                               className={status.rent ? "active-status" : ""}
+                               className={filterState.beds === 6  ? "active-status" : ""}
                                onClick={(e)=>{
-                                handleStatus(e,"rent",props.stateProp);
+                                handleBeds(e);
                             }}>
                                 +6
                             </button>
@@ -255,18 +381,27 @@ const Forms = ({classname, title, template, url, method}) =>{
                 return  ( <div key={id} style={{position: "relative"}}>
                         <fieldset className="show-price-for-flex">
                             <button className="flex-button"  onClick={(e)=>{e.preventDefault();handleDrop("prices")}}>
-                                {label.prices}
+                                {PriceText()}
                             </button>
                         </fieldset>
+
                         <fieldset  className={`${props.class} ${filterDropDown.prices ? "show-prices" : "hide-prices"}`}>
                               {props.label && props.type !=="submit" && <label>{props.label}</label>}
                               <div>
-                                <select onChange={(e)=>{
+                                <select 
+                                value={getOption(filterState.prices.min)}
+                                onChange={(e)=>{
                                     handlePriceChange(e,"min",props.stateProp)
                                 }}>
-                                <option>No Minimum</option>
-                                {prices.map((price, index) => (
-                                    <option key={index}>${NumberFormat.abbreviateNumber(price) }</option>
+                                <option>No minimum</option>
+                                {priceOptions.map((price, index) => (
+                                <option 
+                                     key={index} 
+                                     value={NumberFormat.abbreviateNumber(price)}
+                                    // selected={getOption(price, filterState.prices.min)}
+                                     >
+                                        ${NumberFormat.abbreviateNumber(price)}
+                                </option>
                                 ))}                            
                               </select >
                               <i className="fa-solid fa-chevron-down"></i>
@@ -275,10 +410,18 @@ const Forms = ({classname, title, template, url, method}) =>{
                               <div>
                               <select onChange={(e)=>{
                                     handlePriceChange(e,"max",props.stateProp)
-                                }}>
+
+                                }}
+                                value={getOption(filterState.prices.max)}
+                                >
                                 <option>No Maximum</option>
-                                {prices.map((price, index) => (
-                                    <option key={index}>${NumberFormat.abbreviateNumber(price) }</option>
+                                {priceOptions.map((price, index) => (
+                                    <option 
+                                           key={index}
+                                           value={NumberFormat.abbreviateNumber(price)}
+                                    >
+                                        ${NumberFormat.abbreviateNumber(price)}
+                                    </option>
                                 ))}
                               </select>
                               <i className="fa-solid fa-chevron-down"></i>
@@ -287,12 +430,12 @@ const Forms = ({classname, title, template, url, method}) =>{
                                 {props.tag && props.tag}
                          </fieldset>
                 </div>)
-        case "text" :
+        case "location" :
                 return  ( <fieldset key={id} className={props.class}>
                               {props.label && props.type !=="submit" && <label>{props.label}</label>}
                               <input type={props.type} 
                                 name={props.name}
-                                value={formInputs[props.stateProp]}
+                                value={filterState.location}
                                 onChange={(e)=> handleInput(e, props.stateProp)}
                                 placeholder={props.placeholder}
                                 />

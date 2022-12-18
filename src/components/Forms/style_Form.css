@@ -31,6 +31,7 @@ Forms
     color: var(--text-color);
     margin: 0;
     font-weight: 400;
+    width: max-content;
 }
 
 .flex-form .price-options,
@@ -52,6 +53,7 @@ Forms
 
 .flex-form .bed-options label{
     grid-column: 1;
+    margin-bottom: 0;
 }
 
 .flex-form .show-prices{
@@ -87,6 +89,10 @@ Forms
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.column-form .flex-button{
+    display: none;
 }
 
 form label{

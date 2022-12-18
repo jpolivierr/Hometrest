@@ -59,12 +59,21 @@ export const filterFields = {
                         type: "bed-options",
                         value: "",
                       },
+                      {
+                        label : "Bathrooms",
+                        name: "",
+                        placeholder : "",
+                        stateProp : "bathRooms",
+                        class : "bed-options",
+                        type: "bath-options",
+                        value: "",
+                      },
                     {
                         name: "location",
                         placeholder : "Location",
                         stateProp : "location",
                         class : "search-input",
-                        type: "text",
+                        type: "location",
                         value: "",
                         handler: "input",
                         tag: <i className="fa-solid fa-location-dot"></i>
