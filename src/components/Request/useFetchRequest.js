@@ -4,9 +4,10 @@ import { useState} from "react";
 //Actions
 import { bindActionCreators } from 'redux'
 import { useDispatch } from "react-redux";
+import { serverAction } from "../../_state/Actions/actionCollection";
 import { requestStatusAction } from "../../_state/Actions/actionCollection";
 //Reducer
-
+import {useSelector} from 'react-redux'
 
 const useFetchRequest = () =>{
 
@@ -25,7 +26,7 @@ const useFetchRequest = () =>{
                   }
      }
 
-    const sendRequest = async (method, url, data) =>{
+    const sendRequest = async (type, method, url, data, csData) =>{
         
         setLoading(true)
         
@@ -61,52 +62,60 @@ const useFetchRequest = () =>{
                     case 200 :
                         setLoading(false)
                         serverResp = {...respData, 
+                                            status: resp.status,
                                             header: "success",
                                             csMessage: ""
                                         }
-                        console.log(serverResp)
-                        // setRequestStatus(type, serverResp)
+                    
+                                      setRequestStatus(serverResp)
                         break
                     case 400 :
                         setLoading(false)
                         serverResp = {...respData, 
+                                            status: resp.status,
                                             header: "Error",
                                             csMessage: "Oops!Something went wrong"
                                         }
-                        console.log(serverResp)
-                        // setRequestStatus(type, serverResp)
+                    
+                                     setRequestStatus(serverResp)
                         break
                     case 417 :
                         setLoading(false)
                         serverResp = {...respData, 
+                                            status: resp.status,
                                             header: "Error",
                                             csMessage: "Oops!Something went wrong"
                                         }
-                        console.log(serverResp)
+                                    setRequestStatus(serverResp)
                         break
                     case 404 :
                         setLoading(false)
                         serverResp = {...respData, 
+                                            status: resp.status,
                                             header: "Error",
                                             csMessage: "Oops!Something went wrong"
                                         }
-                        console.log(serverResp)
+                                        setRequestStatus(serverResp) 
                         break
                     case 500 :
                         setLoading(false)
                         serverResp = {...respData, 
+                                            status: resp.status,
                                             header: "Error",
                                             csMessage: "Oops!Something went wrong"
                                         }
-                        console.log(serverResp)
+                                        setRequestStatus(serverResp) 
+                    
                         break
                     default :
                     setLoading(false)
                         serverResp = {...respData, 
+                                            status: resp.status,
                                             header: "Error",
                                             csMessage: "Oops!Something went wrong"
                                         }
-                        console.log(serverResp)
+                                        setRequestStatus(serverResp) 
+                    
                     break
                 }
 

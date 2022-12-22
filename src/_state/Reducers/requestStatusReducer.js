@@ -11,7 +11,7 @@ const init = {
 
 const requestStatusReducer = (state = init, action) =>{
     switch(action.type){
-        case PATH_TYPE.ACCOUNT:
+        case "send":
             return { 
                      ...state, 
                      status: action.payload.status, 
@@ -20,16 +20,6 @@ const requestStatusReducer = (state = init, action) =>{
                      csMessage: action.payload.csMessage,
                      data: action.payload.data
                     }
-        case PATH_TYPE.RECURRING:
-            const newRecurring = action.payload.data.formList
-            const stateClone =  JSON.parse(JSON.stringify(state))
-            stateClone.data.recurringBill = newRecurring
-            return state = stateClone
-        case PATH_TYPE.TRANSACTION:
-            const newTransaction = action.payload.data.formList
-            const newTransactionClone =  JSON.parse(JSON.stringify(state))
-            newTransactionClone.data.transaction = newTransaction
-            return state = newTransactionClone 
         case "isLoading":
             return { 
                      ...state, 

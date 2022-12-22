@@ -54,7 +54,7 @@ li{
 }
 
 .container{
-    width: 90%;
+    width: 97%;
     margin: auto;
 }
 
@@ -96,17 +96,17 @@ button i{
 }
 
 
-.property-list-type{
+.home-type{
   margin-bottom: 0rem;
 }
 
-.property-list-type ul{
+.home-type ul{
   display: grid;
   grid-template-columns: max-content max-content;
   column-gap: 2rem;
 }
 
-.property-list-type ul li{
+.home-type ul li, .search-type ul li{
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -117,7 +117,7 @@ button i{
     cursor: pointer;
 }
 
-.property-list-type ul li i{
+.home-type ul li i, .search-type ul li i{
   position: relative;
   margin: 0;
   left: 0;
@@ -157,13 +157,15 @@ button i{
 
 .bed-options{
   display: grid;
-  grid-template-columns: repeat(6, max-content);
+  grid-template-columns: repeat(7, max-content);
   column-gap: 1rem;
+  row-gap: 1rem;
   margin-bottom: 1rem;
 }
 
 .bed-options label{
-  grid-column: 1 / 7;
+  grid-column: 1 / 8;
+  margin-bottom: 0rem;
 }
 
 .bed-options button{

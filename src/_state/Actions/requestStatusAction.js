@@ -1,6 +1,6 @@
-export const setRequestStatus = (type,data) =>{
+export const setRequestStatus = (data) =>{
     return{
-        type,
+        type : "send",
         payload: data
     }
 }

@@ -14,7 +14,7 @@ Forms
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: .7rem;
 }
 
 .flex-form fieldset input{
@@ -22,6 +22,10 @@ Forms
     padding: .5rem 1rem;
     padding-left: 2.5rem;
     outline: none;
+}
+
+.flex-form .search-input{
+  max-width: 250px;
 }
 
 .flex-form .flex-button{
@@ -32,16 +36,37 @@ Forms
     margin: 0;
     font-weight: 400;
     width: max-content;
+    font-size: .9rem;
 }
 
 .flex-form .price-options,
-.flex-form .bed-options{
+.flex-form .bed-options,
+.flex-form .home-type,
+.flex-form .search-type{
     position: absolute;
     width: 400px;
     top: 130%;
     left: 0;
     box-shadow: 0px 0px 20px #82bbcc54;
     padding: 1rem;
+}
+
+.flex-form .home-type, .flex-form .search-type{
+    grid-template-columns: 1fr;
+    width: max-content;
+    padding: 2rem;
+}
+
+.flex-form .home-type label, .flex-form .search-type label{
+    grid-column: 1;
+}
+
+.flex-form .home-type ul, .flex-form .search-type ul{
+    grid-template-columns: 1fr;
+}
+
+.flex-form .home-type ul li, .flex-form .search-type ul li{
+    padding-left: 0rem;
 }
 
 .flex-form .bed-options{
@@ -58,6 +83,7 @@ Forms
 
 .flex-form .show-prices{
     display: grid !important;
+    background: white;
 }
 
 .flex-form .hide-prices{

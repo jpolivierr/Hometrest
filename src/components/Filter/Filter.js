@@ -22,7 +22,7 @@ function Filter(){
             <FlexLayout classname ={"container filter"}>    
                <li onClick={()=>openModal(MODAL_TYPE.FLOATING, COMPONENT.FILTER_FORM)} className="more-filter">
                <i className="fa-solid fa-ellipsis-vertical"></i>
-                    Filter
+                    <p>More</p>
                 </li>      
                 <ul>
                     

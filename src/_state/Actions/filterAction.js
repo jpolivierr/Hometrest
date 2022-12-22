@@ -25,3 +25,17 @@ export const setLocation = (data) =>{
         payload: data
     }
 }
+
+export const setType = (data) =>{
+    return{
+        type: "homeType",
+        payload: data
+    }
+}
+
+export const setStatus = (data) =>{
+    return{
+        type: "searchType",
+        payload: data
+    }
+}

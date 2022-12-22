@@ -47,6 +47,22 @@ class Format{
         // Convert the string to a number and multiply it by 1000
         return parseFloat(str) * 1000;
       }
+
+       formatNumberWithCommas(number) {
+        let numberString = number.toString();
+        let formattedString = "";
+      
+        for (let i = 0; i < numberString.length; i++) {
+          let char = numberString[i];
+          formattedString += char;
+          if (numberString.length - i > 3 && (numberString.length - i) % 3 === 1) {
+            formattedString += ",";
+          }
+        }
+      
+        return formattedString;
+      }
+      
       
 
 

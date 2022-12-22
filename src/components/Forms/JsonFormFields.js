@@ -26,19 +26,32 @@ export    const template = {
 export const filterFields = {
 
                 fields : [
+                  {
+                    name: "location",
+                    placeholder : "Location",
+                    stateProp : "location",
+                    class : "search-input",
+                    type: "location",
+                    value: "",
+                    handler: "input",
+                    tag: <i className="fa-solid fa-location-dot"></i>
+                    
+                  },
                     {
-                        stateProp : "status",
-                        class : "select-status",
-                        type: "status",
+                        stateProp : "searchType",
+                        class : "search-type",
+                        type: "search-type",
+                        label: "Search Type",
+                        name : "Search Type",
+                        value : ""
                         
                       },
                       {
-                        label : "Property type",
-                        name: "Property Type",
-                        placeholder : "Location",
-                        stateProp : "propertyType",
-                        class : "property-list-type",
-                        type: "list",
+                        label : "Home type",
+                        name: "Home Type",
+                        stateProp : "homeType",
+                        class : "home-type",
+                        type: "home-type",
                         value: "",
                       },
                       {
@@ -67,17 +80,6 @@ export const filterFields = {
                         class : "bed-options",
                         type: "bath-options",
                         value: "",
-                      },
-                    {
-                        name: "location",
-                        placeholder : "Location",
-                        stateProp : "location",
-                        class : "search-input",
-                        type: "location",
-                        value: "",
-                        handler: "input",
-                        tag: <i className="fa-solid fa-location-dot"></i>
-                        
                       },
 
                       {

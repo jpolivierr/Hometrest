@@ -3,6 +3,8 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem 0rem;
+    position: relative;
+    z-index: 2;
 }
 
 .filter .more-filter{
