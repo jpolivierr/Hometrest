@@ -1,11 +1,14 @@
 .listing-result{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    
 
 }
 
 .search-result{
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
+    min-height: 90vh;
 }

@@ -41,6 +41,7 @@ export const PATH_TYPE = {
 
 export const URL = {
 
-    GET_PROPERTIES : `http://localhost:7070/api`,
+    GET_PROPERTIES : `http://localhost:7070/api/search`,
+    GET_SINGLE_LISTING : "http://localhost:7070/api/property"
 
 }

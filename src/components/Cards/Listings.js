@@ -1,8 +1,8 @@
 import "./style_listing.css"
 
-const Listings = ({id, status, img, price, beds,baths, sqft, street, city, state, zip}) =>{
+const Listings = ({id, classname, status, img, price, beds,baths, sqft, street, city, state, zip}) =>{
     return(
-        <div key={id} id={id} className="slider-block">
+        <div key={id} id={id} className={`${classname} slider-block`}>
             <figure>
                 <span>{status}</span>
                 <img src={img} alt=""/>

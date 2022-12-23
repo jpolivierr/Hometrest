@@ -31,8 +31,6 @@ function Filter(){
                             classname="flex-form"
                             title="" 
                             template = {filterFields} 
-                            url={URL.GET_PROPERTIES}
-                            method="POST"
                             />
                     </li>
                 </ul>

@@ -187,3 +187,16 @@ button i{
   display: none !important;
 }
 
+.loading-card{
+  filter: blur(2px);
+  transform: .3s;
+}
+
+.loading-card::before{
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.342);
+  z-index: 1;
+}

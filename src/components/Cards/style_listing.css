@@ -5,6 +5,7 @@
     overflow: hidden;
     box-shadow: 0px 0px 23px 0px #497c8836;
     cursor: pointer;
+    position: relative;
   }
 
   .slider-block figure {

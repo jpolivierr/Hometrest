@@ -26,7 +26,7 @@ const useFetchRequest = () =>{
                   }
      }
 
-    const sendRequest = async (type, method, url, data, csData) =>{
+    const sendRequest = async (method, url, data) =>{
         
         setLoading(true)
         
@@ -54,8 +54,9 @@ const useFetchRequest = () =>{
                     
                 }
                 const resp = await fetch(url, config)
-                const respData = await resp.json()
-                // const respData = await resp.json()
+                    // const respData = await resp.json()
+                  const respData = await resp.json()
+                  console.log(respData)
                 let serverResp
 
                 switch(resp.status){

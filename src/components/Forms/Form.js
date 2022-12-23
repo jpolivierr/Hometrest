@@ -19,10 +19,10 @@ import { NumberFormat } from "../../functions/NumberFormat"
 
 
 
-const Forms = ({classname, title, template, url, method}) =>{
+const Forms = ({classname, title, template}) =>{
 
     const filterState = useSelector( state => state.filterReducer)
-    console.log(filterState)
+    const responseData = useSelector(state => state.requestStatusReducer)
 
 
     const {fields} = template
@@ -135,23 +135,6 @@ const Forms = ({classname, title, template, url, method}) =>{
             return `${NumberFormat.abbreviateNumber(min)} - ${NumberFormat.abbreviateNumber(max)}`
         }
     }
-
-    // const handleStatus = (e, data, stateProp) =>{
-    //     e.preventDefault()
-
-    //     const statusClone = {...status}
-        
-    //     if( data === 'rent'){
-    //         setStatus({...status, rent: !status.rent})
-    //         statusClone.rent = !statusClone.rent
-    //     }
-    //     if( data === 'buy'){
-    //         setStatus({...status, buy: !status.buy})
-    //         statusClone.buy = !statusClone.buy
-    //     }
-    //     setFormInputs({...formInputs, [stateProp] : statusClone})
-
-    // }
 
     const toggleSelectState = (element) =>{
         setSelectState({...selectState, [element]: !selectState[element]})
@@ -273,7 +256,8 @@ const handleStatus = (type) =>{
     
     const submitForm = async (e) =>{
            e.preventDefault()
-            await sendRequest(method,url, filterState)
+           const url = URL.GET_PROPERTIES
+            await sendRequest("POST",url, filterState)
 
             if(requestState.status === 600){
                 openModal(null)
