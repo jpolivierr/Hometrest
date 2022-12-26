@@ -1,6 +1,8 @@
 import React from 'react';
 import "./style_modal.css"
 
+import Photos from '../Photos/Photos';
+
 import { MODAL_TYPE, COMPONENT, URL} from '../../VAR/var';
 
 //Animation
@@ -46,6 +48,8 @@ const Modals = () => {
                               url={URL.GET_PROPERTIES}
                               method="POST"
                               />
+            case COMPONENT.PHOTOS :
+                return <Photos photos={modalState.data}/>
             case COMPONENT.RECURRING_CREATE_FORM  :
                 return null
             case COMPONENT.TRANSACTION_CREATE_FORM :

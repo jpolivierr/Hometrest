@@ -1,8 +1,17 @@
 import "./style_listing.css"
+import { Link } from "react-router-dom";
 
-const Listings = ({id, classname, status, img, price, beds,baths, sqft, street, city, state, zip}) =>{
+const Listings = ({callBack, id, classname, style, status, img, price, beds,baths, sqft, street, city, state, zip}) =>{
     return(
-        <div key={id} id={id} className={`${classname} slider-block`}>
+      
+        <div
+       
+            onClick={!callBack ? null : ()=>callBack(id)}
+           key={id} id={id} 
+           className={`${classname} slider-block`}
+            style={style}
+           >
+  <Link to={`/property?id=${id}`}>
             <figure>
                 <span>{status}</span>
                 <img src={img} alt=""/>
@@ -15,7 +24,10 @@ const Listings = ({id, classname, status, img, price, beds,baths, sqft, street, 
                 <h5><span>{sqft}</span> <span>Sq.Ft.</span></h5>
                 <p>{street}, {city}, <br></br>{state} {zip}</p>
             </div>
+            </Link>
         </div>
+        
+        
     )
 }
 

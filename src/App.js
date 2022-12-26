@@ -12,6 +12,7 @@ function App() {
             <div>
                <Routes>
                     <Route path="/" element={<HomeSearch />} />
+                    <Route path="/search" element={<HomeSearch />} />
                     <Route path="property" element={<SingleHome />}/>
                </Routes>
                <Modals />

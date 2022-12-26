@@ -15,7 +15,8 @@ export const COMPONENT = {
      TRANSACTION_UPDATE_FORM : "transaction-update-form",
      TRANSACTION_CREATE_FORM : "transaction-create-form",
      ADD_LIST: "add-list",
-     SIDE_NAVIGATION: "side-navigation"
+     SIDE_NAVIGATION: "side-navigation",
+     PHOTOS : "photos"
 }
 
 export const ANIMATION = {
@@ -42,6 +43,7 @@ export const PATH_TYPE = {
 export const URL = {
 
     GET_PROPERTIES : `http://localhost:7070/api/search`,
-    GET_SINGLE_LISTING : "http://localhost:7070/api/property"
+    GET_SINGLE_LISTING : "http://localhost:7070/api/property",
+    GET_SIMILAR_LISTING : "http://localhost:7070/api/similar-listings"
 
 }

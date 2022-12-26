@@ -9,6 +9,41 @@
     .flex-form div:nth-child(3){
         display: none;
     }
+    .single-home-container{
+        width: 95% !important;
+        grid-template-columns: 1fr !important;
+    }
+
+    .single-home-container section:nth-child(2),
+    .single-home-container section:nth-child(1){
+        grid-column: 1 !important;
+    }
+
+    .single-home-container aside{
+        grid-column: 1 !important;
+        grid-row: 6 !important;
+    }
+
+    .single-home-photo{
+        height: 240px !important;
+    }
+
+    .home-basic-info h2, .home-basic-info h2 span{
+        font-size: 1rem !important;
+    }
+    .home-basic-info ul{
+        flex-wrap: wrap;
+        gap: 2rem !important;
+    }
+
+    .home-basic-info ul li h3{
+        font-size: 1.2rem !important;
+    }
+
+    .home-features ul{
+        flex-wrap: wrap !important;
+    }
+    
 }
 
 @media (max-width: 632px){

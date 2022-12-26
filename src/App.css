@@ -23,7 +23,7 @@
     --label-weight: 600;
     --btn-label-weight: 800;
     --text-color: #142149;
-    --text-color-light: #142149a1;
+    --text-color-light: #273251ab;
     --text-color-dark: #050913;
     --text-color-error: #ff4e4e;
     --light-blue: #a4e3fd52;
@@ -51,6 +51,10 @@
 li{
   list-style: none;
   font-size: var(--list-size);
+}
+
+a{
+  text-decoration: none;
 }
 
 .container{

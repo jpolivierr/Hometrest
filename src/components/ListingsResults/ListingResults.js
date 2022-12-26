@@ -20,17 +20,18 @@ const ListingResults = () =>{
     //Request Hook
     const { sendRequest} = useFetchRequest()
 
+    const listingData = requestStatus.data
+      console.log(listingData)
+
     useEffect(() =>{
 
         // const url = URL.GET_PROPERTIES
-        const url = URL.GET_SINGLE_LISTING
+        const url = URL.GET_PROPERTIES
         sendRequest("POST",url, filterState)
       
     },[])
 
-      const data= listingModel.data.home_search.results
-      const listingData = requestStatus.data
-      console.log(listingData)
+      
   
 
      const formatImg = (img) =>{
@@ -50,7 +51,7 @@ const ListingResults = () =>{
                           <Listings 
                               key={index}
                               id={listing.property_id}
-                              classname={isLoading ? `loading-card` : `show-card`}
+                              classname={isLoading && `loading-card` }
                               status={listing.status}
                               img={formatImg(listing.primary_photo.href)}
                               price={NumberFormat.formatNumberWithCommas(listing.list_price) }

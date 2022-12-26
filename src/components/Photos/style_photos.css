@@ -1,0 +1,18 @@
+.photo-gallery{
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    gap: 10px;
+    max-height: 1000px;
+    overflow-y: scroll;
+}
+
+.photo-gallery h2{
+    margin-top: 2rem;
+    grid-column: 1 / 3;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.photo-gallery figure img{
+    width: 100%;
+}
