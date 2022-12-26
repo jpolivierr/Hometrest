@@ -41,8 +41,7 @@ const ListingResults = () =>{
     return (
           <div className="container listing-result">
               <div className='map'>
-                {/* {<Index/>} */}
-                {/* <GoogleMaps/> */}
+                <GoogleMaps/>
               </div>
               <div className='search-result'>
                 {

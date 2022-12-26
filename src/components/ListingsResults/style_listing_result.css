@@ -10,5 +10,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    min-height: 90vh;
+
+    max-height: 85vh;
+    padding: 1rem;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-radius: 10px;
 }

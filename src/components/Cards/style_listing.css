@@ -3,11 +3,11 @@
   .slider-block {
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0px 0px 23px 0px #497c8836;
+    box-shadow: 0px 0px 13px 0px #497c8836;
     cursor: pointer;
     position: relative;
-    max-width: 355px;
-    height: max-content;
+    max-width: 455px;
+    height: 350px;
   }
 
   .slider-block figure {
