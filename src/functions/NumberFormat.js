@@ -3,7 +3,8 @@
 class Format{
 
     checkIfNum(num){
-        if(!num){
+      try {
+          if(!num){
             return true
         }else{
               const exp = /^[0-9]+\.?[0-9]*$/
@@ -13,23 +14,34 @@ class Format{
                     return true
                 }
         }
+      } catch (error) {
+        console.log(error)
+        return 0
+      }
+      
         
     }
 
     double(num){
 
-        if(!this.checkIfNum(num)){
-           console.log("not a number")
-        }else{
-            const floatNum = parseFloat(num)
-         const floatDeci = floatNum.toFixed(2)
-          console.log(Number(floatDeci))
-        }
+       try {
+              if(!this.checkIfNum(num)){
+                console.log("not a number")
+              }else{
+                  const floatNum = parseFloat(num)
+              const floatDeci = floatNum.toFixed(2)
+              }
+       } catch (error) {
+           console.log(error)
+           return 0
+       }
+        
          
     }
 
     abbreviateNumber(num) {
-        if (num >= 1000 && num < 1000000) {
+      try {
+         if (num >= 1000 && num < 1000000) {
           return (num / 1000).toFixed(1) + "k";
         } else if (num >= 1000000 && num < 1000000000) {
           return (num / 1000000).toFixed(1) + "m";
@@ -38,29 +50,49 @@ class Format{
         } else {
           return num;
         }
+      } catch (error) {
+         console.log(error)
+         return 0
+      }
+       
       }
 
       convertToInt(str) {
-        // Remove the dollar sign and the "k" abbreviation
+
+        try {
+          // Remove the dollar sign and the "k" abbreviation
         str = str.replace("$", "").replace("k", "");
       
         // Convert the string to a number and multiply it by 1000
         return parseFloat(str) * 1000;
+        } catch (error) {
+           console.log(error)
+           return 0;
+        }
+        
       }
 
        formatNumberWithCommas(number) {
-        let numberString = number.toString();
-        let formattedString = "";
-      
-        for (let i = 0; i < numberString.length; i++) {
-          let char = numberString[i];
-          formattedString += char;
-          if (numberString.length - i > 3 && (numberString.length - i) % 3 === 1) {
-            formattedString += ",";
-          }
-        }
+
+        try {
+              let numberString = number.toString();
+            let formattedString = "";
+          
+            for (let i = 0; i < numberString.length; i++) {
+              let char = numberString[i];
+              formattedString += char;
+              if (numberString.length - i > 3 && (numberString.length - i) % 3 === 1) {
+                formattedString += ",";
+              }
+            }
       
         return formattedString;
+        } catch (error) {
+          console.log(error)
+          return 0
+        }
+        
+        
       }
       
       

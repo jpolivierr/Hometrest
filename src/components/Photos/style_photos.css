@@ -3,7 +3,6 @@
     grid-template-columns:1fr 1fr;
     gap: 10px;
     max-height: 1000px;
-    overflow-y: scroll;
 }
 
 .photo-gallery h2{

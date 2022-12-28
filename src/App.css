@@ -192,7 +192,6 @@ button i{
 }
 
 .loading-card{
-  filter: blur(2px);
   transform: .3s;
 }
 
@@ -201,6 +200,6 @@ button i{
   content: '';
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.342);
-  z-index: 1;
+  background: rgba(255, 255, 255, 0.671);
+  z-index: 3;
 }

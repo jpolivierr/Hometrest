@@ -1,11 +1,13 @@
 import "./style_Form.css"
-import { useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import Validator from "../../functions/Validator"
 import { useFetchRequest } from "../Request/useFetchRequest"
 
 import { URL, PATH_TYPE, COMPONENT } from "../../VAR/var"
 import useDropDown from "../DropDown/useDropDown.js"
 import { CapitalizeFirstLetter } from "../../functions/CapitalizeFirstLetter"
+
+import { getZipCode, detectZipCode } from "../../functions/DetectZip"
 
 //reducer
 import { useSelector } from "react-redux"
@@ -23,7 +25,10 @@ const Forms = ({classname, title, template}) =>{
 
     const filterState = useSelector( state => state.filterReducer)
     const responseData = useSelector(state => state.requestStatusReducer)
+    const inputRef = useRef("")
 
+
+    // console.log(filterState)
 
     const {fields} = template
     const {dropDown} = useDropDown()
@@ -35,7 +40,9 @@ const Forms = ({classname, title, template}) =>{
            setBaths,
            setLocation,
            setType,
-           setStatus
+           setStatus,
+           setCity,
+           setZipcode
         } = bindActionCreators(filterAction, useDispatch())
 
      const { sendRequest} = useFetchRequest()
@@ -60,11 +67,6 @@ const Forms = ({classname, title, template}) =>{
         date: false
     })
 
-    // const [status, setStatus] = useState({
-    //     rent: false,
-    //     buy : false
-    // })
-
     const [filterDropDown, setFilterDropDown] = useState({
         list_price : false,
         beds : false,
@@ -86,15 +88,12 @@ const Forms = ({classname, title, template}) =>{
             }else{
                 filterDropDownClone[key] = !filterDropDownClone[key]
             }
-
         }
-
         setFilterDropDown({...filterDropDown, ...filterDropDownClone})
     }
 
     const buttonLabel = (type, value, key) =>{
         let labelClone = {...label}
-
             labelClone[key] = value
             setLabel({...label, ...labelClone})
 
@@ -134,6 +133,8 @@ const Forms = ({classname, title, template}) =>{
         if(typeof min === "number" && typeof max === "number"){
             return `${NumberFormat.abbreviateNumber(min)} - ${NumberFormat.abbreviateNumber(max)}`
         }
+
+        return "Pricing"
     }
 
     const toggleSelectState = (element) =>{
@@ -141,8 +142,16 @@ const Forms = ({classname, title, template}) =>{
     }
     
 
-    const handleInput = (e,stateProp) =>{
-        setLocation(e.target.value)
+    const handleInput = (e) =>{
+        const value = e.target.value
+
+        if(!getZipCode(value)){
+            setZipcode("")
+            setCity(value.trim())
+        }else{
+            setZipcode(getZipCode(value))
+        }
+        setLocation(value)
     }
 
     const handleDropwDown = (name, stateProp) =>{
@@ -207,7 +216,6 @@ const Forms = ({classname, title, template}) =>{
         const propertyTypeClone = {...filterState}
         const statusClone =  propertyTypeClone.type
          if(statusClone.includes(type)){
-            console.log("ran..")
             const newStatus = statusClone.filter((el) => el !== type)
             setType(newStatus)
          }else{
@@ -238,7 +246,6 @@ const handleStatus = (type) =>{
     const propertyTypeClone = {...filterState}
     const typeClone =  propertyTypeClone.status
      if(typeClone.includes(type)){
-        console.log("ran..")
         const newType = typeClone.filter((el) => el !== type)
         setStatus(newType)
      }else{
@@ -257,6 +264,7 @@ const handleStatus = (type) =>{
     const submitForm = async (e) =>{
            e.preventDefault()
            const url = URL.GET_PROPERTIES
+           openModal(null)
             await sendRequest("POST",url, filterState)
 
             if(requestState.status === 600){
@@ -265,6 +273,8 @@ const handleStatus = (type) =>{
             if(requestState.status === 200){
                  openModal(null)
             } 
+
+            
            
     }
 
@@ -543,7 +553,7 @@ const handleStatus = (type) =>{
         case "location" :
                 return  ( <fieldset key={id} className={props.class}>
                               {props.label && props.type !=="submit" && <label>{props.label}</label>}
-                              <input type={props.type} 
+                              <input ref={inputRef} type={props.type} 
                                 name={props.name}
                                 value={filterState.location}
                                 onChange={(e)=> handleInput(e, props.stateProp)}

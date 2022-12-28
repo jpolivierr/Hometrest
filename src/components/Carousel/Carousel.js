@@ -10,6 +10,7 @@ import { useEffect, useState, useRef } from "react"
 import { initCarousel } from "../../functions/Carousel"
 import Listings from "../Cards/Listings"
 import { NumberFormat } from "../../functions/NumberFormat"
+import { formatImg } from "../../functions/formatImg"
 
 const Carousel = ({relatedHomes, setPropertyId}) =>{
 
@@ -59,10 +60,6 @@ const Carousel = ({relatedHomes, setPropertyId}) =>{
         }
 
     },[])
-
-        const formatImg = (img) =>{
-            return img.replace("s.jpg","od-w480_h360_x2.jpg")
-         }
 
 
             const carousel = document.querySelector(".carousel")

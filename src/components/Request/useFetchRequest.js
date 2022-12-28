@@ -44,9 +44,16 @@ const useFetchRequest = () =>{
 
                     }else{
                         console.log("Payload :")
-                        console.log(data)
+
+                        if(!data.city){
+                            delete data.city
+                        }
+                        if(!data.postal_code ){
+                           delete data.postal_code
+                        }
+                        
                        const formData = new FormData()
-                       
+                       console.log(data)
                        formData.append("formData", JSON.stringify(data))
                        
                        config.body = formData

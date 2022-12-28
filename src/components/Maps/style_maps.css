@@ -1,6 +1,12 @@
 #map{
     height: 85vh;
     border-radius: 10px;
+    position: sticky !important;
+    top: 170px;
+}
+
+#map div{
+    outline: none !important;
 }
 
 .map-container{

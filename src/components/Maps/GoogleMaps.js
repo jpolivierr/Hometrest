@@ -1,60 +1,73 @@
 import { useRef, useEffect } from "react"
 import "./style_maps.css"
-
-const GoogleMaps = () =>{
+import rectangle from "../../media/images/circle.png"
+const GoogleMaps = ({listings, classname}) =>{
 
   const mapRef = useRef(null)
 
-
  function initMap(){
+       const addressArray = []
+       listings.forEach(listing =>{
+            const coordinate = listing.location.address.coordinate
+            const address = listing.location.address.line
+            const city = listing.location.address.city
+            const state = listing.location.address.state_code
+            const zipCode = listing.location.address.postal_code
+
+            if(!coordinate){
+              return
+            }else{
+              const lat = coordinate.lat
+              const lng = coordinate.lon
+              const arr = [{lat,lng},`${address} ${city}, ${state}, ${zipCode}`]
+              addressArray.push(arr)
+            }
+            
+       })
+
         const center = {
-              lat: 34.84555, 
-              lng: -111.8035
+              lat: addressArray[1][0].lat, 
+              lng: addressArray[1][0].lng
           }
 
           const map = new window.google.maps.Map(mapRef.current,
             {
-             zoom: 12,
-             center: center
+             zoom: 11,
+              center: center
             }
          )
 
-          const tourStops = [
-            [{ lat: 34.8791806, lng: -111.8265049 }, "Boynton Pass"],
-            [{ lat: 34.8559195, lng: -111.7988186 }, "Airport Mesa"],
-            [{ lat: 34.832149, lng: -111.7695277 }, "Chapel of the Holy Cross"],
-            [{ lat: 34.823736, lng: -111.8001857 }, "Red Rock Crossing"],
-            [{ lat: 34.800326, lng: -111.7665047 }, "Bell Rock"],
-          ];
+          const contentInfo = `<div>
+                              <h2>Hello there</h2>
+                            </div>`
         
-          const infoWindow = new window.google.maps.InfoWindow()
+          const infoWindow = new window.google.maps.InfoWindow({
+            content : contentInfo,
+            ariaLabel: "Uluru",
+          })
 
            // Create the markers.
-           tourStops.forEach(([position, title], i)=>{
+           addressArray.forEach(([position, title], i)=>{
+
                 const marker = new window.google.maps.Marker({
                   position,
                   map,
-                  title: `${i + 1}. ${title}`,
-                  label: `${i + 1} hellooo`,
-                  optimized: false,
-
+                  icon: rectangle,
                 })
 
-                 // Add a click listener for each marker, and set up the info window.
-          marker.addListener("click", () => {
-            infoWindow.close();
-            infoWindow.setContent(marker.getTitle());
-            infoWindow.open(marker.getMap(), marker);
-          });
+                // Add a click listener for each marker, and set up the info window.
+                marker.addListener("mouseover", () => {
 
+                  infoWindow.open({anchor: marker, map});
+                });
 
            })
           
   }
 
   useEffect(()=>{
-    const theMap = document.querySelector("#the-map")
-    if(!theMap){
+  
+       window.initMap = initMap;
       window.initMap = initMap;
     const script = document.createElement("script")
     script.id="the-map"
@@ -62,16 +75,18 @@ const GoogleMaps = () =>{
     script.defer = true
     script.async = true
     document.body.appendChild(script)
-    }
-    
+const theMap = document.querySelector("#the-map")
+    console.log("ran....")
 
-  },[])
+     theMap.remove()
+    
+  },[listings])
 
   
 
   return(
     <>
-        <div ref={mapRef} id="map">
+        <div ref={mapRef} id="map" className={classname}>
 
           
         </div>

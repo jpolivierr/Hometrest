@@ -5,10 +5,10 @@ import { URL, PATH_TYPE, COMPONENT, MODAL_TYPE } from "../../VAR/var"
 import { NumberFormat } from "../../functions/NumberFormat"
 import { Link, useNavigate} from "react-router-dom"
 import {CapitalizeFirstLetter} from "../../functions/CapitalizeFirstLetter"
+import { formatImg } from "../../functions/formatImg"
+import nophoto from "../../media/images/nophotos.jpg"
 
 import SimilarListings from "../SimilarListings/SimilarListings"
-
-import image_1 from "../../media/images/img-1.jpg"
 
 import {useSearchParams} from 'react-router-dom'
 import Loading from "../Loading/Loading"
@@ -31,10 +31,6 @@ const SingleHome= () =>{
     const {openModal} = bindActionCreators(modalAction, useDispatch())
 
     const [propertyId,setPropertyId]=useState(null)
-
-    const formatImg = (img) =>{
-        return img.replace("s.jpg","od-w480_h360_x2.jpg")
-     }
 
     const getSingleProperty = async (id) =>{
                 setIsLoading(true)
@@ -62,7 +58,7 @@ const SingleHome= () =>{
         
     useEffect(()=>{
         checkIfIdParamExist()
-         getSingleProperty()
+        getSingleProperty()
     },[])
 
     let description
@@ -83,18 +79,20 @@ const SingleHome= () =>{
     let agentEmail
     let agentPhone
     let agentOffice
+    let agentPhotos
 
     if(home){
           const singleHome = home.data.home
           const homeInfo = singleHome.description
           const location = singleHome.location.address
-          const advertisers = singleHome.advertisers
+          const advertisers = !singleHome.advertisers ? null : singleHome.advertisers
 
           //Advertisers
           agentName = !advertisers[0] ? null : advertisers[0].name
           agentEmail = !advertisers[0] ? null : advertisers[0].email
-          agentPhone = !advertisers[0] ? null :advertisers[0].phones[0].number
-          agentOffice = !advertisers[0] ? null : advertisers[0].office.name
+          agentPhone = !advertisers[0] ? null : !advertisers[0].phones ? null : advertisers[0].phones[0].number
+          agentOffice = !advertisers[0] ? null : !advertisers[0].office ? null : advertisers[0].office.name
+          agentPhotos = !advertisers[0] ? null : !advertisers[0].photo ? null : advertisers[0].photo
 
           //property details
           description = homeInfo.text
@@ -114,7 +112,7 @@ const SingleHome= () =>{
 
           price = !singleHome.list_price ? 0 : NumberFormat.formatNumberWithCommas(singleHome.list_price) 
 
-          photos = singleHome.photos
+          photos = !singleHome.photos ? [{href: nophoto}]: singleHome.photos
 
           
     }
@@ -192,7 +190,10 @@ const SingleHome= () =>{
                                 <p>{yearBuilt}</p>
                             </li>
                         }
-                        {garage &&
+                        {!garage ? <li>
+                                <h3>Garage</h3>
+                                <p>{garage}</p>
+                            </li> :
                             <li>
                                 <h3>Garage</h3>
                                 <p>{garage}</p>
@@ -206,7 +207,7 @@ const SingleHome= () =>{
                  <aside>
                     <figure>
                          {/* <img src="https://ap.rdcpix.com/885619ad4a7464b68f5ed0a4e80b5665g-c4265837386l.jpg"/> */}
-                         <img src={image_1}/>
+                         <img src={formatImg(agentPhotos)}/>
                     </figure>
                      <h3>{agentName}</h3>
                      <h4>{agentOffice}</h4>

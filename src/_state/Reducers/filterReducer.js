@@ -1,5 +1,7 @@
 const init = {
+    limit: 100,
     location : "",
+    city : "",
     postal_code : "33167",
     status: [],
     type : [],
@@ -8,15 +10,23 @@ const init = {
         max : 0
     },
     beds: {
-        min : null
+        min : 0
     },
     baths: {
-        min : null
+        min : 0
     },
 }
 
 const filterReducer = (state = init, action) =>{
     switch(action.type){
+        case "city" :
+            const getCity =  JSON.parse(JSON.stringify(state))
+            getCity.city = action.payload
+            return state = getCity
+        case "zip" :
+            const getZip =  JSON.parse(JSON.stringify(state))
+            getZip.postal_code = action.payload
+            return state = getZip
         case "location" :
             const getLocation =  JSON.parse(JSON.stringify(state))
             getLocation.location = action.payload

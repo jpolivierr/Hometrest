@@ -39,3 +39,17 @@ export const setStatus = (data) =>{
         payload: data
     }
 }
+
+export const setZipcode = (data) =>{
+    return{
+        type: "zip",
+        payload: data
+    }
+}
+
+export const setCity = (data) =>{
+    return{
+        type: "city",
+        payload: data
+    }
+}

@@ -6,6 +6,7 @@ import Listings from "../Cards/Listings"
 import Loading from "../Loading/Loading"
 import { NumberFormat } from "../../functions/NumberFormat"
 import Carousel from "../Carousel/Carousel"
+import { formatImg } from "../../functions/formatImg"
 
 const SimilarListings = ({propertyId, setPropertyId}) =>{
 
@@ -16,10 +17,6 @@ const SimilarListings = ({propertyId, setPropertyId}) =>{
     const requestStatus = useSelector(state => state.requestStatusReducer)
     // const isLoading = requestStatus.isLoading
 
-
-    const formatImg = (img) =>{
-        return img.replace("s.jpg","od-w480_h360_x2.jpg")
-     }
 
     useEffect(()=>{
          setIsLoading(true)

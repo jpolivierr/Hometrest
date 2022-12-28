@@ -1,10 +1,8 @@
 import "./style_photos.css"
+import { formatImg } from "../../functions/formatImg"
 
 const Photos = ({photos} ) =>{
 
-    const formatImg = (img) =>{
-        return img.replace("s.jpg","od-w480_h360_x2.jpg")
-     }
 
     console.log(photos.length)
     return(

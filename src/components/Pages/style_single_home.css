@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: 1fr .4fr;
     column-gap: 5rem;
-    max-width: 1092px;
+    max-width: 1216px;
 }
 
 .single-home-header{

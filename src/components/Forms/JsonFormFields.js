@@ -2,7 +2,7 @@ export    const template = {
     fields : [
                 {
                   name: "location",
-                  placeholder : "Location",
+                  placeholder : "Enter city or zip code",
                   stateProp : "location",
                   class : "search-input",
                   type: "text",
@@ -28,7 +28,7 @@ export const filterFields = {
                 fields : [
                   {
                     name: "location",
-                    placeholder : "Location",
+                    placeholder : "Enter city or zip code",
                     stateProp : "location",
                     class : "search-input",
                     type: "location",
