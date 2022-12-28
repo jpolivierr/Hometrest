@@ -1,12 +1,17 @@
+.filter-container{
+    position: sticky;
+    z-index: 4;
+    top: 64px;
+    background: white;
+    border-bottom: 1px solid var(--light-silver);
+}
+
 .filter{
     display: flex;
     align-items: center;
     gap: 1rem;
     padding: 2rem 0rem;
-    position: sticky;
-    z-index: 4;
-    top: 64px;
-    background: white;
+    
 }
 
 .filter .more-filter{

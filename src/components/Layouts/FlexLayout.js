@@ -1,4 +1,4 @@
-import "./style_flexLayout.css"
+
 
 function FlexLayout({children, classname}){
     return (

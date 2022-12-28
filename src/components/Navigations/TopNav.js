@@ -1,17 +1,27 @@
 import "./style_topNav.css"
-import FlexLayout from "../Layouts/FlexLayout";
-import Lists from "../Lists/Lists";
 import { navList } from "../Lists/listData";
+import { Link } from "react-router-dom";
 
 const TopNav = () =>{
 
     return(
-        <header className="top_nav">
-            <FlexLayout classname={"container flex_nav"} >
-                <figure className="Logo"><h2>Hometrest</h2></figure>
-                <Lists classname={"flex_list"} lists={navList}/>
+        <header className="top_nav"> 
+          <div className="container flex_nav">
+
+                <figure className="Logo">
+                    <Link to="/"><h2>Hometrest</h2></Link>
+                </figure>
+
+                <ul>
+                    <li>Home</li>
+                    <li>Buy</li>
+                    <li>Rent</li>
+                    <li>Property Search</li>
+                </ul>
+
                 <i className="fa-solid fa-bars"></i>
-           </FlexLayout>
+            </div>
+                
         </header>
         
     )

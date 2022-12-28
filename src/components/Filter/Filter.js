@@ -19,6 +19,7 @@ function Filter(){
 
 
     return (
+        <div className="filter-container">
             <FlexLayout classname ={"container filter"}>    
                <li onClick={()=>openModal(MODAL_TYPE.FLOATING, COMPONENT.FILTER_FORM)} className="more-filter">
                <i className="fa-solid fa-ellipsis-vertical"></i>
@@ -35,6 +36,8 @@ function Filter(){
                 </ul>
                 {/* <Lists classname = "" lists={filterList}/> */}
             </FlexLayout>
+        </div>
+            
      );
 }
 

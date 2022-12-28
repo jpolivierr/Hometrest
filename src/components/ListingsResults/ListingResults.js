@@ -1,5 +1,4 @@
 import './style_listing_result.css'
-import { listingModel } from './listingModel'
 import Listings from '../Cards/Listings'
 import { NumberFormat } from '../../functions/NumberFormat'
 import { useFetchRequest } from '../Request/useFetchRequest'

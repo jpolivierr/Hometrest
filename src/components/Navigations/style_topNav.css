@@ -1,3 +1,10 @@
+.flex_nav {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr max-content max-content;
+    gap: 3rem;
+}
+
 .top_nav{
     padding: 1rem 0rem;
     border-bottom: 1px solid var(--light-silver);
@@ -8,7 +15,14 @@
 }
 
 .top_nav ul{
-    display: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.top_nav ul li{
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .top_nav figure h2{
