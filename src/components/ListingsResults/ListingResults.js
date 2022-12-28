@@ -35,9 +35,9 @@ const ListingResults = () =>{
           <div className="container listing-result">
               {
                 !listingData.home_search ? <Loading/> : <><div className='map'>
-                {/* {
-                  <GoogleMaps classname={isLoading && `loading-card` } listings={listingData.home_search.results}/>
-                } */}
+                {
+                  <GoogleMaps classname={isLoading ? `loading-card` : null } listings={listingData.home_search.results}/>
+                }
                 
               </div>
               <div className='search-result'>
@@ -50,7 +50,7 @@ const ListingResults = () =>{
                           <Listings 
                               key={index}
                               id={listing.property_id}
-                              classname={isLoading && `loading-card` }
+                              classname={isLoading ? `loading-card` : null }
                               status={listing.status.replaceAll("_"," ")}
                               img={formatImg(!listing.primary_photo ? null : listing.primary_photo.href)}
                               price={NumberFormat.formatNumberWithCommas(listing.list_price) }

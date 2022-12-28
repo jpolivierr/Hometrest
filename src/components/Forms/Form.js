@@ -318,7 +318,9 @@ const handleStatus = (type) =>{
                                     <fieldset className="show-price-for-flex">
                                         <button className="flex-button" onClick={(e)=>{e.preventDefault();handleDrop("status")}}>
                                             {statusLabel()}
+                                           {props.tag && props.tag} 
                                         </button>
+                                        
                                     </fieldset>
 
                                 <fieldset key={id} className={`${props.class} ${filterDropDown.status ? "show-prices" : "hide-prices"}`}>
@@ -334,6 +336,28 @@ const handleStatus = (type) =>{
                                     {filterState.status.includes("for_sale") ? <i className="fa-solid fa-square-check"></i> : <i className="fa-regular fa-square"></i>}
                                             Buy
                                         </li>
+
+                                    <li onClick={()=>{handleStatus("sold")}}>
+                                    {filterState.status.includes("sold") ? <i className="fa-solid fa-square-check"></i> : <i className="fa-regular fa-square"></i>}
+                                            Sold
+                                        </li>
+
+                                        <li onClick={()=>{handleStatus("new_community")}}>
+                                    {filterState.status.includes("new_community") ? <i className="fa-solid fa-square-check"></i> : <i className="fa-regular fa-square"></i>}
+                                            New community
+                                        </li>
+
+                                        <li onClick={()=>{handleStatus("ready_to_build")}}>
+                                    {filterState.status.includes("ready_to_build") ? <i className="fa-solid fa-square-check"></i> : <i className="fa-regular fa-square"></i>}
+                                            Ready to build
+                                        </li>
+
+                                        <li onClick={()=>{handleStatus("off_market")}}>
+                                    {filterState.status.includes("off_market") ? <i className="fa-solid fa-square-check"></i> : <i className="fa-regular fa-square"></i>}
+                                            Off market
+                                        </li>
+
+
                                     </ul>
                                 </fieldset>
                         </div> 
@@ -344,6 +368,7 @@ const handleStatus = (type) =>{
                                     <fieldset className="show-price-for-flex">
                                         <button className="flex-button" onClick={(e)=>{e.preventDefault();handleDrop("type")}}>
                                             {typeLabel()}
+                                            {props.tag && props.tag} 
                                         </button>
                                     </fieldset>
 
@@ -389,6 +414,7 @@ const handleStatus = (type) =>{
                  <fieldset className="show-price-for-flex">
                         <button className="flex-button" onClick={(e)=>{e.preventDefault();handleDrop("baths")}}>
                             {bathLabel()}
+                            {props.tag && props.tag} 
                         </button>
                     </fieldset>
                  <fieldset key={id} className={`${props.class} ${filterDropDown.baths ? "show-prices" : "hide-prices"}`}>
@@ -445,6 +471,7 @@ const handleStatus = (type) =>{
                      <fieldset className="show-price-for-flex">
                             <button className="flex-button" onClick={(e)=>{e.preventDefault();handleDrop("beds")}}>
                                 {bedLabel()}
+                                {props.tag && props.tag} 
                             </button>
                         </fieldset>
                      <fieldset key={id} className={`${props.class} ${filterDropDown.beds ? "show-prices" : "hide-prices"}`}>
@@ -502,6 +529,7 @@ const handleStatus = (type) =>{
                         <fieldset className="show-price-for-flex">
                             <button className="flex-button"  onClick={(e)=>{e.preventDefault();handleDrop("list_price")}}>
                                 {PriceText()}
+                                {props.tag && props.tag} 
                             </button>
                         </fieldset>
 
@@ -547,7 +575,6 @@ const handleStatus = (type) =>{
                               <i className="fa-solid fa-chevron-down"></i>
                               </div>
                               
-                                {props.tag && props.tag}
                          </fieldset>
                 </div>)
         case "location" :
@@ -579,8 +606,8 @@ const handleStatus = (type) =>{
         case "submit" :
         return <button key={id} onClick={(e)=> submitForm(e)} 
                        className={props.class}>
-                        {props.label}
                         {props.tag && props.tag}
+                        {props.label}
                 </button>
                           
         default :

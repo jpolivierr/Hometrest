@@ -43,7 +43,8 @@ export const filterFields = {
                         type: "search-type",
                         label: "Search Type",
                         name : "Search Type",
-                        value : ""
+                        value : "",
+                        tag: <i className="fa-sharp fa-solid fa-caret-down"></i>
                         
                       },
                       {
@@ -53,6 +54,7 @@ export const filterFields = {
                         class : "home-type",
                         type: "home-type",
                         value: "",
+                        tag: <i className="fa-sharp fa-solid fa-caret-down"></i>
                       },
                       {
                         label : "Price",
@@ -62,6 +64,7 @@ export const filterFields = {
                         class : "price-options",
                         type: "price-options",
                         value: "",
+                        tag: <i className="fa-sharp fa-solid fa-caret-down"></i>
                       },
                       {
                         label : "Bedrooms",
@@ -71,6 +74,7 @@ export const filterFields = {
                         class : "bed-options",
                         type: "bed-options",
                         value: "",
+                        tag: <i className="fa-sharp fa-solid fa-caret-down"></i>
                       },
                       {
                         label : "Bathrooms",
@@ -80,15 +84,16 @@ export const filterFields = {
                         class : "bed-options",
                         type: "bath-options",
                         value: "",
+                        tag: <i className="fa-sharp fa-solid fa-caret-down"></i>
                       },
 
                       {
-                        label : "Submit",
+                        label : "Search",
                         type: "submit",
                         value: "",
                         handler: "submit",
-                        tag: "",
-                        class: "main-btn"
+                        tag: <i className="fa-solid fa-magnifying-glass"></i>,
+                        class: "main-btn search-btn"
                         
                       },
                 ]

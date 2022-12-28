@@ -22,3 +22,20 @@
     gap: .5rem;
     cursor: pointer;
 }
+
+.filter form fieldset button{
+    padding-right: 2.5rem;
+}
+
+.filter form fieldset button i{
+    right: 15px;
+    color: var(--text-color-light);
+    width: max-content;
+    margin-right: 0;
+    font-size: .9rem;
+}
+
+.filter form .main-btn, .column-form .main-btn{
+    display: flex;
+    gap: .5rem;
+}

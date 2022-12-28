@@ -16,6 +16,7 @@ const TopNav = () =>{
                     <li>Home</li>
                     <li>Buy</li>
                     <li>Rent</li>
+                    <li>New Community</li>
                     <li>Property Search</li>
                 </ul>
 
