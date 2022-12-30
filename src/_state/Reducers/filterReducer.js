@@ -19,6 +19,10 @@ const init = {
 
 const filterReducer = (state = init, action) =>{
     switch(action.type){
+        case "limit" :
+            const getLimit =  JSON.parse(JSON.stringify(state))
+            getLimit.limit = action.payload
+            return state = getLimit
         case "city" :
             const getCity =  JSON.parse(JSON.stringify(state))
             getCity.city = action.payload

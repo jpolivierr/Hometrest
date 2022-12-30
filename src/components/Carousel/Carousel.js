@@ -31,35 +31,38 @@ const Carousel = ({relatedHomes, setPropertyId}) =>{
     useEffect(()=>{
         const carousel = carouselRef.current
         const wrapper = wrapperRef.current
-    
         
         if(wrapper){
 
            switch(true){
-            case wrapper.clientWidth < 779 && wrapper.clientWidth > 400 :
-                setInitNum(2)
-                setWrapperWidth(wrapper.clientWidth)
-                setGap(14)
-                break
+
             case wrapper.clientWidth < 400 :
-                setInitNum(1)
-                setWrapperWidth(wrapper.clientWidth)
-                setGap(15)
-                break
-            case wrapper.clientWidth > 1107 :
-                setInitNum(4)
-                setWrapperWidth(wrapper.clientWidth)
-                setGap(42)
-                break
-            default :
-                setInitNum(3)
-                setWrapperWidth(wrapper.clientWidth)
-                setGap(28)
-                break
+                        setInitNum(1)
+                        setWrapperWidth(wrapper.clientWidth)
+                        setGap(30)
+                        break
+                    case wrapper.clientWidth > 400 && wrapper.clientWidth < 762 :
+                        setInitNum(2)
+                        setWrapperWidth(wrapper.clientWidth)
+                        setGap(14)
+                        break
+                    case wrapper.clientWidth >= 762 && wrapper.clientWidth <= 1084:
+                        setInitNum(3)
+                        setWrapperWidth(wrapper.clientWidth)
+                        setGap(28)
+                        break
+                    case wrapper.clientWidth >= 1085 :
+                        setInitNum(4)
+                        setWrapperWidth(wrapper.clientWidth)
+                        setGap(42)
+                        break
+                    default :
+                       
+                        break
            }
         }
 
-    },[])
+    },[relatedHomes])
 
 
             const carousel = document.querySelector(".carousel")
@@ -75,30 +78,31 @@ const Carousel = ({relatedHomes, setPropertyId}) =>{
              window.addEventListener("resize", ()=>{
                const wrapper = document.querySelector(".wrapper")
 
-
                if(wrapper){
-
                 switch(true){
-                 case wrapper.clientWidth < 779 && wrapper.clientWidth > 400 :
-                     setInitNum(2)
-                     setWrapperWidth(wrapper.clientWidth)
-                     setGap(14)
-                     break
-                 case wrapper.clientWidth < 400 :
-                     setInitNum(1)
-                     setWrapperWidth(wrapper.clientWidth)
-                     setGap(15)
-                     break
-                 case wrapper.clientWidth > 1107 :
-                     setInitNum(4)
-                     setWrapperWidth(wrapper.clientWidth)
-                     setGap(42)
-                     break
-                 default :
-                     setInitNum(3)
-                     setWrapperWidth(wrapper.clientWidth)
-                     setGap(28)
-                     break
+                    case wrapper.clientWidth < 400 :
+                        setInitNum(1)
+                        setWrapperWidth(wrapper.clientWidth)
+                        setGap(30)
+                        break
+                    case wrapper.clientWidth > 400 && wrapper.clientWidth < 762 :
+                        setInitNum(2)
+                        setWrapperWidth(wrapper.clientWidth)
+                        setGap(14)
+                        break
+                    case wrapper.clientWidth >= 762 && wrapper.clientWidth <= 1084:
+                        setInitNum(3)
+                        setWrapperWidth(wrapper.clientWidth)
+                        setGap(28)
+                        break
+                    case wrapper.clientWidth >= 1085 :
+                        setInitNum(4)
+                        setWrapperWidth(wrapper.clientWidth)
+                        setGap(42)
+                        break
+                    default :
+                       
+                        break
                 }
              }
                
@@ -176,7 +180,6 @@ const Carousel = ({relatedHomes, setPropertyId}) =>{
             carousel.addEventListener("touchend", dragStop);
         } 
          
-        // console.log(carouselRef.current)
 
     return (
         <div ref={wrapperRef} className="wrapper">

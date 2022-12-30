@@ -84,7 +84,7 @@
   }
 
   .carousel .slider-block{
-    height: 340px;
+    height: max-content;
     object-fit: cover;
     user-select: none;
     margin-left: 14px;

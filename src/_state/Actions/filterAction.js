@@ -53,3 +53,10 @@ export const setCity = (data) =>{
         payload: data
     }
 }
+
+export const setLimit = (data) =>{
+    return{
+        type: "limit",
+        payload: data
+    }
+}

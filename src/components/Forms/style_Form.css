@@ -24,10 +24,6 @@ Forms
     outline: none;
 }
 
-.flex-form .search-input{
-  max-width: 250px;
-}
-
 .flex-form .flex-button{
     background: #9cbad93d;
     background: white;
@@ -49,6 +45,10 @@ Forms
     left: 0;
     box-shadow: 0px 0px 20px #82bbcc54;
     padding: 1rem;
+}
+
+.flex-form .price-options i{
+  /* bottom: 14px; */
 }
 
 .flex-form .home-type, .flex-form .search-type{
@@ -78,12 +78,22 @@ Forms
 
 .flex-form .bed-options label{
     grid-column: 1;
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 }
 
 .flex-form .show-prices{
     display: grid !important;
     background: white;
+    border-radius: 10px;
+}
+
+.home-type i{
+  position: relative !important;
+}
+
+.show-prices label{
+  margin-bottom: 1rem !important;
+  font-weight: 500 !important;
 }
 
 .flex-form .hide-prices{

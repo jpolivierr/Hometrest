@@ -22,5 +22,6 @@
 .search-result .search-header h1,.search-result .search-header h1 span{
     font-size: 1.2rem;
     font-weight: 400;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
+    margin-top: 1rem;
 }

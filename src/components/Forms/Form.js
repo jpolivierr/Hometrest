@@ -8,6 +8,7 @@ import useDropDown from "../DropDown/useDropDown.js"
 import { CapitalizeFirstLetter } from "../../functions/CapitalizeFirstLetter"
 
 import { getZipCode, detectZipCode } from "../../functions/DetectZip"
+import { priceOptions } from "../Lists/priceOptions"
 
 //reducer
 import { useSelector } from "react-redux"
@@ -277,23 +278,6 @@ const handleStatus = (type) =>{
             
            
     }
-
-    const priceOptions = [
-                     10000,
-                     20000,
-                     30000,
-                     40000,
-                     50000,
-                     100000,
-                     150000,
-                     200000,
-                     250000,
-                     300000,
-                     350000,
-                     400000,
-                     450000,
-                     500000
-                    ]
 
       
     

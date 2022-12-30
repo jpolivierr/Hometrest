@@ -3,7 +3,7 @@
   .slider-block {
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0px 0px 13px 0px #497c8836;
+    box-shadow: 0px 5px 13px 0px #7db3c43d;
     cursor: pointer;
     position: relative;
     max-width: 320px;
@@ -13,7 +13,7 @@
   .slider-block figure {
     position: relative;
     overflow: hidden;
-    height: 200px;
+    height: 170px;
   }
 
   .slider-block figure img{

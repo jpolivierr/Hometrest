@@ -1,6 +1,8 @@
 import "./style_topNav.css"
 import { navList } from "../Lists/listData";
 import { Link } from "react-router-dom";
+import { HeaderEffect } from "../../functions/headerEffect";
+import { useEffect, useRef } from "react";
 
 const TopNav = () =>{
 

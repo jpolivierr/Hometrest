@@ -20,9 +20,9 @@
 }
 
 .top_nav ul li{
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
+    font-size: .9rem;
+font-weight: 400;
+cursor: pointer;
 }
 
 .top_nav figure h2{
@@ -32,3 +32,8 @@
 .top_nav i{
     font-size: 1.3rem;
 }
+
+.menu-color div{
+    background-color: var(--text-color) !important;
+}
+

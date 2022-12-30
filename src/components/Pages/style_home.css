@@ -1,0 +1,270 @@
+.web-container{
+    width: 80%;
+    margin: auto;
+    max-width: 1200px;
+}
+
+.bk-alt{
+    background: white !important;
+    transition: .3s ease-in-out;
+}
+
+.bk-alt ul li, .bk-alt h2, .bk-alt h2 i{
+    color: var(--text-color) !important;
+}
+
+.border-bottom{
+    border-bottom: 1px solid #e8e9ea !important;
+    transition: .3s ease-in-out;
+}
+
+/* background */
+
+.bk-transparent {
+    background: transparent;
+    transition: .3s ease-in-out;
+  }
+  
+  .bk-transparent h1,
+  .bk-transparent h2,
+  .bk-transparent h3,
+  .bk-transparent h4,
+  .bk-transparent h5,
+  .bk-transparent p,
+  .bk-transparent ul li{
+      color: white;
+  }
+/* 
+*****************************************************************
+top Navigation  
+*****************************************************************
+*/
+.web-nav{
+    background: transparent;
+    padding: 1.4rem 0rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border-bottom: 1px solid #ffffff5c;
+    z-index: 5;
+}
+
+.web-nav .web-container{
+    display: grid;
+    grid-template-columns: max-content max-content;
+    justify-content: space-between;
+}
+
+.web-nav .web-container h2, .web-nav .web-container h2 i{
+    font-size: 1.5rem;
+    color: white;
+}
+
+.web-nav .web-container ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 3rem;
+    
+}
+
+.web-nav .web-container ul li{
+    color: white;
+    font-weight: 400;
+    font-size: .9rem;
+}
+
+.web-nav .web-container menu {
+    display: flex;
+  }
+
+  .av-header-v1 .web-container menu {
+	display: none;
+	width: 45px;
+	height: 40px;
+	justify-content: space-between;
+	align-items: center;
+	flex-flow: column;
+	position: relative;
+	cursor: pointer;
+	padding: 9px 8px;
+	border-radius: 5px;
+}
+
+/* 
+*****************************************************************
+Hero Section 
+*****************************************************************
+*/
+
+.hero{
+    padding: 14rem 0rem;
+    position: relative;
+
+}
+
+.hero h1{
+    color: white;
+    max-width: 1000px;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.hero p{
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+    
+    /* 
+*****************************************************************
+Featured Properties
+*****************************************************************
+*/
+
+.featured-property {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    padding-top: 33rem;
+}
+
+.featured-property section:nth-child(1){
+    display: flex;
+    justify-content: center;
+}
+
+.article{
+    margin-top: 4rem;
+}
+
+.reverse section:nth-child(2){
+
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.reverse section:nth-child(2) div{
+
+width: max-content;
+}
+
+.article p{
+    color: var(--text-color-light);
+    margin-bottom: 1rem;
+    max-width: 500px;
+}
+
+.h2-styling h2{
+        font-size: var(--h2-size);
+        font-weight: var(--h2-weight);
+        margin-bottom: 1rem;
+        max-width: 500px;
+        line-height: 1.3;
+        display: flex;
+        flex-flow: column;
+        text-align: center;
+}
+
+
+
+.h2-styling h2 span {
+	font-size: 1rem;
+	font-weight: 400;
+	color: var(--text-color-light);
+    position: relative;
+    width: max-content;
+    margin: auto;
+    margin-bottom: .5rem;
+}
+
+
+.h2-styling h2 span::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 80px;
+	margin: auto;
+	width: 35px;
+	height: 2px;
+	background: var(--main-color);
+}
+
+.h2-left h2{
+    text-align: left;
+}
+
+.h2-left h2 span{
+    margin: 0;
+    margin-bottom: .5rem;
+    left: 0 !important;
+    width: 100%;
+    padding-left: 3.3rem;
+}
+
+.h2-left h2 span::before{
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: auto;
+}
+
+footer {
+    background: var(--text-color-dark);
+    margin-top: 1rem;
+}
+
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0rem
+}
+
+.footer ul {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer ul li{
+    color: white;
+}
+
+
+@media (max-width: 1245px) {
+    .web-container{
+        width: 90%;
+    }
+}
+
+
+@media (max-width: 700px) {
+    .web-nav .web-container ul{
+        display: none;
+    }
+
+    .hero{
+        padding-top: 9rem;
+    }
+
+    .hero h1{
+        font-size: 2.9rem;
+    }
+
+    .block{
+        grid-template-columns: 1fr;
+    }
+
+    .featured-property{
+        padding-top: 45rem;
+    }
+}

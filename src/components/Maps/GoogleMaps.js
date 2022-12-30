@@ -1,6 +1,8 @@
 import { useRef, useEffect } from "react"
 import "./style_maps.css"
 import rectangle from "../../media/images/circle.png"
+import { NumberFormat } from "../../functions/NumberFormat"
+import { formatImg } from "../../functions/formatImg"
 const GoogleMaps = ({listings, classname}) =>{
 
   const mapRef = useRef(null)
@@ -27,25 +29,32 @@ console.log(listings[0].location.address.coordinate)
            // Create the markers.
            listings.forEach((home)=>{
 
+            const id = home.property_id
+            const status = home.status.replaceAll("_"," ")
             const coordinate = home.location.address.coordinate
-            const address = home.location.address.line
+            const street = home.location.address.line
             const city = home.location.address.city
             const state = home.location.address.state_code
             const zipCode = home.location.address.postal_code
+            const price = NumberFormat.formatNumberWithCommas(home.list_price) 
+            const image = formatImg(!home.primary_photo ? null : home.primary_photo.href)
+            const beds = !home.description.beds ? 0 : home.description.beds 
+            const baths = !home.description.baths ? 0 : home.description.baths
+            const sqft = !home.description.sqft ? 0 : home.description.sqft
 
-             const contentInfo = `<div id="5374218639" class="false slider-block slider-map">
+             const contentInfo = `<div id="${id}" className="false slider-block slider-map">
 
-                                     <a href="/property?id=5374218639">
+                                     <a href="/property?id=${id}">
 
-                                      <figure><span>for sale</span><img src="https://ap.rdcpix.com/6c441ac8f9d94935fd09af1ed6250284l-m2214354290od-w480_h360_x2.jpg" alt=""></figure>
+                                      <figure><span>${status}</span><img src=${image} alt=""></figure>
                                       
-                                      <div class="av-property-details">
-                                          <h4>$425,000</h4>
-                                          <i class="fa-regular fa-heart"></i>
-                                          <h5><span>3</span> <span>Beds</span></h5>
-                                          <h5><span>2</span> <span>Baths</span></h5>
-                                          <h5><span>1206</span> <span>Sq.Ft.</span></h5>
-                                          <p>12901 NW 22nd Ave, Miami,FL 33167</p>
+                                      <div className="av-property-details">
+                                          <h4>$${price}</h4>
+                                          <i className="fa-regular fa-heart"></i>
+                                          <h5><span>${beds}</span> <span>Beds</span></h5>
+                                          <h5><span>${baths}</span> <span>Baths</span></h5>
+                                          <h5><span>${sqft}</span> <span>Sq.Ft.</span></h5>
+                                          <p>${street}, ${city},${state} ${zipCode}</p>
                                       </div>
                                       
                                       </a>
@@ -96,18 +105,18 @@ console.log(listings[0].location.address.coordinate)
 
   useEffect(()=>{
   
-       window.initMap = initMap;
-      window.initMap = initMap;
-    const script = document.createElement("script")
-    script.id="the-map"
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&callback=initMap&v=weekly`
-    script.defer = true
-    script.async = true
-    document.body.appendChild(script)
-const theMap = document.querySelector("#the-map")
-    console.log("ran....")
+//        window.initMap = initMap;
+//       window.initMap = initMap;
+//     const script = document.createElement("script")
+//     script.id="the-map"
+//     script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&callback=initMap&v=weekly`
+//     script.defer = true
+//     script.async = true
+//     document.body.appendChild(script)
+// const theMap = document.querySelector("#the-map")
+//     console.log("ran....")
 
-     theMap.remove()
+//      theMap.remove()
     
   },[listings])
 

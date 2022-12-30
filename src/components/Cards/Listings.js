@@ -12,9 +12,8 @@ const Listings = ({callBack, id, classname, style, status, img, price, beds,bath
             style={style}
            >
   <Link to={`/property?id=${id}`}>
-            <figure>
-                <span>{status}</span>
-                <img src={img} alt=""/>
+            <figure style={{background: `url(${img}) no-repeat center center/cover`}}>
+                <span>{status.replaceAll("_"," ")}</span>
             </figure>
             <div className="av-property-details">
                 <h4>${price}</h4>
@@ -22,7 +21,7 @@ const Listings = ({callBack, id, classname, style, status, img, price, beds,bath
                 <h5><span>{beds}</span> <span>Beds</span></h5>
                 <h5><span>{baths}</span> <span>Baths</span></h5>
                 <h5><span>{sqft}</span> <span>Sq.Ft.</span></h5>
-                <p>{street}, {city},{state} {zip}</p>
+                <p>{street}, {city}, {state} {zip}</p>
             </div>
             </Link>
         </div>
