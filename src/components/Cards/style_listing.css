@@ -13,7 +13,7 @@
   .slider-block figure {
     position: relative;
     overflow: hidden;
-    height: 170px;
+    height: 200px;
   }
 
   .slider-block figure img{
@@ -28,7 +28,7 @@
     top: 5px;
     left: 5px;
     padding: .1rem .6rem;
-    font-size: .7rem;
+    font-size: .8rem;
     background-color: var(--text-color);
     color: white;
     font-weight: bold;
@@ -46,7 +46,7 @@
   .slider-block .av-property-details h4 {
     grid-column: 1 / 3;
     text-align: left;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-weight: 500;
     align-self: center;
     margin-bottom: .2rem;
@@ -63,12 +63,13 @@
     text-align: left;
     font-weight: normal;
     color: var(--text-color-light);
+    margin: .5rem 0rem;
   }
 
   .slider-block .av-property-details h5 span:nth-child(1){
     color: var(--text-color-light);
     font-weight: 500;
-    font-size: .9rem;
+    font-size: 1rem;
   }
 
   .slider-block .av-property-details h5 span:nth-child(2){

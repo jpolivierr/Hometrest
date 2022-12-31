@@ -1,13 +1,12 @@
 import "./style_Form.css"
-import { useEffect, useState, useRef } from "react"
-import Validator from "../../functions/Validator"
+import { useState, useRef } from "react"
 import { useFetchRequest } from "../Request/useFetchRequest"
 
-import { URL, PATH_TYPE, COMPONENT } from "../../VAR/var"
+import { URL } from "../../VAR/var"
 import useDropDown from "../DropDown/useDropDown.js"
 import { CapitalizeFirstLetter } from "../../functions/CapitalizeFirstLetter"
 
-import { getZipCode, detectZipCode } from "../../functions/DetectZip"
+import { getZipCode } from "../../functions/DetectZip"
 import { priceOptions } from "../Lists/priceOptions"
 
 //reducer
@@ -25,7 +24,6 @@ import { NumberFormat } from "../../functions/NumberFormat"
 const Forms = ({classname, title, template}) =>{
 
     const filterState = useSelector( state => state.filterReducer)
-    const responseData = useSelector(state => state.requestStatusReducer)
     const inputRef = useRef("")
 
 

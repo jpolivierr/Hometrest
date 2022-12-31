@@ -105,6 +105,10 @@ Forms
    display: none;
 }
 
+.flex-form button{
+  padding: .5rem 1rem;
+}
+
 .column-form {
     display: flex;
     flex-flow: column;

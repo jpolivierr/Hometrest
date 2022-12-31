@@ -1,8 +1,6 @@
 import "./style_topNav.css"
-import { navList } from "../Lists/listData";
 import { Link } from "react-router-dom";
-import { HeaderEffect } from "../../functions/headerEffect";
-import { useEffect, useRef } from "react";
+
 
 const TopNav = () =>{
 
@@ -15,11 +13,26 @@ const TopNav = () =>{
                 </figure>
 
                 <ul>
-                    <li>Home</li>
-                    <li>Buy</li>
-                    <li>Rent</li>
-                    <li>New Community</li>
-                    <li>Property Search</li>
+                    <Link to="/">
+                        <li>Home</li>
+                    </Link>
+                    
+                    <Link to="/search">
+                       <li>Buy</li>
+                    </Link>
+
+                    <Link to="/search">
+                       <li>Rent</li>
+                    </Link>
+
+                    <Link to="/search">
+                       <li>New Community</li>
+                    </Link>
+
+                    <Link to="/search">
+                       <li>Property Search</li>
+                    </Link>
+
                 </ul>
 
                 <i className="fa-solid fa-bars"></i>

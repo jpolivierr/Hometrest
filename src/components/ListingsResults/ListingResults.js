@@ -2,12 +2,13 @@ import './style_listing_result.css'
 import Listings from '../Cards/Listings'
 import { NumberFormat } from '../../functions/NumberFormat'
 import { useFetchRequest } from '../Request/useFetchRequest'
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import GoogleMaps from '../Maps/GoogleMaps'
 import { URL } from '../../VAR/var'
 import Loading from '../Loading/Loading'
 import { formatImg } from '../../functions/formatImg'
+import { useLocation } from 'react-router'
 
 // Actions
 
@@ -21,6 +22,13 @@ const ListingResults = () =>{
     const { sendRequest} = useFetchRequest()
 
     const listingData = requestStatus.data
+
+
+     const location = useLocation();
+     const path = location.pathname
+    useEffect(()=>{
+      window.scrollTo(0, 0);
+    },[path])
 
     useEffect(() =>{
 

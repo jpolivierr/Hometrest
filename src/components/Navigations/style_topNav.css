@@ -5,13 +5,13 @@
     gap: 3rem;
 }
 
-.top_nav{
-    padding: 1rem 0rem;
-    border-bottom: 1px solid var(--light-silver);
-    position: sticky;
-    top: 0;
-    background: white;
-    z-index: 4;
+.top_nav {
+	padding: 1.2rem 0rem;
+	border-bottom: 1px solid var(--light-silver);
+	position: sticky;
+	top: 0;
+	background: white;
+	z-index: 5;
 }
 
 .top_nav ul{

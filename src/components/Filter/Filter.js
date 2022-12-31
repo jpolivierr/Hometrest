@@ -1,17 +1,17 @@
 import FlexLayout from "../Layouts/FlexLayout";
-import Lists from "../Lists/Lists";
 import Forms from "../Forms/Form";
 import "./style_Filter.css"
 
 
 //form Fields
-import { template, filterFields } from "../Forms/JsonFormFields";
+import {filterFields } from "../Forms/JsonFormFields";
 
 //Actions
 import { modalAction } from "../../_state/Actions/actionCollection";
 import { useDispatch } from "react-redux"
 import { bindActionCreators } from "redux"
-import { URL, PATH_TYPE,MODAL_TYPE , COMPONENT } from "../../VAR/var";
+import { MODAL_TYPE , COMPONENT } from "../../VAR/var";
+
 
 function Filter(){
 

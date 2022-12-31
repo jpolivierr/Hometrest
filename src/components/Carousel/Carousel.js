@@ -1,21 +1,12 @@
 import "./style_carousel.css"
-import image_1 from "../../media/images/img-1.jpg"
-import image_2 from "../../media/images/img-2.jpg"
-import image_3 from "../../media/images/img-3.jpg"
-import image_4 from "../../media/images/img-4.jpg"
-import image_5 from "../../media/images/img-5.jpg"
-import image_6 from "../../media/images/img-6.jpg"
-import image_7 from "../../media/images/img-7.jpg"
+
 import { useEffect, useState, useRef } from "react"
-import { initCarousel } from "../../functions/Carousel"
 import Listings from "../Cards/Listings"
 import { NumberFormat } from "../../functions/NumberFormat"
 import { formatImg } from "../../functions/formatImg"
 
 const Carousel = ({relatedHomes, setPropertyId}) =>{
 
-    const [carouselWidth, setCarouselWidth] = useState(null)
-    const [divideBy, setDivideBy] =useState(null)
     const [wrapperWidth, setWrapperWidth] = useState(null)
     const [initNum, setInitNum] =useState(null)
     const [gap, setGap] = useState(null)
@@ -25,11 +16,10 @@ const Carousel = ({relatedHomes, setPropertyId}) =>{
 
         // const carousel = carouselRef.current
         // const wrapper = wrapperRef.current
-        let initialWidth 
-        let divide
+       
+    
 
     useEffect(()=>{
-        const carousel = carouselRef.current
         const wrapper = wrapperRef.current
         
         if(wrapper){
@@ -64,17 +54,12 @@ const Carousel = ({relatedHomes, setPropertyId}) =>{
 
     },[relatedHomes])
 
-
-            const carousel = document.querySelector(".carousel")
-            const wrapper = document.querySelector(".wrapper")
-            
+            const carousel = document.querySelector(".carousel")            
 
         if(!carousel){
             
         }else{
     
-
-             initialWidth = wrapper.clientWidth
              window.addEventListener("resize", ()=>{
                const wrapper = document.querySelector(".wrapper")
 
@@ -117,15 +102,15 @@ const Carousel = ({relatedHomes, setPropertyId}) =>{
                 const showHideIcons = () => {
                     // showing and hiding prev/next icon according to carousel scroll left value
                     let scrollWidth = carousel.scrollWidth - carousel.clientWidth; // getting max scrollable width
-                    arrowIcons[0].style.display = carousel.scrollLeft == 0 ? "none" : "block";
-                    arrowIcons[1].style.display = carousel.scrollLeft == scrollWidth ? "none" : "block";
+                    arrowIcons[0].style.display = carousel.scrollLeft === 0 ? "none" : "block";
+                    arrowIcons[1].style.display = carousel.scrollLeft === scrollWidth ? "none" : "block";
                 }
 
                 arrowIcons.forEach(icon => {
                     icon.addEventListener("click", () => {
                         let firstImgWidth = firstImg.clientWidth + 14; // getting first img width & adding 14 margin value
                         // if clicked icon is left, reduce width value from the carousel scroll left else add to it
-                        carousel.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
+                        carousel.scrollLeft += icon.id === "left" ? -firstImgWidth : firstImgWidth;
                         setTimeout(() => showHideIcons(), 60); // calling showHideIcons after 60ms
                     });
                 });

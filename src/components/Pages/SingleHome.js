@@ -7,6 +7,7 @@ import { Link, useNavigate} from "react-router-dom"
 import {CapitalizeFirstLetter} from "../../functions/CapitalizeFirstLetter"
 import { formatImg } from "../../functions/formatImg"
 import nophoto from "../../media/images/nophotos.jpg"
+import { useLocation } from "react-router-dom"
 
 import SimilarListings from "../SimilarListings/SimilarListings"
 
@@ -20,6 +21,12 @@ import { modalAction } from "../../_state/Actions/actionCollection"
 
 
 const SingleHome= () =>{
+
+    const location = useLocation();
+     const path = location.pathname
+    useEffect(()=>{
+      window.scrollTo(0, 0);
+    },[path])
 
     const navigate = useNavigate()
     const [home, setHome] = useState(null)

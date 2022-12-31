@@ -1,5 +1,9 @@
-import SimilarListings from "../SimilarListings/SimilarListings"
 import house4 from "../../media/images/house4.jpg"
+import house1 from "../../media/images/house_1.jpg"
+import house2 from "../../media/images/house2.jpg"
+import interior2 from "../../media/images/interior2.jpg"
+import interior3 from "../../media/images/interior3.jpg"
+import interior1 from "../../media/images/interior1.jpg"
 import WebFilter from "../Filter/WebFilter"
 import "./style_home.css"
 import { useFetchRequest } from "../Request/useFetchRequest"
@@ -7,6 +11,7 @@ import { useState, useEffect, useRef } from "react"
 import { useSelector } from 'react-redux'
 import { URL } from "../../VAR/var"
 import Carousel from "../Carousel/Carousel"
+import { useLocation } from "react-router-dom"
 
 import { filterAction } from "../../_state/Actions/actionCollection"
 import { bindActionCreators } from "redux"
@@ -14,15 +19,23 @@ import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 
 
-import { HeaderEffect } from "../../functions/headerEffect";
 const Home = () =>{
 
+    const location = useLocation();
+     const path = location.pathname
+     console.log(path)
+    useEffect(()=>{
+      window.scrollTo(0, 0);
+    },[path])
+
     const topNavRef = useRef(null)
-    const menuRef = useRef(null)
+    // const menuRef = useRef(null)
 
     const [scrollPosition, setScrollPosition] = useState(0);
 
     const handleScroll = () => {
+
+       if(topNavRef.current){
         const position = window.pageYOffset;
    
         if(position >= 76){
@@ -36,18 +49,26 @@ const Home = () =>{
             
         }
         setScrollPosition(position);
+       }
+            
+        
+        
     };
 
     // console.log(scrollPosition)
 
     useEffect(()=>{
-        window.addEventListener('scroll', handleScroll, { passive: true });
-    },[])
+        if(path === "/"){
+        window.addEventListener('scroll', handleScroll);
+        }else{
+            console.log("removed...")
+            window.removeEventListener("scroll",handleScroll)
+        }
+    },[path])
 
     // Reducers
     const filterState = useSelector(state => state.filterReducer)
     const requestStatus = useSelector(state => state.requestStatusReducer)
-    const isLoading = requestStatus.isLoading
 
     //Request Hook
     const { sendRequest} = useFetchRequest()
@@ -143,20 +164,20 @@ const Home = () =>{
         </article>
 
         <article>
-            <section className="web-container article block h2-styling h2-left">
-                <section>
+            <section className="web-container smart-search article block h2-styling h2-left">
+                <section className="smar-search-content">
                     <h2>
                         <span>Smart Search</span>
                         Smart way to find your dream home
                     </h2>
 
                     <p>
-                    Money doesn't have to be messy. The YNAB budgeting app and its simple four-rule method will help you organize your finances, demolish your debt, save piles of cash, and reach your financial goals faster.
+                    The CRM system tracks the level of service to each customer for their needs, similarly in real estate. For instance, tracking your customers is essential for any business to have long-term success. With our CRM, you will be able to take customer's information and also follow up with them through email, phone.
                     </p>
 
                     <div className="btn-container">
                                     <Link to="/search">
-                                            <button className="main-btn">
+                                            <button className="main-btn shadow-btn">
                                                 Find my home
                                             </button>
                                             </Link>
@@ -164,8 +185,9 @@ const Home = () =>{
 
 
                 </section>
-                <section>
-
+                <section className="article-img">
+                       <figure style={{background: `url(${house1}) no-repeat center center/cover`}}/> 
+                       <figure style={{background: `url(${house2}) no-repeat center center/cover`}}/>
                 </section>
                         
 
@@ -175,13 +197,19 @@ const Home = () =>{
 
 
         <article>
-            <section className="web-container article reverse block h2-styling h2-left">
+            <section className="web-container find-it article reverse block h2-styling h2-left">
 
-                <section>
+                <section className="article-img">
+
+                <figure style={{background: `url(${interior2}) no-repeat center center/cover`}}/> 
+
+                <figure style={{background: `url(${interior1}) no-repeat center center/cover`}}/>
+
+                <figure style={{background: `url(${interior3}) no-repeat center center/cover`}}/>
 
                 </section>
 
-                <section>
+                <section className="find-it-content">
                     <div>
                         <h2>
                         <span>Find what</span>
@@ -189,12 +217,12 @@ const Home = () =>{
                     </h2>
 
                     <p>
-                    Money doesn't have to be messy. The YNAB budgeting app and its simple four-rule method will help you organize your finances, demolish your debt, save piles of cash, and reach your financial goals faster.
+                    Manage all the aspects of your business from leasing, investments, and sales. Especially manage your customers' property to keep in order the maintenance of the property and its winnings.
                     </p>
 
                     <div className="btn-container">
                                           <Link to="/search">
-                                            <button className="main-btn">
+                                            <button className="main-btn shadow-btn">
                                                 Find my home
                                             </button>
                                             </Link> 
@@ -214,9 +242,20 @@ const Home = () =>{
         <footer>
             <article className="web-container article footer">
                     <ul>
-                        <li>Home</li>
-                        <li>Listings</li>
-                        <li>Buy</li>
+                        <Link to="/">
+                           <li>Home</li>
+                        </Link>
+
+                        <Link to="/search">
+                            <li>Listings</li>
+                        </Link>
+
+                        <Link to="/search">
+                           <li>Buy</li>
+                        </Link>
+                        
+                        
+                        
                     </ul>
             </article>
         </footer>
