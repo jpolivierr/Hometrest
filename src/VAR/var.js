@@ -42,8 +42,8 @@ export const PATH_TYPE = {
 
 export const URL = {
 
-    GET_PROPERTIES : `http://localhost:7070/api/search`,
-    GET_SINGLE_LISTING : "http://localhost:7070/api/property",
-    GET_SIMILAR_LISTING : "http://localhost:7070/api/similar-listings"
+    GET_PROPERTIES : `https://hometrest.com/api/search`,
+    GET_SINGLE_LISTING : "https://hometrest.com/api/property",
+    GET_SIMILAR_LISTING : "https://hometrest.com/api/similar-listings"
 
 }

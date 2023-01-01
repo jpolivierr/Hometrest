@@ -18,6 +18,7 @@ import { filterAction } from "../../_state/Actions/actionCollection"
 import { bindActionCreators } from "redux"
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
+import Loading from "../Loading/Loading"
 
 
 const Home = () =>{
@@ -26,7 +27,7 @@ const Home = () =>{
      const path = location.pathname
      console.log(path)
     useEffect(()=>{
-    //   window.scrollTo(0, 0);
+      window.scrollTo(0, 0);
     },[path])
 
     const topNavRef = useRef(null)
@@ -117,7 +118,7 @@ const Home = () =>{
             </section>
 
         </header>
-            <article style={{background: `url(${house4}) no-repeat center center/cover`}} className="">
+            <article style={{background: `url(${house4}) no-repeat center center/cover`}} className="main-section">
 
             <section className="web-container block hero">
 
@@ -152,11 +153,11 @@ const Home = () =>{
                     {/* <h2>
                         <span>Listings</span>
                            Featured Properties
-                        </h2> */}
-                        
+                        </h2>
+                        <p>investments, and sales. Especially manage your customers' property to keep in Finding the apartment, condo, or house you'll love to rent just got easie. Finding the apartment, condo, or h</p> */}
                 </section>
-                <section style={{position: "relative", width: "100%", marginBottom: "0rem", maxWidth: "1600px"}} className="similar-listings single-page-container">
-                { !listingData.home_search ? null : <Carousel relatedHomes={listingData.home_search.results} />}
+                <section style={{position: "relative", width: "100%",minHeight: "300px", marginBottom: "0rem", maxWidth: "1600px"}} className="similar-listings single-page-container">
+                { !listingData.home_search ? <Loading/>: <Carousel relatedHomes={listingData.home_search.results} />}
                 </section>
                         
 

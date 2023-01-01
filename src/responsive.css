@@ -45,8 +45,8 @@
     .flex-form div:nth-child(3){
         /* display: none; */
     }
-    .single-home-container{
-        width: 95% !important;
+    .single-home-container {
+        width: 85% !important;
         grid-template-columns: 1fr !important;
     }
 
@@ -78,6 +78,11 @@
 
     .home-features ul{
         flex-wrap: wrap !important;
+    }
+
+    .single-home-container aside {
+
+        border-left: none !important;
     }
     
 }

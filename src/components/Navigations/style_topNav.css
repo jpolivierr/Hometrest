@@ -37,3 +37,9 @@ cursor: pointer;
     background-color: var(--text-color) !important;
 }
 
+@media (max-width: 800px) {
+    .top_nav ul{
+        display: none;
+    }
+}
+

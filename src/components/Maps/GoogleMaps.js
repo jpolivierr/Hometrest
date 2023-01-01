@@ -26,6 +26,8 @@ console.log(listings[0].location.address.coordinate)
 
          
 
+         
+
            // Create the markers.
            listings.forEach((home)=>{
 
@@ -42,26 +44,11 @@ console.log(listings[0].location.address.coordinate)
             const baths = !home.description.baths ? 0 : home.description.baths
             const sqft = !home.description.sqft ? 0 : home.description.sqft
 
-             const contentInfo = `<div id="${id}" className="false slider-block slider-map">
+            const content = `<div id="${id}" class="null slider-block"><a href="/property?id=${id}"><figure style="background: url(${image}) center center / cover no-repeat;"><span>${status}</span></figure><div class="av-property-details"><h4>$${price}</h4><i class="fa-regular fa-heart"></i><h5><span>${beds}</span> <span>Beds</span></h5><h5><span>${baths}</span> <span>Baths</span></h5><h5><span>${sqft}</span> <span>Sq.Ft.</span></h5><p>${street}, ${city}, ${state} ${zipCode}</p></div></a></div>`
 
-                                     <a href="/property?id=${id}">
-
-                                      <figure><span>${status}</span><img src=${image} alt=""></figure>
-                                      
-                                      <div className="av-property-details">
-                                          <h4>$${price}</h4>
-                                          <i className="fa-regular fa-heart"></i>
-                                          <h5><span>${beds}</span> <span>Beds</span></h5>
-                                          <h5><span>${baths}</span> <span>Baths</span></h5>
-                                          <h5><span>${sqft}</span> <span>Sq.Ft.</span></h5>
-                                          <p>${street}, ${city},${state} ${zipCode}</p>
-                                      </div>
-                                      
-                                      </a>
-                                      </div>`
 
           const infoWindow = new window.google.maps.InfoWindow({
-            content : contentInfo,
+            content : content,
             ariaLabel: "Uluru",
           })
 
