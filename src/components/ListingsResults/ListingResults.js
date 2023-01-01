@@ -49,6 +49,8 @@ const ListingResults = () =>{
                 
               </div>
               <div className='search-result'>
+
+                {isLoading ? `loading-card` : null}
                 <div className='search-header'>
                     <h1>Found <span style={{fontWeight: "600"}}>{listingData.home_search.results.length} </span>results for search "<span style={{fontWeight: "600"}}>{!filterState.city ? filterState.postal_code : filterState.city}</span>"</h1>
                 </div>

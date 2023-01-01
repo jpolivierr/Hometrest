@@ -53,7 +53,6 @@ const useFetchRequest = () =>{
                         }
                         
                        const formData = new FormData()
-                       console.log(data)
                        formData.append("formData", JSON.stringify(data))
                        
                        config.body = formData
@@ -104,6 +103,7 @@ const useFetchRequest = () =>{
                                             csMessage: "Oops!Something went wrong"
                                         }
                                         setRequestStatus(serverResp) 
+                                        window.location.href = "https://www.hometrest.com";
                         break
                     case 500 :
                         setLoading(false)
@@ -113,6 +113,7 @@ const useFetchRequest = () =>{
                                             csMessage: "Oops!Something went wrong"
                                         }
                                         setRequestStatus(serverResp) 
+                                        window.location.href = "https://www.hometrest.com";
                     
                         break
                     default :
@@ -129,7 +130,6 @@ const useFetchRequest = () =>{
 
 
             }catch(error){
-                console.log(error.message)
                     if(error.message.includes("JSON.parse: ")){
                         setLoading(false)
                         setRequestStatus(500,

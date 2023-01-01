@@ -2,7 +2,7 @@ const init = {
     limit: 100,
     location : "",
     city : "",
-    postal_code : "33167",
+    postal_code : "20634",
     status: [],
     type : [],
     list_price: {

@@ -95,7 +95,7 @@ const WebFilter = () =>{
     const min = filterState.list_price.min
 
     if(max < 1 && min < 1){
-        return "10.0K - 500.0K"
+        return "No minimum"
     }
 
     if(typeof max !== "number" && typeof min === "number"){
@@ -207,7 +207,7 @@ const handleStatus = (type) =>{
                     <li onClick={()=>{setActiveLink({...activeLink, offMarket: !activeLink.offMarket}); handleStatus("off_market"); }} className={activeLink.offMarket? "q-active" : ""}>Off market</li>
                  </ul>
             </fieldset>
-            <fieldset>
+            <fieldset className="q-location">
                 <label>Location</label>
                 <input 
                          type="text" 
@@ -216,7 +216,7 @@ const handleStatus = (type) =>{
                          value={filterState.location}
                          onChange={(e)=> handleInput(e)}   />
             </fieldset>
-            <fieldset style={{position: "relative"}}>
+            <fieldset className="q-type" style={{position: "relative"}}>
                 <label> Property type</label>
                 <input readOnly 
                        onClick={(e)=>{e.preventDefault();handleDrop("type")}} 
@@ -261,7 +261,7 @@ const handleStatus = (type) =>{
                                     </ul>
                                 </fieldset>
             </fieldset>
-            <fieldset>
+            <fieldset className="q-price">
                 <label>Price range</label>
                 <input 
                        readOnly 
@@ -432,7 +432,7 @@ const handleStatus = (type) =>{
                         </button>
                    </fieldset>
             </fieldset>
-            <Link to="/search">
+            <Link className="q-search" to="/search">
             <button className="main-btn"><i className="fa-solid fa-magnifying-glass"></i></button>
             </Link>
             

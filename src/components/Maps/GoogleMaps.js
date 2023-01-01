@@ -6,11 +6,11 @@ import { formatImg } from "../../functions/formatImg"
 const GoogleMaps = ({listings, classname}) =>{
 
   const mapRef = useRef(null)
-console.log(listings[0].location.address.coordinate)
+
  function initMap(){
 
-       const initLat = listings[1].location.address.coordinate.lat
-       const initLng = listings[1].location.address.coordinate.lon
+       const initLat = listings[0].location.address.coordinate.lat
+       const initLng = listings[0].location.address.coordinate.lon
 
         const center = {
               lat: initLat, 
@@ -99,7 +99,7 @@ const theMap = document.querySelector("#the-map")
 
      theMap.remove()
     
-  },[listings])
+  },[])
 
   
 

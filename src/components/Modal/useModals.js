@@ -88,7 +88,6 @@ const useModals = () =>{
         switch(modals.type){
            
             case "floating" :
-                console.log(modals)
                 floatingModal()
                 break
             // case "side" :
@@ -96,7 +95,6 @@ const useModals = () =>{
             // case "select" :
             //     return selectModal()
             default :
-                console.log(modals)
                 empty()
         }
 

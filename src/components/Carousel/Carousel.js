@@ -44,7 +44,7 @@ const Carousel = ({relatedHomes, setPropertyId}) =>{
                     case wrapper.clientWidth >= 1085 :
                         setInitNum(3)
                         setWrapperWidth(wrapper.clientWidth)
-                        setGap(42)
+                        setGap(28)
                         break
                     default :
                        
@@ -83,7 +83,7 @@ const Carousel = ({relatedHomes, setPropertyId}) =>{
                     case wrapper.clientWidth >= 1085 :
                         setInitNum(3)
                         setWrapperWidth(wrapper.clientWidth)
-                        setGap(42)
+                        setGap(28)
                         break
                     default :
                        
@@ -179,7 +179,7 @@ const Carousel = ({relatedHomes, setPropertyId}) =>{
                       //   classname={isLoading && `` }
                         style={{minWidth:`calc(${wrapperWidth - gap}px / ${initNum})`}}
                         status={listing.status}
-                        img={formatImg(listing.primary_photo.href)}
+                        img={formatImg(!listing.primary_photo ? null : listing.primary_photo.href)}
                         price={NumberFormat.formatNumberWithCommas(listing.list_price) }
                         beds={!listing.description.beds ? 0 : listing.description.beds }
                         baths={!listing.description.baths ? 0 : listing.description.baths}

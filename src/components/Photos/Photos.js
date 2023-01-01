@@ -3,8 +3,6 @@ import { formatImg } from "../../functions/formatImg"
 
 const Photos = ({photos} ) =>{
 
-
-    console.log(photos.length)
     return(
         <div className="photo-gallery">
             <h2>Photo gallery</h2>

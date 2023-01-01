@@ -108,12 +108,13 @@ Hero Section
     color: white;
     max-width: 1000px;
     margin-bottom: 2rem;
-    font-weight: 600;
+    font-weight: 800;
 }
 
 .hero p{
     color: white;
     margin-bottom: 1rem;
+    font-weight: 500;
 }
 
 .block {
@@ -133,7 +134,7 @@ Hero Section
     height: 100%;
     top: 0;
     left: 0;
-    background: #05091326;
+    
 }
 
 
@@ -204,7 +205,6 @@ Featured Properties
         line-height: 1.3;
         display: flex;
         flex-flow: column;
-        text-align: center;
 }
 
 
@@ -225,7 +225,7 @@ Featured Properties
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	right: 80px;
+	right: 95px;
 	margin: auto;
 	width: 35px;
 	height: 2px;
@@ -253,7 +253,7 @@ Featured Properties
 
 footer {
     background: var(--text-color-dark);
-    margin-top: 10rem;
+    margin-top: 5rem;
 }
 
 .footer{
@@ -469,13 +469,18 @@ footer {
 
 @media (max-width: 850px) {
 
+    .block {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
     .bk-design figure, .bk-design div{
         display: none;
     }
 
     .section-bk{
         height: max-content;
-        margin-top: 6rem;
+        margin-top: 3rem;
     }
 
     .section-bk .article-img{
@@ -514,16 +519,16 @@ footer {
 
     .property-list {
         background: var(--light-blue);
-        padding-bottom: 4rem;
+        padding-bottom: 2rem;
     }
 
     .smart-search .article-img {
-        margin-top: 3rem;
+        margin-top: 1rem;
         max-width: 100%;
     }
 
     .smart-search .article-img {
-        height: 400px;
+        height: 300px;
 
     }
 
@@ -540,10 +545,34 @@ footer {
     .reverse section:nth-child(2) div {
         text-align: left;
     }
+
+    .find-it .article-img {
+        gap: .5rem;
+    }
+
+    .find-it {
+        margin-top: 3rem;
+    }
+
+    .find-it .article-img figure:nth-child(1) {
+        bottom: 0px;
+    }
+
+    .find-it .article-img figure:nth-child(3) {
+        top: 0px;
+    }
+
+    .fit-v2 h2 span {
+        margin-left: 3rem;
+    }
 }
 
 
 @media (max-width: 700px) {
+
+    .web-nav {
+        padding: 1rem 0rem;
+    }
 
     
     .web-nav .web-container ul{
@@ -569,6 +598,10 @@ footer {
 
     .smart-search{
         margin-top: 3rem;
+    }
+
+    .main-section::before {
+        background: #1821375c;
     }
 }
 

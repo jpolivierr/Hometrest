@@ -53,7 +53,6 @@ const SingleHome= () =>{
                 const listing = await res.json()
                 
                 if(res.status === 200){
-                    console.log(listing)
                     setHome(listing)
                 }
                 setIsLoading(false)
