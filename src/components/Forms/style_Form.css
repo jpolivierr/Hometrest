@@ -47,8 +47,9 @@ Forms
     padding: 1rem;
 }
 
-.flex-form .price-options i{
+.flex-form .price-options div{
   /* bottom: 14px; */
+   display: block !important;
 }
 
 .flex-form .home-type, .flex-form .search-type{

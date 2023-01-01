@@ -1,7 +1,7 @@
  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap'); 
 
 :root{
-    --shadow: 0px 5px 40px #7db3c43d;
+    --shadow: 0px 5px 40px #7db3c421;
     --shadow-hard: 0px 5px 25px #557b867a;
     --shadow-soft: 10px 0px 50px -30px #4264889c;
     --shadow-btn: 0px 15px 20px -5px #82bbcc99;
@@ -26,7 +26,7 @@
     --text-color-light: #273251ab;
     --text-color-dark: #050913;
     --text-color-error: #ff4e4e;
-    --light-blue: #a4e3fd52;
+    --light-blue: #9cbad924;
     --light-blue-v2: #bed4d9;
     --light-silver:  #e6e9ea;
     --error-color: #ff000014;
@@ -34,7 +34,7 @@
     --secondary-color: #fff9f1;
     --secondary-color: #fbefdf;
     --border-radius: 100px;
-    --border-radius-v2: 20px;
+    --border-radius-v2: 5px;
     --modal-bk-color: #2a2b2ebf;
     --animation-second: .2s;
 }

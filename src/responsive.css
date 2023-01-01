@@ -43,7 +43,7 @@
 
 @media (max-width: 895px){
     .flex-form div:nth-child(3){
-        display: none;
+        /* display: none; */
     }
     .single-home-container{
         width: 95% !important;

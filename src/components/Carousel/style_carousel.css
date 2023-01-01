@@ -93,6 +93,15 @@
     /* min-width: calc(931px / 3); */
   }
 
+  .carousel .slider-block figure{
+    height: 240px;
+  }
+
+  .carousel .slider-block .av-property-details{
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+  }
+
   .carousel .slider-block:first-child{
     margin-left: 0px;
   }
@@ -100,6 +109,10 @@
   @media screen and (max-width: 900px) {
     .carousel .slider-block{
       width: calc(100% / 2);
+    }
+
+    .carousel .slider-block figure{
+      height: 180px;
     }
   }
 

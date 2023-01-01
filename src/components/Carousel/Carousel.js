@@ -42,7 +42,7 @@ const Carousel = ({relatedHomes, setPropertyId}) =>{
                         setGap(28)
                         break
                     case wrapper.clientWidth >= 1085 :
-                        setInitNum(4)
+                        setInitNum(3)
                         setWrapperWidth(wrapper.clientWidth)
                         setGap(42)
                         break
@@ -81,7 +81,7 @@ const Carousel = ({relatedHomes, setPropertyId}) =>{
                         setGap(28)
                         break
                     case wrapper.clientWidth >= 1085 :
-                        setInitNum(4)
+                        setInitNum(3)
                         setWrapperWidth(wrapper.clientWidth)
                         setGap(42)
                         break

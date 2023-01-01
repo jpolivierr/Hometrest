@@ -1,9 +1,10 @@
+import mainHouse from "../../media/images/main_house.jpg"
 import house4 from "../../media/images/house4.jpg"
-import house1 from "../../media/images/house_1.jpg"
 import house2 from "../../media/images/house2.jpg"
 import interior2 from "../../media/images/interior2.jpg"
 import interior3 from "../../media/images/interior3.jpg"
 import interior1 from "../../media/images/interior1.jpg"
+import family from "../../media/images/family.jpg"
 import WebFilter from "../Filter/WebFilter"
 import "./style_home.css"
 import { useFetchRequest } from "../Request/useFetchRequest"
@@ -25,7 +26,7 @@ const Home = () =>{
      const path = location.pathname
      console.log(path)
     useEffect(()=>{
-      window.scrollTo(0, 0);
+    //   window.scrollTo(0, 0);
     },[path])
 
     const topNavRef = useRef(null)
@@ -145,15 +146,15 @@ const Home = () =>{
         </article>
 
 
-        <article>
+        <article className="property-list">
             <section className="web-container featured-property h2-styling">
                 <section>
-                    <h2>
+                    {/* <h2>
                         <span>Listings</span>
                            Featured Properties
-                        </h2>
+                        </h2> */}
+                        
                 </section>
-
                 <section style={{position: "relative", width: "100%", marginBottom: "0rem", maxWidth: "1600px"}} className="similar-listings single-page-container">
                 { !listingData.home_search ? null : <Carousel relatedHomes={listingData.home_search.results} />}
                 </section>
@@ -163,7 +164,7 @@ const Home = () =>{
 
         </article>
 
-        <article>
+        <article id="smart-search">
             <section className="web-container smart-search article block h2-styling h2-left">
                 <section className="smar-search-content">
                     <h2>
@@ -172,21 +173,47 @@ const Home = () =>{
                     </h2>
 
                     <p>
-                    The CRM system tracks the level of service to each customer for their needs, similarly in real estate. For instance, tracking your customers is essential for any business to have long-term success. With our CRM, you will be able to take customer's information and also follow up with them through email, phone.
+                    Manage all the aspects of your business from leasing, investments, and sales. Especially manage your customers' property to keep in order.
+                    nd sales. 
                     </p>
 
-                    <div className="btn-container">
+                    <ul className="smart-search-list">
+                        <li>
+                            <figure>
+                                 1
+                            </figure>
+                            <h3>Your perfect rental</h3>
+                            <p>Finding the apartment, condo, or house you'll love to rent just got easi eFinding the apartmen</p>
+                        </li>
+
+                        <li>
+                            <figure>
+                                 2
+                            </figure>
+                            <h3>Get real-time market updates</h3>
+                            <p>Finding the apartment, condo, or house you'll love to rent just got easie. Finding the apartment, condo, or ho</p>
+                        </li>
+
+                        <li>
+                            <figure>
+                                 3
+                            </figure>
+                            <h3>Sell for more than the home next door</h3>
+                            <p>Finding the apartment, condo, or house you'll love to rent just got easie, use you'll love to rent j</p>
+                        </li>
+                    </ul>
+
+                    {/* <div className="btn-container">
                                     <Link to="/search">
                                             <button className="main-btn shadow-btn">
                                                 Find my home
                                             </button>
                                             </Link>
-                                    </div>
+                                    </div> */}
 
 
                 </section>
                 <section className="article-img">
-                       <figure style={{background: `url(${house1}) no-repeat center center/cover`}}/> 
                        <figure style={{background: `url(${house2}) no-repeat center center/cover`}}/>
                 </section>
                         
@@ -195,17 +222,14 @@ const Home = () =>{
 
         </article>
 
-
-        <article>
+        <article className="section-bk" style={{position: "relative"}}>
+            <div className="bk-design">
+                  <figure style={{background: `url(${family}) no-repeat center center/cover`}} />
+                  <div></div>
+            </div>
             <section className="web-container find-it article reverse block h2-styling h2-left">
 
                 <section className="article-img">
-
-                <figure style={{background: `url(${interior2}) no-repeat center center/cover`}}/> 
-
-                <figure style={{background: `url(${interior1}) no-repeat center center/cover`}}/>
-
-                <figure style={{background: `url(${interior3}) no-repeat center center/cover`}}/>
 
                 </section>
 
@@ -220,6 +244,7 @@ const Home = () =>{
                     Manage all the aspects of your business from leasing, investments, and sales. Especially manage your customers' property to keep in order the maintenance of the property and its winnings.
                     </p>
 
+
                     <div className="btn-container">
                                           <Link to="/search">
                                             <button className="main-btn shadow-btn">
@@ -228,13 +253,53 @@ const Home = () =>{
                                             </Link> 
                                     </div>
                     </div>
-                    
-
 
                 </section>
                 
                         
 
+            </section>
+
+        </article>
+
+
+        <article>
+            <section className="web-container find-it article  block h2-styling h2-left">
+
+                
+            <section className="find-it-content">
+                                <div>
+                                    <h2>
+                                    <span>Find what</span>
+                                    Find what works for you 
+                                </h2>
+
+                                <p>
+                                Manage all the aspects of your business from leasing, investments, and sales. Especially manage your customers' property to keep in order the maintenance of the property and its winnings.
+                                </p>
+
+                                <p>
+                    Manage all the aspects of your business from leasing, investments, and sales. Especially manage your customers' property to keep in order the maintenance of 
+                    </p>
+
+                                <div className="btn-container">
+                                                    <Link to="/search">
+                                                        <button className="main-btn shadow-btn">
+                                                            Find my home
+                                                        </button>
+                                                        </Link> 
+                                                </div>
+                                </div>
+                            </section>
+                <section className="article-img">
+
+                <figure style={{background: `url(${interior2}) no-repeat center center/cover`}}/> 
+
+                <figure style={{background: `url(${interior1}) no-repeat center center/cover`}}/>
+
+                <figure style={{background: `url(${interior3}) no-repeat center center/cover`}}/>
+
+                </section>
             </section>
 
         </article>

@@ -93,30 +93,24 @@ console.log(listings[0].location.address.coordinate)
                   
                 });
             }
-
-
-
-                
-
-
            })
           
   }
 
   useEffect(()=>{
   
-//        window.initMap = initMap;
-//       window.initMap = initMap;
-//     const script = document.createElement("script")
-//     script.id="the-map"
-//     script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&callback=initMap&v=weekly`
-//     script.defer = true
-//     script.async = true
-//     document.body.appendChild(script)
-// const theMap = document.querySelector("#the-map")
-//     console.log("ran....")
+       window.initMap = initMap;
+      window.initMap = initMap;
+    const script = document.createElement("script")
+    script.id="the-map"
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&callback=initMap&v=weekly`
+    script.defer = true
+    script.async = true
+    document.body.appendChild(script)
+const theMap = document.querySelector("#the-map")
+    console.log("ran....")
 
-//      theMap.remove()
+     theMap.remove()
     
   },[listings])
 
