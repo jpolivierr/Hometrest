@@ -1,6 +1,7 @@
 :root{
     --main-color: rgb(255, 9, 101);
     --dark-color : #181f38;
+    --light-color: lightblue;
     --dark-text-color : #181f38;
     --paragraph-text-color : #2b3857;
 }

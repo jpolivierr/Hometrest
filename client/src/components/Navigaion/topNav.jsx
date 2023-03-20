@@ -1,6 +1,8 @@
 import Layout from "../../lib/Layout/layout"
 import Buttons from "../../lib/Buttons/button"
 import { useState } from "react"
+import NavList from "../list/NavList"
+
 const TopNav = () =>{
 
     const navStyle = {
@@ -16,11 +18,15 @@ const TopNav = () =>{
     return(
                 <section className="padding-top-bottom">
                     <div className="container flex-space-between">
-                                <div>Logo</div>
-                            <ul>
+                                <div>
+                                    <h2><i class="fa-brands fa-pagelines"></i> HomeTrest</h2>
+                                </div>
+                            
+                            <NavList 
+                               Class="hideMobile flex-space-between gap-2x nav-list"
+                            />
 
-                            </ul>
-                            <div className="hideMobile gap-1x">
+                            <div className="hideMobile flex-space-between gap-1x">
                                 <Buttons 
                                 label="Sign up"
                                 Class=" button main-btn"
