@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Tele Neo';
+    font-weight: normal;
+    src:url('Tele Neo Medium.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Tele Neo';
+    font-weight: bold;
+    src: url('Tele Neo Bold.woff2') format('woff2');
+}

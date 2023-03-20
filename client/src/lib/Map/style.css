@@ -1,0 +1,46 @@
+#map{
+    height: 85.5vh;
+border-radius: 10px;
+position: sticky !important;
+top: 190px;
+}
+
+#map div{
+    outline: none !important;
+}
+
+.map-container{
+    height: 100%;
+}
+
+.slider-map{
+    max-width: 200px;
+    max-height: 300px;
+}
+
+.slider-map figure{
+    border-radius: 10px;
+    max-height: 150px;
+}
+
+.slider-map .av-property-details{
+    padding: .2rem;
+    padding-top: .9rem;
+    padding-bottom: 0rem;
+}
+
+.slider-map .av-property-details h4{
+    font-size: .9rem;
+    grid-column: 1 / 4;
+}
+
+.slider-map .av-property-details h5 span{
+    font-size: .8rem !important;
+}
+
+.slider-map .av-property-details  p{
+    font-size: .8rem !important;
+}
+.slider-map .av-property-details i{
+    display: none;
+}

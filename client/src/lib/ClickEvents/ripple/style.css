@@ -1,0 +1,19 @@
+.av-rippple{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border-radius: 50%;
+    animation: ripple .3s infinite;
+    background: white;
+}
+
+@keyframes ripple {
+
+    from{
+        transform: scale(0);
+    }
+    to{
+        transform: scale(1.5);
+    }
+    
+}

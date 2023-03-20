@@ -1,0 +1,12 @@
+.main-btn{
+    background-color: rgb(255, 9, 101);
+    border-radius: 100px;
+    color: white;
+    border: none;
+    font-weight: bold;
+    padding: 1rem;
+    cursor: pointer;
+    transition: .5s;
+    /* margin-top: 1rem; */
+    text-transform: uppercase;
+}
