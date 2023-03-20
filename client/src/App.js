@@ -1,9 +1,10 @@
-import './App.css';
+
+import Login from './Pages/login';
 
 function App() {
   return (
     <div className="App">
-        Hometrest create react app git testing
+        <Login/>
     </div>
   );
 }
