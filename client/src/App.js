@@ -3,7 +3,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-        react-app
+        Hometrest create react app
     </div>
   );
 }
