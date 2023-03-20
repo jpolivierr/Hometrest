@@ -1,12 +1,28 @@
-.main-btn{
-    background-color: rgb(255, 9, 101);
+.button{
     border-radius: 100px;
-    color: white;
     border: none;
     font-weight: bold;
-    padding: 1rem;
+    padding: .7rem .8rem;
     cursor: pointer;
     transition: .5s;
-    /* margin-top: 1rem; */
     text-transform: uppercase;
+}
+
+.main-btn{
+    background-color: var(--main-color);
+    color: white;
+}
+
+.main-btn:hover{
+    background: rgba(255, 9, 99, 0.815);
+}
+
+
+.secondary-btn{
+    background-color: var(--dark-color);
+    color: white;
+}
+
+.secondary-btn:hover{
+    background-color: #181f38bf;
 }

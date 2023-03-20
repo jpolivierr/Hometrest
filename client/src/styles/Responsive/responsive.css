@@ -1,6 +1,18 @@
 
+@media(min-width: 900px){
+
+
+    .hideDesktop{
+        display: none;
+    }
+    
+}
 
 @media(max-width: 900px){
+
+    .container{
+        width: 90%;
+    }
 
     .hideMobile{
         display: none;

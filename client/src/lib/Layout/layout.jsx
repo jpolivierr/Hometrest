@@ -13,8 +13,10 @@ const Layout = (props) =>{
 
 
     useLayoutEffect(()=>{
+
+        const compStyle = document.querySelector("#compStyle")
          
-        if(!document.querySelector("#compStyle")){
+        if(!compStyle){
             const head = document.head
             const firstStyleElement = head.querySelectorAll("style")
             const el = document.createElement("style")
@@ -22,17 +24,15 @@ const Layout = (props) =>{
 
         
             if(!firstStyleElement){
-
                 head.appendChild(el)
 
             }else if(firstStyleElement[0]){
 
                 const first = firstStyleElement[0]
                 head.insertBefore(el, first)
-
             }
-            
-            
+        }else{
+            compStyle.innerHTML = ""
         }
 
         generateClass()

@@ -31,4 +31,20 @@ a{
 .container{
     width: 80%;
     margin: auto;
+    max-width: 1500px;
+}
+
+.gap-1x{
+    display: flex;
+    gap: .6rem;
+}
+
+.flex-space-between{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.padding-top-bottom{
+    padding: 1rem 0rem;
 }
