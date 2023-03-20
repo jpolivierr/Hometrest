@@ -8,6 +8,7 @@ temp/
 .vscode/
 .idea/
 bin/
+node_modules/
 
 # dependencies
 /node_modules
