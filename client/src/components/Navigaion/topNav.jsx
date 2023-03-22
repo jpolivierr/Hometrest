@@ -28,9 +28,10 @@ const TopNav = () =>{
 
            <>
                     <section className="padding-top-bottom">
+
                                 <div className="container flex-space-between">
                                             <div>
-                                                <h2><i class="fa-brands fa-pagelines"></i> HomeTrest</h2>
+                                                <h2><i className="fa-brands fa-pagelines"></i> HomeTrest</h2>
                                             </div>
                                         
                                         <NavList 
@@ -57,6 +58,7 @@ const TopNav = () =>{
                                             </menu>
                                         </div>
                                 </div>
+
                         </section>
 
 
