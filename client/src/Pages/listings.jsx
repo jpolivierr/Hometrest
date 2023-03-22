@@ -1,6 +1,6 @@
 import TopNav from "../components/Navigaion/topNav"
 
-const Home = (props) =>{
+const Listings = (props) =>{
 
     const {Class, id} = props
 
@@ -8,7 +8,7 @@ const Home = (props) =>{
         <div id={id} className={Class}>
           <TopNav />
           <div className="container">
-            <h1>Home</h1>
+            <h1>Listings</h1>
           </div>
           
         </div>
@@ -16,4 +16,4 @@ const Home = (props) =>{
     )
 }
 
-export default Home
+export default Listings

@@ -1,10 +1,14 @@
 import TopNav from "../components/Navigaion/topNav"
 
-const Login = () =>{
+const Login = (props) =>{
+
+    const {Class, id} = props
     return(
-        <div>
+        <div id={id} className={Class}>
             <TopNav />
-            <h1>Login</h1>
+            <div className="container">
+                <h1>Login</h1>
+          </div>
         </div>
     )
 }

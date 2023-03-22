@@ -1,11 +1,15 @@
 import TopNav from "../components/Navigaion/topNav"
 
-const About = () =>{
+const About = (props) =>{
+
+    const {Class, id} = props
     return(
-        <>
+        <div id={id} className={Class}>
           <TopNav />
-          <h1>About</h1>
-        </>
+          <div className="container">
+            <h1>About</h1>
+          </div>
+        </div>
     )
 }
 

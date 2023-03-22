@@ -1,6 +1,8 @@
 
 import Login from './Pages/login';
+import About from './Pages/about';
 import Home from './Pages/home';
+import Listings from './Pages/listings';
 import { Routes, Route } from 'react-router-dom';
 
 
@@ -9,7 +11,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/about" element={<Login/>}/>
+        <Route path="/about" element={<About/>}/>
+        <Route path="/listings" element={<Listings/>}/>
         <Route path="/" element={<Home />}/>
       </Routes>
     </div>
