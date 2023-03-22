@@ -1,13 +1,27 @@
 import "./style.css"
 const NavList = (props) =>{
 
-    const {Class} = props
+    const {Class, listsClass, listsClickEvent} = props
+
+     const listClickEvent = (e) =>{
+          if(listClickEvent){
+            listsClickEvent(e)
+          }
+     }
 
     return(
         <ul className={Class}>
-            <li>Home</li>
-            <li>About</li>
-            <li>Listings</li>
+            <li onClick={(e)=>{listClickEvent(e)}} 
+                className={listsClass}>Home
+            </li>
+
+            <li onClick={(e)=>{listClickEvent(e)}}  
+                className={listsClass}>About
+            </li>
+
+            <li onClick={(e)=>{listClickEvent(e)}} 
+                className={listsClass}>Listings
+            </li>
         </ul>
     )
 }

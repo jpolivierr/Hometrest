@@ -1,9 +1,18 @@
-import Layout from "../../lib/Layout/layout"
 import Buttons from "../../lib/Buttons/button"
+
+import useModal from "../../lib/Modal/useModal"
+import Modal from "../../lib/Modal/modal"
+import SlideWindow from "../../lib/Modal/Windows/slideWindow"
+import ModalOverlay from "../../lib/Modal/Overlays/modalOverlay"
+
+
+
 import { useState } from "react"
 import NavList from "../list/NavList"
 
 const TopNav = () =>{
+
+    const {isShowing, toggle, motion } = useModal();
 
     const navStyle = {
         parent : {
@@ -16,39 +25,73 @@ const TopNav = () =>{
     const [style] = useState(navStyle)
 
     return(
-                <section className="padding-top-bottom">
-                    <div className="container flex-space-between">
-                                <div>
-                                    <h2><i class="fa-brands fa-pagelines"></i> HomeTrest</h2>
+
+           <>
+                    <section className="padding-top-bottom">
+                                <div className="container flex-space-between">
+                                            <div>
+                                                <h2><i class="fa-brands fa-pagelines"></i> HomeTrest</h2>
+                                            </div>
+                                        
+                                        <NavList 
+                                        Class="hideMobile flex-space-between gap-2x nav-list"
+                                        />
+
+                                        <div className="hideMobile flex-space-between gap-1x">
+                                            <Buttons 
+                                            label="Sign up"
+                                            Class=" button main-btn"
+                                            />
+
+                                            <Buttons 
+                                            label="Login"
+                                            Class="button secondary-btn"
+                                            />
+                                        </div>
+
+                                        <div className="hideDesktop">
+                                            <menu onClick={toggle}>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </menu>
+                                        </div>
                                 </div>
-                            
-                            <NavList 
-                               Class="hideMobile flex-space-between gap-2x nav-list"
+                        </section>
+
+
+                        <Modal
+                            isShowing={isShowing}
+                           >
+                            <ModalOverlay
+                                toggle={toggle}
+                                animated={{time: 200, motion: motion}}
+                                motionType="fade"
+                                seconds=".3s"
+                                from="0"
+                                to="1"
                             />
 
-                            <div className="hideMobile flex-space-between gap-1x">
-                                <Buttons 
-                                label="Sign up"
-                                Class=" button main-btn"
+                    <SlideWindow 
+                            toggle={toggle}
+                            Class=""
+                            animated={{time: 200, motion: motion}}
+                            motionType="slide-left"
+                            seconds=".2s"
+                            from="-300px"
+                            to="0px"
+                        >
+                            <NavList 
+                                Class="flex-columns gap-1x nav-list"
+                                listsClass="text-center"
+                                listsClickEvent={()=>toggle(300)}
                                 />
 
-                                <Buttons 
-                                label="Login"
-                                Class="button secondary-btn"
-                                />
-                            </div>
+                        </SlideWindow>
 
-                            <div className="hideDesktop">
-                                <menu>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </menu>
-                            </div>
-                    </div>
-                   
+                        </Modal>
+           </>
                 
-            </section>
                    
      
     )

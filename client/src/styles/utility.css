@@ -1,4 +1,11 @@
 
+.container{
+    width: 80%;
+    margin: auto;
+    max-width: 1500px;
+}
+
+
 .text-left{
     text-align: left;
 }
@@ -19,12 +26,6 @@
     display: none;
 }
 
-.container{
-    width: 80%;
-    margin: auto;
-    max-width: 1500px;
-}
-
 .gap-1x{
     gap: .6rem;
 }
@@ -41,6 +42,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.flex-columns{
+    display: flex;
+    flex-flow: column;
 }
 
 .padding-top-bottom{
