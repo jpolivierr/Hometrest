@@ -9,7 +9,7 @@ const About = (props) =>{
         urlParcer()
     },[])
 
-    const paramObj = {name: "sara"}
+    const paramObj = {name: "sara",address: "miami"}
 
     return(
         <div id={id} className={Class}>

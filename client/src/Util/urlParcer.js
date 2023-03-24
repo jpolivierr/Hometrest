@@ -51,7 +51,18 @@ export const updateParam = (paramObj) =>{
     
     if(typeof paramObj === "object" && Object.keys(paramObj).length > 0){
         
-        console.log(Object.keys(paramObj).length)
+        const url = new URL(window.location.href)
+         const search_params = url.searchParams
+
+        console.log(search_params)
+        for( const key in paramObj){
+         
+                search_params.set(key,paramObj[key])
+        }
+
+        url.search = search_params.toString()
+         console.log(url.toString())
+
     }
 }
 
