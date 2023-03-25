@@ -55,7 +55,6 @@ export const updateParam = (paramObj) =>{
 
         const search_params = url.searchParams
 
-        console.log(search_params)
 
         for( const key in paramObj){
                 
@@ -65,7 +64,9 @@ export const updateParam = (paramObj) =>{
         url.search = search_params.toString()
 
         const data = search_params
+
         const title = document.title
+        
         const newUrl = url.toString()
 
         // This will create a new entry in the browser's history, without reloading
@@ -73,8 +74,6 @@ export const updateParam = (paramObj) =>{
 
         // This will replace the current entry in the browser's history, without reloading
         window.history.replaceState(data, title, newUrl);
-
-        console.log(title)
 
     }
 }
