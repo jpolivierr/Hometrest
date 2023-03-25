@@ -1,6 +1,7 @@
 import Form from "../../lib/Forms/Form"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { emptyField } from "../../lib/Forms/Util/emptyField"
+import useForm from "../../lib/Forms/useForm"
 
 
 
@@ -40,7 +41,7 @@ const LoginForm = () =>{
                 // icon : <i className="fa-solid fa-location-dot"></i>
               },
               {
-                type : "input",
+                type : "password",
                 label : "Password",
                 // placeHolder : "Enter city or Zip",
                 name : "password",
@@ -53,11 +54,19 @@ const LoginForm = () =>{
         ]
     })
 
+    const {getForm, formResponse} = useForm(formSetting)
+
+    console.log(formResponse)
+
     return(
         <div className="margin-top-2x">
-           <Form 
+
+           {/* <Form 
               setting={formSetting}
-           />
+           /> */}
+
+           {getForm()}
+
         </div>
         
     )

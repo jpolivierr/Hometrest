@@ -12,7 +12,8 @@ const Inputs= (props) =>{
            setFormError,
            formError,
            formStatus,
-           defaultValue
+           defaultValue,
+           type
             } = props
 
 
@@ -43,12 +44,12 @@ const Inputs= (props) =>{
       
     }
     
-
      return(
         <fieldset>
         {props.label && <label>{props.label}</label>}
         <div className="input-container">
              <input 
+                     type={type === "password" ? "password" : ""}
                      ref={inputElement}
                      placeholder={props.placeHolder} 
                      name={props.name}

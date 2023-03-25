@@ -12,12 +12,15 @@ import useFormSubmit from "./Request/request";
 import { useState } from "react";
 
 
-const Form = (props) =>{
+const useForm = (formSettings) =>{
 
-   const {makeRequest, formResponse} = useFormSubmit()
+    const [settings, setSettings] = useState(formSettings)
 
-     const {fields,config, info} = props.setting
-      
+   
+
+     const {fields,config, info} = settings
+
+      const {makeRequest, formResponse} = useFormSubmit()
       const [submitStatus, setSubmitStatus] = useState(false)
       const [formError, setFormError] = useState(myFormFieds(fields).errors)
       const [formFields, setFormFields] = useState(myFormFieds(fields).fields)
@@ -97,7 +100,6 @@ const Form = (props) =>{
                         
                        if(validateFields().errors){
                            console.log("error found")
-                           makeRequest(config.method, config.url, formFields)
 
                        }else{
 
@@ -224,29 +226,36 @@ const Form = (props) =>{
             
       }
 
+      const getForm = () =>{
+        return(
+            // <FormProvider data={{num: 5}}>
+               <form className={info.Class} onSubmit={e => submit(e)}>
+                  {info.title && <h2>{info.title}</h2>}
+                 
+                   
+                   {
+                  
+                    fields.map((field, index) => 
+                    getFields(field, index)
+      
+                    )
+                   }
+      
+               
+                  <button className="button main-btn" type="submit">
+                           {config.buttonLabel}
+                  </button>
+              </form>
+            // </FormProvider>
+              
+           )
+      }
 
-     return(
-      // <FormProvider data={{num: 5}}>
-         <form className={info.Class} onSubmit={e => submit(e)}>
-            {info.title && <h2>{info.title}</h2>}
-           
-             
-             {
-            
-              fields.map((field, index) => 
-              getFields(field, index)
 
-              )
-             }
-
-         
-            <button className="button main-btn" type="submit">
-                     {config.buttonLabel}
-            </button>
-        </form>
-      // </FormProvider>
-        
-     )
+     return{
+        getForm,
+        formResponse
+     }
 }
 
-export default Form;
+export default useForm;
