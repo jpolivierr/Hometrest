@@ -1,5 +1,6 @@
 import "./colors.css"
 import "./tags.css"
+import "./Shadows/shadow.css"
 import "./Navigation/topNav.css"
 import "./Buttons/buttons.css"
 import "./Modals/modal.css"

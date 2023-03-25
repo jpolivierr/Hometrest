@@ -5,9 +5,10 @@ FORM
 
 .avalon{
     padding: 2rem;
-    border: 1px solid silver;
     height: max-content;
     width: 500px;
+    border-radius: 15px;
+    background: white;
 }
 
 /* ******************************************* 
@@ -101,7 +102,8 @@ OPTIONS
 BUTTON
 *********************************************
 */
-.avalon button{
+
+/* .avalon button{
     background: #ff0965;
     border-radius: 100px;
     color: white;
@@ -110,10 +112,9 @@ BUTTON
     padding: 1rem;
     cursor: pointer;
     transition: .5s;
-    /* margin-top: 1rem; */
     text-transform: uppercase;
 }
 
 .avalon button:hover{
     background-color: #cc004b;
-}
+} */

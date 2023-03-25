@@ -213,7 +213,7 @@ const Form = (props) =>{
              }
 
          
-            <button type="submit">
+            <button className="button main-btn" type="submit">
                      {config.buttonLabel}
             </button>
         </form>

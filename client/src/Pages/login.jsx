@@ -1,6 +1,7 @@
 import TopNav from "../components/Navigaion/topNav"
 import { useEffect } from "react"
 import {urlParcer} from "../Util/urlParcer"
+import LoginForm from "../components/Forms/loginForm"
 
 const Login = (props) =>{
 
@@ -11,10 +12,10 @@ const Login = (props) =>{
     },[])
 
     return(
-        <div id={id} className={Class}>
+        <div id={id} className={`${Class} light-bk`}>
             <TopNav />
-            <div className="container">
-                <h1>Login</h1>
+            <div className="container center-content padding-bottom-2x">
+                <LoginForm/>
           </div>
         </div>
     )

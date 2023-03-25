@@ -28,3 +28,7 @@ menu div{
     height: 2px;
     background: var(--dark-color);
 }
+
+fieldset{
+    border: none;
+}

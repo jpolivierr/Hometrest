@@ -47,6 +47,7 @@ const TopNav = () =>{
                                             <Buttons 
                                             label="Login"
                                             Class="button secondary-btn"
+                                            href="/login"
                                             />
                                         </div>
 
