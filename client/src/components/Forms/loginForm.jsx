@@ -56,8 +56,6 @@ const LoginForm = () =>{
 
     const {getForm, formResponse} = useForm(formSetting)
 
-    console.log(formResponse)
-
     return(
         <div className="margin-top-2x">
 
