@@ -5,9 +5,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -34,23 +34,43 @@ public class SessionFilter implements Filter {
        // Create a session object if it is already not  created.
        HttpSession session = httpRequest.getSession(true);
 
-       SimpleDateFormat simpleDate = new SimpleDateFormat("E yyyy/MM/dd 'at' hh:mm a zzz");
-
-       // Get session creation time.
-       Date sessionCreationdate = new Date(session.getCreationTime());
-
-       String createTime = simpleDate.format(sessionCreationdate);
-
-       // Get last access time of this web page.
-      //  Date lastAccessTime = new Date(session.getLastAccessedTime());
+      PrintWriter out = response.getWriter();
 
       if(session.isNew()){
-        session.setAttribute("time-entered", device.fullURL);
-        session.setAttribute("last-access", createTime);
+
+      out.println("new sessions");
+      SimpleDateFormat simpleDate = new SimpleDateFormat("E yyyy-MM-dd 'at' hh:mm:ss a zzz");
+      
+
+      // Get session creation time.
+       Date sessionCreationdate = new Date(session.getCreationTime());
+       String sessionCreationdateFormat = simpleDate.format(sessionCreationdate);
+
+       // Get last access time of this web page.
+       Date lastAccessTime = new Date(session.getLastAccessedTime());
+       String lastAccessTimeFormat = simpleDate.format(lastAccessTime);
+
+
+        session.setAttribute(ValidSessionKeys.SESSION_ID, session.getId());
+        session.setAttribute(ValidSessionKeys.SESSION_START_TIME, sessionCreationdateFormat);
+        session.setAttribute(ValidSessionKeys.SESSION_LAST_ACCESS, lastAccessTimeFormat);
+
+      }else {
+
+         out.println("Already exist:: Same original session");
+
+         SimpleDateFormat simpleDate = new SimpleDateFormat("E yyyy-MM-dd 'at' hh:mm:ss a zzz");
+
+         // Get last access time of this web page.
+         Date lastAccessTime = new Date(session.getLastAccessedTime());
+         String lastAccessTimeFormat = simpleDate.format(lastAccessTime);
+
+         session.setAttribute(ValidSessionKeys.SESSION_LAST_ACCESS, lastAccessTimeFormat);
+
       }
 
 
-          chain.doFilter(request, response);
+      chain.doFilter(request, response);
     //    httpResp.send(response,200,"Session filter",null);
 
  }

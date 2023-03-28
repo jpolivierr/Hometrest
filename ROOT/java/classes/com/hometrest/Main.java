@@ -2,7 +2,9 @@ package com.hometrest;
 
  import com.hometrest.servlet.*;
 import com.hometrest.ErrorHandler.ErrorServlet;
+import com.hometrest.api.ApiEndPoint;
 import com.hometrest.filter.*;
+
 
 
 public class Main {
@@ -13,8 +15,8 @@ public class Main {
          new ErrorServlet();
         //new RequestFilter();
          new SessionFilter();
-         
-
+         new ApiEndPoint();
+        
     }
     
 }
