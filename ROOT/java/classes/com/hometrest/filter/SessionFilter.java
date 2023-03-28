@@ -31,13 +31,10 @@ public class SessionFilter implements Filter {
 
        var device = new RequestInfoFilter(httpRequest);
 
-    //    var httpResp = new HttpResponse();
-       HashMap<String,String> sessionProps = new HashMap<>();
-
        // Create a session object if it is already not  created.
        HttpSession session = httpRequest.getSession(true);
 
-       SimpleDateFormat simpleDate = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm a zzz");
+       SimpleDateFormat simpleDate = new SimpleDateFormat("E yyyy/MM/dd 'at' hh:mm a zzz");
 
        // Get session creation time.
        Date sessionCreationdate = new Date(session.getCreationTime());
