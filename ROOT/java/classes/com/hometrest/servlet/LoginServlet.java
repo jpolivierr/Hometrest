@@ -16,16 +16,20 @@ public class LoginServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
     throws ServletException, IOException{
 
-        resp.setHeader("Access-Control-Allow-Origin", "*");
-        // resp.setStatus(200);
-        resp.setContentType("text/html");
-        PrintWriter printWriter = resp.getWriter();
-        printWriter.print("<html>");
-        printWriter.print("<body>");
-        printWriter.print("<h1>Hello World HttpServlet Class Example</h1>");
-        printWriter.print("</body>");
-        printWriter.print("</html>");
-        printWriter.close();
+       
+            
+        
+        throw new NullPointerException();
+        // resp.setHeader("Access-Control-Allow-Origin", "*");
+        // // resp.setStatus(200);
+        // resp.setContentType("text/html");
+        // PrintWriter printWriter = resp.getWriter();
+        // printWriter.print("<html>");
+        // printWriter.print("<body>");
+        // printWriter.print("<h1>Hello World HttpServlet Class Example</h1>");
+        // printWriter.print("</body>");
+        // printWriter.print("</html>");
+        // printWriter.close();
     }
 
 }
