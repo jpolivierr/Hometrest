@@ -1,25 +1,32 @@
 package com.hometrest.filter;
 
-import jakarta.servlet.annotation.WebFilter;
+import java.util.Optional;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import jakarta.servlet.http.HttpServletRequest;
 
-import com.hometrest.handlers.HttpResponse;
+public class RequestInfoFilter{
 
-import java.io.IOException;
-import java.util.Map;
+        final String referer;
+        final String fullURL ;
+        final String clientIpAddr;
+        final String clientOS;
+        final String clientBrowser;
+        final String userAgent;
 
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
+        RequestInfoFilter(HttpServletRequest request){
 
-@WebFilter(filterName="RequestFilter", urlPatterns="/*")
+        this.referer = request.getHeader("referer");
+        this.fullURL = getFullURL(request);
+        this.clientIpAddr = getClientIpAddr(request);
+        this.clientOS = getClientOS(request);
+        this.clientBrowser = getClientBrowser(request);
+        this.userAgent = getUserAgent(request);
 
-public class RequestFilter implements Filter {
+        }
 
-    public void init(FilterConfig filterConfig) {}
 
     public String getFullURL(HttpServletRequest request) {
         final StringBuffer requestURL = request.getRequestURL();
@@ -118,40 +125,22 @@ public class RequestFilter implements Filter {
         return request.getHeader("User-Agent");
     }
 
-    class RequestProps {
+    public String Json(Optional<Boolean> type){
 
-        final String referer;
-        final String fullURL ;
-        final String clientIpAddr;
-        final String clientOS;
-        final String clientBrowser;
-        final String userAgent;
+        String body;
 
-        RequestProps(HttpServletRequest request){
+        if(type.isPresent() && type.get()){
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    body = gson.toJson(this);
+        }else{
 
-        this.referer = request.getHeader("referer");
-        this.fullURL = getFullURL(request);
-        this.clientIpAddr = getClientIpAddr(request);
-        this.clientOS = getClientOS(request);
-        this.clientBrowser = getClientBrowser(request);
-        this.userAgent = getUserAgent(request);
-
+            Gson gson = new Gson();
+            body = gson.toJson(this);
+            
         }
 
-
+        return body;
+        
     }
-
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-    throws IOException, ServletException{
-
-        var httpReq = (HttpServletRequest) request;
-        var clientInfo = new RequestProps(httpReq);
-         
-        new HttpResponse().send(response,200,"success", clientInfo);
-
-        // chain.doFilter(request, response);
- }
-
-    public void destroy() {}
     
 }

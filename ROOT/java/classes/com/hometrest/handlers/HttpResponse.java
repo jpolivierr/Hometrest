@@ -7,9 +7,9 @@ import com.google.gson.GsonBuilder;
 
 public class HttpResponse {
 
-    private int status;
-    private String message;
-    private Object body;
+    public int status;
+    public String message;
+    public Object body;
 
     public void send(ServletResponse response, int status, String message, Object body){
 

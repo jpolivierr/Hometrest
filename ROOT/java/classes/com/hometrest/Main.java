@@ -10,9 +10,9 @@ public class Main {
     public static void name(String[] args) {
          new LoginServlet();
          new SignupServlet();
-        //  new RequestFilter();
-     //  new ClientInfoFilter();
          new ErrorServlet();
+        //new RequestFilter();
+         new SessionFilter();
          
 
     }
