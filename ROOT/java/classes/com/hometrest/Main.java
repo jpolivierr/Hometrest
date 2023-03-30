@@ -3,6 +3,7 @@ package com.hometrest;
  import com.hometrest.servlet.*;
 import com.hometrest.ErrorHandler.ErrorServlet;
 import com.hometrest.api.ApiEndPoint;
+import com.hometrest.api.LoginApi;
 import com.hometrest.filter.*;
 
 
@@ -16,6 +17,7 @@ public class Main {
         //new RequestFilter();
          new SessionFilter();
          new ApiEndPoint();
+         new LoginApi();
         
     }
     

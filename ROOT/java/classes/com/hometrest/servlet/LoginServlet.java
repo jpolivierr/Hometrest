@@ -2,7 +2,7 @@ package com.hometrest.servlet;
 
 import java.io.IOException;
 
-import com.hometrest.handlers.HttpResponse;
+import com.hometrest.handlers.JsonHttpResponse;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet{
     var isAuth = session.getAttribute("user_authenticate");
 
     if(isAuth != null){
-        var jsonResonse = new HttpResponse();
+        var jsonResonse = new JsonHttpResponse();
         jsonResonse.send(resp, 200, "success", null);
     }
 

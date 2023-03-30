@@ -2,10 +2,12 @@ package com.hometrest.handlers;
 
 import java.io.*; 
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class HttpResponse {
+public class JsonHttpResponse {
 
     public int status;
     public String message;
@@ -13,8 +15,9 @@ public class HttpResponse {
 
     public void send(ServletResponse response, int status, String message, Object body){
 
-        response.setContentType("application/json");
-
+        var sendResponse = (HttpServletResponse) response;
+        sendResponse.setContentType("application/json");
+        
         this.status = status;
         this.message = message;
         this.body = body;
@@ -24,7 +27,7 @@ public class HttpResponse {
         String Json = gson.toJson(this);
 
         try {
-
+            sendResponse.setStatus(status);
             PrintWriter out = response.getWriter();
 
             out.print(Json);

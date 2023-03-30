@@ -9,8 +9,8 @@ const LoginForm = () =>{
 
     const [formSetting] = useState({
         config: {
-            url: "http://localhost:8080/login",
-            method: "GET",
+            url: "http://localhost:8080/secure/login",
+            method: "POST",
             buttonLabel: "Submit"
         },
         info : {
@@ -25,18 +25,18 @@ const LoginForm = () =>{
                 name : "name",
                 // onChangefunc : numValidate,
                 // fieldToUpdate : setLocation,
-                onSubmitFunc: [emptyField],
+                // onSubmitFunc: [emptyField],
                 required : true,
-                // icon : <i className="fa-solid fa-location-dot"></i>
+                //  icon : <i className="fa-solid fa-location-dot"></i>
               },
             {
                 type : "input",
                 label : "Email",
                 // placeHolder : "Enter city or Zip",
-                name : "Email",
+                name : "email",
                 // onChangefunc : numValidate,
                 // fieldToUpdate : setLocation,
-                onSubmitFunc: [emptyField],
+                // onSubmitFunc: [emptyField],
                 required : true,
                 // icon : <i className="fa-solid fa-location-dot"></i>
               },
@@ -47,7 +47,7 @@ const LoginForm = () =>{
                 name : "password",
                 // onChangefunc : numValidate,
                 // fieldToUpdate : setLocation,
-                onSubmitFunc: [emptyField],
+                // onSubmitFunc: [emptyField],
                 required : true,
                 // icon : <i className="fa-solid fa-location-dot"></i>
               },
@@ -55,6 +55,8 @@ const LoginForm = () =>{
     })
 
     const {getForm, formResponse} = useForm(formSetting)
+
+    console.log(formResponse)
 
     return(
         <div className="margin-top-2x">

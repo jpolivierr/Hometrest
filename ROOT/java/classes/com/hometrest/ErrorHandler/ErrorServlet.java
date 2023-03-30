@@ -2,7 +2,7 @@ package com.hometrest.ErrorHandler;
 
 import java.io.IOException;
 
-import com.hometrest.handlers.HttpResponse;
+import com.hometrest.handlers.JsonHttpResponse;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -101,7 +101,7 @@ public class ErrorServlet extends HttpServlet {
 
     response.setContentType("text/html");
 
-    var httpRes = new HttpResponse();
+    var httpRes = new JsonHttpResponse();
      // Analyze the servlet exception       
      Throwable throwable = (Throwable) request.getAttribute("jakarta.servlet.error.exception");
 
@@ -123,11 +123,13 @@ public class ErrorServlet extends HttpServlet {
         httpRes.send(response, errorProps.statusCode, "error", errorProps);
      }
 
-
-    // PrintWriter out = response.getWriter();
-    // out.println("custom error");
           
 
+   }
+
+   public void doPost(HttpServletRequest request, HttpServletResponse response)
+   throws ServletException, IOException{
+      doGet(request, response);
    }
     
 }
