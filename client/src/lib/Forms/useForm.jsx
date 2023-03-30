@@ -4,12 +4,13 @@ import fieldTypes from "./VARS/fieldType";
 import MultiSelect from "./Fields/MultiSelect";
 import ListOption from "./Fields/ListOption";
 import { myFormFieds } from "./Config/getFields";
+import { capitalizeFirstLetter } from "./Util/capitalizeFirstLetter";
 import { validateFields } from "./Config/formValidation";
 import "./style/avalon.css"
 
 import useFormSubmit from "./Request/request";
 //Action
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const useForm = (formSettings) =>{
@@ -24,6 +25,49 @@ const useForm = (formSettings) =>{
       const [submitStatus, setSubmitStatus] = useState(false)
       const [formError, setFormError] = useState(myFormFieds(fields).errors)
       const [formFields, setFormFields] = useState(myFormFieds(fields).fields)
+
+      useEffect(()=>{
+
+         errorFromServer(formResponse)
+
+      },[formResponse])
+      
+      const errorFromServer = (response) =>{
+          
+         if(response){
+
+            if(response.status === 405){
+
+               const formErrorCopy = {...formError}
+               const responseBody = response.body
+               
+               for(const key in formErrorCopy){
+                  
+                  if(responseBody[key]){
+                     formErrorCopy[key] = capitalizeFirstLetter(responseBody[key])
+                  }else{
+                     formErrorCopy[key] = false
+                  }
+  
+               }
+                setFormError(formErrorCopy)
+            }else{
+               clearFormError()
+            }
+         }
+      }
+
+      const clearFormError = () =>{
+
+         const formErrorCopy = {...formError}
+
+         for(const key in formErrorCopy){
+            formErrorCopy[key] = false;
+         }
+
+         setFormError(formErrorCopy)
+      }
+
 
       const updateError = (key, value) =>{
 
@@ -53,7 +97,7 @@ const useForm = (formSettings) =>{
 
       const validateFields = () =>{
          
-         console.log(formFields)
+         // console.log(formFields)
 
          const formErrorCopy = {...formError}
 
@@ -105,6 +149,7 @@ const useForm = (formSettings) =>{
 
                            console.log("Submit")
                            makeRequest(config.method, config.url, formFields)
+                           
                            
                        }
                                

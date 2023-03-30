@@ -1,10 +1,10 @@
 import TopNav from "../components/Navigaion/topNav"
 import { useEffect } from "react"
 import {urlParcer} from "../Util/urlParcer"
-import LoginForm from "../components/Forms/loginForm"
+import SignupForm from "../components/Forms/signupForm"
 import useRequest from "../lib/MakeRequest/MakeRequest"
 
-const Login = (props) =>{
+const Signup = (props) =>{
 
     const {Class, id} = props
     const {makeRequest, response} = useRequest()
@@ -16,7 +16,6 @@ const Login = (props) =>{
     },[])
 
     // console.log(response)
-
     
 
     return(
@@ -24,10 +23,10 @@ const Login = (props) =>{
             
             <TopNav />
             <div className="container center-content padding-bottom-2x">
-                <LoginForm/>
+                <SignupForm/>
           </div>
         </div>
     )
 }
 
-export default Login
+export default Signup

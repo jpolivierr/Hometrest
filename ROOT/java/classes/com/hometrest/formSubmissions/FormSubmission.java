@@ -6,11 +6,11 @@ abstract class FormSubmission {
 
     HashMap<String,String> errors = new HashMap<>();
 
-    protected void emailValidation(String email){
+    protected void emailValidation(String key, String email){
 
             if(email != null && !email.contains("@")){
 
-              errors.put("email", "not a valid email"); 
+              errors.put(key, key + ": not a valid email"); 
 
             }
           
@@ -20,7 +20,7 @@ abstract class FormSubmission {
 
         if(value != null && value.isEmpty()){
 
-            errors.put(key, "Is required");
+            errors.put(key, key + ": is required");
 
         }
         

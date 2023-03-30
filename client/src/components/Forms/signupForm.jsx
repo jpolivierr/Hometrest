@@ -5,16 +5,16 @@ import useForm from "../../lib/Forms/useForm"
 
 
 
-const LoginForm = () =>{
+const Signup = () =>{
 
     const [formSetting] = useState({
         config: {
-            url: "http://localhost:8080/secure/login",
+            url: "http://localhost:8080/secure/signup",
             method: "POST",
             buttonLabel: "Submit"
         },
         info : {
-            title: "Login",
+            title: "Signup",
             Class: "avalon text-left av-shadow"
         },
         fields : [
@@ -51,6 +51,17 @@ const LoginForm = () =>{
                 required : true,
                 // icon : <i className="fa-solid fa-location-dot"></i>
               },
+              {
+                type : "password",
+                label : "Re-enter Password",
+                // placeHolder : "Enter city or Zip",
+                name : "password2",
+                // onChangefunc : numValidate,
+                // fieldToUpdate : setLocation,
+                // onSubmitFunc: [emptyField],
+                required : true,
+                // icon : <i className="fa-solid fa-location-dot"></i>
+              },
         ]
     })
 
@@ -72,4 +83,4 @@ const LoginForm = () =>{
     )
 }
 
-export default LoginForm
+export default Signup

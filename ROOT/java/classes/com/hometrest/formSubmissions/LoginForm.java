@@ -10,7 +10,7 @@ public class LoginForm extends FormSubmission{
 
      public HashMap<String,String> validate(){
 
-        emailValidation(email);
+        emailValidation("email",email);
         isEmpty("name", name);
         isEmpty("email", email);
         isEmpty("password", password);

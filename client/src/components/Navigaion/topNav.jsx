@@ -42,6 +42,7 @@ const TopNav = () =>{
                                             <Buttons 
                                             label="Sign up"
                                             Class=" button main-btn"
+                                            href="/signup"
                                             />
 
                                             <Buttons 

@@ -104,6 +104,7 @@ const Form = (props) =>{
                            console.log("Submit")
                            makeRequest(config.method, config.url, formFields)
                            
+                           
                        }
                                
       }
