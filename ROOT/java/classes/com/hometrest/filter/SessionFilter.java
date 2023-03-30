@@ -5,7 +5,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -29,16 +28,13 @@ public class SessionFilter implements Filter {
        
        var httpRequest = (HttpServletRequest) request;
 
-       var device = new RequestInfoFilter(httpRequest);
+      //  var device = new RequestInfoFilter(httpRequest);
 
        // Create a session object if it is already not  created.
        HttpSession session = httpRequest.getSession(true);
 
-      PrintWriter out = response.getWriter();
-
       if(session.isNew()){
 
-      out.println("new sessions");
       SimpleDateFormat simpleDate = new SimpleDateFormat("E yyyy-MM-dd 'at' hh:mm:ss a zzz");
       
 
@@ -56,8 +52,6 @@ public class SessionFilter implements Filter {
         session.setAttribute(ValidSessionKeys.SESSION_LAST_ACCESS, lastAccessTimeFormat);
 
       }else {
-
-         out.println("Already exist:: Same original session");
 
          SimpleDateFormat simpleDate = new SimpleDateFormat("E yyyy-MM-dd 'at' hh:mm:ss a zzz");
 

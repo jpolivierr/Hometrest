@@ -1,8 +1,8 @@
 import { useState } from "react"
 
-const useFormSubmit = () =>{
+const useRequest = () =>{
 
-    const [formResponse, setFormResponse] = useState({
+    const [response, setResponse] = useState({
         status: null,
         message: "",
         error: null,
@@ -39,38 +39,18 @@ const useFormSubmit = () =>{
 
                 switch(status){
                     case 200 :
-                        setFormResponse(
-                            {
-                            ...formResponse,
-                                status,
-                                message : "success",
-                                body : await request.json()
-                            }
-                        )
+                        setResponse(await request.json())
                         break
                     case 400 :
-                        setFormResponse(
-                            {
-                            ...formResponse,
-                                status,
-                                message : "server not found",
-                                body : await request.json()
-                            }
+                        setResponse(await request.json()
                         )
                     case 500 :
-                        setFormResponse(
-                            {
-                            ...formResponse,
-                                status,
-                                message : "server not found",
-                                body : await request.json()
-                            }
-                        )
-
+                        setResponse(await request.json())
                 }
         } catch (error) {
 
             console.log(error)
+
         }
 
         
@@ -80,9 +60,9 @@ const useFormSubmit = () =>{
 
     return{
         makeRequest,
-        formResponse
+        response
     }
 
 }
 
-export default useFormSubmit
+export default useRequest

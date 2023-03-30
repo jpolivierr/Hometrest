@@ -9,7 +9,7 @@ const LoginForm = () =>{
 
     const [formSetting] = useState({
         config: {
-            url: "https://jsonplaceholder.typicode.com/posts",
+            url: "http://localhost:8080/login",
             method: "GET",
             buttonLabel: "Submit"
         },
