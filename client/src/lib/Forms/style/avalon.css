@@ -54,10 +54,10 @@ FIELDS
 }
 
 .avalon fieldset input{
-    border-radius: 100px;
+    border-radius: 5px;
     outline: none;
     padding: .7rem 1rem;
-    border: 1px solid #70879f3d;;
+    border: 1px solid #70879f94;
     width: 100%;
 }
 

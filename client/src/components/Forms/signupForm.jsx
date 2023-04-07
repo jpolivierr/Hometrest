@@ -1,6 +1,7 @@
 import Form from "../../lib/Forms/Form"
 import { useEffect, useState } from "react"
 import { emptyField } from "../../lib/Forms/Util/emptyField"
+import { emailValidation } from "../../lib/Forms/Util/emailValidation"
 import useForm from "../../lib/Forms/useForm"
 
 
@@ -36,7 +37,7 @@ const Signup = () =>{
                 name : "email",
                 // onChangefunc : numValidate,
                 // fieldToUpdate : setLocation,
-                // onSubmitFunc: [emptyField],
+                // onSubmitFunc: [emptyField,emailValidation],
                 required : true,
                 // icon : <i className="fa-solid fa-location-dot"></i>
               },
@@ -56,6 +57,7 @@ const Signup = () =>{
                 label : "Re-enter Password",
                 // placeHolder : "Enter city or Zip",
                 name : "password2",
+                // match: "password",
                 // onChangefunc : numValidate,
                 // fieldToUpdate : setLocation,
                 // onSubmitFunc: [emptyField],

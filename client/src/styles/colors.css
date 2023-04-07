@@ -1,6 +1,6 @@
 :root{
-    --main-color: rgb(255, 9, 101);
-    --dark-color : #181f38;
+    --main-color: rgba(255, 9, 101, 0.9);
+    --dark-color : #293768;
     --light-color: #add8e64a;
     --dark-text-color : #181f38;
     --paragraph-text-color : #2b3857;

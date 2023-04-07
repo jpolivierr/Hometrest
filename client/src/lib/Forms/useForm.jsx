@@ -5,6 +5,7 @@ import MultiSelect from "./Fields/MultiSelect";
 import ListOption from "./Fields/ListOption";
 import { myFormFieds } from "./Config/getFields";
 import { capitalizeFirstLetter } from "./Util/capitalizeFirstLetter";
+import { matchPassword } from "./Util/matchPassword";
 import { validateFields } from "./Config/formValidation";
 import "./style/avalon.css"
 
@@ -15,14 +16,12 @@ import { useEffect, useState } from "react";
 
 const useForm = (formSettings) =>{
 
-    const [settings, setSettings] = useState(formSettings)
-
-   
+    const [settings] = useState(formSettings)
 
      const {fields,config, info} = settings
 
       const {makeRequest, formResponse} = useFormSubmit()
-      const [submitStatus, setSubmitStatus] = useState(false)
+      const [submitStatus] = useState(false)
       const [formError, setFormError] = useState(myFormFieds(fields).errors)
       const [formFields, setFormFields] = useState(myFormFieds(fields).fields)
 
@@ -32,6 +31,7 @@ const useForm = (formSettings) =>{
 
       },[formResponse])
       
+      console.log(formResponse)
       const errorFromServer = (response) =>{
           
          if(response){
@@ -95,6 +95,7 @@ const useForm = (formSettings) =>{
          }
       }
 
+
       const validateFields = () =>{
          
          // console.log(formFields)
@@ -130,6 +131,21 @@ const useForm = (formSettings) =>{
                      }
                  }
 
+                 //match condition
+                 if(field.match && (field.match in formFields)){
+
+                     const pwd1 = formFields[field.match]
+                     const pwd2 = formFields[field.name]
+                     
+                     if(matchPassword(pwd1,pwd2)){
+                        formErrorCopy[field.name] = matchPassword(pwd1,pwd2)
+                        formErrorCopy.errors = true
+                     }else{
+                        formErrorCopy[field.name] = false
+                     }
+                     
+                 }
+
          })
 
          setFormError(formErrorCopy)
@@ -148,6 +164,7 @@ const useForm = (formSettings) =>{
                        }else{
 
                            console.log("Submit")
+                           console.log(formFields);
                            makeRequest(config.method, config.url, formFields)
                            
                            
