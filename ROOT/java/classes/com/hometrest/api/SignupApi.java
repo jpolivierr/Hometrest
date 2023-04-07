@@ -25,8 +25,9 @@ public class SignupApi extends HttpServlet {
         var jsonHttpResponse = new JsonHttpResponse();
 
         String clientResponse = req.getParameter("formData");
+        
+        //Validate form
         Gson gson = new Gson();
-
         var form = gson.fromJson(clientResponse, SignupForm.class);
         var result = form.validate();
 

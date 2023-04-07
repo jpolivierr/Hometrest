@@ -2,20 +2,15 @@ import TopNav from "../components/Navigaion/topNav"
 import { useEffect } from "react"
 import {urlParcer} from "../Util/urlParcer"
 import SignupForm from "../components/Forms/signupForm"
-import useRequest from "../lib/MakeRequest/MakeRequest"
 
 const Signup = (props) =>{
 
     const {Class, id} = props
-    const {makeRequest, response} = useRequest()
 
     useEffect(()=>{
-        // makeRequest("GET","http://localhost:8080/login")
-        // console.log(response)
         urlParcer()
     },[])
 
-    // console.log(response)
     
 
     return(
