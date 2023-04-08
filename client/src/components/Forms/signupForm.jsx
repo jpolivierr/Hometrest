@@ -21,9 +21,20 @@ const Signup = () =>{
         fields : [
             {
                 type : "input",
-                label : "Name",
+                label : "First Name",
                 // placeHolder : "Enter city or Zip",
-                name : "name",
+                name : "first_name",
+                // onChangefunc : numValidate,
+                // fieldToUpdate : setLocation,
+                // onSubmitFunc: [emptyField],
+                required : true,
+                //  icon : <i className="fa-solid fa-location-dot"></i>
+              },
+              {
+                type : "input",
+                label : "Last Name",
+                // placeHolder : "Enter city or Zip",
+                name : "last_name",
                 // onChangefunc : numValidate,
                 // fieldToUpdate : setLocation,
                 // onSubmitFunc: [emptyField],

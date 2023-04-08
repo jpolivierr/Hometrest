@@ -3,7 +3,7 @@ import java.util.regex.Pattern;
 
 import java.util.HashMap;
 
-abstract class FormSubmission {
+public abstract class FormSubmission {
 
     HashMap<String,String> errors = new HashMap<>();
 

@@ -33,7 +33,7 @@ public class LoginApi extends HttpServlet {
         if(result.isEmpty()){
             jsonHttpResponse.send(resp, 200,"api login success", null);
         }else{
-            jsonHttpResponse.send(resp, 405,"aerror", result);
+            jsonHttpResponse.send(resp, 409,"aerror", result);
         }
 
         

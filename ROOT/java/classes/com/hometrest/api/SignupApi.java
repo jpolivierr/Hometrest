@@ -4,6 +4,8 @@ import java.io.IOException;
 // import java.io.PrintWriter;
 
 import com.google.gson.Gson;
+import com.hometrest.database.CreateUser;
+import com.hometrest.database.DbConnect;
 import com.hometrest.formSubmissions.SignupForm;
 import com.hometrest.handlers.JsonHttpResponse;
 
@@ -28,13 +30,16 @@ public class SignupApi extends HttpServlet {
         
         //Validate form
         Gson gson = new Gson();
-        var form = gson.fromJson(clientResponse, SignupForm.class);
-        var result = form.validate();
+        var userInput = gson.fromJson(clientResponse, SignupForm.class);
+        var result = userInput.validate();
 
         if(result.isEmpty()){
-            jsonHttpResponse.send(resp, 200,"api signup success", null);
+            var dbConnect = DbConnect.getDbConnect();
+            var connection = dbConnect.connect();
+            var createUser = new CreateUser();
+            createUser.init(resp, connection, userInput);
         }else{
-            jsonHttpResponse.send(resp, 405,"Signup error", result);
+            jsonHttpResponse.send(resp, 409,"Signup error", result);
         }
 
         

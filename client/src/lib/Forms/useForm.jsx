@@ -36,7 +36,7 @@ const useForm = (formSettings) =>{
           
          if(response){
 
-            if(response.status === 405){
+            if(response.status === 409){
 
                const formErrorCopy = {...formError}
                const responseBody = response.body
@@ -44,7 +44,7 @@ const useForm = (formSettings) =>{
                for(const key in formErrorCopy){
                   
                   if(responseBody[key]){
-                     formErrorCopy[key] = capitalizeFirstLetter(responseBody[key])
+                     formErrorCopy[key] = capitalizeFirstLetter(responseBody[key]).replace("_"," ")
                   }else{
                      formErrorCopy[key] = false
                   }

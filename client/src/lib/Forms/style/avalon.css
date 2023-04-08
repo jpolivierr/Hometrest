@@ -23,6 +23,8 @@ LABEL AND HEADER
 .avalon label{
     display: block;
     margin-bottom: .5rem;
+    color: #293768;
+    font-size: .9rem;
 }
 
 /* ******************************************* 
@@ -54,10 +56,10 @@ FIELDS
 }
 
 .avalon fieldset input{
-    border-radius: 5px;
+    border-radius: 10px;
     outline: none;
     padding: .7rem 1rem;
-    border: 1px solid #70879f94;
+    border: 1px solid #70879f4a;
     width: 100%;
 }
 

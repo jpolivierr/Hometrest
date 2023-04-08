@@ -19,6 +19,18 @@ public class LoginForm extends FormSubmission{
         
      }
 
+     public String getName() {
+         return name;
+     }
+
+     public String getEmail() {
+         return email;
+     }
+
+     public String getPassword() {
+         return password;
+     }
+
 
     
 }

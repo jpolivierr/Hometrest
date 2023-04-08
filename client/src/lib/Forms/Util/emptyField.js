@@ -3,10 +3,10 @@ import { capitalizeFirstLetter } from "./capitalizeFirstLetter";
 export const emptyField = (name, value) =>{
     try {
         if(Array.isArray(value) && value.length <=0){
-            return capitalizeFirstLetter(name) + " is required"
+            return capitalizeFirstLetter(name).replace("_"," ") + " is required"
         }
         if(!value ){
-            return capitalizeFirstLetter(name) + " is required"
+            return capitalizeFirstLetter(name).replace("_"," ") + " is required"
         }else{
             return false;
         }

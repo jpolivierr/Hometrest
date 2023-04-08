@@ -5,7 +5,6 @@ import com.hometrest.ErrorHandler.ErrorServlet;
 import com.hometrest.api.ApiEndPoint;
 import com.hometrest.api.LoginApi;
 import com.hometrest.api.SignupApi;
-import com.hometrest.database.DbConnect;
 import com.hometrest.filter.*;
 
 
@@ -21,8 +20,6 @@ public class Main {
          new ApiEndPoint();
          new LoginApi();
          new SignupApi();
-         var dbConnect = DbConnect.getDbConnect();
-         dbConnect.connect();
         
     }
     
