@@ -1,4 +1,4 @@
-import TopNav from "../components/Navigaion/topNav"
+
 import {urlParcer, updateParam} from "../Util/urlParcer"
 import { useEffect } from "react"
 const About = (props) =>{
@@ -13,7 +13,6 @@ const About = (props) =>{
 
     return(
         <div id={id} className={Class}>
-          <TopNav />
           <div className="container">
             <h1>About</h1>
 

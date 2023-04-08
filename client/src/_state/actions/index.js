@@ -1,0 +1,1 @@
+export * as getUserAction from "./getUserAction"

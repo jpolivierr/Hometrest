@@ -80,7 +80,17 @@ const Signup = () =>{
 
     const {getForm, formResponse} = useForm(formSetting)
 
-    // console.log(formResponse)
+    
+
+    useEffect(()=>{
+
+      console.log(formResponse)
+
+      if(formResponse && formResponse.status === 200){
+        window.location.href = "/"
+      }
+
+    },[formResponse])
 
     return(
         <div className="margin-top-2x">

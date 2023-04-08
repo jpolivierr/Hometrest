@@ -31,7 +31,6 @@ const useForm = (formSettings) =>{
 
       },[formResponse])
       
-      console.log(formResponse)
       const errorFromServer = (response) =>{
           
          if(response){

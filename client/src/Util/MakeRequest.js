@@ -1,13 +1,5 @@
-import { useState } from "react"
 
-const useRequest = () =>{
 
-    const [formResponse, setFormResponse] = useState({
-        status: null,
-        message: "",
-        error: null,
-        body: {}
-    })
 
     const makeRequest = async (method, url, data, callBackFunk) => {
 
@@ -39,16 +31,13 @@ const useRequest = () =>{
 
                 switch(status){
                     case 200 :
-                        setFormResponse(await response.json())
-                        break
+                        return await response.json()
                     case 400 :
-                        setFormResponse(await response.json())
-                        break
+                        return await response.json()
                     case 500 :
-                        setFormResponse(await response.json())
-                        break
+                        return await response.json()
                     default :
-                        setFormResponse(await response.json())
+                        return await response.json()
  
                 }
         } catch (error) {
@@ -58,11 +47,6 @@ const useRequest = () =>{
 
     }
 
-    return{
-        makeRequest,
-        formResponse
-    }
 
-}
 
-export default useRequest
+export default makeRequest

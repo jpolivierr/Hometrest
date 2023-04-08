@@ -1,5 +1,4 @@
 import { useEffect } from "react"
-import TopNav from "../components/Navigaion/topNav"
 
 import {urlParcer} from "../Util/urlParcer"
 
@@ -13,7 +12,6 @@ const Home = (props) =>{
 
     return(
         <div id={id} className={Class}>
-          <TopNav />
           <div className="container">
             <h1>Home</h1>
           </div>
