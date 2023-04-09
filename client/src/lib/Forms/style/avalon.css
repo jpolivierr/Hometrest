@@ -6,7 +6,7 @@ FORM
 .avalon{
     padding: 2rem;
     height: max-content;
-    width: 430px;
+    width: 450px;
     border-radius: 15px;
     background: white;
 }
@@ -122,3 +122,11 @@ BUTTON
 .avalon button:hover{
     background-color: #cc004b;
 } */
+
+.server-error{
+    color: red;
+    margin-bottom: 1.5rem;
+    font-size: .9rem;
+    background: #ff000012;
+    padding: 1rem;
+}

@@ -5,7 +5,7 @@ const useScale = () =>{
     const style = `
     
     .buttonClick{
-        animation: buttonClick .05s ease;
+        animation: buttonClick .02s ease;
     }
     
     @keyframes buttonClick {
@@ -16,7 +16,7 @@ const useScale = () =>{
             transform: scale(.9);
         }
         100%{
-            transform: scale(.9);
+            transform: scale(1);
         }
     }
     

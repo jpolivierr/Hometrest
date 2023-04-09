@@ -53,6 +53,17 @@ public class CreateUser extends DbMethods<String>  {
             e.printStackTrace();
 
         }
+        finally{
+            
+            try {
+                
+                connection.close();
+
+            } catch (SQLException e) {
+                
+                e.printStackTrace();
+            }
+        }
         
 
     }

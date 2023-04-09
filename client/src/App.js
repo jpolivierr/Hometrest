@@ -19,10 +19,7 @@ function App() {
 
   useEffect(()=>{
     getUser()
-    console.log("render..")
   },[])
-
-  console.log(activeUser)
 
   return (
     <div className="App">

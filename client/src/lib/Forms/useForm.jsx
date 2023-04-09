@@ -18,7 +18,7 @@ const useForm = (formSettings) =>{
 
     const [settings] = useState(formSettings)
 
-     const {fields,config, info} = settings
+     const {fields,config, info, button} = settings
 
       const {makeRequest, formResponse} = useFormSubmit()
       const [submitStatus] = useState(false)
@@ -39,9 +39,14 @@ const useForm = (formSettings) =>{
 
                const formErrorCopy = {...formError}
                const responseBody = response.body
-               
+               console.log(responseBody)
+
+               if(responseBody.serverError){
+                  formErrorCopy.serverError = responseBody.serverError
+               }
+
                for(const key in formErrorCopy){
-                  
+
                   if(responseBody[key]){
                      formErrorCopy[key] = capitalizeFirstLetter(responseBody[key]).replace("_"," ")
                   }else{
@@ -289,8 +294,13 @@ const useForm = (formSettings) =>{
 
       const getForm = () =>{
         return(
-            // <FormProvider data={{num: 5}}>
+
                <form className={info.Class} onSubmit={e => submit(e)}>
+
+                  {formError.serverError && 
+                    <p className="server-error">{formError.serverError}</p>
+                    }
+                  
                   {info.title && <h2>{info.title}</h2>}
                  
                    
@@ -301,11 +311,13 @@ const useForm = (formSettings) =>{
       
                     )
                    }
+
+
       
-               
-                  <button className="button main-btn" type="submit">
+                  {button ? button : 
+                     <button className="button main-btn" type="submit">
                            {config.buttonLabel}
-                  </button>
+                  </button>}
               </form>
             // </FormProvider>
               

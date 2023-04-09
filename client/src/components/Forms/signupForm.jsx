@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { emptyField } from "../../lib/Forms/Util/emptyField"
 import { emailValidation } from "../../lib/Forms/Util/emailValidation"
 import useForm from "../../lib/Forms/useForm"
+import MainButton from "../buton/MainButton"
 
 
 
@@ -75,7 +76,12 @@ const Signup = () =>{
                 required : true,
                 // icon : <i className="fa-solid fa-location-dot"></i>
               },
-        ]
+        ],
+        button : <MainButton 
+                      label="Submit"
+                      Class=" button main-btn"
+                      type="submit"
+                  />
     })
 
     const {getForm, formResponse} = useForm(formSetting)

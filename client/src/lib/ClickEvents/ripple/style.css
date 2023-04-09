@@ -1,19 +1,50 @@
-.av-rippple{
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    border-radius: 50%;
-    animation: ripple .3s infinite;
-    background: white;
-}
+    .av-ripple{
+      position: absolute;
+      outline: none;
+      transition: all 1s linear !important;
+      
+  }
 
-@keyframes ripple {
+  .av-ripple:active {
+    transform: scale(0.98) !important;
+  }
 
-    from{
-        transform: scale(0);
-    }
-    to{
-        transform: scale(1.5);
-    }
-    
-}
+  .scl-btn:active{
+    /* transform: scale(0.8) !important; */
+    background: rgb(129, 7, 52) !important;
+  }
+
+  .av-ripple::before{
+    content: "";
+      position: absolute;
+
+      top: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      border-radius: 50%;
+      animation: ripple ease-out .6s forwards;
+      background: rgba(255, 255, 255, 0.781);
+  }
+  
+  @keyframes ripple {
+  
+      0%{
+        width: 0px;
+        height: 0px;
+          opacity: 0;
+      }
+      56%{
+        width: 80px;
+        height: 80px;;
+          opacity: .5;
+          
+      }
+      100%{
+        width: 150px;
+        height: 150px;
+          opacity: 0;
+          
+      }
+      
+  }

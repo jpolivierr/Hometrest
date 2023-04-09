@@ -2,6 +2,7 @@ import Form from "../../lib/Forms/Form"
 import { useEffect, useState } from "react"
 import { emptyField } from "../../lib/Forms/Util/emptyField"
 import useForm from "../../lib/Forms/useForm"
+import MainButton from "../buton/MainButton"
 
 
 
@@ -18,17 +19,6 @@ const LoginForm = () =>{
             Class: "avalon text-left av-shadow"
         },
         fields : [
-            {
-                type : "input",
-                label : "Name",
-                // placeHolder : "Enter city or Zip",
-                name : "name",
-                // onChangefunc : numValidate,
-                // fieldToUpdate : setLocation,
-                // onSubmitFunc: [emptyField],
-                required : true,
-                //  icon : <i className="fa-solid fa-location-dot"></i>
-              },
             {
                 type : "input",
                 label : "Email",
@@ -51,12 +41,17 @@ const LoginForm = () =>{
                 required : true,
                 // icon : <i className="fa-solid fa-location-dot"></i>
               },
-        ]
+        ],
+        button : <MainButton 
+                            label="Submit"
+                            Class=" button main-btn"
+                            type="submit"
+                        />
     })
 
     const {getForm, formResponse} = useForm(formSetting)
 
-    // console.log(formResponse)
+    //  console.log(formResponse)
 
     return(
         <div className="margin-top-2x">

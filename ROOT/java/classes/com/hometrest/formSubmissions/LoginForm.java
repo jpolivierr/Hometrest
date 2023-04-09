@@ -4,14 +4,12 @@ import java.util.HashMap;
 
 public class LoginForm extends FormSubmission{
 
-     private String name;
      private String email;
      private String password;
 
      public HashMap<String,String> validate(){
 
         emailValidation("email",email);
-        isEmpty("name", name);
         isEmpty("email", email);
         isEmpty("password", password);
         
@@ -19,9 +17,6 @@ public class LoginForm extends FormSubmission{
         
      }
 
-     public String getName() {
-         return name;
-     }
 
      public String getEmail() {
          return email;

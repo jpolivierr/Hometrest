@@ -4,6 +4,7 @@ import useModal from "../../lib/Modal/useModal"
 import Modal from "../../lib/Modal/modal"
 import SlideWindow from "../../lib/Modal/Windows/slideWindow"
 import ModalOverlay from "../../lib/Modal/Overlays/modalOverlay"
+import MainButton from "../buton/MainButton"
 
 
 
@@ -39,10 +40,11 @@ const TopNav = () =>{
                                         />
 
                                         <div className="hideMobile flex-space-between gap-1x">
-                                            <Buttons 
-                                            label="Sign up"
-                                            Class=" button main-btn"
-                                            href="/signup"
+                                            
+                                            <MainButton 
+                                                label="Sign up"
+                                                Class=" button main-btn"
+                                                href="/signup"
                                             />
 
                                             <Buttons 
