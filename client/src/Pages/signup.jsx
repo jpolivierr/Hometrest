@@ -11,9 +11,8 @@ const Signup = (props) =>{
     },[])
 
     useEffect(()=>{
-        console.log("render sign up ...")
-        console.log(activeUser)
-    },[activeUser])
+ 
+    },[])
 
     
 

@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 // import jakarta.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = "/secure/login")
+@WebServlet(urlPatterns = "/login")
 @MultipartConfig
 
 public class LoginApi extends HttpServlet {
@@ -36,15 +36,26 @@ public class LoginApi extends HttpServlet {
         var result = userInput.validate();
 
         if(result.isEmpty()){
+
             var dbConnect = DbConnect.getDbConnect();
+
             var connection = dbConnect.connect();
+
             var getUser = new ValidateUser();
-            getUser.init(resp, connection, userInput);
+
+            var userIsAuthenticate = getUser.init(resp, connection, userInput);
+
+            if(userIsAuthenticate){
+
+                System.out.println("user authenticated...");
+
+                jsonHttpResponse.send(resp, 200,"user authenticated", result);
+            }
+
         }else{
             jsonHttpResponse.send(resp, 409,"aerror", result);
         }
 
-        
 
     }
     

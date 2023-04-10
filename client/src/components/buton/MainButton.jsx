@@ -1,10 +1,18 @@
 
 import { Link, NavLink, useLocation } from "react-router-dom";
 import useRipple from "../../lib/ClickEvents/ripple/ripple";
+import { useState } from "react";
 
 const MainButton = (props) =>{
 
-const {target, href,Class,label,clickEvent,type} = props
+const {target,
+        href,
+        Class,
+        label,
+        clickEvent,
+        type,
+        loadingEffect
+    } = props
 const {rippleClass, rippleAnimation} = useRipple()
 
 const handleClick = (e) =>{
@@ -12,9 +20,8 @@ const handleClick = (e) =>{
     if(clickEvent){
         clickEvent(e)
     }
-
+    
     rippleAnimation(e)
-
 
 }
 
@@ -27,6 +34,8 @@ const generateButton = () =>{
                   type={type} 
                   onClick={(e)=>{handleClick(e)}}
                   className={`${Class} ${rippleClass} scl-btn`}>
+                    {/* <Ring isShowing = {isLoading}/> */}
+                    {loadingEffect && loadingEffect}
                     
                     {label}
                 </button>

@@ -3,10 +3,14 @@ import { useEffect, useState } from "react"
 import { emptyField } from "../../lib/Forms/Util/emptyField"
 import useForm from "../../lib/Forms/useForm"
 import MainButton from "../buton/MainButton"
+import Ring from "../../lib/loadingEffect/loading/ring"
+import getCookie from "../../Util/getCookie"
+
 
 
 
 const LoginForm = () =>{
+
 
     const [formSetting] = useState({
         config: {
@@ -43,15 +47,22 @@ const LoginForm = () =>{
               },
         ],
         button : <MainButton 
-                            label="Submit"
-                            Class=" button main-btn"
-                            type="submit"
-                        />
+        label="Submit"
+        Class=" button main-btn"
+        type="submit"
+        loadingEffect={true}
+    />
     })
 
-    const {getForm, formResponse} = useForm(formSetting)
+    const {getForm, formResponse, loading} = useForm(formSetting)
 
-    //  console.log(formResponse)
+      console.log(formResponse)
+
+      if(formResponse && formResponse.status === 200){
+        console.log("getting -> cookie")
+        const sessionId = getCookie("SESSIONID")
+        console.log(sessionId)
+      }
 
     return(
         <div className="margin-top-2x">

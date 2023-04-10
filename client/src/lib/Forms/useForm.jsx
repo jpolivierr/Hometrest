@@ -24,6 +24,7 @@ const useForm = (formSettings) =>{
       const [submitStatus] = useState(false)
       const [formError, setFormError] = useState(myFormFieds(fields).errors)
       const [formFields, setFormFields] = useState(myFormFieds(fields).fields)
+      const [loading, setLoading] = useState(false)
 
       useEffect(()=>{
 
@@ -166,10 +167,12 @@ const useForm = (formSettings) =>{
                            console.log("error found")
 
                        }else{
-
-                           console.log("Submit")
+                            console.log("Submit")
+                           setLoading(true)
+                           
                            console.log(formFields);
-                           makeRequest(config.method, config.url, formFields)
+                           await makeRequest(config.method, config.url, formFields)
+                           // setLoading(false)
                            
                            
                        }
@@ -293,6 +296,8 @@ const useForm = (formSettings) =>{
       }
 
       const getForm = () =>{
+      
+
         return(
 
                <form className={info.Class} onSubmit={e => submit(e)}>
@@ -313,11 +318,12 @@ const useForm = (formSettings) =>{
                    }
 
 
-      
                   {button ? button : 
-                     <button className="button main-btn" type="submit">
-                           {config.buttonLabel}
-                  </button>}
+                              <button className="button main-btn" type="submit">
+                                    {config.buttonLabel}
+                           </button>}
+               
+                  
               </form>
             // </FormProvider>
               
@@ -327,7 +333,8 @@ const useForm = (formSettings) =>{
 
      return{
         getForm,
-        formResponse
+        formResponse,
+        loading
      }
 }
 

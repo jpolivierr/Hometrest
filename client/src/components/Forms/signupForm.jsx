@@ -4,10 +4,13 @@ import { emptyField } from "../../lib/Forms/Util/emptyField"
 import { emailValidation } from "../../lib/Forms/Util/emailValidation"
 import useForm from "../../lib/Forms/useForm"
 import MainButton from "../buton/MainButton"
+import Ring from "../../lib/loadingEffect/loading/ring"
 
 
 
 const Signup = () =>{
+
+  const [isLoading] = useState(true)
 
     const [formSetting] = useState({
         config: {
@@ -81,12 +84,14 @@ const Signup = () =>{
                       label="Submit"
                       Class=" button main-btn"
                       type="submit"
+                      href="#"
+                      loadingEffect={<Ring isShowing = {isLoading} />}
                   />
     })
 
-    const {getForm, formResponse} = useForm(formSetting)
+    const {getForm, formResponse, loading} = useForm(formSetting)
 
-    
+    console.log(loading)
 
     useEffect(()=>{
 
@@ -96,7 +101,7 @@ const Signup = () =>{
         window.location.href = "/"
       }
 
-    },[formResponse])
+    },[])
 
     return(
         <div className="margin-top-2x">

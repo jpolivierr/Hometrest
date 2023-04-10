@@ -12,13 +12,14 @@ import java.sql.CallableStatement;
 
 import com.hometrest.formSubmissions.LoginForm;
 
-public class ValidateUser extends DbMethods<String>  {
+public class ValidateUser  {
 
     JsonHttpResponse jsonHttpResponse = new JsonHttpResponse();
-     
+    boolean result = false;
 
-    public void init(ServletResponse response, Connection connection, LoginForm userInput){
+    public boolean init(ServletResponse response, Connection connection, LoginForm userInput){
 
+        
         
         try {
 
@@ -54,7 +55,8 @@ public class ValidateUser extends DbMethods<String>  {
 
             }else{
 
-                jsonHttpResponse.send(response, 200,"Success",responseBody );
+                // jsonHttpResponse.send(response, 200,"Success",responseBody );
+                result = true;
 
             }
             
@@ -84,8 +86,10 @@ public class ValidateUser extends DbMethods<String>  {
                 
                 e.printStackTrace();
             }
+            
         }
-        
+
+        return result;
 
     }
 
