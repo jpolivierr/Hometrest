@@ -14,7 +14,6 @@ import com.hometrest.formSubmissions.LoginForm;
 
 public class ValidateUser  {
 
-    JsonHttpResponse jsonHttpResponse = new JsonHttpResponse();
     boolean result = false;
 
     public boolean init(ServletResponse response, Connection connection, LoginForm userInput){
@@ -51,7 +50,7 @@ public class ValidateUser  {
             if(responseBody.isEmpty()){
 
                 responseBody.put("Email", "Your email or password is incorrect");
-                jsonHttpResponse.send(response, 409,"error",responseBody );
+                JsonHttpResponse.send(response, 409,"error",responseBody );
 
             }else{
 
@@ -71,7 +70,7 @@ public class ValidateUser  {
 
                 if(e.getErrorCode() == 0){
                     error.put("serverError", "Your email or password is incorrect");
-                    jsonHttpResponse.send(response, 409,"Error", error);
+                    JsonHttpResponse.send(response, 409,"Error", error);
                 }
 
                 e.printStackTrace();

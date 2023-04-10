@@ -101,7 +101,6 @@ public class ErrorServlet extends HttpServlet {
 
     response.setContentType("text/html");
 
-    var httpRes = new JsonHttpResponse();
      // Analyze the servlet exception       
      Throwable throwable = (Throwable) request.getAttribute("jakarta.servlet.error.exception");
 
@@ -116,11 +115,11 @@ public class ErrorServlet extends HttpServlet {
      }
 
      if (throwable == null && errorProps.statusCode == null) {
-        httpRes.send(response, 500, "unknown error", errorProps);
+        JsonHttpResponse.send(response, 500, "unknown error", errorProps);
      }
 
      if(errorProps.statusCode != null){
-        httpRes.send(response, errorProps.statusCode, "error", errorProps);
+        JsonHttpResponse.send(response, errorProps.statusCode, "error", errorProps);
      }
 
           

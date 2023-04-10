@@ -9,22 +9,23 @@ import com.google.gson.GsonBuilder;
 
 public class JsonHttpResponse {
 
-    public int status;
-    public String message;
-    public Object body;
+    public static int status;
+    public static String message;
+    public static Object body;
 
-    public void send(ServletResponse response, int status, String message, Object body){
+    public static void send(ServletResponse response, int status, String message, Object body){
 
+        
         var sendResponse = (HttpServletResponse) response;
         sendResponse.setContentType("application/json");
         
-        this.status = status;
-        this.message = message;
-        this.body = body;
+        JsonHttpResponse.status = status;
+        JsonHttpResponse.message = message;
+        JsonHttpResponse.body = body;
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        String Json = gson.toJson(this);
+        String Json = gson.toJson(JsonHttpResponse.class);
 
         try {
             sendResponse.setStatus(status);

@@ -25,8 +25,6 @@ public class LoginApi extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
     throws ServletException, IOException{
 
-        var jsonHttpResponse = new JsonHttpResponse();
-
         String clientResponse = req.getParameter("formData");
 
         Gson gson = new Gson();
@@ -49,11 +47,11 @@ public class LoginApi extends HttpServlet {
 
                 System.out.println("user authenticated...");
 
-                jsonHttpResponse.send(resp, 200,"user authenticated", result);
+                JsonHttpResponse.send(resp, 200,"user authenticated", result);
             }
 
         }else{
-            jsonHttpResponse.send(resp, 409,"aerror", result);
+            JsonHttpResponse.send(resp, 409,"aerror", result);
         }
 
 

@@ -16,7 +16,7 @@ public class Main {
          new SignupServlet();
          new ErrorServlet();
         //new RequestFilter();
-         new SessionFilter();
+         new EndPointFilter();
          new ApiEndPoint();
          new LoginApi();
          new SignupApi();

@@ -13,8 +13,6 @@ import java.sql.CallableStatement;
 import com.hometrest.formSubmissions.SignupForm;
 
 public class CreateUser extends DbMethods<String>  {
-
-    JsonHttpResponse jsonHttpResponse = new JsonHttpResponse();
      
 
     public void init(ServletResponse response, Connection connection, SignupForm userInput){
@@ -33,7 +31,7 @@ public class CreateUser extends DbMethods<String>  {
 
            sctmt.execute();
 
-           jsonHttpResponse.send(response, 200,"success", null);
+           JsonHttpResponse.send(response, 200,"success", null);
 
 
         } catch (SQLException e) {
@@ -46,7 +44,7 @@ public class CreateUser extends DbMethods<String>  {
                 var error =new HashMap<String,String>();
 
                 error.put("email","Email already exist");
-                jsonHttpResponse.send(response, 409,"Error", error);
+                JsonHttpResponse.send(response, 409,"Error", error);
             }
             System.out.println(e.getMessage());
             System.out.println(e.getClass());

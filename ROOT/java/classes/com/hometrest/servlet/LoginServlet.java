@@ -26,8 +26,6 @@ public class LoginServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
     throws ServletException, IOException{
 
-        var jsonHttpResponse = new JsonHttpResponse();
-
         String clientResponse = req.getParameter("formData");
 
         Gson gson = new Gson();
@@ -42,21 +40,22 @@ public class LoginServlet extends HttpServlet{
 
             var connection = dbConnect.connect();
 
-            var getUser = new ValidateUser();
+            ValidateUser validateUser = new ValidateUser();
 
-            var userIsAuthenticate = getUser.init(resp, connection, userInput);
+            var userIsAuthenticate = validateUser.init(resp, connection, userInput);
 
             if(userIsAuthenticate){
 
                 System.out.println("user authenticated...");
 
-                SessionManagement.create(req, resp);   
+                var newSession = SessionManagement.create(req, resp);
+                newSession.setAttribute("email", userInput.getEmail()); 
 
-                jsonHttpResponse.send(resp, 200,"user authenticated", result);
+                JsonHttpResponse.send(resp, 200,"user authenticated", result);
             }
 
         }else{
-            jsonHttpResponse.send(resp, 409,"aerror", result);
+            JsonHttpResponse.send(resp, 409,"aerror", result);
         }
 
 
@@ -73,8 +72,8 @@ public class LoginServlet extends HttpServlet{
     var isAuth = session.getAttribute("user_authenticate");
 
     if(isAuth != null){
-        var jsonResonse = new JsonHttpResponse();
-        jsonResonse.send(resp, 200, "success", null);
+ 
+        JsonHttpResponse.send(resp, 200, "success", null);
     }
 
     }

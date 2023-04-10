@@ -24,8 +24,6 @@ public class SignupApi extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
     throws ServletException, IOException{
 
-        var jsonHttpResponse = new JsonHttpResponse();
-
         String clientResponse = req.getParameter("formData");
         
         //Validate form
@@ -39,7 +37,7 @@ public class SignupApi extends HttpServlet {
             var createUser = new CreateUser();
             createUser.init(resp, connection, userInput);
         }else{
-            jsonHttpResponse.send(resp, 409,"Signup error", result);
+            JsonHttpResponse.send(resp, 409,"Signup error", result);
         }
 
         
