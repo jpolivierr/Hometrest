@@ -2,7 +2,7 @@ package com.hometrest;
 
  import com.hometrest.servlet.*;
 import com.hometrest.ErrorHandler.ErrorServlet;
-import com.hometrest.api.ApiEndPoint;
+// import com.hometrest.api.ApiEndPoint;
 import com.hometrest.filter.*;
 
 
@@ -10,11 +10,11 @@ import com.hometrest.filter.*;
 public class Main {
 
     public static void main(String[] args) {
-        new LoginServlet();
-        new SignupServlet();
-        new ErrorServlet();
-        new EndPointFilter();
-        new ApiEndPoint();
+         new LoginServlet();
+         new SignupServlet();
+         new ErrorServlet();
+         new EndPointFilter();
+        // new ApiEndPoint();
         
     }
     

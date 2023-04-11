@@ -18,14 +18,14 @@ public class ApiEndPoint extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
     throws ServletException, IOException{
 
-    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
 
     response.setContentType("text/html");
 
     HttpSession session = request.getSession(false);
 
     PrintWriter out = response.getWriter();
-    
+
         if(session == null){
 
             HttpSession newSession = request.getSession(true);

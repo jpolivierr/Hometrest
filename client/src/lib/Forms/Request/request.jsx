@@ -9,6 +9,14 @@ const useFormSubmit = () =>{
         body: {}
     })
 
+    const redirection = (redirected) =>{
+
+        if(redirected){
+            window.location.href = redirected.url
+        }
+
+    }
+
     const makeRequest = async (method, url, data, callBackFunk) => {
 
         let response
@@ -23,6 +31,7 @@ const useFormSubmit = () =>{
                     switch(method){
                     case "GET" :
                         response = await fetch(url)
+                        redirection(response.redirected)
                         status = response.status
                         break
                     case "POST" :
@@ -30,8 +39,9 @@ const useFormSubmit = () =>{
                             const formData = new FormData()
                             formData.append("formData",JSON.stringify(data))
                             config.body = formData
-                            response = await fetch(url,config) 
-                            console.log(await response.text())
+                            response = await fetch(url,config)
+                            redirection(response.redirected)
+                            console.log(response.text())
                             status = response.status
                         }         
                         break

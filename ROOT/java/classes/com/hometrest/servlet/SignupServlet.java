@@ -19,7 +19,7 @@ public class SignupServlet extends HttpServlet{
     throws ServletException, IOException{
 
      
-    resp.setHeader("Access-Control-Allow-Origin", "*");
+    resp.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
 
     resp.setContentType("text/html");
 

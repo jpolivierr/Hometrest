@@ -14,8 +14,6 @@ public class JsonHttpResponse {
 
     public static void send(ServletResponse response, int status, String message, Object body){
 
-        
-
         var sendResponse = (HttpServletResponse) response;
         sendResponse.setContentType("application/json");
 
@@ -31,7 +29,7 @@ public class JsonHttpResponse {
         try {
 
             sendResponse.setStatus(status);
-            
+
             PrintWriter out = response.getWriter();
 
             out.print(Json);
