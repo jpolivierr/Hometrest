@@ -1,6 +1,8 @@
 package com.hometrest.handlers;
 
-import java.io.*; 
+import java.io.*;
+import java.util.HashMap;
+
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -9,26 +11,27 @@ import com.google.gson.GsonBuilder;
 
 public class JsonHttpResponse {
 
-    public static int status;
-    public static String message;
-    public static Object body;
 
     public static void send(ServletResponse response, int status, String message, Object body){
 
         
+
         var sendResponse = (HttpServletResponse) response;
         sendResponse.setContentType("application/json");
-        
-        JsonHttpResponse.status = status;
-        JsonHttpResponse.message = message;
-        JsonHttpResponse.body = body;
+
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("status", status);
+        result.put("message", message);
+        result.put("body", body);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        String Json = gson.toJson(JsonHttpResponse.class);
+        String Json = gson.toJson(result);
 
         try {
+
             sendResponse.setStatus(status);
+            
             PrintWriter out = response.getWriter();
 
             out.print(Json);

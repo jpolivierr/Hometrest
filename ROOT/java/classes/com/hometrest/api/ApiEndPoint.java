@@ -15,25 +15,32 @@ import jakarta.servlet.http.HttpSession;
 @MultipartConfig
 public class ApiEndPoint extends HttpServlet{
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
     throws ServletException, IOException{
 
-    resp.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Origin", "*");
 
-    resp.setContentType("text/html");
+    response.setContentType("text/html");
 
-    HttpSession session = req.getSession(false);
+    HttpSession session = request.getSession(false);
 
-    if(session.getAttribute("user_authenticate") == null){
+    PrintWriter out = response.getWriter();
+    
+        if(session == null){
 
-        resp.sendRedirect("/login");
-
-    }
+            HttpSession newSession = request.getSession(true);
+            newSession.setMaxInactiveInterval(60);
+            
+              out.println("created a session");
+        }else{
+           
+            out.println("session already exsit");
+        }
 
     
     // resp.setStatus(200);
     
-    PrintWriter printWriter = resp.getWriter();
+    PrintWriter printWriter = response.getWriter();
     printWriter.print("<html>");
     printWriter.print("<body>");
     printWriter.print("<h1>API Page</h1>");

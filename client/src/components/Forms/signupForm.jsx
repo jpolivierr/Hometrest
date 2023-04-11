@@ -84,14 +84,13 @@ const Signup = () =>{
                       label="Submit"
                       Class=" button main-btn"
                       type="submit"
-                      href="#"
                       loadingEffect={<Ring isShowing = {isLoading} />}
                   />
     })
 
     const {getForm, formResponse, loading} = useForm(formSetting)
 
-    console.log(loading)
+    console.log(formResponse)
 
     useEffect(()=>{
 

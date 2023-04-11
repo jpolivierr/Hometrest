@@ -3,6 +3,8 @@ package com.hometrest.SessionManagement;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+import com.hometrest.handlers.JsonHttpResponse;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -30,12 +32,14 @@ public class SessionManagement {
 
     }
 
-    public static boolean validateSessionId(HttpServletRequest request){
+    public static boolean validateSessionId(HttpServletRequest request,HttpServletResponse response){
 
 
         boolean result = false;
 
         HttpSession session = request.getSession(false);
+
+    //    JsonHttpResponse.send(response, 200, session.getId(), null);
 
         if(session != null){
 
@@ -44,7 +48,9 @@ public class SessionManagement {
             var sessionCookie = getCookies(request, "JSESSIONID");
 
             if(sessionCookie == null){
+
                 return result;
+
             }
 
             if(currentSessionId.equals(sessionCookie)){
@@ -85,7 +91,9 @@ public class SessionManagement {
     public static HttpSession create(HttpServletRequest request, HttpServletResponse response){
 
         // Create a session object if it is already not  created.
-         HttpSession session = request.getSession(true);
+         HttpSession session = request.getSession();
+
+
 
          if(session.isNew()){
 
@@ -102,15 +110,7 @@ public class SessionManagement {
             session.setAttribute(SESSION_START_TIME, sessionCreationdateFormat);
             session.setAttribute(SESSION_LAST_ACCESS, lastAccessTimeFormat);
 
-            Cookie sessionCookie = new Cookie("SESSIONID", session.getId());
-
-            sessionCookie.setSecure(true);
-
-            sessionCookie.setHttpOnly(true);
-
-            sessionCookie.setMaxAge(3600);
-        
-            response.addCookie(sessionCookie);
+            JsonHttpResponse.send(response, 200, "created a session", null);
 
          }
 

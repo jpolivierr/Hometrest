@@ -15,7 +15,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 
 
@@ -23,10 +22,11 @@ import jakarta.servlet.http.HttpSession;
 @MultipartConfig
 public class LoginServlet extends HttpServlet{
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     throws ServletException, IOException{
 
-        String clientResponse = req.getParameter("formData");
+
+        String clientResponse = request.getParameter("formData");
 
         Gson gson = new Gson();
 
@@ -42,39 +42,22 @@ public class LoginServlet extends HttpServlet{
 
             ValidateUser validateUser = new ValidateUser();
 
-            var userIsAuthenticate = validateUser.init(resp, connection, userInput);
+            var userIsAuthenticate = validateUser.init(response, connection, userInput);
 
             if(userIsAuthenticate){
 
                 System.out.println("user authenticated...");
 
-                var newSession = SessionManagement.create(req, resp);
+                var newSession = SessionManagement.create(request, response);
                 newSession.setAttribute("email", userInput.getEmail()); 
 
-                JsonHttpResponse.send(resp, 200,"user authenticated", result);
+                JsonHttpResponse.send(response, 200,"user authenticated", result);
             }
 
         }else{
-            JsonHttpResponse.send(resp, 409,"aerror", result);
+            JsonHttpResponse.send(response, 409,"Error", result);
         }
 
-
-    }
-
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
-    throws ServletException, IOException{
-
-    resp.setHeader("Access-Control-Allow-Origin", "*"); 
-
-    HttpSession session = req.getSession(false);
-    
-    session.setAttribute("user_authenticate", "true");
-    var isAuth = session.getAttribute("user_authenticate");
-
-    if(isAuth != null){
- 
-        JsonHttpResponse.send(resp, 200, "success", null);
-    }
 
     }
 

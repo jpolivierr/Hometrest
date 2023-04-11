@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @MultipartConfig
 public class SignupApi extends HttpServlet {
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+    protected void doPost(HttpServletRequest req, HttpServletResponse response) 
     throws ServletException, IOException{
 
         String clientResponse = req.getParameter("formData");
@@ -35,9 +35,9 @@ public class SignupApi extends HttpServlet {
             var dbConnect = DbConnect.getDbConnect();
             var connection = dbConnect.connect();
             var createUser = new CreateUser();
-            createUser.init(resp, connection, userInput);
+            createUser.init(response, connection, userInput);
         }else{
-            JsonHttpResponse.send(resp, 409,"Signup error", result);
+            JsonHttpResponse.send(response, 409,"Signup error", result);
         }
 
         

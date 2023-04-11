@@ -15,7 +15,8 @@ const useFormSubmit = () =>{
         let status
 
         const config = {
-            method: method,
+            credentials: 'include',
+            method: method
         }
         
         try {
@@ -29,7 +30,8 @@ const useFormSubmit = () =>{
                             const formData = new FormData()
                             formData.append("formData",JSON.stringify(data))
                             config.body = formData
-                            response = await fetch(url,config)         
+                            response = await fetch(url,config) 
+                            console.log(await response.text())
                             status = response.status
                         }         
                         break
