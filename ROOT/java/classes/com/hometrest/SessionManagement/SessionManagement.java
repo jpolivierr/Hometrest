@@ -3,7 +3,7 @@ package com.hometrest.SessionManagement;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
-import com.hometrest.handlers.JsonHttpResponse;
+import com.hometrest.JsonResponse.JsonHttpResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

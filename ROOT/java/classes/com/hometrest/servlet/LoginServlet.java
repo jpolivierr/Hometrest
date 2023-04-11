@@ -3,11 +3,11 @@ package com.hometrest.servlet;
 import java.io.IOException;
 
 import com.google.gson.Gson;
+import com.hometrest.JsonResponse.JsonHttpResponse;
 import com.hometrest.SessionManagement.SessionManagement;
 import com.hometrest.database.DbConnect;
 import com.hometrest.database.ValidateUser;
 import com.hometrest.formSubmissions.LoginForm;
-import com.hometrest.handlers.JsonHttpResponse;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;

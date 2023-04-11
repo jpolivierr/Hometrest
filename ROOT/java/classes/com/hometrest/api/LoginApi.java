@@ -4,10 +4,10 @@ import java.io.IOException;
 // import java.io.PrintWriter;
 
 import com.google.gson.Gson;
+import com.hometrest.JsonResponse.JsonHttpResponse;
 import com.hometrest.database.DbConnect;
 import com.hometrest.database.ValidateUser;
 import com.hometrest.formSubmissions.LoginForm;
-import com.hometrest.handlers.JsonHttpResponse;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;

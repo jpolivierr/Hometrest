@@ -1,4 +1,4 @@
-package com.hometrest.handlers;
+package com.hometrest.JsonResponse;
 
 import java.io.*;
 import java.util.HashMap;

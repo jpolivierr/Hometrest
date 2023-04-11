@@ -4,12 +4,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import com.hometrest.handlers.JsonHttpResponse;
-
 import jakarta.servlet.ServletResponse;
 
 import java.sql.CallableStatement;
 
+import com.hometrest.JsonResponse.JsonHttpResponse;
 import com.hometrest.formSubmissions.SignupForm;
 
 public class CreateUser extends DbMethods<String>  {

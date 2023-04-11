@@ -6,8 +6,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+import com.hometrest.JsonResponse.JsonHttpResponse;
 import com.hometrest.SessionManagement.SessionManagement;
-import com.hometrest.handlers.JsonHttpResponse;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
