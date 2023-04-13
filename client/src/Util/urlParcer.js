@@ -55,10 +55,29 @@ export const updateParam = (paramObj) =>{
 
         const search_params = url.searchParams
 
-
+          console.log(paramObj)
         for( const key in paramObj){
+
+            
+
+                // if(typeof paramObj[key] === "object" && Object.keys(paramObj[key]).length > 0 ){
+
+                //     for( const key2 in paramObj[key]){
+                //        console.log(key2, paramObj[key][key2])
+                //        if(paramObj[key][key2]){
+                //         search_params.set(key2,paramObj[key][key2])
+                //        }
+                //     }
+
+                // }else 
+
                 
-                search_params.set(key,paramObj[key])
+                
+                if(paramObj[key] !== "") {
+                    console.log(key,paramObj[key])
+                     search_params.set(key,paramObj[key])
+                }   
+                
         }
 
         url.search = search_params.toString()

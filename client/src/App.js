@@ -7,9 +7,6 @@ import Listings from './Pages/listings';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import TopNav from './components/Navigaion/topNav';
 
-import { useDispatch, useSelector } from "react-redux"
-import { bindActionCreators } from "redux"
-import {getUserAction} from "./_state/actions"
 import { useEffect } from 'react';
 import useReduxMng from './hooks/useReduxMng';
 
@@ -18,7 +15,9 @@ function App() {
   const {getUser, activeUser} = useReduxMng()
 
   useEffect(()=>{
+
     getUser()
+    
   },[])
 
   return (

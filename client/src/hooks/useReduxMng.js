@@ -1,16 +1,22 @@
 
 import { useDispatch, useSelector } from "react-redux"
 import { bindActionCreators } from "redux"
-import {getUserAction} from "../_state/actions/"
+import {getUserAction, updateSearch} from "../_state/actions/"
 
 const useReduxMng = () =>{
 
     const activeUser = useSelector((state)=> {return state.activeUser})
+    const searchReducer = useSelector((state)=> state.searchReducer)
+
     const {getUser} = bindActionCreators(getUserAction, useDispatch())
+    const {setLocation,setType} = bindActionCreators(updateSearch, useDispatch())
 
     return {
         activeUser,
-        getUser
+        searchReducer,
+        getUser,
+        setLocation,
+        setType
     }
 
 }

@@ -40,8 +40,7 @@ const useFormSubmit = () =>{
                             formData.append("formData",JSON.stringify(data))
                             config.body = formData
                             response = await fetch(url,config)
-                            redirection(response.redirected)
-                            console.log(response.text())
+                            redirection(response.redirected)             
                             status = response.status
                         }         
                         break

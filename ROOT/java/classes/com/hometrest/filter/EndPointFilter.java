@@ -30,9 +30,8 @@ public class EndPointFilter implements Filter {
        
        var httpRequest = (HttpServletRequest) request;
        var httpResponse = (HttpServletResponse) response;
-       httpResponse.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
-      //  httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
-      //  var device = new RequestInfoFilter(httpRequest);
+       httpResponse.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+       httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
 
       var sessionExist = SessionManagement.validateSessionId(httpRequest,httpResponse);
 
@@ -43,7 +42,7 @@ public class EndPointFilter implements Filter {
       }else{
 
          JsonHttpResponse.send(response, 200,"session found", null);
-         httpResponse.sendRedirect("http://localhost:3001");
+         // httpResponse.sendRedirect("http://localhost:3001");
 
       }
 

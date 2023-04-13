@@ -1,4 +1,5 @@
 import {useEffect, useRef, useState } from "react";
+import fieldView from "../Util/fieldView";
 
 const MultiSelect = (props) =>{
 
@@ -51,35 +52,39 @@ const MultiSelect = (props) =>{
 
            let newValue 
 
-           let inputHolder = [...inputValue]
+           let inputValueClone = [...inputValue]
+
+           let newFieldView
            
-           if(!inputHolder.includes(value)){
+        //    if(!inputValueClone.includes(value)){
 
-                 inputHolder.push(value)
+        //          inputValueClone.push(value)
 
-           }else{
+        //    }else{
             
-             const index = inputHolder.indexOf(value)
-             inputHolder.splice(index, 1)
+        //      const index = inputValueClone.indexOf(value)
+        //      inputValueClone.splice(index, 1)
 
-           }
+        //    }
 
-           console.log(inputHolder)
-            funcArray.forEach((func)=>{
 
-                newValue = func(inputHolder)
+            funcArray.forEach((customFunction)=>{
+
+                newValue = customFunction(inputValueClone)
 
             })
 
-            setUserView(newValue)
-            setInputValue(inputHolder)
-            fieldToUpdate && fieldToUpdate(inputHolder)
-            updateFormField && updateFormField(name,inputHolder)
+            newFieldView = fieldView(name,inputValueClone)
+            setUserView(newFieldView)
+            setInputValue(inputValueClone)
+            fieldToUpdate && fieldToUpdate(inputValueClone)
+            updateFormField && updateFormField(name,inputValueClone)
 
             listToggleWindow()
 
         }else{
 
+          
             handleInput(value)
 
             listToggleWindow()
@@ -89,16 +94,25 @@ const MultiSelect = (props) =>{
 
     const handleInput = (value) =>{
 
-        const holder = [...inputValue]
+        let inputValueClone = [...inputValue]
 
-        if(!holder.includes(value)){
-            holder.push(value)
+        if(!inputValueClone.includes(value)){
+
+            inputValueClone.push(value)
+
+        }else{
+
+            inputValueClone = inputValueClone.filter((input) => input != value)
+
         }
 
-        setUserView(holder)
-        setInputValue(holder)
-        fieldToUpdate && fieldToUpdate(holder)
-        updateFormField && updateFormField(name,holder)
+
+        const newFieldView = fieldView(name,inputValueClone)
+        // console.log(newFieldView)
+        setUserView(!newFieldView ? inputValueClone : newFieldView)
+        setInputValue(inputValueClone)
+        fieldToUpdate && fieldToUpdate(inputValueClone)
+        updateFormField && updateFormField(name,inputValueClone)
 
     }
 
