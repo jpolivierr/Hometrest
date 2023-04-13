@@ -5,6 +5,7 @@ import useForm from "../../lib/Forms/useForm"
 import MainButton from "../buton/MainButton"
 import Ring from "../../lib/loadingEffect/loading/ring"
 import getCookie from "../../Util/getCookie"
+import URL from "../../Config/urls"
 
 
 
@@ -14,7 +15,7 @@ const LoginForm = () =>{
 
     const [formSetting] = useState({
         config: {
-            url: "http://localhost:8080/secure/login",
+            url: URL.LOGIN,
             method: "POST",
             buttonLabel: "Submit"
         },

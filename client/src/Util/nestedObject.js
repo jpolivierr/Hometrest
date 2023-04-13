@@ -1,28 +1,21 @@
 
-const nestedObject = (obj, ...args) =>{
-
-    let objValue = obj
-    let count = 0
-
-    while(count < args.length ){ 
-
-        if(!objValue[args[count]]){
-            return false
+function getValueByKey(obj, key, parent = null) {
+    let foundValue = false;
+    const searchObj = parent ? obj[parent] : obj;
+  
+    function searchForObject(currentObj) {
+      for (let prop in currentObj) {
+        if (prop === key) {
+          foundValue = currentObj[prop];
+        } else if (typeof currentObj[prop] === "object" && currentObj[prop] !== null) {
+          searchForObject(currentObj[prop]);
         }
-        
-        if(count === args.length - 1){
-            return objValue[args[count]]
-        }
-
-        if(!objValue[args[count]]){
-            return false
-        }
-        
-        objValue = objValue[args[count]]
-        
-        count ++
+      }
     }
+  
+    searchForObject(searchObj);
+    return foundValue;
+  }
+  
 
-}
-
-export default nestedObject
+export default getValueByKey

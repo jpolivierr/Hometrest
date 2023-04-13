@@ -3,20 +3,23 @@ import useForm from "../../lib/Forms/useForm"
 import MainButton from "../buton/MainButton"
 import useReduxMng from "../../hooks/useReduxMng"
 import { getParams, updateParam } from "../../Util/urlParcer"
+import URL from "../../Config/urls"
+
 
 const SearchForm = () =>{
 
     const {searchReducer, setType} = useReduxMng();
 
     useEffect(()=>{
-        console.log(searchReducer)
-        updateParam(searchReducer)
+
+        updateParam(searchReducer, true, "search")
+
     },[searchReducer])
     
 
     const [formSetting] = useState({
         config: {
-            url: "http://localhost:8080/search",
+            url: URL.SEARCH,
             method: "POST",
             buttonLabel: "Submit"
         },

@@ -18,7 +18,7 @@ public class MakeRequest {
     private static final HttpClient client = HttpClient.newHttpClient();
     private static Object jsonResponse = null;
 
-    public static Object get(String url) {
+    public static Object post(String url, String data) {
 
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -26,7 +26,7 @@ public class MakeRequest {
                         .header("accept", "application/json")
                         .header("X-RapidAPI-Key", REALTOR_API_KEY )
                         .header("X-RapidAPI-Host", "realty-in-us.p.rapidapi.com")
-                        .method("GET", HttpRequest.BodyPublishers.noBody())
+                        .method("POST", HttpRequest.BodyPublishers.ofString(data))
                         .build();
 
         
@@ -48,9 +48,9 @@ public class MakeRequest {
     private static Object parseJsonResponse(String responseBody) {
         
         try {
-            // assuming the response body is a JSON object
+           
             Object json = gson.fromJson(responseBody, Object.class);
-            // String jsonString = gson.toJson(json);
+            System.out.println(gson.toJson(json));
             return json;
         } catch (Exception e) {
             throw new RuntimeException("Failed to parse JSON response", e);
@@ -59,6 +59,7 @@ public class MakeRequest {
 
      private static Void handleException(Throwable t) {
         System.err.println("Request failed: " + t.getMessage());
+        jsonResponse = "ERROR: " + t.getMessage();
         t.printStackTrace();
         return null;
     }

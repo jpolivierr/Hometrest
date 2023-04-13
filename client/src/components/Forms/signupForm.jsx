@@ -5,6 +5,7 @@ import { emailValidation } from "../../lib/Forms/Util/emailValidation"
 import useForm from "../../lib/Forms/useForm"
 import MainButton from "../buton/MainButton"
 import Ring from "../../lib/loadingEffect/loading/ring"
+import URL from "../../Config/urls"
 
 
 
@@ -14,7 +15,7 @@ const Signup = () =>{
 
     const [formSetting] = useState({
         config: {
-            url: "http://localhost:8080/secure/signup",
+            url: URL.SIGNUP,
             method: "POST",
             buttonLabel: "Submit"
         },

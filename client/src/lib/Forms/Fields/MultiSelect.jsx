@@ -83,7 +83,6 @@ const MultiSelect = (props) =>{
             listToggleWindow()
 
         }else{
-
           
             handleInput(value)
 

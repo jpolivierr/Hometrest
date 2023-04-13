@@ -17,8 +17,11 @@ public class Main {
         //  new EndPointFilter();
          new SearchServlet();
         // new ApiEndPoint();
-        var rs = MakeRequest.get("https://jsonplaceholder.typicode.com/posts/1");
-        System.out.println(rs);
+        // String url = "https://realty-in-us.p.rapidapi.com/properties/v3/list";
+        // String data = "{\"limit\": 3,\"postal_code\":\"90004\"}";
+        
+        // var rs = MakeRequest.post(url, data);
+        // System.out.println(rs);
     
         
     }

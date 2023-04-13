@@ -23,14 +23,18 @@ public class SearchServlet extends HttpServlet{
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
         response.setHeader("Access-Control-Allow-Credentials", "true");
 
-
-
         String clientResponse = request.getParameter("formData");
+        Gson gson = new Gson();
+        Object json = gson.fromJson(clientResponse,Object.class);
 
-        
 
-        var rs = MakeRequest.get("https://jsonplaceholder.typicode.com/posts/1");
-        JsonHttpResponse.send(response, 200, "here", rs);
+        String url = "https://realty-in-us.p.rapidapi.com/properties/v3/list";
+
+        String data = "{\"limit\": 3,\"postal_code\":\"90004\"}";
+
+        var rs = MakeRequest.post(url, clientResponse);
+
+        JsonHttpResponse.send(response, 200, "check", rs);
 
     }
 

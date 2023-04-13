@@ -47,7 +47,7 @@ export const getParams = () =>{
     
 }
 
-export const updateParam = (paramObj) =>{
+export const updateParam = (paramObj,toJson, paramKey) =>{
     
     if(typeof paramObj === "object" && Object.keys(paramObj).length > 0){
         
@@ -55,30 +55,37 @@ export const updateParam = (paramObj) =>{
 
         const search_params = url.searchParams
 
-          console.log(paramObj)
-        for( const key in paramObj){
+        if(!toJson){
 
-            
+                    for( const key in paramObj){
 
-                // if(typeof paramObj[key] === "object" && Object.keys(paramObj[key]).length > 0 ){
+                    const keyValue = paramObj[key]
 
-                //     for( const key2 in paramObj[key]){
-                //        console.log(key2, paramObj[key][key2])
-                //        if(paramObj[key][key2]){
-                //         search_params.set(key2,paramObj[key][key2])
-                //        }
-                //     }
+                    
+                        if(
+                            typeof keyValue === "object" && 
+                            Object.keys(keyValue).length > 0)
+                            {
 
-                // }else 
+                                const myArr = Object.entries(keyValue)
 
-                
-                
-                if(paramObj[key] !== "") {
-                    console.log(key,paramObj[key])
-                     search_params.set(key,paramObj[key])
-                }   
-                
-        }
+                                search_params.set(key,myArr + "&")
+
+                        }else if(keyValue !== "") {
+
+                            search_params.set(key,keyValue)
+
+                        }   
+                        
+                }
+
+          }else{
+
+              search_params.set(paramKey, JSON.stringify(paramObj) )
+
+          }
+
+      
 
         url.search = search_params.toString()
 
