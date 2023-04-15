@@ -5,7 +5,6 @@ import useReduxMng from "../hooks/useReduxMng"
 import { getParams } from "../Util/urlParcer"
 import URL from "../Config/urls"
 import findPropertyValue from "../Util/nestedObject"
-import { errors } from "./object"
 
 
 const Listings = (props) =>{
@@ -14,19 +13,17 @@ const Listings = (props) =>{
 
     const {makeRequest, formResponse, loading } = useRequest()
 
-    const{searchReducer} = useReduxMng()
+    const{searchReducer, getPropertyList, propertiesReducer} = useReduxMng()
 
     useEffect( ()=>{
 
       // console.log(searchReducer)
-          if(getParams().listing_options){
+          if(getParams().search){
 
-          const listingOptions = getParams().listing_options
+          const listingOptions = getParams().search
           const listingObject = JSON.parse(listingOptions)
 
-          console.log(findPropertyValue(errors,"time_thrown"))
-
-          //  makeRequest("POST", URL.SEARCH, listingObject)
+            // makeRequest("POST", URL.SEARCH, listingObject)
 
         }
       
@@ -35,15 +32,21 @@ const Listings = (props) =>{
 
     useEffect(()=>{
 
-      
       if(formResponse && formResponse.status === 200){
-          console.log(formResponse)
+          
+         const homeSearch = findPropertyValue(formResponse,"home_search")
+
+         if(homeSearch.total && homeSearch.total > 0){
+
+            getPropertyList(homeSearch)
+
+         }
+
       }
 
     },[formResponse])
 
    
-
 
     return(
         <div id={id} className={Class}>

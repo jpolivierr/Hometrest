@@ -54,6 +54,7 @@ export const setStatus = (data) =>{
 }
 
 export const setZipcode = (data) =>{
+
     return{
         type: ACTION_TYPE.ZIP,
         payload: data

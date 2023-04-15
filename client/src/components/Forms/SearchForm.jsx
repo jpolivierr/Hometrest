@@ -8,13 +8,40 @@ import URL from "../../Config/urls"
 
 const SearchForm = () =>{
 
-    const {searchReducer, setType} = useReduxMng();
+    const {
+             searchReducer,
+             setType,
+             setLocation,
+             setCity,
+             setZipcode,
+             setStatus
+            
+            } = useReduxMng();
 
     useEffect(()=>{
 
         updateParam(searchReducer, true, "search")
 
     },[searchReducer])
+
+    const updateCityorZip = (value) =>{
+
+        const zipPattern = /^\d{5}(?:[-\s]\d{4})?$/
+        const cityPattern = /^[a-zA-Z\s'\-,.]+$/
+
+        if(zipPattern.test(value)){
+            setCity("")
+            setZipcode(value)
+        }else if(cityPattern.test(value)){
+            setZipcode("")
+            setCity(value)
+        }else{
+            setZipcode("")
+            setCity("")
+
+        }
+
+    }
     
 
     const [formSetting] = useState({
@@ -32,29 +59,34 @@ const SearchForm = () =>{
                 type : "input",
                 label : "Location",
                 name : "location",
+                placeHolder : "Enter a city or zipcode",
                 required : true,
+                // fieldToUpdate : setLocation,
+                onOutFocus : updateCityorZip
               },
               {
                 type : "multi-select",
                 label : "Property",
                 placeHolder : "Search Properties",
+                onChangefunc : [],
                 name : "property",
                 fieldToUpdate : setType,
                 icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
                 list : {
                           info : {
                                     class: "",
-                                    title: "Search Property"
+                                    title: "Search Property",
+                                    listEvent : ()=>{console.log("clicked..")}
                           },
                           lists : [
                                      {
                                         Class: "",
-                                        name: "Single-Family",
-                                        el: "Single Family"
+                                        name: "Single_Family",
+                                        el: "Single Family",
                                      },
                                      {
                                         Class: "",
-                                        name: "Multi-Family",
+                                        name: "Multi_Family",
                                         el: "Multi-Family"
                                      },
                                      {
@@ -68,6 +100,73 @@ const SearchForm = () =>{
                 onSubmitFunc: [],
                 // listPreventExit: true
               },
+              {
+                type : "multi-select",
+                label : "Property Type",
+                name : "property_type",
+                fieldToUpdate : setStatus,
+                icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
+                list : {
+                          info : {
+                                    class: "",
+                                    title: "Search Property"
+                          },
+                          lists : [
+                                     {
+                                        Class: "",
+                                        name: "for_sale",
+                                        el: "For Sale"
+                                     },
+                                     {
+                                        Class: "",
+                                        name: "for_rent",
+                                        el: "Rent"
+                                     },
+                                     {
+                                        Class: "",
+                                        name: "sold",
+                                        el: "Sold"
+                                     }
+                          ]
+                },
+                // defaultValue : location,
+                onSubmitFunc: [],
+                // listPreventExit: true
+              },
+              {
+                type : "multi-select",
+                label : "Pricing",
+                name : "price",
+                fieldToUpdate : setStatus,
+                icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
+                list : {
+                          info : {
+                                    class: "",
+                                    title: "Pricing"
+                          },
+                          lists : [
+                                     {
+                                        Class: "",
+                                        name: "for_sale",
+                                        el: "For Sale"
+                                     },
+                                     {
+                                        Class: "",
+                                        name: "for_rent",
+                                        el: "Rent"
+                                     },
+                                     {
+                                        Class: "",
+                                        name: "sold",
+                                        el: "Sold"
+                                     }
+                          ]
+                },
+                // defaultValue : location,
+                onSubmitFunc: [],
+                // listPreventExit: true
+              },
+              
         ],
         button : <MainButton 
             label="Submit"
@@ -79,7 +178,8 @@ const SearchForm = () =>{
 
     const {getForm, formResponse, loading} = useForm(formSetting)
 
-    //   console.log(formResponse)
+//    console.log(formResponse)
+   console.log(searchReducer)
 
     return(
         <div className="margin-top-2x">

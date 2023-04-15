@@ -192,6 +192,7 @@ const useForm = (formSettings) =>{
                                        placeHolder={field.placeHolder}
                                        name = {field.name}
                                        onChangefunc = {field.onChangefunc}
+                                       onOutFocus = {field.onOutFocus}
                                        fieldToUpdate = {field.fieldToUpdate}
                                        formStatus={submitStatus}
                                        required = {field.required}
@@ -212,6 +213,7 @@ const useForm = (formSettings) =>{
                                        placeHolder={field.placeHolder}
                                        name = {field.name}
                                        onChangefunc = {field.onChangefunc}
+                                       onOutFocus = {field.onOutFocus}
                                        fieldToUpdate = {field.fieldToUpdate}
                                        formStatus={submitStatus}
                                        required = {field.required}
@@ -268,7 +270,7 @@ const useForm = (formSettings) =>{
                               />
                         )
 
-                        case fieldTypes.LIST_OPTION :
+                        case fieldTypes.STATIC_SELECTION :
                            return (
                               <ListOption 
                                  key={index}
@@ -286,6 +288,28 @@ const useForm = (formSettings) =>{
                                  updateFormField = {updateFormField}
                                  updateError = {updateError}
                                  defaultValue = {field.defaultValue}
+                              />
+                        )
+
+                        case fieldTypes.COMP :
+                           return (
+                              <MultiSelect 
+                                 key={index}
+                                 label={field.label}
+                                 placeHolder={field.placeHolder}
+                                 name = {field.name}
+                                 onChangefunc = {field.onChangefunc}
+                                 fieldToUpdate = {field.fieldToUpdate}
+                                 formStatus={submitStatus}
+                                 required = {field.required}
+                                 formError = {formError}
+                                 setFormError = {setFormError}
+                                 icon = {field.icon}
+                                 list = {field.list}
+                                 updateFormField = {updateFormField}
+                                 updateError = {updateError}
+                                 defaultValue = {field.defaultValue}
+                                 listPreventExit = {field.listPreventExit}
                               />
                         )
 

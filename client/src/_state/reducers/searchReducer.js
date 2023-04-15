@@ -2,11 +2,7 @@ import { ACTION_TYPE } from "../actions/searchAction"
 
 const init = {
     limit: 100,
-    location : "",
-    city : "",
     postal_code : "20634",
-    status: [],
-    type : [],
     list_price: {
         min : 0,
         max : 0
@@ -26,11 +22,19 @@ const searchReducer = (state = init, action) =>{
             getLimit.limit = action.payload
             return state = getLimit
         case ACTION_TYPE.CITY :
-            const getCity =  JSON.parse(JSON.stringify(state))
-            getCity.city = action.payload
-            return state = getCity
+            const stateClone =  JSON.parse(JSON.stringify(state))
+            if(!action.payload && ("city" in stateClone)){
+                delete stateClone.city
+                return state = stateClone
+            }
+            stateClone.city = action.payload
+            return state = stateClone
         case ACTION_TYPE.ZIP :
             const getZip =  JSON.parse(JSON.stringify(state))
+            if(!action.payload && ("postal_code" in getZip)){
+                delete getZip.postal_code
+                return state = getZip
+            }
             getZip.postal_code = action.payload
             return state = getZip
         case ACTION_TYPE.LOCATION :
@@ -51,10 +55,18 @@ const searchReducer = (state = init, action) =>{
             return state = getBaths 
         case ACTION_TYPE.HOMETYPE :
             const getHomeType =  JSON.parse(JSON.stringify(state))
+            if(action.payload.length <= 0 && ("type" in getHomeType)){
+                delete getHomeType.type
+                return state = getHomeType
+            }
             getHomeType.type = action.payload
             return state = getHomeType 
         case ACTION_TYPE.SEARCH_TYPE :
             const getSearchType =  JSON.parse(JSON.stringify(state))
+            if(action.payload.length <= 0 && ("status" in getSearchType)){
+                delete getSearchType.status
+                return state = getSearchType
+            }
             getSearchType.status = action.payload
             return state = getSearchType
         default :

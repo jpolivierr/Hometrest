@@ -13,7 +13,8 @@ const Inputs= (props) =>{
            formError,
            formStatus,
            defaultValue,
-           type
+           type,
+           onOutFocus
             } = props
 
 
@@ -40,8 +41,11 @@ const Inputs= (props) =>{
 
     }
 
-    const handleBlur = () =>{
-      
+    const handleBlur = (e) =>{
+
+        const value = e.target.value
+
+        onOutFocus && onOutFocus(value)
     }
     
      return(
@@ -55,7 +59,7 @@ const Inputs= (props) =>{
                      name={props.name}
                      value={inputValue}
                      onChange={e => handleInput(e)}
-                     onBlur={()=>{handleBlur()}}
+                     onBlur={(e)=>{handleBlur(e)}}
                      style={props.icon && {paddingLeft: "2.3rem"}}
                      />
                      {props.icon && props.icon}

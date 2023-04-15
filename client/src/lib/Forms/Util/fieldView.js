@@ -1,3 +1,4 @@
+import { capitalizeFirstLetter } from "./capitalizeFirstLetter";
 
 const fieldView = (label, arr) =>{
 
@@ -7,7 +8,7 @@ const fieldView = (label, arr) =>{
         
         const lenght = arr.length;
         if(lenght > 1){
-           result = `${label} (${lenght})`
+           result = `${capitalizeFirstLetter(label)} (${lenght})`
         }else{
             result = ""
         }
