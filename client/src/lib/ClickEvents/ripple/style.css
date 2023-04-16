@@ -9,11 +9,6 @@
     transform: scale(0.98) !important;
   }
 
-  .scl-btn:active{
-    /* transform: scale(0.8) !important; */
-    background: rgb(129, 7, 52) !important;
-  }
-
   .av-ripple::before{
     content: "";
       position: absolute;

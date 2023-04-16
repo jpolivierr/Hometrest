@@ -6,7 +6,7 @@ FORM
 .avalon{
     padding: 2rem;
     height: max-content;
-    width: 450px;
+    width: 500px;
     border-radius: 15px;
     background: white;
 }
@@ -23,8 +23,9 @@ LABEL AND HEADER
 .avalon label{
     display: block;
     margin-bottom: .5rem;
-    color: #293768;
+    color: #212c51;
     font-size: .9rem;
+    font-weight: 500;
 }
 
 /* ******************************************* 
@@ -55,12 +56,19 @@ FIELDS
     width: max-content;
 }
 
+.avalon fieldset i{
+    color: #566184cc;
+font-size: .8rem;
+}
+
 .avalon fieldset input{
     border-radius: 10px;
     outline: none;
     padding: .7rem 1rem;
-    border: 1px solid #70879f4a;
+    border: 1px solid #70879f78;
     width: 100%;
+    height: 48px;
+    background: #eaeaea24;
 }
 
 /* ******************************************* 
@@ -105,7 +113,19 @@ BUTTON
 *********************************************
 */
 .avalon button{
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
+    width: 100%;
+    height: 48px;
+    border-radius: 10px;
+}
+
+.avalon .button-container{
+            border-radius: 10px;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            height: 48px;
+            margin-top: 2rem;
 }
 /* .avalon button{
     background: #ff0965;

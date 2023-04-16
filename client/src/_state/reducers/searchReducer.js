@@ -1,8 +1,7 @@
 import { ACTION_TYPE } from "../actions/searchAction"
 
 const init = {
-    limit: 100,
-    postal_code : "20634",
+    limit: 20
 }
 
 const searchReducer = (state = init, action) =>{
@@ -13,7 +12,8 @@ const searchReducer = (state = init, action) =>{
             return state = getLimit
         case ACTION_TYPE.CITY :
             const stateClone =  JSON.parse(JSON.stringify(state))
-            if(!action.payload && ("city" in stateClone)){
+            console.log(action.payload)
+            if(!action.payload){
                 delete stateClone.city
                 return state = stateClone
             }
@@ -21,7 +21,8 @@ const searchReducer = (state = init, action) =>{
             return state = stateClone
         case ACTION_TYPE.ZIP :
             const getZip =  JSON.parse(JSON.stringify(state))
-            if(!action.payload && ("postal_code" in getZip)){
+            console.log(action.payload)
+            if(!action.payload){
                 delete getZip.postal_code
                 return state = getZip
             }

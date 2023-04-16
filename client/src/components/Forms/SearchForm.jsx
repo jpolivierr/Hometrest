@@ -4,6 +4,7 @@ import MainButton from "../buton/MainButton"
 import useReduxMng from "../../hooks/useReduxMng"
 import { getParams, updateParam } from "../../Util/urlParcer"
 import URL from "../../Config/urls"
+import Ring from "../../lib/loadingEffect/loading/ring"
 
 
 const SearchForm = () =>{
@@ -50,6 +51,7 @@ const SearchForm = () =>{
     const [formSetting] = useState({
         config: {
             url: URL.SEARCH,
+            data: true,
             method: "POST",
             buttonLabel: "Submit"
         },
@@ -61,20 +63,18 @@ const SearchForm = () =>{
             {
                 type : "input",
                 label : "Location",
-                name : "location",
-                placeHolder : "Enter a city or zipcode",
+                name : "city_zip",
                 required : true,
-                // fieldToUpdate : setLocation,
+                fieldToUpdate : updateCityorZip,
                 onOutFocus : updateCityorZip
               },
               {
-                type : "multi-select",
+                type : "static-selection",
                 label : "Property",
-                placeHolder : "Search Properties",
                 onChangefunc : [],
                 name : "property",
                 fieldToUpdate : setType,
-                icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
+                icon : <i className="fa-solid fa-angle-down"></i>,
                 list : {
                           info : {
                                     class: "",
@@ -104,11 +104,11 @@ const SearchForm = () =>{
                 // listPreventExit: true
               },
               {
-                type : "multi-select",
-                label : "Property Type",
+                type : "static-selection",
+                label : "Property type",
                 name : "property_type",
                 fieldToUpdate : setStatus,
-                icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
+                icon : <i className="fa-solid fa-angle-down"></i>,
                 list : {
                           info : {
                                     class: "",
@@ -137,16 +137,14 @@ const SearchForm = () =>{
                 // listPreventExit: true
               },
               {
-                type : "comp",
+                type : "static-component",
                 label : "Pricing",
                 name : "price",
-                placeHolder : "200.0k - 500.0k",
                 fieldToUpdate : setPrices,
-                icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
+                icon : <i className="fa-solid fa-angle-down"></i>,
                 custom : {
-                    label : "Price Options",
+                    label : "Price options",
                     payload : [
-                        10000,
                         20000,
                         30000,
                         40000,
@@ -169,12 +167,11 @@ const SearchForm = () =>{
                 // listPreventExit: true
               },
               {
-                type : "comp",
+                type : "static-component",
                 label : "Beds",
                 name : "beds",
-                placeHolder : "1 - 5",
                 fieldToUpdate : setBeds,
-                icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
+                icon : <i className="fa-solid fa-angle-down"></i>,
                 custom : {
                     label : "Bed option",
                     payload : [
@@ -197,12 +194,11 @@ const SearchForm = () =>{
                 // listPreventExit: true
               },
               {
-                type : "comp",
+                type : "static-component",
                 label : "Baths",
                 name : "baths",
-                placeHolder : "1 - 5",
                 fieldToUpdate : setBaths,
-                icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
+                icon : <i className="fa-solid fa-angle-down"></i>,
                 custom : {
                     label : "Bath option",
                     payload : [
@@ -226,18 +222,21 @@ const SearchForm = () =>{
               },
               
         ],
-        button : <MainButton 
-            label="Submit"
-            Class=" button main-btn"
-            type="submit"
-            loadingEffect={true}
-    />
+        button : {
+                component :<MainButton 
+                        label="Submit"
+                        Class=" button main-btn"
+                        type="submit"
+                        />,
+                 loadingEffect : <Ring isShowing={true}/>
+                }
+    
     })
 
     const {getForm, formResponse, loading} = useForm(formSetting)
 
-//    console.log(formResponse)
-    console.log(searchReducer)
+   console.log(formResponse)
+  console.log(searchReducer)
 
     return(
         <div className="margin-top-2x">

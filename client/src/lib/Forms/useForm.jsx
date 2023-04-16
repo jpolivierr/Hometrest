@@ -1,14 +1,15 @@
 import Inputs from "./Fields/Inputs";
 import Options from "./Fields/Options";
-import fieldTypes from "./VARS/fieldType";
 import MultiSelect from "./Fields/MultiSelect";
 import ListOption from "./Fields/ListOption";
 import Comp from "./Fields/comp";
+import StaticComp from "./Fields/staticComp";
 import { myFormFieds } from "./Config/getFields";
 import { capitalizeFirstLetter } from "./Util/capitalizeFirstLetter";
 import { matchPassword } from "./Util/matchPassword";
 import { validateFields } from "./Config/formValidation";
 import "./style/avalon.css"
+import useReduxMng from "../../hooks/useReduxMng";
 
 import useFormSubmit from "./Request/request";
 //Action
@@ -16,6 +17,18 @@ import { useEffect, useState } from "react";
 
 
 const useForm = (formSettings) =>{
+
+   const fieldTypes = {
+      INPUT: "input",
+      OPTIONS: "options",
+      MULTISELECT: "multi-select",
+      STATIC_SELECTION: "static-selection",
+      STATIC_COMPONENT : "static-component",
+      PWD :"password",
+      COMP : "comp"
+  }
+
+   const {searchReducer} = useReduxMng()
 
     const [settings] = useState(formSettings)
 
@@ -170,9 +183,11 @@ const useForm = (formSettings) =>{
                             console.log("Submit")
                            setLoading(true)
                            
-                           console.log(formFields);
-                           await makeRequest(config.method, config.url, formFields)
-                           // setLoading(false)
+                           
+                           const data = config.data ? searchReducer : formFields
+                           console.log(data);
+                           await makeRequest(config.method, config.url, data)
+                           setLoading(false)
                            
                            
                        }
@@ -314,6 +329,29 @@ const useForm = (formSettings) =>{
                               />
                         )
 
+                        case fieldTypes.STATIC_COMPONENT :
+                           return (
+                              <StaticComp
+                                 key={index}
+                                 label={field.label}
+                                 placeHolder={field.placeHolder}
+                                 name = {field.name}
+                                 onChangefunc = {field.onChangefunc}
+                                 fieldToUpdate = {field.fieldToUpdate}
+                                 formStatus={submitStatus}
+                                 required = {field.required}
+                                 formError = {formError}
+                                 setFormError = {setFormError}
+                                 icon = {field.icon}
+                                 list = {field.list}
+                                 updateFormField = {updateFormField}
+                                 updateError = {updateError}
+                                 defaultValue = {field.defaultValue}
+                                 listPreventExit = {field.listPreventExit}
+                                 custom = {field.custom}
+                              />
+                        )
+
                         default :
                               return null
                      }
@@ -344,7 +382,12 @@ const useForm = (formSettings) =>{
                    }
 
 
-                  {button ? button : 
+                  {button.component ? 
+                  <div className="button-container">
+                     {loading && button.loadingEffect && button.loadingEffect}
+                     {button.component}
+                  </div>
+                      : 
                               <button className="button main-btn" type="submit">
                                     {config.buttonLabel}
                            </button>}

@@ -68,7 +68,7 @@ class Format{
         str = str.replace("$", "").replace("k", "");
       
         // Convert the string to a number and multiply it by 1000
-        if(parseFloat(str) <= 100){
+        if(parseFloat(str) <= 10){
             return parseFloat(str)
         }
         return parseFloat(str) * 1000;

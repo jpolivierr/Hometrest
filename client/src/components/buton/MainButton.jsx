@@ -1,5 +1,5 @@
 
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useRipple from "../../lib/ClickEvents/ripple/ripple";
 import { useState } from "react";
 
@@ -13,6 +13,7 @@ const {target,
         type,
         loadingEffect
     } = props
+    
 const {rippleClass, rippleAnimation} = useRipple()
 
 const handleClick = (e) =>{

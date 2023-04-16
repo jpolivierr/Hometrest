@@ -24,13 +24,9 @@ public class SearchServlet extends HttpServlet{
         response.setHeader("Access-Control-Allow-Credentials", "true");
 
         String clientResponse = request.getParameter("formData");
-        Gson gson = new Gson();
-        Object json = gson.fromJson(clientResponse,Object.class);
 
 
         String url = "https://realty-in-us.p.rapidapi.com/properties/v3/list";
-
-        String data = "{\"limit\": 3,\"postal_code\":\"90004\"}";
 
         var rs = MakeRequest.post(url, clientResponse);
 
