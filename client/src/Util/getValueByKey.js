@@ -1,4 +1,4 @@
-export const nestedObj  = (obj, ...args) =>{
+export const nestedObj  = (obj, args, returnType = null) =>{
 
     let objValue = obj
     let count = 0
@@ -28,7 +28,7 @@ export const nestedObj  = (obj, ...args) =>{
         // if key does not exist in current object
         // exit loop
         if(!newValue){
-            return false
+            return returnType
         }
         
         if(count === args.length - 1){
