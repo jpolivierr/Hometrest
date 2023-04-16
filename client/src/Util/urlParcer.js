@@ -20,30 +20,46 @@ export const urlParcer = () =>{
 
 }
 
-export const getParams = () =>{
-
+export const getParams = (paramKey) =>{
+ 
     const search = window.location.search
+    
+    if(!search){
 
-    const paramValue = new URLSearchParams(search)
+        return null
 
-    const entries = paramValue.entries()
+    }else{
+            const paramValue = new URLSearchParams(search)
 
-
-    if(search && entries){
-
-         let paramObj = {}
-
-        for(const entry of entries) {
-            paramObj[entry[0]] = entry[1]
-          }
+            const entries = paramValue.entries()
 
 
-        return paramObj
+            if(search && entries){
+
+                let paramObj = {}
+
+                for(const entry of entries) {
+                    paramObj[entry[0]] = entry[1]
+                }
+                try {
+
+                    return JSON.parse(paramObj[paramKey])
+
+                } catch (error) {
+                    console.log(error)
+                    return null
+                }
+
+                 
+
+            
+            }else{
+                return null
+            }
+    }
+
 
     
-    }else{
-        return null
-    }
     
 }
 

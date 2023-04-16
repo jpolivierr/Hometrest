@@ -25,7 +25,6 @@ const StaticComp = (props) =>{
            custom
             } = props
 
-
     useEffect(()=>{
 
       if(defaultValue){
@@ -45,7 +44,6 @@ const StaticComp = (props) =>{
                 setOptionState(false)
 
             }
-
         }
         document.addEventListener("click",addEvent, true)
 
@@ -54,7 +52,7 @@ const StaticComp = (props) =>{
     useEffect(()=>{
         updateFormField && updateFormField(name,inputValue)
         fieldToUpdate && fieldToUpdate(compState)
-    },[inputValue, compState])
+    },[compState])
 
     const handleClick = ( value, funcArray) =>{
 
@@ -153,6 +151,7 @@ const StaticComp = (props) =>{
                                     }
                             label={custom && custom.label}
                             compState={getCompState}
+                            defaultValue={custom.defaultValue}
                             />
            
             {formError[name] && <p>{formError[name]}</p>}    

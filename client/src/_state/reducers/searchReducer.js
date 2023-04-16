@@ -1,7 +1,7 @@
 import { ACTION_TYPE } from "../actions/searchAction"
 
 const init = {
-    limit: 20
+    limit : 50
 }
 
 const searchReducer = (state = init, action) =>{

@@ -2,6 +2,7 @@ import {useEffect, useRef, useState } from "react";
 import fieldView from "../Util/fieldView";
 import { cleanInput } from "../Util/cleanInput";
 import RangeOptions from "../../../components/priceOptions/rangeOptions";
+import { NumberFormat } from "../../../Util/numberFormater";
 
 const Comp = (props) =>{
 
@@ -22,10 +23,15 @@ const Comp = (props) =>{
            name,
            updateFormField,
            onChangefunc, 
-           custom
+           custom,
             } = props
 
 
+    useEffect(()=>{
+        if(custom.defaultValue && Object.keys(custom.defaultValue).length > 0){
+            setInputValue(formatInput(custom.defaultValue))
+        }
+    },[])
     useEffect(()=>{
 
       if(defaultValue){
@@ -132,12 +138,38 @@ const Comp = (props) =>{
     }
 
     const getValueFromChildComponent = (value) =>{
+        console.log("getting value..")
+        console.log(value)
         setInputValue(value)
     }
 
     const getCompState = (value) =>{
         setCompState(value)
     }
+
+    const formatInput = (range) =>{
+      
+
+        if(Object.keys(range).length === 0){
+            return ""
+        }
+    
+        if(Object.keys(range).length === 1){
+            for(let keys in range){
+                return NumberFormat.abbreviateNumber(range[keys])
+            }
+        }
+    
+        if(Object.keys(range).length === 2){
+    
+            const minPrice = NumberFormat.abbreviateNumber(range.min)
+            const maxPrice = NumberFormat.abbreviateNumber(range.max)
+    
+            
+            return `${minPrice} - ${maxPrice}`
+        }
+    
+       }
     
     const showStyle = optionState ? "show" : "hide"
 
@@ -167,6 +199,7 @@ const Comp = (props) =>{
                                     }
                             label={custom && custom.label}
                             compState={getCompState}
+                            defaultValue={custom.defaultValue}
                             />
             </div> 
             {formError[name] && <p>{formError[name]}</p>}    

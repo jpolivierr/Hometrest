@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState} from "react"
 import { NumberFormat } from "../../Util/numberFormater"
 import "./style.css"
 
 const RangeOptions = (props) =>{
 
-    const {getValue, options, label,compState} = props
+
+    const {getValue,
+        options,
+        label,
+        compState,
+        defaultValue} = props
 
     const priceOptions = [
         10000,
@@ -27,15 +32,33 @@ const RangeOptions = (props) =>{
 
        const [inputValue, setInputValue] = useState("")
 
+       useEffect(()=>{
+
+        setInputValue(formatInput())
+
+         getValue(formatInput())
+
+        compState(range)
+
+       },[range])
+
+
        const handleMinPrice = (e) =>{
 
             const value = e.target.value
+
             const minPrice = NumberFormat.convertToInt(value)
 
-            if(isNaN(minPrice) && range.min){
+            if(isNaN(minPrice)){
+
+                console.log("ran..")
+
                 const rangeClone = {...range}
+
                 delete rangeClone.min
+
                 setRange(rangeClone)
+
                 return
             }
 
@@ -47,7 +70,7 @@ const RangeOptions = (props) =>{
         const value = e.target.value
             const maxPrice = NumberFormat.convertToInt(value)
 
-            if(isNaN(maxPrice) && range.max){
+            if(isNaN(maxPrice)){
                 const rangeClone = {...range}
                 delete rangeClone.max
                 setRange(rangeClone)
@@ -79,17 +102,7 @@ const RangeOptions = (props) =>{
         return `${minPrice} - ${maxPrice}`
     }
 
-
-      
-    
    }
-
-   useEffect(()=>{
-        setInputValue(formatInput())
-        formatInput()
-        getValue(formatInput())
-        compState(range)
-   },[range])
 
     return (
         <div className="price-options">
@@ -98,7 +111,12 @@ const RangeOptions = (props) =>{
                 <select
                   onChange={(e)=>{handleMinPrice(e)}}
                 >
-                    <option value={"No minimum"}>No minumum</option>
+                    {defaultValue && defaultValue.min && 
+                    <option value={NumberFormat.abbreviateNumber(defaultValue.min)}>
+                        {NumberFormat.abbreviateNumber(defaultValue.min)}
+                        </option>
+                        }
+                    <option value={"No minimum"}>No minimum</option>
                     {options.map((price, index) =>(
                         <option 
                         key={index} 
@@ -115,7 +133,12 @@ const RangeOptions = (props) =>{
                 <select
                     onChange={(e)=>{handleMaxPrice(e)}}
                 >
-                    <option value={"No minimum"}>No maximum</option>
+                     {defaultValue && defaultValue.max && 
+                    <option value={NumberFormat.abbreviateNumber(defaultValue.max)}>
+                        {NumberFormat.abbreviateNumber(defaultValue.max)}
+                        </option>
+                        }
+                    <option value={"No maximum"}>No maximum</option>
                     {options.map((price, index) =>(
                         <option 
                         key={index} 

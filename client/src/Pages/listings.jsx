@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import SearchForm from "../components/Forms/SearchForm"
 import useRequest from "../lib/MakeRequest/MakeRequest"
 import useReduxMng from "../hooks/useReduxMng"
-import { getParams } from "../Util/urlParcer"
+import { getParams, updateParam } from "../Util/urlParcer"
 import URL from "../Config/urls"
 import findPropertyValue from "../Util/nestedObject"
 
@@ -18,17 +18,28 @@ const Listings = (props) =>{
     useEffect( ()=>{
 
       // console.log(searchReducer)
-          if(getParams().search){
+          if(getParams("search")){
 
-          const listingOptions = getParams().search
-          const listingObject = JSON.parse(listingOptions)
+          const listingOptions = getParams("search")
+
 
             // makeRequest("POST", URL.SEARCH, listingObject)
 
         }
-      
 
     },[searchReducer])
+
+
+
+
+      useEffect(()=>{
+
+        updateParam(searchReducer, true, "search")
+
+    },[searchReducer])
+
+
+
 
     useEffect(()=>{
 

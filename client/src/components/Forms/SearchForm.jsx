@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 import useForm from "../../lib/Forms/useForm"
 import MainButton from "../buton/MainButton"
 import useReduxMng from "../../hooks/useReduxMng"
-import { getParams, updateParam } from "../../Util/urlParcer"
 import URL from "../../Config/urls"
 import Ring from "../../lib/loadingEffect/loading/ring"
+import { result } from "../../Pages/object"
+import { getValueByKey, nestedObj  } from "../../Util/getValueByKey"
 
 
 const SearchForm = () =>{
@@ -22,11 +23,28 @@ const SearchForm = () =>{
             
             } = useReduxMng();
 
-    useEffect(()=>{
+            const objtet = {
+                             name : {
+                                        first : "Frederic",
+                                        last : "Olivier"
+                                    },
+                            addres : "8700 southside dr",
+                            visit : [
+                                        "visit",
+                                       "leana",
+                                        "Milla",
+                                        {
+                                            hour : "1am",
+                                            day : {
+                                                echo : [
+                                                       "miami"
+                                                ]
+                                            }
+                                        }
+                                    ]
+            }
 
-        updateParam(searchReducer, true, "search")
-
-    },[searchReducer])
+    console.log(nestedObj(objtet, "visit","day","echo","miami"))
 
     const updateCityorZip = (value) =>{
 
@@ -65,6 +83,7 @@ const SearchForm = () =>{
                 label : "Location",
                 name : "city_zip",
                 required : true,
+                defaultValue : "miami",
                 fieldToUpdate : updateCityorZip,
                 onOutFocus : updateCityorZip
               },
@@ -73,6 +92,7 @@ const SearchForm = () =>{
                 label : "Property",
                 onChangefunc : [],
                 name : "property",
+                defaultValue : ["Single_Family", "Multi_Family"],
                 fieldToUpdate : setType,
                 icon : <i className="fa-solid fa-angle-down"></i>,
                 list : {
@@ -108,11 +128,12 @@ const SearchForm = () =>{
                 label : "Property type",
                 name : "property_type",
                 fieldToUpdate : setStatus,
+                defaultValue : ["for_sale", "sold"],
                 icon : <i className="fa-solid fa-angle-down"></i>,
                 list : {
                           info : {
                                     class: "",
-                                    title: "Search Property"
+                                    title: "Property type"
                           },
                           lists : [
                                      {
@@ -143,6 +164,10 @@ const SearchForm = () =>{
                 fieldToUpdate : setPrices,
                 icon : <i className="fa-solid fa-angle-down"></i>,
                 custom : {
+                    defaultValue : {
+                        "min": 40000,
+                        "max": 350000
+                      },
                     label : "Price options",
                     payload : [
                         20000,
@@ -173,6 +198,10 @@ const SearchForm = () =>{
                 fieldToUpdate : setBeds,
                 icon : <i className="fa-solid fa-angle-down"></i>,
                 custom : {
+                    defaultValue : {
+                        "min": 4,
+                        "max": 3
+                      },
                     label : "Bed option",
                     payload : [
                         1,
@@ -188,9 +217,6 @@ const SearchForm = () =>{
                     ], 
 
                 },
-                
-                // defaultValue : location,
-                onSubmitFunc: [],
                 // listPreventExit: true
               },
               {
@@ -235,8 +261,8 @@ const SearchForm = () =>{
 
     const {getForm, formResponse, loading} = useForm(formSetting)
 
-   console.log(formResponse)
-  console.log(searchReducer)
+//    console.log(formResponse)
+//   console.log(searchReducer)
 
     return(
         <div className="margin-top-2x">
