@@ -3,6 +3,16 @@ export const nestedObj  = (obj, args, returnType = null) =>{
     let objValue = obj
     let count = 0
 
+    if(obj && typeof obj !== "object"){
+        return obj
+    }
+
+    if(!obj || 
+        (Array.isArray(obj) && obj.length === 0) ||
+         Object.keys(obj).length === 0){
+        return returnType
+    }
+
     while(count < args.length ){
 
         const key = args[count]

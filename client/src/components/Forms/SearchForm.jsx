@@ -44,7 +44,7 @@ const SearchForm = () =>{
                                     ]
             }
 
-    console.log(nestedObj(objtet,["name", "first"],""))
+    console.log(nestedObj(null,["name", "first"],""))
 
     const updateCityorZip = (value) =>{
 
