@@ -1,13 +1,15 @@
 import {useEffect, useRef, useState } from "react";
 import fieldView from "../Util/fieldView";
 import { cleanInput } from "../Util/cleanInput";
+import RangeOptions from "../../../components/priceOptions/rangeOptions";
 
-const MultiSelect = (props) =>{
+const Comp = (props) =>{
 
     const [inputValue, setInputValue] = useState([])
     const [errorMessage, setErrorMessage] = useState("")
     const [optionState, setOptionState] = useState(false)
     const [userView, setUserView] = useState("")
+    const [compState, setCompState] = useState(null)
     const windowRef = useRef(null);
 
     const {required, 
@@ -19,7 +21,8 @@ const MultiSelect = (props) =>{
            defaultValue,
            name,
            updateFormField,
-           onChangefunc
+           onChangefunc, 
+           custom
             } = props
 
 
@@ -47,6 +50,11 @@ const MultiSelect = (props) =>{
         document.addEventListener("click",addEvent, true)
 
     },[])
+
+    useEffect(()=>{
+        updateFormField && updateFormField(name,inputValue)
+        fieldToUpdate && fieldToUpdate(compState)
+    },[inputValue, compState])
 
     const handleClick = ( value, funcArray) =>{
 
@@ -106,6 +114,8 @@ const MultiSelect = (props) =>{
 
     }
 
+    // console.log(va)
+
     const listToggleWindow = () =>{
         return
 }
@@ -120,6 +130,14 @@ const MultiSelect = (props) =>{
     const handleBlur = () =>{
       
     }
+
+    const getValueFromChildComponent = (value) =>{
+        setInputValue(value)
+    }
+
+    const getCompState = (value) =>{
+        setCompState(value)
+    }
     
     const showStyle = optionState ? "show" : "hide"
 
@@ -131,7 +149,7 @@ const MultiSelect = (props) =>{
              <input 
                      placeholder={props.placeHolder} 
                      name={props.name}
-                     value={userView}
+                     value={inputValue}
                      onBlur={()=>{handleBlur()}}
                      style={props.icon && {paddingRight: "2.3rem"}}
                      readOnly={true}
@@ -141,37 +159,19 @@ const MultiSelect = (props) =>{
         </div>
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
             <div className={`options-window ${showStyle}`  }>
-                   {/* {props.comp} */}
-                    <ul className={list.info.Class}>
-                        {list.info.title && <h3>{list.info.title}</h3>}
-
-                        {
-                          list.lists.map((li,index) => (
-                            <li
-                            style={{display: "flex"}}
-                                 key={index}
-                                 className={li.Class}
-                                 listid={li.name}
-                                 onClick={(e)=>{
-                                     handleClick(li.name,li.handleClick)
-                                     list.info.listEvent && handleClick(li.name,list.info.listEvent())
-                                }}
-                               >
-                                {
-                                    !inputValue.includes(li.name) ? <i className="fa-regular fa-square"></i> : <i className="fa-solid fa-square-check"></i>
-                                }
-                                {
-                                    
-                                    li.el && li.el
-                                }
-                            </li>
-                          ))
-                        }
-                    </ul>
+                    <RangeOptions 
+                            getValue={getValueFromChildComponent}
+                            options={custom ? 
+                                     custom.payload :
+                                    []
+                                    }
+                            label={custom && custom.label}
+                            compState={getCompState}
+                            />
             </div> 
             {formError[name] && <p>{formError[name]}</p>}    
          </fieldset>
      )
 }
 
-export default MultiSelect;
+export default Comp;

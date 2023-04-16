@@ -4,7 +4,7 @@ const fieldTypes = {
     MULTISELECT: "multi-select",
     STATIC_SELECTION: "static-selection",
     PWD :"password",
-    COMP : "COMP"
+    COMP : "comp"
 }
 
 export default fieldTypes 

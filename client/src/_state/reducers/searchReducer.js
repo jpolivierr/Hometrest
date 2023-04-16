@@ -3,16 +3,6 @@ import { ACTION_TYPE } from "../actions/searchAction"
 const init = {
     limit: 100,
     postal_code : "20634",
-    list_price: {
-        min : 0,
-        max : 0
-    },
-    beds: {
-        min : 0
-    },
-    baths: {
-        min : 0
-    },
 }
 
 const searchReducer = (state = init, action) =>{
@@ -43,14 +33,38 @@ const searchReducer = (state = init, action) =>{
             return state = getLocation
         case ACTION_TYPE.PRICES:
             const getPrices =  JSON.parse(JSON.stringify(state))
+            if((action.payload && 
+                Object.keys(action.payload).length === 0) ||
+                !action.payload
+                ){
+                 delete getPrices.list_price
+                 return state = getPrices
+ 
+                }
             getPrices.list_price = action.payload
             return state = getPrices
         case ACTION_TYPE.BEDS:
             const getBeds =  JSON.parse(JSON.stringify(state))
+            if((action.payload && 
+                Object.keys(action.payload).length === 0) ||
+                !action.payload
+                ){
+                 delete getBeds.beds
+                 return state = getBeds
+ 
+                }
             getBeds.beds = action.payload
             return state = getBeds 
         case ACTION_TYPE.BATHS :
             const getBaths =  JSON.parse(JSON.stringify(state))
+            if((action.payload && 
+                Object.keys(action.payload).length === 0) ||
+                !action.payload
+                ){
+                 delete getBaths.baths
+                 return state = getBaths
+ 
+                }
             getBaths.baths = action.payload
             return state = getBaths 
         case ACTION_TYPE.HOMETYPE :

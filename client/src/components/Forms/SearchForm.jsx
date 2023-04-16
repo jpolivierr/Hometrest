@@ -14,7 +14,10 @@ const SearchForm = () =>{
              setLocation,
              setCity,
              setZipcode,
-             setStatus
+             setStatus,
+             setPrices,
+             setBeds,
+             setBaths
             
             } = useReduxMng();
 
@@ -134,34 +137,89 @@ const SearchForm = () =>{
                 // listPreventExit: true
               },
               {
-                type : "multi-select",
+                type : "comp",
                 label : "Pricing",
                 name : "price",
-                fieldToUpdate : setStatus,
+                placeHolder : "200.0k - 500.0k",
+                fieldToUpdate : setPrices,
                 icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
-                list : {
-                          info : {
-                                    class: "",
-                                    title: "Pricing"
-                          },
-                          lists : [
-                                     {
-                                        Class: "",
-                                        name: "for_sale",
-                                        el: "For Sale"
-                                     },
-                                     {
-                                        Class: "",
-                                        name: "for_rent",
-                                        el: "Rent"
-                                     },
-                                     {
-                                        Class: "",
-                                        name: "sold",
-                                        el: "Sold"
-                                     }
-                          ]
+                custom : {
+                    label : "Price Options",
+                    payload : [
+                        10000,
+                        20000,
+                        30000,
+                        40000,
+                        50000,
+                        100000,
+                        150000,
+                        200000,
+                        250000,
+                        300000,
+                        350000,
+                        400000,
+                        450000,
+                        500000
+                    ], 
+
                 },
+                
+                // defaultValue : location,
+                onSubmitFunc: [],
+                // listPreventExit: true
+              },
+              {
+                type : "comp",
+                label : "Beds",
+                name : "beds",
+                placeHolder : "1 - 5",
+                fieldToUpdate : setBeds,
+                icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
+                custom : {
+                    label : "Bed option",
+                    payload : [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10
+                    ], 
+
+                },
+                
+                // defaultValue : location,
+                onSubmitFunc: [],
+                // listPreventExit: true
+              },
+              {
+                type : "comp",
+                label : "Baths",
+                name : "baths",
+                placeHolder : "1 - 5",
+                fieldToUpdate : setBaths,
+                icon : <i className="fa-sharp fa-solid fa-caret-down"></i>,
+                custom : {
+                    label : "Bath option",
+                    payload : [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10
+                    ], 
+
+                },
+                
                 // defaultValue : location,
                 onSubmitFunc: [],
                 // listPreventExit: true
@@ -179,7 +237,7 @@ const SearchForm = () =>{
     const {getForm, formResponse, loading} = useForm(formSetting)
 
 //    console.log(formResponse)
-   console.log(searchReducer)
+    console.log(searchReducer)
 
     return(
         <div className="margin-top-2x">

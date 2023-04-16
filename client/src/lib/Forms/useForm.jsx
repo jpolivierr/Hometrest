@@ -3,6 +3,7 @@ import Options from "./Fields/Options";
 import fieldTypes from "./VARS/fieldType";
 import MultiSelect from "./Fields/MultiSelect";
 import ListOption from "./Fields/ListOption";
+import Comp from "./Fields/comp";
 import { myFormFieds } from "./Config/getFields";
 import { capitalizeFirstLetter } from "./Util/capitalizeFirstLetter";
 import { matchPassword } from "./Util/matchPassword";
@@ -103,8 +104,6 @@ const useForm = (formSettings) =>{
 
 
       const validateFields = () =>{
-         
-         // console.log(formFields)
 
          const formErrorCopy = {...formError}
 
@@ -288,12 +287,13 @@ const useForm = (formSettings) =>{
                                  updateFormField = {updateFormField}
                                  updateError = {updateError}
                                  defaultValue = {field.defaultValue}
+                                 custom = {field.custom}
                               />
                         )
 
                         case fieldTypes.COMP :
                            return (
-                              <MultiSelect 
+                              <Comp
                                  key={index}
                                  label={field.label}
                                  placeHolder={field.placeHolder}
@@ -310,6 +310,7 @@ const useForm = (formSettings) =>{
                                  updateError = {updateError}
                                  defaultValue = {field.defaultValue}
                                  listPreventExit = {field.listPreventExit}
+                                 custom = {field.custom}
                               />
                         )
 
