@@ -7,17 +7,16 @@ import StaticComp from "./Fields/staticComp";
 import { getFormFields } from "./Config/getFormFields";
 import { capitalizeFirstLetter } from "./Util/capitalizeFirstLetter";
 import { matchPassword } from "./Util/matchPassword";
-import { validateFields } from "./Config/formValidation";
+// import { validateFields } from "./Config/formValidation";
 import "./style/avalon.css"
 import useReduxMng from "../../hooks/useReduxMng";
-
 import useFormSubmit from "./Request/request";
 //Action
 import { useEffect, useState } from "react";
+ import { validateFields } from "./Config/validateFields";
 
 
-const useForm = (formSettings) =>{
-
+const useFormCopy = () =>{
 
    const fieldTypes = {
       INPUT: "input",
@@ -28,27 +27,30 @@ const useForm = (formSettings) =>{
       PWD :"password",
       COMP : "comp"
   }
+     const {searchReducer} = useReduxMng()
+     const {makeRequest, formResponse} = useFormSubmit()
+     const [formError, setFormError] = useState({})
+     const [loading, setLoading] = useState(false)
+      
+      const [formState, setFormState] = useState({})
+      const [_fields, setFields] = useState({})
+      const [_config, setConfig] = useState({})
 
-   const {searchReducer} = useReduxMng()
 
-    const [settings] = useState(formSettings)
 
-     const {fields,config, info, button} = settings
-
-      const {makeRequest, formResponse} = useFormSubmit()
-      const [submitStatus] = useState(false)
-      const [formError, setFormError] = useState(getFormFields(fields).errors)
-      const [formFields, setFormFields] = useState(getFormFields(fields).fields)
-      const [loading, setLoading] = useState(false)
+      useEffect(()=>{
+         // setFormState(getFields(fields).fields)
+      },[])
+      
 
       useEffect(()=>{
 
-         errorFromServer(formResponse)
+         errorFromServer(formResponse, formError)
 
       },[formResponse])
 
       
-      const errorFromServer = (response) =>{
+      const errorFromServer = (response, formError) =>{
           
          if(response){
 
@@ -90,104 +92,39 @@ const useForm = (formSettings) =>{
       }
 
 
-      const updateError = (key, value) =>{
-
-         if((key in formError)){
-               
-               const formErrorCopy = {...formError}
-
-               formErrorCopy[key] = value
-
-               setFormError(formErrorCopy)
-         }
-
-      }
-
       const updateFormField = (key, value) =>{
 
          
-         if((key in formFields)){
+         if((key in formState)){
 
-               const formFieldCopy = {...formFields}
+               const formFieldCopy = {...formState}
 
                formFieldCopy[key] = value
 
-               setFormFields(formFieldCopy)
+               setFormState(formFieldCopy)
          }
-      }
-
-
-      const validateFields = () =>{
-
-         const formErrorCopy = {...formError}
-
-         formErrorCopy.errors = false
-
-         fields.forEach((field)=>{
-
-                const fieldData = formFields[field.name]
-               
-                 if(field.onSubmitFunc && field.name){
-                      
-                     const func = field.onSubmitFunc
-                     
-                     for(let i = 0; i < func.length; i++){
-                       
-                        const call = func[i]
-                       
-                        const funcResult = call(field.name, fieldData)
-
-                        if(funcResult){
-                     
-                           formErrorCopy[field.name] = funcResult
-                           formErrorCopy.errors = true
-                           break
-
-                        }else{
-                           formErrorCopy[field.name] = false
-                        }
-
-                     }
-                 }
-
-                 //match condition
-                 if(field.match && (field.match in formFields)){
-
-                     const pwd1 = formFields[field.match]
-                     const pwd2 = formFields[field.name]
-                     
-                     if(matchPassword(pwd1,pwd2)){
-                        formErrorCopy[field.name] = matchPassword(pwd1,pwd2)
-                        formErrorCopy.errors = true
-                     }else{
-                        formErrorCopy[field.name] = false
-                     }
-                     
-                 }
-
-         })
-
-         setFormError(formErrorCopy)
-
-         return formErrorCopy
-
       }
 
       const submit = async (e) =>{
 
+                       
                        e.preventDefault()
-                        
-                       if(validateFields().errors){
+
+                       const errorResult = validateFields(formState, _fields)
+
+                        setFormError({})
+                       if(errorResult.errors){
                            console.log("error found")
+                           setFormError(errorResult)
 
                        }else{
                             console.log("Submit")
                            setLoading(true)
                            
                            
-                           const data = config.data ? searchReducer : formFields
+                           const data = _config.data ? searchReducer : formState
                            console.log(data);
-                           await makeRequest(config.method, config.url, data)
+                           await makeRequest(_config.method, _config.url, data)
                            setLoading(false)
                            
                            
@@ -195,181 +132,22 @@ const useForm = (formSettings) =>{
                                
       }
 
-      const getFields = (field,index) =>{
-         
-                     switch(field.type){
-                        
-                        case fieldTypes.INPUT :
-                              return (
-                                    <Inputs 
-                                       key={index}
-                                       label={field.label}
-                                       placeHolder={field.placeHolder}
-                                       name = {field.name}
-                                       onChangefunc = {field.onChangefunc}
-                                       onOutFocus = {field.onOutFocus}
-                                       fieldToUpdate = {field.fieldToUpdate}
-                                       formStatus={submitStatus}
-                                       required = {field.required}
-                                       formError = {formError}
-                                       setFormError = {setFormError}
-                                       icon = {field.icon}
-                                       updateFormField = {updateFormField}
-                                       updateError = {updateError}
-                                       defaultValue = {field.defaultValue}
-                                       defaultKey = {field.defaultKey}
-                                    />
-                              )
-                        case fieldTypes.PWD :
-                              return (
-                                    <Inputs 
-                                       type={fieldTypes.PWD}
-                                       key={index}
-                                       label={field.label}
-                                       placeHolder={field.placeHolder}
-                                       name = {field.name}
-                                       onChangefunc = {field.onChangefunc}
-                                       onOutFocus = {field.onOutFocus}
-                                       fieldToUpdate = {field.fieldToUpdate}
-                                       formStatus={submitStatus}
-                                       required = {field.required}
-                                       formError = {formError}
-                                       setFormError = {setFormError}
-                                       icon = {field.icon}
-                                       updateFormField = {updateFormField}
-                                       updateError = {updateError}
-                                       defaultValue = {field.defaultValue}
-                                       defaultKey = {field.defaultKey}
-                                    />
-                              )
-                        case fieldTypes.OPTIONS :
-                           return (
-                                 <Options 
-                                    key={index}
-                                    label={field.label}
-                                    placeHolder={field.placeHolder}
-                                    name = {field.name}
-                                    onChangefunc = {field.onChangefunc}
-                                    fieldToUpdate = {field.fieldToUpdate}
-                                    formStatus={submitStatus}
-                                    required = {field.required}
-                                    formError = {formError}
-                                    setFormError = {setFormError}
-                                    icon = {field.icon}
-                                    list = {field.list}
-                                    // handleClick = {handleOptions}
-                                    updateFormField = {updateFormField}
-                                    updateError = {updateError}
-                                    defaultValue = {field.defaultValue}
-                                    defaultKey = {field.defaultKey}
-                                    listPreventExit = {field.listPreventExit}
-                                    
-                                 />
-                           )
+      const getForm = (settings) =>{
 
-                        case fieldTypes.MULTISELECT :
-                           return (
-                              <MultiSelect 
-                                 key={index}
-                                 label={field.label}
-                                 placeHolder={field.placeHolder}
-                                 name = {field.name}
-                                 onChangefunc = {field.onChangefunc}
-                                 fieldToUpdate = {field.fieldToUpdate}
-                                 formStatus={submitStatus}
-                                 required = {field.required}
-                                 formError = {formError}
-                                 setFormError = {setFormError}
-                                 icon = {field.icon}
-                                 list = {field.list}
-                                 updateFormField = {updateFormField}
-                                 updateError = {updateError}
-                                 defaultValue = {field.defaultValue}
-                                 defaultKey = {field.defaultKey}
-                                 listPreventExit = {field.listPreventExit}
-                              />
-                        )
+          const {
+                  fields,
+                  info,
+                  config,
+                  button
+               
+               } = settings
 
-                        case fieldTypes.STATIC_SELECTION :
-                           return (
-                              <ListOption 
-                                 key={index}
-                                 label={field.label}
-                                 placeHolder={field.placeHolder}
-                                 name = {field.name}
-                                 onChangefunc = {field.onChangefunc}
-                                 fieldToUpdate = {field.fieldToUpdate}
-                                 formStatus={submitStatus}
-                                 required = {field.required}
-                                 formError = {formError}
-                                 setFormError = {setFormError}
-                                 icon = {field.icon}
-                                 list = {field.list}
-                                 updateFormField = {updateFormField}
-                                 updateError = {updateError}
-                                 defaultValue = {field.defaultValue}
-                                 defaultKey = {field.defaultKey}
-                                 custom = {field.custom}
-                              />
-                        )
-
-                        case fieldTypes.COMP :
-                           return (
-                              <Comp
-                                 key={index}
-                                 label={field.label}
-                                 placeHolder={field.placeHolder}
-                                 name = {field.name}
-                                 onChangefunc = {field.onChangefunc}
-                                 fieldToUpdate = {field.fieldToUpdate}
-                                 formStatus={submitStatus}
-                                 required = {field.required}
-                                 formError = {formError}
-                                 setFormError = {setFormError}
-                                 icon = {field.icon}
-                                 list = {field.list}
-                                 updateFormField = {updateFormField}
-                                 updateError = {updateError}
-                                 defaultValue = {field.defaultValue}
-                                 defaultKey = {field.defaultKey}
-                                 listPreventExit = {field.listPreventExit}
-                                 custom = {field.custom}
-                              />
-                        )
-
-                        case fieldTypes.STATIC_COMPONENT :
-                           return (
-                              <StaticComp
-                                 key={index}
-                                 label={field.label}
-                                 placeHolder={field.placeHolder}
-                                 name = {field.name}
-                                 onChangefunc = {field.onChangefunc}
-                                 fieldToUpdate = {field.fieldToUpdate}
-                                 formStatus={submitStatus}
-                                 required = {field.required}
-                                 formError = {formError}
-                                 setFormError = {setFormError}
-                                 icon = {field.icon}
-                                 list = {field.list}
-                                 updateFormField = {updateFormField}
-                                 updateError = {updateError}
-                                 defaultValue = {field.defaultValue}
-                                 defaultKey = {field.defaultKey}
-                                 listPreventExit = {field.listPreventExit}
-                                 custom = {field.custom}
-                              />
-                        )
-
-                        default :
-                              return null
-                     }
-                
-            
-      }
-
-      const getForm = () =>{
-      
+          if(Object.keys(formState).length === 0){
+          
+            setFormState(getFormFields(fields).fields)
+            setFields(fields)
+            setConfig(config)
+          }
 
         return(
 
@@ -384,8 +162,8 @@ const useForm = (formSettings) =>{
                    
                    {
                   
-                    fields.map((field, index) => 
-                    getFields(field, index)
+                    fields.map((fields, index) => 
+                    getFields(fields, index)
       
                     )
                    }
@@ -408,6 +186,179 @@ const useForm = (formSettings) =>{
            )
       }
 
+      const getFields = (field,index) =>{
+         
+                     switch(field.type){
+                        
+                        case fieldTypes.INPUT :
+                              return (
+                                    <Inputs 
+                                       key={index}
+                                       label={field.label}
+                                       placeHolder={field.placeHolder}
+                                       name = {field.name}
+                                       onChangefunc = {field.onChangefunc}
+                                       onOutFocus = {field.onOutFocus}
+                                       fieldToUpdate = {field.fieldToUpdate}
+                                       
+                                       required = {field.required}
+                                       formError = {formError}
+                                       setFormError = {setFormError}
+                                       icon = {field.icon}
+                                       updateFormField = {updateFormField}
+      
+                                       defaultValue = {field.defaultValue}
+                                       defaultKey = {field.defaultKey}
+                                    />
+                              )
+                        case fieldTypes.PWD :
+                              return (
+                                    <Inputs 
+                                       type={fieldTypes.PWD}
+                                       key={index}
+                                       label={field.label}
+                                       placeHolder={field.placeHolder}
+                                       name = {field.name}
+                                       onChangefunc = {field.onChangefunc}
+                                       onOutFocus = {field.onOutFocus}
+                                       fieldToUpdate = {field.fieldToUpdate}
+                                       
+                                       required = {field.required}
+                                       formError = {formError}
+                                       setFormError = {setFormError}
+                                       icon = {field.icon}
+                                       updateFormField = {updateFormField}
+      
+                                       defaultValue = {field.defaultValue}
+                                       defaultKey = {field.defaultKey}
+                                    />
+                              )
+                        case fieldTypes.OPTIONS :
+                           return (
+                                 <Options 
+                                    key={index}
+                                    label={field.label}
+                                    placeHolder={field.placeHolder}
+                                    name = {field.name}
+                                    onChangefunc = {field.onChangefunc}
+                                    fieldToUpdate = {field.fieldToUpdate}
+                                    
+                                    required = {field.required}
+                                    formError = {formError}
+                                    setFormError = {setFormError}
+                                    icon = {field.icon}
+                                    list = {field.list}
+                                    // handleClick = {handleOptions}
+                                    updateFormField = {updateFormField}
+   
+                                    defaultValue = {field.defaultValue}
+                                    defaultKey = {field.defaultKey}
+                                    listPreventExit = {field.listPreventExit}
+                                    
+                                 />
+                           )
+
+                        case fieldTypes.MULTISELECT :
+                           return (
+                              <MultiSelect 
+                                 key={index}
+                                 label={field.label}
+                                 placeHolder={field.placeHolder}
+                                 name = {field.name}
+                                 onChangefunc = {field.onChangefunc}
+                                 fieldToUpdate = {field.fieldToUpdate}
+                                 
+                                 required = {field.required}
+                                 formError = {formError}
+                                 setFormError = {setFormError}
+                                 icon = {field.icon}
+                                 list = {field.list}
+                                 updateFormField = {updateFormField}
+
+                                 defaultValue = {field.defaultValue}
+                                 defaultKey = {field.defaultKey}
+                                 listPreventExit = {field.listPreventExit}
+                              />
+                        )
+
+                        case fieldTypes.STATIC_SELECTION :
+                           return (
+                              <ListOption 
+                                 key={index}
+                                 label={field.label}
+                                 placeHolder={field.placeHolder}
+                                 name = {field.name}
+                                 onChangefunc = {field.onChangefunc}
+                                 fieldToUpdate = {field.fieldToUpdate}
+                                 
+                                 required = {field.required}
+                                 formError = {formError}
+                                 setFormError = {setFormError}
+                                 icon = {field.icon}
+                                 list = {field.list}
+                                 updateFormField = {updateFormField}
+
+                                 defaultValue = {field.defaultValue}
+                                 defaultKey = {field.defaultKey}
+                                 custom = {field.custom}
+                              />
+                        )
+
+                        case fieldTypes.COMP :
+                           return (
+                              <Comp
+                                 key={index}
+                                 label={field.label}
+                                 placeHolder={field.placeHolder}
+                                 name = {field.name}
+                                 onChangefunc = {field.onChangefunc}
+                                 fieldToUpdate = {field.fieldToUpdate}
+                                 
+                                 required = {field.required}
+                                 formError = {formError}
+                                 setFormError = {setFormError}
+                                 icon = {field.icon}
+                                 list = {field.list}
+                                 updateFormField = {updateFormField}
+
+                                 defaultValue = {field.defaultValue}
+                                 defaultKey = {field.defaultKey}
+                                 listPreventExit = {field.listPreventExit}
+                                 custom = {field.custom}
+                              />
+                        )
+
+                        case fieldTypes.STATIC_COMPONENT :
+                           return (
+                              <StaticComp
+                                 key={index}
+                                 label={field.label}
+                                 placeHolder={field.placeHolder}
+                                 name = {field.name}
+                                 onChangefunc = {field.onChangefunc}
+                                 fieldToUpdate = {field.fieldToUpdate}
+                                 
+                                 required = {field.required}
+                                 formError = {formError}
+                                 setFormError = {setFormError}
+                                 icon = {field.icon}
+                                 list = {field.list}
+                                 updateFormField = {updateFormField}
+
+                                 defaultValue = {field.defaultValue}
+                                 defaultKey = {field.defaultKey}
+                                 listPreventExit = {field.listPreventExit}
+                                 custom = {field.custom}
+                              />
+                        )
+
+                        default :
+                              return null
+                     }
+                
+            
+      }
+
 
      return{
         getForm,
@@ -416,4 +367,4 @@ const useForm = (formSettings) =>{
      }
 }
 
-export default useForm;
+export default useFormCopy;

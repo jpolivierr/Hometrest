@@ -6,13 +6,17 @@ const init = {
 
 const searchReducer = (state = init, action) =>{
     switch(action.type){
+        case ACTION_TYPE.SET_SEARCH :
+            if(!action.payload || Object.keys(action.payload).length === 0){
+                return state
+            }
+            return {...state, ...action.payload}
         case ACTION_TYPE.LIMIT :
             const getLimit =  JSON.parse(JSON.stringify(state))
             getLimit.limit = action.payload
             return state = getLimit
         case ACTION_TYPE.CITY :
             const stateClone =  JSON.parse(JSON.stringify(state))
-            console.log(action.payload)
             if(!action.payload){
                 delete stateClone.city
                 return state = stateClone
@@ -21,7 +25,6 @@ const searchReducer = (state = init, action) =>{
             return state = stateClone
         case ACTION_TYPE.ZIP :
             const getZip =  JSON.parse(JSON.stringify(state))
-            console.log(action.payload)
             if(!action.payload){
                 delete getZip.postal_code
                 return state = getZip

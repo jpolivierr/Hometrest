@@ -8,7 +8,15 @@ export const ACTION_TYPE = {
         SEARCH_TYPE : "searchType",
         ZIP : "zip",
         CITY : "city",
-        LIMIT : "limit"
+        LIMIT : "limit",
+        SET_SEARCH : "set_search"
+}
+
+export const setSearch = (data) =>{
+    return{
+        type: ACTION_TYPE.SET_SEARCH,
+        payload : data
+    }
 }
 
 export const setPrices = (data) =>{

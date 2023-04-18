@@ -13,7 +13,10 @@ const Listings = (props) =>{
 
     const {makeRequest, formResponse, loading } = useRequest()
 
-    const{searchReducer, getPropertyList, propertiesReducer} = useReduxMng()
+    const{searchReducer,
+          getPropertyList,
+          setSearch,
+          propertiesReducer} = useReduxMng()
 
     useEffect( ()=>{
 
@@ -21,13 +24,14 @@ const Listings = (props) =>{
           if(getParams("search")){
 
           const listingOptions = getParams("search")
+          setSearch(listingOptions)
 
 
             // makeRequest("POST", URL.SEARCH, listingObject)
 
         }
 
-    },[searchReducer])
+    },[])
 
 
 

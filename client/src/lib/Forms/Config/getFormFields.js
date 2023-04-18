@@ -1,4 +1,5 @@
-export  const myFormFieds = (fields) => {
+export const getFormFields = (fields) => {
+
 
     let formFields = {}
     let formErrors = {
@@ -9,7 +10,7 @@ export  const myFormFieds = (fields) => {
     
        if(field.name){
 
-          formFields[field.name] = !field.defaultValue ?"": field.defaultValue
+          formFields[field.name] = !field.defaultValue ? "": field.defaultValue
           formErrors[field.name] = false
           
        }

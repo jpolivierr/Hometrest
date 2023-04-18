@@ -1,4 +1,4 @@
-export const nestedObj  = (obj, args, returnType = null) =>{
+export const deepSearch  = (obj, args, returnType = null) =>{
 
     let objValue = obj
     let count = 0
@@ -50,14 +50,6 @@ export const nestedObj  = (obj, args, returnType = null) =>{
         count ++
     }
 
-}
-
-const deepSearch = (value, ...args) =>{
-
-
-    if(typeof value === 'object' && value !== null && !Array.isArray(value)){
-
-    }
 }
 
 export const getValueByKey = (nestedObj, ...args) =>{

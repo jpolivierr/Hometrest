@@ -19,7 +19,8 @@ const useReduxMng = () =>{
            setStatus,
            setZipcode,
            setCity,
-           setLimit
+           setLimit,
+           setSearch
         
         } = bindActionCreators(updateSearch, useDispatch())
     const {getPropertyList} = bindActionCreators(getProperties, useDispatch())
@@ -32,6 +33,7 @@ const useReduxMng = () =>{
         setType,
         getPropertyList,
         propertiesReducer,
+        setSearch,
         setPrices,
         setBeds,
         setBaths,
