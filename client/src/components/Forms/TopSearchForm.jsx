@@ -216,6 +216,7 @@ useEffect(()=>{
                 label : "Pricing",
                 name : "price",
                 fieldToUpdate : setPrices,
+                defaultValue : price,
                 icon : <i className="fa-solid fa-angle-down"></i>,
                 custom : {
                     defaultValue : price,

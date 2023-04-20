@@ -26,7 +26,7 @@ const MultiSelect = (props) =>{
     useEffect(()=>{
 
       if(defaultValue){
-
+     
         setUserView(fieldView(name, defaultValue))
 
         setInputValue(defaultValue)
@@ -123,15 +123,20 @@ const MultiSelect = (props) =>{
     const handleBlur = () =>{
       
     }
-    console.log(inputValue)
+
     const showStyle = optionState ? "show" : "hide"
 
      return(
         <fieldset className="options" ref={windowRef}>
         {props.label && <label>{props.label}</label>}
-        <div className="input-container" 
-                 onClick={()=>{toggleWindow()}}>
-             <input 
+    
+                    <div className="select-option"
+                     onClick={()=>{toggleWindow()}}
+                    >
+                        {userView}
+                        {props.icon && props.icon}
+                    </div>
+             {/* <input 
                      placeholder={props.placeHolder} 
                      name={props.name}
                      value={userView}
@@ -139,9 +144,9 @@ const MultiSelect = (props) =>{
                      style={props.icon && {paddingRight: "2.3rem"}}
                      readOnly={true}
                      onChange={e => handleOnChange(e)}
-                     />
-                     {props.icon && props.icon}
-        </div>
+                     /> */}
+                     
+        
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
             <div className={`options-window ${showStyle}`  }>
                    {/* {props.comp} */}
@@ -160,7 +165,6 @@ const MultiSelect = (props) =>{
                                      list.info.listEvent && handleClick(li.name,list.info.listEvent())
                                 }}
                                >
-                                {console.log(li.name)}
                                 {
                                     !inputValue.includes(li.name) ? <i className="fa-regular fa-square"></i> : <i className="fa-solid fa-square-check"></i>
                                 }

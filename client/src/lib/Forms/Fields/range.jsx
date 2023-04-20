@@ -4,13 +4,14 @@ import { cleanInput } from "../Util/cleanInput";
 import RangeOptions from "../../../components/priceOptions/rangeOptions";
 import { NumberFormat } from "../../../Util/numberFormater";
 
-const Comp = (props) =>{
+const Range = (props) =>{
 
     const [inputValue, setInputValue] = useState([])
     const [errorMessage, setErrorMessage] = useState("")
     const [optionState, setOptionState] = useState(false)
     const [userView, setUserView] = useState("")
     const [compState, setCompState] = useState(null)
+    const [range, setRange] = useState({})
     const windowRef = useRef(null);
 
     const {required, 
@@ -24,30 +25,17 @@ const Comp = (props) =>{
            updateFormField,
            onChangefunc, 
            custom,
+           label,
+           options
             } = props
 
-
-    // useEffect(()=>{
-    //     if(custom.defaultValue && Object.keys(custom.defaultValue).length > 0){
-    //         setInputValue(defaultValue)
-    //     }
-    // },[defaultValue])
-    
-    // useEffect(()=>{
-
-    //   if(defaultValue){
-
-    //     setInputValue(defaultValue)
-
-    //   }
-
-    // },[defaultValue])
 
     useEffect(()=>{
 
         if(defaultValue && Object.keys(defaultValue).length > 0){
-
+            console.log(defaultValue)
             setInputValue(formatInput(defaultValue))
+            setRange(defaultValue)
 
         }
 
@@ -68,10 +56,6 @@ const Comp = (props) =>{
 
     },[])
 
-    useEffect(()=>{
-        updateFormField && updateFormField(name,inputValue)
-        fieldToUpdate && fieldToUpdate(compState)
-    },[inputValue, compState])
 
     const handleClick = ( value, funcArray) =>{
 
@@ -144,22 +128,47 @@ const Comp = (props) =>{
     }
     
 
-    const handleBlur = () =>{
-      
-    }
 
-    const getValueFromChildComponent = (value) =>{
+    const handleMinimum = (e) =>{
 
-        setInputValue(value)
-    }
+        const value = e.target.value
 
-    const getCompState = (value) =>{
-        setCompState(value)
-    }
+        const minPrice = NumberFormat.convertToInt(value)
+
+        if(isNaN(minPrice)){
+
+            console.log("ran..")
+
+            const rangeClone = {...range}
+
+            delete rangeClone.min
+
+            setRange(rangeClone)
+
+            return
+        }
+
+        setRange({...range, min : minPrice })
+   }
+
+   const handleMaximum = (e) =>{
+    
+    const value = e.target.value
+        const maxPrice = NumberFormat.convertToInt(value)
+
+        if(isNaN(maxPrice)){
+            const rangeClone = {...range}
+            delete rangeClone.max
+            setRange(rangeClone)
+            return
+        }
+
+        setRange({...range, max : maxPrice })
+}
 
     const formatInput = (range) =>{
 
-        let symbole
+            let symbole
             let bkLabel
 
             console.log(name)
@@ -201,40 +210,74 @@ const Comp = (props) =>{
        }
     
     const showStyle = optionState ? "show" : "hide"
+    let symbole = name === "price" && "$" 
 
      return(
         <fieldset className="options" ref={windowRef}>
         {props.label && <h3>{props.label}</h3>}
         <div className="input-container" 
                  onClick={()=>{toggleWindow()}}>
-             <input 
-                     placeholder={props.placeHolder} 
-                     name={props.name}
-                     value={inputValue}
-                     onBlur={()=>{handleBlur()}}
-                     style={props.icon && {paddingRight: "2.3rem"}}
-                     readOnly={true}
-                     onChange={e => handleOnChange(e)}
-                     />
+                      <div className="select-option"
+                     onClick={()=>{toggleWindow()}}
+                    >
+                        {inputValue}
+                        {props.icon && props.icon}
+                    </div>
                      {props.icon && props.icon}
         </div>
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
             <div className={`options-window ${showStyle}`  }>
-                    <RangeOptions 
-                            getValue={getValueFromChildComponent}
-                            options={custom ? 
-                                     custom.payload :
-                                    []
-                                    }
-                            label={custom && custom.label}
-                            compState={getCompState}
-                            defaultValue={custom.defaultValue}
-                            name={name}
-                            />
+            <div className="price-options">
+            {label && <h3>{label}</h3>}
+            <div>
+                <select
+                  onChange={(e)=>{handleMinimum(e)}}
+                >
+                    {defaultValue && defaultValue.min && 
+                    <option value={symbole + NumberFormat.abbreviateNumber(defaultValue.min)}>
+                        {symbole + NumberFormat.abbreviateNumber(defaultValue.min)}
+                        </option>
+                        }
+                    <option value={"No minimum"}>No minimum</option>
+                    {options.map((price, index) =>(
+                        <option 
+                        key={index} 
+                        value={symbole + NumberFormat.abbreviateNumber(price)}
+                        >
+                           {symbole + NumberFormat.abbreviateNumber(price)}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+
+            <div>
+                <select
+                    onChange={(e)=>{handleMaximum(e)}}
+                >
+                     {defaultValue && defaultValue.max && 
+                    <option value={symbole + NumberFormat.abbreviateNumber(defaultValue.max)}>
+                        {symbole + NumberFormat.abbreviateNumber(defaultValue.max)}
+                        </option>
+                        }
+                    <option value={"No maximum"}>No maximum</option>
+                    {options.map((price, index) =>(
+                        <option 
+                        key={index} 
+                        value={symbole + NumberFormat.abbreviateNumber(price)}
+                        >
+                           {symbole + NumberFormat.abbreviateNumber(price)}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+
+        </div>
             </div> 
             {formError[name] && <p>{formError[name]}</p>}    
          </fieldset>
      )
 }
 
-export default Comp;
+export default Range;

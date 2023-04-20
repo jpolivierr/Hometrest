@@ -15,7 +15,7 @@ const Inputs= (props) =>{
            defaultValue,
            defaultKey,
            type,
-           onOutFocus
+           onOutFocus,
             } = props
 
 
