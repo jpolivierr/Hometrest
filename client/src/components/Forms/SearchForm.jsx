@@ -45,13 +45,7 @@ const SearchForm = () =>{
 
     }
 
-    const [cityZip, setCityZip] = useState(null)
 
-    useEffect(()=>{
-
-        setCityZip(deepSearch(searchReducer,["city"],""))
-
-    },[searchReducer])
     
 
     const {getForm, formResponse, loading} = useFormCopy()
@@ -78,7 +72,7 @@ const formSetting = {
             required : true,
             defaultValue : deepSearch(searchReducer,["city"],""),
             onSubmitFunc : [emptyField],
-            defaultKey : "city-zip",
+            // defaultKey : "city-zip",
             fieldToUpdate : updateCityorZip,
             onOutFocus : updateCityorZip
           },
@@ -87,7 +81,7 @@ const formSetting = {
             label : "Property",
             onChangefunc : [],
             name : "property",
-            defaultValue : ["Single_Family", "Multi_Family"],
+            // defaultValue : ["Single_Family", "Multi_Family"],
             fieldToUpdate : setType,
             icon : <i className="fa-solid fa-angle-down"></i>,
             list : {
@@ -109,9 +103,40 @@ const formSetting = {
                                  },
                                  {
                                     Class: "",
-                                    name: "Condo",
+                                    name: "townHomes",
+                                    el: "TownHomes"
+                                 },
+                                 {
+                                    Class: "",
+                                    name: "condos",
                                     el: "Condo"
-                                 }
+                                 },
+                                 {
+                                    Class: "",
+                                    name: "apartment",
+                                    el: "Apartment"
+                                 },
+                                 {
+                                    Class: "",
+                                    name: "duplex_triplex",
+                                    el: "Duplex/Triplex"
+                                 },
+                                 {
+                                    Class: "",
+                                    name: "farm",
+                                    el: "Farm"
+                                 },
+                                 {
+                                    Class: "",
+                                    name: "land",
+                                    el: "Land"
+                                 },
+                                 {
+                                    Class: "",
+                                    name: "mobile",
+                                    el: "Mobile"
+                                 },
+
                       ]
             },
             // defaultValue : location,
@@ -123,7 +148,7 @@ const formSetting = {
             label : "Property type",
             name : "property_type",
             fieldToUpdate : setStatus,
-            defaultValue : ["for_sale", "sold"],
+            // defaultValue : ["for_sale", "sold"],
             icon : <i className="fa-solid fa-angle-down"></i>,
             list : {
                       info : {
@@ -145,6 +170,21 @@ const formSetting = {
                                     Class: "",
                                     name: "sold",
                                     el: "Sold"
+                                 },
+                                 {
+                                    Class: "",
+                                    name: "ready_to_build",
+                                    el: "Ready to Build"
+                                 },
+                                 {
+                                    Class: "",
+                                    name: "off_market",
+                                    el: "Off Market"
+                                 },
+                                 {
+                                    Class: "",
+                                    name: "new_community",
+                                    el: "New Community"
                                  }
                       ]
             },
@@ -159,10 +199,10 @@ const formSetting = {
             fieldToUpdate : setPrices,
             icon : <i className="fa-solid fa-angle-down"></i>,
             custom : {
-                defaultValue : {
-                    "min": 40000,
-                    "max": 350000
-                  },
+                // defaultValue : {
+                //     "min": 40000,
+                //     "max": 350000
+                //   },
                 label : "Price options",
                 payload : [
                     20000,
@@ -193,10 +233,10 @@ const formSetting = {
             fieldToUpdate : setBeds,
             icon : <i className="fa-solid fa-angle-down"></i>,
             custom : {
-                defaultValue : {
-                    "min": 4,
-                    "max": 3
-                  },
+                // defaultValue : {
+                //     "min": 4,
+                //     "max": 3
+                //   },
                 label : "Bed option",
                 payload : [
                     1,
@@ -215,7 +255,7 @@ const formSetting = {
             // listPreventExit: true
           },
           {
-            type : "static-component",
+            type : "comp",
             label : "Baths",
             name : "baths",
             fieldToUpdate : setBaths,
@@ -256,7 +296,7 @@ const formSetting = {
 
 
     return(
-        <div className="margin-top-2x">
+        <div className="">
 
            {getForm(formSetting)}
 

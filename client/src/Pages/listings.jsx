@@ -18,30 +18,6 @@ const Listings = (props) =>{
           setSearch,
           propertiesReducer} = useReduxMng()
 
-    useEffect( ()=>{
-
-      // console.log(searchReducer)
-          if(getParams("search")){
-
-          const listingOptions = getParams("search")
-          setSearch(listingOptions)
-
-
-            // makeRequest("POST", URL.SEARCH, listingObject)
-
-        }
-
-    },[])
-
-
-
-
-      useEffect(()=>{
-
-        updateParam(searchReducer, true, "search")
-
-    },[searchReducer])
-
 
 
 

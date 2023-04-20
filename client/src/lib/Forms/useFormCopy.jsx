@@ -134,56 +134,65 @@ const useFormCopy = () =>{
 
       const getForm = (settings) =>{
 
-          const {
-                  fields,
-                  info,
-                  config,
-                  button
+         if(!settings || Object.keys(settings).length === 0){
+
+            return 
+
+         }else{
+         
+            const {
+               fields,
+               info,
+               config,
+               button
+            
+            } = settings
+
+       if(Object.keys(formState).length === 0){
+       
+         setFormState(getFormFields(fields).fields)
+         setFields(fields)
+         setConfig(config)
+       }
+
+     return(
+
+            <form className={info.Class} onSubmit={e => submit(e)}>
+
+               {formError.serverError && 
+                 <p className="server-error">{formError.serverError}</p>
+                 }
                
-               } = settings
-
-          if(Object.keys(formState).length === 0){
-          
-            setFormState(getFormFields(fields).fields)
-            setFields(fields)
-            setConfig(config)
-          }
-
-        return(
-
-               <form className={info.Class} onSubmit={e => submit(e)}>
-
-                  {formError.serverError && 
-                    <p className="server-error">{formError.serverError}</p>
-                    }
-                  
-                  {info.title && <h2>{info.title}</h2>}
-                 
-                   
-                   {
-                  
-                    fields.map((fields, index) => 
-                    getFields(fields, index)
-      
-                    )
-                   }
-
-
-                  {button.component ? 
-                  <div className="button-container">
-                     {loading && button.loadingEffect && button.loadingEffect}
-                     {button.component}
-                  </div>
-                      : 
-                              <button className="button main-btn" type="submit">
-                                    {config.buttonLabel}
-                           </button>}
-               
-                  
-              </form>
-            // </FormProvider>
+               {info.title && <h2>{info.title}</h2>}
               
-           )
+                
+                {
+               
+                 fields.map((fields, index) => 
+                 getFields(fields, index)
+   
+                 )
+                }
+
+
+               {button.component ? 
+               <div className="button-container">
+                  {loading && button.loadingEffect && button.loadingEffect}
+                  {button.component}
+               </div>
+                   : 
+                           <button className="button main-btn" type="submit">
+                                 {config.buttonLabel}
+                        </button>}
+            
+               
+           </form>
+         // </FormProvider>
+           
+        )
+
+         }
+
       }
 
       const getFields = (field,index) =>{
@@ -266,15 +275,13 @@ const useFormCopy = () =>{
                                  placeHolder={field.placeHolder}
                                  name = {field.name}
                                  onChangefunc = {field.onChangefunc}
-                                 fieldToUpdate = {field.fieldToUpdate}
-                                 
+                                 fieldToUpdate = {field.fieldToUpdate}                          
                                  required = {field.required}
                                  formError = {formError}
                                  setFormError = {setFormError}
                                  icon = {field.icon}
                                  list = {field.list}
                                  updateFormField = {updateFormField}
-
                                  defaultValue = {field.defaultValue}
                                  defaultKey = {field.defaultKey}
                                  listPreventExit = {field.listPreventExit}

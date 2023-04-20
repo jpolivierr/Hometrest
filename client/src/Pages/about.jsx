@@ -1,6 +1,7 @@
 
 import {urlParcer, updateParam} from "../Util/urlParcer"
 import { useEffect } from "react"
+import TopSearchForm from "../components/Forms/TopSearchForm"
 const About = (props) =>{
 
     const {Class, id} = props
@@ -13,12 +14,8 @@ const About = (props) =>{
 
     return(
         <div id={id} className={Class}>
-          <div className="container">
-            <h1>About</h1>
-
-            <button onClick={(e)=>{updateParam(paramObj)}}>
-                update param
-            </button>
+          <div className="">
+            <TopSearchForm />
           </div>
         </div>
     )

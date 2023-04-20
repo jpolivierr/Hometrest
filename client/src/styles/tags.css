@@ -12,6 +12,12 @@ h1{
     color: var(--dark-text-color);
 }
 
+h3{
+    font-weight: 600;
+    color: var(--dark-text-color);
+    font-size: 1rem;
+}
+
 menu{
     width: 20px;
     height: 14px;

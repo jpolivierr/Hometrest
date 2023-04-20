@@ -138,8 +138,7 @@ const Comp = (props) =>{
     }
 
     const getValueFromChildComponent = (value) =>{
-        console.log("getting value..")
-        console.log(value)
+
         setInputValue(value)
     }
 
@@ -175,7 +174,7 @@ const Comp = (props) =>{
 
      return(
         <fieldset className="options" ref={windowRef}>
-        {props.label && <label>{props.label}</label>}
+        {props.label && <h3>{props.label}</h3>}
         <div className="input-container" 
                  onClick={()=>{toggleWindow()}}>
              <input 

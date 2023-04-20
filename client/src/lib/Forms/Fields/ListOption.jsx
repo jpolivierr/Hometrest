@@ -124,21 +124,8 @@ const ListOption = (props) =>{
     const showStyle = optionState ? "show" : "hide"
 
      return(
-        <fieldset className="options" ref={windowRef}>
-        {/* {props.label && <label>{props.label}</label>} */}
-        {/* <div className="input-container" 
-                 onClick={()=>{toggleWindow()}}>
-             <input 
-                     placeholder={props.placeHolder} 
-                     name={props.name}
-                     value={userView}
-                     onBlur={()=>{handleBlur()}}
-                     style={props.icon && {paddingRight: "2.3rem"}}
-                     readOnly={true}
-                     onChange={e => handleOnChange(e)}
-                     />
-                     {props.icon && props.icon}
-        </div> */}
+        <fieldset className="options static-option" ref={windowRef}>
+
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
             
                    {/* {props.comp} */}

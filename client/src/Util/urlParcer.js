@@ -30,20 +30,25 @@ export const getParams = (paramKey) =>{
 
     }else{
             const paramValue = new URLSearchParams(search)
+            
 
             const entries = paramValue.entries()
 
 
             if(search && entries){
 
+                try {
                 let paramObj = {}
 
                 for(const entry of entries) {
                     paramObj[entry[0]] = entry[1]
                 }
-                try {
+                
+                    if(paramObj[paramKey]){
+                        return JSON.parse(paramObj[paramKey])
+                    }
 
-                    return JSON.parse(paramObj[paramKey])
+                    
 
                 } catch (error) {
                     console.log(error)

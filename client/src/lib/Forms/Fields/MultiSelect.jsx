@@ -27,11 +27,14 @@ const MultiSelect = (props) =>{
 
       if(defaultValue){
 
+        setUserView(fieldView(name, defaultValue))
+
         setInputValue(defaultValue)
 
       }
 
-    },[defaultValue])
+    },[])
+
 
     useEffect(()=>{
     
@@ -98,7 +101,7 @@ const MultiSelect = (props) =>{
 
 
         const newFieldView = fieldView(name,inputValueClone)
-        // console.log(newFieldView)
+        //  console.log(newFieldView)
         setUserView(!newFieldView ? cleanInput(inputValueClone) : cleanInput(newFieldView) )
         setInputValue(inputValueClone)
         fieldToUpdate && fieldToUpdate(inputValueClone)
@@ -120,7 +123,7 @@ const MultiSelect = (props) =>{
     const handleBlur = () =>{
       
     }
-    
+    console.log(inputValue)
     const showStyle = optionState ? "show" : "hide"
 
      return(
@@ -157,6 +160,7 @@ const MultiSelect = (props) =>{
                                      list.info.listEvent && handleClick(li.name,list.info.listEvent())
                                 }}
                                >
+                                {console.log(li.name)}
                                 {
                                     !inputValue.includes(li.name) ? <i className="fa-regular fa-square"></i> : <i className="fa-solid fa-square-check"></i>
                                 }

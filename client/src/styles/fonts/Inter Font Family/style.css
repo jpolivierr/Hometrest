@@ -1,5 +1,5 @@
 
-    @font-face {
+    /* @font-face {
     font-family: 'Inter Regular';
     font-style: normal;
     font-weight: normal;
@@ -21,9 +21,9 @@
     font-weight: normal;
     src: local('Inter Thin BETA'), url('Inter-Thin-BETA.woff') format('woff');
     }
-    
+     */
 
-    @font-face {
+    /* @font-face {
     font-family: 'Inter Thin Italic BETA';
     font-style: normal;
     font-weight: normal;
@@ -53,9 +53,9 @@
     font-weight: normal;
     src: local('Inter Light BETA'), url('Inter-Light-BETA.woff') format('woff');
     }
-    
+     */
 
-    @font-face {
+    /* @font-face {
     font-family: 'Inter Light Italic BETA';
     font-style: normal;
     font-weight: normal;
@@ -66,12 +66,12 @@
     @font-face {
     font-family: 'Inter Medium';
     font-style: normal;
-    font-weight: normal;
+    font-weight: medium;
     src: local('Inter Medium'), url('Inter-Medium.woff') format('woff');
-    }
+    } */
     
 
-    @font-face {
+    /* @font-face {
     font-family: 'Inter Medium Italic';
     font-style: normal;
     font-weight: normal;
@@ -84,10 +84,10 @@
     font-style: normal;
     font-weight: normal;
     src: local('Inter Semi Bold'), url('Inter-SemiBold.woff') format('woff');
-    }
+    } */
     
 
-    @font-face {
+    /* @font-face {
     font-family: 'Inter Semi Bold Italic';
     font-style: normal;
     font-weight: normal;
@@ -124,10 +124,10 @@
     font-style: normal;
     font-weight: normal;
     src: local('Inter Extra Bold Italic'), url('Inter-ExtraBoldItalic.woff') format('woff');
-    }
+    } */
     
 
-    @font-face {
+    /* @font-face {
     font-family: 'Inter Black';
     font-style: normal;
     font-weight: normal;
@@ -140,12 +140,24 @@
     font-style: normal;
     font-weight: normal;
     src: local('Inter Black Italic'), url('Inter-BlackItalic.woff') format('woff');
-    }
+    } */
 
     @font-face {
         font-family: 'Inter';
         font-weight: normal;
-        src: local('Inter Black Italic'), url('Inter-Regular.woff') format('woff');
+        src: url('Inter-Regular.woff') format('woff');
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        font-weight: 500;
+        src: url('Inter-Regular.woff') format('woff');
+    }
+
+    @font-face {
+        font-family: 'Inter';
+        font-weight: 600;
+        src: url('Inter-SemiBold.woff') format('woff');
     }
 
     @font-face {

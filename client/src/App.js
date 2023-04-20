@@ -6,13 +6,39 @@ import Home from './Pages/home';
 import Listings from './Pages/listings';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import TopNav from './components/Navigaion/topNav';
-
+import { getParams, updateParam } from './Util/urlParcer';
 import { useEffect } from 'react';
 import useReduxMng from './hooks/useReduxMng';
+import { deepSearch } from './Util/getValueByKey';
 
 function App() {
 
-  const {getUser, activeUser} = useReduxMng()
+  const {getUser, 
+         activeUser, 
+         setSearch,
+         searchReducer,
+         propertiesReducer
+        } = useReduxMng()
+
+      useEffect( ()=>{
+
+      // console.log(searchReducer)
+          if(getParams("search")){
+
+          const listingOptions = getParams("search")
+          setSearch(listingOptions)
+
+            // makeRequest("POST", URL.SEARCH, listingObject)
+
+        }
+
+    },[])
+
+      useEffect(()=>{
+
+        updateParam(searchReducer, true, "search")
+
+    },[searchReducer])
 
   useEffect(()=>{
 
