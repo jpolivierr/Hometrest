@@ -1,12 +1,12 @@
 
-import Inputs from "./Fields/Inputs"
-import MultiSelect from "./Fields/MultiSelect";
+import Inputs from "../../lib/Forms/Fields/Inputs"
+import MultiSelect from "../../lib/Forms/Fields/MultiSelect";
 import useReduxMng from "../../hooks/useReduxMng";
-import Range from "./Fields/range";
+import Range from "../../lib/Forms/Fields/range";
 import { useEffect, useState } from "react";
 import { deepSearch } from "../../Util/getValueByKey";
-
-const NewForm = () =>{
+import { getParams } from "../../Util/urlParcer";
+const TopSearchFilter = () =>{
 
     const {
         searchReducer,
@@ -24,11 +24,12 @@ const NewForm = () =>{
        const [formError, setFormError] = useState({})
        const [formState, setFormState] = useState({
           city_zip : "",
-          Home_type : ""
+          Home_type : "",
+          list_price : "",
+          beds : "",
+          baths : ""
        })
-
      
-           
 
 
        
@@ -66,16 +67,18 @@ const NewForm = () =>{
 
     }
 
+    console.log(formState)
+
     const updateFormField = (key, value) =>{
          
-        if((key in formState)){
 
               const formFieldCopy = {...formState}
 
               formFieldCopy[key] = value
 
               setFormState(formFieldCopy)
-        }
+
+        
      }
 
 
@@ -228,7 +231,7 @@ const NewForm = () =>{
              setFormError = {setFormError}
              fieldToUpdate = {setPrices}
              icon={<i className="fa-solid fa-angle-down"></i>}
-             name={"price"}
+             name={"list_price"}
              label={"Price options"}
              options = {[
                 20000,
@@ -296,4 +299,4 @@ const NewForm = () =>{
 
 }
 
-export default NewForm
+export default TopSearchFilter

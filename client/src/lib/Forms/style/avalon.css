@@ -69,6 +69,7 @@ font-size: .8rem;
     border-radius: 10px;
     outline: none;
     padding: .7rem 1rem;
+    padding-right: 2rem;
     border: 1px solid #70879f78;
     /* border : 1px solid #203c5978; */
     width: 100%;
@@ -115,7 +116,8 @@ OPTIONS
 }
 
 
-.avalon .options .input-container i{
+.avalon .options .input-container i,
+.top-form-search .select-option i{
     position: absolute;
     top: 0;
     bottom: 0;
@@ -225,7 +227,7 @@ TopFormSection
 
     display: flex;
     align-items: center;
-    width: max-content;
+    width: 100%;
     column-gap: .7rem;
     box-shadow: none !important;
     font-weight: bold;
@@ -241,12 +243,18 @@ TopFormSection
 .top-form-search .select-option{
     text-align: center;
     font-weight: bold;
+    transition: background .5s;
 }
 
-.top-form-search .select-option i{
-    position: relative;
-    left: 10px;
+.top-form-search .select-option:hover{
+    background: var(--light-color);
 }
+
+.top-form-search fieldset:nth-child(2) input{
+  font-weight: normal;
+  text-align: left;
+}
+
 
 
 .top-form-search h2, .top-form-search h3, .top-form-search label{
@@ -267,7 +275,7 @@ TopFormSection
 
 .top-form-search fieldset .options-window{
     width: max-content !important;
-     padding: 2rem !important;
+     padding: 1rem !important;
 }
 
 .top-form-search .options-window h3{
@@ -282,4 +290,44 @@ TopFormSection
 
 .top-form-search .price-options select{
     font-weight: bold;
+}
+
+.top-form-search fieldset .options-window h3{
+    margin-top: .6rem;
+    margin-bottom: 1rem;
+}
+
+.top-form-search fieldset:nth-child(3) .options-window h3,
+.top-form-search fieldset:nth-child(4) .options-window h3{
+    margin-bottom: 1.2rem;
+}
+
+.top-form-search fieldset:nth-child(3) .options-window,
+.top-form-search fieldset:nth-child(4) .options-window
+{
+    font-weight: normal;
+    text-align: left;
+    padding: 1rem 2rem!important;
+  }
+
+.top-form-search fieldset:nth-child(5) .options-window{
+    font-weight: normal;
+    text-align: left;
+    padding: 1rem !important;
+  }
+
+  .top-form-search fieldset:nth-child(5) .options-window .price-options{
+        width: 250px;
+  }
+
+  .top-form-search fieldset:nth-child(6) .options-window .price-options{
+    width: 150px;
+}
+
+.top-form-search fieldset:nth-child(7) .options-window .price-options{
+    width: 150px;
+}
+
+.has-value{
+    background: var(--light-color);
 }

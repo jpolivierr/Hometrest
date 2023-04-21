@@ -33,7 +33,7 @@ const MultiSelect = (props) =>{
 
       }
 
-    },[])
+    },[defaultValue])
 
 
     useEffect(()=>{
@@ -120,17 +120,13 @@ const MultiSelect = (props) =>{
     }
     
 
-    const handleBlur = () =>{
-      
-    }
-
     const showStyle = optionState ? "show" : "hide"
 
      return(
         <fieldset className="options" ref={windowRef}>
         {props.label && <label>{props.label}</label>}
     
-                    <div className="select-option"
+                    <div className={`select-option ${inputValue.length > 0 && "has-value"}`}
                      onClick={()=>{toggleWindow()}}
                     >
                         {userView}

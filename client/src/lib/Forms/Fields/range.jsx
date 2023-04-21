@@ -35,11 +35,17 @@ const Range = (props) =>{
         if(defaultValue && Object.keys(defaultValue).length > 0){
             console.log(defaultValue)
             setInputValue(formatInput(defaultValue))
-            setRange(defaultValue)
+            // setRange(defaultValue)
 
         }
 
-    },[])
+    },[defaultValue])
+
+    useEffect(()=>{
+            setInputValue(formatInput(range))
+            fieldToUpdate && fieldToUpdate(range)
+            updateFormField && updateFormField(name,range)
+    },[range])
 
     useEffect(()=>{
     
@@ -57,70 +63,6 @@ const Range = (props) =>{
     },[])
 
 
-    const handleClick = ( value, funcArray) =>{
-
-      if(Array.isArray(funcArray) && funcArray.length > 0){
-
-           let newValue 
-
-           let inputValueClone = [...inputValue]
-
-           let newFieldView
-
-
-            funcArray.forEach((customFunction)=>{
-
-                newValue = customFunction(inputValueClone)
-
-            })
-
-            newFieldView = fieldView(name,inputValueClone)
-            setUserView(newFieldView)
-            setInputValue(inputValueClone)
-            fieldToUpdate && fieldToUpdate(inputValueClone)
-            updateFormField && updateFormField(name,inputValueClone)
-
-            listToggleWindow()
-
-        }else{
-          
-            handleOnChange(value)
-
-            listToggleWindow()
-        }
-        
-    }
-
-    const handleOnChange = (value) =>{
-
-        let inputValueClone = [...inputValue]
-
-        if(!inputValueClone.includes(value)){
-
-            inputValueClone.push(value)
-
-        }else{
-
-            inputValueClone = inputValueClone.filter((input) => input != value)
-
-        }
-
-
-        const newFieldView = fieldView(name,inputValueClone)
-        // console.log(newFieldView)
-        setUserView(!newFieldView ? cleanInput(inputValueClone) : cleanInput(newFieldView) )
-        setInputValue(inputValueClone)
-        fieldToUpdate && fieldToUpdate(inputValueClone)
-        updateFormField && updateFormField(name,inputValueClone)
-
-    }
-
-    // console.log(va)
-
-    const listToggleWindow = () =>{
-        return
-}
-
     const toggleWindow = () =>{
 
         setOptionState(!optionState)
@@ -136,8 +78,6 @@ const Range = (props) =>{
         const minPrice = NumberFormat.convertToInt(value)
 
         if(isNaN(minPrice)){
-
-            console.log("ran..")
 
             const rangeClone = {...range}
 
@@ -164,16 +104,15 @@ const Range = (props) =>{
         }
 
         setRange({...range, max : maxPrice })
+        // setInputValue({...range, max : maxPrice })
 }
 
     const formatInput = (range) =>{
 
             let symbole
             let bkLabel
-
-            console.log(name)
             switch(name){
-                case "price" :
+                case "list_price" :
                     symbole = "$"
                     bkLabel = ""
                     break
@@ -185,6 +124,10 @@ const Range = (props) =>{
                     symbole = ""
                     bkLabel = "Bath"
                     break
+                default : 
+                    symbole = ""
+                    bkLabel = ""
+
             }
       
 
@@ -194,7 +137,7 @@ const Range = (props) =>{
     
         if(Object.keys(range).length === 1){
             for(let keys in range){
-                return NumberFormat.abbreviateNumber(range[keys])
+                return NumberFormat.abbreviateNumber(range[keys]) + " " + bkLabel
             }
         }
     
@@ -210,7 +153,7 @@ const Range = (props) =>{
        }
     
     const showStyle = optionState ? "show" : "hide"
-    let symbole = name === "price" && "$" 
+    let symbole = name === "list_price" && "$" 
 
      return(
         <fieldset className="options" ref={windowRef}>
@@ -223,13 +166,13 @@ const Range = (props) =>{
                         {inputValue}
                         {props.icon && props.icon}
                     </div>
-                     {props.icon && props.icon}
+            
         </div>
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
             <div className={`options-window ${showStyle}`  }>
             <div className="price-options">
             {label && <h3>{label}</h3>}
-            <div>
+           
                 <select
                   onChange={(e)=>{handleMinimum(e)}}
                 >
@@ -248,10 +191,10 @@ const Range = (props) =>{
                         </option>
                     ))}
                 </select>
-            </div>
+           
 
 
-            <div>
+          
                 <select
                     onChange={(e)=>{handleMaximum(e)}}
                 >
@@ -273,7 +216,7 @@ const Range = (props) =>{
             </div>
 
 
-        </div>
+       
             </div> 
             {formError[name] && <p>{formError[name]}</p>}    
          </fieldset>
