@@ -39,25 +39,14 @@ class Format{
          
     }
 
-    abbreviateNumber(num) {
+    abbreviateNumber(num, round = false) {
 
-        if(num < 100){
-            return num
-        }
-      try {
-         if (num >= 1000 && num < 1000000) {
-          return (num / 1000).toFixed(1) + "k";
-        } else if (num >= 1000000 && num < 1000000000) {
-          return (num / 1000000).toFixed(1) + "m";
-        } else if (num >= 1000000000) {
-          return (num / 1000000000).toFixed(1) + "b";
-        } else {
-          return num;
-        }
-      } catch (error) {
-         console.log(error)
-         return 0
+      if (typeof num !== "number") {
+        return num;
       }
+      const parts = num.toFixed(round ? 2 : 0).toString().split(".");
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return parts.join(".");
        
       }
 

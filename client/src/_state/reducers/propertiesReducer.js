@@ -1,16 +1,15 @@
-import { GET_PROPERTIES } from "../actions/getProperties"
+import { SET_PROPERTIES } from "../actions/propertiesAction"
 
-const init = {}
+const init = []
 
 const propertiesReducer = (state = init, action) =>{
 
     switch(action.type){
 
-        case GET_PROPERTIES :
-            return action.payload
+        case SET_PROPERTIES :
+            return [...state, ...action.payload]
         default :
             return state
-
 
     }
 

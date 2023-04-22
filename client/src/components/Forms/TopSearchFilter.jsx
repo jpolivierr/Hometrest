@@ -88,7 +88,7 @@ const TopSearchFilter = () =>{
 
     return(
     <>
-        <form className="avalon text-left av-shadow top-form-search">
+        <form className="avalon text-left av-shadow top-form-search stick">
             <h2>Search Form</h2>
             <Inputs 
                     label={"Location"}
@@ -297,9 +297,9 @@ const TopSearchFilter = () =>{
             ]}
         />  
 
-        <MoreOptions>
+        {/* <MoreOptions>
             <SearchFilter/>
-        </MoreOptions>
+        </MoreOptions> */}
         </form>
         <Modal
                     isShowing={isShowing}

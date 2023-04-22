@@ -1,4 +1,4 @@
-export const result = [
+const propertiesDemo = [
   {
     "__typename": "SearchHome",
     "property_id": "5242686095",
@@ -2690,3 +2690,5 @@ export const result = [
     }
   }
 ]
+
+export default propertiesDemo

@@ -3,32 +3,32 @@ import Login from './Pages/login';
 import Signup from './Pages/signup';
 import About from './Pages/about';
 import Home from './Pages/home';
-import Listings from './Pages/listings';
+import Listings from './Pages/listings/listings';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import TopNav from './components/Navigaion/topNav';
 import { getParams, updateParam } from './Util/urlParcer';
 import { useEffect } from 'react';
 import useReduxMng from './hooks/useReduxMng';
-import { deepSearch } from './Util/getValueByKey';
+import propertiesDemo from "./propertyDemo"
 
 function App() {
 
-  const {getUser, 
+  const {
+    getUser, 
          activeUser, 
          setSearch,
          searchReducer,
-         propertiesReducer
+         propertiesReducer,
+         setPropertyList
         } = useReduxMng()
 
       useEffect( ()=>{
 
-      // console.log(searchReducer)
           if(getParams("search")){
 
           const listingOptions = getParams("search")
           setSearch(listingOptions)
 
-            // makeRequest("POST", URL.SEARCH, listingObject)
 
         }
 
@@ -44,6 +44,13 @@ function App() {
 
     getUser()
     
+  },[])
+
+
+  useEffect(()=>{
+
+    setPropertyList(propertiesDemo)
+
   },[])
 
   return (

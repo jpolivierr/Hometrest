@@ -1,0 +1,6 @@
+.show-properties{
+    display: grid;
+    grid-template-columns: max-content max-content;
+    gap: .5rem;
+    padding: 0rem .5rem;
+}

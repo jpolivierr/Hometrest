@@ -1,5 +1,9 @@
 .av-shadow{
-    box-shadow: 0 5px 20px -6px #16343e4f
+    box-shadow: 0 0px 14px -2px #225a6d4f
+}
+
+.av-shadow-2{
+    box-shadow: 0 0 20px #82bbcc54;
 }
 
 /* 0 10px 50px -5px rgba(46,71,93,.12) */

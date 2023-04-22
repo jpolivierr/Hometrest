@@ -1,10 +1,12 @@
+import "./style.css"
 import { useEffect } from "react"
-import SearchForm from "../components/Forms/SearchForm"
-import useRequest from "../lib/MakeRequest/MakeRequest"
-import useReduxMng from "../hooks/useReduxMng"
-import { getParams, updateParam } from "../Util/urlParcer"
-import URL from "../Config/urls"
-import findPropertyValue from "../Util/nestedObject"
+import SearchForm from "../../components/Forms/SearchForm"
+import useRequest from "../../lib/MakeRequest/MakeRequest"
+import useReduxMng from "../../hooks/useReduxMng"
+import findPropertyValue from "../../Util/nestedObject"
+import TopSearchFilter from "../../components/Forms/TopSearchFilter"
+import ShowProperties from "../../components/showProperties/ShowProperties"
+import Map from "../../components/map/Map"
 
 
 const Listings = (props) =>{
@@ -41,9 +43,11 @@ const Listings = (props) =>{
 
     return(
         <div id={id} className={Class}>
-          <div className="container center-content padding-bottom-2x">
+          <div className="search-result wide-container">
     
-            <SearchForm />
+            <TopSearchFilter/>
+            <Map />
+            <ShowProperties />
 
           </div>
           

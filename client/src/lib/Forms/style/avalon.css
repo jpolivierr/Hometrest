@@ -395,6 +395,14 @@ TopFormSection
 
 }
 
+.stick{
+    position: sticky;
+    top: 70.4px;
+    z-index: 2;
+    border-radius: 0px;
+    
+}
+
 @media (max-width: 1100px) {
 
     .top-form-search fieldset:nth-child(6){

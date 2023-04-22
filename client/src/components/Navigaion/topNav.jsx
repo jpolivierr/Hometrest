@@ -5,6 +5,7 @@ import Modal from "../../lib/Modal/modal"
 import SlideWindow from "../../lib/Modal/Windows/slideWindow"
 import ModalOverlay from "../../lib/Modal/Overlays/modalOverlay"
 import MainButton from "../buton/MainButton"
+import "./style.css"
 
 
 
@@ -28,7 +29,7 @@ const TopNav = () =>{
     return(
 
            <>
-                    <section className="padding-top-bottom">
+                    <section className="padding-top-bottom top-nav">
 
                                 <div className="container flex-space-between">
                                             <div>
