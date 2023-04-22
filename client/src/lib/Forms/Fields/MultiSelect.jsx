@@ -26,11 +26,12 @@ const MultiSelect = (props) =>{
     useEffect(()=>{
 
       if(defaultValue){
-     
         setUserView(fieldView(name, defaultValue))
 
         setInputValue(defaultValue)
-
+      }else{
+        setInputValue([])
+        setUserView("")
       }
 
     },[defaultValue])
@@ -129,18 +130,10 @@ const MultiSelect = (props) =>{
                     <div className={`select-option ${inputValue.length > 0 && "has-value"}`}
                      onClick={()=>{toggleWindow()}}
                     >
+                        {inputValue.length === 0 && props.label }
                         {userView}
                         {props.icon && props.icon}
                     </div>
-             {/* <input 
-                     placeholder={props.placeHolder} 
-                     name={props.name}
-                     value={userView}
-                     onBlur={()=>{handleBlur()}}
-                     style={props.icon && {paddingRight: "2.3rem"}}
-                     readOnly={true}
-                     onChange={e => handleOnChange(e)}
-                     /> */}
                      
         
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   

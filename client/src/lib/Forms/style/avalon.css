@@ -65,9 +65,12 @@ FIELDS
 font-size: .8rem;
 }
 
+.avalon fieldset input:focus{
+    outline: 2px solid #43b6ecb0;
+}
+
 .avalon fieldset input, .avalon fieldset select, .select-option{
     border-radius: 10px;
-    outline: none;
     padding: .7rem 1rem;
     padding-right: 2rem;
     border: 1px solid #70879f78;
@@ -100,7 +103,11 @@ OPTIONS
 
 .avalon .options li i{
     color: #586281cc;
-    font-size: 1rem;
+    font-size: 1.2rem;
+}
+
+.fa-square-check{
+    color: var(--main-color) !important;
 }
 
 .avalon .options h3{
@@ -227,6 +234,7 @@ TopFormSection
 
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 100%;
     column-gap: .7rem;
     box-shadow: none !important;
@@ -285,7 +293,7 @@ TopFormSection
 
 .top-form-search fieldset .options-window ul li{
     font-weight: normal;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .top-form-search .price-options select{
@@ -293,8 +301,24 @@ TopFormSection
 }
 
 .top-form-search fieldset .options-window h3{
-    margin-top: .6rem;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
+}
+
+.top-form-search fieldset:nth-child(3) .select-option{
+    min-width: 145px;
+}
+
+.top-form-search fieldset:nth-child(4) .select-option{
+    min-width: 174px;
+}
+
+.top-form-search fieldset:nth-child(5) .select-option{
+    min-width: 174px;
+}
+
+.top-form-search fieldset:nth-child(6) .select-option,
+.top-form-search fieldset:nth-child(7) .select-option{
+    min-width: 120px;
 }
 
 .top-form-search fieldset:nth-child(3) .options-window h3,
@@ -307,7 +331,7 @@ TopFormSection
 {
     font-weight: normal;
     text-align: left;
-    padding: 1rem 2rem!important;
+    padding: 1.5rem !important;
   }
 
 .top-form-search fieldset:nth-child(5) .options-window{
@@ -328,6 +352,87 @@ TopFormSection
     width: 150px;
 }
 
+.more-filter{
+    position: relative;
+    padding-right: 1.5rem;
+    
+}
+
+.search-filter{
+    box-shadow: none !important;
+}
+
+.search-filter fieldset:nth-child(2),
+.search-filter fieldset:nth-child(5),
+.search-filter fieldset:nth-child(6)
+{
+    margin-bottom: 2rem;
+}
+
+
 .has-value{
-    background: var(--light-color);
+    background: #add8e62e;
+    border: 2px solid #0081bf29;
+}
+
+.more-options{
+    max-height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.more-options h3{
+    margin-bottom: .9rem !important;
+
+}
+
+.more-options .static-option h3{
+    margin-bottom: 1.5rem !important;
+}
+
+.more-options fieldset{
+    margin-bottom: 1.5rem !important;
+
+}
+
+@media (max-width: 1100px) {
+
+    .top-form-search fieldset:nth-child(6){
+        display: none;
+    }
+    
+    .top-form-search fieldset:nth-child(7){
+        display: none;
+    }
+    
+}
+
+
+@media (max-width: 697px) {
+
+    
+    .top-form-search fieldset:nth-child(5){
+        display: none;
+    }
+    
+}
+
+
+@media (max-width: 633px) {
+
+    .top-form-search fieldset:nth-child(3){
+        display: none;
+    }
+
+    
+}
+
+
+@media (max-width: 467px) {
+
+    .top-form-search fieldset:nth-child(4){
+        display: none;
+    }
+    
+    
 }

@@ -109,17 +109,8 @@ const ListOption = (props) =>{
     const listToggleWindow = () =>{
         return
 }
-
-    const toggleWindow = () =>{
-
-        setOptionState(!optionState)
-
-    }
     
 
-    const handleBlur = () =>{
-      
-    }
     
     const showStyle = optionState ? "show" : "hide"
 

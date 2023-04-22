@@ -4,11 +4,10 @@ import { cleanInput } from "../Util/cleanInput";
 import RangeOptions from "../../../components/priceOptions/rangeOptions";
 import { NumberFormat } from "../../../Util/numberFormater";
 
-const Range = (props) =>{
-    
+const RangeNoDropDown = (props) =>{
+
     const minRef = useRef(null)
     const maxRef = useRef(null)
-
     const [inputValue, setInputValue] = useState([])
     const [errorMessage, setErrorMessage] = useState("")
     const [optionState, setOptionState] = useState(false)
@@ -38,7 +37,9 @@ const Range = (props) =>{
         if(defaultValue && Object.keys(defaultValue).length > 0){
 
             setInputValue(formatInput(defaultValue))
+
             // setRange(defaultValue)
+
         }else{
 
             setInputValue("")
@@ -92,13 +93,6 @@ const Range = (props) =>{
 
     },[])
 
-
-    const toggleWindow = () =>{
-
-        setOptionState(!optionState)
-
-    }
-    
 
     const handleMinimum = (e) =>{
 
@@ -194,49 +188,35 @@ const Range = (props) =>{
 
        const formatSingleInput = (value) =>{
 
-        let symbole
-        let bkLabel
-        switch(name){
-            case "list_price" :
-                symbole = "$"
-                bkLabel = ""
-                break
-            case "beds" :
-                symbole = ""
-                bkLabel = "Bed"
-                break
-            case "baths" :
-                symbole = ""
-                bkLabel = "Bath"
-                break
-            default : 
-                symbole = ""
-                bkLabel = ""
-        }
+                let symbole
+                let bkLabel
+                switch(name){
+                    case "list_price" :
+                        symbole = "$"
+                        bkLabel = ""
+                        break
+                    case "beds" :
+                        symbole = ""
+                        bkLabel = "Bed"
+                        break
+                    case "baths" :
+                        symbole = ""
+                        bkLabel = "Bath"
+                        break
+                    default : 
+                        symbole = ""
+                        bkLabel = ""
+                }
 
-        return `${symbole}${NumberFormat.abbreviateNumber(value)} ${bkLabel}`
+                return `${symbole}${NumberFormat.abbreviateNumber(value)} ${bkLabel}`
 
-}
-    
-    const showStyle = optionState ? "show" : "hide"
-    let symbole = name === "list_price" && "$" 
+       }
+
 
      return(
         <fieldset className="options" ref={windowRef}>
-        {props.label && <h3>{props.label}</h3>}
-        <div className="input-container" 
-                 onClick={()=>{toggleWindow()}}>
-                      <div className={`select-option ${inputValue.length > 0 && "has-value"}`}
-                     onClick={()=>{toggleWindow()}}
-                    >
-                        {inputValue.length === 0 && props.label }
-                        {inputValue}
-                        {props.icon && props.icon}
-                    </div>
-            
-        </div>
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
-            <div className={`options-window ${showStyle}`  }>
+           
             <div className="price-options">
             {label && <h3>{label}</h3>}
            
@@ -244,10 +224,14 @@ const Range = (props) =>{
                 ref={minRef}
                   onChange={(e)=>{handleMinimum(e)}}
                 >
-                    {defaultValue && defaultValue.min && 
+                    {
+                    defaultValue && defaultValue.min && 
+                    <>
                     <option value={formatSingleInput(defaultValue.min)}>
                         {formatSingleInput(defaultValue.min)}
                         </option>
+                    </>
+    
                         }
                     <option value={"No minimum"}>Min</option>
                     {options.map((price, index) =>(
@@ -259,15 +243,22 @@ const Range = (props) =>{
                         </option>
                     ))}
                 </select>
+           
+
+
           
                 <select
-                   ref={maxRef}
+                    ref={maxRef}
                     onChange={(e)=>{handleMaximum(e)}}
                 >
-                     {defaultValue && defaultValue.max && 
+                     {
+                     
+                     defaultValue && defaultValue.max && 
                     <option value={formatSingleInput(defaultValue.max)}>
                         {formatSingleInput(defaultValue.max)}
                         </option>
+
+
                         }
                     <option value={"No maximum"}>Max</option>
                     {options.map((price, index) =>(
@@ -279,7 +270,7 @@ const Range = (props) =>{
                         </option>
                     ))}
                 </select>
-            </div>
+            
 
 
        
@@ -289,4 +280,4 @@ const Range = (props) =>{
      )
 }
 
-export default Range;
+export default RangeNoDropDown;

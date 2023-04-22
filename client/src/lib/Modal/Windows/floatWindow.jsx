@@ -1,7 +1,7 @@
 import ModalAnimation from "../ModalAnimation/animation"
 import getMotion from "../Util/getMotion"
 
-const FoatingWindow = (props) =>{
+const FloatingWindow = (props) =>{
 
     const {
            Class,
@@ -54,4 +54,4 @@ const FoatingWindow = (props) =>{
     )
 }
 
-export default FoatingWindow 
+export default FloatingWindow 

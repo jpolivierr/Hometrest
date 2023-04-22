@@ -26,16 +26,11 @@ const TopSearchForm = () =>{
 
       const city = deepSearch(searchReducer,["city"],"")
 
-      const type = deepSearch(searchReducer,["type"],["Single_Family", "Multi_Family", "townhomes", "condos", "apartment"])
-      const status = deepSearch(searchReducer,["status"],[
-        "for_sale",
-        "for_rent",
-        "sold",
-        "ready_to_build"
-      ])
-      const price = deepSearch(searchReducer,["list_price"],{min: 200000,max:600000})
-      const beds = deepSearch(searchReducer,["beds"],{min: 1,max:4})
-      const baths = deepSearch(searchReducer,["baths"],{min: 1,max:3})
+      const type = deepSearch(searchReducer,["type"],"")
+      const status = deepSearch(searchReducer,["status"],"")
+      const price = deepSearch(searchReducer,["list_price"])
+      const beds = deepSearch(searchReducer,["beds"])
+      const baths = deepSearch(searchReducer,["baths"])
 
 
 

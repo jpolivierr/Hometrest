@@ -1,9 +1,7 @@
 .nav-list li{
-  border-radius: 100px;
-  transition: .3s;
   padding: .5rem .6rem;
 }
 
 .nav-list li:hover{
-    background: var(--light-color);
+    color : var(--main-color)
 }

@@ -3,14 +3,14 @@ import Inputs from "../../lib/Forms/Fields/Inputs"
 import MultiSelect from "../../lib/Forms/Fields/MultiSelect";
 import useReduxMng from "../../hooks/useReduxMng";
 import Range from "../../lib/Forms/Fields/range";
+import RangeNoDropDown from "../../lib/Forms/Fields/rangeNoDropDown";
+import ListOption from "../../lib/Forms/Fields/ListOption";
 import { useEffect, useState } from "react";
 import { deepSearch } from "../../Util/getValueByKey";
-import Modal from "../../lib/Modal/modal";
+import { getParams } from "../../Util/urlParcer";
 import useModal from "../../lib/Modal/useModal";
-import MoreOptions from "../../lib/Forms/Fields/MoreOptions";
-import SearchFilter from "./SearchFilter";
 
-const TopSearchFilter = () =>{
+const SearchFilter = () =>{
 
    const {
            isShowing,
@@ -40,7 +40,7 @@ const TopSearchFilter = () =>{
           beds : "",
           baths : ""
        })
-
+       
        const city = deepSearch(searchReducer,["city"],"")
        const type = deepSearch(searchReducer,["type"])
        const status = deepSearch(searchReducer,["status"])
@@ -52,7 +52,7 @@ const TopSearchFilter = () =>{
 
         const zipPattern = /^\d{5}(?:[-\s]\d{4})?$/
         const cityPattern = /^[a-zA-Z\s'\-,.]+$/
-     
+
         if(zipPattern.test(value)){
             setCity("")
             setZipcode(value)
@@ -60,6 +60,7 @@ const TopSearchFilter = () =>{
             setZipcode("")
             setCity(value)
         }else{
+
             setZipcode("")
             setCity("")
 
@@ -88,7 +89,7 @@ const TopSearchFilter = () =>{
 
     return(
     <>
-        <form className="avalon text-left av-shadow top-form-search">
+        <form style={{margin: "auto"}}className="avalon text-left av-shadow search-filter">
             <h2>Search Form</h2>
             <Inputs 
                     label={"Location"}
@@ -105,7 +106,7 @@ const TopSearchFilter = () =>{
                     defaultValue = {city}
                     />
 
-            <MultiSelect 
+            <ListOption 
                     label={"Home type"}
                     placeHolder={"Home type"}
                     name = {"Home_type"}
@@ -175,7 +176,7 @@ const TopSearchFilter = () =>{
                 />
 
 
-<MultiSelect 
+<ListOption 
                     label={"Property status"}
                     placeHolder={"Home type"}
                     name = {"property_status"}
@@ -228,14 +229,14 @@ const TopSearchFilter = () =>{
                     // listPreventExit = {field.listPreventExit}
                 />
 
-        <Range
+        <RangeNoDropDown
              defaultValue = {price}
              formError = {formError}
              setFormError = {setFormError}
              fieldToUpdate = {setPrices}
              icon={<i className="fa-solid fa-angle-down"></i>}
              name={"list_price"}
-             label={"Price"}
+             label={"Price options"}
              options = {[
                 20000,
                 30000,
@@ -253,7 +254,7 @@ const TopSearchFilter = () =>{
             ]}
         />  
 
-        <Range
+        <RangeNoDropDown
              defaultValue = {beds}
              formError = {formError}
              setFormError = {setFormError}
@@ -275,7 +276,7 @@ const TopSearchFilter = () =>{
             ]}
         /> 
 
-        <Range
+        <RangeNoDropDown
              defaultValue = {baths}
              formError = {formError}
              setFormError = {setFormError}
@@ -295,27 +296,12 @@ const TopSearchFilter = () =>{
                         9,
                         10
             ]}
-        />  
-
-        <MoreOptions>
-            <SearchFilter/>
-        </MoreOptions>
+        /> 
+        
         </form>
-        <Modal
-                    isShowing={isShowing}
-                    toggle={toggle}
-                    motion={motion}
-                    time={0}
-                    motionType={"fade"}
-                    type={"floating"}
-                >
-                <form>
-                  <input />
-                </form>
-                </Modal>
                 </>
     )
 
 }
 
-export default TopSearchFilter
+export default SearchFilter

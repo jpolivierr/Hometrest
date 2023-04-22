@@ -23,6 +23,8 @@ const Inputs= (props) =>{
     useEffect(()=>{
         if(defaultValue){
                 setInputValue(defaultValue)
+              }else{
+                setInputValue("")
               }
     },[defaultValue])
 
