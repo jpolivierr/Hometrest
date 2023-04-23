@@ -89,8 +89,9 @@ const TopSearchFilter = () =>{
     return(
     <>
         <form className="avalon text-left av-shadow top-form-search stick">
-            <h2>Search Form</h2>
+
             <Inputs 
+                    elementClass={"location-field"}
                     label={"Location"}
                     placeHolder={"Enter city or zip"}
                     name = {"city_zip"}
@@ -106,6 +107,7 @@ const TopSearchFilter = () =>{
                     />
 
             <MultiSelect 
+                    elementClass={"type-field"}
                     label={"Home type"}
                     placeHolder={"Home type"}
                     name = {"Home_type"}
@@ -176,6 +178,7 @@ const TopSearchFilter = () =>{
 
 
 <MultiSelect 
+                    elementClass={"status-field"}
                     label={"Property status"}
                     placeHolder={"Home type"}
                     name = {"property_status"}
@@ -229,6 +232,7 @@ const TopSearchFilter = () =>{
                 />
 
         <Range
+             elementClass={"price-field"}
              defaultValue = {price}
              formError = {formError}
              setFormError = {setFormError}
@@ -254,6 +258,7 @@ const TopSearchFilter = () =>{
         />  
 
         <Range
+             elementClass={"bed-field"}
              defaultValue = {beds}
              formError = {formError}
              setFormError = {setFormError}
@@ -276,6 +281,7 @@ const TopSearchFilter = () =>{
         /> 
 
         <Range
+             elementClass={"bath-field"}
              defaultValue = {baths}
              formError = {formError}
              setFormError = {setFormError}
@@ -297,9 +303,10 @@ const TopSearchFilter = () =>{
             ]}
         />  
 
-        {/* <MoreOptions>
-            <SearchFilter/>
-        </MoreOptions> */}
+        <MoreOptions>
+             <SearchFilter/> 
+        </MoreOptions>
+        
         </form>
         <Modal
                     isShowing={isShowing}

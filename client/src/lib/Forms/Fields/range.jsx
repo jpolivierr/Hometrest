@@ -29,7 +29,8 @@ const Range = (props) =>{
            onChangefunc, 
            custom,
            label,
-           options
+           options,
+           elementClass
             } = props
 
 
@@ -222,7 +223,7 @@ const Range = (props) =>{
     let symbole = name === "list_price" && "$" 
 
      return(
-        <fieldset className="options" ref={windowRef}>
+        <fieldset className={`${elementClass} options`} ref={windowRef}>
         {props.label && <h3>{props.label}</h3>}
         <div className="input-container" 
                  onClick={()=>{toggleWindow()}}>
@@ -235,55 +236,61 @@ const Range = (props) =>{
                     </div>
             
         </div>
-            {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
-            <div className={`options-window ${showStyle}`  }>
-            <div className="price-options">
-            {label && <h3>{label}</h3>}
-           
-                <select
-                ref={minRef}
-                  onChange={(e)=>{handleMinimum(e)}}
-                >
-                    {defaultValue && defaultValue.min && 
-                    <option value={formatSingleInput(defaultValue.min)}>
-                        {formatSingleInput(defaultValue.min)}
-                        </option>
-                        }
-                    <option value={"No minimum"}>Min</option>
-                    {options.map((price, index) =>(
-                        <option 
-                        key={index} 
-                        value={formatSingleInput(price)}
-                        >
-                           {formatSingleInput(price)}
-                        </option>
-                    ))}
-                </select>
-          
-                <select
-                   ref={maxRef}
-                    onChange={(e)=>{handleMaximum(e)}}
-                >
-                     {defaultValue && defaultValue.max && 
-                    <option value={formatSingleInput(defaultValue.max)}>
-                        {formatSingleInput(defaultValue.max)}
-                        </option>
-                        }
-                    <option value={"No maximum"}>Max</option>
-                    {options.map((price, index) =>(
-                        <option 
-                        key={index} 
-                        value={formatSingleInput(price)}
-                        >
-                           {formatSingleInput(price)}
-                        </option>
-                    ))}
-                </select>
+            {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
+
+            <div className={`option-window-container ${showStyle}`}>
+            <div onClick={()=>{toggleWindow()}} className={`select-bk`}></div>
+                    <div className={`options-window ${showStyle}`  }>
+                <div className="price-options">
+                {label && <h3>{label}</h3>}
+            
+                    <select
+                    ref={minRef}
+                    onChange={(e)=>{handleMinimum(e)}}
+                    >
+                        {defaultValue && defaultValue.min && 
+                        <option value={formatSingleInput(defaultValue.min)}>
+                            {formatSingleInput(defaultValue.min)}
+                            </option>
+                            }
+                        <option value={"No minimum"}>Min</option>
+                        {options.map((price, index) =>(
+                            <option 
+                            key={index} 
+                            value={formatSingleInput(price)}
+                            >
+                            {formatSingleInput(price)}
+                            </option>
+                        ))}
+                    </select>
+            
+                    <select
+                    ref={maxRef}
+                        onChange={(e)=>{handleMaximum(e)}}
+                    >
+                        {defaultValue && defaultValue.max && 
+                        <option value={formatSingleInput(defaultValue.max)}>
+                            {formatSingleInput(defaultValue.max)}
+                            </option>
+                            }
+                        <option value={"No maximum"}>Max</option>
+                        {options.map((price, index) =>(
+                            <option 
+                            key={index} 
+                            value={formatSingleInput(price)}
+                            >
+                            {formatSingleInput(price)}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+
+        
+                </div>
             </div>
 
-
-       
-            </div> 
+             
             {formError[name] && <p>{formError[name]}</p>}    
          </fieldset>
      )

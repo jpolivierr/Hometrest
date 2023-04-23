@@ -28,7 +28,8 @@ const RangeNoDropDown = (props) =>{
            onChangefunc, 
            custom,
            label,
-           options
+           options,
+           elementClass
             } = props
 
 
@@ -214,7 +215,7 @@ const RangeNoDropDown = (props) =>{
 
 
      return(
-        <fieldset className="options" ref={windowRef}>
+        <fieldset className={`${elementClass} options`} ref={windowRef}>
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
            
             <div className="price-options">

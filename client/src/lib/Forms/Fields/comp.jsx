@@ -24,6 +24,7 @@ const Comp = (props) =>{
            updateFormField,
            onChangefunc, 
            custom,
+           elementClass
             } = props
 
 
@@ -203,7 +204,7 @@ const Comp = (props) =>{
     const showStyle = optionState ? "show" : "hide"
 
      return(
-        <fieldset className="options" ref={windowRef}>
+        <fieldset className={`${elementClass} options`} ref={windowRef}>
         {props.label && <h3>{props.label}</h3>}
         <div className="input-container" 
                  onClick={()=>{toggleWindow()}}>

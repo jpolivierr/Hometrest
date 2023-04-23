@@ -22,7 +22,8 @@ const StaticComp = (props) =>{
            name,
            updateFormField,
            onChangefunc, 
-           custom
+           custom,
+           elementClass
             } = props
 
     useEffect(()=>{
@@ -140,7 +141,7 @@ const StaticComp = (props) =>{
     const showStyle = optionState ? "show" : "hide"
 
      return(
-        <fieldset className="options" ref={windowRef}>
+        <fieldset className={`${elementClass} options`} ref={windowRef}>
 
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
                     <RangeOptions 

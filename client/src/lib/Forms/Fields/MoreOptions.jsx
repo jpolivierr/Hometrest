@@ -11,7 +11,8 @@ const MoreOptions = (props) =>{
     const { 
            formError, 
            name,
-           children
+           children,
+           elementClass
             } = props
 
 
@@ -44,7 +45,7 @@ const MoreOptions = (props) =>{
     const showStyle = optionState ? "show" : "hide"
 
      return(
-        <fieldset className="options" ref={windowRef}>
+        <fieldset className={`${elementClass} options`} ref={windowRef}>
         {props.label && <label>{props.label}</label>}
     
                     <div className={`select-option ${inputValue.length > 0 && "has-value"}`}
@@ -54,11 +55,14 @@ const MoreOptions = (props) =>{
                        <i className="fa-solid fa-ellipsis-vertical"></i>
                     </div>
                      
-          
-            <div style={{right: 0, left: "auto"}}className={`options-window ${showStyle} more-options`  }>
-                   
-               {children}
-            </div>     
+                    <div className={`option-window-container ${showStyle}`}>
+                    <div onClick={()=>{toggleWindow()}} className={`select-bk`}></div>
+                        <div style={{right: 0, left: "auto"}}className={`options-window ${showStyle} more-options`  }>
+                                
+                            {children}
+                    </div>  
+                    </div>
+               
          </fieldset>
      )
 }

@@ -19,7 +19,8 @@ const ListOption = (props) =>{
            defaultValue,
            name,
            updateFormField,
-           onChangefunc
+           onChangefunc,
+           elementClass
             } = props
 
 
@@ -115,7 +116,7 @@ const ListOption = (props) =>{
     const showStyle = optionState ? "show" : "hide"
 
      return(
-        <fieldset className="options static-option" ref={windowRef}>
+        <fieldset className={`${elementClass} options static-option`} ref={windowRef}>
 
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
             

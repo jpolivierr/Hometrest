@@ -16,7 +16,8 @@ const Options = (props) =>{
            defaultValue,
            name,
            updateFormField,
-           listPreventExit
+           listPreventExit,
+           elementClass
             } = props
 
 
@@ -107,7 +108,7 @@ const Options = (props) =>{
     const showStyle = optionState ? "show" : "hide"
 
      return(
-        <fieldset className="options" ref={windowRef}>
+        <fieldset className={` ${elementClass} options`} ref={windowRef}>
         {props.label && <label>{props.label}</label>}
         <div className="input-container" 
                  onClick={()=>{toggleWindow()}}>

@@ -89,7 +89,7 @@ const SearchFilter = () =>{
 
     return(
     <>
-        <form style={{margin: "auto"}}className="avalon text-left av-shadow search-filter">
+        <div style={{margin: "auto"}}className="avalon text-left av-shadow search-filter">
             <h2>Search Form</h2>
             <Inputs 
                     label={"Location"}
@@ -298,7 +298,7 @@ const SearchFilter = () =>{
             ]}
         /> 
         
-        </form>
+        </div>
                 </>
     )
 

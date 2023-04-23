@@ -19,7 +19,8 @@ const MultiSelect = (props) =>{
            defaultValue,
            name,
            updateFormField,
-           onChangefunc
+           onChangefunc,
+           elementClass
             } = props
 
 
@@ -124,7 +125,7 @@ const MultiSelect = (props) =>{
     const showStyle = optionState ? "show" : "hide"
 
      return(
-        <fieldset className="options" ref={windowRef}>
+        <fieldset className={`${elementClass} options`} ref={windowRef}>
         {props.label && <label>{props.label}</label>}
     
                     <div className={`select-option ${inputValue.length > 0 && "has-value"}`}
@@ -136,8 +137,13 @@ const MultiSelect = (props) =>{
                     </div>
                      
         
-            {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
-            <div className={`options-window ${showStyle}`  }>
+            {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}  
+
+            
+            <div className={`option-window-container ${showStyle}`}>
+                <div onClick={()=>{toggleWindow()}} className={`select-bk`}></div>
+                  <div className={`options-window ${showStyle}`  }>
+            
                    {/* {props.comp} */}
                     <ul className={list.info.Class}>
                         {list.info.title && <h3>{list.info.title}</h3>}
@@ -165,7 +171,9 @@ const MultiSelect = (props) =>{
                           ))
                         }
                     </ul>
-            </div> 
+            </div>
+            </div>
+           
             {formError[name] && <p>{formError[name]}</p>}    
          </fieldset>
      )

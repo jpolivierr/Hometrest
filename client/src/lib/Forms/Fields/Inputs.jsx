@@ -16,6 +16,7 @@ const Inputs= (props) =>{
            defaultKey,
            type,
            onOutFocus,
+           elementClass
             } = props
 
 
@@ -52,7 +53,7 @@ const Inputs= (props) =>{
     }
     
      return(
-        <fieldset>
+        <fieldset className={elementClass}>
         {props.label && <label>{props.label}</label>}
         <div className="input-container">
              <input 

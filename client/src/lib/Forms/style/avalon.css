@@ -20,9 +20,9 @@ LABEL AND HEADER
     margin-bottom: 2rem;
 }
 
-.avalon h3{
+/* .avalon h3{
     margin-bottom: .7rem;
-}
+} */
 
 .avalon label{
     display: block;
@@ -119,7 +119,6 @@ OPTIONS
     gap: .5rem;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: .5rem;
 }
 
 
@@ -134,18 +133,6 @@ OPTIONS
     height: max-content;
     width: max-content;
     cursor: pointer;
-}
-
-.avalon .options .options-window{
-    position: absolute;
-    left: 0;
-    top: 110%;
-    border-radius: 10px;
-    box-shadow: 0 0 20px #82bbcc54;padding: 1rem;
-    width: 100%;
-    background: white;
-    border: 1px solid rgb(228, 227, 227);
-    z-index: 1;
 }
 
 .avalon .static-option h3{
@@ -281,28 +268,50 @@ TopFormSection
     overflow: inherit;
 }
 
-.top-form-search fieldset .options-window{
-    width: max-content !important;
-     padding: 1rem !important;
+.options-window{
+    position: absolute;
+    left: 0;
+    top: 110%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #82bbcc54;
+    width: max-content;
+    background: white;
+    border: 1px solid rgb(228, 227, 227);
+    z-index: 1;
 }
+
+.options-window h3{
+    background: var(--light-color);
+    padding: 1rem;
+    padding-left: 1.5rem;
+    text-align: left;
+    color: var(--alt-text-color);
+    font-size: .8rem;
+    margin-bottom: .7rem;
+}
+
+.options-window ul li{
+    padding: .6rem 1.5rem;
+}
+
 
 .top-form-search .options-window h3{
     display: block;
-    margin-bottom: 1.3rem;
 }
 
-.top-form-search fieldset .options-window ul li{
+/* .top-form-search fieldset .options-window ul li{
     font-weight: normal;
-    margin-bottom: 1.5rem;
-}
+    padding: .6rem 1.5rem;
+} */
+
 
 .top-form-search .price-options select{
     font-weight: bold;
 }
 
-.top-form-search fieldset .options-window h3{
+/* .top-form-search fieldset .options-window h3{
     margin-bottom: .5rem;
-}
+} */
 
 .top-form-search fieldset:nth-child(3) .select-option{
     min-width: 145px;
@@ -321,17 +330,16 @@ TopFormSection
     min-width: 120px;
 }
 
-.top-form-search fieldset:nth-child(3) .options-window h3,
+/* .top-form-search fieldset:nth-child(3) .options-window h3,
 .top-form-search fieldset:nth-child(4) .options-window h3{
     margin-bottom: 1.2rem;
-}
+} */
 
-.top-form-search fieldset:nth-child(3) .options-window,
-.top-form-search fieldset:nth-child(4) .options-window
+.top-form-search .type-field .options-window,
+.top-form-search .status-field .options-window
 {
     font-weight: normal;
     text-align: left;
-    padding: 1.5rem !important;
   }
 
 .top-form-search fieldset:nth-child(5) .options-window{
@@ -386,6 +394,8 @@ TopFormSection
 
 }
 
+
+
 .more-options .static-option h3{
     margin-bottom: 1.5rem !important;
 }
@@ -403,42 +413,64 @@ TopFormSection
     
 }
 
+.select-bk{
+        display: none;
+        background: #232a40c9;
+        position: fixed;
+        top: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        right: 0;
+}
+
 @media (max-width: 1100px) {
 
-    .top-form-search fieldset:nth-child(6){
+    .top-form-search .bath-field{
         display: none;
     }
     
-    .top-form-search fieldset:nth-child(7){
-        display: none;
-    }
-    
-}
-
-
-@media (max-width: 697px) {
-
-    
-    .top-form-search fieldset:nth-child(5){
+    .top-form-search .bed-field{
         display: none;
     }
     
 }
 
-
-@media (max-width: 633px) {
-
-    .top-form-search fieldset:nth-child(3){
-        display: none;
-    }
+@media (max-width: 921px) {
 
     
+    .top-form-search .price-field{
+        display: none;
+    }
+    .options-window{
+        position: fixed !important;
+        top: auto !important;
+        bottom: 0;
+        width: 100% !important;
+    }
+
+    .select-bk{
+        display: block;
+    }
 }
 
 
-@media (max-width: 467px) {
+@media (max-width: 743px) {
 
-    .top-form-search fieldset:nth-child(4){
+    .top-form-search .status-field{
+        display: none;
+    }
+
+    .top-form-search{
+        justify-content: flex-start;
+    }
+
+}
+
+
+@media (max-width: 667px) {
+
+    .top-form-search .type-field{
         display: none;
     }
     
