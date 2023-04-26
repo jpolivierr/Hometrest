@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 
 import com.hometrest.MySessionManagement;
+import com.hometrest.Redirects;
 import com.hometrest.Util.FormatDate;
 
 import jakarta.servlet.Filter;
@@ -68,8 +69,6 @@ public class EndPointFilter implements Filter {
 
          // JsonHttpResponse.send(response, 200,"no sessions found", null);
           out.print("session do not exist. <br>");
-
-            
       }else{
 
             String sessionExist = MySessionManagement.validateSessionId(session,httpRequest);
@@ -84,20 +83,12 @@ public class EndPointFilter implements Filter {
                         // httpResponse.sendRedirect("http://localhost:3001");
                            String path = httpRequest.getServletPath();
 
-                        switch(path){
-                           case "/login" :
-                              httpResponse.sendRedirect("/");
-                              break;
-                           default :
-                              return ;
-
-                        }
+                           Redirects.send(path, httpResponse);
             }
 
           
 
       }
-
 
       chain.doFilter(request, response);
 
