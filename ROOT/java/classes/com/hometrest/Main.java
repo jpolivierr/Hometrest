@@ -2,6 +2,7 @@ package com.hometrest;
 
  import com.hometrest.servlet.*;
 import com.hometrest.ErrorHandler.ErrorServlet;
+import com.hometrest.api.LoginApi;
 // import com.hometrest.api.ApiEndPoint;
 import com.hometrest.filter.*;
 
@@ -15,6 +16,7 @@ public class Main {
          new SignupServlet();
          new ErrorServlet();
          new SearchServlet();
+         new LoginApi();
         // new ApiEndPoint();
         // String url = "https://realty-in-us.p.rapidapi.com/properties/v3/list";
         // String data = "{\"limit\": 3,\"postal_code\":\"90004\"}";

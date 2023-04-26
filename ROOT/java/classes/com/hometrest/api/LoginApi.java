@@ -2,9 +2,12 @@ package com.hometrest.api;
 
 import java.io.IOException;
 // import java.io.PrintWriter;
+import java.io.PrintWriter;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
-import com.hometrest.JsonResponse.JsonHttpResponse;
+import com.hometrest.JsonHttpResponse;
+import com.hometrest.MySessionManagement;
 import com.hometrest.database.DbConnect;
 import com.hometrest.database.ValidateUser;
 import com.hometrest.formSubmissions.LoginForm;
@@ -17,44 +20,62 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 // import jakarta.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = "/login")
+@WebServlet(urlPatterns = "/secure/login")
 @MultipartConfig
 
 public class LoginApi extends HttpServlet {
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
     throws ServletException, IOException{
 
-        String clientResponse = req.getParameter("formData");
+        PrintWriter out = response.getWriter();
+        out.println("login api");
 
-        Gson gson = new Gson();
+        // Gson gson = new Gson();
 
-        var userInput = gson.fromJson(clientResponse, LoginForm.class);
+        // String clientResponse = request.getParameter("formData");
 
-        var result = userInput.validate();
+        // LoginForm userInput = gson.fromJson(clientResponse, LoginForm.class);
 
-        if(result.isEmpty()){
+        LoginForm logInForm = new LoginForm();
+
+        logInForm.setEmail("jp@gmail.com");
+
+        logInForm.setPassword("car2naval2");
+
+        HashMap<String, String> validateLoginInput = logInForm.validate();
+
+        if(validateLoginInput.isEmpty()){
 
             var dbConnect = DbConnect.getDbConnect();
 
             var connection = dbConnect.connect();
 
-            var getUser = new ValidateUser();
+            ValidateUser validateUser = new ValidateUser();
 
-            var userIsAuthenticate = getUser.init(resp, connection, userInput);
+            HashMap<String,String> userIsAuthenticate = validateUser.init(response, connection, logInForm);
 
-            if(userIsAuthenticate){
+            if(userIsAuthenticate.isEmpty()){
 
-                System.out.println("user authenticated...");
+                System.out.println("Either the password or email is not valid");
 
-                JsonHttpResponse.send(resp, 200,"user authenticated", result);
+            }else{
+                // JsonHttpResponse.send(response, 409,"Error", result);
+                out.println("User is authenticated...");
+    
+                var newSession = MySessionManagement.create(request, response);
+    
+                    newSession.setAttribute("email", logInForm.getEmail()); 
+    
+                    // JsonHttpResponse.send(response, 200,"user authenticated", result);
             }
 
         }else{
-            JsonHttpResponse.send(resp, 409,"aerror", result);
+            // JsonHttpResponse.send(response, 409,"Error", result);
+            out.println("there isan error in the form...");
         }
 
 
-    }
+     }
     
 }

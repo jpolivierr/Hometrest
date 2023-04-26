@@ -4,7 +4,7 @@ import java.io.IOException;
 // import java.io.PrintWriter;
 
 import com.google.gson.Gson;
-import com.hometrest.JsonResponse.JsonHttpResponse;
+import com.hometrest.JsonHttpResponse;
 import com.hometrest.database.CreateUser;
 import com.hometrest.database.DbConnect;
 import com.hometrest.formSubmissions.SignupForm;

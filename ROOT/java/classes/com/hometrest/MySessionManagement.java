@@ -1,4 +1,4 @@
-package com.hometrest.SessionManagement;
+package com.hometrest;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Cookie;
 import com.hometrest.Util.FormatDate;
 
-public class SessionManagement {
+public class MySessionManagement {
 
         public final static String SESSION_ID = "SESSION_ID";
         public final static String SESSION_START_TIME = "START_TIME";
@@ -98,8 +98,6 @@ public class SessionManagement {
             session.setAttribute(SESSION_ID, session.getId());
             session.setAttribute(SESSION_START_TIME, sessionCreationdateFormat);
             session.setAttribute(SESSION_LAST_ACCESS, lastAccessTimeFormat);
-
-            // JsonHttpResponse.send(response, 200, "created a session", null);
 
          }
 

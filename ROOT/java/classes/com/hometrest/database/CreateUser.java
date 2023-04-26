@@ -8,7 +8,7 @@ import jakarta.servlet.ServletResponse;
 
 import java.sql.CallableStatement;
 
-import com.hometrest.JsonResponse.JsonHttpResponse;
+import com.hometrest.JsonHttpResponse;
 import com.hometrest.formSubmissions.SignupForm;
 
 public class CreateUser extends DbMethods<String>  {

@@ -2,7 +2,7 @@ package com.hometrest.ErrorHandler;
 
 import java.io.IOException;
 
-import com.hometrest.JsonResponse.JsonHttpResponse;
+import com.hometrest.JsonHttpResponse;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

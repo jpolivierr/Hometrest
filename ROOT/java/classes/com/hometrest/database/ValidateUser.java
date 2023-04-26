@@ -8,14 +8,13 @@ import jakarta.servlet.ServletResponse;
 
 import java.sql.CallableStatement;
 
-import com.hometrest.JsonResponse.JsonHttpResponse;
 import com.hometrest.formSubmissions.LoginForm;
 
 public class ValidateUser  {
 
-    boolean result = false;
+    HashMap<String,String> responseBody = new HashMap<String,String>();
 
-    public boolean init(ServletResponse response, Connection connection, LoginForm userInput){
+    public HashMap<String,String> init(ServletResponse response, Connection connection, LoginForm userInput){
 
         
         
@@ -30,9 +29,6 @@ public class ValidateUser  {
             cstmt.execute();
 
             var rs = cstmt.executeQuery();
-            
-            var responseBody = new HashMap<String,String>();
-
 
             while(rs.next()){
                      
@@ -41,20 +37,6 @@ public class ValidateUser  {
                          responseBody.put("email", rs.getString("last_name"));
                          responseBody.put("liked_id", Integer.toString(rs.getInt("liked_id")));
                          responseBody.put("url", rs.getString("url"));
-
-            }
-
-            
-            
-            if(responseBody.isEmpty()){
-
-                responseBody.put("Email", "Your email or password is incorrect");
-                JsonHttpResponse.send(response, 409,"error",responseBody );
-
-            }else{
-
-                // jsonHttpResponse.send(response, 200,"Success",responseBody );
-                result = true;
 
             }
             
@@ -69,7 +51,6 @@ public class ValidateUser  {
 
                 if(e.getErrorCode() == 0){
                     error.put("serverError", "Your email or password is incorrect");
-                    JsonHttpResponse.send(response, 409,"Error", error);
                 }
 
                 e.printStackTrace();
@@ -87,7 +68,7 @@ public class ValidateUser  {
             
         }
 
-        return result;
+        return responseBody;
 
     }
 

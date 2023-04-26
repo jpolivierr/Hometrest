@@ -1,64 +1,54 @@
 package com.hometrest.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import com.google.gson.Gson;
-import com.hometrest.JsonResponse.JsonHttpResponse;
-import com.hometrest.SessionManagement.SessionManagement;
-import com.hometrest.database.DbConnect;
-import com.hometrest.database.ValidateUser;
-import com.hometrest.formSubmissions.LoginForm;
+import com.hometrest.MySessionManagement;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 
-@WebServlet(urlPatterns = "/secure/login")
+@WebServlet(urlPatterns = "/login")
 @MultipartConfig
 public class LoginServlet extends HttpServlet{
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
     throws ServletException, IOException{
 
+    PrintWriter out = response.getWriter();
 
-        String clientResponse = request.getParameter("formData");
+    HttpSession session = request.getSession(false);
 
-        Gson gson = new Gson();
+    String sessionId = MySessionManagement.validateSessionId(session, request);
 
-        var userInput = gson.fromJson(clientResponse, LoginForm.class);
+    if(session != null && sessionId != null){
 
-        var result = userInput.validate();
+        out.print("Session Exist.");
 
-        if(result.isEmpty()){
+        response.sendRedirect("/");
 
-            var dbConnect = DbConnect.getDbConnect();
+    }else{
 
-            var connection = dbConnect.connect();
+        out.print("Session does not exist.");
 
-            ValidateUser validateUser = new ValidateUser();
+         RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
 
-            var userIsAuthenticate = validateUser.init(response, connection, userInput);
+         dispatcher.include(request, response);
 
-            if(userIsAuthenticate){
+    }
+ 
 
-                System.out.println("user authenticated...");
+   
 
-                var newSession = SessionManagement.create(request, response);
-                newSession.setAttribute("email", userInput.getEmail()); 
-
-                JsonHttpResponse.send(response, 200,"user authenticated", result);
-            }
-
-        }else{
-            JsonHttpResponse.send(response, 409,"Error", result);
-        }
-
-
+        
     }
 
 }
