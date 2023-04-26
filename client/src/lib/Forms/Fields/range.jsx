@@ -3,6 +3,7 @@ import fieldView from "../Util/fieldView";
 import { cleanInput } from "../Util/cleanInput";
 import RangeOptions from "../../../components/priceOptions/rangeOptions";
 import { NumberFormat } from "../../../Util/numberFormater";
+import Buttons from "../../../lib/Buttons/button"
 
 const Range = (props) =>{
     
@@ -240,10 +241,9 @@ const Range = (props) =>{
 
             <div className={`option-window-container ${showStyle}`}>
             <div onClick={()=>{toggleWindow()}} className={`select-bk`}></div>
-                    <div className={`options-window ${showStyle}`  }>
-                <div className="price-options">
+            <div className={`options-window ${showStyle}`  }>
                 {label && <h3>{label}</h3>}
-            
+                <div className="range-options">
                     <select
                     ref={minRef}
                     onChange={(e)=>{handleMinimum(e)}}
@@ -284,9 +284,13 @@ const Range = (props) =>{
                         ))}
                     </select>
                 </div>
-
-
-        
+                <div className="option-window-button-container">
+                        <Buttons 
+                            label="Done"
+                            Class="button main-btn"
+                            clickEvent={(e)=>{ e.preventDefault();toggleWindow()}}
+                        />
+                    </div>
                 </div>
             </div>
 

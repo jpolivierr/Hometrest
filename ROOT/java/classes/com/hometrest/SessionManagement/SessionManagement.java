@@ -1,19 +1,15 @@
 package com.hometrest.SessionManagement;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
-import com.hometrest.JsonResponse.JsonHttpResponse;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Cookie;
+import com.hometrest.Util.FormatDate;
 
 public class SessionManagement {
 
         public final static String SESSION_ID = "SESSION_ID";
-        public final static String SESSION_START_TIME = "TART_TIME";
+        public final static String SESSION_START_TIME = "START_TIME";
         public final static String SESSION_LAST_ACCESS = "LAST_ACCESS";
 
 
@@ -32,36 +28,32 @@ public class SessionManagement {
 
     }
 
-    public static boolean validateSessionId(HttpServletRequest request,HttpServletResponse response){
+    public static String validateSessionId(HttpSession session, HttpServletRequest request){
 
 
-        boolean result = false;
-
-        HttpSession session = request.getSession(false);
-
-    //    JsonHttpResponse.send(response, 200, session.getId(), null);
+        String sessionId = null;
 
         if(session != null){
 
             var currentSessionId = session.getId();
 
-            var sessionCookie = getCookies(request, "JSESSIONID");
+            String sessionCookie = getCookies(request, "JSESSIONID");
 
             if(sessionCookie == null){
 
-                return result;
+                return sessionId;
 
             }
 
             if(currentSessionId.equals(sessionCookie)){
 
-                result = true;
+                sessionId = sessionCookie ;
 
             }
         }
 
 
-        return result;
+        return sessionId;
 
     }
 
@@ -93,24 +85,21 @@ public class SessionManagement {
         // Create a session object if it is already not  created.
          HttpSession session = request.getSession();
 
-
-
          if(session.isNew()){
 
-            Date sessionCreationdate = new Date(session.getCreationTime());
-            SimpleDateFormat simpleDate = new SimpleDateFormat("E yyyy-MM-dd 'at' hh:mm:ss a zzz");
+            String format = "E yyyy-MM-dd 'at' hh:mm:ss a zzz";
 
-            String sessionCreationdateFormat = simpleDate.format(sessionCreationdate);
+            String sessionCreationdateFormat = FormatDate.format(session.getCreationTime(), format);
 
             // Get last access time of this web page.
-            Date lastAccessTime = new Date(session.getLastAccessedTime());
-            String lastAccessTimeFormat = simpleDate.format(lastAccessTime);
+            String lastAccessTimeFormat = FormatDate.format(session.getLastAccessedTime(), format);
 
+            session.setMaxInactiveInterval(60);
             session.setAttribute(SESSION_ID, session.getId());
             session.setAttribute(SESSION_START_TIME, sessionCreationdateFormat);
             session.setAttribute(SESSION_LAST_ACCESS, lastAccessTimeFormat);
 
-            JsonHttpResponse.send(response, 200, "created a session", null);
+            // JsonHttpResponse.send(response, 200, "created a session", null);
 
          }
 

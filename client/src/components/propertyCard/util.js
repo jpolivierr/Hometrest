@@ -2,10 +2,6 @@
 export const getPhoto = (str) =>{
 
     const index = str.lastIndexOf(".jpg");
-
-    console.log(index)
-    console.log(str.slice(0,index - 1) + "0_h360.jpg")
-        console.log(str)
         // return str;
 
         return str.slice(0,index - 1) + "od-w480_h360.jpg"

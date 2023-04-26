@@ -4,6 +4,7 @@ import { cleanInput } from "../Util/cleanInput";
 import RangeOptions from "../../../components/priceOptions/rangeOptions";
 import { NumberFormat } from "../../../Util/numberFormater";
 
+
 const RangeNoDropDown = (props) =>{
 
     const minRef = useRef(null)
@@ -217,9 +218,9 @@ const RangeNoDropDown = (props) =>{
      return(
         <fieldset className={`${elementClass} options`} ref={windowRef}>
             {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}   
-           
-            <div className="price-options">
-            {label && <h3>{label}</h3>}
+           {label && <h3>{label}</h3>}
+            <div className="range-options">
+            
            
                 <select
                 ref={minRef}
@@ -271,9 +272,6 @@ const RangeNoDropDown = (props) =>{
                         </option>
                     ))}
                 </select>
-            
-
-
        
             </div> 
             {formError[name] && <p>{formError[name]}</p>}    

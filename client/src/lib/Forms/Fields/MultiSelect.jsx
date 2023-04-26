@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState } from "react";
 import fieldView from "../Util/fieldView";
 import { cleanInput } from "../Util/cleanInput";
+import Buttons from "../../../lib/Buttons/button"
 
 const MultiSelect = (props) =>{
 
@@ -171,6 +172,14 @@ const MultiSelect = (props) =>{
                           ))
                         }
                     </ul>
+                    <div className="option-window-button-container">
+                        <Buttons 
+                            label="Done"
+                            Class="button main-btn"
+                            clickEvent={(e)=>{ e.preventDefault();toggleWindow()}}
+                        />
+                    </div>
+                    
             </div>
             </div>
            

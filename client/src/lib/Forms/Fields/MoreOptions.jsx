@@ -1,4 +1,5 @@
 import {useEffect, useRef, useState } from "react";
+import Buttons from "../../../lib/Buttons/button"
 
 const MoreOptions = (props) =>{
 
@@ -57,9 +58,16 @@ const MoreOptions = (props) =>{
                      
                     <div className={`option-window-container ${showStyle}`}>
                     <div onClick={()=>{toggleWindow()}} className={`select-bk`}></div>
-                        <div style={{right: 0, left: "auto"}}className={`options-window ${showStyle} more-options`  }>
-                                
+                        <div className={`options-window ${showStyle} more-options`  }>
+                                <h3>More options</h3>
                             {children}
+                            <div className="option-window-button-container">
+                        <Buttons 
+                            label="Done"
+                            Class="button main-btn"
+                            clickEvent={(e)=>{ e.preventDefault();toggleWindow()}}
+                        />
+                    </div>
                     </div>  
                     </div>
                

@@ -303,7 +303,9 @@ const TopSearchFilter = () =>{
             ]}
         />  
 
-        <MoreOptions>
+        <MoreOptions
+         elementClass="more-field"
+        >
              <SearchFilter/> 
         </MoreOptions>
         
