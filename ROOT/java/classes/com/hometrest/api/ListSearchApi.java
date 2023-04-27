@@ -1,4 +1,4 @@
-package com.hometrest.servlet;
+package com.hometrest.api;
 
 import java.io.IOException;
 
@@ -12,9 +12,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/search")
+@WebServlet(urlPatterns = "/api/search")
 @MultipartConfig
-public class SearchServlet extends HttpServlet{
+public class ListSearchApi extends HttpServlet{
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     throws ServletException, IOException{

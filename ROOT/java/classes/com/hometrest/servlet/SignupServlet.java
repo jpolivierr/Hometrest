@@ -3,7 +3,7 @@ package com.hometrest.servlet;
 
 import java.io.IOException;
 
-
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,16 +15,13 @@ import jakarta.servlet.http.HttpServletResponse;
 @MultipartConfig
 public class SignupServlet extends HttpServlet{
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
     throws ServletException, IOException{
+        // out.print("Session does not exist.");
 
-     
-    resp.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
+         RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
 
-    resp.setContentType("text/html");
-
-
-    // resp.setStatus(200);
-    
+         dispatcher.include(request, response);
+        
     }
 }

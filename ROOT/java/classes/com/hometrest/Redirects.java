@@ -8,7 +8,7 @@ public class Redirects {
         try {
              switch(path){
                 case "/login" :
-                response.sendRedirect("/");
+                    response.sendRedirect("/");
                 break;
             default :
                 return ;

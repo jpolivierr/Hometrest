@@ -1,10 +1,6 @@
 package com.hometrest.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import com.hometrest.JsonHttpResponse;
-import com.hometrest.makeRequest.MakeRequest;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

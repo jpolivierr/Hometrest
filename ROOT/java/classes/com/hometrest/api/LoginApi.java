@@ -22,14 +22,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = "/secure/login")
 @MultipartConfig
-
 public class LoginApi extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
     throws ServletException, IOException{
 
         PrintWriter out = response.getWriter();
-        out.println("login api");
 
         // Gson gson = new Gson();
 
@@ -57,22 +55,20 @@ public class LoginApi extends HttpServlet {
 
             if(userIsAuthenticate.isEmpty()){
 
-                System.out.println("Either the password or email is not valid");
-
+                JsonHttpResponse.send(response, 409,"Either the password or email is not valid", null);
             }else{
-                // JsonHttpResponse.send(response, 409,"Error", result);
-                out.println("User is authenticated...");
     
                 var newSession = MySessionManagement.create(request, response);
     
                     newSession.setAttribute("email", logInForm.getEmail()); 
     
-                    // JsonHttpResponse.send(response, 200,"user authenticated", result);
+               JsonHttpResponse.send(response, 200,"user authenticated", userIsAuthenticate);
             }
 
         }else{
-            // JsonHttpResponse.send(response, 409,"Error", result);
-            out.println("there isan error in the form...");
+
+            JsonHttpResponse.send(response, 409,"Error", validateLoginInput);
+            
         }
 
 

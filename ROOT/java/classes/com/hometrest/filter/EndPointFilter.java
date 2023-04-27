@@ -8,8 +8,11 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import com.hometrest.MySessionManagement;
+import com.hometrest.Paths;
 import com.hometrest.Redirects;
 import com.hometrest.Util.FormatDate;
 
@@ -29,11 +32,17 @@ public class EndPointFilter implements Filter {
     public void init(FilterConfig filterConfig) {}
 
     public static String encodeURL(String url) {
+
       String encodedURL = "";
+
       try {
+
           encodedURL = URLEncoder.encode(url, "UTF-8");
+
       } catch (Exception e) {
+
           e.printStackTrace();
+
       }
       return encodedURL;
   }
@@ -63,34 +72,46 @@ public class EndPointFilter implements Filter {
 
        HttpSession session = httpRequest.getSession(false);
 
-      //  out.println("Filter ran.. <br>");
 
       if(session == null){
 
-         // JsonHttpResponse.send(response, 200,"no sessions found", null);
-          out.print("session do not exist. <br>");
+          chain.doFilter(request, response);
+
       }else{
 
             String sessionExist = MySessionManagement.validateSessionId(session,httpRequest);
 
             if(sessionExist != null){
-               // String lastSession = FormatDate.format(session.getLastAccessedTime(), "E yyyy-MM-dd 'at' hh:mm:ss a zzz");
-               //          out.println("SessioID: " + session.getAttribute("SESSION_ID") + "<br>");
-               //          out.println("Start time: " + session.getAttribute("START_TIME") + "<br>");
-               //          out.println("last access: " + lastSession + "<br>");
-               //          out.println("email: " + session.getAttribute("email"));
 
-                        // httpResponse.sendRedirect("http://localhost:3001");
-                           String path = httpRequest.getServletPath();
+                  String path = httpRequest.getServletPath();
 
-                           Redirects.send(path, httpResponse);
+                  HashMap<String, String> redirectMap = new HashMap<String, String>();
+
+                  redirectMap.put(Paths.LOGIN, "/");
+                  redirectMap.put(Paths.SIGNUP, "/");
+
+                  if(redirectMap.containsKey(path)){
+
+                     httpResponse.sendRedirect(redirectMap.get(path));
+
+                     return;
+
+                  }
+
+                  chain.doFilter(request, response);
+                  
+                  
+            }else{
+               //  out.print("session exist but is not valie <br>");
+                chain.doFilter(request, response);
+
             }
 
           
 
       }
 
-      chain.doFilter(request, response);
+     
 
  }
 
