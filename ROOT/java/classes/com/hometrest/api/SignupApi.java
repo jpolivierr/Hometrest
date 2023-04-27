@@ -37,7 +37,9 @@ public class SignupApi extends HttpServlet {
             var createUser = new CreateUser();
             createUser.init(response, connection, userInput);
         }else{
+
             JsonHttpResponse.send(response, 409,"Signup error", result);
+            
         }
 
         

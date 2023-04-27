@@ -55,7 +55,7 @@ public class EndPointFilter implements Filter {
        var httpResponse = (HttpServletResponse) response;
        String requestURL = httpRequest.getRequestURL().toString();
        String queryString = httpRequest.getQueryString();
-      PrintWriter out = httpResponse.getWriter();
+      // PrintWriter out = httpResponse.getWriter();
        
 
        if (queryString != null) {

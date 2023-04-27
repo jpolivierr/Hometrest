@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import jakarta.servlet.ServletResponse;
-
 import java.sql.CallableStatement;
 
 import com.hometrest.formSubmissions.LoginForm;
@@ -14,7 +12,7 @@ public class ValidateUser  {
 
     HashMap<String,String> responseBody = new HashMap<String,String>();
 
-    public HashMap<String,String> init(ServletResponse response, Connection connection, LoginForm userInput){
+    public HashMap<String,String> init(Connection connection, LoginForm userInput){
 
         
         
