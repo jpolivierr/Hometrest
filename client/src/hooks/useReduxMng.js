@@ -5,7 +5,7 @@ import {setUserAction, updateSearch, properties} from "../_state/actions/"
 
 const useReduxMng = () =>{
 
-    const activeUser = useSelector((state)=> {return state.activeUser})
+    const activeUserReducer = useSelector((state)=> {return state.activeUserReducer})
     const searchReducer = useSelector((state)=> state.searchReducer)
     const propertiesReducer = useSelector((state) => state.propertiesReducer)
 
@@ -27,9 +27,9 @@ const useReduxMng = () =>{
     const {setPropertyList} = bindActionCreators(properties, useDispatch())
 
     const {setUser} = bindActionCreators(setUserAction, useDispatch())
-    
+
     return {
-        activeUser,
+        activeUserReducer,
         searchReducer,
         setUser,
         setLocation,

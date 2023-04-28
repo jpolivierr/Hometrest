@@ -68,7 +68,6 @@ const LoginForm = () =>{
 
       },[formResponse])
 
-         console.log(activeUser)
 
     return(
         <div className="margin-top-2x">

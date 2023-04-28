@@ -1,10 +1,10 @@
-import activeUser from "./activeUser"
+import activeUserReducer from "./activeUserReducer"
 import searchReducer from "./searchReducer";
 import propertiesReducer from "./propertiesReducer";
 import {combineReducers} from 'redux'
 
 const reducers = combineReducers({
-    activeUser,
+    activeUserReducer,
     searchReducer,
     propertiesReducer
 })

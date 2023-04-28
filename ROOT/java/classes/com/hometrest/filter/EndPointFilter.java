@@ -73,6 +73,8 @@ public class EndPointFilter implements Filter {
 
         }
 
+        httpResponse.setHeader("Access-Control-Allow-Headers", "AuthorizationToken");
+
        httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
 
        httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -90,10 +92,15 @@ public class EndPointFilter implements Filter {
 
             if(sessionExist != null){
 
+
+                  String token = (String) session.getAttribute("token");
+                  httpResponse.setHeader("AuthorizationToken", token);
+
                   String path = httpRequest.getServletPath();
 
                   HashMap<String, String> redirectMap = new HashMap<String, String>();
-
+ 
+                  
                   redirectMap.put(Paths.LOGIN, "/");
                   redirectMap.put(Paths.SIGNUP, "/");
 

@@ -2,10 +2,10 @@ import { SET_USER } from "../actions/setUserAction"
 
 const init = {
     userInfo : null,
-    authorizationToken : null
+    token : null
 }
 
-const activeUser = (state = init, action) =>{
+const activeUserReducer = (state = init, action) =>{
 
     
 
@@ -14,7 +14,7 @@ const activeUser = (state = init, action) =>{
         case SET_USER :
                     return {...state, 
                             userInfo : action.payload.userInfo,
-                            authorizationToken : action.payload.token
+                            token: action.payload.token
                     }
         default : 
                     return state
@@ -22,4 +22,4 @@ const activeUser = (state = init, action) =>{
     }
 }
 
-export default activeUser
+export default activeUserReducer

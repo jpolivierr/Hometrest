@@ -30,7 +30,7 @@ public class MySessionManagement {
 
     public static String validateSessionId(HttpSession session, HttpServletRequest request){
 
-
+        
         String sessionId = null;
 
         if(session != null){
@@ -45,7 +45,10 @@ public class MySessionManagement {
 
             }
 
-            if(currentSessionId.equals(sessionCookie)){
+            String serverToken = (String) session.getAttribute("token");
+
+
+            if(currentSessionId.equals(sessionCookie) && serverToken != null){
 
                 sessionId = sessionCookie ;
 

@@ -64,7 +64,7 @@ public class LoginApi extends HttpServlet {
 
         }else{
 
-            JsonHttpResponse.send(response, 409,"Error", validateLoginInput);
+            JsonHttpResponse.send(response, 409,"error", validateLoginInput);
 
         }
 

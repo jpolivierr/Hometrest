@@ -1,8 +1,10 @@
 import { useState } from "react"
+import useReduxMng from "../../../hooks/useReduxMng"
 
 const useFormSubmit = () =>{
 
     const [formResponse, setFormResponse] = useState({})
+    const {activeUserReducer} = useReduxMng()
     
     const redirection = (redirected) =>{
 
@@ -20,8 +22,12 @@ const useFormSubmit = () =>{
         let status
         let headers
 
+        const requestHeaders = new Headers();
+        requestHeaders.append('AuthorizationToken', activeUserReducer.token);
+
         const config = {
             credentials: 'include',
+            headers: requestHeaders,
             method: method
         }
         
