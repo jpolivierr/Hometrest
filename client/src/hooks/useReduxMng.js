@@ -1,7 +1,7 @@
 
 import { useDispatch, useSelector } from "react-redux"
 import { bindActionCreators } from "redux"
-import {getUserAction, updateSearch, properties} from "../_state/actions/"
+import {setUserAction, updateSearch, properties} from "../_state/actions/"
 
 const useReduxMng = () =>{
 
@@ -9,7 +9,7 @@ const useReduxMng = () =>{
     const searchReducer = useSelector((state)=> state.searchReducer)
     const propertiesReducer = useSelector((state) => state.propertiesReducer)
 
-    const {getUser} = bindActionCreators(getUserAction, useDispatch())
+    
     const {
            setLocation,
            setType,
@@ -23,12 +23,15 @@ const useReduxMng = () =>{
            setSearch
         
         } = bindActionCreators(updateSearch, useDispatch())
+
     const {setPropertyList} = bindActionCreators(properties, useDispatch())
 
+    const {setUser} = bindActionCreators(setUserAction, useDispatch())
+    
     return {
         activeUser,
         searchReducer,
-        getUser,
+        setUser,
         setLocation,
         setType,
         setPropertyList,

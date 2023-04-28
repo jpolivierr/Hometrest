@@ -81,12 +81,6 @@ const SearchFilter = () =>{
         
      }
 
-     
-
-     
-
-
-
     return(
     <>
         <div style={{margin: "auto"}}className="search-filter">

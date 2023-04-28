@@ -13,52 +13,44 @@ import propertiesDemo from "./propertyDemo"
 
 function App() {
 
-  const {
-    getUser, 
-         activeUser, 
-         setSearch,
-         searchReducer,
-         propertiesReducer,
-         setPropertyList
-        } = useReduxMng()
+  // const {
+  //        setSearch,
+  //        searchReducer,
+  //        propertiesReducer,
+  //        setPropertyList
+  //       } = useReduxMng()
 
-      useEffect( ()=>{
+  //     useEffect( ()=>{
 
-          if(getParams("search")){
+  //         if(getParams("search")){
 
-          const listingOptions = getParams("search")
-          setSearch(listingOptions)
+  //         const listingOptions = getParams("search")
+  //         setSearch(listingOptions)
 
 
-        }
+  //       }
 
-    },[])
+  //   },[])
 
-      useEffect(()=>{
+  //     useEffect(()=>{
 
-        updateParam(searchReducer, true, "search")
+  //       updateParam(searchReducer, true, "search")
 
-    },[searchReducer])
-
-  useEffect(()=>{
-
-    getUser()
-    
-  },[])
+  //   },[searchReducer])
 
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
-    setPropertyList(propertiesDemo)
+  //   setPropertyList(propertiesDemo)
 
-  },[])
+  // },[])
 
   return (
     <div className="App">
       <Router>
         <TopNav />
         <Routes>
-        <Route path="/signup" element={<Signup activeUser={activeUser}/>}/>
+        <Route path="/signup" element={<Signup/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/listings" element={<Listings/>}/>

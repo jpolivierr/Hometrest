@@ -9,7 +9,6 @@ import { capitalizeFirstLetter } from "./Util/capitalizeFirstLetter";
 import { matchPassword } from "./Util/matchPassword";
 import { validateFields } from "./Config/formValidation";
 import "./style/avalon.css"
-import useReduxMng from "../../hooks/useReduxMng";
 
 import useFormSubmit from "./Request/request";
 //Action
@@ -28,8 +27,6 @@ const useForm = (formSettings) =>{
       PWD :"password",
       COMP : "comp"
   }
-
-   const {searchReducer} = useReduxMng()
 
     const [settings] = useState(formSettings)
 
@@ -172,7 +169,7 @@ const useForm = (formSettings) =>{
          return formErrorCopy
 
       }
-
+    
       const submit = async (e) =>{
 
                        e.preventDefault()
@@ -184,8 +181,7 @@ const useForm = (formSettings) =>{
                             console.log("Submit")
                            setLoading(true)
                            
-                           
-                           const data = config.data ? searchReducer : formFields
+                           const data = config.data ? config.data : formFields
                            console.log(data);
                            await makeRequest(config.method, config.url, data)
                            setLoading(false)

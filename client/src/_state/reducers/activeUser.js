@@ -1,6 +1,8 @@
+import { SET_USER } from "../actions/setUserAction"
+
 const init = {
-    userLoggedIn : false,
-    userInfo : null
+    userInfo : null,
+    authorizationToken : null
 }
 
 const activeUser = (state = init, action) =>{
@@ -9,16 +11,11 @@ const activeUser = (state = init, action) =>{
 
     switch(action.type){
 
-        case "getUser" :
-                   const payload = action.payload
-                    if(payload){
-                        return {...state, 
-                                userLoggedIn : true,
-                                userInfo : payload
-                                }
-                            }
-                            return state
-            
+        case SET_USER :
+                    return {...state, 
+                            userInfo : action.payload.userInfo,
+                            authorizationToken : action.payload.token
+                    }
         default : 
                     return state
 

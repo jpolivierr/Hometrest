@@ -310,6 +310,9 @@ const TopSearchFilter = () =>{
         </MoreOptions>
         
         </form>
+
+
+        
         <Modal
                     isShowing={isShowing}
                     toggle={toggle}

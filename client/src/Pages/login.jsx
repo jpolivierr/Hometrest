@@ -7,7 +7,6 @@ import useRequest from "../lib/MakeRequest/MakeRequest"
 const Login = (props) =>{
 
     const {Class, id} = props
-    const {makeRequest, response} = useRequest()
 
     useEffect(()=>{
         // makeRequest("GET","http://localhost:8080/login")
@@ -17,13 +16,16 @@ const Login = (props) =>{
 
     // console.log(response)
 
-    
-
     return(
         <div id={id} className={`${Class} light-bk`}>
             
             <div className="container center-content padding-bottom-2x">
-                <LoginForm/>
+                <div style={{}}>
+
+  
+                     <LoginForm/>
+                </div>
+               
           </div>
         </div>
     )

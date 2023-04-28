@@ -1,16 +1,18 @@
-import Form from "../../lib/Forms/Form"
+
 import { useEffect, useState } from "react"
-import { emptyField } from "../../lib/Forms/Util/emptyField"
 import useForm from "../../lib/Forms/useForm"
 import MainButton from "../buton/MainButton"
-import Ring from "../../lib/loadingEffect/loading/ring"
-import getCookie from "../../Util/getCookie"
+
 import URL from "../../Config/urls"
+
+import useReduxMng from "../../hooks/useReduxMng"
 
 
 
 
 const LoginForm = () =>{
+
+   const {setUser, activeUser, searchReducer} = useReduxMng()
 
 
     const [formSetting] = useState({
@@ -27,24 +29,15 @@ const LoginForm = () =>{
             {
                 type : "input",
                 label : "Email",
-                // placeHolder : "Enter city or Zip",
                 name : "email",
-                // onChangefunc : numValidate,
-                // fieldToUpdate : setLocation,
-                // onSubmitFunc: [emptyField],
                 required : true,
-                // icon : <i className="fa-solid fa-location-dot"></i>
+
               },
               {
                 type : "password",
                 label : "Password",
-                // placeHolder : "Enter city or Zip",
                 name : "password",
-                // onChangefunc : numValidate,
-                // fieldToUpdate : setLocation,
-                // onSubmitFunc: [emptyField],
                 required : true,
-                // icon : <i className="fa-solid fa-location-dot"></i>
               },
         ],
         button : <MainButton 
@@ -57,20 +50,29 @@ const LoginForm = () =>{
 
     const {getForm, formResponse, loading} = useForm(formSetting)
 
-      console.log(formResponse)
+      useEffect(()=>{
+   
+         if(formResponse.status === 200){
+   
+             const payload = {
 
-      if(formResponse && formResponse.status === 200){
-        console.log("getting -> cookie")
-        const sessionId = getCookie("SESSIONID")
-        console.log(sessionId)
-      }
+                      userInfo: formResponse.body,
+
+                      token : formResponse.headers.get("authorizationtoken")
+                      
+                      }
+                      // console.log(payload)
+                      setUser(payload)   
+   
+           }
+
+      },[formResponse])
+
+         console.log(activeUser)
 
     return(
         <div className="margin-top-2x">
 
-           {/* <Form 
-              setting={formSetting}
-           /> */}
 
            {getForm()}
 

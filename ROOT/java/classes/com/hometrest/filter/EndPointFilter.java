@@ -64,7 +64,14 @@ public class EndPointFilter implements Filter {
 
        }
 
-       httpResponse.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+       String origin = httpRequest.getHeader("Origin");
+
+
+        if (origin != null && (origin.equals(Paths.LOCAL_8080) || origin.equals(Paths.LOCAL_3000))) {
+
+            httpResponse.setHeader("Access-Control-Allow-Origin", origin);
+
+        }
 
        httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
 

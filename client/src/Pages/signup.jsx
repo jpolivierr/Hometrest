@@ -4,7 +4,7 @@ import SignupForm from "../components/Forms/signupForm"
 
 const Signup = (props) =>{
 
-    const {Class, id, activeUser} = props
+    const {Class, id} = props
 
     useEffect(()=>{
         urlParcer()

@@ -3,6 +3,7 @@ package com.hometrest.api;
 import java.io.IOException;
 // import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.hometrest.JsonHttpResponse;
@@ -51,11 +52,14 @@ public class LoginApi extends HttpServlet {
                 JsonHttpResponse.send(response, 409,"Either the password or email is not valid", null);
             }else{
     
-                var newSession = MySessionManagement.create(request, response);
-    
+                   var newSession = MySessionManagement.create(request, response);
+
+                   String token = UUID.randomUUID().toString();
+                    newSession.setAttribute("token", token);
                     newSession.setAttribute("email", logInForm.getEmail()); 
-    
-               JsonHttpResponse.send(response, 200,"user authenticated", userIsAuthenticate);
+                    response.setHeader("AuthorizationToken", token);
+                    response.setHeader("Access-Control-Expose-Headers", "AuthorizationToken");
+                    JsonHttpResponse.send(response, 200,"user authenticated", userIsAuthenticate);
             }
 
         }else{

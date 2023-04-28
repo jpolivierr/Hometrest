@@ -2,17 +2,14 @@ import { useState } from "react"
 
 const useFormSubmit = () =>{
 
-    const [formResponse, setFormResponse] = useState({
-        status: null,
-        message: "",
-        error: null,
-        body: {}
-    })
-
+    const [formResponse, setFormResponse] = useState({})
+    
     const redirection = (redirected) =>{
 
         if(redirected){
+
             window.location.href = redirected.url
+
         }
 
     }
@@ -21,6 +18,7 @@ const useFormSubmit = () =>{
 
         let response
         let status
+        let headers
 
         const config = {
             credentials: 'include',
@@ -33,6 +31,7 @@ const useFormSubmit = () =>{
                         response = await fetch(url)
                         redirection(response.redirected)
                         status = response.status
+                        headers = response.headers
                         break
                     case "POST" :
                         if(data){
@@ -42,6 +41,7 @@ const useFormSubmit = () =>{
                             response = await fetch(url,config)
                             redirection(response.redirected)             
                             status = response.status
+                            headers = response.headers
                         }         
                         break
                     default :
@@ -50,7 +50,9 @@ const useFormSubmit = () =>{
 
                 switch(status){
                     case 200 :
-                        setFormResponse(await response.json())
+                        const serverResponse = await response.json()
+                        serverResponse.headers = headers
+                        setFormResponse(serverResponse)
                         break
                     case 400 :
                         setFormResponse(await response.json())
@@ -71,7 +73,7 @@ const useFormSubmit = () =>{
 
     return{
         makeRequest,
-        formResponse
+        formResponse,
     }
 
 }
