@@ -11,6 +11,7 @@ import { matchPassword } from "./Util/matchPassword";
 import "./style/avalon.css"
 import useReduxMng from "../../hooks/useReduxMng";
 import useFormSubmit from "./Request/request";
+import useRequest from "../MakeRequest/MakeRequest";
 //Action
 import { useEffect, useState } from "react";
  import { validateFields } from "./Config/validateFields";
@@ -28,7 +29,7 @@ const useFormCopy = () =>{
       COMP : "comp"
   }
      const {searchReducer} = useReduxMng()
-     const {makeRequest, formResponse} = useFormSubmit()
+     const {makeRequest, formResponse} = useRequest()
      const [formError, setFormError] = useState({})
      const [loading, setLoading] = useState(false)
       

@@ -9,45 +9,50 @@ import TopNav from './components/Navigaion/topNav';
 import { getParams, updateParam } from './Util/urlParcer';
 import { useEffect } from 'react';
 import useReduxMng from './hooks/useReduxMng';
-import propertiesDemo from "./propertyDemo"
+import { useLocation } from 'react-router-dom';
+import useRedirectMng from './hooks/useRedirectMng';
 
 function App() {
 
-  // const {
-  //        setSearch,
-  //        searchReducer,
-  //        propertiesReducer,
-  //        setPropertyList
-  //       } = useReduxMng()
+  const {
+         setSearch,
+         searchReducer,
+        } = useReduxMng()
 
-  //     useEffect( ()=>{
+  const location = useLocation()
 
-  //         if(getParams("search")){
+  const {pathMng} = useRedirectMng()
 
-  //         const listingOptions = getParams("search")
-  //         setSearch(listingOptions)
+  useEffect(()=>{
 
+    pathMng(location.pathname)
 
-  //       }
-
-  //   },[])
-
-  //     useEffect(()=>{
-
-  //       updateParam(searchReducer, true, "search")
-
-  //   },[searchReducer])
+  },[location.pathname])
 
 
-  // useEffect(()=>{
 
-  //   setPropertyList(propertiesDemo)
+  useEffect( ()=>{
 
-  // },[])
+          if(getParams("search")){
+
+          const listingOptions = getParams("search")
+          setSearch(listingOptions)
+
+
+        }
+
+    },[])
+
+      useEffect(()=>{
+
+        updateParam(searchReducer, true, "search")
+
+    },[searchReducer])
+
 
   return (
     <div className="App">
-      <Router>
+  
         <TopNav />
         <Routes>
         <Route path="/signup" element={<Signup/>}/>
@@ -56,8 +61,7 @@ function App() {
           <Route path="/listings" element={<Listings/>}/>
           <Route path="/" element={<Home />}/>
         </Routes>
-      </Router>
-      
+
     </div>
   );
 }

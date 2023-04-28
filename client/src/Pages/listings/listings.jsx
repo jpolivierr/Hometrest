@@ -7,6 +7,7 @@ import findPropertyValue from "../../Util/nestedObject"
 import TopSearchFilter from "../../components/Forms/TopSearchFilter"
 import ShowProperties from "../../components/showProperties/ShowProperties"
 import Map from "../../components/map/Map"
+import propertiesDemo from "../../propertyDemo"
 
 
 const Listings = (props) =>{
@@ -18,10 +19,16 @@ const Listings = (props) =>{
     const{searchReducer,
           getPropertyList,
           setSearch,
-          propertiesReducer} = useReduxMng()
+          propertiesReducer,
+          setPropertyList
+        } = useReduxMng()
 
 
+          useEffect(()=>{
 
+            setPropertyList(propertiesDemo)
+        
+          },[])
 
     useEffect(()=>{
 

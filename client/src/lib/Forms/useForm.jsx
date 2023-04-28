@@ -11,6 +11,8 @@ import { validateFields } from "./Config/formValidation";
 import "./style/avalon.css"
 
 import useFormSubmit from "./Request/request";
+import useRequest from "../MakeRequest/MakeRequest";
+
 //Action
 import { useEffect, useState } from "react";
 
@@ -32,11 +34,11 @@ const useForm = (formSettings) =>{
 
      const {fields,config, info, button} = settings
 
-      const {makeRequest, formResponse} = useFormSubmit()
+      const {makeRequest, formResponse, loading} = useRequest()
       const [submitStatus] = useState(false)
       const [formError, setFormError] = useState(getFormFields(fields).errors)
       const [formFields, setFormFields] = useState(getFormFields(fields).fields)
-      const [loading, setLoading] = useState(false)
+      // const [loading, setLoading] = useState(false)
 
       useEffect(()=>{
 
@@ -178,12 +180,10 @@ const useForm = (formSettings) =>{
 
                        }else{
                             console.log("Submit")
-                           setLoading(true)
                            
                            const data = config.data ? config.data : formFields
                            console.log(data);
                            await makeRequest(config.method, config.url, data)
-                           setLoading(false)
                            
                            
                        }

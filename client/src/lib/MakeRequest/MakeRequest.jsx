@@ -1,20 +1,19 @@
 import { useState } from "react"
+import useReduxMng from "../../hooks/useReduxMng"
 
 const useRequest = () =>{
 
-    const [formResponse, setFormResponse] = useState({
-        status: null,
-        message: "",
-        error: null,
-        body: {}
-    })
+    const [formResponse, setFormResponse] = useState({})
+    const {activeUserReducer} = useReduxMng()
 
     const [loading, setLoading] = useState(false)
 
     const redirection = (redirected) =>{
 
         if(redirected){
+
             window.location.href = redirected.url
+
         }
 
     }
@@ -23,11 +22,18 @@ const useRequest = () =>{
 
         let response
         let status
+        let headers
+
+        const requestHeaders = new Headers();
+        requestHeaders.append('AuthorizationToken', activeUserReducer.token);
 
         const config = {
             credentials: 'include',
+            headers: requestHeaders,
             method: method
         }
+
+        
         
         try {
                     switch(method){
@@ -36,6 +42,7 @@ const useRequest = () =>{
                         response = await fetch(url)
                         redirection(response.redirected)
                         status = response.status
+                        headers = response.headers
                         setLoading(false)
                         break
                     case "POST" :
@@ -47,6 +54,7 @@ const useRequest = () =>{
                             response = await fetch(url,config)  
                             redirection(response.redirected)       
                             status = response.status
+                            headers = response.headers
                             setLoading(false)
                         }         
                         break
@@ -56,7 +64,9 @@ const useRequest = () =>{
 
                 switch(status){
                     case 200 :
-                        setFormResponse(await response.json())
+                        const serverResponse = await response.json()
+                        serverResponse.headers = headers
+                        setFormResponse(serverResponse)
                         break
                     case 400 :
                         setFormResponse(await response.json())
@@ -71,6 +81,7 @@ const useRequest = () =>{
         } catch (error) {
 
             console.log(error)
+            
         }
 
     }

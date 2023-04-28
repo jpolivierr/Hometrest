@@ -55,9 +55,9 @@ public class LoginApi extends HttpServlet {
                    var newSession = MySessionManagement.create(request, response);
 
                    String token = UUID.randomUUID().toString();
-                    newSession.setAttribute("token", token);
+                    newSession.setAttribute("token", token + "_" + newSession.getMaxInactiveInterval());
                     newSession.setAttribute("email", logInForm.getEmail()); 
-                    response.setHeader("AuthorizationToken", token);
+                    response.setHeader("AuthorizationToken", token + "_" + newSession.getMaxInactiveInterval());
                     response.setHeader("Access-Control-Expose-Headers", "AuthorizationToken");
                     JsonHttpResponse.send(response, 200,"user authenticated", userIsAuthenticate);
             }
