@@ -96,7 +96,7 @@ public class MySessionManagement {
 
             // Get last access time of this web page.
             String lastAccessTimeFormat = FormatDate.format(session.getLastAccessedTime(), format);
-
+            
             session.setMaxInactiveInterval(300);
             session.setAttribute(SESSION_ID, session.getId());
             session.setAttribute(SESSION_START_TIME, sessionCreationdateFormat);

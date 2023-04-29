@@ -51,7 +51,7 @@ const useRequest = () =>{
                             formData.append("formData",JSON.stringify(data))
                             config.body = formData
                             setLoading(true)
-                            response = await fetch(url,config)  
+                            response = await fetch(url,config) 
                             redirection(response.redirected)       
                             status = response.status
                             headers = response.headers
@@ -81,7 +81,7 @@ const useRequest = () =>{
         } catch (error) {
 
             console.log(error)
-            
+
         }
 
     }

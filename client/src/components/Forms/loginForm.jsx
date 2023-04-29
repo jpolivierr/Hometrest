@@ -6,6 +6,7 @@ import MainButton from "../buton/MainButton"
 import URL from "../../Config/urls"
 
 import useReduxMng from "../../hooks/useReduxMng"
+import useSessionMng from "../../hooks/useSessionMng"
 
 
 
@@ -13,6 +14,7 @@ import useReduxMng from "../../hooks/useReduxMng"
 const LoginForm = () =>{
 
    const {setUser, activeUser, searchReducer} = useReduxMng()
+   const {startSession} = useSessionMng()
 
 
     const [formSetting] = useState({
@@ -52,19 +54,7 @@ const LoginForm = () =>{
 
       useEffect(()=>{
    
-         if(formResponse.status === 200){
-   
-             const payload = {
-
-                      userInfo: formResponse.body,
-
-                      token : formResponse.headers.get("authorizationtoken")
-                      
-                      }
-                      // console.log(payload)
-                      setUser(payload)   
-   
-           }
+        startSession(formResponse)
 
       },[formResponse])
 

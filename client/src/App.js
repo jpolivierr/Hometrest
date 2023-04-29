@@ -11,10 +11,13 @@ import { useEffect } from 'react';
 import useReduxMng from './hooks/useReduxMng';
 import { useLocation } from 'react-router-dom';
 import useRedirectMng from './hooks/useRedirectMng';
+import useSessionMng from './hooks/useSessionMng';
+
 
 function App() {
 
   const {
+         activeUserReducer,
          setSearch,
          searchReducer,
         } = useReduxMng()
@@ -23,9 +26,20 @@ function App() {
 
   const {pathMng} = useRedirectMng()
 
+  const {validateSession, processTokens} = useSessionMng()
+
   useEffect(()=>{
 
+    processTokens()
+
+  },[])
+
+  useEffect(()=>{
+
+    
     pathMng(location.pathname)
+
+    validateSession()
 
   },[location.pathname])
 

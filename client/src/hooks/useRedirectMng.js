@@ -6,11 +6,14 @@ const useRedirectMng = () =>{
     const userToken = activeUserReducer.token
 
     const pathMng = (path) =>{
-        console.log(path)
+
         switch(true){
-            case path === "/login" && userToken : 
-              window.location.pathname = "/"
+            case path === "/login" && userToken != null : 
+               window.location.pathname = "/"
                break
+            case path === "/signup" && userToken != null : 
+                window.location.pathname = "/"
+                break
             default :
                 return 
         }

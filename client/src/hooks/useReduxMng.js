@@ -26,15 +26,17 @@ const useReduxMng = () =>{
 
     const {setPropertyList} = bindActionCreators(properties, useDispatch())
 
-    const {setUser} = bindActionCreators(setUserAction, useDispatch())
+    const {setUser, setToken, clearUser} = bindActionCreators(setUserAction, useDispatch())
 
     return {
         activeUserReducer,
         searchReducer,
         setUser,
+        setToken,
         setLocation,
         setType,
         setPropertyList,
+        clearUser,
         propertiesReducer,
         setSearch,
         setPrices,

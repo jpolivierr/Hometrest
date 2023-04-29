@@ -13,9 +13,6 @@ const Login = (props) =>{
     const {activeUserReducer} = useReduxMng()
     const userToken = activeUserReducer.token
 
-    console.log(activeUserReducer)
-    console.log(userToken)
-
     useEffect(()=>{
         
         urlParcer()
@@ -37,10 +34,7 @@ const Login = (props) =>{
             </div>
             </div>
         </>
-         
-   
-        
-        
+          
     )
 }
 

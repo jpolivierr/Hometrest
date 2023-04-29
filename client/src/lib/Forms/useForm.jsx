@@ -48,7 +48,8 @@ const useForm = (formSettings) =>{
 
       
       const errorFromServer = (response) =>{
-          console.log(response)
+         
+
          if(response){
 
             if(response.status === 409){
@@ -56,7 +57,7 @@ const useForm = (formSettings) =>{
                const formErrorCopy = {...formError}
                const responseBody = response.body
 
-               if(responseBody.serverError){
+               if(responseBody){
                   formErrorCopy.serverError = responseBody.serverError
                }
 

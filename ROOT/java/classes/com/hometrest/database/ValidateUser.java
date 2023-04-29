@@ -14,8 +14,6 @@ public class ValidateUser  {
 
     public HashMap<String,String> init(Connection connection, LoginForm userInput){
 
-        
-        
         try {
 
             String sql = "{CALL validateUser(?, ?)}";
@@ -37,7 +35,6 @@ public class ValidateUser  {
                          responseBody.put("url", rs.getString("url"));
 
             }
-            
 
 
         } catch (SQLException e) {
@@ -48,13 +45,16 @@ public class ValidateUser  {
                 var error =new HashMap<String,String>();
 
                 if(e.getErrorCode() == 0){
+
                     error.put("serverError", "Your email or password is incorrect");
+
                 }
 
                 e.printStackTrace();
 
         }
         finally{
+
             try {
 
                 connection.close();
@@ -70,9 +70,6 @@ public class ValidateUser  {
 
     }
 
-    public String exc(){
-       return "";
-    }
     
 }
 

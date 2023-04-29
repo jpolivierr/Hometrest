@@ -49,18 +49,25 @@ public class LoginApi extends HttpServlet {
 
             if(userIsAuthenticate.isEmpty()){
 
-                JsonHttpResponse.send(response, 409,"Either the password or email is not valid", null);
-            }else{
+                HashMap<String,String> notFound = new HashMap<>();
+                notFound.put("serverError", "Either the password or email is not valie");
+
+                JsonHttpResponse.send(response, 409,"Either the password or email is not valid", notFound);
+
+                return;
+
+            }
+            
     
                    var newSession = MySessionManagement.create(request, response);
 
                    String token = UUID.randomUUID().toString();
                     newSession.setAttribute("token", token + "_" + newSession.getMaxInactiveInterval());
                     newSession.setAttribute("email", logInForm.getEmail()); 
-                    response.setHeader("AuthorizationToken", token + "_" + newSession.getMaxInactiveInterval());
+                    response.setHeader("AuthorizationToken", token + ";" + newSession.getMaxInactiveInterval());
                     response.setHeader("Access-Control-Expose-Headers", "AuthorizationToken");
                     JsonHttpResponse.send(response, 200,"user authenticated", userIsAuthenticate);
-            }
+            
 
         }else{
 
