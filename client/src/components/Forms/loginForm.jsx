@@ -54,7 +54,13 @@ const LoginForm = () =>{
 
       useEffect(()=>{
    
-        startSession(formResponse)
+        const session = startSession(formResponse)
+
+        if(session){
+
+          window.location.pathname = "/"
+          
+        }
 
       },[formResponse])
 

@@ -12,6 +12,8 @@ import useReduxMng from './hooks/useReduxMng';
 import { useLocation } from 'react-router-dom';
 import useRedirectMng from './hooks/useRedirectMng';
 import useSessionMng from './hooks/useSessionMng';
+import useRequest from './lib/MakeRequest/MakeRequest';
+import URL from './Config/urls';
 
 
 function App() {
@@ -26,13 +28,35 @@ function App() {
 
   const {pathMng} = useRedirectMng()
 
-  const {validateSession, processTokens} = useSessionMng()
+  const {validateSession, processTokens, getTokens} = useSessionMng()
+
+  const { makeRequest, formResponse } = useRequest()
 
   useEffect(()=>{
 
-    processTokens()
+    validateSession()
+    // processTokens()
+    
 
-  },[])
+    const userIsAuthenticated = getTokens("authorizationtoken")
+    console.log(userIsAuthenticated)
+    if(userIsAuthenticated){
+
+      makeRequest("GET", URL.GET_ACCOUNT )
+      
+    }
+
+    console.log(formResponse)
+
+  },[formResponse])
+
+
+
+  useEffect(()=>{
+
+    console.log("Active User: ", activeUserReducer)
+
+  },[activeUserReducer])
 
   useEffect(()=>{
 

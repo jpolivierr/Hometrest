@@ -40,7 +40,6 @@ public class ValidateUser  {
         } catch (SQLException e) {
 
             // TODO Auto-generated catch block
-            System.out.println(e.getErrorCode());
 
                 var error =new HashMap<String,String>();
 

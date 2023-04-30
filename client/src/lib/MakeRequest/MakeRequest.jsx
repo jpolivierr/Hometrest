@@ -1,12 +1,14 @@
 import { useState } from "react"
 import useReduxMng from "../../hooks/useReduxMng"
+import useSessionMng from "../../hooks/useSessionMng"
 
 const useRequest = () =>{
 
     const [formResponse, setFormResponse] = useState({})
     const {activeUserReducer} = useReduxMng()
-
     const [loading, setLoading] = useState(false)
+    const {getTokens} = useSessionMng()
+
 
     const redirection = (redirected) =>{
 
@@ -25,10 +27,12 @@ const useRequest = () =>{
         let headers
 
         const requestHeaders = new Headers();
-        requestHeaders.append('AuthorizationToken', activeUserReducer.token);
+
+        requestHeaders.append('AuthorizationToken', getTokens("authorizationtoken"));
 
         const config = {
             credentials: 'include',
+            mode: 'cors',
             headers: requestHeaders,
             method: method
         }
@@ -39,7 +43,7 @@ const useRequest = () =>{
                     switch(method){
                     case "GET" :
                         setLoading(true)
-                        response = await fetch(url)
+                        response = await fetch(url,config)
                         redirection(response.redirected)
                         status = response.status
                         headers = response.headers

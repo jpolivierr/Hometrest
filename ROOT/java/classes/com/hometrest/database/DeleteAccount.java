@@ -1,0 +1,68 @@
+package com.hometrest.database;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.HashMap;
+
+public class DeleteAccount {
+
+    public boolean init(Connection connection, String email){
+
+        boolean result = false;
+        
+        try {
+
+
+            String sql = "{CALL deleteUser(?)}";
+
+            CallableStatement cstmt = connection.prepareCall(sql);
+
+            cstmt.setString(1, email);
+
+            cstmt.execute();
+
+            var rs = cstmt.executeQuery();
+
+            while(rs.next()){
+                
+                if(rs.getBoolean("result")){
+
+                    result = true;
+
+                }
+
+            }
+
+            
+        } catch (SQLException e) {
+
+            var error =new HashMap<String,String>();
+
+                if(e.getErrorCode() == 0){
+
+                    error.put("serverError", "");
+
+                }
+
+                e.printStackTrace();
+
+        }
+        finally{
+
+            try {
+
+                connection.close();
+
+            } catch (SQLException e) {
+                
+                e.printStackTrace();
+            }
+
+        }
+
+
+        return result;
+    }
+    
+}

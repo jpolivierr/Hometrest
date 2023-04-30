@@ -31,20 +31,51 @@ const useSessionMng = () =>{
 
     }
 
+    const getTokens = (key) =>{
+
+        const localToken = localStorage.getItem(key)
+        const regexPattern = `(?:(?:^|.*;\s*)${key}\s*\=\s*([^;]*).*$)|^.*$`
+        const regexValue = new RegExp(regexPattern)
+        const cookieValue = document.cookie.replace(regexValue, "$1");
+
+        if(!localToken && !cookieValue){
+
+            return null
+
+        }
+
+        if(localToken){
+            const tokenArr = localToken.split("_")
+            return tokenArr[0] + "_" + tokenArr[1]
+
+        }
+
+        if(cookieValue){
+            const tokenArr = cookieValue.split("_")
+            return tokenArr[0] + "_" +  tokenArr[1]
+            
+        }
+
+        return null
+
+    }
+
     const setDataToStorage = (value) =>{
 
         const date = new Date()
         const time = date.getTime()
+        
+        console.log(value)
 
-        localStorage.setItem(mytoken, `${value};${time}`)
+        localStorage.setItem(mytoken, `${value}_${time}`)
 
-        document.cookie = `${mytoken}=${value};${time};SameSite=Strict`
+        document.cookie = `${mytoken}=${value}_${time};SameSite=strict`
 
     }
 
     const deleteStorageData = () =>{
 
-        document.cookie = `${mytoken}=;expires=${new Date(0).toUTCString()};SameSite=Strict;path=/;`
+        document.cookie = `${mytoken}=;expires=${new Date(0).toUTCString()};SameSite=strict;path=/;`
 
         localStorage.removeItem(mytoken)
 
@@ -62,18 +93,35 @@ const useSessionMng = () =>{
 
                 const date = new Date()
                 const currentTime = date.getTime()
-                const tokenMaxInterval = Number(localToken.split(";")[1])
-                const tokenExpTime = Number(localToken.split(";")[2])
-
-                if(typeof tokenMaxInterval === "number"){
-                    // console.log(tokenMaxInterval)
-                    // console.log(Math.floor((currentTime - tokenExpTime) / 1000) )
-                }
+                const tokenMaxInterval = Number(localToken.split("_")[1])
+                const tokenExpTime = Number(localToken.split("_")[2])
                 
                 if(typeof tokenExpTime === "number"){
                    
                     const timeLaps = Math.floor((currentTime - tokenExpTime) / 1000)
                
+                    if(timeLaps > 60){
+                        deleteStorageData()
+                    }
+
+                }
+            
+            return
+
+        }
+
+
+        if(localToken){
+
+                const date = new Date()
+                const currentTime = date.getTime()
+                const tokenMaxInterval = Number(localToken.split("_")[1])
+                const tokenExpTime = Number(localToken.split("_")[2])
+                
+                if(typeof tokenExpTime === "number"){
+                   
+                    const timeLaps = Math.floor((currentTime - tokenExpTime) / 1000)
+                   console.log(timeLaps)
                     if(timeLaps > 60){
                         deleteStorageData()
                     }
@@ -105,10 +153,9 @@ const useSessionMng = () =>{
                     }
                     // console.log(payload)
                     setDataToStorage(token)
-                    validateSession()
                     setUser(activeUserInfo)
                     
-
+                    return true
  
          }else{
             return false
@@ -119,7 +166,8 @@ const useSessionMng = () =>{
     return{
         startSession,
         validateSession,
-        processTokens
+        processTokens,
+        getTokens
     }
 }
 

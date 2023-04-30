@@ -2,7 +2,8 @@ const URL = {
 
     SEARCH : "http://localhost:8080/search",
     LOGIN : "http://localhost:8080/secure/login",
-    SIGNUP : "http://localhost:8080/secure/signup"
+    SIGNUP : "http://localhost:8080/secure/signup",
+    GET_ACCOUNT : "http://localhost:8080/api/get_account"
     
 }
 

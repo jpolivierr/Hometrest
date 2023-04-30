@@ -6,15 +6,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.HashMap;
 
 import com.hometrest.MySessionManagement;
 import com.hometrest.Paths;
 import com.hometrest.Redirects;
-import com.hometrest.Util.FormatDate;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -29,7 +26,10 @@ import jakarta.servlet.ServletResponse;
 
 public class EndPointFilter implements Filter {
 
-    public void init(FilterConfig filterConfig) {}
+
+    public void init(FilterConfig filterConfig) {
+
+    }
 
     public static String encodeURL(String url) {
 
@@ -50,13 +50,24 @@ public class EndPointFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
     throws IOException, ServletException{
+
       
        var httpRequest = (HttpServletRequest) request;
        var httpResponse = (HttpServletResponse) response;
        String requestURL = httpRequest.getRequestURL().toString();
        String queryString = httpRequest.getQueryString();
-      // PrintWriter out = httpResponse.getWriter();
+       String requestUrl = httpRequest.getRequestURI();
+
        
+
+       if (requestUrl.startsWith("/api") || requestUrl.startsWith("/secure")) {
+
+        chain.doFilter(request, response);
+
+        return;
+
+      }
+
 
        if (queryString != null) {
 
@@ -73,59 +84,43 @@ public class EndPointFilter implements Filter {
 
         }
 
-        httpResponse.setHeader("Access-Control-Allow-Headers", "AuthorizationToken");
+        // httpResponse.setHeader("Access-Control-Allow-Origin", Paths.LOCAL_3000);
 
-       httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
+        httpResponse.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Custom-Header, authorizationtoken");
 
-       httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
+
+        httpResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+
+        httpResponse.setHeader("Access-Control-Max-Age", "3600");
 
        HttpSession session = httpRequest.getSession(false);
-
 
       if(session == null){
 
           chain.doFilter(request, response);
 
-      }else{
-
-            String sessionExist = MySessionManagement.validateSessionId(session,httpRequest);
-
-            if(sessionExist != null){
-
-
-                  String token = (String) session.getAttribute("token");
-                  httpResponse.setHeader("AuthorizationToken", token);
-
-                  String path = httpRequest.getServletPath();
-
-                  HashMap<String, String> redirectMap = new HashMap<String, String>();
- 
-                  
-                  redirectMap.put(Paths.LOGIN, "/");
-                  redirectMap.put(Paths.SIGNUP, "/");
-
-                  if(redirectMap.containsKey(path)){
-
-                     httpResponse.sendRedirect(redirectMap.get(path));
-
-                     return;
-
-                  }
-
-                  chain.doFilter(request, response);
-                  
-                  
-            }else{
-               //  out.print("session exist but is not valie <br>");
-                chain.doFilter(request, response);
-
-            }
-
-          
+          return;
 
       }
 
-     
+    String sessionExist = MySessionManagement.validateSessionId(session,httpRequest);
+
+    if(sessionExist != null){
+
+        String token = (String) session.getAttribute("token");
+
+        httpResponse.setHeader("AuthorizationToken", token);
+
+        boolean redirect = Redirects.send(httpRequest, httpResponse);
+
+        if(!redirect){
+
+            chain.doFilter(request, response);
+
+        }
+        
+    }
 
  }
 
