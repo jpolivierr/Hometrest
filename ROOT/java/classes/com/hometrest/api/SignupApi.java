@@ -69,7 +69,7 @@ public class SignupApi extends HttpServlet {
 
                 response.setHeader("Access-Control-Expose-Headers", "AuthorizationToken");
 
-                response.sendRedirect("/");
+                JsonHttpResponse.send(response, 200,"user created", account);
 
                 return;
 

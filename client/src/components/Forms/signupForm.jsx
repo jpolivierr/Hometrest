@@ -100,7 +100,7 @@ const Signup = () =>{
 
       if(session){
 
-        //  window.location.pathname = "/"
+          window.location.pathname = "/"
         
       }else{
 

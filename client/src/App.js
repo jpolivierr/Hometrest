@@ -37,25 +37,27 @@ function App() {
     // validateSession()
     // processTokens()
     
-
-    const userIsAuthenticated = getTokens("authorizationtoken")
-
-    if(userIsAuthenticated){
-
+    // const userIsAuthenticated = getTokens("authorizationtoken")
       makeRequest("GET", URL.GET_ACCOUNT )
       
-    }
-
+    
     if(
       formResponse.status === 200
       ){
-        console.log(formResponse)
-        console.log(formResponse.headers)
-        console.log("Authent at the bottom")
         console.log(formResponse.headers.get("authorizationtoken"))
       }
 
 
+  },[])
+
+  useEffect(()=>{
+
+    if(
+      formResponse.status === 200
+      ){
+        console.log(formResponse.headers.get("authorizationtoken"))
+      }
+    
   },[formResponse])
 
 

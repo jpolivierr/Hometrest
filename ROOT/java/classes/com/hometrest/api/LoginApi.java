@@ -70,7 +70,7 @@ public class LoginApi extends HttpServlet {
 
                     response.setHeader("Access-Control-Expose-Headers", "AuthorizationToken");
                     
-                    response.sendRedirect("/");
+                    JsonHttpResponse.send(response, 200,"user authenticated", userIsAuthenticate);
             
 
         }else{

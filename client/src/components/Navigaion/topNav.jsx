@@ -42,17 +42,17 @@ const TopNav = () =>{
 
                                         <div className="hideMobile flex-space-between gap-1x">
                                             
-                                            <MainButton 
-                                                label="Sign up"
-                                                Class=" button main-btn"
-                                                href="/signup"
-                                            />
+                                            <a href="/signup">
+                                                <button className="button main-btn">
+                                                    Sign up
+                                                </button>
+                                            </a>
 
-                                            <Buttons 
-                                            label="Login"
-                                            Class="button secondary-btn"
-                                            href="/login"
-                                            />
+                                            <a href="/login">
+                                                <button className="button secondary-btn">
+                                                   Log in
+                                                </button>
+                                            </a>
                                         </div>
 
                                         <div className="hideDesktop">
