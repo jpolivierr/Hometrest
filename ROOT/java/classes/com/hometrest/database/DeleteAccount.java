@@ -2,8 +2,10 @@ package com.hometrest.database;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+
 
 public class DeleteAccount {
 
@@ -22,17 +24,21 @@ public class DeleteAccount {
 
             cstmt.execute();
 
-            var rs = cstmt.executeQuery();
+            ResultSet rs = cstmt.getResultSet();
+            
 
             while(rs.next()){
-                
+
                 if(rs.getBoolean("result")){
 
-                    result = true;
+                result = true;
 
                 }
 
             }
+            
+
+    
 
             
         } catch (SQLException e) {

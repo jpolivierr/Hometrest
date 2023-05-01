@@ -48,6 +48,10 @@ public class ApisFilter implements Filter {
 
         httpResponse.setHeader("Content-Type", "application/json");
 
+        httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); 
+
+        httpResponse.setHeader("Pragma", "no-cache"); 
+
         HttpSession session = httpRequest.getSession(false);
 
         if(session == null){

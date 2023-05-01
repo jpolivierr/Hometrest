@@ -1,36 +1,46 @@
 package com.hometrest.database;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import jakarta.servlet.ServletResponse;
-
 import java.sql.CallableStatement;
 
-import com.hometrest.JsonHttpResponse;
 import com.hometrest.formSubmissions.SignupForm;
 
-public class CreateUser extends DbMethods<String>  {
+public class CreateUser  {
      
+    public boolean init(Connection connection, SignupForm userInput){
 
-    public void init(ServletResponse response, Connection connection, SignupForm userInput){
+        boolean result = false;
 
-        
         try {
 
-            String sql = "{CALL createUser(?, ?, ?, ?, ?)}";
+            String sql = "{CALL addUser(?, ?, ?, ?)}";
 
-            CallableStatement sctmt = connection.prepareCall(sql);
+            CallableStatement cstmt = connection.prepareCall(sql);
 
-            sctmt.setString(1, userInput.getFirstName());
-            sctmt.setString(2,userInput.getLastName());
-            sctmt.setString(3,userInput.getEmail());
-            sctmt.setString(4,userInput.getPassword());
+            cstmt.setString(1, userInput.getFirstName());
+            cstmt.setString(2,userInput.getLastName());
+            cstmt.setString(3,userInput.getEmail());
+            cstmt.setString(4,userInput.getPassword());
 
-           sctmt.execute();
+           cstmt.execute();
 
-           JsonHttpResponse.send(response, 200,"success", null);
+           ResultSet rs = cstmt.getResultSet();
+
+           while(rs.next()){
+
+            if(rs.getBoolean("result")){
+
+                result = true;
+
+            }
+
+
+           }
+
 
 
         } catch (SQLException e) {
@@ -43,11 +53,8 @@ public class CreateUser extends DbMethods<String>  {
                 var error =new HashMap<String,String>();
 
                 error.put("email","Email already exist");
-                JsonHttpResponse.send(response, 409,"Error", error);
+                
             }
-            System.out.println(e.getMessage());
-            System.out.println(e.getClass());
-            e.printStackTrace();
 
         }
         finally{
@@ -62,11 +69,9 @@ public class CreateUser extends DbMethods<String>  {
             }
         }
         
-
+        return result;
     }
 
-    public String exc(){
-       return "";
-    }
+
     
 }

@@ -139,11 +139,11 @@ const useSessionMng = () =>{
         if(
             formResponse.status === 200 &&
             formResponse.body &&
-            formResponse.headers
-            
+            formResponse.headers &&
+            formResponse.headers.get(mytoken)
             ){
 
-                const token = formResponse.headers.get(mytoken)
+            const token = formResponse.headers.get(mytoken)
  
            const activeUserInfo = {
 

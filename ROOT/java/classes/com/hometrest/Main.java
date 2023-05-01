@@ -4,7 +4,8 @@ package com.hometrest;
 import com.hometrest.ErrorHandler.ErrorServlet;
 import com.hometrest.api.LoginApi;
 import com.hometrest.api.LogoutApi;
-import com.hometrest.api.DeleteApi;
+import com.hometrest.api.SignupApi;
+import com.hometrest.api.DeleteUserAccount;
 import com.hometrest.api.GetAccount;
 import com.hometrest.api.ListSearchApi;
 // import com.hometrest.api.ApiEndPoint;
@@ -22,19 +23,11 @@ public class Main {
          new SignupServlet();
          new ErrorServlet();
          new ListSearchApi();
+         new SignupApi();
          new LoginApi();
          new LogoutApi();
-         new DeleteApi();
+         new DeleteUserAccount();
          new GetAccount();
-
-
-        // new ApiEndPoint();
-        // String url = "https://realty-in-us.p.rapidapi.com/properties/v3/list";
-        // String data = "{\"limit\": 3,\"postal_code\":\"90004\"}";
-        
-        // var rs = MakeRequest.post(url, data);
-        // System.out.println(rs);
-    
         
     }
     

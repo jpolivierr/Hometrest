@@ -10,11 +10,11 @@ const useRequest = () =>{
     const {getTokens} = useSessionMng()
 
 
-    const redirection = (redirected) =>{
+    const redirection = (response) =>{
 
-        if(redirected){
+        if(response.redirected){
 
-            window.location.href = redirected.url
+            window.location.href = response.url
 
         }
 
@@ -55,8 +55,9 @@ const useRequest = () =>{
                             formData.append("formData",JSON.stringify(data))
                             config.body = formData
                             setLoading(true)
-                            response = await fetch(url,config) 
-                            redirection(response.redirected)       
+                            response = await fetch(url,config)
+                            console.log(response.url)
+                            redirection(response)       
                             status = response.status
                             headers = response.headers
                             setLoading(false)

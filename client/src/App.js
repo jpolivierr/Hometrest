@@ -34,27 +34,33 @@ function App() {
 
   useEffect(()=>{
 
-    validateSession()
+    // validateSession()
     // processTokens()
     
 
     const userIsAuthenticated = getTokens("authorizationtoken")
-    console.log(userIsAuthenticated)
+
     if(userIsAuthenticated){
 
       makeRequest("GET", URL.GET_ACCOUNT )
       
     }
 
-    console.log(formResponse)
+    if(
+      formResponse.status === 200
+      ){
+        console.log(formResponse)
+        console.log(formResponse.headers)
+        console.log("Authent at the bottom")
+        console.log(formResponse.headers.get("authorizationtoken"))
+      }
+
 
   },[formResponse])
 
 
-
   useEffect(()=>{
 
-    console.log("Active User: ", activeUserReducer)
 
   },[activeUserReducer])
 
@@ -74,8 +80,8 @@ function App() {
           if(getParams("search")){
 
           const listingOptions = getParams("search")
-          setSearch(listingOptions)
 
+          setSearch(listingOptions)
 
         }
 

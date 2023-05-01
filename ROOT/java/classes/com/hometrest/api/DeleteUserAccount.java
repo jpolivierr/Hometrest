@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.util.HashMap;
 
 import com.hometrest.JsonHttpResponse;
+import com.hometrest.MySessionManagement;
 import com.hometrest.database.DbConnect;
 import com.hometrest.database.DeleteAccount;
 
@@ -18,17 +19,18 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet(urlPatterns = "/api/delete_account")
 @MultipartConfig
-public class DeleteApi extends HttpServlet{
+public class DeleteUserAccount extends HttpServlet{
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
     throws ServletException, IOException{
 
 
             HttpSession session = request.getSession(false);
+            String sessionExist = MySessionManagement.validateSessionId(session,request);
 
             String email = (String) session.getAttribute("email");
 
-            if(email != null){
+            if(email != null && sessionExist != null){
 
                 DbConnect dbConnect = DbConnect.getDbConnect();
 
@@ -49,7 +51,10 @@ public class DeleteApi extends HttpServlet{
                   return ;
                 }
 
-                JsonHttpResponse.send(response, 200,"Account deleted", null);
+                session.invalidate();
+                session = null;
+
+                response.sendRedirect("/");
 
                 return;
 

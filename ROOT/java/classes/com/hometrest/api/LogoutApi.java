@@ -44,6 +44,7 @@ public class LogoutApi extends HttpServlet {
             session = null;
 
             response.sendRedirect("/");
+            
 
         }
 

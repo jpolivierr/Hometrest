@@ -21,7 +21,7 @@ const Signup = (props) =>{
 
     return(
     
-        !userToken && 
+        // !userToken && 
         <>
             <div id={id} className={`${Class} light-bk`}>
                 

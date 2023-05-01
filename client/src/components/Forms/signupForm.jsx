@@ -6,12 +6,14 @@ import useForm from "../../lib/Forms/useForm"
 import MainButton from "../buton/MainButton"
 import Ring from "../../lib/loadingEffect/loading/ring"
 import URL from "../../Config/urls"
+import useSessionMng from "../../hooks/useSessionMng"
 
 
 
 const Signup = () =>{
 
   const [isLoading] = useState(true)
+  const {startSession} = useSessionMng()
 
     const [formSetting] = useState({
         config: {
@@ -91,24 +93,26 @@ const Signup = () =>{
 
     const {getForm, formResponse, loading} = useForm(formSetting)
 
-    console.log(formResponse)
-
     useEffect(()=>{
 
-      console.log(formResponse)
+      
+      const session = startSession(formResponse)
 
-      if(formResponse && formResponse.status === 200){
-        window.location.href = "/"
+      if(session){
+
+        //  window.location.pathname = "/"
+        
+      }else{
+
+        console.log("Incorrect response..")
+
       }
 
-    },[])
+    },[formResponse])
 
     return(
         <div className="margin-top-2x">
 
-           {/* <Form 
-              setting={formSetting}
-           /> */}
 
            {getForm()}
 
