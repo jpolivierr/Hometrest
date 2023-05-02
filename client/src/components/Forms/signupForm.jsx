@@ -4,7 +4,7 @@ import { emptyField } from "../../lib/Forms/Util/emptyField"
 import { emailValidation } from "../../lib/Forms/Util/emailValidation"
 import useForm from "../../lib/Forms/useForm"
 import MainButton from "../buton/MainButton"
-import Ring from "../../lib/loadingEffect/loading/ring"
+import Ring from "../../lib/loadingEffect/loading/loadingEffect"
 import URL from "../../Config/urls"
 import useSessionMng from "../../hooks/useSessionMng"
 
@@ -84,10 +84,13 @@ const Signup = () =>{
               },
         ],
         button : <MainButton 
-                      label="Submit"
+                      label="Submitsss"
                       Class=" button main-btn"
                       type="submit"
-                      loadingEffect={<Ring isShowing = {isLoading} />}
+                       loadingEffect={<Ring 
+                        isShowing = {true} 
+                        elementClass="av-loading"
+                        />}
                   />
     })
 
@@ -112,7 +115,6 @@ const Signup = () =>{
 
     return(
         <div className="margin-top-2x">
-
 
            {getForm()}
 

@@ -34,11 +34,8 @@ const useSessionMng = () =>{
     const getTokens = (key) =>{
 
         const localToken = localStorage.getItem(key)
-        const regexPattern = `(?:(?:^|.*;\s*)${key}\s*\=\s*([^;]*).*$)|^.*$`
-        const regexValue = new RegExp(regexPattern)
-        const cookieValue = document.cookie.replace(regexValue, "$1");
 
-        if(!localToken && !cookieValue){
+        if(!localToken){
 
             return null
 
@@ -49,6 +46,10 @@ const useSessionMng = () =>{
             return tokenArr[0] + "_" + tokenArr[1]
 
         }
+
+        const regexPattern = `(?:(?:^|.*;\s*)${key}\s*\=\s*([^;]*).*$)|^.*$`
+        const regexValue = new RegExp(regexPattern)
+        const cookieValue = document.cookie.replace(regexValue, "$1");
 
         if(cookieValue){
             const tokenArr = cookieValue.split("_")
@@ -153,7 +154,6 @@ const useSessionMng = () =>{
                     }
                     // console.log(payload)
                     setDataToStorage(token)
-                    setUser(activeUserInfo)
                     
                     return true
  

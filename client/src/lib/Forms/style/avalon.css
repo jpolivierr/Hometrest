@@ -29,7 +29,7 @@ LABEL AND HEADER
     margin-bottom: .5rem;
     color: #212c51;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 /* ******************************************* 
@@ -77,7 +77,6 @@ font-size: .8rem;
     /* border : 1px solid #203c5978; */
     width: 100%;
     height: 48px;
-    background: #eaeaea24;
 }
 
 .avalon fieldset input{

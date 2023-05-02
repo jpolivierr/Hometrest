@@ -2,6 +2,8 @@ import { useEffect } from "react"
 import {urlParcer} from "../Util/urlParcer"
 import SignupForm from "../components/Forms/signupForm"
 import useReduxMng from "../hooks/useReduxMng"
+import NewSignUpForm from "../components/Forms/NewSignupForm"
+
 
 const Signup = (props) =>{
 
@@ -27,7 +29,8 @@ const Signup = (props) =>{
                 
                 <div className="container center-content padding-bottom-2x">
                     <div style={{}}>
-                    <SignupForm/>
+                    {/* <SignupForm/> */}
+                    <NewSignUpForm />
                     </div>
                 
             </div>

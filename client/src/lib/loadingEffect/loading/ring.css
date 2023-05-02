@@ -54,4 +54,32 @@
       transform: rotate(360deg);
     }
   }
+
+  .basic-loading{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    z-index: 2;
+  }
+
+  .basic-loading .lds-ring div{
+
+    border: 3px solid silver;
+    border-color: var(--dark-color) transparent transparent transparent;
+    width: 44px;
+    height: 44px;
+
+  }
+
+  .basic-loading .lds-ring div:nth-child(1) {
+    animation-delay: 0;
+    border-color: #8ca0ac7a;
+  }
   

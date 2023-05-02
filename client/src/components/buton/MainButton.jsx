@@ -26,6 +26,7 @@ const handleClick = (e) =>{
 
 }
 
+
 const generateButton = () =>{
     if(href){
         return(
@@ -38,7 +39,7 @@ const generateButton = () =>{
                     {/* <Ring isShowing = {isLoading}/> */}
                     {loadingEffect && loadingEffect}
                     
-                    {label}
+                    {/* {label} */}
                 </button>
            </Link>
         )
@@ -49,8 +50,8 @@ const generateButton = () =>{
                   style={{cursor: "pointer",position: "relative", overflow: "hidden"}} 
                   type={type} 
                    onClick={(e)=>{handleClick(e)}}
-                   className={`${Class} ${rippleClass} scl-btn`}>
-                    
+                   className={`${Class} scl-btn`}>
+                    {loadingEffect && loadingEffect}
                     {label}
                 </button>
     )

@@ -7,13 +7,14 @@ import Listings from './Pages/listings/listings';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import TopNav from './components/Navigaion/topNav';
 import { getParams, updateParam } from './Util/urlParcer';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import useReduxMng from './hooks/useReduxMng';
 import { useLocation } from 'react-router-dom';
 import useRedirectMng from './hooks/useRedirectMng';
 import useSessionMng from './hooks/useSessionMng';
 import useRequest from './lib/MakeRequest/MakeRequest';
 import URL from './Config/urls';
+import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
 
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
   const {
          activeUserReducer,
          setSearch,
+         setUser,
+         setToken,
          searchReducer,
         } = useReduxMng()
 
@@ -30,32 +33,54 @@ function App() {
 
   const {validateSession, processTokens, getTokens} = useSessionMng()
 
-  const { makeRequest, formResponse } = useRequest()
+  const { makeRequest, formResponse, loading } = useRequest()
 
-  useEffect(()=>{
+  const [isLoading, setIsLoading] = useState(true)
 
-    // validateSession()
-    // processTokens()
-    
-    // const userIsAuthenticated = getTokens("authorizationtoken")
-      makeRequest("GET", URL.GET_ACCOUNT )
-      
-    
-    if(
-      formResponse.status === 200
-      ){
-        console.log(formResponse.headers.get("authorizationtoken"))
-      }
+  useLayoutEffect(()=>{
 
+    const userIsAuthenticated = getTokens("authorizationtoken")
+
+    if(!userIsAuthenticated){
+
+       setIsLoading(false)
+
+    }
 
   },[])
 
   useEffect(()=>{
 
+     console.log("will make request")
+     const userIsAuthenticated = getTokens("authorizationtoken")
+     console.log("token: ", userIsAuthenticated)
+
+     if(userIsAuthenticated){
+
+       makeRequest("GET", URL.GET_ACCOUNT )
+
+     }
+
+  },[])
+
+  useEffect(()=>{
+
+    console.log("App Form response: ", formResponse)
+
     if(
-      formResponse.status === 200
+      formResponse.status === 200 &&
+      formResponse.body && 
+      formResponse.headers &&
+      formResponse.headers.get("authorizationtoken")
       ){
-        console.log(formResponse.headers.get("authorizationtoken"))
+      
+        const payload = {
+            userInfo : formResponse.body,
+            token : formResponse.headers.get("authorizationtoken")
+        }
+        setUser(payload)
+        console.log(formResponse)
+        setIsLoading(false)
       }
     
   },[formResponse])
@@ -97,7 +122,11 @@ function App() {
 
 
   return (
-    <div className="App">
+            isLoading ? <LoadingEffect 
+              isShowing = {loading} 
+              elementClass="basic-loading"
+              type="ring"/> : 
+              <div className="App">
   
         <TopNav />
         <Routes>
