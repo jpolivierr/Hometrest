@@ -44,6 +44,7 @@ const useRequest = () =>{
                     case "GET" :
                         setLoading(true)
                         response = await fetch(url,config)
+                        // console.log(response.text())
                         redirection(response.redirected)
                         status = response.status
                         headers = response.headers

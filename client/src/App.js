@@ -51,7 +51,7 @@ function App() {
 
   useEffect(()=>{
 
-     console.log("will make request")
+     console.log("Making request")
      const userIsAuthenticated = getTokens("authorizationtoken")
      console.log("token: ", userIsAuthenticated)
 
@@ -100,7 +100,7 @@ function App() {
 
   },[location.pathname])
 
-
+console.log(activeUserReducer)
 
   useEffect( ()=>{
 

@@ -167,7 +167,8 @@ const useSessionMng = () =>{
         startSession,
         validateSession,
         processTokens,
-        getTokens
+        getTokens,
+        deleteStorageData
     }
 }
 

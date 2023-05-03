@@ -5,6 +5,7 @@ import LoginForm from "../components/Forms/loginForm"
 import useRequest from "../lib/MakeRequest/MakeRequest"
 import useReduxMng from "../hooks/useReduxMng"
 import TopNav from "../components/Navigaion/topNav"
+import NewLoginForm from "../components/Forms/NewLoginForm"
 
 const Login = (props) =>{
 
@@ -28,7 +29,7 @@ const Login = (props) =>{
                 
                 <div className="container center-content padding-bottom-2x">
                     <div style={{}}>
-                        <LoginForm/>
+                        <NewLoginForm />
                     </div>
                 
             </div>

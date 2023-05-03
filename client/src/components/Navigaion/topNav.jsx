@@ -6,8 +6,6 @@ import useReduxMng from "../../hooks/useReduxMng"
 const TopNav = () =>{
 
     const {activeUserReducer} = useReduxMng()
-
-    console.log(activeUserReducer)
     const user = activeUserReducer.userInfo
     const token = activeUserReducer.token
 
@@ -15,6 +13,7 @@ const TopNav = () =>{
     return(
         <>
         {!user && !token ? <LogOutNav/> : <LogInNav/>}
+           {/* <LogInNav /> */}
         </>
                                
      

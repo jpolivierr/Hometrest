@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = "/secure/logout")
+@WebServlet(urlPatterns = "/api/logout")
 @MultipartConfig
 public class LogoutApi extends HttpServlet {
 
@@ -43,7 +43,7 @@ public class LogoutApi extends HttpServlet {
 
             session = null;
 
-            response.sendRedirect("/");
+            JsonHttpResponse.send(response, 200,"user logged out", null);;
             
 
         }

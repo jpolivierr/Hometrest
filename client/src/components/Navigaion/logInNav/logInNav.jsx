@@ -1,19 +1,71 @@
-import useModal from "../../../lib/Modal/useModal"
-import Modal from "../../../lib/Modal/modal"
-import SlideWindow from "../../../lib/Modal/Windows/slideWindow"
-import ModalOverlay from "../../../lib/Modal/Overlays/modalOverlay"
+
 import MainButton from "../../buton/MainButton"
+import useMyModal from "../../../lib/Modal/useMyModal"
+import useRequest from "../../../lib/MakeRequest/MakeRequest"
+import URL from "../../../Config/urls"
+import useSessionMng from "../../../hooks/useSessionMng"
+import useReduxMng from "../../../hooks/useReduxMng"
 import "../style.css"
 import "./style.css"
 
 
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import NavList from "../../list/NavList"
 
 const LogInNav = () =>{
 
-    const {isShowing, toggle, motion } = useModal();
+    // const {isShowing, toggle, motion } = useModal(); 
+    const {makeRequest, formResponse, loading} = useRequest()
+
+    const {activeUserReducer} = useReduxMng()
+
+    const fName = activeUserReducer.userInfo.first_name ? activeUserReducer.userInfo.first_name : ""
+    const lName = activeUserReducer.userInfo.last_name ? activeUserReducer.userInfo.last_name : ""
+
+    const {deleteStorageData} = useSessionMng()
+
+    const {toggle, renderModal, addChildElement} = useMyModal({
+        type: "slide",
+        windowAnimation : {
+                    start: "slide-left",
+                    end: "close-slide-left"
+        },
+        animation: "slide-left_close-slide-left",
+        time: 100,
+    })
+
+    const loginOut = () =>{
+          makeRequest("GET",URL.LOGOUT)
+    }
+
+    useEffect(()=>{
+        
+        if(formResponse.status && formResponse.status === 200){
+
+            deleteStorageData()
+
+             window.location.href="/"
+
+            console.log(formResponse)
+        }
+    },[formResponse])
+
+    addChildElement(
+                    <ul>
+                         <li className="user-icon"><i className="fa-regular fa-user"></i></li>
+                         <li className="user-full-name">{`${fName} ${lName}`}</li>
+                         <li className="user-edit-account"><p>Edit Account</p></li>
+                         <li>
+                            <button onClick={loginOut}>Log out</button>
+                         </li>
+                    </ul>)
+
+    // const modalConfig = {
+    //             type: "float",
+    //             animation : "fade",
+    //             time: 300
+    // }
 
 
     return(
@@ -33,7 +85,7 @@ const LogInNav = () =>{
                                         <div className="hideMobile flex-space-between gap-2x user-nav-info">
                                             
                                             <p className="user-greeting">
-                                                Hi, Frederic
+                                                Hi, {fName}
                                             </p>
 
                                             <button className="user-nav-likes">
@@ -42,9 +94,9 @@ const LogInNav = () =>{
                                             </button>
 
                                            
-                                                <button className="user-nav-account">
+                                            <button onClick={()=>toggle()} className="user-nav-account">
                                                 <i className="fa-regular fa-user"></i>
-                                                </button>
+                                            </button>
                                          
                                         </div>
 
@@ -58,38 +110,25 @@ const LogInNav = () =>{
                                 </div>
 
                         </section>
+                        {renderModal(<div>I'm here</div>)}
 
-
-                        <Modal
+                        {/* <Modal
                             isShowing={isShowing}
-                           >
-                            <ModalOverlay
-                                toggle={toggle}
-                                animated={{time: 200, motion: motion}}
-                                motionType="fade"
-                                seconds=".3s"
-                                from="0"
-                                to="1"
-                            />
-
-                    <SlideWindow 
                             toggle={toggle}
-                            Class=""
-                            animated={{time: 200, motion: motion}}
-                            motionType="slide-left"
-                            seconds=".2s"
-                            from="-300px"
-                            to="0px"
-                        >
-                            <NavList 
-                                Class="flex-columns gap-1x nav-list"
-                                listsClass="text-center"
-                                listsClickEvent={()=>toggle(300)}
-                                />
-
-                        </SlideWindow>
-
-                        </Modal>
+                            motion={motion}
+                            time={300}
+                            motionType={"fade"}
+                            type={"slide"}
+                            from={""}
+                            to={""}
+                         >
+                          
+                                    <NavList 
+                                        Class="flex-columns gap-1x nav-list"
+                                        listsClass="text-center"
+                                        listsClickEvent={()=>toggle(300)}
+                                        />
+                         </Modal> */}
            </>
                 
                    

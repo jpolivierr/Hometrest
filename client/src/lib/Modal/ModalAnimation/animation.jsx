@@ -39,9 +39,9 @@ const ModalAnimation = (props) =>{
                 
                 @keyframes fadeIn {
                     from{
-                        opacity: ${from};
+                        opacity: 0;
                     }to{
-                        opacity: ${to};
+                        opacity: 1;
                     }
                 }
                 
@@ -51,9 +51,9 @@ const ModalAnimation = (props) =>{
                 
                 @keyframes fadeOut {
                     from{
-                        opacity: ${to};
+                        opacity: 1;
                     }to{
-                        opacity: ${from};
+                        opacity: 0;
                     }
                 }
     `
@@ -88,7 +88,7 @@ const ModalAnimation = (props) =>{
     const renderStyle = () =>{
 
         switch(type){
-            case "slide-left" :
+            case "slide" :
                 return slideLeft
 
             case "fade" :
