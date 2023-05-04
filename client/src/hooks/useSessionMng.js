@@ -3,7 +3,7 @@ import useReduxMng from "./useReduxMng"
 
 const useSessionMng = () =>{
 
-    const {setUser, setToken, clearUser, activeUser} = useReduxMng()
+    const {setToken, clearUser, activeUser} = useReduxMng()
     const [mytoken] = useState("authorizationtoken")
 
     const processTokens = () =>{
@@ -26,7 +26,6 @@ const useSessionMng = () =>{
             return
 
         }
-
 
 
     }
@@ -52,7 +51,9 @@ const useSessionMng = () =>{
         const cookieValue = document.cookie.replace(regexValue, "$1");
 
         if(cookieValue){
+
             const tokenArr = cookieValue.split("_")
+            
             return tokenArr[0] + "_" +  tokenArr[1]
             
         }

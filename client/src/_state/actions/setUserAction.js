@@ -1,6 +1,16 @@
+export const SET_AUTHENTICATION = "SET_AUTHENTICATION";
 export const SET_USER = "SET_USER";
 export const SET_TOKEN = "SET_TOKEN";
 export const CLEAR_USER = "CLEAR_USER";
+
+export const setAuthentication = (payload) =>{
+    
+    return {
+            type : SET_AUTHENTICATION,
+            payload
+    }
+    
+}
 
 export const setUser = (payload) =>{
     

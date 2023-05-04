@@ -1,6 +1,7 @@
 
 import Login from './Pages/login';
 import Signup from './Pages/signup';
+import Update from './Pages/update/update';
 import About from './Pages/about';
 import Home from './Pages/home';
 import Listings from './Pages/listings/listings';
@@ -22,7 +23,7 @@ function App() {
   const {
          activeUserReducer,
          setSearch,
-         setUser,
+         setAuthentication,
          setToken,
          searchReducer,
         } = useReduxMng()
@@ -57,7 +58,7 @@ function App() {
 
      if(userIsAuthenticated){
 
-       makeRequest("GET", URL.GET_ACCOUNT )
+        makeRequest("GET", URL.GET_ACCOUNT )
 
      }
 
@@ -78,7 +79,7 @@ function App() {
             userInfo : formResponse.body,
             token : formResponse.headers.get("authorizationtoken")
         }
-        setUser(payload)
+        setAuthentication(payload)
         console.log(formResponse)
         setIsLoading(false)
       }
@@ -134,6 +135,7 @@ console.log(activeUserReducer)
           <Route path="/login" element={<Login/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/listings" element={<Listings/>}/>
+          <Route path="/update" element={<Update/>}/>
           <Route path="/" element={<Home />}/>
         </Routes>
 

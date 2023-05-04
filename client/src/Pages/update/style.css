@@ -1,0 +1,28 @@
+
+.update-page{
+
+    margin-top: 3rem;
+
+}
+.update-page h2{
+
+    border-bottom: 1px solid var(--light-silver);
+    padding-bottom: 1rem;
+
+}
+
+.update-page .avalon button{
+    width: max-content;
+    
+}
+
+.update-page button{
+    height: 48px;
+}
+
+.w-msg{
+    font-size: .9rem;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--alt-text-color);
+}

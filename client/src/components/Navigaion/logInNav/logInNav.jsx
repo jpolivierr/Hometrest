@@ -5,6 +5,9 @@ import useRequest from "../../../lib/MakeRequest/MakeRequest"
 import URL from "../../../Config/urls"
 import useSessionMng from "../../../hooks/useSessionMng"
 import useReduxMng from "../../../hooks/useReduxMng"
+import shortenText from "../../../Util/shortenText"
+import { deepSearch } from "../../../Util/getValueByKey"
+
 import "../style.css"
 import "./style.css"
 
@@ -20,12 +23,13 @@ const LogInNav = () =>{
 
     const {activeUserReducer} = useReduxMng()
 
-    const fName = activeUserReducer.userInfo.first_name ? activeUserReducer.userInfo.first_name : ""
-    const lName = activeUserReducer.userInfo.last_name ? activeUserReducer.userInfo.last_name : ""
+     const fName = deepSearch(activeUserReducer,["userInfo","first_name"],"john")
+     const lName = deepSearch(activeUserReducer,["userInfo","last_name"],"Smith")
+    const email = deepSearch(activeUserReducer,["userInfo","email"],"demo@gmail.com")
 
     const {deleteStorageData} = useSessionMng()
 
-    const {toggle, renderModal, addChildElement} = useMyModal({
+    const {toggle, renderModal, addChildElement, isShowing} = useMyModal({
         type: "slide",
         windowAnimation : {
                     start: "slide-left",
@@ -35,37 +39,44 @@ const LogInNav = () =>{
         time: 100,
     })
 
+
+
     const loginOut = () =>{
           makeRequest("GET",URL.LOGOUT)
     }
 
     useEffect(()=>{
+        addChildElement(<div className="user-settings">
+                       <div className="setting-header">
+                            <div className="user-icon"><i className="fa-regular fa-user"></i></div>
+                            <div className="user-full-name">{`${fName} ${lName}`}</div>
+                            <div className="user-email"><h5>{`${shortenText(email,20) }`}</h5></div>
+                       </div>
+                            <ul className="update-user-list">
+                                
+                                <li className="user-edit-account"><p>Edit Account</p></li>
+                                
+                            </ul>
+                        <div className="user-log-out">
+                                <button className="button main-btn" onClick={loginOut}>Log out</button>
+                        </div>
+                    </div>
+                    )
+        
+    },[isShowing])
+
+
+    useEffect(()=>{
         
         if(formResponse.status && formResponse.status === 200){
 
-            deleteStorageData()
+             deleteStorageData()
 
              window.location.href="/"
 
             console.log(formResponse)
         }
     },[formResponse])
-
-    addChildElement(
-                    <ul>
-                         <li className="user-icon"><i className="fa-regular fa-user"></i></li>
-                         <li className="user-full-name">{`${fName} ${lName}`}</li>
-                         <li className="user-edit-account"><p>Edit Account</p></li>
-                         <li>
-                            <button onClick={loginOut}>Log out</button>
-                         </li>
-                    </ul>)
-
-    // const modalConfig = {
-    //             type: "float",
-    //             animation : "fade",
-    //             time: 300
-    // }
 
 
     return(
@@ -84,9 +95,9 @@ const LogInNav = () =>{
 
                                         <div className="hideMobile flex-space-between gap-2x user-nav-info">
                                             
-                                            <p className="user-greeting">
+                                            <h3 className="user-greeting">
                                                 Hi, {fName}
-                                            </p>
+                                            </h3>
 
                                             <button className="user-nav-likes">
                                                   <i className="fa-regular fa-heart"></i>
@@ -110,8 +121,7 @@ const LogInNav = () =>{
                                 </div>
 
                         </section>
-                        {renderModal(<div>I'm here</div>)}
-
+                        {renderModal()}
                         {/* <Modal
                             isShowing={isShowing}
                             toggle={toggle}

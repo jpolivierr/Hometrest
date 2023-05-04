@@ -46,9 +46,9 @@ public class MySessionManagement {
             }
 
             String serverToken = (String) session.getAttribute("token");
+            String email = (String) session.getAttribute("email");
 
-
-            if(currentSessionId.equals(sessionCookie) && serverToken != null){
+            if(currentSessionId.equals(sessionCookie) && serverToken != null && email !=null ){
 
                 sessionId = sessionCookie ;
 

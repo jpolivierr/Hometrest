@@ -66,6 +66,7 @@ public class LoginApi extends HttpServlet {
                     newSession.setAttribute("token", token + "_" + newSession.getMaxInactiveInterval());
 
                     newSession.setAttribute("email", logInForm.getEmail()); 
+                    
                     response.setHeader("AuthorizationToken", token + "_" + newSession.getMaxInactiveInterval());
 
                     response.setHeader("Access-Control-Expose-Headers", "AuthorizationToken");

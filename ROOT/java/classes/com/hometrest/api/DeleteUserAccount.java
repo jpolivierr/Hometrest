@@ -52,6 +52,7 @@ public class DeleteUserAccount extends HttpServlet{
                 }
 
                 session.invalidate();
+                
                 session = null;
 
                 response.sendRedirect("/");

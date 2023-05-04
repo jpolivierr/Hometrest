@@ -1,9 +1,6 @@
 package com.hometrest.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import com.hometrest.MySessionManagement;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

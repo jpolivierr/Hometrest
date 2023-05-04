@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import "./style.css"
 import ModalAnimation from './ModalAnimation/animation';
@@ -50,9 +50,9 @@ const useMyModal = (children) => {
 
   const addChildElement = (element) =>{
     
-      if(!childElement){
+      
         setChildElement(element)
-      }
+      
 
   }
 

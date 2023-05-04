@@ -16,9 +16,6 @@ Container
     max-width: 1500px;
 }
 
-*{
-    color: var(--light-text-color);
-}
 
 /* 
 =================================================
@@ -93,6 +90,17 @@ PADDING
     padding: 3rem 0rem;
 }
 
+.no-padding{
+    padding: 0rem;
+}
+
+.padding-top{
+ padding-top: 1rem;
+}
+
+.padding-top-2x{
+    padding-top: 2rem;
+   }
 .padding-bottom-2x{
     padding-bottom: 4rem;
 }

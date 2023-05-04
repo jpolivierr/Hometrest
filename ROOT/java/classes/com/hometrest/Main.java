@@ -1,15 +1,19 @@
 package com.hometrest;
 
- import com.hometrest.servlet.*;
 import com.hometrest.ErrorHandler.ErrorServlet;
-import com.hometrest.api.LoginApi;
-import com.hometrest.api.LogoutApi;
-import com.hometrest.api.SignupApi;
 import com.hometrest.api.DeleteUserAccount;
 import com.hometrest.api.GetAccount;
 import com.hometrest.api.ListSearchApi;
-// import com.hometrest.api.ApiEndPoint;
-import com.hometrest.filter.*;
+import com.hometrest.api.LoginApi;
+import com.hometrest.api.LogoutApi;
+import com.hometrest.api.SignupApi;
+import com.hometrest.api.UpdateAccount;
+import com.hometrest.filter.ApisFilter;
+import com.hometrest.filter.EndPointFilter;
+import com.hometrest.filter.SecureFilter;
+import com.hometrest.servlet.ListingsServlet;
+import com.hometrest.servlet.LoginServlet;
+import com.hometrest.servlet.SignupServlet;
 
 
 public class Main {
@@ -21,13 +25,14 @@ public class Main {
          new ListingsServlet();
          new LoginServlet();
          new SignupServlet();
-         new ErrorServlet();
+            new ErrorServlet();
          new ListSearchApi();
          new SignupApi();
          new LoginApi();
          new LogoutApi();
          new DeleteUserAccount();
          new GetAccount();
+          new UpdateAccount();
         
     }
     
