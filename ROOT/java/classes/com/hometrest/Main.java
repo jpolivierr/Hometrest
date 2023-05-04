@@ -1,7 +1,7 @@
 package com.hometrest;
 
 import com.hometrest.ErrorHandler.ErrorServlet;
-import com.hometrest.api.DeleteUserAccount;
+import com.hometrest.api.DeleteAccount;
 import com.hometrest.api.GetAccount;
 import com.hometrest.api.ListSearchApi;
 import com.hometrest.api.LoginApi;
@@ -25,14 +25,14 @@ public class Main {
          new ListingsServlet();
          new LoginServlet();
          new SignupServlet();
-            new ErrorServlet();
+         new ErrorServlet();
          new ListSearchApi();
          new SignupApi();
          new LoginApi();
          new LogoutApi();
-         new DeleteUserAccount();
          new GetAccount();
-          new UpdateAccount();
+         new UpdateAccount();
+         new DeleteAccount();
         
     }
     

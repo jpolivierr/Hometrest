@@ -31,22 +31,14 @@ public class LogoutApi extends HttpServlet {
             return;
         }
 
-        if(session != null){
-
-            String sessionExist = MySessionManagement.validateSessionId(session,request);
-
-            if(sessionExist != null){
-
                 session.invalidate();
 
-            }
-
-            session = null;
+                session = null;
 
             JsonHttpResponse.send(response, 200,"user logged out", null);;
             
 
-        }
+        
 
 
      }

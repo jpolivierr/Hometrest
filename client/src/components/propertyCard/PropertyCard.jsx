@@ -1,12 +1,12 @@
 
 import { deepSearch } from "../../Util/getValueByKey"
 import { getStatusStyle, cleanInput, formatNumber, getPhoto } from "./util"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import "./style.css"
 
 const PropertyCard = (props) =>{
 
-    const {singleProperty} = props 
+    const {singleProperty, toggleModal} = props 
 
     // console.log(key)
   
@@ -33,9 +33,17 @@ const PropertyCard = (props) =>{
         }
         return address
     }
-    
+
+    const [like, setLike] = useState(false)
     
 
+    const likeProperty = (id) =>{
+
+        toggleModal()
+        setLike(!like)
+
+    }
+    
     // console.log(propertyId)
     // console.log(status)
 
@@ -50,7 +58,7 @@ const PropertyCard = (props) =>{
 
             <div className="prop-info">
                     <div className="prop-price">${formatNumber(price)}</div>
-                    <i className="fa-regular fa-heart"></i>
+                    {!like ? <i onClick={()=>likeProperty(propertyId)} className="fa-regular fa-heart"></i> : <i onClick={()=>likeProperty(propertyId)} className="fa-solid fa-heart like-prop"></i>}
                     <div className="prop-beds">{beds} <span>Beds</span></div>
                     <div className="prop-baths">{baths} <span>Baths</span></div>
                     <div className="prop-sqft">{sqft} <span>Sqft</span></div>

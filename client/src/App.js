@@ -32,7 +32,7 @@ function App() {
 
   const {pathMng} = useRedirectMng()
 
-  const {validateSession, processTokens, getTokens} = useSessionMng()
+  const {validateSession, processTokens, getTokens, deleteStorageData} = useSessionMng()
 
   const { makeRequest, formResponse, loading } = useRequest()
 
@@ -88,12 +88,6 @@ function App() {
 
 
   useEffect(()=>{
-
-
-  },[activeUserReducer])
-
-  useEffect(()=>{
-
     
     pathMng(location.pathname)
 

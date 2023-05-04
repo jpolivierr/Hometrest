@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.hometrest.JsonHttpResponse;
 import com.hometrest.MySessionManagement;
 import com.hometrest.database.DbConnect;
-import com.hometrest.database.ValidateUser;
+import com.hometrest.database.Db_ValidateUser;
 import com.hometrest.formSubmissions.LoginForm;
 
 import jakarta.servlet.ServletException;
@@ -43,7 +43,7 @@ public class LoginApi extends HttpServlet {
 
             var connection = dbConnect.connect();
 
-            ValidateUser validateUser = new ValidateUser();
+            Db_ValidateUser validateUser = new Db_ValidateUser();
 
             HashMap<String,String> userIsAuthenticate = validateUser.init(connection, logInForm);
 
@@ -66,7 +66,7 @@ public class LoginApi extends HttpServlet {
                     newSession.setAttribute("token", token + "_" + newSession.getMaxInactiveInterval());
 
                     newSession.setAttribute("email", logInForm.getEmail()); 
-                    
+
                     response.setHeader("AuthorizationToken", token + "_" + newSession.getMaxInactiveInterval());
 
                     response.setHeader("Access-Control-Expose-Headers", "AuthorizationToken");

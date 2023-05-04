@@ -5,6 +5,7 @@ const URL = {
     SIGNUP : "http://localhost:8080/secure/signup",
     GET_ACCOUNT : "http://localhost:8080/api/get_account",
     UPDATE_ACCOUNT : "http://localhost:8080/api/updated_account",
+    DELETE_ACCOUNT : "http://localhost:8080/api/delete_account",
     LOGOUT : "http://localhost:8080/api/logout",
     
 }

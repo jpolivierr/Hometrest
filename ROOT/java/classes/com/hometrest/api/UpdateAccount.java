@@ -10,7 +10,7 @@ import com.hometrest.JsonHttpResponse;
 import com.hometrest.MySessionManagement;
 import com.hometrest.database.CreateUser;
 import com.hometrest.database.DbConnect;
-import com.hometrest.database.UpdateUser;
+import com.hometrest.database.Db_UpdateUser;
 import com.hometrest.formSubmissions.UpdateForm;
 
 import jakarta.servlet.ServletException;
@@ -48,7 +48,7 @@ public class UpdateAccount extends HttpServlet {
 
             var connection = dbConnect.connect();
 
-            UpdateUser updateUser = new UpdateUser();
+            Db_UpdateUser updateUser = new Db_UpdateUser();
 
             HashMap<String,String> account = updateUser.init(connection, updateForm, userEmail);
 
@@ -58,7 +58,7 @@ public class UpdateAccount extends HttpServlet {
 
                 notFound.put("serverError", "Something went wrong");
 
-                JsonHttpResponse.send(response, 409,"Something went wrong", notFound);
+                JsonHttpResponse.send(response, 409,"Account query error", notFound);
 
                 return ;
              }
@@ -67,7 +67,7 @@ public class UpdateAccount extends HttpServlet {
 
         }else{
 
-             JsonHttpResponse.send(response, 409,"Something went wrong", result);
+             JsonHttpResponse.send(response, 409,"Form validation error", result);
             
         }
 

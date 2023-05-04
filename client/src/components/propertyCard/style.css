@@ -75,7 +75,9 @@
     width: max-content;
     text-transform: uppercase;
 }
-
+.like-prop{
+    color: var(--main-color);
+}
 .status-for-sale{
     background: green;
 }

@@ -7,6 +7,7 @@ import useSessionMng from "../../../hooks/useSessionMng"
 import useReduxMng from "../../../hooks/useReduxMng"
 import shortenText from "../../../Util/shortenText"
 import { deepSearch } from "../../../Util/getValueByKey"
+import { Link } from "react-router-dom"
 
 import "../style.css"
 import "./style.css"
@@ -53,8 +54,10 @@ const LogInNav = () =>{
                             <div className="user-email"><h5>{`${shortenText(email,20) }`}</h5></div>
                        </div>
                             <ul className="update-user-list">
-                                
-                                <li className="user-edit-account"><p>Edit Account</p></li>
+
+                            <Link  to="/update" target="">
+                                <li className="user-edit-account" onClick={toggle}><p>Edit Account</p></li>
+                            </Link> 
                                 
                             </ul>
                         <div className="user-log-out">

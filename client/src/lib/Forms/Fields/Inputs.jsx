@@ -23,9 +23,13 @@ const Inputs= (props) =>{
             
     useEffect(()=>{
         if(defaultValue){
+
                 setInputValue(defaultValue)
+    
               }else{
+
                 setInputValue("")
+
               }
     },[defaultValue])
 
@@ -57,7 +61,7 @@ const Inputs= (props) =>{
         {props.label && <label>{props.label}</label>}
         <div className="input-container">
              <input 
-                     type={type === "password" ? "password" : ""}
+                     type={name.includes("password") ? "password" : ""}
                      ref={inputElement}
                      placeholder={props.placeHolder} 
                      name={props.name}

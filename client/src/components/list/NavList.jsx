@@ -46,12 +46,6 @@ const NavList = (props) =>{
                     className={`${listsClass} ${activeClass(pathname,"/listings")}` }>Listings
                 </li>
             </Link> 
-
-            <Link  to="/update" target="">
-                <li onClick={(e)=>{listClickEvent(e)}} 
-                    className={`${listsClass} ${activeClass(pathname,"/update")}` }>Update
-                </li>
-            </Link> 
             
         </ul>
     )

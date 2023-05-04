@@ -18,11 +18,9 @@ const {rippleClass, rippleAnimation} = useRipple()
 
 const handleClick = (e) =>{
 
-    if(clickEvent){
-        clickEvent(e)
-    }
-    
-    rippleAnimation(e)
+    if(!clickEvent) return
+
+    clickEvent(e)
 
 }
 

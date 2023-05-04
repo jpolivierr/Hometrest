@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 import com.hometrest.JsonHttpResponse;
 import com.hometrest.database.DbConnect;
-import com.hometrest.database.FetchAccount;
+import com.hometrest.database.Db_FetchAccount;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -34,7 +34,7 @@ public class GetAccount extends HttpServlet {
 
                 Connection connection = dbConnect.connect();
 
-                FetchAccount fetchAccount = new FetchAccount();
+                Db_FetchAccount fetchAccount = new Db_FetchAccount();
 
                 HashMap<String,String> account = fetchAccount.init(connection, email);
 

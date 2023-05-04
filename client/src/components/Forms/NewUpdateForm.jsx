@@ -24,11 +24,9 @@ const NewUpdateForm = () =>{
 
        const [formError, setFormError] = useState({})
 
-       const [formState, setFormState] = useState({})
+       
 
        const {makeRequest, formResponse, loading} = useRequest()
-
-       const {startSession} = useSessionMng()
 
        const {setUser, activeUserReducer} = useReduxMng()
 
@@ -36,7 +34,11 @@ const NewUpdateForm = () =>{
         const lName = deepSearch(activeUserReducer,["userInfo","last_name"],"Smith")
         const email = deepSearch(activeUserReducer,["userInfo","email"],"demo@gmail.com")
 
-       
+       const [formState, setFormState] = useState({
+            first_name: fName,
+            last_name: lName,
+            email : email
+       })
 
     const updateFormField = (key, value) =>{
          
@@ -118,7 +120,6 @@ const NewUpdateForm = () =>{
                 
 }
 
-// console.log(formState)
 
     return(
 
@@ -136,7 +137,7 @@ const NewUpdateForm = () =>{
                     required = {true}
                     formError = {formError}
                     updateFormField = {updateFormField}
-                    defaultValue ={fName}
+                    defaultValue ={formState.first_name}
 
                     />
 
@@ -146,7 +147,7 @@ const NewUpdateForm = () =>{
                     required = {true}
                     formError = {formError}
                      updateFormField = {updateFormField}
-                     defaultValue ={lName}
+                     defaultValue ={formState.last_name}
 
                     />
 
@@ -156,7 +157,7 @@ const NewUpdateForm = () =>{
                     required = {true}
                     formError = {formError}
                      updateFormField = {updateFormField}
-                     defaultValue ={email}
+                     defaultValue ={formState.email}
                     />
 
             <MainButton 

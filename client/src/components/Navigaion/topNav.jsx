@@ -12,8 +12,8 @@ const TopNav = () =>{
 
     return(
         <>
-        {!user && !token ? <LogOutNav/> : <LogInNav/>}
-           {/* <LogInNav /> */}
+        {/* {!user && !token ? <LogOutNav/> : <LogInNav/>} */}
+           <LogInNav />
         </>
                                
      

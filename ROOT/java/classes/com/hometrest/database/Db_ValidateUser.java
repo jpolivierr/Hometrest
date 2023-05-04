@@ -8,7 +8,7 @@ import java.sql.CallableStatement;
 
 import com.hometrest.formSubmissions.LoginForm;
 
-public class ValidateUser  {
+public class Db_ValidateUser  {
 
     HashMap<String,String> responseBody = new HashMap<String,String>();
 

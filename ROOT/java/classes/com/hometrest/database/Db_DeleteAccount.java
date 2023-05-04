@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 
-public class DeleteAccount {
+public class Db_DeleteAccount {
 
-    public boolean init(Connection connection, String email){
+    public Boolean init(Connection connection, String email){
 
         boolean result = false;
         

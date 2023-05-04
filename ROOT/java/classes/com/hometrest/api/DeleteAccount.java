@@ -5,38 +5,37 @@ import java.sql.Connection;
 import java.util.HashMap;
 
 import com.hometrest.JsonHttpResponse;
-import com.hometrest.MySessionManagement;
 import com.hometrest.database.DbConnect;
-import com.hometrest.database.DeleteAccount;
+import com.hometrest.database.Db_DeleteAccount;
+import com.hometrest.database.Db_FetchAccount;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet; 
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @WebServlet(urlPatterns = "/api/delete_account")
 @MultipartConfig
-public class DeleteUserAccount extends HttpServlet{
+public class DeleteAccount extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
     throws ServletException, IOException{
 
 
             HttpSession session = request.getSession(false);
-            String sessionExist = MySessionManagement.validateSessionId(session,request);
 
             String email = (String) session.getAttribute("email");
 
-            if(email != null && sessionExist != null){
+            if(email != null){
 
                 DbConnect dbConnect = DbConnect.getDbConnect();
 
                 Connection connection = dbConnect.connect();
 
-                DeleteAccount deleteAccount = new DeleteAccount();
+                Db_DeleteAccount deleteAccount = new Db_DeleteAccount();
 
                 Boolean account = deleteAccount.init(connection, email);
 
@@ -52,10 +51,10 @@ public class DeleteUserAccount extends HttpServlet{
                 }
 
                 session.invalidate();
-                
+
                 session = null;
 
-                response.sendRedirect("/");
+                JsonHttpResponse.send(response, 200,"Account Deleted", null);
 
                 return;
 
@@ -63,10 +62,11 @@ public class DeleteUserAccount extends HttpServlet{
 
             HashMap<String,String> notFound = new HashMap<>();
 
-            notFound.put("serverError", "Something went wrong");
+            notFound.put("serverError", "User not found");
 
-            JsonHttpResponse.send(response, 409,"Something went wrong", notFound);
+            JsonHttpResponse.send(response, 409,"User not found", notFound);
         
     }
-    
+
+   
 }

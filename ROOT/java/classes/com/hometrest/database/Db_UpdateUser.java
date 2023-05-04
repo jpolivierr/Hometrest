@@ -5,21 +5,30 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import com.hometrest.formSubmissions.FormSubmission;
+import com.hometrest.formSubmissions.UpdateForm;
 
 
-public class FetchAccount {
+
+public class Db_UpdateUser {
 
     HashMap<String,String> responseBody = new HashMap<String,String>();
 
-    public HashMap<String,String> init(Connection connection, String email){
+    public HashMap<String,String> init(Connection connection, UpdateForm updateForm, String originalEmail){
 
         try {
 
-            String sql = "{CALL getUser(?)}";
+            String sql = "{CALL updateUser(?,?,?,?)}";
 
             CallableStatement cstmt = connection.prepareCall(sql);
 
-            cstmt.setString(1, email);
+            cstmt.setString(1, originalEmail);
+
+            cstmt.setString(2, updateForm.getEmail());
+
+            cstmt.setString(3, updateForm.getFirstName());
+
+            cstmt.setString(4, updateForm.getLastName());
 
             cstmt.execute();
 
@@ -28,11 +37,11 @@ public class FetchAccount {
             while(rs.next()){
                      
                 responseBody.put("first_name", rs.getString("first_name"));
-                responseBody.put("last_name", rs.getString("last_name"));
-                responseBody.put("email", rs.getString("email"));
-                responseBody.put("liked_id", Integer.toString(rs.getInt("liked_id")));
-                responseBody.put("url", rs.getString("url"));
 
+                responseBody.put("last_name", rs.getString("last_name"));
+                
+                responseBody.put("email", rs.getString("email"));
+                
                  }
 
 
