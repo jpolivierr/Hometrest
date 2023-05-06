@@ -1,13 +1,14 @@
 
 import { useDispatch, useSelector } from "react-redux"
 import { bindActionCreators } from "redux"
-import {setUserAction, updateSearch, properties} from "../_state/actions/"
+import {setUserAction, updateSearch, properties, clientActivityAction} from "../_state/actions/"
 
 const useReduxMng = () =>{
 
     const activeUserReducer = useSelector((state)=> {return state.activeUserReducer})
     const searchReducer = useSelector((state)=> state.searchReducer)
     const propertiesReducer = useSelector((state) => state.propertiesReducer)
+    const clientActivityReducer = useSelector((state)=> state.clientActivityReducer)
 
     
     const {
@@ -28,7 +29,10 @@ const useReduxMng = () =>{
 
     const {setAuthentication , setUser, setToken, clearUser} = bindActionCreators(setUserAction, useDispatch())
 
+    const {setInactive, setActive} = bindActionCreators(clientActivityAction, useDispatch())
+
     return {
+        clientActivityReducer,
         activeUserReducer,
         searchReducer,
         setAuthentication,
@@ -46,7 +50,9 @@ const useReduxMng = () =>{
         setStatus,
         setZipcode,
         setCity,
-        setLimit
+        setLimit,
+        setInactive,
+        setActive
     }
 
 }

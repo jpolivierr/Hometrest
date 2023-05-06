@@ -1,10 +1,9 @@
 import { useState } from "react"
 import useReduxMng from "./useReduxMng"
 
-const useSessionMng = () =>{
+const useSessionMng = (mytoken) =>{
 
     const {setToken, clearUser, activeUser} = useReduxMng()
-    const [mytoken] = useState("authorizationtoken")
 
     const processTokens = () =>{
 
@@ -30,9 +29,9 @@ const useSessionMng = () =>{
 
     }
 
-    const getTokens = (key) =>{
+    const getTokens = () =>{
 
-        const localToken = localStorage.getItem(key)
+        const localToken = localStorage.getItem(mytoken)
 
         if(!localToken){
 
@@ -46,14 +45,14 @@ const useSessionMng = () =>{
 
         }
 
-        const regexPattern = `(?:(?:^|.*;\s*)${key}\s*\=\s*([^;]*).*$)|^.*$`
+        const regexPattern = `(?:(?:^|.*;\s*)${mytoken}\s*\=\s*([^;]*).*$)|^.*$`
         const regexValue = new RegExp(regexPattern)
         const cookieValue = document.cookie.replace(regexValue, "$1");
 
         if(cookieValue){
 
             const tokenArr = cookieValue.split("_")
-            
+
             return tokenArr[0] + "_" +  tokenArr[1]
             
         }
@@ -77,11 +76,19 @@ const useSessionMng = () =>{
 
     const deleteStorageData = () =>{
 
-        document.cookie = `${mytoken}=;expires=${new Date(0).toUTCString()};SameSite=strict;path=/;`
+        console.log("----------------------->> Reloading page...")
+
+        if(getTokens(mytoken)){
+            document.cookie = `${mytoken}=;expires=${new Date(0).toUTCString()};SameSite=strict;path=/;`
 
         localStorage.removeItem(mytoken)
 
         clearUser()
+
+        // window.location.href = "/"
+        }
+
+        
 
     }
 

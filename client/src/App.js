@@ -16,11 +16,13 @@ import useSessionMng from './hooks/useSessionMng';
 import useRequest from './lib/MakeRequest/MakeRequest';
 import URL from './Config/urls';
 import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
+import useInactivityTimer from './hooks/usePageVisibility';
 
 
 function App() {
 
   const {
+        clientActivityReducer,
          activeUserReducer,
          setSearch,
          setAuthentication,
@@ -28,19 +30,26 @@ function App() {
          searchReducer,
         } = useReduxMng()
 
+
+        // console.log(clientActivityReducer)
+
+     
+
   const location = useLocation()
 
   const {pathMng} = useRedirectMng()
 
-  const {validateSession, processTokens, getTokens, deleteStorageData} = useSessionMng()
+  const {validateSession, processTokens, getTokens, deleteStorageData} = useSessionMng("authorizationtoken")
 
   const { makeRequest, formResponse, loading } = useRequest()
 
   const [isLoading, setIsLoading] = useState(true)
 
-  useLayoutEffect(()=>{
+   const {setActivityTimer} = useInactivityTimer(10, deleteStorageData);
 
-    const userIsAuthenticated = getTokens("authorizationtoken")
+   const userIsAuthenticated = getTokens("authorizationtoken")
+
+  useLayoutEffect(()=>{
 
     if(!userIsAuthenticated){
 
@@ -50,10 +59,16 @@ function App() {
 
   },[])
 
+  // console.log("App rendering...")
+
+  setActivityTimer()
+
   useEffect(()=>{
 
      console.log("Making request")
+
      const userIsAuthenticated = getTokens("authorizationtoken")
+
      console.log("token: ", userIsAuthenticated)
 
      if(userIsAuthenticated){
@@ -82,6 +97,7 @@ function App() {
         setAuthentication(payload)
         console.log(formResponse)
         setIsLoading(false)
+    
       }
     
   },[formResponse])
@@ -95,7 +111,7 @@ function App() {
 
   },[location.pathname])
 
-console.log(activeUserReducer)
+
 
   useEffect( ()=>{
 

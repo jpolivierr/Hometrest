@@ -1,42 +1,177 @@
+import { useState, useEffect, useRef, useCallback } from "react";
 
-const usePageVisibility = () =>{
 
-    const handleVisibilityChange = () =>{
+const useInactivityTimer = (inactivityTime, logoutCallback) => {
+
+  const [timerId, setTimerId] = useState(null);
+
+  const [activityTimer, startActivityTimer] = useState(false)
+
+  const timerIdRef = useRef(null);
+
+  const [pageVisibility, setPageVisibility] = useState({
+      inactive : null,
+      active : null
+  })
+
+
+  const visibilityManagement = () => {
+
+    if (typeof document.hidden !== "undefined") {
+
+      document.addEventListener("visibilitychange", function () {
 
         if (document.hidden) {
 
-            notVisible()
-        
-          } else {
+          setPageVisibility(prevState => {
 
-            visible();
-          }
-        
+            return {...prevState, inactive: Date.now()};
+
+          });
+
+        } else {
+
+          setPageVisibility(prevState => {
+
+            return {...prevState, active: Date.now()};
+
+          });
+
+        }
+      });
+    }
+  }
+  
+
+  const getInactiveTime = () => {
+
+    if (pageVisibility.active && pageVisibility.inactive) {
+
+      const inactiveTime = Math.round((pageVisibility.inactive - pageVisibility.active) / 1000);
+
+      return Math.abs(inactiveTime);
+
     }
 
-    const visible = () =>{
+    return null;
+  };
 
-        console.log("page is visible")
+  useEffect(()=>{
+
+    console.log(getInactiveTime())
+
+    const userInactiveTime = getInactiveTime()
+
+    if(userInactiveTime >= inactivityTime){
+
+      logoutCallback()
 
     }
 
-    const notVisible = () =>{
+  },[pageVisibility])
 
-        console.log("page not visible")
+
+  const setActivityTimer = () =>{
+
+    if(!activityTimer){
+
+      startActivityTimer(true)
 
     }
 
-    if (typeof document.hidden !== "undefined") {
-       
-        document.addEventListener("visibilitychange", handleVisibilityChange, false);
-
-      } else {
-
-        console.log("Page Visibility API is not supported in this browser");
-        
-      }
+  }
 
 
-}
+  const startTimer = () => {
 
-export default usePageVisibility
+    return setTimeout(() => {
+
+
+      timerIdRef.current = null
+
+      startActivityTimer(false)
+
+      logoutCallback();
+
+
+    }, inactivityTime * 1000);
+
+  };
+
+
+
+  const resetTimer = () => {
+
+    
+
+    if (timerIdRef.current) {
+
+      console.log(timerIdRef.current)
+      clearTimeout(timerIdRef.current);
+      timerIdRef.current = null
+
+    }
+
+        console.log("::::setting timer::::")
+        timerIdRef.current = startTimer()
+
+
+
+    
+
+  };
+
+
+  useEffect(() => {
+
+    const date = new Date();
+
+    setPageVisibility({
+
+      inactive: null,
+
+      active: date.getTime()
+
+    });
+
+  }, []);
+
+  useEffect(() => {
+
+    const handleActivity = () => {
+
+      resetTimer();
+
+    };
+
+    if(activityTimer){
+
+          document.addEventListener("mousemove", handleActivity);
+
+          document.addEventListener("keydown", handleActivity);
+
+          handleActivity()
+
+           visibilityManagement()
+
+    }
+
+    
+
+    return () => {
+
+      document.removeEventListener("mousemove", handleActivity);
+
+      document.removeEventListener("keydown", handleActivity);
+
+      clearTimeout(timerId);
+
+    };
+
+  }, [activityTimer]);
+
+  return { resetTimer, setActivityTimer };
+};
+
+export default useInactivityTimer;
+
