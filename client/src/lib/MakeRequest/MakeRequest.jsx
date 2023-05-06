@@ -1,13 +1,14 @@
 import { useState } from "react"
 import useReduxMng from "../../hooks/useReduxMng"
 import useSessionMng from "../../hooks/useSessionMng"
+import { AUTH_TOKENS } from "../../Config/authToken"
 
 const useRequest = () =>{
 
     const [formResponse, setFormResponse] = useState({})
     const {activeUserReducer} = useReduxMng()
     const [loading, setLoading] = useState(false)
-    const {getTokens} = useSessionMng()
+    const {getTokens} = useSessionMng(AUTH_TOKENS)
 
 
     const redirection = (response) =>{

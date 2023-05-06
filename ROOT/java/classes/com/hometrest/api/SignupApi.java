@@ -3,7 +3,6 @@ package com.hometrest.api;
 import java.io.IOException;
 // import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.hometrest.JsonHttpResponse;
@@ -59,15 +58,13 @@ public class SignupApi extends HttpServlet {
 
                 var newSession = MySessionManagement.create(request, response);
 
-                String token = UUID.randomUUID().toString();
-
-                newSession.setAttribute("token", token + "_" + newSession.getMaxInactiveInterval());
+                newSession.setAttribute("token", MySessionManagement.generateUUID(newSession));
 
                 newSession.setAttribute("email", signupForm.getEmail()); 
 
-                response.setHeader("AuthorizationToken", token + "_" + newSession.getMaxInactiveInterval());
+                response.setHeader(MySessionManagement.getTokenKey(), MySessionManagement.generateUUID(newSession));
 
-                response.setHeader("Access-Control-Expose-Headers", "AuthorizationToken");
+                response.setHeader("Access-Control-Expose-Headers", MySessionManagement.getTokenKey());
 
                 JsonHttpResponse.send(response, 200,"user created", account);
 

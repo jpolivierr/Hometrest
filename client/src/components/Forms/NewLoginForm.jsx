@@ -7,6 +7,7 @@ import useRequest from "../../lib/MakeRequest/MakeRequest";
 import errorFromServer from "./FormUtil/serverError";
 import useSessionMng from "../../hooks/useSessionMng";
 import LoadingEffect from "../../lib/loadingEffect/loading/loadingEffect";
+import { AUTH_TOKENS } from "../../Config/authToken";
 
 
 const NewLoginForm = () =>{
@@ -18,7 +19,7 @@ const NewLoginForm = () =>{
 
        const {makeRequest, formResponse, loading} = useRequest()
 
-       const {startSession} = useSessionMng()
+       const {startSession} = useSessionMng(AUTH_TOKENS)
        
 
     const updateFormField = (key, value) =>{

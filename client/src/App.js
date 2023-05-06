@@ -17,6 +17,7 @@ import useRequest from './lib/MakeRequest/MakeRequest';
 import URL from './Config/urls';
 import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
 import useInactivityTimer from './hooks/usePageVisibility';
+import { AUTH_TOKENS } from './Config/authToken';
 
 
 function App() {
@@ -39,15 +40,15 @@ function App() {
 
   const {pathMng} = useRedirectMng()
 
-  const {validateSession, processTokens, getTokens, deleteStorageData} = useSessionMng("authorizationtoken")
+  const { getTokens, setActivityTimer} = useSessionMng(AUTH_TOKENS)
 
   const { makeRequest, formResponse, loading } = useRequest()
 
   const [isLoading, setIsLoading] = useState(true)
 
-   const {setActivityTimer} = useInactivityTimer(10, deleteStorageData);
+  //  const {setActivityTimer} = useInactivityTimer(10, deleteStorageData);
 
-   const userIsAuthenticated = getTokens("authorizationtoken")
+   const userIsAuthenticated = getTokens(AUTH_TOKENS)
 
   useLayoutEffect(()=>{
 
@@ -61,13 +62,13 @@ function App() {
 
   // console.log("App rendering...")
 
-  setActivityTimer()
+   setActivityTimer()
 
   useEffect(()=>{
 
      console.log("Making request")
 
-     const userIsAuthenticated = getTokens("authorizationtoken")
+     const userIsAuthenticated = getTokens()
 
      console.log("token: ", userIsAuthenticated)
 
@@ -87,12 +88,12 @@ function App() {
       formResponse.status === 200 &&
       formResponse.body && 
       formResponse.headers &&
-      formResponse.headers.get("authorizationtoken")
+      formResponse.headers.get(AUTH_TOKENS)
       ){
       
         const payload = {
             userInfo : formResponse.body,
-            token : formResponse.headers.get("authorizationtoken")
+            token : formResponse.headers.get(AUTH_TOKENS)
         }
         setAuthentication(payload)
         console.log(formResponse)
@@ -106,8 +107,6 @@ function App() {
   useEffect(()=>{
     
     pathMng(location.pathname)
-
-    validateSession()
 
   },[location.pathname])
 

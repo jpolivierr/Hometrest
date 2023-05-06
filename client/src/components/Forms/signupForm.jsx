@@ -7,13 +7,14 @@ import MainButton from "../buton/MainButton"
 import Ring from "../../lib/loadingEffect/loading/loadingEffect"
 import URL from "../../Config/urls"
 import useSessionMng from "../../hooks/useSessionMng"
+import { AUTH_TOKENS } from "../../Config/authToken"
 
 
 
 const Signup = () =>{
 
   const [isLoading] = useState(true)
-  const {startSession} = useSessionMng()
+  const {startSession} = useSessionMng(AUTH_TOKENS)
 
     const [formSetting] = useState({
         config: {

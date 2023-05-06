@@ -4,6 +4,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Cookie;
+
+import java.util.UUID;
+
 import com.hometrest.Util.FormatDate;
 
 public class MySessionManagement {
@@ -11,7 +14,7 @@ public class MySessionManagement {
         public final static String SESSION_ID = "SESSION_ID";
         public final static String SESSION_START_TIME = "START_TIME";
         public final static String SESSION_LAST_ACCESS = "LAST_ACCESS";
-
+        public final static String TOKEN_KEY = "AuthorizationToken";
 
     public static boolean sessionExist(HttpServletRequest request){
 
@@ -25,6 +28,14 @@ public class MySessionManagement {
         }
 
         return result;
+
+    }
+
+    public static String generateUUID(HttpSession session){
+
+        String token = UUID.randomUUID().toString();
+
+        return token + "_" + session.getMaxInactiveInterval();
 
     }
 
@@ -97,7 +108,7 @@ public class MySessionManagement {
             // Get last access time of this web page.
             String lastAccessTimeFormat = FormatDate.format(session.getLastAccessedTime(), format);
             
-            session.setMaxInactiveInterval(300);
+            session.setMaxInactiveInterval(10);
             session.setAttribute(SESSION_ID, session.getId());
             session.setAttribute(SESSION_START_TIME, sessionCreationdateFormat);
             session.setAttribute(SESSION_LAST_ACCESS, lastAccessTimeFormat);
@@ -105,6 +116,13 @@ public class MySessionManagement {
          }
 
          return session;
+
+    }
+
+
+    public static String getTokenKey() {
+
+        return TOKEN_KEY;
 
     }
     

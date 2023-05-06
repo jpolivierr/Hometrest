@@ -7,6 +7,7 @@ import URL from "../../Config/urls"
 
 import useReduxMng from "../../hooks/useReduxMng"
 import useSessionMng from "../../hooks/useSessionMng"
+import { AUTH_TOKENS } from "../../Config/authToken"
 
 
 
@@ -14,7 +15,7 @@ import useSessionMng from "../../hooks/useSessionMng"
 const LoginForm = () =>{
 
    const {setUser, activeUser, searchReducer} = useReduxMng()
-   const {startSession} = useSessionMng()
+   const {startSession} = useSessionMng(AUTH_TOKENS)
 
 
     const [formSetting] = useState({

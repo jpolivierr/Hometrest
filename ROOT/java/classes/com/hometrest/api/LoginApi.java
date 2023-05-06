@@ -3,7 +3,6 @@ package com.hometrest.api;
 import java.io.IOException;
 // import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.hometrest.JsonHttpResponse;
@@ -19,6 +18,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 // import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet(urlPatterns = "/secure/login")
 @MultipartConfig
@@ -59,17 +59,15 @@ public class LoginApi extends HttpServlet {
             }
             
     
-                   var newSession = MySessionManagement.create(request, response);
+                   HttpSession newSession = MySessionManagement.create(request, response);
 
-                   String token = UUID.randomUUID().toString();
-
-                    newSession.setAttribute("token", token + "_" + newSession.getMaxInactiveInterval());
+                    newSession.setAttribute("token", MySessionManagement.generateUUID(newSession));
 
                     newSession.setAttribute("email", logInForm.getEmail()); 
 
-                    response.setHeader("AuthorizationToken", token + "_" + newSession.getMaxInactiveInterval());
+                    response.setHeader(MySessionManagement.getTokenKey(), MySessionManagement.generateUUID(newSession));
 
-                    response.setHeader("Access-Control-Expose-Headers", "AuthorizationToken");
+                    response.setHeader("Access-Control-Expose-Headers", MySessionManagement.getTokenKey());
                     
                     JsonHttpResponse.send(response, 200,"user authenticated", userIsAuthenticate);
             

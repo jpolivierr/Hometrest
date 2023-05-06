@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 
 const useInactivityTimer = (inactivityTime, logoutCallback) => {
 
-  const [timerId, setTimerId] = useState(null);
+  const [timerId] = useState(null);
 
   const [activityTimer, startActivityTimer] = useState(false)
 
@@ -102,39 +102,19 @@ const useInactivityTimer = (inactivityTime, logoutCallback) => {
 
   const resetTimer = () => {
 
-    
-
     if (timerIdRef.current) {
 
-      console.log(timerIdRef.current)
       clearTimeout(timerIdRef.current);
+
       timerIdRef.current = null
 
     }
 
         console.log("::::setting timer::::")
+
         timerIdRef.current = startTimer()
 
-
-
-    
-
   };
-
-
-  useEffect(() => {
-
-    const date = new Date();
-
-    setPageVisibility({
-
-      inactive: null,
-
-      active: date.getTime()
-
-    });
-
-  }, []);
 
   useEffect(() => {
 

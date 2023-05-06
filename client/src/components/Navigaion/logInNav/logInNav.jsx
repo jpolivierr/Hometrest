@@ -8,6 +8,7 @@ import useReduxMng from "../../../hooks/useReduxMng"
 import shortenText from "../../../Util/shortenText"
 import { deepSearch } from "../../../Util/getValueByKey"
 import { Link } from "react-router-dom"
+import { AUTH_TOKENS } from "../../../Config/authToken"
 
 import "../style.css"
 import "./style.css"
@@ -28,7 +29,7 @@ const LogInNav = () =>{
      const lName = deepSearch(activeUserReducer,["userInfo","last_name"],"Smith")
     const email = deepSearch(activeUserReducer,["userInfo","email"],"demo@gmail.com")
 
-    const {deleteStorageData} = useSessionMng()
+    const {deleteStorageData} = useSessionMng(AUTH_TOKENS)
 
     const {toggle, renderModal, addChildElement, isShowing} = useMyModal({
         type: "slide",

@@ -10,7 +10,7 @@ import LoadingEffect from "../../lib/loadingEffect/loading/loadingEffect"
 import useSessionMng from "../../hooks/useSessionMng"
 import URL from "../../Config/urls"
 import "./style.css"
-
+import { AUTH_TOKENS } from "../../Config/authToken"
 
 
 const Update = (props) =>{
@@ -19,7 +19,7 @@ const Update = (props) =>{
 
     const {activeUserReducer} = useReduxMng()
     const{makeRequest, formResponse, loading} = useRequest()
-    const {deleteStorageData} = useSessionMng()
+    const {deleteStorageData} = useSessionMng(AUTH_TOKENS)
     const userToken = activeUserReducer.token
 
     useEffect(()=>{
