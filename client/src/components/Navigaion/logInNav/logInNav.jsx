@@ -72,7 +72,7 @@ const LogInNav = () =>{
 
     useEffect(()=>{
         
-        if(formResponse.status && formResponse.status === 200){
+        if(formResponse.status && (formResponse.status === 200 || formResponse.status === 403)){
 
              deleteStorageData()
 
@@ -80,6 +80,7 @@ const LogInNav = () =>{
 
             console.log(formResponse)
         }
+        
     },[formResponse])
 
 

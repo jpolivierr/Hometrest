@@ -2,48 +2,48 @@ package com.hometrest.database;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class Db_DeleteAccount {
 
-    public Boolean init(Connection connection, String email){
+public class Db_UnlikeProperty {
 
-        boolean result = false;
-        
+    Boolean responseBody = false;
+
+    public Boolean init(Connection connection, String email, String id){
+
         try {
 
-
-            String sql = "{CALL deleteUser(?)}";
+            String sql = "{CALL deleteLikedProperties(?,?)}";
 
             CallableStatement cstmt = connection.prepareCall(sql);
 
             cstmt.setString(1, email);
 
+            cstmt.setString(2, id);
+
             cstmt.execute();
 
-            ResultSet rs = cstmt.getResultSet();
-
+            var rs = cstmt.getResultSet();
+            
             while(rs.next()){
 
-                if(rs.getBoolean("result")){
+                Boolean property_id = rs.getBoolean("result");
 
-                result = true;
+                if(property_id){
+
+                    responseBody = true;
 
                 }
 
             }
-            
 
-    
 
             
         } catch (SQLException e) {
 
-            var error =new HashMap<String,String>();
+                var error =new HashMap<String,String>();
 
                 if(e.getErrorCode() == 0){
 
@@ -52,7 +52,6 @@ public class Db_DeleteAccount {
                 }
 
                 e.printStackTrace();
-
         }
         finally{
 
@@ -64,11 +63,11 @@ public class Db_DeleteAccount {
                 
                 e.printStackTrace();
             }
-
+            
         }
 
+        return responseBody;
 
-        return result;
     }
     
 }

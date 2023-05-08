@@ -1,4 +1,8 @@
-import { SET_AUTHENTICATION, SET_USER, SET_TOKEN, CLEAR_USER } from "../actions/setUserAction"
+import { SET_AUTHENTICATION, 
+        SET_USER, 
+        SET_TOKEN, 
+        CLEAR_USER,
+        UPDATE_LIKES } from "../actions/setUserAction"
 
 const init = {
     userInfo : null,
@@ -29,6 +33,13 @@ const activeUserReducer = (state = init, action) =>{
                             userInfo : null,
                             token: null
                     }
+        case UPDATE_LIKES :
+                    if(state.userInfo && state.userInfo.likes){
+                        const stateClone = {...state}
+                        stateClone.userInfo.likes = action.payload
+                        return stateClone
+                    }
+                    return state
         default : 
                     return state
 

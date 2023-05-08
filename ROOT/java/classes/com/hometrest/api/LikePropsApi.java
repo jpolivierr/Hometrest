@@ -3,10 +3,13 @@ package com.hometrest.api;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.HashMap;
+import java.lang.reflect.Type;
 
+import com.google.gson.Gson;
 import com.hometrest.JsonHttpResponse;
 import com.hometrest.database.DbConnect;
 import com.hometrest.database.Db_FetchAccount;
+import com.hometrest.database.Db_LikeProperty;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -16,13 +19,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = "/api/get_account")
+@WebServlet(urlPatterns = "/api/like_property")
 @MultipartConfig
-public class GetAccount extends HttpServlet {
+public class LikePropsApi extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     throws ServletException, IOException{
 
+            Gson gson = new Gson();
+
+            String clientResponse = request.getParameter("formData");
+
+            Type type = new com.google.gson.reflect.TypeToken<HashMap<String, String>>() {}.getType();
+
+            HashMap<String, String> payload = gson.fromJson(clientResponse, type);
 
             HttpSession session = request.getSession(false);
 
@@ -34,11 +44,11 @@ public class GetAccount extends HttpServlet {
 
                 Connection connection = dbConnect.connect();
 
-                Db_FetchAccount fetchAccount = new Db_FetchAccount();
+                Db_LikeProperty likeProperty = new Db_LikeProperty();
 
-                HashMap<String,Object> account = fetchAccount.init(connection, email);
+                Boolean account = likeProperty.init(connection, email, payload.get("propertyId"));
 
-                if(account.isEmpty()){
+                if(account != true){
 
                 HashMap<String,String> notFound = new HashMap<>();
 
@@ -49,7 +59,7 @@ public class GetAccount extends HttpServlet {
                   return ;
                 }
 
-                JsonHttpResponse.send(response, 200,"Success", account);
+                JsonHttpResponse.send(response, 200,"success", null);
 
                 return;
 
@@ -57,7 +67,7 @@ public class GetAccount extends HttpServlet {
 
             HashMap<String,String> notFound = new HashMap<>();
 
-            notFound.put("serverError", "User not found");
+            notFound.put("serverError", "Something went wrong");
 
             JsonHttpResponse.send(response, 409,"User not found", notFound);
         

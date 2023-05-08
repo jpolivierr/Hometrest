@@ -1,7 +1,11 @@
 
 import { deepSearch } from "../../Util/getValueByKey"
 import { getStatusStyle, cleanInput, formatNumber, getPhoto } from "./util"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import useRequest from "../../lib/MakeRequest/MakeRequest"
+import URL from "../../Config/urls"
+import useReduxMng from "../../hooks/useReduxMng"
+import { likesDemo } from "../../userDemo"
 import "./style.css"
 
 const PropertyCard = (props) =>{
@@ -25,29 +29,96 @@ const PropertyCard = (props) =>{
     const stateCode = deepSearch(singleProperty,["location","address","state_code"])
     const photo = deepSearch(singleProperty,["primary_photo","href"])
 
-    const shortAddress = (address) => {
+     const {makeRequest, formResponse } =  useRequest()
+
+     const {activeUserReducer, updateLikes} = useReduxMng()
+
+
+    useEffect(()=>{
+
+        //  console.log(activeUserReducer)
+         console.log(formResponse)
+
+    },[formResponse])
+
+
+
+     const shortAddress = (address) => {
+
         const max = 39
+
         if(address.length >= max){
+
             const formatAddress = address.substr(0, max - 3) + "..."
-               return formatAddress;
+
+            return formatAddress;
         }
         return address
     }
 
-    const [like, setLike] = useState(false)
-    
+   
 
-    const likeProperty = (id) =>{
+     const [like, setLike] = useState(false)
 
-        toggleModal()
-        setLike(!like)
+     useEffect(()=>{
+
+        console.log(property_ids)
+
+        if(property_ids.includes(propertyId)){
+
+            setLike(!like)
+
+        }
+  
+      },[])
+
+
+     const [userLikes, setUserLikes] = useState([])
+
+     const [prevUserLikes, setPrevUserLikes] = useState([])
+
+ 
+    //    console.log(prevUserLikes)
+
+    //    console.log(userLikes)
+
+    console.log(activeUserReducer)
+ 
+    const property_ids = deepSearch(activeUserReducer,["userInfo","likes"],[])
+
+    console.log(property_ids)
+
+    const likeProperty = (id) =>{ 
+
+        if(property_ids.includes(id)){
+
+            setLike(false)
+
+            const updatedPropertyIds = property_ids.filter(propId => propId != id)
+
+            setUserLikes(updatedPropertyIds)
+
+            updateLikes(updatedPropertyIds)
+
+            makeRequest("POST", URL.UNLIKE_PROPS, {propertyId : id})
+
+            return
+
+        }
+
+        setLike(true)
+
+        updateLikes(property_ids)
+
+        makeRequest("POST", URL.LIKE_PROPS, {propertyId : id})
+
+        // toggleModal() 
+        
 
     }
-    
-    // console.log(propertyId)
-    // console.log(status)
 
     return(
+ 
         <div data-property_id = {propertyId} className="property-card av-shadow">
             <figure style={{background : `url(${getPhoto(photo)}) no-repeat center center/cover`}}>
                 {/* <img src={getPhoto(photo)} /> */}

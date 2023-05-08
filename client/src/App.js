@@ -40,7 +40,7 @@ function App() {
 
   const {pathMng} = useRedirectMng()
 
-  const { getTokens, setActivityTimer} = useSessionMng(AUTH_TOKENS)
+  const { getTokens, setActivityTimer, deleteStorageData} = useSessionMng(AUTH_TOKENS)
 
   const { makeRequest, formResponse, loading } = useRequest()
 
@@ -60,7 +60,7 @@ function App() {
 
   },[])
 
-  // console.log("App rendering...")
+  console.log(activeUserReducer)
 
    setActivityTimer()
 
@@ -98,8 +98,15 @@ function App() {
         setAuthentication(payload)
         console.log(formResponse)
         setIsLoading(false)
-    
+        return
       }
+
+      if(formResponse.status === 403){
+
+        deleteStorageData()
+
+      }
+     
     
   },[formResponse])
 

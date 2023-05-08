@@ -66,10 +66,7 @@ const useSessionMng = (mytoken) =>{
     
         const token = getTokens()
 
-        console.log(token)
-
         if(token){
-            console.log(Number(token.split("_")[1]))
 
           return Number(token.split("_")[1])
 
@@ -83,8 +80,6 @@ const useSessionMng = (mytoken) =>{
 
         const date = new Date()
         const time = date.getTime()
-        
-        console.log(value)
 
         localStorage.setItem(mytoken, `${value}_${time}`)
 
@@ -151,8 +146,6 @@ const useSessionMng = (mytoken) =>{
                    
                     const timeLaps = Math.floor((currentTime - tokenExpTime) / 1000)
 
-                   console.log(timeLaps)
-
                     if(timeLaps > 60){
 
                         deleteStorageData()
@@ -184,7 +177,7 @@ const useSessionMng = (mytoken) =>{
                     token 
                     
                     }
-                    // console.log(payload)
+                   
                     setDataToStorage(token)
                     
                     return true
@@ -295,15 +288,19 @@ const useSessionMng = (mytoken) =>{
 
       useEffect(()=>{
 
-        console.log(pageVisibility)
-    
-        const userInactiveTime = getClientInactiveTime()
+        if(activityTimer && getServerInactiveTime() > 0){
+
+             const userInactiveTime = getClientInactiveTime()
     
         if(userInactiveTime >= getServerInactiveTime()){
     
           deleteStorageData()
     
         }
+
+        }
+    
+       
     
       },[pageVisibility])
 
@@ -318,8 +315,6 @@ const useSessionMng = (mytoken) =>{
           timerIdRef.current = null
     
         }
-    
-            console.log("::::setting timer::::")
     
             timerIdRef.current = startTimer()
     

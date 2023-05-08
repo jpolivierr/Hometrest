@@ -3,10 +3,12 @@ package com.hometrest;
 import com.hometrest.ErrorHandler.ErrorServlet;
 import com.hometrest.api.DeleteAccount;
 import com.hometrest.api.GetAccount;
+import com.hometrest.api.LikePropsApi;
 import com.hometrest.api.ListSearchApi;
 import com.hometrest.api.LoginApi;
 import com.hometrest.api.LogoutApi;
 import com.hometrest.api.SignupApi;
+import com.hometrest.api.UnlikePropsApi;
 import com.hometrest.api.UpdateAccount;
 import com.hometrest.filter.ApisFilter;
 import com.hometrest.filter.EndPointFilter;
@@ -33,6 +35,8 @@ public class Main {
          new GetAccount();
          new UpdateAccount();
          new DeleteAccount();
+         new LikePropsApi();
+         new UnlikePropsApi();
         
     }
     

@@ -35,7 +35,7 @@ const ShowProperties = () =>{
             
             Array.isArray(propertiesReducer) &&
             propertiesReducer.length > 0 && propertiesReducer.map((property,index)=>(
-                    
+        
             <PropertyCard
                singleProperty = {property}
                key={index}
