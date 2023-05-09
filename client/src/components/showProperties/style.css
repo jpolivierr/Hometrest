@@ -4,3 +4,7 @@
     gap: .5rem;
     padding: 0rem .5rem;
 }
+
+.props-loading .property-card{
+    opacity: .3;
+}

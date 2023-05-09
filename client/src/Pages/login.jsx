@@ -29,7 +29,9 @@ const Login = (props) =>{
                 
                 <div className="container center-content padding-bottom-2x">
                     <div style={{}}>
-                        <NewLoginForm />
+                        <NewLoginForm 
+                           elementClass="avalon text-left av-shadow"
+                        />
                     </div>
                 
             </div>

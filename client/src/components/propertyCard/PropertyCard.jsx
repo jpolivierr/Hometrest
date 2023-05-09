@@ -6,6 +6,7 @@ import useRequest from "../../lib/MakeRequest/MakeRequest"
 import URL from "../../Config/urls"
 import useReduxMng from "../../hooks/useReduxMng"
 import { likesDemo } from "../../userDemo"
+import shortenText from "../../Util/shortenText"
 import "./style.css"
 
 const PropertyCard = (props) =>{
@@ -33,36 +34,22 @@ const PropertyCard = (props) =>{
 
      const {activeUserReducer, updateLikes} = useReduxMng()
 
+    const [like, setLike] = useState(false)
 
     useEffect(()=>{
 
         //  console.log(activeUserReducer)
-         console.log(formResponse)
+        if(formResponse.status){
+            console.log(formResponse)
+        }
+         
 
     },[formResponse])
 
 
-
-     const shortAddress = (address) => {
-
-        const max = 39
-
-        if(address.length >= max){
-
-            const formatAddress = address.substr(0, max - 3) + "..."
-
-            return formatAddress;
-        }
-        return address
-    }
-
-   
-
-     const [like, setLike] = useState(false)
-
      useEffect(()=>{
 
-        console.log(property_ids)
+        const property_ids = deepSearch(activeUserReducer,["userInfo","likes"],[])
 
         if(property_ids.includes(propertyId)){
 
@@ -73,30 +60,25 @@ const PropertyCard = (props) =>{
       },[])
 
 
-     const [userLikes, setUserLikes] = useState([])
+    const likeProperty = (id) =>{
 
-     const [prevUserLikes, setPrevUserLikes] = useState([])
+        const property_ids = deepSearch(activeUserReducer,["userInfo","likes"],[])
 
- 
-    //    console.log(prevUserLikes)
+        console.log(property_ids)
 
-    //    console.log(userLikes)
+        if(!activeUserReducer.token){
 
-    console.log(activeUserReducer)
- 
-    const property_ids = deepSearch(activeUserReducer,["userInfo","likes"],[])
+            toggleModal()
 
-    console.log(property_ids)
+            return
 
-    const likeProperty = (id) =>{ 
+        }
 
         if(property_ids.includes(id)){
 
             setLike(false)
 
             const updatedPropertyIds = property_ids.filter(propId => propId != id)
-
-            setUserLikes(updatedPropertyIds)
 
             updateLikes(updatedPropertyIds)
 
@@ -108,11 +90,12 @@ const PropertyCard = (props) =>{
 
         setLike(true)
 
+        property_ids.push(id)
+
         updateLikes(property_ids)
 
         makeRequest("POST", URL.LIKE_PROPS, {propertyId : id})
 
-        // toggleModal() 
         
 
     }
@@ -134,7 +117,7 @@ const PropertyCard = (props) =>{
                     <div className="prop-baths">{baths} <span>Baths</span></div>
                     <div className="prop-sqft">{sqft} <span>Sqft</span></div>
                     <div className="prop-address">
-                        {shortAddress(`${street}, ${city}, ${stateCode} ${zip}`)}
+                        {shortenText(`${street}, ${city}, ${stateCode} ${zip}`, 39)}
                     </div>
             </div>
             

@@ -1,8 +1,6 @@
 import { ACTION_TYPE } from "../actions/searchAction"
 
-const init = {
-    limit : 50
-}
+const init = {}
 
 const searchReducer = (state = init, action) =>{
     switch(action.type){

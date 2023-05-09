@@ -10,7 +10,9 @@ import LoadingEffect from "../../lib/loadingEffect/loading/loadingEffect";
 import { AUTH_TOKENS } from "../../Config/authToken";
 
 
-const NewLoginForm = () =>{
+const NewLoginForm = (props) =>{
+
+    const{elementClass} = props
 
 
        const [formError, setFormError] = useState({})
@@ -102,7 +104,7 @@ const NewLoginForm = () =>{
     return(
 
         <form style={{margin: "auto"}}
-           className="avalon text-left av-shadow" 
+           className={elementClass}
            onSubmit={e => submit(e)}>
 
                 {formError.serverError && 

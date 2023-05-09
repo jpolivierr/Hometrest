@@ -2,19 +2,109 @@ import "./style.css"
 
 const SkeletonLoading = (props) =>{
 
-    const {isShowing} = props
+  const {count} = props
 
-    return isShowing && (
+  let i = 0;
+
+  const render = () =>{
+        if(i <= count){
+
+        }
+        return(
+            <div className="loading-container">
+            <div className="loading-text"></div>
+            <div className="loading-text"></div>
+            <div className="loading-text"></div>
+            <div className="loading-text"></div>
+            <div className="loading-text"></div>
+        </div>
+        )
+    
+  }
+
+    return (
         <div className="av-loading-skeleton">
+ 
+              <div className="loading-container">
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+            </div>
 
             <div className="loading-container">
-                <div className="loading-text"></div>
-                <div className="loading-text"></div>
-                <div className="loading-text"></div>
-                <div className="loading-text"></div>
-                <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
             </div>
-            
+
+            <div className="loading-container">
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+            </div>
+
+            <div className="loading-container">
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+            </div>
+
+            <div className="loading-container">
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+            </div>
+
+            <div className="loading-container">
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+            </div>
+
+            <div className="loading-container">
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+            </div>
+
+
+            <div className="loading-container">
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+            </div>
+
+            <div className="loading-container">
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+            </div>
+
+            <div className="loading-container">
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+                    <div className="loading-text"></div>
+            </div>
         </div>
     )
 

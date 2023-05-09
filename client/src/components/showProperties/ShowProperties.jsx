@@ -2,27 +2,31 @@ import "./style.css"
 import useReduxMng from "../../hooks/useReduxMng"
 import PropertyCard from "../propertyCard/PropertyCard"
 import useMyModal from "../../lib/Modal/useMyModal"
+import NewLoginForm from "../Forms/NewLoginForm"
+import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
 import { useEffect } from "react"
 
 
-const ShowProperties = () =>{
+const ShowProperties = (props) =>{
+
+    const {isLoading} = props
 
     const {propertiesReducer} = useReduxMng()
 
     const {toggle, renderModal, addChildElement, isShowing} = useMyModal({
-        type: "slide",
+        type: "floating",
         windowAnimation : {
-                    start: "slide-left",
-                    end: "close-slide-left"
+                    start: "float",
+                    end: "close-float"
         },
-        animation: "slide-left_close-slide-left",
-        time: 100,
+        time: 0,
     })
 
     useEffect(()=>{
-        addChildElement(<div className="user-settings">
-            
-                      </div>
+        addChildElement(
+                        <NewLoginForm 
+                              elementClass="avalon text-left padding-top-bottom padding-bottom-2x"
+                        />
                     )
         
     },[isShowing])
@@ -30,11 +34,11 @@ const ShowProperties = () =>{
 
 
     return(
-        <div className="show-properties">
+        <div className={`show-properties ${isLoading && "props-loading"}`}>
             {
             
             Array.isArray(propertiesReducer) &&
-            propertiesReducer.length > 0 && propertiesReducer.map((property,index)=>(
+            propertiesReducer.length === 0 ? propertiesReducer.map((property,index)=>(
         
             <PropertyCard
                singleProperty = {property}
@@ -42,7 +46,9 @@ const ShowProperties = () =>{
                toggleModal={toggle}
             />
        
-   ))}
+   )) : <SkeletonLoading
+                   count={6}
+          />}
             {renderModal()}
         </div>
     )

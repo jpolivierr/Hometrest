@@ -7,7 +7,6 @@ import Home from './Pages/home';
 import Listings from './Pages/listings/listings';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import TopNav from './components/Navigaion/topNav';
-import { getParams, updateParam } from './Util/urlParcer';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import useReduxMng from './hooks/useReduxMng';
 import { useLocation } from 'react-router-dom';
@@ -16,7 +15,6 @@ import useSessionMng from './hooks/useSessionMng';
 import useRequest from './lib/MakeRequest/MakeRequest';
 import URL from './Config/urls';
 import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
-import useInactivityTimer from './hooks/usePageVisibility';
 import { AUTH_TOKENS } from './Config/authToken';
 
 
@@ -50,6 +48,12 @@ function App() {
 
    const userIsAuthenticated = getTokens(AUTH_TOKENS)
 
+       useEffect(()=>{
+    
+      pathMng(location.pathname)
+  
+    },[location.pathname])
+
   useLayoutEffect(()=>{
 
     if(!userIsAuthenticated){
@@ -60,7 +64,6 @@ function App() {
 
   },[])
 
-  console.log(activeUserReducer)
 
    setActivityTimer()
 
@@ -68,9 +71,6 @@ function App() {
 
      console.log("Making request")
 
-     const userIsAuthenticated = getTokens()
-
-     console.log("token: ", userIsAuthenticated)
 
      if(userIsAuthenticated){
 
@@ -81,8 +81,6 @@ function App() {
   },[])
 
   useEffect(()=>{
-
-    console.log("App Form response: ", formResponse)
 
     if(
       formResponse.status === 200 &&
@@ -110,32 +108,6 @@ function App() {
     
   },[formResponse])
 
-
-  useEffect(()=>{
-    
-    pathMng(location.pathname)
-
-  },[location.pathname])
-
-
-
-  useEffect( ()=>{
-
-          if(getParams("search")){
-
-          const listingOptions = getParams("search")
-
-          setSearch(listingOptions)
-
-        }
-
-    },[])
-
-      useEffect(()=>{
-
-        updateParam(searchReducer, true, "search")
-
-    },[searchReducer])
 
 
   return (

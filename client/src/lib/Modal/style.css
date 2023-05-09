@@ -1,0 +1,117 @@
+.modal-bk{
+    position: fixed;
+    width: 100%;
+    background-color: #2a2b2ebf;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 100;
+}
+
+.modal-window{
+    background: white;
+    position: absolute;
+    width: max-content;
+    height: 100vh;  
+    z-index: 101; 
+}
+
+/* ********************************************************************* */
+/* CLOSE BUTTONS */
+/* ********************************************************************* */
+.close-btn{
+    display: block;
+    position: absolute;
+    font-size: 2rem;
+    font-weight: 100;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.close-btn span{
+    position: relative;
+    transform: rotate(45deg);
+    width: max-content;
+    height: max-content;
+    top: -2px;
+    left: 1px;
+}
+
+/* ********************************************************************* */
+/* SLIDING MODAL */
+/* ********************************************************************* */
+.slide-window{
+    position: fixed;
+    background: white;
+    height: 100vh;
+    top: 0;
+    padding: 3rem 0rem;
+    z-index: 101; 
+}
+
+.slide-window .close-btn{
+    top: 1px;
+    left: 5px;
+}
+
+.slide-left{
+    animation: slideLeft .1s forwards;
+  }
+
+  @keyframes slideLeft {
+            from{
+                opacity: 0;
+                right: -100px;
+            }to{
+                opacity: 1;
+                right: 0px;
+            }
+    }
+
+
+    .close-slide-left{
+        animation: closeSlideLeft .1s forwards;
+    }
+    
+    @keyframes closeSlideLeft {
+        from{
+            opacity: 1;
+            right: 0px;
+        }to{
+            opacity: 0;
+            right: -100px;
+        }
+    }
+
+
+/* ********************************************************************* */
+/* FLOATING */
+/* ********************************************************************* */
+
+.float-window{
+    position: fixed;
+    background: white;
+    border-radius: 10px;
+    padding: 3rem 1.5rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 2;
+    padding: 2rem 1.5rem;
+    padding-bottom: 1rem;
+    z-index: 101;
+    top: 60px;
+    width: max-content;
+}
+
+.float-window .close-btn{
+
+    top: 10px;
+    right: 5px;
+
+}
+

@@ -3,34 +3,6 @@ const ModalAnimation = (props) =>{
 
     const {type, seconds, from, to} = props
 
-    const slideLeft = `
-
-          .slide-left{
-            animation: slideLeft ${seconds} forwards;
-          }
-
-          @keyframes slideLeft {
-                    from{
-                        right: ${from};
-                    }to{
-                        right: ${to};
-                    }
-            }
-
-
-            .close-slide-left{
-                animation: closeSlideLeft ${seconds} forwards;
-            }
-            
-            @keyframes closeSlideLeft {
-                from{
-                    right: ${to};
-                }to{
-                    right: ${from};
-                }
-            }
-
-    `
 
     const fade = `
                 .fadeIn{
@@ -59,43 +31,12 @@ const ModalAnimation = (props) =>{
     `
 
 
-    const float = `
-    .float{
-        animation: floatIn ${seconds}  forwards;
-    }
-    
-    @keyframes floatIn {
-        from{
-            top: ${from};
-        }to{
-            top: ${to};
-        }
-    }
-    
-    .close-float{
-        animation: floatOut ${seconds} forwards;
-    }
-    
-    @keyframes floatOut {
-        from{
-            top: ${to};
-        }to{
-            top: ${from};
-        }
-    }
-`
 
     const renderStyle = () =>{
 
         switch(type){
-            case "slide" :
-                return slideLeft
-
             case "fade" :
                 return fade
-
-            case "float" :
-            return float
 
             default :
                 return null

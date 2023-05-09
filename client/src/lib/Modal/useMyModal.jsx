@@ -7,8 +7,8 @@ import ModalAnimation from './ModalAnimation/animation';
 const useMyModal = (children) => {
 
       const windowTypes = {
-    FLOATING : "floating",
-    SLIDE: "slide"
+          FLOATING : "floating",
+          SLIDE: "slide"
         }
 
   const [isShowing, setIsShowing] = useState(false);
@@ -60,18 +60,11 @@ const useMyModal = (children) => {
     return(
         <>
     
-        <div className={`slide-window ${overlayAnimation} ${windowAnimation}`}>
+        <div className={`slide-window ${windowAnimation}`}>
             <div style={{cursor : "pointer"}} className="close-btn" onClick={toggle}><span>+</span>
             </div>
                 {childElement}
         </div>
-
-                <ModalAnimation
-                    type = {children.type}
-                    seconds = {convertToSeconds(children.time)}
-                     from = {"-100px"}
-                     to = {"0px"}
-                />
 
         </>
 
@@ -79,12 +72,27 @@ const useMyModal = (children) => {
 }
 
 
+const floatingModal = () =>{
+  return(
+      <>
+  
+  <div className={`float-window ${windowAnimation}`}>
+            <div style={{cursor : "pointer"}} className="close-btn" onClick={toggle}><span>+</span>
+            </div>
+            {childElement}
+        </div>
+      </>
+
+  )
+}
+
+
 
   const getWindow = () =>{
 
     switch(children.type){
-        // case windowTypes.FLOATING :
-        //     return floatingModal()
+        case windowTypes.FLOATING :
+            return floatingModal()
         case windowTypes.SLIDE :
             return slideModal()
         default :
