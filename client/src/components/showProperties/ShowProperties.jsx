@@ -21,6 +21,7 @@ const ShowProperties = (props) =>{
         },
         time: 0,
     })
+    
 
     useEffect(()=>{
         addChildElement(
@@ -38,16 +39,15 @@ const ShowProperties = (props) =>{
             {
             
             Array.isArray(propertiesReducer) &&
-            propertiesReducer.length === 0 ? propertiesReducer.map((property,index)=>(
+            propertiesReducer.length > 0 ? propertiesReducer.map((property,index)=>(
         
             <PropertyCard
                singleProperty = {property}
                key={index}
-               toggleModal={toggle}
             />
        
    )) : <SkeletonLoading
-                   count={6}
+
           />}
             {renderModal()}
         </div>

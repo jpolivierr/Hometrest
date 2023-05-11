@@ -15,6 +15,7 @@ const useMyModal = (children) => {
   const [ childElement, setChildElement] = useState(null)
   const [overlayAnimation, setOverlayAnimation] = useState("")
   const [windowAnimation, setWindowAnimation] = useState(children.windowAnimation.start)
+  const [modalClass, setModalClass] = useState("")
 
 
 
@@ -25,6 +26,10 @@ const useMyModal = (children) => {
     if(!isShowing){
          setOverlayAnimation("fadeIn")
           setWindowAnimation(children.windowAnimation.start)
+          console.log(children.elementClass)
+          if(children.elementClass){
+            setModalClass(children.elementClass)
+          }
         setIsShowing(true)
         return
     }
@@ -46,7 +51,6 @@ const useMyModal = (children) => {
 
     }
   }
-
 
   const addChildElement = (element) =>{
     
@@ -76,7 +80,7 @@ const floatingModal = () =>{
   return(
       <>
   
-  <div className={`float-window ${windowAnimation}`}>
+  <div className={`float-window ${windowAnimation} ${modalClass}`}>
             <div style={{cursor : "pointer"}} className="close-btn" onClick={toggle}><span>+</span>
             </div>
             {childElement}

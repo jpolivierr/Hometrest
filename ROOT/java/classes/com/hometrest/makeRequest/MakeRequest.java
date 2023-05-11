@@ -44,6 +44,29 @@ public class MakeRequest {
             return jsonResponse;
     }
 
+    public static Object get(String url) {
+
+        HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create(url))
+                        .header("accept", "application/json")
+                        .header("X-RapidAPI-Key", REALTOR_API_KEY )
+                        .header("X-RapidAPI-Host", "realty-in-us.p.rapidapi.com")
+                        .GET()
+                        .build();
+
+          
+        CompletableFuture<HttpResponse<String>> future = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+
+        future.thenApply(HttpResponse::body)
+            .thenApply(MakeRequest::parseJsonResponse)
+            .thenAccept((response) -> jsonResponse = response)
+            .exceptionally(MakeRequest::handleException)
+            .join();
+
+            return jsonResponse;
+
+    }
+
 
     private static Object parseJsonResponse(String responseBody) {
         

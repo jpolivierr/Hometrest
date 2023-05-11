@@ -92,7 +92,7 @@ const Listings = (props) =>{
             <TopSearchFilter/>
             <Map />
             <ShowProperties 
-              isLoading = {true}
+              isLoading = {false}
             />
 
           </div>

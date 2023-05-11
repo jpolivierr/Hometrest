@@ -7,11 +7,13 @@ import URL from "../../Config/urls"
 import useReduxMng from "../../hooks/useReduxMng"
 import { likesDemo } from "../../userDemo"
 import shortenText from "../../Util/shortenText"
+import useMyModal from "../../lib/Modal/useMyModal"
+import NewLoginForm from "../Forms/NewLoginForm"
 import "./style.css"
 
 const PropertyCard = (props) =>{
 
-    const {singleProperty, toggleModal} = props 
+    const {singleProperty} = props 
 
     // console.log(key)
   
@@ -34,7 +36,27 @@ const PropertyCard = (props) =>{
 
      const {activeUserReducer, updateLikes} = useReduxMng()
 
+     const {toggle, renderModal, addChildElement, isShowing} = useMyModal({
+        type: "floating",
+        windowAnimation : {
+                    start: "float",
+                    end: "close-float"
+        },
+        time: 0,
+    })
+
+
+
     const [like, setLike] = useState(false)
+
+    useEffect(()=>{
+        addChildElement(
+                        <NewLoginForm 
+                              elementClass="avalon text-left padding-top-bottom padding-bottom-2x"
+                        />
+                    )
+        
+    },[isShowing])
 
     useEffect(()=>{
 
@@ -59,16 +81,16 @@ const PropertyCard = (props) =>{
   
       },[])
 
+      
+
 
     const likeProperty = (id) =>{
 
         const property_ids = deepSearch(activeUserReducer,["userInfo","likes"],[])
 
-        console.log(property_ids)
-
         if(!activeUserReducer.token){
 
-            toggleModal()
+            toggle()
 
             return
 
@@ -96,15 +118,26 @@ const PropertyCard = (props) =>{
 
         makeRequest("POST", URL.LIKE_PROPS, {propertyId : id})
 
-        
+    
+    }
+
+    const handleClick = (e) =>{
+
+        const targetClassName = e.target.className
+
+        if(targetClassName.includes("fa-heart")){
+            return
+        }
+
+        console.log("handle click")
 
     }
 
+
     return(
  
-        <div data-property_id = {propertyId} className="property-card av-shadow">
+        <div onClick={handleClick} data-property_id = {propertyId} className="property-card av-shadow">
             <figure style={{background : `url(${getPhoto(photo)}) no-repeat center center/cover`}}>
-                {/* <img src={getPhoto(photo)} /> */}
                 <div className={getStatusStyle("for_sale")}>
                 {cleanInput(status)}
             </div>
@@ -121,7 +154,7 @@ const PropertyCard = (props) =>{
                     </div>
             </div>
             
-
+            {renderModal()}
         </div>
     )
 }

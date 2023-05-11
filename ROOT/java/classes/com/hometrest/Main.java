@@ -4,7 +4,6 @@ import com.hometrest.ErrorHandler.ErrorServlet;
 import com.hometrest.api.DeleteAccount;
 import com.hometrest.api.GetAccount;
 import com.hometrest.api.LikePropsApi;
-import com.hometrest.api.ListSearchApi;
 import com.hometrest.api.LoginApi;
 import com.hometrest.api.LogoutApi;
 import com.hometrest.api.SignupApi;
@@ -15,7 +14,9 @@ import com.hometrest.filter.EndPointFilter;
 import com.hometrest.filter.SecureFilter;
 import com.hometrest.servlet.ListingsServlet;
 import com.hometrest.servlet.LoginServlet;
+import com.hometrest.servlet.PropertySearchServlet;
 import com.hometrest.servlet.SignupServlet;
+import com.hometrest.servlet.SinglePropertySearchServlet;
 
 
 public class Main {
@@ -28,7 +29,8 @@ public class Main {
          new LoginServlet();
          new SignupServlet();
          new ErrorServlet();
-         new ListSearchApi();
+         new PropertySearchServlet();
+         new SinglePropertySearchServlet();
          new SignupApi();
          new LoginApi();
          new LogoutApi();

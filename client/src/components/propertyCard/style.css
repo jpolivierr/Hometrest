@@ -36,6 +36,7 @@
     font-size: 1.2rem;
     position: relative;
     grid-column: 1 / 3;
+    align-self: center;
 }
 
 .property-card .prop-info i{
@@ -43,6 +44,14 @@
     align-self: center;
     justify-self: flex-end;
     font-size: 1.4rem;
+    padding: .4rem;
+    border-radius: 50%;
+    transition: all .2s;
+
+}
+
+.property-card .prop-info i:hover{
+    background: #dbedf5e8;
 }
 
 .property-card .prop-address{
