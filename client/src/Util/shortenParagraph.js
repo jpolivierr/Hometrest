@@ -1,28 +1,13 @@
 
-const ShortenParagraph = (id, paragraph, maxCount) =>{
+export const shortenParagraph = (id, paragraph, maxCount) =>{
 
     console.log(paragraph.length)
 
-    let defaultHeight = "100px"
+    let defaultHeight = paragraph.length >= 640 ? "100px" : "max-content"
 
     const style = {
         overflow: "hidden",
         height: defaultHeight,
-    }
-
-    const expStyle = {
-                cursor: "pointer",
-                marginTop: "1rem",
-                fontWeight: 600,
-                background: "var(--light-color)",
-                width: "max-content",
-                padding: ".5rem 1rem",
-                borderRadius: "100px",
-                fontSize: ".9rem",
-                display: "flex",
-                justfyContent: "center",
-                alignItems: "center",
-                gap: ".7rem"
     }
 
     const expand = (e) =>{
@@ -52,10 +37,68 @@ const ShortenParagraph = (id, paragraph, maxCount) =>{
             <p id={id} onClick={()=>{console.log("here")}} style={style} className="">
                     {paragraph}
             </p>
-            <div style={expStyle} onClick={expand}>Show more <i class="fa-solid fa-angle-down"></i></div>
+            <div className="expand-btn" onClick={expand}>Show more <i class="fa-solid fa-angle-down"></i></div>
         </>
             )
 
 }
 
-export default ShortenParagraph
+
+export const expandElement = (id, elementArray) =>{
+
+    console.log(elementArray.length)
+
+    let defaultHeight = elementArray.length >= 4 ? "250px" : "max-content"
+
+    const style = {
+        overflow: "hidden",
+        height: defaultHeight,
+    }
+
+    const expand = (e) =>{
+
+        const button = e.target
+        const element = document.querySelector(`#${id}`)
+        const height = element.style.height
+
+        if(height === "max-content"){
+
+            element.style.height = defaultHeight
+
+            button.innerHTML = `Show more <i class="fa-solid fa-angle-down"></i>`
+
+        }else{
+
+            element.style.height = "max-content" 
+
+            button.innerHTML = `Show less <i class="fa-solid fa-angle-up"></i>`
+
+        }
+
+    }
+
+    return(
+        <>
+        <div>
+        <h2>Property Details</h2>
+            <div id={id} className="prop_details" style={style}>
+              {
+                elementArray.length > 0 &&
+                elementArray.map((detail,index)=>(
+                    <div key={index}>
+                        <h3>{detail.category}</h3>
+                        <p>{detail.text.join(", ")}</p>
+                    </div>
+                ))
+            }
+             </div>
+             
+            <div style={{padding: "0rem 1rem"}}>
+                <div className="expand-btn" onClick={expand}>Show more <i class="fa-solid fa-angle-down"></i></div>
+            </div>
+            
+        </div> 
+        </>
+            )
+
+}

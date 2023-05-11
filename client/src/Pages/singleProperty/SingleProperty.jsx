@@ -8,7 +8,7 @@ import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoa
 import { getPhoto } from "../../components/propertyCard/util"
 import useMyModal from "../../lib/Modal/useMyModal"
 import { cleanInput } from "../../lib/Forms/Util/cleanInput"
-import shortenParagraph from "../../Util/shortenParagraph"
+import {shortenParagraph, expandElement} from "../../Util/shortenParagraph"
 import MainButton from "../../components/buton/MainButton"
 import "./style.css"
 
@@ -57,6 +57,43 @@ const SingleProperty = () =>{
 
     },[])
 
+    const likeProperty = (id) =>{
+
+        const property_ids = deepSearch(activeUserReducer,["userInfo","likes"],[])
+
+        if(!activeUserReducer.token){
+
+            toggle()
+
+            return
+
+        }
+
+        if(property_ids.includes(id)){
+
+            setLike(false)
+
+            const updatedPropertyIds = property_ids.filter(propId => propId != id)
+
+            updateLikes(updatedPropertyIds)
+
+            makeRequest("POST", URL.UNLIKE_PROPS, {propertyId : id})
+
+            return
+
+        }
+
+        setLike(true)
+
+        property_ids.push(id)
+
+        updateLikes(property_ids)
+
+        makeRequest("POST", URL.LIKE_PROPS, {propertyId : id})
+
+    
+    }
+
 
     useEffect(()=>{
         console.log(formResponse)
@@ -97,6 +134,12 @@ const SingleProperty = () =>{
               !singleProperty.property_id ?
                 <SkeletonLoading /> :
                 <div>
+                    <ul className="single_prop_header">
+                        <li>Back to search</li>
+                        <li className="single_share_btn">share</li>
+                        <li className="single_like_btn"><i class="fa-solid fa-share"></i></li>
+
+                     </ul>
                     <div onClick={photoModal.toggle} className="prop_photos">
                         {photos.length >= 3 && 
                             photos.map((photo, index)=>(
@@ -110,7 +153,8 @@ const SingleProperty = () =>{
 
                          <div className="prop_info">
                         <div className="prop_info_header">
-                            <h2>{`${address}, ${state}, ${zip}`}</h2>
+                            <p style={{padding: "0rem 1rem"}}>Status - {cleanInput(status)}</p>
+                            <h2 style={{background: "white", fontWeight: "500"}}>{`${address}, ${state}, ${zip}`}</h2>
                             <ul className="prop_info_list">
                                 <li>
                                     <h3>Price</h3>
@@ -143,11 +187,11 @@ const SingleProperty = () =>{
                                     
                                 </li>
 
-                                <li>
+                                {/* <li>
                                     <h3>Type</h3>
                                     <p>{`${cleanInput(type)}`}</p>
                                     
-                                </li>
+                                </li> */}
 
                               
                             </ul>
@@ -159,39 +203,37 @@ const SingleProperty = () =>{
                                 {shortenParagraph("description", description) }
                             
                         </div>
-                        <div className="prop_details">
-                            {
-                                details.length > 0 &&
-                                details.map((detail,index)=>(
-                                    <div key={index}>
-                                        <h3>{detail.category}</h3>
-                                        <p>{detail.text.join(", ")}</p>
-                                    </div>
-                                ))
-                            }
-                        </div>
+                        
+                            {expandElement("details",details)}
                     
                     </div>
                     <div className="agent_info">
+                        <figure className="agent-head-shot"></figure>
                         <div className="agent">
+
                             <ul>
                                 <li>
                                     <p>Frederic Oliver</p>
-                                     <h4>Keller Wiliams Realty</h4>
+                                     <h3>Keller Wiliams Realty</h3>
                                 </li>
                                 <li>
                                     <p>Text or Call</p>
-                                     <h4>2409255535</h4>
+                                     <h3>2409255535</h3>
                                 </li>
 
                                 <li>
                                     <p>Email</p>
-                                     <h4>jp@gmail.com</h4>
+                                     <h3>jp@gmail.com</h3>
+                                </li>
+
+                                <li>
+                                    <p>Office</p>
+                                     <h3>155367 NW 14Ct, Miami, FL, 33784</h3>
                                 </li>
                             </ul>
                                 
                         </div>
-                        <button className="button main-btn">
+                        <button style={{width: "100%"}} className="button main-btn">
                                                 Schedule a Tour
                         </button>
                     </div>
