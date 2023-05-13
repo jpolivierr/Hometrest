@@ -9,12 +9,27 @@ import { getPhoto } from "../../components/propertyCard/util"
 import useMyModal from "../../lib/Modal/useMyModal"
 import { cleanInput } from "../../lib/Forms/Util/cleanInput"
 import {shortenParagraph, expandElement} from "../../Util/shortenParagraph"
+import useReduxMng from "../../hooks/useReduxMng"
 import MainButton from "../../components/buton/MainButton"
+import NewLoginForm from "../../components/Forms/NewLoginForm"
+import SimilarProperties from "../../components/SimilarProperties/SimilarProperties"
+import ScheduleTour from "./Scedule"
 import "./style.css"
 
 const SingleProperty = () =>{
 
     const {makeRequest, formResponse, loading} = useRequest()
+
+       const {toggle, renderModal, addChildElement, isShowing} = useMyModal({
+        type: "floating",
+        windowAnimation : {
+                    start: "float",
+                    end: "close-float"
+        },
+        time: 0,
+    })
+
+    const {activeUserReducer, updateLikes} = useReduxMng()
 
     const photoModal = useMyModal({
         type: "floating",
@@ -39,23 +54,61 @@ const SingleProperty = () =>{
         )
     },[photoModal.isShowing])
 
-    const [singleProperty, setSingleProperty] = useState(deepSearch(singleDemo,["data","home"],{}))
+    const [singleProperty, setSingleProperty] = useState(null)
 
     useEffect(()=>{
 
         const paramId = getParams("prop_id")
 
-        console.log(singleProperty)
-
         if(paramId){
 
             console.log("make request")
 
-            //   makeRequest("GET",URL.SINGLE_PROPERTY + "?prop_id=" + paramId)
+            //    makeRequest("GET",URL.SINGLE_PROPERTY + "?prop_id=" + paramId)
 
         }
 
     },[])
+
+    useEffect(()=>{
+
+        const property = deepSearch(singleDemo,["data","home"],{})
+
+        setSingleProperty(property)
+
+
+        if(formResponse.status && formResponse.status === 200){
+
+            const property = deepSearch(formResponse.body,["data","home"],{})
+
+            setSingleProperty(property)
+
+        }
+
+    },[formResponse])
+
+    useEffect(()=>{
+
+        const property_ids = deepSearch(activeUserReducer,["userInfo","likes"],[])
+
+        if(property_ids.includes(propertyId)){
+
+            setLike(!like)
+
+        }
+  
+      },[])
+
+      const [like, setLike] = useState(false)
+
+    useEffect(()=>{
+        addChildElement(
+                        <NewLoginForm 
+                              elementClass="avalon text-left padding-top-bottom padding-bottom-2x"
+                        />
+                    )
+        
+    },[isShowing])
 
     const likeProperty = (id) =>{
 
@@ -95,19 +148,6 @@ const SingleProperty = () =>{
     }
 
 
-    useEffect(()=>{
-        console.log(formResponse)
-
-        if(formResponse.status && formResponse.status === 200){
-
-            const property = deepSearch(formResponse.body,["data","home"],{})
-
-            setSingleProperty(property)
-
-        }
-
-    },[formResponse])
-
     const propertyId = deepSearch(singleProperty,["property_id"], "")
     const price = deepSearch(singleProperty,["list_price"], "")
     const address = deepSearch(singleProperty,["location","address","line"],"")
@@ -125,19 +165,19 @@ const SingleProperty = () =>{
     const details = deepSearch(singleProperty,["details"], [])
     const status = deepSearch(singleProperty,["status"],"")
 
-  console.log(details)
-
     return(
-        getParams("prop_id") && 
         <div className="container-medium">
-            {
-              !singleProperty.property_id ?
-                <SkeletonLoading /> :
+          {
+            getParams("prop_id") && 
+              !singleProperty || !singleProperty.property_id ?
+              <SkeletonLoading 
+              elementClass={"av-loading-skeleton loading-page"}
+              type="page" /> :
                 <div>
                     <ul className="single_prop_header">
                         <li>Back to search</li>
-                        <li className="single_share_btn">share</li>
-                        <li className="single_like_btn"><i class="fa-solid fa-share"></i></li>
+                        <li className="single_share_btn"><i className="fa-solid fa-share"></i></li>
+                        <li className="single_like_btn">{!like ? <i onClick={()=>likeProperty(propertyId)} className="fa-regular fa-heart"></i> : <i onClick={()=>likeProperty(propertyId)} className="fa-solid fa-heart like-prop"></i>}</li>
 
                      </ul>
                     <div onClick={photoModal.toggle} className="prop_photos">
@@ -208,10 +248,32 @@ const SingleProperty = () =>{
                     
                     </div>
                     <div className="agent_info">
-                        <figure className="agent-head-shot"></figure>
+                        {/* <figure className="agent-head-shot"></figure> */}
                         <div className="agent">
 
-                            <ul>
+                            <form>
+                                <h2>Ask me a Question</h2>
+                                <fieldset>
+                                    <input placeholder="Name"/>
+                                </fieldset>
+                                <fieldset>
+                                    <input placeholder="email"/>
+                                </fieldset>
+                                <fieldset>
+                                    <input placeholder="Phone"/>
+                                </fieldset>
+                                <fieldset>
+                                    <textarea placeholder="I'd like to learn more">
+                                       
+                                    </textarea>
+                                </fieldset>
+                                <button style={{width: "100%", marginBottom: "1rem"}} className="button secondary-btn">
+                                                Send 
+                        </button>
+                            </form>
+                            
+
+                            {/* <ul>
                                 <li>
                                     <p>Frederic Oliver</p>
                                      <h3>Keller Wiliams Realty</h3>
@@ -230,9 +292,14 @@ const SingleProperty = () =>{
                                     <p>Office</p>
                                      <h3>155367 NW 14Ct, Miami, FL, 33784</h3>
                                 </li>
-                            </ul>
+                            </ul> */}
                                 
                         </div>
+                        {/* <button style={{width: "100%", marginBottom: "1rem"}} className="button secondary-btn">
+                                                ask Me a Question
+                        </button> */}
+                        <h2 style={{marginTop: "3rem"}}>Schedule a Tour</h2>
+                        <ScheduleTour />
                         <button style={{width: "100%"}} className="button main-btn">
                                                 Schedule a Tour
                         </button>
@@ -241,9 +308,15 @@ const SingleProperty = () =>{
                    
                 </div>
                 
-                
+            
             }
+            <div className="similar-property">
+                <h2>Similar Properties</h2>
+                <SimilarProperties propId={getParams("prop_id")}/>
+            </div>
+            
             {photoModal.renderModal()}
+            {renderModal()}
         </div>
     )
 

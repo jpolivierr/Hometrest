@@ -1,8 +1,8 @@
 
-import {urlParcer, updateParam} from "../Util/urlParcer"
+import {urlParcer} from "../Util/urlParcer"
 import { useEffect } from "react"
-import TopSearchForm from "../components/Forms/TopSearchForm"
-import TopSearchFilter from "../components/Forms/TopSearchFilter"
+import SimilarProperties from "../components/SimilarProperties/SimilarProperties"
+
 const About = (props) =>{
 
     const {Class, id} = props
@@ -15,9 +15,10 @@ const About = (props) =>{
 
     return(
         <div id={id} className={Class}>
-          <div className="">
+          <div className="container">
 
-            <TopSearchFilter />
+          {<SimilarProperties />}
+            {/* <TopSearchFilter /> */}
             {/* <TopSearchForm /> */}
             
           </div>

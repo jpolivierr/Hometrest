@@ -1,11 +1,17 @@
-.slider-container{
+.carousel-container{
     position: relative;
+    width: 100%;
 }
-.slider{
-    position: absolute;
+.carousel{
+    position: relative;
     display: flex;
     overflow: hidden;
     z-index: 1;
+}
+
+.slide{
+    position: absolute;
+    height: max-content;
 }
 
 .slider-btn{
@@ -41,9 +47,4 @@
 
 .slider-btn-left{
    left: -44px;
-}
-
-.slider-card{
-    position: relative;
-    height: max-content;
 }

@@ -1,7 +1,6 @@
 
 export const shortenParagraph = (id, paragraph, maxCount) =>{
 
-    console.log(paragraph.length)
 
     let defaultHeight = paragraph.length >= 640 ? "100px" : "max-content"
 
@@ -37,7 +36,7 @@ export const shortenParagraph = (id, paragraph, maxCount) =>{
             <p id={id} onClick={()=>{console.log("here")}} style={style} className="">
                     {paragraph}
             </p>
-            <div className="expand-btn" onClick={expand}>Show more <i class="fa-solid fa-angle-down"></i></div>
+            <div className="expand-btn" onClick={expand}>Show more <i className="fa-solid fa-angle-down"></i></div>
         </>
             )
 
@@ -46,9 +45,8 @@ export const shortenParagraph = (id, paragraph, maxCount) =>{
 
 export const expandElement = (id, elementArray) =>{
 
-    console.log(elementArray.length)
 
-    let defaultHeight = elementArray.length >= 4 ? "250px" : "max-content"
+    let defaultHeight = elementArray.length >= 4 ? "200px" : "max-content"
 
     const style = {
         overflow: "hidden",
@@ -94,7 +92,7 @@ export const expandElement = (id, elementArray) =>{
              </div>
              
             <div style={{padding: "0rem 1rem"}}>
-                <div className="expand-btn" onClick={expand}>Show more <i class="fa-solid fa-angle-down"></i></div>
+                <div className="expand-btn" onClick={expand}>Show more <i className="fa-solid fa-angle-down"></i></div>
             </div>
             
         </div> 

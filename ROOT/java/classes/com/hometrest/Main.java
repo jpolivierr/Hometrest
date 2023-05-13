@@ -16,6 +16,7 @@ import com.hometrest.servlet.ListingsServlet;
 import com.hometrest.servlet.LoginServlet;
 import com.hometrest.servlet.PropertySearchServlet;
 import com.hometrest.servlet.SignupServlet;
+import com.hometrest.servlet.SimilarPropertyServlet;
 import com.hometrest.servlet.SinglePropertySearchServlet;
 
 
@@ -39,6 +40,7 @@ public class Main {
          new DeleteAccount();
          new LikePropsApi();
          new UnlikePropsApi();
+         new SimilarPropertyServlet();
         
     }
     

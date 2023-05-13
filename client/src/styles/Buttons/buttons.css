@@ -5,6 +5,7 @@
     padding: .7rem .88rem;
     cursor: pointer;
     transition: .5s;
+    height: 45px;
 }
 
 .main-btn{

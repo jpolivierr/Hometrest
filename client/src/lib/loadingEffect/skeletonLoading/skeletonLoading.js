@@ -1,110 +1,28 @@
 import "./style.css"
-
+import Cards from "./cards";
+import Page from "./page";
 const SkeletonLoading = (props) =>{
 
-  const {count} = props
+  const {type, elementClass} = props
 
   let i = 0;
 
   const render = () =>{
-        if(i <= count){
+                 
+        switch(type){
+                case "cards" :
+                        return <Cards/>
+                case "page" :
+                        return <Page/>
+                default :
+                        return <Cards/>
 
         }
-        return(
-            <div className="loading-container">
-            <div className="loading-text"></div>
-            <div className="loading-text"></div>
-            <div className="loading-text"></div>
-            <div className="loading-text"></div>
-            <div className="loading-text"></div>
-        </div>
-        )
-    
   }
 
     return (
-        <div className="av-loading-skeleton">
- 
-              <div className="loading-container">
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-            </div>
-
-            <div className="loading-container">
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-            </div>
-
-            <div className="loading-container">
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-            </div>
-
-            <div className="loading-container">
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-            </div>
-
-            <div className="loading-container">
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-            </div>
-
-            <div className="loading-container">
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-            </div>
-
-            <div className="loading-container">
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-            </div>
-
-
-            <div className="loading-container">
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-            </div>
-
-            <div className="loading-container">
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-            </div>
-
-            <div className="loading-container">
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-                    <div className="loading-text"></div>
-            </div>
+        <div className={`${elementClass}`}>
+                {render()}
         </div>
     )
 

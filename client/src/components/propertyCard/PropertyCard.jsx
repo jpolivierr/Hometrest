@@ -137,7 +137,7 @@ const PropertyCard = (props) =>{
     return(
  
         <div onClick={handleClick} data-property_id = {propertyId} className="property-card av-shadow">
-            <figure style={{background : `url(${getPhoto(photo)}) no-repeat center center/cover`}}>
+            <figure style={{background : `url(${photo}) no-repeat center center/cover`}}>
                 <div className={getStatusStyle("for_sale")}>
                 {cleanInput(status)}
             </div>
@@ -150,7 +150,7 @@ const PropertyCard = (props) =>{
                     <div className="prop-baths">{baths} <span>Baths</span></div>
                     <div className="prop-sqft">{sqft} <span>Sqft</span></div>
                     <div className="prop-address">
-                        {shortenText(`${street}, ${city}, ${stateCode} ${zip}`, 39)}
+                        {`${street}, ${city}, ${stateCode} ${zip}`}
                     </div>
             </div>
             

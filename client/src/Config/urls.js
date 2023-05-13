@@ -10,6 +10,7 @@ const URL = {
     LOGOUT : "http://localhost:8080/api/logout",
     LIKE_PROPS : "http://localhost:8080/api/like_property",
     UNLIKE_PROPS : "http://localhost:8080/api/unlike_property",
+    SIMILAR_PROPS : "http://localhost:8080/similar_property",
     
 }
 
