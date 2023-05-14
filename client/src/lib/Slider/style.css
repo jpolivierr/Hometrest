@@ -34,17 +34,15 @@
     transition: all .3s;
 }
 
-.slider-btn
-
 .slider-btn:hover{
     transform: scale(1.1);
-    background: #343f4f13;
+    background: white;
 }
 
 .slider-btn-right{
-   right: -44px;
+   right: -24px;
 }
 
 .slider-btn-left{
-   left: -44px;
+   left: -24px;
 }

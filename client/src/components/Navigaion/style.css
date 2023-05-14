@@ -3,4 +3,5 @@
     top: 0;
     z-index: 2;
     background: white;
+    border-bottom: 1px solid var(--light-silver);
 }

@@ -1,6 +1,6 @@
 .show-properties{
     display: grid;
-    grid-template-columns: max-content max-content;
+    grid-template-columns: 1fr 1fr;
     gap: .5rem;
     padding: 0rem .5rem;
 }

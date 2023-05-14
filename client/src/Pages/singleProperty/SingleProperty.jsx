@@ -10,10 +10,12 @@ import useMyModal from "../../lib/Modal/useMyModal"
 import { cleanInput } from "../../lib/Forms/Util/cleanInput"
 import {shortenParagraph, expandElement} from "../../Util/shortenParagraph"
 import useReduxMng from "../../hooks/useReduxMng"
-import MainButton from "../../components/buton/MainButton"
 import NewLoginForm from "../../components/Forms/NewLoginForm"
 import SimilarProperties from "../../components/SimilarProperties/SimilarProperties"
 import ScheduleTour from "./Scedule"
+import { formatNumber } from "../../components/propertyCard/util"
+import jonathan from "../../media/images/JONATHAN.jpg"
+import map from "../../media/images/map.jpg"
 import "./style.css"
 
 const SingleProperty = () =>{
@@ -164,6 +166,9 @@ const SingleProperty = () =>{
     const yearBuilt = deepSearch(singleProperty,["description", "year_built"], "")
     const details = deepSearch(singleProperty,["details"], [])
     const status = deepSearch(singleProperty,["status"],"")
+    const monthlyEstimate = deepSearch(singleProperty,["mortgage","estimate","monthly_payment"],"")
+    console.log(monthlyEstimate)
+    console.log(singleProperty)
 
     return(
         <div className="container-medium">
@@ -175,9 +180,10 @@ const SingleProperty = () =>{
               type="page" /> :
                 <div>
                     <ul className="single_prop_header">
-                        <li>Back to search</li>
-                        <li className="single_share_btn"><i className="fa-solid fa-share"></i></li>
-                        <li className="single_like_btn">{!like ? <i onClick={()=>likeProperty(propertyId)} className="fa-regular fa-heart"></i> : <i onClick={()=>likeProperty(propertyId)} className="fa-solid fa-heart like-prop"></i>}</li>
+                        <li className="single_back_btn s-h-btn"><i class="fa-solid fa-angle-left"></i>Back to search</li>
+                    
+                        <li className="single_share_btn s-h-btn"><i className="fa-solid fa-share"></i> Share</li>
+                        <li onClick={()=>likeProperty(propertyId)} className="single_like_btn s-h-btn">{!like ? <i onClick={()=>likeProperty(propertyId)} className="fa-regular fa-heart"></i> : <i onClick={()=>likeProperty(propertyId)} className="fa-solid fa-heart like-prop"></i>} Favorite</li>
 
                      </ul>
                     <div onClick={photoModal.toggle} className="prop_photos">
@@ -193,48 +199,33 @@ const SingleProperty = () =>{
 
                          <div className="prop_info">
                         <div className="prop_info_header">
-                            <p style={{padding: "0rem 1rem"}}>Status - {cleanInput(status)}</p>
-                            <h2 style={{background: "white", fontWeight: "500"}}>{`${address}, ${state}, ${zip}`}</h2>
-                            <ul className="prop_info_list">
+                            <figure className="mini-map">
+                               <img src={map}/>
+                            </figure>
+                            <div className="prop_header_details">
+                                <p>Status - {cleanInput(status)}</p>
+                            <h2>{`${address}, ${state}, ${zip}`}</h2>
+                                <h3>{`$${formatNumber(price)}`} <span>Est. ${formatNumber(monthlyEstimate)}/month</span></h3>
+                                
+                                <ul className="prop_info_list">
                                 <li>
-                                    <h3>Price</h3>
-                                    <p>{`$${price}`}</p>
-                                    
-                                    
+                                    <h4>Beds <span>{`${beds}`}</span></h4>
+
                                 </li>
                                 <li>
-                                    <h3>Beds</h3>
-                                    <p>{`${beds}`}</p>
-                                    
-                                    
+                                    <h4>Baths <span>{`${baths}`}</span></h4>        
                                 </li>
                                 <li>
-                                    <h3>Baths</h3>
-                                    <p>{`${baths}`}</p>
-                                    
-                                    
-                                </li>
-                                <li>
-                                    <h3>Sqft</h3>
-                                    <p>{`${sqft}`}</p>
-                                    
+                                    <h4>Sqft <span>{`${formatNumber(sqft)}`}</span></h4>
                                 </li>
 
                                 <li>
-
-                                    <h3>Year built</h3>
-                                    <p>{`${yearBuilt}`}</p>
-                                    
+                                    <h4>Year built <span>{`${yearBuilt}`}</span></h4>                           
                                 </li>
-
-                                {/* <li>
-                                    <h3>Type</h3>
-                                    <p>{`${cleanInput(type)}`}</p>
-                                    
-                                </li> */}
-
                               
                             </ul>
+                            </div>
+
 
                         </div>
                         <div className="prop_description">
@@ -248,11 +239,22 @@ const SingleProperty = () =>{
                     
                     </div>
                     <div className="agent_info">
-                        {/* <figure className="agent-head-shot"></figure> */}
+                        <div className="personal_info">
+                        <figure className="agent-head-shot">
+                            <img src={jonathan} alt="Example" />
+                        </figure>
+                        <h4>Jonathan Pluviose</h4>
+                        <h5>Keller William Realty</h5>
+                        <ul className="contact-info">
+                                <li><i className="fa-solid fa-phone"></i><p>Call</p></li>
+                                <li><i className="fa-solid fa-envelope"></i><p>Message</p></li>
+                        </ul>
+                        </div>
+                        
                         <div className="agent">
 
                             <form>
-                                <h2>Ask me a Question</h2>
+                                {/* <h3 style={{marginBottom: "1rem"}}>Ask me a Question</h3> */}
                                 <fieldset>
                                     <input placeholder="Name"/>
                                 </fieldset>
@@ -268,37 +270,14 @@ const SingleProperty = () =>{
                                     </textarea>
                                 </fieldset>
                                 <button style={{width: "100%", marginBottom: "1rem"}} className="button secondary-btn">
-                                                Send 
+                                                Ask me a question 
                         </button>
                             </form>
-                            
-
-                            {/* <ul>
-                                <li>
-                                    <p>Frederic Oliver</p>
-                                     <h3>Keller Wiliams Realty</h3>
-                                </li>
-                                <li>
-                                    <p>Text or Call</p>
-                                     <h3>2409255535</h3>
-                                </li>
-
-                                <li>
-                                    <p>Email</p>
-                                     <h3>jp@gmail.com</h3>
-                                </li>
-
-                                <li>
-                                    <p>Office</p>
-                                     <h3>155367 NW 14Ct, Miami, FL, 33784</h3>
-                                </li>
-                            </ul> */}
                                 
                         </div>
-                        {/* <button style={{width: "100%", marginBottom: "1rem"}} className="button secondary-btn">
-                                                ask Me a Question
-                        </button> */}
-                        <h2 style={{marginTop: "3rem"}}>Schedule a Tour</h2>
+            
+                        <h3 style={{marginTop: "2rem"}}>
+                            Select a tour date. No obligation. Cancel at any time.</h3>
                         <ScheduleTour />
                         <button style={{width: "100%"}} className="button main-btn">
                                                 Schedule a Tour

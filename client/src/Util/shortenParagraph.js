@@ -46,7 +46,7 @@ export const shortenParagraph = (id, paragraph, maxCount) =>{
 export const expandElement = (id, elementArray) =>{
 
 
-    let defaultHeight = elementArray.length >= 4 ? "200px" : "max-content"
+    let defaultHeight = elementArray.length >= 4 ? "560px" : "max-content"
 
     const style = {
         overflow: "hidden",
@@ -91,7 +91,7 @@ export const expandElement = (id, elementArray) =>{
             }
              </div>
              
-            <div style={{padding: "0rem 1rem"}}>
+            <div>
                 <div className="expand-btn" onClick={expand}>Show more <i className="fa-solid fa-angle-down"></i></div>
             </div>
             
