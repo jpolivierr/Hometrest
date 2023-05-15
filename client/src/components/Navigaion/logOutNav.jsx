@@ -18,7 +18,7 @@ const LogOutNav = () =>{
     return(
 
            <>
-                    <section className="padding-top-bottom top-nav">
+                    <section className=" top-nav">
 
                                 <div className="container flex-space-between">
                                             <div>

@@ -230,7 +230,6 @@ TopFormSection
 }
 
 .top-form-search input{
-    text-align: center;
     font-weight: bold;
 }
 
@@ -462,9 +461,10 @@ TopFormSection
 
 .stick{
     position: sticky;
-    top: 70.4px;
+    top: 75.4px;
     z-index: 2;
     border-radius: 0px;
+    box-shadow: 0px 10px 30px -20px #3279845c !important;
     
 }
 

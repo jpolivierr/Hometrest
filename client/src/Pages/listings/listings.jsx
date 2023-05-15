@@ -55,10 +55,6 @@ const Listings = (props) =>{
   
       },[searchReducer])
 
-
-
-
-
           useEffect(()=>{
 
             // console.log("set property result ----->", propertiesDemo)
@@ -90,7 +86,9 @@ const Listings = (props) =>{
           <div className="search-result wide-container">
     
             <TopSearchFilter/>
-            <Map />
+            <Map 
+              properties={propertiesDemo}
+            />
             <ShowProperties 
               isLoading = {false}
             />

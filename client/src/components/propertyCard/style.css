@@ -84,6 +84,21 @@
     width: max-content;
     text-transform: uppercase;
 }
+
+.info-window-prop-card{
+    border: none;
+    max-width: 200px;
+}
+
+.info-window-prop-card figure{
+    max-height: 100px;
+}
+
+.info-window-prop-card .prop-info{
+    padding: 0rem;
+    gap: .2rem;
+}
+
 .like-prop{
     color: var(--main-color);
 }

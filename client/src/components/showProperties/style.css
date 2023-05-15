@@ -3,6 +3,8 @@
     grid-template-columns: 1fr 1fr;
     gap: .5rem;
     padding: 0rem .5rem;
+    margin-top: 1rem;
+    max-width: 734px;
 }
 
 .props-loading .property-card{

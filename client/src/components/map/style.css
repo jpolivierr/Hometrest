@@ -1,6 +1,7 @@
 .the-map{
-    background: var(--light-color);
     height: 100vh;
-    position: sticky;
-    top: 150px;
+    top: 158px !important;
+    position: sticky !important;
+    top: 0;
 }
+

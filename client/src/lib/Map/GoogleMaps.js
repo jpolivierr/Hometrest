@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react"
 
 const GoogleMaps = (props) =>{
  
-    const {Class, view} = props
+    const {Class} = props
     const mapRef = useRef(null)
 
     

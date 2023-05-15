@@ -9,14 +9,15 @@ import { likesDemo } from "../../userDemo"
 import shortenText from "../../Util/shortenText"
 import useMyModal from "../../lib/Modal/useMyModal"
 import NewLoginForm from "../Forms/NewLoginForm"
+import { withRouter } from 'react-router-dom';
 import "./style.css"
 
 const PropertyCard = (props) =>{
 
-    const {singleProperty} = props 
+    const {singleProperty, history} = props 
 
     // console.log(key)
-  
+
     const propertyId = deepSearch(singleProperty,["property_id"])
     const listingId = deepSearch(singleProperty,["listing_id"])
     const status = deepSearch(singleProperty,["status"])
@@ -130,6 +131,7 @@ const PropertyCard = (props) =>{
         }
 
         console.log("handle click")
+        history.push('/new-route');
 
     }
 

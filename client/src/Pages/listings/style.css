@@ -1,7 +1,6 @@
 .search-result{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 1rem;
+    grid-template-columns: 1fr max-content;
 }
 
 .search-result .avalon{
@@ -13,7 +12,8 @@
 
 
     .show-properties{
-        grid-template-columns: max-content !important;
+        grid-template-columns: 1fr !important;
+        max-width: 400px !important
 
     }
     
@@ -28,7 +28,7 @@
     }
     .show-properties{
         grid-template-columns: 1fr 1fr !important;
-
+         max-width: 100% !important;
     }
 
     .the-map{
@@ -47,6 +47,7 @@
     .show-properties{
         grid-template-columns: 1fr !important;
         justify-self: center;
+        max-width: 350px !important;
 
     }
 

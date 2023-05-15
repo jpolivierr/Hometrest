@@ -87,7 +87,7 @@ const LogInNav = () =>{
     return(
 
            <>
-                    <section className="padding-top-bottom top-nav log-in-nav">
+                    <section className="top-nav log-in-nav">
 
                                 <div className="container flex-space-between">
                                             <div>

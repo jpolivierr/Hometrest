@@ -4,4 +4,10 @@
     z-index: 2;
     background: white;
     border-bottom: 1px solid var(--light-silver);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .9rem 0rem;
+    min-height: 74.8px;
+
 }
