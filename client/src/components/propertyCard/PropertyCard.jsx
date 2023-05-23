@@ -51,7 +51,7 @@ const PropertyCard = (props) =>{
     useEffect(()=>{
         addChildElement(
                         <NewLoginForm 
-                              elementClass="avalon text-left padding-top-bottom padding-bottom-2x"
+                              elementclassName="avalon text-left padding-top-bottom padding-bottom-2x"
                         />
                     )
         
@@ -155,9 +155,9 @@ const PropertyCard = (props) =>{
             <div className="prop-info">
                     <div className="prop-price">${formatNumber(price)}{handleForRent(status)}</div>
                     {!like ? <i onClick={()=>likeProperty(propertyId)} className="fa-regular fa-heart"></i> : <i onClick={()=>likeProperty(propertyId)} className="fa-solid fa-heart like-prop"></i>}
-                    <div className="prop-beds"><i class="fa-solid fa-bed"></i> {beds} <span>Beds</span></div>
-                    <div className="prop-baths"><i class="fa-solid fa-bath"></i>{baths} <span>Baths</span></div>
-                    <div className="prop-sqft"><i class="fa-brands fa-unity"></i>{formatNumber(sqft)} <span>Sqft</span></div>
+                    <div className="prop-beds"><i className="fa-solid fa-bed"></i> {beds} <span>Beds</span></div>
+                    <div className="prop-baths"><i className="fa-solid fa-bath"></i>{baths} <span>Baths</span></div>
+                    <div className="prop-sqft"><i className="fa-brands fa-unity"></i>{formatNumber(sqft)} <span>Sqft</span></div>
                     <div className="prop-address">
                         {`${street}, ${city}, ${stateCode} ${zip}`}
                     </div>

@@ -19,6 +19,7 @@ const Listings = (props) =>{
 
     const{
       setPropertyList,
+      propertiesReducer,
       setSearch,
       searchReducer
     } = useReduxMng()  
@@ -111,14 +112,6 @@ const Listings = (props) =>{
 
            prevData.current = searchReducer
 
-              // setTimeout(()=>{
-
-              //    setPropertyList(propertiesDemo)
-
-              //   setLoadingProps(false)
-
-              // },2000)
-
           
 
       },[])
@@ -155,7 +148,7 @@ const Listings = (props) =>{
     
             <TopSearchFilter/>
             <Map 
-              properties={propertiesDemo}
+              properties={propertiesReducer}
             />
             <ShowProperties 
               isLoading = {loadingProps}

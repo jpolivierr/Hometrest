@@ -74,7 +74,7 @@
 }
 
 .property-card .prop-info i:hover{
-    background: #dbedf5e8;
+    background: var(--light-color);
 }
 
 .property-card .prop-address{

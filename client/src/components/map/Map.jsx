@@ -179,33 +179,33 @@ const Map = (props) =>{
 
 
     const [initialView, setInitialView] = useState({
-        zoom: 12,
+            zoom: 12,
          center :getCenterCoordinate()
     })
 
 
-    // useEffect(()=>{
+    useEffect(()=>{
 
-    //     const theMap = document.querySelector("#the-map")
+        const theMap = document.querySelector("#the-map")
 
-    //     if(!theMap){
-    //         console.log("creating script")
-    //         const script = document.createElement("script")
-    //         script.id="the-map"
-    //         script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&callback=initMap&v=weekly`
-    //         script.defer = true
-    //         script.async = true
-    //         document.body.appendChild(script)
+        if(!theMap){
+            console.log("creating script")
+            const script = document.createElement("script")
+            script.id="the-map"
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&callback=initMap&v=weekly`
+            script.defer = true
+            script.async = true
+            document.body.appendChild(script)
 
-    //         window.initMap = () => {
-    //                         const map = new window.google.maps.Map(mapRef.current, initialView);
-    //                         processMarkers(map)
+            window.initMap = () => {
+                            const map = new window.google.maps.Map(mapRef.current, initialView);
+                            processMarkers(map)
                 
-    //                     }
+                        }
 
-    //     }
+        }
         
-    // },[])
+    },[])
 
 
     useEffect(()=>{
