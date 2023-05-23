@@ -1,5 +1,9 @@
+import NoImage from "../../media/images/no-image.png"
+
 
 export const getPhoto = (str) =>{
+ 
+    if(!str) return NoImage
 
     const index = str.lastIndexOf(".jpg");
         // return str;
@@ -14,21 +18,45 @@ export const getStatusStyle = (status) =>{
 
     switch(status){
         case "for_sale" :
-            return "status-style status-for-sale"
+            return "status-for-sale"
         case "for_rent" :
-            return "status-style status-for-rent"
+            return "status-for-rent"
         case "sold" :
-            return "status-style status-sold"
+            return "status-sold"
         case "ready_to_build" :
-            return "status-style status-ready-to-build"
+            return "status-ready-to-build"
         case "off_market" :
-            return "status-style status-off-market"
+            return "status-off-market"
         case "new_community" :
-        return "status-style status-new-community"
+        return "status-new-community"
+
+    }
+}
+
+export const getTypeStyle = (type) =>{
+    
+    switch(type){
+        case "apartment" :
+            return "type-apartment"
+        case "townhomes" :
+            return "type-townhomes"
+        case "condos" :
+            return "type-condos"
+        case "duplex_triplex" :
+            return "type-duplex_triplex"
+        case "farm" :
+            return "type-farm"
+        case "mobile" :
+            return "type-mobile"
+        case "multi_family" :
+            return "type-multi_family"
+        case "single_family" :
+            return "type-single_family"
+        case "coop" :
+        return "type-coop"
 
     }
 
-    return `${cleanInput(status)}`
 }
 
 export const cleanInput = (str) =>{

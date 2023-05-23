@@ -5,6 +5,7 @@
     overflow: hidden;
     border: 1px solid #d6dde4;
     cursor: pointer;
+    max-height: 360px;
 }
 
 
@@ -25,6 +26,18 @@
     padding: 1rem;
     /* font-size: .9rem; */
 }
+.prop-beds i, .prop-baths i, .prop-sqft i{
+
+        font-size: .8rem !important;
+        margin-right: .3rem;
+        color: var(--alt-text-color);
+        background: var(--light-color) !important;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+}
 
 .property-card .prop-info span{
     color: var(--alt-text-color);
@@ -33,10 +46,15 @@
 
 .property-card .prop-price{
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     position: relative;
     grid-column: 1 / 3;
     align-self: center;
+}
+
+.property-card .prop-price span{
+    font-size: .9rem;
+    font-weight: 600;
 }
 
 .property-card .prop-info i{
@@ -48,6 +66,11 @@
     border-radius: 50%;
     transition: all .2s;
 
+}
+
+.prop-beds, .prop-baths, .prop-sqft{
+    display: flex;
+    align-items: center;
 }
 
 .property-card .prop-info i:hover{
@@ -63,19 +86,22 @@
 
 
 
+
 .property-card img{
     position: absolute;
     width: auto;
     width: 100%;
 }
 
-.property-card .status-style{
+.property-card .status-component{
     position: absolute;
     top: 10px;
     left: 10px;
+     display: flex;
+    gap: .6rem;
 }
 
-.status-style{
+.property-card .status-component div{
     border-radius: 100px;
     color: white;
     padding: .3rem .6rem;
@@ -103,19 +129,19 @@
     color: var(--main-color);
 }
 .status-for-sale{
-    background: green;
+    background: #479d47;
 }
 
 .status-for-rent{
-    background: blue;
+    background: #3737ca;
 }
 
 .status-sold{
-    background: red;
+    background: #ff4141;
 }
 
 .status-ready-to-build{
-    background: orange;
+    background: #ff9231;
 }
 
 .status-off-market{
@@ -124,4 +150,44 @@
 
 .status-new-community{
     background: lightblue;
+}
+
+
+
+
+
+.type-apartment{
+    background: #479d47;
+}
+
+.type-townhomes{
+    background: #3777ca;
+}
+
+.type-condos{
+    background: #ff4141;
+}
+
+.type-duplex_triplex{
+    background: #ff9231;
+}
+
+.type-farm{
+    background: purple;
+}
+
+.type-mobile{
+    background: #b5881f;
+}
+
+.type-single_family{
+    background: #8b22d3;
+}
+
+.type-multi_family{
+    background: #b534ad;
+}
+
+.type-coop{
+    background: #2290d3;
 }

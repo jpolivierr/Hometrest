@@ -1,6 +1,6 @@
 
 import { deepSearch } from "../../Util/getValueByKey"
-import { getStatusStyle, cleanInput, formatNumber, getPhoto } from "./util"
+import { getStatusStyle, getTypeStyle, cleanInput, formatNumber, getPhoto } from "./util"
 import { useEffect, useRef, useState } from "react"
 import useRequest from "../../lib/MakeRequest/MakeRequest"
 import URL from "../../Config/urls"
@@ -60,7 +60,7 @@ const PropertyCard = (props) =>{
     useEffect(()=>{
 
         if(formResponse.status){
-            
+
             console.log(formResponse)
         }
          
@@ -133,22 +133,31 @@ const PropertyCard = (props) =>{
 
     }
 
-
+  const handleForRent = (status) =>{
+    if(status === "for_rent") return (<span>/month</span>)
+  }
     return(
  
         <div onClick={handleClick} data-property_id = {propertyId} className="property-card av-shadow">
-            <figure style={{background : `url(${photo}) no-repeat center center/cover`}}>
-                <div className={getStatusStyle("for_sale")}>
-                {cleanInput(status)}
-            </div>
+            <figure style={{background : `url(${getPhoto(photo)}) no-repeat center center/cover`}}>
+
+                <div className="status-component">
+                        <div className={getStatusStyle(status)}>
+                            {cleanInput(status)}
+                        </div>
+                        <div className={getTypeStyle(type)}>
+                            {cleanInput(type)}
+                        </div>
+                </div>
+                
             </figure>
 
             <div className="prop-info">
-                    <div className="prop-price">${formatNumber(price)}</div>
+                    <div className="prop-price">${formatNumber(price)}{handleForRent(status)}</div>
                     {!like ? <i onClick={()=>likeProperty(propertyId)} className="fa-regular fa-heart"></i> : <i onClick={()=>likeProperty(propertyId)} className="fa-solid fa-heart like-prop"></i>}
-                    <div className="prop-beds">{beds} <span>Beds</span></div>
-                    <div className="prop-baths">{baths} <span>Baths</span></div>
-                    <div className="prop-sqft">{sqft} <span>Sqft</span></div>
+                    <div className="prop-beds"><i class="fa-solid fa-bed"></i> {beds} <span>Beds</span></div>
+                    <div className="prop-baths"><i class="fa-solid fa-bath"></i>{baths} <span>Baths</span></div>
+                    <div className="prop-sqft"><i class="fa-brands fa-unity"></i>{formatNumber(sqft)} <span>Sqft</span></div>
                     <div className="prop-address">
                         {`${street}, ${city}, ${stateCode} ${zip}`}
                     </div>

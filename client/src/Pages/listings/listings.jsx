@@ -79,7 +79,7 @@ const Listings = (props) =>{
 
            prevData.current = searchReducer
 
-            console.log(searchReducerClone)
+           console.log(searchReducerClone)
            makeRequest("POST", URL.SEARCH, searchReducerClone)
               // setTimeout(()=>{
 
@@ -136,11 +136,8 @@ const Listings = (props) =>{
 
          console.log(homeSearch)
 
-         if(homeSearch.length > 0){
-
           setPropertyList(homeSearch)
 
-         }
 
       }
 

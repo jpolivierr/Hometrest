@@ -16,6 +16,10 @@
         max-width: 400px !important
 
     }
+
+    .show-properties-header{
+        columns: 1;
+    }
     
 }
 

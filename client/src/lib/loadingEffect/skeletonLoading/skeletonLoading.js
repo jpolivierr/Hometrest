@@ -5,8 +5,6 @@ const SkeletonLoading = (props) =>{
 
   const {type, elementClass} = props
 
-  let i = 0;
-
   const render = () =>{
                  
         switch(type){

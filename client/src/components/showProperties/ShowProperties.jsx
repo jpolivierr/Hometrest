@@ -11,7 +11,7 @@ const ShowProperties = (props) =>{
 
     const {isLoading} = props
 
-    const {propertiesReducer} = useReduxMng()
+    const {propertiesReducer,searchReducer} = useReduxMng()
 
     const {toggle, renderModal, addChildElement, isShowing} = useMyModal({
         type: "floating",
@@ -32,11 +32,37 @@ const ShowProperties = (props) =>{
         
     },[isShowing])
 
+    console.log(propertiesReducer)
+    console.log(propertiesReducer.length)
+    console.log(isLoading)
+    console.log(searchReducer)
 
+    const getSearchValue = () =>{
+
+        if(searchReducer.city && !isLoading) return searchReducer.city
+        if(searchReducer.postal_code && !isLoading) return searchReducer.postal_code
+    
+    }
+
+    const renderLoading = () =>{
+
+        if(isLoading && propertiesReducer.length === 0){
+            return(
+                <SkeletonLoading
+              type="cards"
+              elementClass="av-loading-skeleton"
+          />
+            )
+        }
+
+    }
     return(
         <div className={`show-properties ${isLoading && "props-loading"}`}>
+
+        {getSearchValue() && <div className="show-properties-header"> 
+                <h2>{`${propertiesReducer.length} results found for "${getSearchValue()}"`}</h2>
+            </div>}
             {
-            
             Array.isArray(propertiesReducer) &&
             propertiesReducer.length > 0 ? propertiesReducer.map((property,index)=>(
         
@@ -45,9 +71,7 @@ const ShowProperties = (props) =>{
                key={index}
             />
        
-   )) : <SkeletonLoading
-
-          />}
+   )) : renderLoading()}
             {renderModal()}
         </div>
     )

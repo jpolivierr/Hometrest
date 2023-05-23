@@ -5,6 +5,18 @@
     padding: 0rem .5rem;
     margin-top: 1rem;
     max-width: 734px;
+    height: max-content;
+}
+
+.show-properties-header{
+    grid-column: 1 / 3;
+    padding: 1rem 0rem;
+    padding-top: 0rem;
+    max-height: 30px;
+}
+
+.show-properties-header h2{
+    font-weight: 500;
 }
 
 .props-loading .property-card{
