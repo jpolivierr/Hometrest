@@ -9,14 +9,12 @@ import { likesDemo } from "../../userDemo"
 import shortenText from "../../Util/shortenText"
 import useMyModal from "../../lib/Modal/useMyModal"
 import NewLoginForm from "../Forms/NewLoginForm"
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom"
 import "./style.css"
 
 const PropertyCard = (props) =>{
 
-    const {singleProperty, history} = props 
-
-    // console.log(key)
+    const {singleProperty} = props 
 
     const propertyId = deepSearch(singleProperty,["property_id"])
     const listingId = deepSearch(singleProperty,["listing_id"])
@@ -61,8 +59,8 @@ const PropertyCard = (props) =>{
 
     useEffect(()=>{
 
-        //  console.log(activeUserReducer)
         if(formResponse.status){
+            
             console.log(formResponse)
         }
          
@@ -131,7 +129,7 @@ const PropertyCard = (props) =>{
         }
 
         console.log("handle click")
-        history.push('/new-route');
+   
 
     }
 

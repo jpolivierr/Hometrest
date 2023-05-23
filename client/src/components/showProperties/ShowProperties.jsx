@@ -33,7 +33,6 @@ const ShowProperties = (props) =>{
     },[isShowing])
 
 
-
     return(
         <div className={`show-properties ${isLoading && "props-loading"}`}>
             {

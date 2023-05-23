@@ -70,9 +70,6 @@ function App() {
 
   useEffect(()=>{
 
-     console.log("Making request")
-
-
      if(userIsAuthenticated){
 
         makeRequest("GET", URL.GET_ACCOUNT )

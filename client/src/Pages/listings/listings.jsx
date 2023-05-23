@@ -1,5 +1,5 @@
 import "./style.css"
-import { useEffect } from "react"
+import { useEffect, useState, useRef } from "react"
 import useRequest from "../../lib/MakeRequest/MakeRequest"
 import useReduxMng from "../../hooks/useReduxMng"
 import findPropertyValue from "../../Util/nestedObject"
@@ -8,7 +8,8 @@ import ShowProperties from "../../components/showProperties/ShowProperties"
 import Map from "../../components/map/Map"
 import propertiesDemo from "../../propertyDemo"
 import { getParams, updateParam } from "../../Util/urlParcer"
-
+import { deepSearch } from "../../Util/getValueByKey"
+import URL from "../../Config/urls"
 
 const Listings = (props) =>{
 
@@ -17,67 +18,137 @@ const Listings = (props) =>{
     const {makeRequest, formResponse, loading } = useRequest()
 
     const{
-      getPropertyList,
       setPropertyList,
       setSearch,
       searchReducer
     } = useReduxMng()  
 
-  
+    const [loadingProps, setLoadingProps] = useState(true)
+
     useEffect( ()=>{
-  
+
             if(getParams("search")){
   
-            const listingOptions = getParams("search")
-
-            console.log("Get filter from search bar -----> ",listingOptions)
-  
-            setSearch(listingOptions)
-  
+                  const filterOptions = getParams("search")
+                  console.log("--> Get Param")
+                  console.log(filterOptions)
+        
+                  setSearch(filterOptions)
+        
           }
   
       },[])
 
+      
+      useEffect(()=>{
+      
+      
+        if(Object.keys(searchReducer) > 0){
 
-  
-        useEffect(()=>{
+         console.log("--> Update Param")
 
-          console.log("SearchReducer ------>", searchReducer)
-           updateParam(searchReducer, true, "search")
+          updateParam(searchReducer, true, "search")
 
-           if(!searchReducer.limit){
+        }
+        
 
-              searchReducer.limit = 50
 
-              console.log("Make request  ------>", searchReducer)
-
-           }
-  
       },[searchReducer])
 
-          useEffect(()=>{
+      const prevData = useRef({});
 
-            // console.log("set property result ----->", propertiesDemo)
-            setPropertyList(propertiesDemo)
-        
-          },[])
+       useEffect(()=>{
+
+        const prevDataJSON = JSON.stringify(prevData.current)
+
+        const currentDataJSON = JSON.stringify(searchReducer);
+      
+
+        if ((prevDataJSON !== currentDataJSON)) {
+
+          console.log("=============END============")
+
+             console.log(prevDataJSON, currentDataJSON)
+
+            setLoadingProps(true)
+          
+            const searchReducerCloneJSON = JSON.stringify(searchReducer)
+            const searchReducerClone = JSON.parse(searchReducerCloneJSON)
+
+           if(!searchReducerClone.limit) searchReducerClone.limit = 50  
+
+           prevData.current = searchReducer
+
+            console.log(searchReducerClone)
+           makeRequest("POST", URL.SEARCH, searchReducerClone)
+              // setTimeout(()=>{
+
+              //   // setPropertyList(propertiesDemo)
+
+              //   setLoadingProps(false)
+
+              // },2000)
+
+          }
+
+      },[searchReducer])
+
+
+
+
+        useEffect(()=>{
+
+          console.log("Initial load request...", searchReducer)
+
+          console.log("=============END============")
+
+            setLoadingProps(true)
+          
+            const searchReducerCloneJSON = JSON.stringify(searchReducer)
+            const searchReducerClone = JSON.parse(searchReducerCloneJSON)
+
+           if(!searchReducerClone.limit) searchReducerClone.limit = 50  
+
+           prevData.current = searchReducer
+
+              // setTimeout(()=>{
+
+              //    setPropertyList(propertiesDemo)
+
+              //   setLoadingProps(false)
+
+              // },2000)
+
+          
+
+      },[])
+
+  
 
 
     useEffect(()=>{
 
+     
+
       if(formResponse && formResponse.status === 200){
-          
-         const homeSearch = findPropertyValue(formResponse,"home_search")
+           console.log(formResponse)
+         const homeSearch =  deepSearch(formResponse,["body","data","home_search","results"],[])
 
-         if(homeSearch.total && homeSearch.total > 0){
+         console.log(homeSearch)
 
-            getPropertyList(homeSearch)
+         if(homeSearch.length > 0){
+
+          setPropertyList(homeSearch)
 
          }
 
       }
 
+      setLoadingProps(false)
+
     },[formResponse])
+
+
 
    
 
@@ -90,7 +161,7 @@ const Listings = (props) =>{
               properties={propertiesDemo}
             />
             <ShowProperties 
-              isLoading = {false}
+              isLoading = {loadingProps}
             />
 
           </div>

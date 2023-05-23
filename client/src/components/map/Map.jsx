@@ -64,7 +64,7 @@ const Map = (props) =>{
         }
 
     }
-    console.log(properties)
+
 
     const processInfoWindow = (singleProperty, marker, map) =>{
 
