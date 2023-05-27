@@ -166,11 +166,9 @@ const SingleProperty = () =>{
     const details = deepSearch(singleProperty,["details"], [])
     const status = deepSearch(singleProperty,["status"],"")
     const monthlyEstimate = deepSearch(singleProperty,["mortgage","estimate","monthly_payment"],"")
-    console.log(monthlyEstimate)
-    console.log(singleProperty)
 
     return(
-        <div className="container-medium">
+        <div className="container-medium" style={{maxWidth: "1000px"}}>
           {
               !singleProperty || !singleProperty.property_id ?
               <SkeletonLoading 
@@ -178,7 +176,7 @@ const SingleProperty = () =>{
               type="page" /> :
                 <div>
                     <ul className="single_prop_header">
-                        <li  onClick={()=>navigate(-1)} className="single_back_btn s-h-btn"><i className="fa-solid fa-angle-left"></i>Back to search</li>
+                        <li  onClick={()=>navigate(-1)} className="single_back_btn s-h-btn"><i className="fa-solid fa-angle-left"></i>Search</li>
                     
                         <li className="single_share_btn s-h-btn"><i className="fa-solid fa-share"></i> Share</li>
                         <li onClick={()=>likeProperty(propertyId)} className="single_like_btn s-h-btn">{!like ? <i onClick={()=>likeProperty(propertyId)} className="fa-regular fa-heart"></i> : <i onClick={()=>likeProperty(propertyId)} className="fa-solid fa-heart like-prop"></i>} Favorite</li>
@@ -253,15 +251,7 @@ const SingleProperty = () =>{
 
                             <form onSubmit={(e)=> e.preventDefault()}>
                                 {/* <h3 style={{marginBottom: "1rem"}}>Ask me a Question</h3> */}
-                                <fieldset>
-                                    <input placeholder="Name"/>
-                                </fieldset>
-                                <fieldset>
-                                    <input placeholder="email"/>
-                                </fieldset>
-                                <fieldset>
-                                    <input placeholder="Phone"/>
-                                </fieldset>
+                       
                                 <fieldset>
                                     <textarea placeholder="I'd like to learn more">
                                        

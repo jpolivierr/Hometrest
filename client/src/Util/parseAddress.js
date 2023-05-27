@@ -76,7 +76,12 @@ const states = [
 
         if(parts.length > 0){
 
-            // const zipPattern = /^\d{5}(?:[-\s]\d{4})?$/
+          console.log(input, parts.length )
+
+             if(parts.length === 2 && input.toLowerCase() === "new york" ){
+               address.city = input
+               return address
+             }
             let getCity = input
 
             const findStateCode = parts.filter(state => stateAbbreviations.includes(state.toUpperCase()))

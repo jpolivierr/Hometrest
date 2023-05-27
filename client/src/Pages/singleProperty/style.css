@@ -20,12 +20,12 @@
 }
 
 .s-h-btn i{
-    font-size: 1rem;
+    font-size: .9rem;
     color: var(--alt-text-color);
     background: #92a6bf17;
     border: 1px solid var(--light-silver);
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -372,6 +372,51 @@
     background: #3d98c421;
     border: 3px solid var(--secondary-color);
 }
+
+@media (max-width: 1010px){
+    .prop_info_container .agent_info{
+        display: none;
+    }
+
+    .prop_info_container{
+        grid-template-columns: 1fr;
+    }
+
+    .prop_info_header .mini-map{
+        width: 113px;
+height: 113px;
+    }
+
+    .prop_header_details p{
+       font-size: .9rem;
+    }
+
+    .prop_header_details h2{
+        font-size: .9rem;
+        margin: 0rem;
+     }
+
+     .prop_header_details h3{
+        font-size: 1.2rem;
+     }
+
+     .prop_header_details h3 span{
+        font-size: .9rem;
+     }
+
+     .prop_header_details h4{
+        font-size: .9rem;
+     }
+
+     .prop_info_list li:nth-last-child(1){
+        display: none;
+     }
+
+     .prop_info_list li:nth-last-child(2){
+        display: none;
+     }
+}
+
 @media (max-width: 850px){
 
     .prop_photos{

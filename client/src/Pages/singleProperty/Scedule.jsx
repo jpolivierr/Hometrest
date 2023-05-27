@@ -41,7 +41,7 @@ const ScheduleTour = () =>{
           size={1}
         >
             {week.map((day, index)=>(
-                <div class={`schedule-time ${index === 0 && "active-time"}`} key={index}>
+                <div className={`schedule-time ${index === 0 && "active-time"}`} key={index}>
                     <h3>{day.day}</h3>
                     <h2>{day.date}</h2>
                     <h3>{day.month}</h3>

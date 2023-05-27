@@ -41,8 +41,6 @@ const Slider = (props) =>{
         const totalCard = slider.querySelectorAll(".slider-card").length
         const cardWidth = sliderWidth / cardSplit(sliderWidth) + sliderGap
 
-        console.log(cardWidth)
-
         setTotalCard(totalCard)
 
         setTotalCount(Math.abs((cardWidth * totalCard) - sliderWidth ))

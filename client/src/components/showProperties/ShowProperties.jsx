@@ -34,6 +34,8 @@ const ShowProperties = (props) =>{
 
     const getSearchValue = () =>{
 
+        console.log(searchReducer)
+
         const city = searchReducer.city || ""
         const postal_code = searchReducer.postal_code || ""
         const state_code = searchReducer.state_code || ""
@@ -49,13 +51,13 @@ const ShowProperties = (props) =>{
 
         const str = `${city} ${myState} ${postal_code}`
 
-        return  str.trim()
+        return  (<h2>{`${propertiesReducer.length} result found for "${str.trim()}"`}</h2>)
     
     }
 
     const renderLoading = () =>{
 
-        if(isLoading && propertiesReducer.length === 0){
+        if(isLoading || propertiesReducer.length === 0){
             return(
                 <SkeletonLoading
               type="cards"
@@ -65,11 +67,13 @@ const ShowProperties = (props) =>{
         }
 
     }
+
+
     return(
         <div className={`show-properties ${isLoading && "props-loading"}`}>
 
         {<div className="show-properties-header"> 
-                <h2>{`${propertiesReducer.length} results found for "${getSearchValue()}"`}</h2>
+             {!isLoading && getSearchValue()}
             </div>}
             {
             Array.isArray(propertiesReducer) &&

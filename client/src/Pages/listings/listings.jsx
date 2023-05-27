@@ -21,7 +21,8 @@ const Listings = (props) =>{
       setPropertyList,
       propertiesReducer,
       setSearch,
-      searchReducer
+      searchReducer,
+      setAddress
     } = useReduxMng()  
 
     const [loadingProps, setLoadingProps] = useState(true)
@@ -31,8 +32,6 @@ const Listings = (props) =>{
             if(getParams("search")){
   
                   const filterOptions = getParams("search")
-                  console.log("--> Get Param")
-                  console.log(filterOptions)
         
                   setSearch(filterOptions)
         
@@ -48,8 +47,6 @@ const Listings = (props) =>{
           updateParam(searchReducer, true, "search")
 
         }
-        
-
 
       },[searchReducer])
 
@@ -72,16 +69,12 @@ const Listings = (props) =>{
            if(!searchReducerClone.limit) searchReducerClone.limit = 50  
 
            prevData.current = searchReducer
-
             console.log(searchReducerClone)
             makeRequest("POST", URL.SEARCH, searchReducerClone)
 
           }
 
       },[searchReducer])
-
-
-
 
         useEffect(()=>{
 
@@ -92,7 +85,18 @@ const Listings = (props) =>{
 
            if(!searchReducerClone.limit) searchReducerClone.limit = 50  
 
-           prevData.current = searchReducer
+           if(!searchReducerClone.city && !searchReducerClone.postal_code){
+
+             prevData.current = searchReducer
+           console.log("===================================")
+           console.log("INITIAL LOAD")
+            searchReducerClone.city = "jacksonville"
+            searchReducerClone.state_code = "FL"
+            setAddress({city: "jacksonville", state_code: "FL"})
+           }
+
+          
+          //  makeRequest("POST", URL.SEARCH, searchReducerClone)
 
           
 
@@ -103,22 +107,24 @@ const Listings = (props) =>{
 
     useEffect(()=>{
 
-     console.log(formResponse)
-
       if(formResponse && formResponse.status === 200){
 
          const homeSearch =  deepSearch(formResponse,["body","data","home_search","results"],[])
-        console.log(homeSearch)
-          setPropertyList(homeSearch)
 
+          setPropertyList(homeSearch)
+        
       }
 
-      setLoadingProps(false)
+      if(Object.keys(formResponse).length > 0){
+        setLoadingProps(false)
+      }
+
+      
 
     },[formResponse])
 
 
-
+console.log(searchReducer)
    
 
     return(

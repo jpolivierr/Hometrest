@@ -129,8 +129,7 @@ const PropertyCard = (props) =>{
             return
         }
 
-        console.log("handle click")
-        window.location.href = `/single_property?prop_id=${propertyId}`
+        navigate(`/single_property?prop_id=${propertyId}`)
 
     }
 

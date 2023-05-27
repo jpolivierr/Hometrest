@@ -12,7 +12,7 @@ import NewLoginForm from "../Forms/NewLoginForm"
 import { useNavigate } from "react-router-dom"
 import "./style.css"
 
-const PropertyCard2 = (props) =>{
+const PropertyCard = (props) =>{
 
     const {singleProperty} = props 
     const navigate = useNavigate()
@@ -129,8 +129,7 @@ const PropertyCard2 = (props) =>{
             return
         }
 
-        console.log("handle click")
-        window.location.href = `/single_property?prop_id=${propertyId}`
+        navigate(`/single_property?prop_id=${propertyId}`)
 
     }
 
@@ -169,4 +168,4 @@ const PropertyCard2 = (props) =>{
     )
 }
 
-export default PropertyCard2
+export default PropertyCard
