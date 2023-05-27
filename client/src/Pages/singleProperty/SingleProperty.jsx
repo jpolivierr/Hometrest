@@ -16,9 +16,12 @@ import ScheduleTour from "./Scedule"
 import { formatNumber } from "../../components/propertyCard/util"
 import jonathan from "../../media/images/JONATHAN.jpg"
 import map from "../../media/images/map.jpg"
+import { useNavigate } from "react-router-dom"
 import "./style.css"
 
 const SingleProperty = () =>{
+
+    const navigate = useNavigate()
 
     const {makeRequest, formResponse, loading} = useRequest()
 
@@ -66,17 +69,13 @@ const SingleProperty = () =>{
 
             console.log("make request")
 
-            //    makeRequest("GET",URL.SINGLE_PROPERTY + "?prop_id=" + paramId)
+            makeRequest("GET",URL.SINGLE_PROPERTY + "?prop_id=" + paramId)
 
         }
 
     },[])
 
     useEffect(()=>{
-
-        const property = deepSearch(singleDemo,["data","home"],{})
-
-        setSingleProperty(property)
 
 
         if(formResponse.status && formResponse.status === 200){
@@ -173,14 +172,13 @@ const SingleProperty = () =>{
     return(
         <div className="container-medium">
           {
-            getParams("prop_id") && 
               !singleProperty || !singleProperty.property_id ?
               <SkeletonLoading 
               elementClass={"av-loading-skeleton loading-page"}
               type="page" /> :
                 <div>
                     <ul className="single_prop_header">
-                        <li className="single_back_btn s-h-btn"><i class="fa-solid fa-angle-left"></i>Back to search</li>
+                        <li  onClick={()=>navigate(-1)} className="single_back_btn s-h-btn"><i className="fa-solid fa-angle-left"></i>Back to search</li>
                     
                         <li className="single_share_btn s-h-btn"><i className="fa-solid fa-share"></i> Share</li>
                         <li onClick={()=>likeProperty(propertyId)} className="single_like_btn s-h-btn">{!like ? <i onClick={()=>likeProperty(propertyId)} className="fa-regular fa-heart"></i> : <i onClick={()=>likeProperty(propertyId)} className="fa-solid fa-heart like-prop"></i>} Favorite</li>
@@ -253,7 +251,7 @@ const SingleProperty = () =>{
                         
                         <div className="agent">
 
-                            <form>
+                            <form onSubmit={(e)=> e.preventDefault()}>
                                 {/* <h3 style={{marginBottom: "1rem"}}>Ask me a Question</h3> */}
                                 <fieldset>
                                     <input placeholder="Name"/>
@@ -290,7 +288,6 @@ const SingleProperty = () =>{
             
             }
             <div className="similar-property">
-                <h2>Similar Properties</h2>
                 <SimilarProperties propId={getParams("prop_id")}/>
             </div>
             

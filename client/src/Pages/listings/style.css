@@ -18,7 +18,7 @@
     }
 
     .show-properties-header{
-        columns: 1;
+        grid-column: 1 !important;
     }
     
 }

@@ -9,7 +9,9 @@ export const ACTION_TYPE = {
         ZIP : "zip",
         CITY : "city",
         LIMIT : "limit",
-        SET_SEARCH : "set_search"
+        SET_SEARCH : "set_search",
+        ADDRESS : "set_address",
+        INPUT_VALUE : "set_input_value"
 }
 
 export const setSearch = (data) =>{
@@ -47,6 +49,13 @@ export const setLocation = (data) =>{
     }
 }
 
+export const setInputValue = (data) =>{
+    return{
+        type: ACTION_TYPE.INPUT_VALUE,
+        payload: data
+    }
+}
+
 export const setType = (data) =>{
     return{
         type: ACTION_TYPE.HOMETYPE,
@@ -72,6 +81,13 @@ export const setZipcode = (data) =>{
 export const setCity = (data) =>{
     return{
         type: ACTION_TYPE.CITY,
+        payload: data
+    }
+}
+
+export const setAddress = (data) =>{
+    return{
+        type: ACTION_TYPE.ADDRESS,
         payload: data
     }
 }

@@ -3,6 +3,8 @@ import { useRef, useEffect, useState } from "react"
 import { deepSearch } from "../../Util/getValueByKey"
 import circle from "../../media/images/circle.png"
 import PropertyCard from "../propertyCard/PropertyCard"
+import { getPhoto } from "../propertyCard/util"
+import { formatNumber } from "../propertyCard/util"
 
 const Map = (props) =>{
 
@@ -12,27 +14,40 @@ const Map = (props) =>{
 
     const getCenterCoordinate = () =>{
 
+        let count = 0 
+
         if(Array.isArray(properties) && properties.length > 0){
 
-              const center = properties.slice(0,2).reduce((current, next )=>{
-                    // console.log(current)
-                    const currentLat = deepSearch(current,["location","address","coordinate","lat"], 0)
-                    const nextLat = deepSearch(next,["location","address","coordinate","lat"], 0)
-                    const currentLng = deepSearch(current,["location","address","coordinate","lon"], 0)
-                    const nextLng = deepSearch(next,["location","address","coordinate","lon"], 0)
+              const center = properties.slice(0, 4).reduce((accumulator, currentValue, index )=>{
 
-                    return{
-                        lat: currentLat,
-                        lng: currentLng
-                    }
+                    const currentLat = deepSearch(currentValue ,["location","address","coordinate","lat"], 0)
 
-                    // return {
-                    //     lat : currentLat + nextLat / 2,
-                    //     lng : currentLng + nextLng / 2
-                    // }
+                    const currentLng = deepSearch(currentValue ,["location","address","coordinate","lon"], 0)
 
+                    if(Math.abs(currentLat) > 0 && Math.abs(currentLng) > 0) {
+
+                        count++
+
+                        return{
+                            lat: accumulator.lat + currentLat,
+                            lng: accumulator.lng + currentLng
+                        }
+
+                    } 
+
+                    return accumulator
+
+              },{
+                    lat : 0,
+                    lng : 0
               }
             )  
+
+            if (count > 0) {
+                center.lat /= count;
+                center.lng /= count;
+              }
+
 
               return center
         }
@@ -47,8 +62,6 @@ const Map = (props) =>{
                 const lat = deepSearch(property,["location","address","coordinate","lat"],0)
                 const lng = deepSearch(property,["location","address","coordinate","lon"],0)
 
-                // console.log(lat)
-                // console.log(lng)
 
               const marker = new window.google.maps.Marker({
                     position : {lat: lat, lng: lng},
@@ -85,14 +98,13 @@ const Map = (props) =>{
 
         const element = `
         <div data-property_id="${propertyId}" data-infoWindow_id="${propertyId}" class="property-card av-shadow info-window-prop-card">
-        <figure style="background: url(${photo}) center center / cover no-repeat;">
-          <div class="status-style status-for-sale">${status}</div>
+        <figure style="background: url(${getPhoto(photo)}) center center / cover no-repeat;">
         </figure>
         <div class="prop-info">
-          <div class="prop-price">$${price}</div><i class="fa-regular fa-heart"></i>
+          <div class="prop-price">$${formatNumber(price)}</div><i class="fa-regular fa-heart"></i>
           <div class="prop-beds">${beds} <span>Beds</span></div>
           <div class="prop-baths">${baths} <span>Baths</span></div>
-          <div class="prop-sqft">${sqft}<span>Sqft</span></div>
+          <div class="prop-sqft">${formatNumber(sqft)}<span>Sqft</span></div>
           <div class="prop-address">${street}, ${city}, ${stateCode} ${zip}</div>
           </div>
         </div>
@@ -105,35 +117,7 @@ const Map = (props) =>{
         
                   })
 
-                  let val
 
-                  const addInfoWindowEventListener = (element) =>{
-
-                    let isOpen = true;
-
-                      const handleMouseOver = () =>{
-                        
-                         console.log("opening info window")
-                         val = true
-                          element.removeEventListener("mouseover", handleMouseOver);
-
-                      }
-
-                      const handleMouseOut = (event) =>{
-
-                        console.log(event.currentTarget)
-                        if (event.target === element) {
-                            console.log("closing window..")
-                        // infoWindow.close()
-                        }
-                        
-
-                      }
-                    
-                      element.addEventListener("mouseover", handleMouseOver);
-                      element.addEventListener("mouseout", (e) => handleMouseOut(e));
-
-                  }
 
                   marker.addListener("mouseover", () => {
                     
@@ -142,46 +126,30 @@ const Map = (props) =>{
                   })
 
                   marker.addListener("mouseout", (e) => {
-
-                    //  console.log(infoWindow)
-                    setTimeout(()=>{
-
-                        console.log(val)
-                        // if(val)
-
-                    },500)
                     
-                    // infoWindow.close();
+                    infoWindow.close();
               
                 });
 
-                // Add a mouseover listener on the InfoWindow
-                
-                window.google.maps.event.addListener(infoWindow, "domready", () => {
-                const infoWindowElement = infoWindow.getContent();
-                const infoWindoElement = document.querySelector(`[data-infoWindow_id="${propertyId}"]`)
-                console.log(infoWindoElement)
-                 addInfoWindowEventListener(infoWindoElement)
-           
+      
 
-               
-                });
 
     }
-
-    useEffect(()=>{
-    // console.log(getCenterCoordinate())
-
-
-    },[properties])
 
 
 
 
     const [initialView, setInitialView] = useState({
-            zoom: 12,
-         center :getCenterCoordinate()
+            zoom: 11,
+            center :getCenterCoordinate()
     })
+
+    useEffect(()=>{
+        // console.log(getCenterCoordinate())
+           
+        setInitialView({...initialView, center : getCenterCoordinate()})
+         
+        },[properties])
 
 
     useEffect(()=>{
@@ -189,7 +157,7 @@ const Map = (props) =>{
         const theMap = document.querySelector("#the-map")
 
         if(!theMap){
-            console.log("creating script")
+    
             const script = document.createElement("script")
             script.id="the-map"
             script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&callback=initMap&v=weekly`
@@ -210,13 +178,16 @@ const Map = (props) =>{
 
     useEffect(()=>{
 
+      
+
         if(window.google && mapRef.current){
 
             const map = new window.google.maps.Map(mapRef.current, initialView);
+
             processMarkers(map)
 
         }
-    },[initialView])
+    },[initialView, properties])
 
 
     return(

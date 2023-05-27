@@ -1,0 +1,25 @@
+.location-input-style{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.location-input-style .iicon{
+    background: var(--main-color);
+    color: white;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 0rem 1rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.location-input-style input{
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border-right: none !important;
+}

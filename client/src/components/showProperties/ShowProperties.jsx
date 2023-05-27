@@ -32,15 +32,24 @@ const ShowProperties = (props) =>{
         
     },[isShowing])
 
-    console.log(propertiesReducer)
-    console.log(propertiesReducer.length)
-    console.log(isLoading)
-    console.log(searchReducer)
-
     const getSearchValue = () =>{
 
-        if(searchReducer.city && !isLoading) return searchReducer.city
-        if(searchReducer.postal_code && !isLoading) return searchReducer.postal_code
+        const city = searchReducer.city || ""
+        const postal_code = searchReducer.postal_code || ""
+        const state_code = searchReducer.state_code || ""
+        const state = searchReducer.state || ""
+
+        let myState
+
+        if(state_code && state){
+            myState = state_code
+        }else{
+            myState = state_code ? state_code : state
+        }
+
+        const str = `${city} ${myState} ${postal_code}`
+
+        return  str.trim()
     
     }
 
@@ -59,7 +68,7 @@ const ShowProperties = (props) =>{
     return(
         <div className={`show-properties ${isLoading && "props-loading"}`}>
 
-        {getSearchValue() && <div className="show-properties-header"> 
+        {<div className="show-properties-header"> 
                 <h2>{`${propertiesReducer.length} results found for "${getSearchValue()}"`}</h2>
             </div>}
             {

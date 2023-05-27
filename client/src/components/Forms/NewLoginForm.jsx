@@ -111,7 +111,7 @@ const NewLoginForm = (props) =>{
                     <p className="server-error">{formError.serverError}</p>
                     }
 
-            <h2>Search Form</h2>
+            <h2>Log in</h2>
             <Inputs 
                     label={"Email"}
                     name = {"email"}  

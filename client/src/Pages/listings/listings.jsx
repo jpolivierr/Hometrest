@@ -42,12 +42,9 @@ const Listings = (props) =>{
 
       
       useEffect(()=>{
-      
-      
-        if(Object.keys(searchReducer) > 0){
 
-         console.log("--> Update Param")
-
+        if(Object.keys(searchReducer).length > 0){
+          
           updateParam(searchReducer, true, "search")
 
         }
@@ -67,10 +64,6 @@ const Listings = (props) =>{
 
         if ((prevDataJSON !== currentDataJSON)) {
 
-          console.log("=============END============")
-
-             console.log(prevDataJSON, currentDataJSON)
-
             setLoadingProps(true)
           
             const searchReducerCloneJSON = JSON.stringify(searchReducer)
@@ -80,15 +73,8 @@ const Listings = (props) =>{
 
            prevData.current = searchReducer
 
-           console.log(searchReducerClone)
-           makeRequest("POST", URL.SEARCH, searchReducerClone)
-              // setTimeout(()=>{
-
-              //   // setPropertyList(propertiesDemo)
-
-              //   setLoadingProps(false)
-
-              // },2000)
+            console.log(searchReducerClone)
+            makeRequest("POST", URL.SEARCH, searchReducerClone)
 
           }
 
@@ -98,10 +84,6 @@ const Listings = (props) =>{
 
 
         useEffect(()=>{
-
-          console.log("Initial load request...", searchReducer)
-
-          console.log("=============END============")
 
             setLoadingProps(true)
           
@@ -121,16 +103,13 @@ const Listings = (props) =>{
 
     useEffect(()=>{
 
-     
+     console.log(formResponse)
 
       if(formResponse && formResponse.status === 200){
-           console.log(formResponse)
+
          const homeSearch =  deepSearch(formResponse,["body","data","home_search","results"],[])
-
-         console.log(homeSearch)
-
+        console.log(homeSearch)
           setPropertyList(homeSearch)
-
 
       }
 
@@ -147,9 +126,12 @@ const Listings = (props) =>{
           <div className="search-result wide-container">
     
             <TopSearchFilter/>
-            <Map 
+
+           {!propertiesReducer || propertiesReducer.length === 0 ? <div style={{background: "#eef6f9",height: "87vh"}}></div> :
+               <Map 
               properties={propertiesReducer}
             />
+           }
             <ShowProperties 
               isLoading = {loadingProps}
             />

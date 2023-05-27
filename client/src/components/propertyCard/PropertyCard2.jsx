@@ -12,7 +12,7 @@ import NewLoginForm from "../Forms/NewLoginForm"
 import { useNavigate } from "react-router-dom"
 import "./style.css"
 
-const PropertyCard = (props) =>{
+const PropertyCard2 = (props) =>{
 
     const {singleProperty} = props 
     const navigate = useNavigate()
@@ -140,7 +140,7 @@ const PropertyCard = (props) =>{
     return(
  
         <div onClick={(e)=> handleClick(e,propertyId)} data-property_id = {propertyId} className="property-card av-shadow">
-            <figure style={{background : `url(${getPhoto(photo)}) no-repeat center center/cover`}}>
+            <figure style={{background : `url(${photo}) no-repeat center center/cover`}}>
 
                 <div className="status-component">
                         <div className={getStatusStyle(status)}>
@@ -169,4 +169,4 @@ const PropertyCard = (props) =>{
     )
 }
 
-export default PropertyCard
+export default PropertyCard2

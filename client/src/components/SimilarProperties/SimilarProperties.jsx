@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react"
-import Slider from "../../lib/Slider/Slider"
-import PropertyCard from "../propertyCard/PropertyCard"
+import Slider2 from "../../lib/Slider/Slider2"
+import PropertyCard2 from "../propertyCard/PropertyCard2"
 import useReduxMng from "../../hooks/useReduxMng"
 import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
 import useRequest from "../../lib/MakeRequest/MakeRequest"
@@ -14,7 +14,6 @@ const SimilarProperties = (props) =>{
 
     const {propId} = props
 
-   const {propertiesReducer, setPropertyList} = useReduxMng()
 
    const {makeRequest, formResponse, loading } = useRequest()
 
@@ -24,14 +23,16 @@ const SimilarProperties = (props) =>{
 
    useEffect(()=>{
 
-    //   makeRequest("GET", URL.SIMILAR_PROPS + "?prop_id=" + propId)
+    if(propId){
+           makeRequest("GET", URL.SIMILAR_PROPS + "?prop_id=" + propId)
+    }
+    
 
    },[])
 
    useEffect(()=>{
 
-    setSimilarListings(propertiesDemo)
-
+   console.log(formResponse)
     if(formResponse.status && formResponse.status === 200){
 
         const property = deepSearch(formResponse.body,["data","home","related_homes","results"],[])
@@ -43,8 +44,9 @@ const SimilarProperties = (props) =>{
    },[formResponse])
 
     return(
-
-        similarListings ? <Slider 
+       <>
+         <h2>Similar Properties</h2>
+        {similarListings ? <Slider2 
                               gap={10}
                                   >   
             {
@@ -52,7 +54,7 @@ const SimilarProperties = (props) =>{
                     Array.isArray(similarListings) &&
                     similarListings.length > 0 && similarListings.map((property,index)=>(
 
-                    <PropertyCard
+                    <PropertyCard2
                     singleProperty = {property}
                     key={index}
                 />
@@ -60,8 +62,10 @@ const SimilarProperties = (props) =>{
                 ))
                 }
           
-          </Slider> : <SkeletonLoading 
-                            elementClass={"av-loading-skeleton av-loading-skeleton-side"} />
+          </Slider2> : <SkeletonLoading 
+                            elementClass={"av-loading-skeleton av-loading-skeleton-side"} />}
+       </>
+       
      
     )
 }

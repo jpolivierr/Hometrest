@@ -9,6 +9,8 @@ import Modal from "../../lib/Modal/modal";
 import useModal from "../../lib/Modal/useModal";
 import MoreOptions from "../../lib/Forms/Fields/MoreOptions";
 import SearchFilter from "./SearchFilter";
+import { parseAddress2 } from "../../Util/parseAddress";
+import "./style.css"
 
 const TopSearchFilter = () =>{
 
@@ -28,7 +30,8 @@ const TopSearchFilter = () =>{
         setStatus,
         setPrices,
         setBeds,
-        setBaths
+        setBaths,
+        setAddress
        
        } = useReduxMng();
 
@@ -49,21 +52,12 @@ const TopSearchFilter = () =>{
        const baths = deepSearch(searchReducer,["baths"])
 
     const updateCityorZip = (value) =>{
-
-        const zipPattern = /^\d{5}(?:[-\s]\d{4})?$/
-        const cityPattern = /^[a-zA-Z\s'\-,.]+$/
      
-        if(zipPattern.test(value)){
-            setCity("")
-            setZipcode(value)
-        }else if(cityPattern.test(value)){
-            setZipcode("")
-            setCity(value)
-        }else{
-            setZipcode("")
-            setCity("")
+        const addressPrased = parseAddress2(value)
 
-        }
+        console.log(addressPrased)
+
+         setAddress(addressPrased)
 
     }
 
@@ -80,31 +74,99 @@ const TopSearchFilter = () =>{
         
      }
 
-     
+     const handleSubmit = (e) =>{
+         e.preventDefault()
+         console.log("submit..")
+     }
 
-     
+        const getSearchValue = () =>{
+
+        const city = searchReducer.city || ""
+        const postal_code = searchReducer.postal_code || ""
+        const state_code = searchReducer.state_code || ""
+        const state = searchReducer.state || ""
+
+        let myState
+
+        if(state_code && state){
+            myState = state_code
+        }else{
+            myState = state_code ? state_code : state
+        }
+
+        const str = `${city} ${myState} ${postal_code}`
+
+        return  str.trim()
+    
+    }
+
+    const salePriceOptions = [ 
+      20000,
+      30000,
+      40000,
+      50000,
+      100000,
+      150000,
+      200000,
+      250000,
+      300000,
+      350000,
+      400000,
+      450000,
+      500000
+   ]
+
+   const rentPriceOptions = [ 
+      700,
+      1000,
+      1100,
+      1250,
+      1350,
+      1450,
+      1550,
+      1650,
+      1700,
+      1800,
+      1900,
+      2000,
+      3000
+   ]
+
+   const getPriceArray = () =>{
+
+       if(status && status.includes("for_rent")){
+          return rentPriceOptions
+       }
+
+       return salePriceOptions
+
+   }
 
 
 
     return(
     <>
-        <form className="avalon text-left av-shadow top-form-search stick">
+        <form className="avalon text-left av-shadow top-form-search stick" onSubmit={handleSubmit}>
 
-            <Inputs 
-                    elementClass={"location-field"}
-                    label={"Location"}
-                    placeHolder={"Enter city or zip"}
-                    name = {"city_zip"}
-                //  onChangefunc = {field.onChangefunc}
-                    onOutFocus = {updateCityorZip}
-                    fieldToUpdate = {updateCityorZip}   
-                    required = {true}
-                    formError = {formError}
-                    setFormError = {setFormError}
-                    icon = {<i className="fa-solid fa-location-dot"></i>}
-                    updateFormField = {updateFormField}
-                    defaultValue = {city}
-                    />
+            <div className="location-input-style">
+               <Inputs 
+                              elementClass={"location-field"}
+                              label={"Location"}
+                              placeHolder={"Enter city, state or zip"}
+                              name = {"city_zip"}
+                           //  onChangefunc = {field.onChangefunc}
+                              onOutFocus = {updateCityorZip}
+                              fieldToUpdate = {updateCityorZip}   
+                              required = {true}
+                              formError = {formError}
+                              setFormError = {setFormError}
+                              icon = {<i className="fa-solid fa-location-dot"></i>}
+                              updateFormField = {updateFormField}
+                              defaultValue = {getSearchValue()}
+                              />
+                              <i className="iicon fa-solid fa-magnifying-glass"></i>
+            </div>
+           
 
             <MultiSelect 
                     elementClass={"type-field"}
@@ -240,21 +302,7 @@ const TopSearchFilter = () =>{
              icon={<i className="fa-solid fa-angle-down"></i>}
              name={"list_price"}
              label={"Price"}
-             options = {[
-                20000,
-                30000,
-                40000,
-                50000,
-                100000,
-                150000,
-                200000,
-                250000,
-                300000,
-                350000,
-                400000,
-                450000,
-                500000
-            ]}
+             options = {getPriceArray()}
         />  
 
         <Range

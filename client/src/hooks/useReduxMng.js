@@ -21,7 +21,9 @@ const useReduxMng = () =>{
            setZipcode,
            setCity,
            setLimit,
-           setSearch
+           setSearch,
+           setAddress,
+           setInputValue
         
         } = bindActionCreators(updateSearch, useDispatch())
 
@@ -53,7 +55,9 @@ const useReduxMng = () =>{
         setCity,
         setLimit,
         setInactive,
-        setActive
+        setActive,
+        setAddress,
+        setInputValue
     }
 
 }

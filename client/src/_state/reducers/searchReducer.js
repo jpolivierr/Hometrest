@@ -13,22 +13,22 @@ const searchReducer = (state = init, action) =>{
             const getLimit =  JSON.parse(JSON.stringify(state))
             getLimit.limit = action.payload
             return state = getLimit
-        case ACTION_TYPE.CITY :
-            const stateClone =  JSON.parse(JSON.stringify(state))
-            if(!action.payload){
-                delete stateClone.city
-                return state = stateClone
-            }
-            stateClone.city = action.payload
-            return state = stateClone
-        case ACTION_TYPE.ZIP :
-            const getZip =  JSON.parse(JSON.stringify(state))
-            if(!action.payload){
-                delete getZip.postal_code
-                return state = getZip
-            }
-            getZip.postal_code = action.payload
-            return state = getZip
+
+        case ACTION_TYPE.ADDRESS :
+
+            const stateCloneAddress =  JSON.parse(JSON.stringify(state))
+             stateCloneAddress.city = action.payload.city
+             stateCloneAddress.state = action.payload.state
+             stateCloneAddress.postal_code = action.payload.postal_code
+             stateCloneAddress.state_code = action.payload.state_code
+             
+             !stateCloneAddress.postal_code && delete stateCloneAddress.postal_code
+             !stateCloneAddress.city && delete stateCloneAddress.city
+             !stateCloneAddress.state && delete stateCloneAddress.state
+             !stateCloneAddress.state_code && delete stateCloneAddress.state_code
+
+             return state = stateCloneAddress
+
         case ACTION_TYPE.LOCATION :
             const getLocation =  JSON.parse(JSON.stringify(state))
             getLocation.location = action.payload

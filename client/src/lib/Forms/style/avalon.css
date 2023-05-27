@@ -102,6 +102,7 @@ OPTIONS
 
 .avalon .options input, .avalon fieldset select{
     cursor: pointer;
+    background: white;
 }
 
 .avalon .options li i{

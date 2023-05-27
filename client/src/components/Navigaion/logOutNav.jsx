@@ -24,12 +24,13 @@ const LogOutNav = () =>{
                                             <div>
                                                 <h2><i className="fa-brands fa-pagelines"></i> HomeTrest</h2>
                                             </div>
-                                        
-                                        <NavList 
-                                        Class="hideMobile flex-space-between gap-2x nav-list"
+                                        <div style={{display: "flex"}}>
+
+                                             <NavList 
+                                        Class="hideMobile flex-space-between gap-1x nav-list"
                                         />
 
-                                        <div className="hideMobile flex-space-between gap-1x">
+                                        <div style={{marginLeft: "3rem"}} className="hideMobile flex-space-between gap-1x">
                                             
                                             <a href="/signup">
                                                 <button className="button main-btn">
@@ -43,6 +44,8 @@ const LogOutNav = () =>{
                                                 </button>
                                             </a>
                                         </div>
+                                        </div>
+                                       
 
                                         <div className="hideDesktop">
                                             <menu onClick={toggle}>
