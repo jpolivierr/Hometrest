@@ -68,6 +68,69 @@ const SearchFilter = () =>{
 
     }
 
+    const getSearchValue = () =>{
+
+      const city = searchReducer.city || ""
+      const postal_code = searchReducer.postal_code || ""
+      const state_code = searchReducer.state_code || ""
+      const state = searchReducer.state || ""
+
+      let myState
+
+      if(state_code && state){
+          myState = state_code
+      }else{
+          myState = state_code ? state_code : state
+      }
+
+      const str = `${city} ${myState} ${postal_code}`
+
+      return  str.trim()
+  
+  }
+
+    const salePriceOptions = [ 
+      20000,
+      30000,
+      40000,
+      50000,
+      100000,
+      150000,
+      200000,
+      250000,
+      300000,
+      350000,
+      400000,
+      450000,
+      500000
+   ]
+
+   const rentPriceOptions = [ 
+      700,
+      1000,
+      1100,
+      1250,
+      1350,
+      1450,
+      1550,
+      1650,
+      1700,
+      1800,
+      1900,
+      2000,
+      3000
+   ]
+
+   const getPriceArray = () =>{
+
+      if(status && status.includes("for_rent")){
+         return rentPriceOptions
+      }
+
+      return salePriceOptions
+
+  }
+
 
     const updateFormField = (key, value) =>{
          
@@ -97,7 +160,7 @@ const SearchFilter = () =>{
                     setFormError = {setFormError}
                     icon = {<i className="fa-solid fa-location-dot"></i>}
                     updateFormField = {updateFormField}
-                    defaultValue = {city}
+                    defaultValue = {getSearchValue()}
                     />
 
             <ListOption 
@@ -231,21 +294,7 @@ const SearchFilter = () =>{
              icon={<i className="fa-solid fa-angle-down"></i>}
              name={"list_price"}
              label={"Price options"}
-             options = {[
-                20000,
-                30000,
-                40000,
-                50000,
-                100000,
-                150000,
-                200000,
-                250000,
-                300000,
-                350000,
-                400000,
-                450000,
-                500000
-            ]}
+             options = {getPriceArray()}
         />  
 
         <RangeNoDropDown

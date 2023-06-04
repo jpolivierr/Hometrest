@@ -29,10 +29,11 @@ const useRequest = () =>{
 
         const requestHeaders = new Headers();
 
-        requestHeaders.append('AuthorizationToken', getTokens("authorizationtoken"));
+        // requestHeaders.set('AuthorizationToken', getTokens("authorizationtoken"));
+        requestHeaders.set("Content-Type","application/json")
 
         const config = {
-            credentials: 'include',
+            // credentials: 'include',
             mode: 'cors',
             headers: requestHeaders,
             method: method
@@ -53,12 +54,9 @@ const useRequest = () =>{
                         break
                     case "POST" :
                         if(data){
-                            const formData = new FormData()
-                            formData.append("formData",JSON.stringify(data))
-                            config.body = formData
+                            config.body = JSON.stringify(data)
                             setLoading(true)
                             response = await fetch(url,config)
-                            console.log(response.url)
                             redirection(response)       
                             status = response.status
                             headers = response.headers

@@ -17,6 +17,7 @@ const Listings = (props) =>{
 
     const {makeRequest, formResponse, loading } = useRequest()
 
+    const prevData = useRef({});
     const{
       setPropertyList,
       propertiesReducer,
@@ -25,12 +26,12 @@ const Listings = (props) =>{
       setAddress
     } = useReduxMng()  
 
-    const [loadingProps, setLoadingProps] = useState(true)
+    const [loadingProps, setLoadingProps] = useState(false)
 
     useEffect( ()=>{
 
             if(getParams("search")){
-  
+   
                   const filterOptions = getParams("search")
         
                   setSearch(filterOptions)
@@ -50,7 +51,7 @@ const Listings = (props) =>{
 
       },[searchReducer])
 
-      const prevData = useRef({});
+      
 
        useEffect(()=>{
 
@@ -58,18 +59,21 @@ const Listings = (props) =>{
 
         const currentDataJSON = JSON.stringify(searchReducer);
       
-
+       console.log(prevDataJSON, currentDataJSON)
         if ((prevDataJSON !== currentDataJSON)) {
 
-            setLoadingProps(true)
+            
           
             const searchReducerCloneJSON = JSON.stringify(searchReducer)
             const searchReducerClone = JSON.parse(searchReducerCloneJSON)
 
            if(!searchReducerClone.limit) searchReducerClone.limit = 50  
 
+           console.log("===================================")
+           console.log("FETCHING...")
            prevData.current = searchReducer
             console.log(searchReducerClone)
+            setLoadingProps(true)
             makeRequest("POST", URL.SEARCH, searchReducerClone)
 
           }
@@ -78,7 +82,7 @@ const Listings = (props) =>{
 
         useEffect(()=>{
 
-            setLoadingProps(true)
+            
           
             const searchReducerCloneJSON = JSON.stringify(searchReducer)
             const searchReducerClone = JSON.parse(searchReducerCloneJSON)
@@ -90,20 +94,16 @@ const Listings = (props) =>{
              prevData.current = searchReducer
            console.log("===================================")
            console.log("INITIAL LOAD")
+
             searchReducerClone.city = "jacksonville"
             searchReducerClone.state_code = "FL"
             setAddress({city: "jacksonville", state_code: "FL"})
+            setLoadingProps(true)
            }
-
-          
-          //  makeRequest("POST", URL.SEARCH, searchReducerClone)
 
           
 
       },[])
-
-  
-
 
     useEffect(()=>{
 
@@ -122,9 +122,6 @@ const Listings = (props) =>{
       
 
     },[formResponse])
-
-
-console.log(searchReducer)
    
 
     return(

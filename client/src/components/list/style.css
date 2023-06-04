@@ -1,6 +1,7 @@
 .nav-list li{
   padding: .5rem .6rem;
   font-weight: 600;
+  font-size: .9rem;
 }
 
 .nav-list li:hover{

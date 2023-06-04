@@ -16,7 +16,7 @@ import ScheduleTour from "./Scedule"
 import { formatNumber } from "../../components/propertyCard/util"
 import jonathan from "../../media/images/JONATHAN.jpg"
 import map from "../../media/images/map.jpg"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import "./style.css"
 
 const SingleProperty = () =>{
@@ -33,6 +33,15 @@ const SingleProperty = () =>{
         },
         time: 0,
     })
+
+    const { pathname, search } = useLocation();
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        
+        window.scrollTo(0, 0);
+
+    }, [pathname, search]);
 
     const {activeUserReducer, updateLikes} = useReduxMng()
 
@@ -68,22 +77,26 @@ const SingleProperty = () =>{
         if(paramId){
 
             console.log("make request")
-
+            setIsLoading(true)
             makeRequest("GET",URL.SINGLE_PROPERTY + "?prop_id=" + paramId)
 
         }
 
-    },[])
+    },[pathname, search])
 
     useEffect(()=>{
 
-
+         
         if(formResponse.status && formResponse.status === 200){
 
             const property = deepSearch(formResponse.body,["data","home"],{})
 
             setSingleProperty(property)
 
+        }
+
+        if(Object.keys(formResponse).length > 0){
+            setIsLoading(false)
         }
 
     },[formResponse])
@@ -170,7 +183,7 @@ const SingleProperty = () =>{
     return(
         <div className="container-medium" style={{maxWidth: "1000px"}}>
           {
-              !singleProperty || !singleProperty.property_id ?
+              (!singleProperty || !singleProperty.property_id || isLoading) ?
               <SkeletonLoading 
               elementClass={"av-loading-skeleton loading-page"}
               type="page" /> :

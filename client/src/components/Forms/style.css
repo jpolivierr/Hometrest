@@ -7,7 +7,7 @@
 .location-input-style .iicon{
     background: var(--main-color);
     color: white;
-    height: 48px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;

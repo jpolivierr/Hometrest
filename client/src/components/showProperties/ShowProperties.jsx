@@ -34,8 +34,6 @@ const ShowProperties = (props) =>{
 
     const getSearchValue = () =>{
 
-        console.log(searchReducer)
-
         const city = searchReducer.city || ""
         const postal_code = searchReducer.postal_code || ""
         const state_code = searchReducer.state_code || ""

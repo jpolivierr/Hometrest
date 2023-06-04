@@ -121,7 +121,7 @@ const PropertyCard = (props) =>{
     
     }
 
-    const handleClick = (e, propertyId) =>{
+    const handlePropClick = (e, propertyId) =>{
 
         const targetClassName = e.target.className
 
@@ -138,7 +138,9 @@ const PropertyCard = (props) =>{
   }
     return(
  
-        <div onClick={(e)=> handleClick(e,propertyId)} data-property_id = {propertyId} className="property-card av-shadow">
+        <>
+                <div 
+            onClick={(e)=> handlePropClick(e,propertyId)} data-property_id = {propertyId} className="property-card av-shadow">
             <figure style={{background : `url(${getPhoto(photo)}) no-repeat center center/cover`}}>
 
                 <div className="status-component">
@@ -163,8 +165,13 @@ const PropertyCard = (props) =>{
                     </div>
             </div>
             
-            {renderModal()}
+            
         </div>
+
+
+        {renderModal()}
+        </>
+
     )
 }
 

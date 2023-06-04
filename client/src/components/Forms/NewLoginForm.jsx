@@ -36,11 +36,14 @@ const NewLoginForm = (props) =>{
 
      useEffect(()=>{
 
-        const serverError = errorFromServer(formResponse, formError)
+        console.log(formResponse)
+        if(formResponse.status === 401){
 
-        if(serverError){
+            setFormError({serverError: formResponse.message})
 
-            setFormError(serverError)
+        }else if(formResponse.status === 400){
+            
+            setFormError(formResponse.errors)
 
         }else{
 
@@ -52,17 +55,12 @@ const NewLoginForm = (props) =>{
 
      useEffect(()=>{
 
-      
         const session = startSession(formResponse)
   
         if(session){
   
             window.location.pathname = "/"
           
-        }else{
-  
-          console.log("Incorrect response..")
-  
         }
   
       },[formResponse])
@@ -89,8 +87,6 @@ const NewLoginForm = (props) =>{
             console.log("error found")
 
         }else{
-
-             console.log("Submit")
             
             console.log(formState);
             await makeRequest("POST", URL.LOGIN, formState)

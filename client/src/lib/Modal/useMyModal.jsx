@@ -26,7 +26,6 @@ const useMyModal = (children) => {
     if(!isShowing){
          setOverlayAnimation("fadeIn")
           setWindowAnimation(children.windowAnimation.start)
-          console.log(children.elementClass)
           if(children.elementClass){
             setModalClass(children.elementClass)
           }
