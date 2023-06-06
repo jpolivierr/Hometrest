@@ -35,72 +35,54 @@ function App() {
 
      
 
-  const location = useLocation()
+  // const location = useLocation()
 
-  const {pathMng} = useRedirectMng()
+  // const {pathMng} = useRedirectMng()
 
   const { getTokens, setActivityTimer, deleteStorageData} = useSessionMng(AUTH_TOKENS)
 
-  const { makeRequest, formResponse, loading } = useRequest()
+  console.log(getTokens("AuthorizationToken"))
 
-  const [isLoading, setIsLoading] = useState(true)
+   const [isLoading, setIsLoading] = useState(false)
 
   //  const {setActivityTimer} = useInactivityTimer(10, deleteStorageData);
 
-   const userIsAuthenticated = getTokens(AUTH_TOKENS)
+  //  const userIsAuthenticated = getTokens(AUTH_TOKENS)
 
-       useEffect(()=>{
+  //      useEffect(()=>{
     
-      pathMng(location.pathname)
+  //     pathMng(location.pathname)
   
-    },[location.pathname])
+  //   },[location.pathname])
 
-  useLayoutEffect(()=>{
+  // useLayoutEffect(()=>{
 
-    if(!userIsAuthenticated){
+  //   if(!userIsAuthenticated){
 
-       setIsLoading(false)
+  //      setIsLoading(false)
 
-    }
+  //   }
 
-  },[])
+  // },[])
 
 
-   setActivityTimer()
+  //  setActivityTimer()
 
-  useEffect(()=>{
-
-     if(userIsAuthenticated){
-
-        makeRequest("GET", URL.GET_ACCOUNT )
-
-     }
-
-  },[])
+  const { makeRequest, formResponse, loading } = useRequest()
 
   useEffect(()=>{
 
-    if(
-      formResponse.status === 200 &&
-      formResponse.body && 
-      formResponse.headers &&
-      formResponse.headers.get(AUTH_TOKENS)
-      ){
-      
-        const payload = {
-            userInfo : formResponse.body,
-            token : formResponse.headers.get(AUTH_TOKENS)
-        }
-        setAuthentication(payload)
-        console.log(formResponse)
-        setIsLoading(false)
-        return
-      }
+        // makeRequest("GET", URL.GET_ACCOUNT )
 
-      if(formResponse.status === 403){
+  },[])
 
-        deleteStorageData()
+  useEffect(()=>{
 
+    console.log(formResponse)
+
+    if(formResponse.status === 200){
+    
+  
       }
      
     

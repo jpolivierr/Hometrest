@@ -13,6 +13,7 @@ const useRequest = () =>{
 
     const redirection = (response) =>{
 
+        console.log(response)
         if(response.redirected){
 
             window.location.href = response.url
@@ -33,7 +34,7 @@ const useRequest = () =>{
         requestHeaders.set("Content-Type","application/json")
 
         const config = {
-            // credentials: 'include',
+            credentials: 'include',
             mode: 'cors',
             headers: requestHeaders,
             method: method
@@ -57,6 +58,7 @@ const useRequest = () =>{
                             config.body = JSON.stringify(data)
                             setLoading(true)
                             response = await fetch(url,config)
+                            console.log(response)
                             redirection(response)       
                             status = response.status
                             headers = response.headers
@@ -85,7 +87,13 @@ const useRequest = () =>{
                 }
         } catch (error) {
 
-            console.log(error)
+            if (error.name === 'AbortError') {
+                console.log('Request aborted');
+                return
+              } else {
+                console.error('Error:', error);
+              }
+            setFormResponse({status: 500, message: error.getMessage})
 
         }
 

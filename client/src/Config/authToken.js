@@ -1,2 +1,2 @@
 
-export const AUTH_TOKENS = "authorizationtoken"
+export const AUTH_TOKENS = "AuthorizationToken"

@@ -37,21 +37,27 @@ const NewLoginForm = (props) =>{
      useEffect(()=>{
 
         console.log(formResponse)
-        if(formResponse.status === 401){
 
-            setFormError({serverError: formResponse.message})
-
-        }else if(formResponse.status === 400){
-            
-            setFormError(formResponse.errors)
-
-        }else{
-
-            setFormError({})
+        switch(formResponse.status){
+                case 200 :
+                    window.location.href = "/"
+                    break
+                case 401 :
+                    setFormError({serverError: formResponse.message})
+                    break
+                case 400 :
+                    setFormError(formResponse.errors)
+                    break
+                case 500 :
+                    setFormError({serverError: "Something went wrong on our end. Please try again later."})
+                    break
+                    default :
+                        setFormError({})
 
         }
 
      },[formResponse])
+
 
      useEffect(()=>{
 

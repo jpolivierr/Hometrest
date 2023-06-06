@@ -30,35 +30,20 @@ const useSessionMng = (mytoken) =>{
 
     }
 
-    const getTokens = () =>{
+    const getTokens = (cookieName) =>{
 
-        const localToken = localStorage.getItem(mytoken)
+       const cookies = document.cookie.split(';')
 
-        if(!localToken){
+       const cookiess = document.cookie
+       console.log(cookiess)
 
-            return null
-
-        }
-
-        if(localToken){
-            const tokenArr = localToken.split("_")
-            return tokenArr[0] + "_" + tokenArr[1]
-
-        }
-
-        const regexPattern = `(?:(?:^|.*;\s*)${mytoken}\s*\=\s*([^;]*).*$)|^.*$`
-        const regexValue = new RegExp(regexPattern)
-        const cookieValue = document.cookie.replace(regexValue, "$1");
-
-        if(cookieValue){
-
-            const tokenArr = cookieValue.split("_")
-
-            return tokenArr[0] + "_" +  tokenArr[1]
-            
-        }
-
-        return null
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(cookieName + '=')) {
+              return cookie.substring(cookieName.length + 1);
+            }
+          }
+      return null; // Cookie not found
 
     }
 
