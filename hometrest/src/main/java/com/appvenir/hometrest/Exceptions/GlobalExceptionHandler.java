@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.ExceptionApi;
+package com.appvenir.hometrest.Exceptions;
 
 import java.sql.SQLException;
 
@@ -32,14 +32,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(exception, status);
     }
 
-    @ExceptionHandler(value = {FormValidationException.class})
-    public ResponseEntity<Object> handleFormValidationException(FormValidationException e) {
-        int statusCode = HttpStatus.BAD_REQUEST.value();
-        HttpStatus status = HttpStatus.valueOf(statusCode);
-        String message = "Invalid inputs";
-        ExceptionApi exception = new ExceptionApi(statusCode, message, e.getError());
-        return new ResponseEntity<>(exception, status);
-    }
+    // @ExceptionHandler(value = {FormValidationException.class})
+    // public ResponseEntity<Object> handleFormValidationException(FormValidationException e) {
+    //     int statusCode = HttpStatus.BAD_REQUEST.value();
+    //     HttpStatus status = HttpStatus.valueOf(statusCode);
+    //     String message = "Invalid inputs";
+    //     ExceptionApi exception = new ExceptionApi(statusCode, message, e.getError());
+    //     return new ResponseEntity<>(exception, status);
+    // }
 
 
         @ExceptionHandler(value = {DataAccessException.class})
@@ -73,6 +73,8 @@ public class GlobalExceptionHandler {
     //     int statusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
     //     HttpStatus status = HttpStatus.valueOf(statusCode);
     //     String message = "Something went wrong on our end. Please try again later.";
+
+    //     System.out.println(e.getCause().getMessage());
 
     //     ExceptionApi exception = new ExceptionApi(statusCode, message, e);
     //     return new ResponseEntity<>(exception, status);

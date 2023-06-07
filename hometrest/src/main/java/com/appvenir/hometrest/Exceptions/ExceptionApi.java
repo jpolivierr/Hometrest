@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.ExceptionApi;
+package com.appvenir.hometrest.Exceptions;
 
 import java.time.LocalDateTime;
 

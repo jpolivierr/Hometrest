@@ -1,8 +1,10 @@
 package com.appvenir.hometrest.api.user;
 
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataAccessResourceFailureException;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
+
+import com.appvenir.hometrest.Exceptions.UserNotFoundException;
 
 // import org.springframework.stereotype.Service;
 // import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +13,39 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserLikesRepository userLikesRepository;
 
-    UserService(UserRepository userRepository) {
+    UserService(UserRepository userRepository, UserLikesRepository userLikesRepository) {
         this.userRepository = userRepository;
+        this.userLikesRepository = userLikesRepository;
     }
 
     public void saveUser(User user) {
   
             userRepository.save(user);
+    }
+
+    public void updateUser(User user, String email) {
+
+        userRepository.updateUser(user, email);
+    }
+
+    public User findByEmail(String email) {
+  
+        Optional<User> user = userRepository.findByEmail(email);
+
+        return user.orElseThrow(UserNotFoundException::new);
+    }
+
+    public void deleteByEmail(String email){
+
+        userRepository.deleteByEmail(email);
+        
+    }
+
+    public void saveLikes(UserLikes userLikes) {
+  
+        userLikesRepository.save(userLikes);
     }
     
 }

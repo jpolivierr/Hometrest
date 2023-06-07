@@ -15,12 +15,6 @@ public class User {
     
     private String password;
 
-    public User(String firstName, String lastName, String email, String password){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -32,6 +26,10 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     public String getEmail() {

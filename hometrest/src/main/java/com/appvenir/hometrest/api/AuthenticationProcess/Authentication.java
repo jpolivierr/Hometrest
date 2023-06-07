@@ -1,51 +1,51 @@
 package com.appvenir.hometrest.api.AuthenticationProcess;
 
-import com.appvenir.hometrest.ExceptionApi.FormValidationException;
-import com.appvenir.hometrest.formValidation.FormValidation;
+// import com.appvenir.hometrest.Exceptions.FormValidationException;
+// import com.appvenir.hometrest.formValidation.FormValidation;
 
-public class Authentication extends FormValidation {
+public class Authentication {
 
-    private String email;
-    private String password;
+    // private String email;
+    // private String password;
 
-    public String getEmail() {
-        return email;
-    }
+    // public String getEmail() {
+    //     return email;
+    // }
 
-    public String getPassword() {
-        return password;
-    }
+    // public String getPassword() {
+    //     return password;
+    // }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    // public void setEmail(String email) {
+    //     this.email = email;
+    // }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    // public void setPassword(String password) {
+    //     this.password = password;
+    // }
 
-    @Override
-    public boolean validate(){
+    // @Override
+    // public boolean validate(){
 
-        boolean validated = false;
+    //     boolean validated = false;
 
-       emailValidation("email",email);
-       isEmpty("email", email);
-       isEmpty("password", password);
+    //    emailValidation("email",email);
+    //    isEmpty("email", email);
+    //    isEmpty("password", password);
        
-       if(!getResult().isEmpty()){
+    //    if(!getResult().isEmpty()){
 
-        throw new FormValidationException(getResult());
+    //     throw new FormValidationException(getResult());
 
-       }else{
+    //    }else{
 
-         validated = true;
+    //      validated = true;
 
-       }
+    //    }
 
-       return validated;
+    //    return validated;
        
-    }
+    // }
 
     
 }
