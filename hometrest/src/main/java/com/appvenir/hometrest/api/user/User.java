@@ -1,5 +1,6 @@
 package com.appvenir.hometrest.api.user;
 
+
 import org.springframework.data.annotation.Id;
 
 public class User {
@@ -15,6 +16,9 @@ public class User {
     
     private String password;
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;

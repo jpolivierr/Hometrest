@@ -13,11 +13,10 @@ import com.appvenir.hometrest.Exceptions.UserNotFoundException;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserLikesRepository userLikesRepository;
 
-    UserService(UserRepository userRepository, UserLikesRepository userLikesRepository) {
+    UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.userLikesRepository = userLikesRepository;
+       
     }
 
     public void saveUser(User user) {
@@ -40,12 +39,7 @@ public class UserService {
     public void deleteByEmail(String email){
 
         userRepository.deleteByEmail(email);
-        
-    }
 
-    public void saveLikes(UserLikes userLikes) {
-  
-        userLikesRepository.save(userLikes);
     }
     
 }

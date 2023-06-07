@@ -1,23 +1,19 @@
-package com.appvenir.hometrest.api.user;
+package com.appvenir.hometrest.api.userLikes;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.jdbc.core.mapping.AggregateReference;
 
 public class UserLikes {
 
     @Id
-    private Integer id;
-
+    private Integer likeId;
     private String propertyId;
 
-    private AggregateReference<User, Integer> user;
-    
     public Integer getId() {
-        return this.id;
+        return this.likeId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer likeId) {
+        this.likeId= likeId;
     }
 
     public String getPropertyId() {
@@ -27,4 +23,5 @@ public class UserLikes {
     public void setPropertyId(String propertyId) {
         this.propertyId = propertyId;
     }
+
 }
