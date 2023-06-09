@@ -2,9 +2,9 @@ package com.appvenir.hometrest.api.likedProperties;
 
 import java.util.Optional;
 
-import org.springframework.data.relational.core.sql.Like;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,12 +36,20 @@ public class LikePropertiesController {
      @ResponseStatus(HttpStatus.CREATED)
      @PostMapping(path="")
      public void addLikedProperty(@RequestBody LikeProperties likedProperties){
-
         Optional<User> user = userRepository.findByEmail("jp@gmail.com");
         User userFound = user.orElseThrow(UserNotFoundException::new);
         likedProperties.setUser(userFound);
         likedProperty.save(likedProperties);
-
      }
+
+      // delete liked property
+      @ResponseStatus(HttpStatus.NO_CONTENT)
+      @DeleteMapping(path="")
+      public void deleteLikedProperty(@RequestBody LikeProperties likedProperties){
+         Optional<User> user = userRepository.findByEmail("jp@gmail.com");
+         User userFound = user.orElseThrow(UserNotFoundException::new);
+         likedProperties.setUser(userFound);
+         likedProperty.deleteById(likedProperties.getId());
+      }
     
 }
