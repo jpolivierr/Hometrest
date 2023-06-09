@@ -1,45 +1,47 @@
-// package com.appvenir.hometrest.api.user;
+package com.appvenir.hometrest.api.user;
 
-// import java.util.Optional;
+import java.util.Optional;
 
-// import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
 
-// import com.appvenir.hometrest.Exceptions.UserNotFoundException;
+import com.appvenir.hometrest.Exceptions.UserNotFoundException;
 
-// // import org.springframework.stereotype.Service;
-// // import org.springframework.beans.factory.annotation.Autowired;
+@Service
+public class UserService {
 
-// @Service
-// public class UserService {
+    private UserRepository userRepository;
 
-//     private final UserRepository userRepository;
+    UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
-//     UserService(UserRepository userRepository) {
-//         this.userRepository = userRepository;
-       
-//     }
+    // Create a new user
+    public void createUser(User user){
 
-//     public void saveUser(User user) {
-  
-//             userRepository.save(user);
-//     }
+            userRepository.save(user);
 
-//     public void updateUser(User user, String email) {
-
-//         userRepository.updateUser(user, email);
-//     }
-
-//     public User findByEmail(String email) {
-  
-//         Optional<User> user = userRepository.findByEmail(email);
-
-//         return user.orElseThrow(UserNotFoundException::new);
-//     }
-
-//     public void deleteByEmail(String email){
-
-//         userRepository.deleteByEmail(email);
-
-//     }
+    }
     
-// }
+    // Update user
+    public void updateUser(User user){ 
+
+        userRepository.save(user);
+        
+    }
+
+    // Find user
+    public User findUser(String email){ 
+
+        Optional<User> getUser = userRepository.findByEmail(email);
+        User userFound = getUser.orElseThrow(UserNotFoundException::new);
+        return userFound;
+        
+    }
+
+    // delete user
+    public void deleteUser(String email){
+
+        userRepository.deleteByEmail(email);
+
+    }
+}

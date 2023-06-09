@@ -1,7 +1,5 @@
 package com.appvenir.hometrest.api.likedProperties;
 
-import java.util.Optional;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,46 +8,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.appvenir.hometrest.ApiResponse.ApiResponse;
-import com.appvenir.hometrest.Exceptions.UserNotFoundException;
-import com.appvenir.hometrest.api.userJpa.User;
-import com.appvenir.hometrest.api.userJpa.UserRepository;
-
 @Controller
 @RequestMapping(path="/api/v1/like_property")
 public class LikePropertiesController {
 
-    private LikePropertiesRepository likedProperty;
-    private ApiResponse apiResponse;
-    private UserRepository userRepository;
+    private LikePropertiesService likePropertiesService;
 
     LikePropertiesController(
-                              LikePropertiesRepository likedProperty,
-                              ApiResponse apiResponse,
-                              UserRepository userRepository){
-        this.likedProperty = likedProperty;
-        this.apiResponse = apiResponse;
-        this.userRepository = userRepository;
+                              LikePropertiesService likePropertiesService
+                              ){
+
+        this.likePropertiesService = likePropertiesService;
     }
 
      // Add liked property
      @ResponseStatus(HttpStatus.CREATED)
      @PostMapping(path="")
-     public void addLikedProperty(@RequestBody LikeProperties likedProperties){
-        Optional<User> user = userRepository.findByEmail("jp@gmail.com");
-        User userFound = user.orElseThrow(UserNotFoundException::new);
-        likedProperties.setUser(userFound);
-        likedProperty.save(likedProperties);
+     public void addLikedProperty(@RequestBody LikeProperties likeProperties){
+        likePropertiesService.add("jp@gmail.com", likeProperties);
      }
 
       // delete liked property
       @ResponseStatus(HttpStatus.NO_CONTENT)
       @DeleteMapping(path="")
-      public void deleteLikedProperty(@RequestBody LikeProperties likedProperties){
-         Optional<User> user = userRepository.findByEmail("jp@gmail.com");
-         User userFound = user.orElseThrow(UserNotFoundException::new);
-         likedProperties.setUser(userFound);
-         likedProperty.deleteById(likedProperties.getId());
+      public void deleteLikedProperty(@RequestBody LikeProperties likeProperties){
+        likePropertiesService.delete("jp@gmail.com", likeProperties);
       }
     
 }
