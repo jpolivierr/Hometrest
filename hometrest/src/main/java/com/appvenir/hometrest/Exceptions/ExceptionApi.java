@@ -2,11 +2,13 @@ package com.appvenir.hometrest.Exceptions;
 
 import java.time.LocalDateTime;
 
+import org.springframework.http.HttpStatus;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 class ExceptionApi {
 
-    private int status;
+    private HttpStatus status;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy hh:mm:ss")
     private LocalDateTime timestamp;
     private String message;
@@ -14,20 +16,20 @@ class ExceptionApi {
     private Object errors;
  
  
-    ExceptionApi (int status, String message) {
+    ExceptionApi (HttpStatus status, String message) {
         this.timestamp = LocalDateTime.now();
         this.status = status;
         this.message = message;
     }
 
-    ExceptionApi (int status, String message, Throwable ex) {
+    ExceptionApi (HttpStatus status, String message, Throwable ex) {
         this.timestamp = LocalDateTime.now();
         this.status = status;
         this.message = message;
         this.debugMessage = ex.getMessage();
     }
 
-    ExceptionApi (int status, String message, Object errors) {
+    ExceptionApi (HttpStatus status, String message, Object errors) {
         this.timestamp = LocalDateTime.now();
         this.status = status;
         this.message = message;
@@ -42,7 +44,7 @@ class ExceptionApi {
         return errors;
     }
 
-    public int getStatus() {
+    public HttpStatus getStatus() {
         return status;
     }
 

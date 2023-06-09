@@ -1,6 +1,8 @@
 package com.appvenir.hometrest.Exceptions;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -8,6 +10,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -17,18 +21,16 @@ public class GlobalExceptionHandler {
     
     @ExceptionHandler(EmptyResultDataAccessException.class)
     protected ResponseEntity<Object> handleEmptyResultDataAccessException( EmptyResultDataAccessException e ){
-        int statusCode = HttpStatus.NOT_FOUND.value();
-        HttpStatus status = HttpStatus.valueOf(statusCode);
-        ExceptionApi exception = new ExceptionApi(statusCode, "Either the email or password is incorrect", e);
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ExceptionApi exception = new ExceptionApi(status, "Either the email or password is incorrect", e);
         return new ResponseEntity<>(exception, status);
     }
 
     @ExceptionHandler(value = {UserNotFoundException.class})
     public ResponseEntity<Object> handleUserNotFoundException(Exception e) {
-        int statusCode = HttpStatus.UNAUTHORIZED.value();
-        HttpStatus status = HttpStatus.valueOf(statusCode);
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
         String message = "Either your email or password is incorrect";
-        ExceptionApi exception = new ExceptionApi(statusCode, message, e);
+        ExceptionApi exception = new ExceptionApi(status, message, e);
         return new ResponseEntity<>(exception, status);
     }
 
@@ -45,8 +47,7 @@ public class GlobalExceptionHandler {
         @ExceptionHandler(value = {DataAccessException.class})
     public ResponseEntity<Object> handleDataAccess(DataAccessException e) {
 
-        int statusCode = HttpStatus.UNPROCESSABLE_ENTITY.value();
-        HttpStatus status = HttpStatus.valueOf(statusCode);
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
 
         SQLException sqlEx = (SQLException) e.getRootCause();
         int sqlErrorCode = sqlEx.getErrorCode();
@@ -56,7 +57,7 @@ public class GlobalExceptionHandler {
         switch(sqlErrorCode){
 
             case 1062 :
-                statusCode = HttpStatus.UNPROCESSABLE_ENTITY.value();
+                status = HttpStatus.UNPROCESSABLE_ENTITY;
                 message = "Email already exist";
                 break;
 
@@ -64,7 +65,7 @@ public class GlobalExceptionHandler {
         
         System.out.println(e.getCause().getMessage());
 
-        ExceptionApi exception = new ExceptionApi(statusCode, message);
+        ExceptionApi exception = new ExceptionApi(status, message);
         return new ResponseEntity<>(exception, status);
     }
 
@@ -79,6 +80,27 @@ public class GlobalExceptionHandler {
     //     ExceptionApi exception = new ExceptionApi(statusCode, message, e);
     //     return new ResponseEntity<>(exception, status);
     // }
+
+
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        public ResponseEntity<Object> handleValidationExceptions(
+        MethodArgumentNotValidException ex) {
+
+            Map<String, String> errors = new HashMap<>();
+            
+            ex.getBindingResult().getAllErrors().forEach((error) -> {
+
+                String fieldName = ((FieldError) error).getField();
+
+                String errorMessage = error.getDefaultMessage();
+
+                errors.put(fieldName, errorMessage);
+            });
+
+            ExceptionApi exception = new ExceptionApi(HttpStatus.BAD_REQUEST, "Field error", errors);
+
+            return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
+        }
 
     
 

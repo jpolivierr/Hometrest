@@ -14,9 +14,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name="user")
+@Table(name="User")
 public class User {
 
     @Id
@@ -24,15 +26,20 @@ public class User {
     private Integer id;
 
     @Column(name = "first_name")
+    @NotBlank(message = "First name is required")
     private String firstName;
 
     @Column(name = "last_name")
+    @NotBlank(message = "Last name is required")
     private String lastName;
 
     @Column(name = "email")
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email")
     private String email;
 
     @Column(name = "password")
+    @NotBlank(message = "Password is required")
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

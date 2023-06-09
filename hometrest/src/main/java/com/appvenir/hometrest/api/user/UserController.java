@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.appvenir.hometrest.ApiResponse.ApiResponse;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping(path="/api/v1/user")
@@ -32,7 +33,7 @@ public class UserController {
     // Create a new user
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path="")
-    public void addNewUser(@RequestBody User user){
+    public void addNewUser(@Valid @RequestBody User user){
         userService.createUser(user);
     }
 
