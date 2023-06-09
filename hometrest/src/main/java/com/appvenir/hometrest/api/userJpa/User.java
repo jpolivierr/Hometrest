@@ -1,20 +1,53 @@
 package com.appvenir.hometrest.api.userJpa;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.appvenir.hometrest.api.likedProperties.LikeProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="user")
 public class User {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "pasword")
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("user")
+    Set<LikeProperties> likedProperties = new HashSet<>();
+
+
+    public Set<LikeProperties> getLikedProperties() {
+        return this.likedProperties;
+    }
+
+    public void setLikedProperties(Set<LikeProperties> likedProperties) {
+        this.likedProperties = likedProperties;
+    }
+
 
     public Integer getId() {
         return this.id;
