@@ -35,7 +35,6 @@ const useSessionMng = (mytoken) =>{
        const cookies = document.cookie.split(';')
 
        const cookiess = document.cookie
-       console.log(cookiess)
 
           for (let i = 0; i < cookies.length; i++) {
             const cookie = cookies[i].trim();
@@ -82,7 +81,7 @@ const useSessionMng = (mytoken) =>{
         localStorage.removeItem(mytoken)
 
         clearUser()
-            console.log("----------------------->> Reloading page...")
+
              window.location.href = "/"
 
         

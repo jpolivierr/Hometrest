@@ -2,10 +2,15 @@ package com.appvenir.hometrest.SessionManagement;
 
 import java.util.UUID;
 
+import org.springframework.security.core.session.SessionIdChangedEvent;
+import org.springframework.stereotype.Component;
+
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
+@Component
 public class SessionManagement {
 
     private final static String SESSION_AUTH_ID = "SESSION_AUTH_ID";
@@ -13,11 +18,13 @@ public class SessionManagement {
 
     private HttpServletRequest request;
     private HttpServletResponse response;
+    private HttpSession session;
     
-    public SessionManagement(HttpServletRequest request, HttpServletResponse response){
+    public SessionManagement(HttpServletRequest request, HttpServletResponse response, HttpSession session){
 
         this.request = request;
         this.response = response;
+        this.session = session;
 
     }
 

@@ -2,6 +2,8 @@ package com.appvenir.hometrest.api.user;
 
 import java.util.Optional;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.appvenir.hometrest.Exceptions.UserNotFoundException;
@@ -10,6 +12,7 @@ import com.appvenir.hometrest.Exceptions.UserNotFoundException;
 public class UserService {
 
     private UserRepository userRepository;
+    // private PasswordEncoder passwordEncoder;
 
     UserService(UserRepository userRepository){
         this.userRepository = userRepository;
@@ -17,6 +20,13 @@ public class UserService {
 
     // Create a new user
     public void createUser(User user){
+
+            // String userpassword = user.getPassword();
+            // String encodedPassword = passwordEncoder.encode(userpassword);
+            
+            // user.setPassword(encodedPassword);
+             
+            // userRepository.save(user);
 
             userRepository.save(user);
 

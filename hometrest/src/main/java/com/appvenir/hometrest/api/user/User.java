@@ -64,6 +64,14 @@ public class User {
         this.id = id;
     }
 
+    public void setName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getName() {
+        return this.firstName;
+    }
+
     public String getFirstName() {
         return this.firstName;
     }

@@ -1,6 +1,6 @@
 package com.appvenir.hometrest.Exceptions;
 
-import java.util.HashMap;
+// import java.util.HashMap;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 

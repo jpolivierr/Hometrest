@@ -58,7 +58,7 @@ public class UserController {
     @DeleteMapping(path="")
     @Transactional
     public void deleteUser(){
-        userService.deleteUser("ced@gmail.com");
+        userService.deleteUser("jp@gmail.com");
     }
     
 }

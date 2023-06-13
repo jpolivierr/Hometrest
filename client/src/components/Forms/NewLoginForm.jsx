@@ -19,7 +19,8 @@ const NewLoginForm = (props) =>{
 
        const [formState, setFormState] = useState({})
 
-       const {makeRequest, formResponse, loading} = useRequest()
+       const {makeRequest, formResponse, loading, status} = useRequest()
+
 
        const {startSession} = useSessionMng(AUTH_TOKENS)
        
@@ -37,9 +38,12 @@ const NewLoginForm = (props) =>{
      useEffect(()=>{
 
         console.log(formResponse)
+        console.log(status)
 
-        switch(formResponse.status){
-                case 200 :
+        switch(status){
+                case null :
+                     break;
+                case 204 :
                     window.location.href = "/"
                     break
                 case 401 :
@@ -51,8 +55,8 @@ const NewLoginForm = (props) =>{
                 case 500 :
                     setFormError({serverError: "Something went wrong on our end. Please try again later."})
                     break
-                    default :
-                        setFormError({})
+                default :
+                    setFormError({serverError: "Something went wrong on our end. Please try again later."})
 
         }
 
@@ -95,7 +99,8 @@ const NewLoginForm = (props) =>{
         }else{
             
             console.log(formState);
-            await makeRequest("POST", URL.LOGIN, formState)
+             await makeRequest("POST", URL.LOGIN, formState)
+    
             
         }
                 

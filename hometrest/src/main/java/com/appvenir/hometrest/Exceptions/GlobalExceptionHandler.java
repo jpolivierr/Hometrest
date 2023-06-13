@@ -69,18 +69,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(exception, status);
     }
 
-    // @ExceptionHandler(value = {Exception.class})
-    // public ResponseEntity<Object> handle500Error(Exception e) {
-    //     int statusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
-    //     HttpStatus status = HttpStatus.valueOf(statusCode);
-    //     String message = "Something went wrong on our end. Please try again later.";
-
-    //     System.out.println(e.getCause().getMessage());
-
-    //     ExceptionApi exception = new ExceptionApi(statusCode, message, e);
-    //     return new ResponseEntity<>(exception, status);
-    // }
-
 
         @ExceptionHandler(MethodArgumentNotValidException.class)
         public ResponseEntity<Object> handleValidationExceptions(
@@ -100,6 +88,22 @@ public class GlobalExceptionHandler {
             ExceptionApi exception = new ExceptionApi(HttpStatus.BAD_REQUEST, "Field error", errors);
 
             return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
+        }
+
+
+        @ExceptionHandler(value = {Exception.class})
+        public ResponseEntity<Object> handle500Error(Exception e) {
+
+            HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+            String message = "Something went wrong on our end. Please try again later.";
+    
+            System.out.println(e.getCause().getMessage());
+    
+            ExceptionApi exception = new ExceptionApi(status, message, e);
+
+            return new ResponseEntity<>(exception, status);
+
         }
 
     

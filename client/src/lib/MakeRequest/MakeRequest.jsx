@@ -6,21 +6,10 @@ import { AUTH_TOKENS } from "../../Config/authToken"
 const useRequest = () =>{
 
     const [formResponse, setFormResponse] = useState({})
+    const [status, setStatus] = useState(null)
     const {activeUserReducer} = useReduxMng()
     const [loading, setLoading] = useState(false)
     const {getTokens} = useSessionMng(AUTH_TOKENS)
-
-
-    const redirection = (response) =>{
-
-        console.log(response)
-        if(response.redirected){
-
-            window.location.href = response.url
-
-        }
-
-    }
 
     const makeRequest = async (method, url, data, callBackFunk) => {
 
@@ -32,6 +21,7 @@ const useRequest = () =>{
 
         // requestHeaders.set('AuthorizationToken', getTokens("authorizationtoken"));
         requestHeaders.set("Content-Type","application/json")
+        // requestHeaders.set('Authorization', 'Basic ' + btoa("jp@gmail.com" + ':' + "1"))
 
         const config = {
             credentials: 'include',
@@ -40,28 +30,22 @@ const useRequest = () =>{
             method: method
         }
 
-        
-        
         try {
                     switch(method){
                     case "GET" :
                         setLoading(true)
                         response = await fetch(url,config)
                         // console.log(response.text())
-                        redirection(response.redirected)
                         status = response.status
-                        headers = response.headers
                         setLoading(false)
                         break
                     case "POST" :
                         if(data){
                             config.body = JSON.stringify(data)
                             setLoading(true)
-                            response = await fetch(url,config)
-                            console.log(response)
-                            redirection(response)       
+                            response = await fetch(url,config)   
                             status = response.status
-                            headers = response.headers
+                            setStatus(response.status)
                             setLoading(false)
                         }         
                         break
@@ -69,18 +53,11 @@ const useRequest = () =>{
                         response = await fetch(url) 
                 }
 
+
                 switch(status){
-                    case 200 :
-                        const serverResponse = await response.json()
-                        serverResponse.headers = headers
-                        setFormResponse(serverResponse)
-                        break
-                    case 400 :
-                        setFormResponse(await response.json())
-                        break
-                    case 500 :
-                        setFormResponse(await response.json())
-                        break
+                     case 204 :
+                        setFormResponse({})
+                        break   
                     default :
                         setFormResponse(await response.json())
  
@@ -102,7 +79,8 @@ const useRequest = () =>{
     return{
         makeRequest,
         formResponse,
-        loading
+        loading,
+        status
     }
 
 }
