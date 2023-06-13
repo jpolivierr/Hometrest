@@ -1,7 +1,7 @@
 import { useState } from "react"
 import useReduxMng from "../../hooks/useReduxMng"
 import useSessionMng from "../../hooks/useSessionMng"
-import { AUTH_TOKENS } from "../../Config/authToken"
+import { USER_AUTH_TOKEN } from "../../Config/authToken"
 
 const useRequest = () =>{
 
@@ -9,7 +9,7 @@ const useRequest = () =>{
     const [status, setStatus] = useState(null)
     const {activeUserReducer} = useReduxMng()
     const [loading, setLoading] = useState(false)
-    const {getTokens} = useSessionMng(AUTH_TOKENS)
+    const {getTokens} = useSessionMng(USER_AUTH_TOKEN)
 
     const makeRequest = async (method, url, data, callBackFunk) => {
 

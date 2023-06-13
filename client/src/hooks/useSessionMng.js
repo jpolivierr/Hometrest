@@ -30,11 +30,9 @@ const useSessionMng = (mytoken) =>{
 
     }
 
-    const getTokens = (cookieName) =>{
+    const getCookie = (cookieName) =>{
 
        const cookies = document.cookie.split(';')
-
-       const cookiess = document.cookie
 
           for (let i = 0; i < cookies.length; i++) {
             const cookie = cookies[i].trim();
@@ -46,9 +44,15 @@ const useSessionMng = (mytoken) =>{
 
     }
 
+    const deleteCookie = (cookieName) =>{
+
+      document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+    }
+
    const getServerInactiveTime = () =>{
     
-        const token = getTokens()
+        const token = getCookie()
 
         if(token){
 
@@ -75,7 +79,7 @@ const useSessionMng = (mytoken) =>{
 
         
 
-        if(getTokens(mytoken)){
+        if(getCookie(mytoken)){
             document.cookie = `${mytoken}=;expires=${new Date(0).toUTCString()};SameSite=strict;path=/;`
 
         localStorage.removeItem(mytoken)
@@ -342,10 +346,11 @@ const useSessionMng = (mytoken) =>{
 
 
     return{
+        deleteCookie,
         startSession,
         validateSession,
         processTokens,
-        getTokens,
+        getCookie,
         deleteStorageData,
         setActivityTimer
     }

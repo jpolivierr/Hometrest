@@ -18,6 +18,7 @@ public class SecurityConfig {
 
     private final MyUserDetailService myUserDetailService;
     private final String home = "/**";
+    private final String api = "/api/**";
     // private final String logIn = "/process-login";
 
     public SecurityConfig(MyUserDetailService myUserDetailService){
@@ -28,15 +29,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securefilterChain(HttpSecurity http) throws Exception{
 
-
         http
-            
             .csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher(home)))
             .securityMatcher(AntPathRequestMatcher.antMatcher(home)) 
             .authorizeHttpRequests((auth) ->
                       auth
                      .anyRequest()
                      .permitAll()
+                    //  .requestMatchers(AntPathRequestMatcher.antMatcher(api))
+                    //  .
                     //  .authenticated()
                    
             )
@@ -48,14 +49,32 @@ public class SecurityConfig {
                                  .contentTypeOptions(contentTypeOptions -> contentTypeOptions.disable())
                              )                            
             .userDetailsService(myUserDetailService);
-            // .formLogin((formLogin) ->
-            //      formLogin
-            //          .usernameParameter("username")
-            //          .passwordParameter("password")
-            //          .loginPage("/logins")
-                    //  .failureUrl("/error")
-                    //  .loginProcessingUrl("/login")
-            //  );
+
+            
+        return http.build();
+
+    }
+
+    @Bean
+    public SecurityFilterChain apifilterChain(HttpSecurity http) throws Exception{
+
+        http
+            .csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher(api)))
+            .securityMatcher(AntPathRequestMatcher.antMatcher(api)) 
+            .authorizeHttpRequests((auth) ->
+                      auth
+                     .anyRequest()
+                     .permitAll()
+            )
+            .cors(Customizer.withDefaults())
+            .headers(headers -> 
+                                 headers.cacheControl(cache -> cache.disable()) 
+                                 )                                
+            .headers(headers -> headers
+                                 .contentTypeOptions(contentTypeOptions -> contentTypeOptions.disable())
+                             )                            
+            .userDetailsService(myUserDetailService);
+
             
         return http.build();
 

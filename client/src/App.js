@@ -16,7 +16,7 @@ import useSessionMng from './hooks/useSessionMng';
 import useRequest from './lib/MakeRequest/MakeRequest';
 import URL from './Config/urls';
 import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
-import { AUTH_TOKENS } from './Config/authToken';
+import { USER_AUTH_TOKEN } from './Config/authToken';
 
 
 function App() {
@@ -33,21 +33,48 @@ function App() {
 
         // console.log(clientActivityReducer)
 
-     
+  const { makeRequest, formResponse, loading, status } = useRequest()
 
   // const location = useLocation()
 
   // const {pathMng} = useRedirectMng()
 
-  const { getTokens, setActivityTimer, deleteStorageData} = useSessionMng(AUTH_TOKENS)
-
-  console.log(getTokens("AuthorizationToken"))
+  const { getCookie, deleteCookie, setActivityTimer, deleteStorageData} = useSessionMng(USER_AUTH_TOKEN)
 
    const [isLoading, setIsLoading] = useState(false)
 
+   useEffect(()=>{
+
+    if(!getCookie(USER_AUTH_TOKEN)) return
+
+    makeRequest("GET", URL.GET_ACCOUNT )
+
+   },[])
+
+   useEffect(()=>{
+
+    console.log(formResponse)
+    console.log(status)
+
+    if(status == 403){
+
+      deleteCookie(USER_AUTH_TOKEN)
+      return
+
+    }
+
+    if(status == 204){
+
+      console.log(getCookie(USER_AUTH_TOKEN))
+
+    }
+
+
+ },[formResponse])
+
   //  const {setActivityTimer} = useInactivityTimer(10, deleteStorageData);
 
-  //  const userIsAuthenticated = getTokens(AUTH_TOKENS)
+  //  const userIsAuthenticated = getTokens(USER_AUTH_TOKEN)
 
   //      useEffect(()=>{
     
@@ -68,25 +95,13 @@ function App() {
 
   //  setActivityTimer()
 
-  const { makeRequest, formResponse, loading } = useRequest()
+  
 
   useEffect(()=>{
 
         // makeRequest("GET", URL.GET_ACCOUNT )
 
   },[])
-
-  useEffect(()=>{
-
-    // console.log(formResponse)
-
-    if(formResponse.status === 200){
-    
-  
-      }
-     
-    
-  },[formResponse])
 
 
 

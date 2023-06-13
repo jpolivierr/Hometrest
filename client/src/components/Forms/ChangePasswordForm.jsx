@@ -17,7 +17,7 @@ import { capitalizeFirstLetter } from "../propertyCard/util";
 import errorFromServer from "./FormUtil/serverError";
 import useSessionMng from "../../hooks/useSessionMng";
 import LoadingEffect from "../../lib/loadingEffect/loading/loadingEffect";
-import { AUTH_TOKENS } from "../../Config/authToken";
+import { USER_AUTH_TOKEN } from "../../Config/authToken";
 
 
 const ChangePasswordForm = () =>{
@@ -29,7 +29,7 @@ const ChangePasswordForm = () =>{
 
        const {makeRequest, formResponse, loading} = useRequest()
 
-       const {startSession} = useSessionMng(AUTH_TOKENS)
+       const {startSession} = useSessionMng(USER_AUTH_TOKEN)
 
        const {setUser, activeUserReducer} = useReduxMng()
 

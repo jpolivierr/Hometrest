@@ -7,7 +7,7 @@ import useRequest from "../../lib/MakeRequest/MakeRequest";
 import errorFromServer from "./FormUtil/serverError";
 import useSessionMng from "../../hooks/useSessionMng";
 import LoadingEffect from "../../lib/loadingEffect/loading/loadingEffect";
-import { AUTH_TOKENS } from "../../Config/authToken";
+import { USER_AUTH_TOKEN } from "../../Config/authToken";
 
 
 const NewLoginForm = (props) =>{
@@ -22,7 +22,7 @@ const NewLoginForm = (props) =>{
        const {makeRequest, formResponse, loading, status} = useRequest()
 
 
-       const {startSession} = useSessionMng(AUTH_TOKENS)
+       const {startSession} = useSessionMng(USER_AUTH_TOKEN)
        
 
     const updateFormField = (key, value) =>{
@@ -44,6 +44,7 @@ const NewLoginForm = (props) =>{
                 case null :
                      break;
                 case 204 :
+                case 409 :
                     window.location.href = "/"
                     break
                 case 401 :

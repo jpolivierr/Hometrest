@@ -1,10 +1,14 @@
 package com.appvenir.hometrest.webMvcConfig;
 
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 // import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.appvenir.hometrest.filter.MyRequestFilter;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,6 +46,15 @@ public class WebConfig implements WebMvcConfigurer, HandlerInterceptor {
       registry.addInterceptor(this);
 
   }
+
+  @Bean
+    public FilterRegistrationBean<MyRequestFilter> customFilterRegistration() {
+        FilterRegistrationBean<MyRequestFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new MyRequestFilter());
+        registrationBean.addUrlPatterns("/api/*");
+
+        return registrationBean;
+    }
 
 
 

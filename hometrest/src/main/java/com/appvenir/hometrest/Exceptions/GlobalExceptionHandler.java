@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -34,14 +35,21 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(exception, status);
     }
 
-    // @ExceptionHandler(value = {FormValidationException.class})
-    // public ResponseEntity<Object> handleFormValidationException(FormValidationException e) {
-    //     int statusCode = HttpStatus.BAD_REQUEST.value();
-    //     HttpStatus status = HttpStatus.valueOf(statusCode);
-    //     String message = "Invalid inputs";
-    //     ExceptionApi exception = new ExceptionApi(statusCode, message, e.getError());
-    //     return new ResponseEntity<>(exception, status);
-    // }
+    @ExceptionHandler(value = {AccessDeniedException.class})
+    public ResponseEntity<Object> handleAccessDeniedException(Exception e) {
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
+        String message = e.getMessage();
+        ExceptionApi exception = new ExceptionApi(status, message);
+        return new ResponseEntity<>(exception, status);
+    }
+
+    @ExceptionHandler(value = {SessionExistException.class})
+    public ResponseEntity<Object> handleSessionExistException(Exception e) {
+        HttpStatus status = HttpStatus.CONFLICT;
+        String message = "User already logged in";
+        ExceptionApi exception = new ExceptionApi(status, message, e);
+        return new ResponseEntity<>(exception, status);
+    }
 
 
         @ExceptionHandler(value = {DataAccessException.class})
@@ -91,20 +99,20 @@ public class GlobalExceptionHandler {
         }
 
 
-        @ExceptionHandler(value = {Exception.class})
-        public ResponseEntity<Object> handle500Error(Exception e) {
+        // @ExceptionHandler(value = {Exception.class})
+        // public ResponseEntity<Object> handle500Error(Exception e) {
 
-            HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        //     HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
-            String message = "Something went wrong on our end. Please try again later.";
+        //     String message = "Something went wrong on our end. Please try again later.";
     
-            System.out.println(e.getCause().getMessage());
+        //     System.out.println(e.getCause().getMessage());
     
-            ExceptionApi exception = new ExceptionApi(status, message, e);
+        //     ExceptionApi exception = new ExceptionApi(status, message, e);
 
-            return new ResponseEntity<>(exception, status);
+        //     return new ResponseEntity<>(exception, status);
 
-        }
+        // }
 
     
 
