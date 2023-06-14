@@ -18,18 +18,15 @@ import "./style.css"
 import { useEffect, useState } from "react"
 import NavList from "../../list/NavList"
 
-const LogInNav = () =>{
+const LogInNav = (props) =>{
+
+    const {user} = props
+    const {firstName, lastName, email} = user
 
     // const {isShowing, toggle, motion } = useModal(); 
-    const {makeRequest, formResponse, loading} = useRequest()
+    const {makeRequest, formResponse, loading, status} = useRequest()
 
-    const {activeUserReducer} = useReduxMng()
-
-     const fName = deepSearch(activeUserReducer,["userInfo","first_name"],"john")
-     const lName = deepSearch(activeUserReducer,["userInfo","last_name"],"Smith")
-    const email = deepSearch(activeUserReducer,["userInfo","email"],"demo@gmail.com")
-
-    const {deleteStorageData} = useSessionMng(USER_AUTH_TOKEN)
+    const {deleteStorageData, deleteCookie} = useSessionMng(USER_AUTH_TOKEN)
 
     const {toggle, renderModal, addChildElement, isShowing} = useMyModal({
         type: "slide",
@@ -51,7 +48,7 @@ const LogInNav = () =>{
         addChildElement(<div className="user-settings">
                        <div className="setting-header">
                             <div className="user-icon"><i className="fa-regular fa-user"></i></div>
-                            <div className="user-full-name">{`${fName} ${lName}`}</div>
+                            <div className="user-full-name">{`${firstName} ${lastName}`}</div>
                             <div className="user-email"><h5>{`${shortenText(email,20) }`}</h5></div>
                        </div>
                             <ul className="update-user-list">
@@ -71,14 +68,16 @@ const LogInNav = () =>{
 
 
     useEffect(()=>{
-        
-        if(formResponse.status && (formResponse.status === 200 || formResponse.status === 403)){
 
-             deleteStorageData()
+        console.log(formResponse)
+        
+        if(status == 204){
+
+             deleteCookie()
 
              window.location.href="/"
 
-            console.log(formResponse)
+            
         }
         
     },[formResponse])
@@ -101,7 +100,7 @@ const LogInNav = () =>{
                                         <div className="hideMobile flex-space-between gap-2x user-nav-info">
                                             
                                             <h3 className="user-greeting">
-                                                Hi, {fName}
+                                                Hi, {user.firstName}
                                             </h3>
 
                                             <button className="user-nav-likes">

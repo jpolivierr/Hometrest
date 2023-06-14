@@ -29,9 +29,17 @@ public class MyRequestFilter implements Filter {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
 
-        
-
         HttpSession session = httpRequest.getSession(false);
+
+        String method = httpRequest.getMethod();
+
+        if(method.equals("POST")){
+
+            chain.doFilter(request, response);
+
+            return;
+
+        }
 
         
         if( session == null ) throw new AccessDeniedException("Unauthorized here");

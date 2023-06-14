@@ -21,8 +21,6 @@ const NewLoginForm = (props) =>{
 
        const {makeRequest, formResponse, loading, status} = useRequest()
 
-
-       const {startSession} = useSessionMng(USER_AUTH_TOKEN)
        
 
     const updateFormField = (key, value) =>{
@@ -63,18 +61,6 @@ const NewLoginForm = (props) =>{
 
      },[formResponse])
 
-
-     useEffect(()=>{
-
-        const session = startSession(formResponse)
-  
-        if(session){
-  
-            window.location.pathname = "/"
-          
-        }
-  
-      },[formResponse])
 
 
     const validateFields = () =>{

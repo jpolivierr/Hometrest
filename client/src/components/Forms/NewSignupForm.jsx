@@ -27,9 +27,7 @@ const NewSignUpForm = () =>{
 
        const [formState, setFormState] = useState({})
 
-       const {makeRequest, formResponse, loading} = useRequest()
-
-       const {startSession} = useSessionMng(USER_AUTH_TOKEN)
+       const {makeRequest, formResponse, loading, status} = useRequest()
        
 
     const updateFormField = (key, value) =>{
@@ -44,39 +42,35 @@ const NewSignUpForm = () =>{
 
      useEffect(()=>{
 
-        const serverError = errorFromServer(formResponse, formError)
+        console.log(formResponse)
+        console.log(status)
 
-        if(serverError){
-
-            setFormError(serverError)
-
-        }else{
-
-            setFormError({})
+        switch(status){
+                case null :
+                     break;
+                case 204 :
+                case 409 :
+                    window.location.href = "/"
+                    break
+                case 401 :
+                    setFormError({serverError: formResponse.message})
+                    break
+                case 400 :
+                    setFormError(formResponse.errors)
+                    break
+                case 500 :
+                    setFormError({serverError: "Something went wrong on our end. Please try again later."})
+                    break
+                default :
+                    setFormError({serverError: "Something went wrong on our end. Please try again later."})
 
         }
 
      },[formResponse])
 
-     useEffect(()=>{
-
-      
-        const session = startSession(formResponse)
-  
-        if(session){
-  
-            window.location.pathname = "/"
-          
-        }else{
-  
-          console.log("Incorrect response..")
-  
-        }
-  
-      },[formResponse])
 
 
-    const validateFields = () =>{
+     const validateFields = () =>{
 
         const formErrorCopy = {...formError}
 
@@ -98,11 +92,8 @@ const NewSignUpForm = () =>{
 
         }else{
 
-             console.log("Submit")
-            
-            const data = formState
-            console.log(data);
-            await makeRequest("POST", URL.SIGNUP, data)
+            console.log(formState);
+            await makeRequest("POST", URL.SIGNUP, formState)
             
         }
                 
@@ -116,21 +107,16 @@ const NewSignUpForm = () =>{
            className="avalon text-left av-shadow" 
            onSubmit={e => submit(e)}>
 
-                {formError.serverError && 
+                {/* {formError.serverError && 
                     <p className="server-error">{formError.serverError}</p>
-                    }
+                    } */}
 
             <h2>Search Form</h2>
             <Inputs 
                     label={"First Name"}
-                    // placeHolder={"Enter city or zip"}
-                    name = {"first_name"}
-                //  onChangefunc = {field.onChangefunc}
-                    //  onOutFocus = {updateCityorZip}
-                    // fieldToUpdate = {updateCityorZip}   
+                    name = {"first_name"}  
                     required = {true}
                     formError = {formError}
-                    //  setFormError = {setFormError}
                      updateFormField = {updateFormField}
 
                     />

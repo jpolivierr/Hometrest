@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.boot.autoconfigure.web.ServerProperties.Reactive.Session;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,21 +36,29 @@ public class UserLoginController {
         }
 
         @ResponseStatus(HttpStatus.NO_CONTENT)
+        @GetMapping(path = "")
+        public void logout(HttpSession session){
+
+            if(session != null) {
+               session.invalidate();
+               session = null;
+            }
+
+        }
+
+        @ResponseStatus(HttpStatus.NO_CONTENT)
         @PostMapping(path = "")
         public void login(
                            @Valid @RequestBody UserLogin userLogin, 
-                           ServletRequest request,
-                           HttpServletResponse response
+                             HttpSession session,
+                             HttpServletResponse response
                            ){
 
-         HttpServletRequest httpRequest = (HttpServletRequest) request;
-         HttpSession activeSession = httpRequest.getSession();
 
-         String email = (String) activeSession.getAttribute(MySesionConfig.EMAIL);
+         String email = (String) session.getAttribute(MySesionConfig.EMAIL);
 
          if(email == null){
 
-            HttpSession session = httpRequest.getSession(true);
             String token = UUID.randomUUID().toString();
 
             Cookie cookie = new Cookie(MySesionConfig.USER_AUTH_TOKEN, token);

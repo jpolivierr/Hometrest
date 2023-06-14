@@ -27,8 +27,6 @@ function App() {
 
   const {activeUser, setUser, clearUser} = useContext(UserContext)
 
-  console.log(activeUser)
-
   const {
         clientActivityReducer,
          activeUserReducer,
@@ -51,10 +49,11 @@ function App() {
 
    const [isLoading, setIsLoading] = useState(false)
 
-   useEffect(()=>{
+   useLayoutEffect(()=>{
 
     if(!getCookie(USER_AUTH_TOKEN)) return
 
+    setIsLoading(true)
     makeRequest("GET", URL.GET_ACCOUNT )
 
    },[])
@@ -67,6 +66,7 @@ function App() {
     if(status == 403){
       clearUser()
       deleteCookie(USER_AUTH_TOKEN)
+      setIsLoading(false)
       return
     }
 
@@ -74,7 +74,10 @@ function App() {
       const user = formResponse.body
       setUser(user)
       console.log(getCookie(USER_AUTH_TOKEN))
+      setIsLoading(false)
     }
+
+    
 
 
  },[formResponse])
