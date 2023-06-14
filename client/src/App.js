@@ -17,7 +17,7 @@ import useRequest from './lib/MakeRequest/MakeRequest';
 import URL from './Config/urls';
 import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
 import { USER_AUTH_TOKEN } from './Config/authToken';
-
+import "./styles/forms/avalon.css"
 import UserContext from './components/userState/UserState';
 import { useContext } from 'react';
 

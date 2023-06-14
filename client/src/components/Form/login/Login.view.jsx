@@ -4,11 +4,12 @@ import MainButton from "../../buton/MainButton";
 import LoadingEffect from "../../../lib/loadingEffect/loading/loadingEffect";
 import useForm from "../useForm";
 import URL from "../../../Config/urls";
+// import loginStyles from "./Login.style.css"
 
 
-const Signup= () =>{
+const Login = () =>{
 
-    const {submit, updateFormField, formError, loading} = useForm(URL.SIGNUP)
+    const {submit, updateFormField, formError, loading} = useForm(URL.LOGIN)
 
 // console.log(formState)
 
@@ -22,24 +23,7 @@ const Signup= () =>{
                     <p className="server-error">{formError.serverError}</p>
                     }
 
-            <h2>Search Form</h2>
-            <Inputs 
-                    label={"First Name"}
-                    name = {"firstName"}  
-                    required = {true}
-                    formError = {formError}
-                     updateFormField = {updateFormField}
-
-                    />
-
-            <Inputs 
-                    label={"Last Name"}
-                    name = {"lastName"}  
-                    required = {true}
-                    formError = {formError}
-                     updateFormField = {updateFormField}
-
-                    />
+            <h2>Login</h2>
 
             <Inputs 
                     label={"Email"}
@@ -53,14 +37,6 @@ const Signup= () =>{
             <Inputs 
                     label={"Password"}
                     name = {"password"}  
-                    required = {true}
-                    formError = {formError}
-                     updateFormField = {updateFormField}
-                    />
-
-            <Inputs 
-                    label={"Re-enter Password"}
-                    name = {"password2"}  
                     required = {true}
                     formError = {formError}
                      updateFormField = {updateFormField}
@@ -84,4 +60,4 @@ const Signup= () =>{
 
 }
 
-export default Signup
+export default Login

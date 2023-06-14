@@ -1,11 +1,11 @@
 
 import { useEffect, useLayoutEffect } from "react"
 import {urlParcer} from "../Util/urlParcer"
-import LoginForm from "../components/Forms/loginForm"
 import useRequest from "../lib/MakeRequest/MakeRequest"
 import useReduxMng from "../hooks/useReduxMng"
 import TopNav from "../components/Navigaion/topNav"
 import NewLoginForm from "../components/Forms/NewLoginForm"
+import LoginForm from "../components/Form/login/Login.view"
 
 const Login = (props) =>{
 
@@ -29,9 +29,7 @@ const Login = (props) =>{
                 
                 <div className="container center-content padding-bottom-2x">
                     <div style={{}}>
-                        <NewLoginForm 
-                           elementClass="avalon text-left av-shadow"
-                        />
+                        <LoginForm/>
                     </div>
                 
             </div>
