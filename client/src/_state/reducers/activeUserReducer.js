@@ -11,8 +11,6 @@ const init = {
 
 const activeUserReducer = (state = init, action) =>{
 
-    
-
     switch(action.type){
         case SET_AUTHENTICATION :
                     return {...state, 

@@ -47,10 +47,8 @@ public class UserController {
     // Find user
     @GetMapping(path="")
     public ResponseEntity<Object> findUser(){
-
         User userFound = userService.findUser("jp@gmail.com");
         return apiResponse.create(200, "success", userFound);
-
     }
 
     // delete user

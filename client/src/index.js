@@ -9,13 +9,8 @@ import './App.css';
 import {Provider} from "react-redux";
 import {store} from './_state/store'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import { UserProvider } from './components/userState/UserState';
 
-import Login from './Pages/login';
-import Signup from './Pages/signup';
-import About from './Pages/about';
-import Home from './Pages/home';
-import Listings from './Pages/listings/listings';
-import TopNav from './components/Navigaion/topNav';
 
 
 
@@ -26,8 +21,10 @@ root.render(
 
    //  <React.StrictMode> 
     <Provider store={store}>
-      <Router>
-        <App />
+      <Router>  
+          <UserProvider>
+            <App />
+          </UserProvider>
       </Router>
     </Provider>
     

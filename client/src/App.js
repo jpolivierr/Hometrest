@@ -18,8 +18,16 @@ import URL from './Config/urls';
 import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
 import { USER_AUTH_TOKEN } from './Config/authToken';
 
+import UserContext from './components/userState/UserState';
+import { useContext } from 'react';
+
+
 
 function App() {
+
+  const {activeUser, setUser, clearUser} = useContext(UserContext)
+
+  console.log(activeUser)
 
   const {
         clientActivityReducer,
@@ -57,16 +65,15 @@ function App() {
     console.log(status)
 
     if(status == 403){
-
+      clearUser()
       deleteCookie(USER_AUTH_TOKEN)
       return
-
     }
 
-    if(status == 204){
-
+    if(status == 200){
+      const user = formResponse.body
+      setUser(user)
       console.log(getCookie(USER_AUTH_TOKEN))
-
     }
 
 

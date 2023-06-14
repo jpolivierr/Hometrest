@@ -3,6 +3,7 @@ package com.appvenir.hometrest.api.login;
 
 import java.util.UUID;
 
+import org.springframework.boot.autoconfigure.web.ServerProperties.Reactive.Session;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,9 @@ import com.appvenir.hometrest.Exceptions.SessionExistException;
 import com.appvenir.hometrest.api.user.User;
 import com.appvenir.hometrest.sessionConfig.MySesionConfig;
 
+import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -35,23 +38,32 @@ public class UserLoginController {
         @PostMapping(path = "")
         public void login(
                            @Valid @RequestBody UserLogin userLogin, 
-                           HttpSession session,
+                           ServletRequest request,
                            HttpServletResponse response
                            ){
 
-         if(session.isNew()){
+         HttpServletRequest httpRequest = (HttpServletRequest) request;
+         HttpSession activeSession = httpRequest.getSession();
 
+         String email = (String) activeSession.getAttribute(MySesionConfig.EMAIL);
+
+         if(email == null){
+
+            HttpSession session = httpRequest.getSession(true);
             String token = UUID.randomUUID().toString();
 
             Cookie cookie = new Cookie(MySesionConfig.USER_AUTH_TOKEN, token);
             cookie.setHttpOnly(false);
-            cookie.setSecure(true);
-            // cookie.setMaxAge(MySesionConfig.MAX_INERVAL);
+            cookie.setSecure(false);
+
             response.addCookie(cookie);
 
             User user = userLoginService.authenticate(userLogin.getEmail(), userLogin.getPassword());
+      
+            System.out.println(user.getEmail());
             session.setAttribute(MySesionConfig.EMAIL, user.getEmail());
             session.setAttribute(MySesionConfig.COOKIE_VALUE, token);
+            session.setAttribute(MySesionConfig.JSESSION_ID, session.getId());
             session.setMaxInactiveInterval(MySesionConfig.MAX_INERVAL);
 
          }else{

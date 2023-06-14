@@ -7,21 +7,14 @@ const useRequest = () =>{
 
     const [formResponse, setFormResponse] = useState({})
     const [status, setStatus] = useState(null)
-    const {activeUserReducer} = useReduxMng()
     const [loading, setLoading] = useState(false)
-    const {getTokens} = useSessionMng(USER_AUTH_TOKEN)
 
-    const makeRequest = async (method, url, data, callBackFunk) => {
+    const makeRequest = async (method, url, data) => {
 
         let response
-        let status
-        let headers
-
         const requestHeaders = new Headers();
 
-        // requestHeaders.set('AuthorizationToken', getTokens("authorizationtoken"));
         requestHeaders.set("Content-Type","application/json")
-        // requestHeaders.set('Authorization', 'Basic ' + btoa("jp@gmail.com" + ':' + "1"))
 
         const config = {
             credentials: 'include',
@@ -35,8 +28,7 @@ const useRequest = () =>{
                     case "GET" :
                         setLoading(true)
                         response = await fetch(url,config)
-                        // console.log(response.text())
-                        status = response.status
+                        setStatus(response.status)
                         setLoading(false)
                         break
                     case "POST" :
@@ -44,7 +36,6 @@ const useRequest = () =>{
                             config.body = JSON.stringify(data)
                             setLoading(true)
                             response = await fetch(url,config)   
-                            status = response.status
                             setStatus(response.status)
                             setLoading(false)
                         }         
