@@ -70,7 +70,7 @@ const LogInNav = (props) =>{
     useEffect(()=>{
 
         console.log(formResponse)
-        
+
         if(status == 204){
 
              deleteCookie()
@@ -97,7 +97,7 @@ const LogInNav = (props) =>{
                                         Class="hideMobile flex-space-between gap-2x nav-list"
                                         />
 
-                                        <div className="hideMobile flex-space-between gap-2x user-nav-info">
+                                        <div className="hideMobile flex-space-between gap-3x user-nav-info">
                                             
                                             <h3 className="user-greeting">
                                                 Hi, {user.firstName}

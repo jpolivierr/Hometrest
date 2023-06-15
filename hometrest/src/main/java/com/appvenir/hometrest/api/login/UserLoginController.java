@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appvenir.hometrest.Exceptions.SessionExistException;
+import com.appvenir.hometrest.SessionManagement.SessionManagement;
 import com.appvenir.hometrest.api.user.User;
 import com.appvenir.hometrest.sessionConfig.MySesionConfig;
 
@@ -27,11 +28,16 @@ import jakarta.validation.Valid;
 @RequestMapping("/process-login")
 public class UserLoginController {
 
-        public UserLoginService userLoginService;
+        private UserLoginService userLoginService;
+        private SessionManagement sessionMng;
 
-        public UserLoginController(UserLoginService userLoginService){
+        public UserLoginController(
+                      UserLoginService userLoginService, 
+                      SessionManagement sessionMng
+                      ){
 
             this.userLoginService = userLoginService;
+            this.sessionMng = sessionMng;
 
         }
 
@@ -54,32 +60,9 @@ public class UserLoginController {
                              HttpServletResponse response
                            ){
 
-
-         String email = (String) session.getAttribute(MySesionConfig.EMAIL);
-
-         if(email == null){
-
-            String token = UUID.randomUUID().toString();
-
-            Cookie cookie = new Cookie(MySesionConfig.USER_AUTH_TOKEN, token);
-            cookie.setHttpOnly(false);
-            cookie.setSecure(false);
-
-            response.addCookie(cookie);
-
             User user = userLoginService.authenticate(userLogin.getEmail(), userLogin.getPassword());
-      
-            System.out.println(user.getEmail());
-            session.setAttribute(MySesionConfig.EMAIL, user.getEmail());
-            session.setAttribute(MySesionConfig.COOKIE_VALUE, token);
-            session.setAttribute(MySesionConfig.JSESSION_ID, session.getId());
-            session.setMaxInactiveInterval(MySesionConfig.MAX_INERVAL);
 
-         }else{
-
-            throw new SessionExistException();
-
-         }
+            sessionMng.create(user.getEmail(), session, response);
 
         }
     

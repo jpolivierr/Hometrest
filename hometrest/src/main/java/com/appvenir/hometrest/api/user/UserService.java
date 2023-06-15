@@ -12,21 +12,20 @@ import com.appvenir.hometrest.Exceptions.UserNotFoundException;
 public class UserService {
 
     private UserRepository userRepository;
-    // private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
-    UserService(UserRepository userRepository){
+    UserService(UserRepository userRepository, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // Create a new user
     public void createUser(User user){
 
             // String userpassword = user.getPassword();
-            // String encodedPassword = passwordEncoder.encode(userpassword);
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
             
-            // user.setPassword(encodedPassword);
-             
-            // userRepository.save(user);
+            user.setPassword(encodedPassword);
 
             userRepository.save(user);
 
@@ -37,6 +36,20 @@ public class UserService {
 
         userRepository.save(user);
         
+    }
+
+    public boolean userExist(String email){
+
+        Optional<User> getUser = userRepository.findByEmail(email);
+
+        if(getUser.isPresent()){
+
+            return true;
+
+        }
+
+        return false;
+
     }
 
     // Find user

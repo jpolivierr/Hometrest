@@ -1,8 +1,11 @@
 import { createContext, useState } from "react";
+import useSession from "../sessionManagement/useSession";
 
 const UserContext = createContext();
 
 export const UserProvider = ({children}) =>{
+
+    const {getCookie, deleteCookie, activeCookie} = useSession()
 
     const init = {
         id: null,
@@ -24,8 +27,15 @@ export const UserProvider = ({children}) =>{
         setActiveUser(init)
     }
 
+    const logout = () =>{
+
+        deleteCookie()
+        clearUser()
+
+    }
+
     return(
-        <UserContext.Provider value={{activeUser, setUser, clearUser}}>
+        <UserContext.Provider value={{activeCookie, activeUser, setUser, clearUser, logout}}>
             {children}
         </UserContext.Provider>
     )

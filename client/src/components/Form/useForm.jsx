@@ -2,8 +2,9 @@
 import { useEffect, useState } from "react";
 import useRequest from "../../lib/MakeRequest/MakeRequest";
 
-const FormLogin = (URL) =>{
+const FormLogin = (URL, method) =>{
 
+       const METHOD = !method ? "POST" : method
 
        const [formError, setFormError] = useState({})
 
@@ -31,6 +32,7 @@ const FormLogin = (URL) =>{
                 case null :
                      break;
                 case 204 :
+                case 201 :
                 case 409 :
                     window.location.href = "/"
                     break
@@ -75,7 +77,7 @@ const FormLogin = (URL) =>{
         }else{
 
             console.log(formState);
-            await makeRequest("POST", URL, formState)
+            await makeRequest(METHOD, URL, formState)
             
         }
                 

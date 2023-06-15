@@ -1,7 +1,4 @@
 import { useState } from "react"
-import useReduxMng from "../../hooks/useReduxMng"
-import useSessionMng from "../../hooks/useSessionMng"
-import { USER_AUTH_TOKEN } from "../../Config/authToken"
 
 const useRequest = () =>{
 
@@ -26,12 +23,14 @@ const useRequest = () =>{
         try {
                     switch(method){
                     case "GET" :
+                    case "DELETE" :
                         setLoading(true)
                         response = await fetch(url,config)
                         setStatus(response.status)
                         setLoading(false)
                         break
                     case "POST" :
+                    case "PUT" :
                         if(data){
                             config.body = JSON.stringify(data)
                             setLoading(true)
@@ -47,6 +46,7 @@ const useRequest = () =>{
 
                 switch(status){
                      case 204 :
+                     case 201 :   
                         setFormResponse({})
                         break   
                     default :
@@ -61,7 +61,7 @@ const useRequest = () =>{
               } else {
                 console.error('Error:', error);
               }
-            setFormResponse({status: 500, message: error.getMessage})
+            setFormResponse({status: 500, message: error})
 
         }
 

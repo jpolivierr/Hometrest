@@ -1,99 +1,103 @@
-// package com.appvenir.hometrest.SessionManagement;
+package com.appvenir.hometrest.SessionManagement;
 
-// import java.util.UUID;
+import java.util.UUID;
 
-// import org.springframework.security.core.session.SessionIdChangedEvent;
-// import org.springframework.stereotype.Component;
+import org.springframework.security.core.session.SessionIdChangedEvent;
+import org.springframework.stereotype.Component;
 
-// import jakarta.servlet.http.Cookie;
-// import jakarta.servlet.http.HttpServletRequest;
-// import jakarta.servlet.http.HttpServletResponse;
-// import jakarta.servlet.http.HttpSession;
+import com.appvenir.hometrest.Exceptions.SessionExistException;
+import com.appvenir.hometrest.api.user.User;
+import com.appvenir.hometrest.sessionConfig.MySesionConfig;
 
-// @Component
-// public class SessionManagement {
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-//     private final static String SESSION_AUTH_ID = "SESSION_AUTH_ID";
-//     private final static String TOKEN_KEY = "AuthorizationToken";
+@Component
+public class SessionManagement {
 
-//     private HttpServletRequest request;
-//     private HttpServletResponse response;
-//     private HttpSession session;
+    private final static String SESSION_AUTH_ID = "SESSION_AUTH_ID";
+    private final static String TOKEN_KEY = "AuthorizationToken";
+
+    private HttpServletRequest request;
+    private HttpServletResponse response;
+    private HttpSession session;
     
-//     public SessionManagement(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+    public SessionManagement(HttpServletRequest request, HttpServletResponse response, HttpSession session){
 
-//         this.request = request;
-//         this.response = response;
-//         this.session = session;
+        this.request = request;
+        this.response = response;
+        this.session = session;
 
-//     }
+    }
 
-//     public Boolean Valid(){
+    public Boolean Valid(){
 
-//         String sessionAuthId = (String) request.getSession().getAttribute("SESSION_AUTH_ID");
-//         String cookieAuthId = getCookie("SESSION_AUTH_ID");
-
-//         System.out.println(sessionAuthId);
-//         System.out.println(cookieAuthId);
+        String sessionAuthId = (String) request.getSession().getAttribute("SESSION_AUTH_ID");
+        String cookieAuthId = getCookie("SESSION_AUTH_ID");
         
-//         if(sessionAuthId == null || cookieAuthId == null) return false;
+        if(sessionAuthId == null || cookieAuthId == null) return false;
 
-//         if(sessionAuthId.equals(cookieAuthId)) return true;
+        if(sessionAuthId.equals(cookieAuthId)) return true;
 
-//         return false;
+        return false;
 
-//     }
+    }
 
-//     public void create(String email){
+    public void create(String email, HttpSession session, HttpServletResponse response){
        
-//             String TOKEN_VALUE = UUID.randomUUID().toString();
-//             String SESSION_AUTH_ID_VALUE = UUID.randomUUID().toString();
+         String emailFoud = (String) session.getAttribute(MySesionConfig.EMAIL);
 
-//             request.getSession().setAttribute(SESSION_AUTH_ID, SESSION_AUTH_ID_VALUE);
-//             request.getSession().setAttribute("email", email);
-//             request.getSession().setMaxInactiveInterval(20);
+         if(emailFoud == null){
 
-//             Cookie authCookie = new Cookie(TOKEN_KEY, TOKEN_VALUE);
-//                               authCookie.setHttpOnly(false);
-//                               authCookie.setSecure(true);
+            String token = UUID.randomUUID().toString();
 
-//             Cookie sessionAuthId = new Cookie(SESSION_AUTH_ID, SESSION_AUTH_ID_VALUE);
-//                                 sessionAuthId.setHttpOnly(true);
-//                                 sessionAuthId.setSecure(false);
+            Cookie cookie = new Cookie(MySesionConfig.USER_AUTH_TOKEN, token);
+            cookie.setHttpOnly(false);
+            cookie.setSecure(false);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+      
+            session.setAttribute(MySesionConfig.EMAIL, email);
+            session.setAttribute(MySesionConfig.COOKIE_VALUE, token);
+            session.setAttribute(MySesionConfig.JSESSION_ID, session.getId());
+            session.setMaxInactiveInterval(MySesionConfig.MAX_INERVAL);
 
-//             response.addCookie(authCookie);
-//             response.addCookie(sessionAuthId);
+         }else{
 
-//             System.out.println("session created...");
+            throw new SessionExistException();
 
-//     }
+         }
 
-//     public String getAttribute(String attributeName){
+    }
 
-//         String sessionAuthId = (String) this.request.getSession().getAttribute(attributeName);
+    public String getAttribute(String attributeName){
 
-//         String result = sessionAuthId != null ? sessionAuthId : null;
+        String sessionAuthId = (String) this.request.getSession().getAttribute(attributeName);
 
-//         return result;
+        String result = sessionAuthId != null ? sessionAuthId : null;
 
-//     }
+        return result;
 
-//     public String getCookie(String cookieName){
-//         Cookie[] cookies = this.request.getCookies();
-//         if (cookies != null) {
-//             for (Cookie cookie : cookies) {
-//                 if (cookie.getName().equals(cookieName)) {
-//                     return cookie.getValue();
-//                 }
-//             }
-//         }
-//         return null;
-//     }
+    }
 
-//     public void close(){
+    public String getCookie(String cookieName){
+        Cookie[] cookies = this.request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(cookieName)) {
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
+    }
 
-//         request.getSession().invalidate();
+    public void close(){
 
-//     }
+        request.getSession().invalidate();
 
-// }
+    }
+
+}

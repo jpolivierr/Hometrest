@@ -16,7 +16,6 @@
     border: none;
     border-radius: 10px;
     background: var(--light-color);
-    border: 1px solid #70879f78;
     cursor: pointer;
 }
 

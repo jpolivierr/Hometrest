@@ -10,20 +10,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.appvenir.hometrest.Authentication.MyUserDetailService;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final MyUserDetailService myUserDetailService;
     private final String home = "/**";
     private final String api = "/api/**";
     // private final String logIn = "/process-login";
-
-    public SecurityConfig(MyUserDetailService myUserDetailService){
-        this.myUserDetailService = myUserDetailService;
-    }
 
 
     @Bean
@@ -47,8 +40,7 @@ public class SecurityConfig {
                                  )                                
             .headers(headers -> headers
                                  .contentTypeOptions(contentTypeOptions -> contentTypeOptions.disable())
-                             )                            
-            .userDetailsService(myUserDetailService);
+                             );
 
             
         return http.build();
@@ -72,8 +64,7 @@ public class SecurityConfig {
                                  )                                
             .headers(headers -> headers
                                  .contentTypeOptions(contentTypeOptions -> contentTypeOptions.disable())
-                             )                            
-            .userDetailsService(myUserDetailService);
+                             );                       
 
             
         return http.build();

@@ -25,7 +25,7 @@ import { useContext } from 'react';
 
 function App() {
 
-  const {activeUser, setUser, clearUser} = useContext(UserContext)
+  const {activeCookie, activeUser, setUser, clearUser, logout} = useContext(UserContext)
 
   const {
         clientActivityReducer,
@@ -51,7 +51,7 @@ function App() {
 
    useLayoutEffect(()=>{
 
-    if(!getCookie(USER_AUTH_TOKEN)) return
+    if(!activeCookie) return
 
     setIsLoading(true)
     makeRequest("GET", URL.GET_ACCOUNT )
@@ -64,8 +64,7 @@ function App() {
     console.log(status)
 
     if(status == 403){
-      clearUser()
-      deleteCookie(USER_AUTH_TOKEN)
+      logout()
       setIsLoading(false)
       return
     }
@@ -73,7 +72,6 @@ function App() {
     if(status == 200){
       const user = formResponse.body
       setUser(user)
-      console.log(getCookie(USER_AUTH_TOKEN))
       setIsLoading(false)
     }
 
@@ -104,14 +102,6 @@ function App() {
 
 
   //  setActivityTimer()
-
-  
-
-  useEffect(()=>{
-
-        // makeRequest("GET", URL.GET_ACCOUNT )
-
-  },[])
 
 
 

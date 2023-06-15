@@ -4,31 +4,36 @@ import MainButton from "../../buton/MainButton";
 import LoadingEffect from "../../../lib/loadingEffect/loading/loadingEffect";
 import useForm from "../useForm";
 import URL from "../../../Config/urls";
+import { useContext } from "react";
+import UserContext from "../../userState/UserState";
 
 
-const Signup= () =>{
+const Update = () =>{
 
-    const {submit, updateFormField, formError, loading} = useForm(URL.SIGNUP)
+    const {submit, updateFormField, formError, loading} = useForm(URL.SIGNUP,"PUT")
 
-// console.log(formState)
+    const {activeUser} = useContext(UserContext)
+
+    const {firstName, lastName, email} = activeUser
+
 
     return(
 
         <form style={{margin: "auto"}}
-           className="avalon text-left av-shadow" 
+           className="avalon text-left padding-top-bottom-2x padding-top-2x" 
            onSubmit={e => submit(e)}>
 
                 {formError.serverError && 
                     <p className="server-error">{formError.serverError}</p>
                     }
 
-            <h2>Signup</h2>
             <Inputs 
                     label={"First Name"}
                     name = {"firstName"}  
                     required = {true}
                     formError = {formError}
-                     updateFormField = {updateFormField}
+                    updateFormField = {updateFormField}
+                    defaultValue = {firstName}
 
                     />
 
@@ -38,6 +43,7 @@ const Signup= () =>{
                     required = {true}
                     formError = {formError}
                      updateFormField = {updateFormField}
+                     defaultValue = {lastName}
 
                     />
 
@@ -47,27 +53,13 @@ const Signup= () =>{
                     required = {true}
                     formError = {formError}
                      updateFormField = {updateFormField}
+                     defaultValue = {email}
 
                     />
 
-            <Inputs 
-                    label={"Password"}
-                    name = {"password"}  
-                    required = {true}
-                    formError = {formError}
-                     updateFormField = {updateFormField}
-                    />
-
-            <Inputs 
-                    label={"Re-enter Password"}
-                    name = {"password2"}  
-                    required = {true}
-                    formError = {formError}
-                     updateFormField = {updateFormField}
-                    />
 
             <MainButton 
-                      label="Submit"
+                      label="Update"
                       Class=" button main-btn"
                       type="submit"
                        loadingEffect={<LoadingEffect 
@@ -84,4 +76,4 @@ const Signup= () =>{
 
 }
 
-export default Signup
+export default Update

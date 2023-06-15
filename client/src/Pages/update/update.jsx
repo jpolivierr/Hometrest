@@ -1,36 +1,31 @@
 
-import { useEffect } from "react"
-import {urlParcer} from "../../Util/urlParcer"
+import { useEffect, useContext } from "react"
 import useRequest from "../../lib/MakeRequest/MakeRequest"
 import useReduxMng from "../../hooks/useReduxMng"
 import NewUpdateForm from "../../components/Forms/NewUpdateForm"
 import ChangePasswordForm from "../../components/Forms/ChangePasswordForm"
 import MainButton from "../../components/buton/MainButton"
 import LoadingEffect from "../../lib/loadingEffect/loading/loadingEffect"
-import useSessionMng from "../../hooks/useSessionMng"
 import URL from "../../Config/urls"
+import UserContext from "../../components/userState/UserState"
+import UpdateForm from "../../components/Form/update/update.view"
+import useSessionMng from "../../hooks/useSessionMng"
 import "./style.css"
-import { USER_AUTH_TOKEN } from "../../Config/authToken"
 
 
 const Update = (props) =>{
 
     const {Class, id} = props
 
-    const {activeUserReducer} = useReduxMng()
-    const{makeRequest, formResponse, loading} = useRequest()
-    const {deleteStorageData} = useSessionMng(USER_AUTH_TOKEN)
-    const userToken = activeUserReducer.token
+    const{makeRequest, formResponse, loading, status} = useRequest()
 
-    useEffect(()=>{
-        
-        urlParcer()
+    const { getCookie, deleteCookie} = useSessionMng()
 
-    },[])
+    const {activeUser} = useContext(UserContext)
 
-    const submit = (e) =>{
-
-        makeRequest("GET",URL.DELETE_ACCOUNT)
+    const submit = () =>{
+              
+        makeRequest("DELETE",URL.DELETE_ACCOUNT)
 
     }
 
@@ -38,11 +33,9 @@ const Update = (props) =>{
 
         console.log(formResponse)
 
-        if(formResponse.status === 200){
-
-            deleteStorageData()
-
-            window.location.href = "/"
+        if(status === 204){
+            
+             deleteCookie()
 
         }
 
@@ -51,14 +44,15 @@ const Update = (props) =>{
 
    return(
     
-        userToken && 
+    activeUser.id && 
         <>
             <div id={id} className={`${Class}`}>
                 
                 <div className="container center-content padding-bottom-2x">
                     <div style={{}} className="update-page">
                         <h2>Profile Detail</h2>
-                        <NewUpdateForm />
+                        {/* <NewUpdateForm /> */}
+                        <UpdateForm />
                         <h2>Password <span className="w-msg">(Not available at this time)</span></h2>
                         <ChangePasswordForm />
                         <h2>My account</h2>
