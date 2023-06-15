@@ -6,12 +6,10 @@ export default function useCookies() {
     const [activeCookie, setActiveCookie] = useState(null)
 
     useLayoutEffect(()=>{
-        
+
         getCookie(USER_AUTH_TOKEN)
 
     },[])
-
-    
 
     const getCookie = (cookieName) =>{
 
@@ -29,9 +27,9 @@ export default function useCookies() {
  
      }
 
-     const deleteCookie = (cookieName) =>{
+     const deleteCookie = () =>{
 
-        document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = USER_AUTH_TOKEN + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         setActiveCookie(null)
   
       }

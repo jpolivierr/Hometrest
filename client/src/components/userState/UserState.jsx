@@ -5,7 +5,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({children}) =>{
 
-    const {getCookie, deleteCookie, activeCookie} = useSession()
+    const {deleteCookie, activeCookie} = useSession()
 
     const init = {
         id: null,

@@ -9,104 +9,22 @@ import Listings from './Pages/listings/listings';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import TopNav from './components/Navigaion/topNav';
 import { useEffect, useLayoutEffect, useState } from 'react';
-import useReduxMng from './hooks/useReduxMng';
-import { useLocation } from 'react-router-dom';
-import useRedirectMng from './hooks/useRedirectMng';
-import useSessionMng from './hooks/useSessionMng';
 import useRequest from './lib/MakeRequest/MakeRequest';
 import URL from './Config/urls';
 import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
-import { USER_AUTH_TOKEN } from './Config/authToken';
 import "./styles/forms/avalon.css"
 import UserContext from './components/userState/UserState';
+import UserRequest from './components/httpRequest/userRequest';
 import { useContext } from 'react';
 
 
 
 function App() {
 
-  const {activeCookie, activeUser, setUser, clearUser, logout} = useContext(UserContext)
-
-  const {
-        clientActivityReducer,
-         activeUserReducer,
-         setSearch,
-         setAuthentication,
-         setToken,
-         searchReducer,
-        } = useReduxMng()
-
-
-        // console.log(clientActivityReducer)
-
-  const { makeRequest, formResponse, loading, status } = useRequest()
-
-  // const location = useLocation()
-
-  // const {pathMng} = useRedirectMng()
-
-  const { getCookie, deleteCookie, setActivityTimer, deleteStorageData} = useSessionMng(USER_AUTH_TOKEN)
-
-   const [isLoading, setIsLoading] = useState(false)
-
-   useLayoutEffect(()=>{
-
-    if(!activeCookie) return
-
-    setIsLoading(true)
-    makeRequest("GET", URL.GET_ACCOUNT )
-
-   },[])
-
-   useEffect(()=>{
-
-    console.log(formResponse)
-    console.log(status)
-
-    if(status == 403){
-      logout()
-      setIsLoading(false)
-      return
-    }
-
-    if(status == 200){
-      const user = formResponse.body
-      setUser(user)
-      setIsLoading(false)
-    }
-
-    
-
-
- },[formResponse])
-
-  //  const {setActivityTimer} = useInactivityTimer(10, deleteStorageData);
-
-  //  const userIsAuthenticated = getTokens(USER_AUTH_TOKEN)
-
-  //      useEffect(()=>{
-    
-  //     pathMng(location.pathname)
-  
-  //   },[location.pathname])
-
-  // useLayoutEffect(()=>{
-
-  //   if(!userIsAuthenticated){
-
-  //      setIsLoading(false)
-
-  //   }
-
-  // },[])
-
-
-  //  setActivityTimer()
-
-
+  const {loading} = UserRequest()
 
   return (
-            isLoading ? <LoadingEffect 
+        loading ? <LoadingEffect 
               isShowing = {loading} 
               elementClass="basic-loading"
               type="ring"/> : 

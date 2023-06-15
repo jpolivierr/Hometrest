@@ -11,12 +11,12 @@ const TopNav = () =>{
     const {activeUserReducer} = useReduxMng()
     const user = activeUserReducer.userInfo
     const token = activeUserReducer.token
-    const {activeUser} = useContext(UserContext)
+    const {activeUser, logout} = useContext(UserContext)
 
 
     return(
         <>
-        {!activeUser.id ? <LogOutNav/> : <LogInNav user={activeUser}/>}
+        {!activeUser.id ? <LogOutNav/> : <LogInNav logOut = {logout} user={activeUser}/>}
         </>
                                
      

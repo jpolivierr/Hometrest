@@ -20,13 +20,11 @@ import NavList from "../../list/NavList"
 
 const LogInNav = (props) =>{
 
-    const {user} = props
+    const {user, logOut} = props
     const {firstName, lastName, email} = user
 
     // const {isShowing, toggle, motion } = useModal(); 
     const {makeRequest, formResponse, loading, status} = useRequest()
-
-    const {deleteStorageData, deleteCookie} = useSessionMng(USER_AUTH_TOKEN)
 
     const {toggle, renderModal, addChildElement, isShowing} = useMyModal({
         type: "slide",
@@ -73,8 +71,7 @@ const LogInNav = (props) =>{
 
         if(status == 204){
 
-             deleteCookie()
-
+             logOut()
              window.location.href="/"
 
             
