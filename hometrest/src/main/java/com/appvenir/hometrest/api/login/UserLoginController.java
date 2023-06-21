@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appvenir.hometrest.Exceptions.SessionExistException;
+import com.appvenir.hometrest.RedirectResponse.RedirectResponse;
 import com.appvenir.hometrest.SessionManagement.SessionManagement;
 import com.appvenir.hometrest.api.user.User;
 import com.appvenir.hometrest.sessionConfig.MySesionConfig;
@@ -30,14 +31,17 @@ public class UserLoginController {
 
         private UserLoginService userLoginService;
         private SessionManagement sessionMng;
+        private RedirectResponse redirectResponse;
 
         public UserLoginController(
                       UserLoginService userLoginService, 
-                      SessionManagement sessionMng
+                      SessionManagement sessionMng,
+                      RedirectResponse redirectResponse
                       ){
 
             this.userLoginService = userLoginService;
             this.sessionMng = sessionMng;
+            this.redirectResponse = redirectResponse;
 
         }
 
@@ -52,9 +56,9 @@ public class UserLoginController {
 
         }
 
-        @ResponseStatus(HttpStatus.NO_CONTENT)
+        @ResponseStatus(HttpStatus.FOUND)
         @PostMapping(path = "")
-        public void login(
+        public RedirectResponse login(
                            @Valid @RequestBody UserLogin userLogin, 
                              HttpSession session,
                              HttpServletResponse response
@@ -63,6 +67,11 @@ public class UserLoginController {
             User user = userLoginService.authenticate(userLogin.getEmail(), userLogin.getPassword());
 
             sessionMng.create(user.getEmail(), session, response);
+
+            redirectResponse.setRedirect(true);
+            redirectResponse.setRedirectLink("/");
+            return redirectResponse;
+
 
         }
     

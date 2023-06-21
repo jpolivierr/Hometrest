@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.appvenir.hometrest.ApiResponse.ApiResponse;
 import com.appvenir.hometrest.Exceptions.UserNotFoundException;
+import com.appvenir.hometrest.RedirectResponse.RedirectResponse;
 import com.appvenir.hometrest.SessionManagement.SessionManagement;
 import com.appvenir.hometrest.sessionConfig.MySesionConfig;
 
@@ -30,20 +31,23 @@ public class UserController {
     private ApiResponse apiResponse;
     private UserService userService;
     private SessionManagement sessionMng;
+    private RedirectResponse redirectResponse;
 
     UserController(
                     ApiResponse apiResponse,
                     UserService userService,
-                    SessionManagement sessionMng){
+                    SessionManagement sessionMng,
+                    RedirectResponse redirectResponse){
         this.apiResponse = apiResponse;
         this.userService = userService;
         this.sessionMng = sessionMng;
+        this.redirectResponse = redirectResponse;
     }
 
     // Create a new user
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.FOUND)
     @PostMapping(path="")
-    public void addNewUser(@Valid @RequestBody User user, 
+    public RedirectResponse addNewUser(@Valid @RequestBody User user, 
                                     HttpSession session,
                                     HttpServletResponse response){
 
@@ -53,10 +57,13 @@ public class UserController {
 
          if(userFound) throw new UserNotFoundException();
 
-        
         userService.createUser(user);
         
         sessionMng.create(user.getEmail(), session, response);
+
+            redirectResponse.setRedirect(true);
+            redirectResponse.setRedirectLink("/");
+            return redirectResponse;
     }
 
     // Update user
@@ -74,7 +81,7 @@ public class UserController {
 
         if(email == null) throw new AccessDeniedException("UNAUTHORIZED");
 
-        User userFound = userService.findUser(email);
+        UserDTO userFound = userService.findUserDTO(email);
 
         return apiResponse.create(200, "success", userFound);
     }
@@ -86,7 +93,8 @@ public class UserController {
     public void deleteUser(HttpSession session) throws AccessDeniedException{
 
         String email = (String) session.getAttribute(MySesionConfig.EMAIL);
-
+         System.out.println("=============");
+         System.out.println("DELETING");
         if(email == null) throw new AccessDeniedException("UNAUTHORIZED");
 
         session.invalidate();

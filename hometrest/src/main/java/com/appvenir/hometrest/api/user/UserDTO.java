@@ -8,18 +8,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-@Entity
-@Table(name="User")
-public class User {
+public class UserDTO {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -38,9 +34,6 @@ public class User {
     @Email(message = "Invalid email")
     private String email;
 
-    @Column(name = "password")
-    @NotBlank(message = "Password is required")
-    private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("user")
@@ -55,15 +48,6 @@ public class User {
         this.likedProperties = likedProperties;
     }
 
-    public UserDTO userDTO(){
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(this.id);
-        userDTO.setFirstName(this.firstName);
-        userDTO.setLastName(this.lastName);
-        userDTO.setEmail(this.email);
-        userDTO.setLikedProperties(this.likedProperties);
-        return userDTO;
-    }
 
     public Integer getId() {
         return this.id;
@@ -103,14 +87,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
     
 }

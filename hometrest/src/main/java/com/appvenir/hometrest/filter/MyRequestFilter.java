@@ -44,6 +44,7 @@ public class MyRequestFilter implements Filter {
         
         if( session == null ) throw new AccessDeniedException("Unauthorized here");
 
+
         String email = (String) session.getAttribute(MySesionConfig.EMAIL);
 
         if( email == null){

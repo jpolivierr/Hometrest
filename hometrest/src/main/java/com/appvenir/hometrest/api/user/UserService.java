@@ -61,6 +61,17 @@ public class UserService {
         
     }
 
+    // Find user
+    public UserDTO findUserDTO(String email){ 
+
+        Optional<User> getUser = userRepository.findByEmail(email);
+        User userFound = getUser.orElseThrow(UserNotFoundException::new);
+        return userFound.userDTO();
+        
+    }
+
+
+
     // delete user
     public void deleteUser(String email){
 

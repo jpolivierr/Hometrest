@@ -1,8 +1,6 @@
 
 import { useEffect, useContext } from "react"
 import useRequest from "../../lib/MakeRequest/MakeRequest"
-import useReduxMng from "../../hooks/useReduxMng"
-import NewUpdateForm from "../../components/Forms/NewUpdateForm"
 import ChangePasswordForm from "../../components/Forms/ChangePasswordForm"
 import MainButton from "../../components/buton/MainButton"
 import LoadingEffect from "../../lib/loadingEffect/loading/loadingEffect"
@@ -19,9 +17,7 @@ const Update = (props) =>{
 
     const{makeRequest, formResponse, loading, status} = useRequest()
 
-    const { getCookie, deleteCookie} = useSessionMng()
-
-    const {activeUser} = useContext(UserContext)
+    const {activeUser, logout} = useContext(UserContext)
 
     const submit = () =>{
               
@@ -35,7 +31,8 @@ const Update = (props) =>{
 
         if(status === 204){
             
-             deleteCookie()
+            logout()
+             window.location.href = "/"
 
         }
 

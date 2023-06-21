@@ -3,6 +3,8 @@ package com.appvenir.hometrest.api.user;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.catalina.User;
+
 import com.appvenir.hometrest.api.likedProperties.LikeProperties;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -17,10 +19,11 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
+
 @Entity
 @Table(name="User")
-public class User {
-
+public class UserRegistration {
+    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
@@ -55,15 +58,6 @@ public class User {
         this.likedProperties = likedProperties;
     }
 
-    public UserDTO userDTO(){
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(this.id);
-        userDTO.setFirstName(this.firstName);
-        userDTO.setLastName(this.lastName);
-        userDTO.setEmail(this.email);
-        userDTO.setLikedProperties(this.likedProperties);
-        return userDTO;
-    }
 
     public Integer getId() {
         return this.id;

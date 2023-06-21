@@ -8,13 +8,8 @@ export default function UserRequest() {
 
   const {activeCookie, setUser, logout} = useContext(UserContext)
 
-  const { makeRequest, formResponse, loading, status } = useRequest()
+  const { makeRequest, response, serverError, loading, status } = useRequest()
 
-  // const fetchUser = () =>{
-
-  //      makeRequest("GET", URL.GET_ACCOUNT )
-
-  // }
 
   useLayoutEffect(()=>{
 
@@ -25,22 +20,24 @@ export default function UserRequest() {
 
    },[activeCookie])
 
-  useEffect(()=>{
+   useEffect(()=>{
 
-    console.log("formResponse",formResponse)
-    console.log("status", status)
-
-    if(status === 403){
+    if(serverError){
       logout()
-      return
     }
 
-    if(status === 200){
-      const user = formResponse.body
+   },[serverError])
+
+  useEffect(()=>{
+
+    console.log(response)
+
+    if(response){
+      const user = response.body
       setUser(user)
     }
 
-  },[formResponse])
+  },[response])
 
   return {
             loading,

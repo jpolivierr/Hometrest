@@ -10,6 +10,9 @@ import { deepSearch } from "../../../Util/getValueByKey"
 import { Link } from "react-router-dom"
 import { USER_AUTH_TOKEN } from "../../../Config/authToken"
 
+import UserContext from "../../userState/UserState"
+import { useContext } from "react"
+
 import "../style.css"
 import "./style.css"
 
@@ -18,10 +21,10 @@ import "./style.css"
 import { useEffect, useState } from "react"
 import NavList from "../../list/NavList"
 
-const LogInNav = (props) =>{
+const LogInNav = () =>{
 
-    const {user, logOut} = props
-    const {firstName, lastName, email} = user
+    const {activeUser, logout} = useContext(UserContext)
+    const {firstName, lastName, email} = activeUser
 
     // const {isShowing, toggle, motion } = useModal(); 
     const {makeRequest, formResponse, loading, status} = useRequest()
@@ -71,7 +74,7 @@ const LogInNav = (props) =>{
 
         if(status == 204){
 
-             logOut()
+            logout()
              window.location.href="/"
 
             
@@ -97,7 +100,7 @@ const LogInNav = (props) =>{
                                         <div className="hideMobile flex-space-between gap-3x user-nav-info">
                                             
                                             <h3 className="user-greeting">
-                                                Hi, {user.firstName}
+                                                Hi, {activeUser.firstName}
                                             </h3>
 
                                             <button className="user-nav-likes">
