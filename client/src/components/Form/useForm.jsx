@@ -26,29 +26,21 @@ const FormLogin = (URL, method) =>{
 
      useEffect(()=>{
 
-        console.log(serverError)
         if(serverError){
             setFormError({serverError: serverError.message})
         }
+
         
-     },[serverError])
-
-
-     useEffect(()=>{
-
-        console.log(fieldError)
         if(fieldError){
             setFormError(fieldError.errors)
         }
+
+        if(response){
+            console.log(response)
+        }
+
         
-     },[fieldError])
-
-
-     useEffect(()=>{
-
-        console.log(response)
-
-     },[response])
+     },[serverError, fieldError, response])
 
 
 

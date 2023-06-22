@@ -1,8 +1,8 @@
 import "./style.css"
 import LogOutNav from "./logOutNav"
-import LogInNav from "./logInNav/logInNav"
+import LogInNav from "./logInNav"
 
-import UserContext from "../userState/UserState"
+import UserContext from "../userContext/UserState"
 import { useContext } from "react"
 
 const TopNav = () =>{

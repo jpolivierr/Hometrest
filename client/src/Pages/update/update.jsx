@@ -1,13 +1,10 @@
 
-import { useEffect, useContext } from "react"
-import useRequest from "../../lib/MakeRequest/MakeRequest"
+import { useContext } from "react"
 import ChangePasswordForm from "../../components/Forms/ChangePasswordForm"
 import MainButton from "../../components/buton/MainButton"
 import LoadingEffect from "../../lib/loadingEffect/loading/loadingEffect"
-import URL from "../../Config/urls"
-import UserContext from "../../components/userState/UserState"
+import UserContext from "../../components/userContext/UserState"
 import UpdateForm from "../../components/Form/update/update.view"
-import useSessionMng from "../../hooks/useSessionMng"
 import "./style.css"
 
 
@@ -15,28 +12,7 @@ const Update = (props) =>{
 
     const {Class, id} = props
 
-    const{makeRequest, formResponse, loading, status} = useRequest()
-
-    const {activeUser, logout} = useContext(UserContext)
-
-    const submit = () =>{
-              
-        makeRequest("DELETE",URL.DELETE_ACCOUNT)
-
-    }
-
-    useEffect(()=>{
-
-        console.log(formResponse)
-
-        if(status === 204){
-            
-            logout()
-             window.location.href = "/"
-
-        }
-
-    },[formResponse])
+    const {activeUser, deleteAccount, loading} = useContext(UserContext)
 
 
    return(
@@ -55,7 +31,7 @@ const Update = (props) =>{
                         <h2>My account</h2>
                         <div className="padding-top">
                              <MainButton 
-                             clickEvent={submit}
+                             clickEvent={deleteAccount}
                                 label="Delete account"
                                 Class=" button "
                                 type="submit"

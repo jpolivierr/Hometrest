@@ -9,7 +9,7 @@ import './App.css';
 import {Provider} from "react-redux";
 import {store} from './_state/store'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
-import { UserProvider } from './components/userState/UserState';
+import { UserProvider } from './components/userContext/UserState';
 import { ModalProvider, modalProvider } from './components/modals/modalContext';
 
 
@@ -23,11 +23,13 @@ root.render(
    //  <React.StrictMode> 
     <Provider store={store}>
       <Router> 
-        <ModalProvider>
+
           <UserProvider>
-            <App />
+            <ModalProvider>
+               <App />
+            </ModalProvider> 
           </UserProvider>
-          </ModalProvider> 
+
       </Router>
     </Provider>
     

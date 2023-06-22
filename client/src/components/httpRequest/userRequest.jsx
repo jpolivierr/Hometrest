@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import useRequest from '../../lib/MakeRequest/MakeRequest'
-import UserContext from '../userState/UserState'
+import UserContext from '../userContext/UserState'
 import { useContext, useLayoutEffect } from 'react'
 import URL from '../../Config/urls'
 
 export default function UserRequest() {
 
-  const {activeCookie, setUser, logout} = useContext(UserContext)
+  const {activeCookie, setUser, logout, clearUser} = useContext(UserContext)
 
   const { makeRequest, response, serverError, loading, status } = useRequest()
 
@@ -20,22 +20,22 @@ export default function UserRequest() {
 
    },[activeCookie])
 
-   useEffect(()=>{
 
-    if(serverError){
-      logout()
+
+   useEffect(()=>{ 
+
+    if(serverError || !response){
+      clearUser()
+      return
     }
 
-   },[serverError])
-
-  useEffect(()=>{
-
-    if(response){
+     if(response){
       const user = response.body
       setUser(user)
     }
 
-  },[response])
+   },[serverError, response])
+
 
   return {
             loading,

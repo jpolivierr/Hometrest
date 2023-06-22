@@ -2,7 +2,7 @@ import { useState } from "react"
 
 const useRequest = () =>{
 
-    const [response, setResponse] = useState({})
+    const [response, setResponse] = useState(null)
     const [serverError, setServerError] = useState(null)
     const [fieldError, setFieldError] = useState(null)
     const [status, setStatus] = useState(null)
@@ -46,8 +46,9 @@ const useRequest = () =>{
                         response = await fetch(url)
                 }
 
-                console.log(response)
                 console.log(response.status)
+                console.log(response)
+                
 
                 switch(response.status){
                      case 204 :

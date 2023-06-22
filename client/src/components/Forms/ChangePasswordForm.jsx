@@ -27,18 +27,6 @@ const ChangePasswordForm = () =>{
 
        const [formState, setFormState] = useState({})
 
-       const {makeRequest, formResponse, loading} = useRequest()
-
-       const {startSession} = useSessionMng(USER_AUTH_TOKEN)
-
-       const {setUser, activeUserReducer} = useReduxMng()
-
-       const fName = deepSearch(activeUserReducer,["userInfo","first_name"],"john")
-        const lName = deepSearch(activeUserReducer,["userInfo","last_name"],"Smith")
-        const email = deepSearch(activeUserReducer,["userInfo","email"],"demo@gmail.com")
-
-       
-
     const updateFormField = (key, value) =>{
          
               const formFieldCopy = {...formState}
@@ -49,77 +37,15 @@ const ChangePasswordForm = () =>{
 
      }
 
-     useEffect(()=>{
-
-        const serverError = errorFromServer(formResponse, formError)
-
-        if(serverError){
-
-            setFormError(serverError)
-
-        }else{
-
-            setFormError({})
-
-        }
-
-     },[formResponse])
-
-     useEffect(()=>{
-
-  
-        if(
-            formResponse.status === 200 &&
-            formResponse.body &&
-            formResponse.headers
-            ){
-
-  
-                setUser(formResponse.body)
-          
-        }else{
-  
-          console.log("Incorrect response..")
-  
-        }
-
-        console.log(formResponse)
-  
-      },[formResponse])
-
-
-    const validateFields = () =>{
-
-        const formErrorCopy = {...formError}
-
-        formErrorCopy.errors = false
-
-        setFormError(formErrorCopy)
-
-        return formErrorCopy
-
-     }
 
      const submit = async (e) =>{
 
          e.preventDefault()
          
-        // if(validateFields().errors){
-
-        //     console.log("error found")
-
-        // }else{
-
-        //      console.log("Submit")
-            
-        //     console.log(formState);
-        //     await makeRequest("POST", URL.UPDATE_ACCOUNT, formState)
-            
-        // }
                 
 }
 
-// console.log(formState)
+
 
     return(
 

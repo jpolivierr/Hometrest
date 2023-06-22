@@ -78,7 +78,8 @@ font-weight: 600;
 }
 
 .user-settings{
-    min-width: 250px;
+    margin-top: 1rem;
+    min-width: 350px;
 }
 
 .user-log-out button{

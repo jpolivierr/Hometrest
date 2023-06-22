@@ -86,10 +86,10 @@ public class UserController {
     }
 
     // delete user
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.FOUND)
     @DeleteMapping(path="")
     @Transactional
-    public void deleteUser(HttpSession session) throws AccessDeniedException{
+    public @ResponseBody RedirectResponse  deleteUser(HttpSession session) throws AccessDeniedException{
 
         String email = (String) session.getAttribute(MySesionConfig.EMAIL);
          System.out.println("=============");
@@ -100,6 +100,10 @@ public class UserController {
         session = null;
 
         userService.deleteUser(email);
+
+        redirectResponse.setRedirect(true);
+        redirectResponse.setRedirectLink("/");
+        return redirectResponse;
 
     }
     

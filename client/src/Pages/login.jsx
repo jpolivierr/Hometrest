@@ -3,7 +3,7 @@ import { useEffect, useLayoutEffect } from "react"
 import {urlParcer} from "../Util/urlParcer"
 import useRequest from "../lib/MakeRequest/MakeRequest"
 import useReduxMng from "../hooks/useReduxMng"
-import TopNav from "../components/Navigaion/topNav"
+import TopNav from "../components/navBar/topNav"
 import NewLoginForm from "../components/Forms/NewLoginForm"
 import LoginForm from "../components/Form/login/Login.view"
 

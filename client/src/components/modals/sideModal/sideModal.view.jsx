@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import UserSettings from '../../menu/userSettings.view'
 import style from "./sideModal.style.css"
 
 export default function SideModal(props) {
@@ -51,7 +52,7 @@ export default function SideModal(props) {
             <div ref={modalRef} className={`sideModal ${animation} ${visible}`}>
                 <div style={{cursor : "pointer"}} className={`close-btn close_btn`} onClick={toggle}><span>+</span>
                 </div>
-                    <h2>testing</h2>
+                    <UserSettings />
             </div>
             </>
         

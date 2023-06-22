@@ -2,11 +2,9 @@ package com.appvenir.hometrest.SessionManagement;
 
 import java.util.UUID;
 
-import org.springframework.security.core.session.SessionIdChangedEvent;
 import org.springframework.stereotype.Component;
 
 import com.appvenir.hometrest.Exceptions.SessionExistException;
-import com.appvenir.hometrest.api.user.User;
 import com.appvenir.hometrest.sessionConfig.MySesionConfig;
 
 import jakarta.servlet.http.Cookie;
@@ -17,18 +15,13 @@ import jakarta.servlet.http.HttpSession;
 @Component
 public class SessionManagement {
 
-    private final static String SESSION_AUTH_ID = "SESSION_AUTH_ID";
-    private final static String TOKEN_KEY = "AuthorizationToken";
 
     private HttpServletRequest request;
-    private HttpServletResponse response;
-    private HttpSession session;
+
     
     public SessionManagement(HttpServletRequest request, HttpServletResponse response, HttpSession session){
 
         this.request = request;
-        this.response = response;
-        this.session = session;
 
     }
 
@@ -47,9 +40,16 @@ public class SessionManagement {
 
     public void create(String email, HttpSession session, HttpServletResponse response){
        
-         String emailFoud = (String) session.getAttribute(MySesionConfig.EMAIL);
+         String cookieValue = (String) session.getAttribute(MySesionConfig.COOKIE_VALUE);
 
-         if(emailFoud == null){
+         String emailFound = (String) session.getAttribute(MySesionConfig.EMAIL);
+
+         if(emailFound != null || cookieValue != null){
+
+            throw new SessionExistException();
+
+         }
+     
 
             String token = UUID.randomUUID().toString();
 
@@ -64,11 +64,7 @@ public class SessionManagement {
             session.setAttribute(MySesionConfig.JSESSION_ID, session.getId());
             session.setMaxInactiveInterval(MySesionConfig.MAX_INERVAL);
 
-         }else{
-
-            throw new SessionExistException();
-
-         }
+       
 
     }
 
