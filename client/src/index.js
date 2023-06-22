@@ -10,6 +10,7 @@ import {Provider} from "react-redux";
 import {store} from './_state/store'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import { UserProvider } from './components/userState/UserState';
+import { ModalProvider, modalProvider } from './components/modals/modalContext';
 
 
 
@@ -21,10 +22,12 @@ root.render(
 
    //  <React.StrictMode> 
     <Provider store={store}>
-      <Router>  
+      <Router> 
+        <ModalProvider>
           <UserProvider>
             <App />
           </UserProvider>
+          </ModalProvider> 
       </Router>
     </Provider>
     

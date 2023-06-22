@@ -30,8 +30,6 @@ export default function UserRequest() {
 
   useEffect(()=>{
 
-    console.log(response)
-
     if(response){
       const user = response.body
       setUser(user)
@@ -43,4 +41,5 @@ export default function UserRequest() {
             loading,
             status
   }
+  
 }

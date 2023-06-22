@@ -3,6 +3,8 @@ import Modal from "../../lib/Modal/modal"
 import SlideWindow from "../../lib/Modal/Windows/slideWindow"
 import ModalOverlay from "../../lib/Modal/Overlays/modalOverlay"
 import MainButton from "../buton/MainButton"
+import ModalContext from "../modals/modalContext"
+import { useContext } from "react"
 import "./style.css"
 
 
@@ -12,7 +14,8 @@ import NavList from "../list/NavList"
 
 const LogOutNav = () =>{
 
-    const {isShowing, toggle, motion } = useModal();
+    // const {isShowing, toggle, motion } = useModal();
+    const {toggleSideModal, toggle} = useContext(ModalContext)
 
 
     return(
@@ -31,6 +34,14 @@ const LogOutNav = () =>{
                                         />
 
                                         <div style={{marginLeft: "3rem"}} className="hideMobile flex-space-between gap-1x">
+
+                                 
+                                                <button 
+                                                  onClick={toggleSideModal}
+                                                className="button main-btn">
+                                                    Modal test
+                                                </button>
+                                         
                                             
                                             <a href="/signup">
                                                 <button className="button main-btn">
@@ -60,11 +71,11 @@ const LogOutNav = () =>{
 
 
                         <Modal
-                            isShowing={isShowing}
+                            // isShowing={isShowing}
                            >
                             <ModalOverlay
                                 toggle={toggle}
-                                animated={{time: 200, motion: motion}}
+                                // animated={{time: 200, motion: motion}}
                                 motionType="fade"
                                 seconds=".3s"
                                 from="0"
@@ -74,7 +85,7 @@ const LogOutNav = () =>{
                     <SlideWindow 
                             toggle={toggle}
                             Class=""
-                            animated={{time: 200, motion: motion}}
+                            // animated={{time: 200, motion: motion}}
                             motionType="slide-left"
                             seconds=".2s"
                             from="-300px"

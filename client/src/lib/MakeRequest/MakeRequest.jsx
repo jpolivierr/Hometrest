@@ -59,6 +59,7 @@ const useRequest = () =>{
                         setResponse(await response.json())
                         break
                       case 302 : 
+                      console.log("found 302")
                         const redirecOption = await response.json()
                         if(redirecOption.redirect){
                             window.location.href = redirecOption.redirectLink

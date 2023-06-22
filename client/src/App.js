@@ -8,14 +8,9 @@ import Home from './Pages/home';
 import Listings from './Pages/listings/listings';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import TopNav from './components/Navigaion/topNav';
-import { useEffect, useLayoutEffect, useState } from 'react';
-import useRequest from './lib/MakeRequest/MakeRequest';
-import URL from './Config/urls';
 import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
 import "./styles/forms/avalon.css"
-import UserContext from './components/userState/UserState';
 import UserRequest from './components/httpRequest/userRequest';
-import { useContext } from 'react';
 
 
 
@@ -24,24 +19,29 @@ function App() {
   const {loading} = UserRequest()
 
   return (
+    <>
+        {
         loading ? <LoadingEffect 
-              isShowing = {loading} 
-              elementClass="basic-loading"
-              type="ring"/> : 
-              <div className="App">
-  
-        <TopNav />
-        <Routes>
-        <Route path="/single_property" element={<SingleProperty/>}/>
-        <Route path="/signup" element={<Signup/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/about" element={<About/>}/>
-          <Route path="/listings" element={<Listings/>}/>
-          <Route path="/update" element={<Update/>}/>
-          <Route path="/" element={<Home />}/>
-        </Routes>
+                isShowing = {loading} 
+                elementClass="basic-loading"
+                type="ring"/> : 
+      <div className="App">
+    
+          <TopNav />
+          <Routes>
+          <Route path="/single_property" element={<SingleProperty/>}/>
+          <Route path="/signup" element={<Signup/>}/>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/about" element={<About/>}/>
+            <Route path="/listings" element={<Listings/>}/>
+            <Route path="/update" element={<Update/>}/>
+            <Route path="/" element={<Home />}/>
+          </Routes>
 
-    </div>
+      </div>
+    }
+    </>
+     
   );
 }
 

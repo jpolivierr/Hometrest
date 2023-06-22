@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.appvenir.hometrest.ApiResponse.ApiResponse;
@@ -47,13 +48,11 @@ public class UserController {
     // Create a new user
     @ResponseStatus(HttpStatus.FOUND)
     @PostMapping(path="")
-    public RedirectResponse addNewUser(@Valid @RequestBody User user, 
+    public @ResponseBody RedirectResponse addNewUser(@Valid @RequestBody User user,
                                     HttpSession session,
                                     HttpServletResponse response){
 
          Boolean userFound = userService.userExist(user.getEmail());
-
-         System.out.println(userFound);
 
          if(userFound) throw new UserNotFoundException();
 
@@ -61,9 +60,9 @@ public class UserController {
         
         sessionMng.create(user.getEmail(), session, response);
 
-            redirectResponse.setRedirect(true);
-            redirectResponse.setRedirectLink("/");
-            return redirectResponse;
+        redirectResponse.setRedirect(true);
+        redirectResponse.setRedirectLink("/");
+        return redirectResponse;
     }
 
     // Update user
