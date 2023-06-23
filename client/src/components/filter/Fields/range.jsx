@@ -1,83 +1,30 @@
 import {useEffect, useRef, useState } from "react";
-import fieldView from "../Util/fieldView";
-import { cleanInput } from "../Util/cleanInput";
-import RangeOptions from "../../../components/priceOptions/rangeOptions";
-import { NumberFormat } from "../../../Util/numberFormater";
+import { cleanInput } from "../../../Util/cleanInput";
 import Buttons from "../../../lib/Buttons/button"
+import fieldView from "../../../Util/fieldView";
+import capitalizeWords from "../../../Util/capitalizedWords";
+import { formatNumber, abbreviateNumber } from "../../../Util/formatNumber";
 
 const Range = (props) =>{
-    
-    const minRef = useRef(null)
-    const maxRef = useRef(null)
 
-    const [inputValue, setInputValue] = useState([])
-    const [errorMessage, setErrorMessage] = useState("")
     const [optionState, setOptionState] = useState(false)
-    const [userView, setUserView] = useState("")
-    const [compState, setCompState] = useState(null)
-    const [range, setRange] = useState({})
     const windowRef = useRef(null);
 
-    const {required, 
-           setFormError, 
-           formError, 
-           formStatus,
-           fieldToUpdate,
-           list,
-           defaultValue,
+    const {
            name,
-           updateFormField,
-           onChangefunc, 
-           custom,
            label,
-           options,
-           elementClass
+           updateField,
+           elementClass,
+           value,
+           optionsTitle,
+           dollarSign,
+           minOption,
+           maxOption,
+           optionSuffix
             } = props
 
+      const symbole = dollarSign ? "$" : ""      
 
-    useEffect(()=>{
-
-        if(defaultValue && Object.keys(defaultValue).length > 0){
-
-            setInputValue(formatInput(defaultValue))
-            // setRange(defaultValue)
-        }else{
-
-            setInputValue("")
-
-        }
-
-    },[defaultValue])
-
-    useEffect(()=>{
-
-        if(defaultValue){
-
-            const minElement = minRef.current
-            const minValue = formatSingleInput(defaultValue.min)
-            const minIndex = Array.from(minElement.options).findIndex(option => option.value === minValue);
-
-            minElement.selectedIndex = minIndex === -1 ? 0 : minIndex
-
-            const maxElement = maxRef.current
-            const maxValue = formatSingleInput(defaultValue.max)
-            const maxIndex = Array.from(maxElement.options).findIndex(option => option.value === maxValue);
-
-            maxElement.selectedIndex = maxIndex === -1 ? 0 : maxIndex
-        }
-        
-
-    },[defaultValue])
-
-    useEffect(()=>{
-
-            setInputValue(formatInput(range))
-
-            fieldToUpdate && fieldToUpdate(range)
-
-            updateFormField && updateFormField(name,range)
-
-    },[range])
 
     useEffect(()=>{
     
@@ -94,6 +41,53 @@ const Range = (props) =>{
 
     },[])
 
+    const getSuffix = (count) =>{
+        
+        const s = count > 1 ? "s" : ""
+
+        return optionSuffix ? optionSuffix + s : ""
+
+    }
+
+   
+    const handleMinPrice = (e) =>{
+
+        const result = Number(e.target.value)
+        const valueClone = {...value}
+        valueClone.min = result
+        updateField(name, valueClone)
+          
+    }
+
+    const handleMaxPrice = (e) =>{
+
+        const result = Number(e.target.value)
+        const valueClone = {...value}
+        valueClone.max = result
+        updateField(name, valueClone)
+          
+    }
+
+    const showPriceRangeSelected = () =>{
+
+        console.log(value)
+
+        if(value.min > 0 && value.max > 0){
+            return `${symbole}${abbreviateNumber(value.min)} - ${symbole}${abbreviateNumber(value.max)} ${getSuffix(value.max)}`
+        }
+
+        if(value.min > 0){
+            return `${symbole}${abbreviateNumber(value.min)} ${getSuffix(value.min)}`
+        }
+
+        if(value.max > 0){
+            return `${symbole}${abbreviateNumber(value.max)} ${getSuffix(value.max)}`
+        }
+
+        return label
+
+    }
+
 
     const toggleWindow = () =>{
 
@@ -102,200 +96,76 @@ const Range = (props) =>{
     }
     
 
-    const handleMinimum = (e) =>{
-
-        const value = e.target.value
-
-        const minPrice = NumberFormat.convertToInt(value)
-
-        if(isNaN(minPrice)){
-
-            const rangeClone = {...defaultValue}
-
-            delete rangeClone.min
-
-            setRange(rangeClone)
-
-            return
-        }
-
-        const rangeClone = {...defaultValue}
-        rangeClone.min = minPrice
-
-        setRange(rangeClone)
-   }
-
-   const handleMaximum = (e) =>{
-    
-    const value = e.target.value
-        const maxPrice = NumberFormat.convertToInt(value)
-
-        if(isNaN(maxPrice)){
-
-            const rangeClone = {...defaultValue}
-
-            delete rangeClone.max
-
-            setRange(rangeClone)
-
-            return
-        }
-
-        const rangeClone = {...defaultValue}
-        rangeClone.max = maxPrice
-
-        setRange(rangeClone)
-
- 
-}
-
-    const formatInput = (range) =>{
-
-            let symbole
-            let bkLabel
-            switch(name){
-                case "list_price" :
-                    symbole = "$"
-                    bkLabel = ""
-                    break
-                case "beds" :
-                    symbole = ""
-                    bkLabel = "Bed"
-                    break
-                case "baths" :
-                    symbole = ""
-                    bkLabel = "Bath"
-                    break
-                default : 
-                    symbole = ""
-                    bkLabel = ""
-
-            }
-      
-
-        if(Object.keys(range).length === 0){
-            return ""
-        }
-    
-        if(Object.keys(range).length === 1){
-            for(let keys in range){
-                return symbole + NumberFormat.abbreviateNumber(range[keys]) + " " + bkLabel
-            }
-        }
-    
-        if(Object.keys(range).length === 2){
-    
-            const minPrice = NumberFormat.abbreviateNumber(range.min)
-            const maxPrice = NumberFormat.abbreviateNumber(range.max)
-    
-            
-            return `${symbole}${minPrice} - ${symbole}${maxPrice} ${bkLabel}`
-        }
-    
-       }
-
-       const formatSingleInput = (value) =>{
-
-        let symbole
-        let bkLabel
-        switch(name){
-            case "list_price" :
-                symbole = "$"
-                bkLabel = ""
-                break
-            case "beds" :
-                symbole = ""
-                bkLabel = "Bed"
-                break
-            case "baths" :
-                symbole = ""
-                bkLabel = "Bath"
-                break
-            default : 
-                symbole = ""
-                bkLabel = ""
-        }
-
-        return `${symbole}${NumberFormat.abbreviateNumber(value)} ${bkLabel}`
-
-}
-    
     const showStyle = optionState ? "show" : "hide"
-    let symbole = name === "list_price" && "$" 
 
      return(
         <fieldset className={`${elementClass} options`} ref={windowRef}>
-        {props.label && <h3>{props.label}</h3>}
-        <div className="input-container" 
-                 onClick={()=>{toggleWindow()}}>
-                      <div className={`select-option ${inputValue.length > 0 && "has-value"}`}
-                     onClick={()=>{toggleWindow()}}
-                    >
-                        {inputValue.length === 0 && props.label }
-                        {inputValue}
-                        {props.icon && props.icon}
-                    </div>
-            
-        </div>
-            {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
 
-            <div className={`option-window-container ${showStyle}`}>
-            <div onClick={()=>{toggleWindow()}} className={`select-bk`}></div>
-            <div className={`options-window ${showStyle}`  }>
-                {label && <h3>{label}</h3>}
-                <div className="range-options">
-                    <select
-                    ref={minRef}
-                    onChange={(e)=>{handleMinimum(e)}}
-                    >
-                        {defaultValue && defaultValue.min && 
-                        <option value={formatSingleInput(defaultValue.min)}>
-                            {formatSingleInput(defaultValue.min)}
-                            </option>
-                            }
-                        <option value={"No minimum"}>Min</option>
-                        {options.map((price, index) =>(
-                            <option 
-                            key={index} 
-                            value={formatSingleInput(price)}
-                            >
-                            {formatSingleInput(price)}
-                            </option>
-                        ))}
-                    </select>
+         {/* label */}
+        {props.label && <label>{props.label}</label>}
+    
+          {/* Input value */}
+        <div className={`select-option ${value.length > 0 && "has-value"}`}
+            onClick={()=>{toggleWindow()}}
+        >
+            {value.length === 0 && props.label }
+             {capitalizeWords(showPriceRangeSelected()) }
+            {props.icon && props.icon}
+        </div>
+                     
+
             
-                    <select
-                    ref={maxRef}
-                        onChange={(e)=>{handleMaximum(e)}}
-                    >
-                        {defaultValue && defaultValue.max && 
-                        <option value={formatSingleInput(defaultValue.max)}>
-                            {formatSingleInput(defaultValue.max)}
-                            </option>
+            <div className={`option-window-container ${showStyle}`}>
+                <div onClick={()=>{toggleWindow()}} className={`select-bk`}></div>
+                  
+                  <div className={`options-window ${showStyle}`  }>
+
+                   {optionsTitle && <h3>{optionsTitle}</h3>}
+                   {/* {props.comp} */}
+                    <ul className="option-range">
+                       <li>
+                             <h3>Minimum</h3>
+                             <select onChange={handleMinPrice}>
+                             {
+                                    minOption.map((option, index) => (
+                                        <option 
+                                        key={index}
+                                         value={option}>
+                                    {symbole}{abbreviateNumber(option)} {getSuffix(option)}
+                                 </option>
+                                    ))
                             }
-                        <option value={"No maximum"}>Max</option>
-                        {options.map((price, index) =>(
-                            <option 
-                            key={index} 
-                            value={formatSingleInput(price)}
-                            >
-                            {formatSingleInput(price)}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div className="option-window-button-container">
+                             </select>
+                             
+                       </li>
+
+                       <li>
+                            <h3>Maximum</h3>
+                            <select onChange={handleMaxPrice}>
+
+                                {
+                                    maxOption.map((option, index) => (
+                                        <option 
+                                          key={index}
+                                          value={option}>
+                                    {symbole}{abbreviateNumber(option)} {getSuffix(option)}
+                                 </option>
+                                    ))
+                                }
+                             </select>
+                       </li>
+                    </ul>
+                    <div className="option-window-button-container">
                         <Buttons 
                             label="Done"
                             Class="button main-btn"
                             clickEvent={(e)=>{ e.preventDefault();toggleWindow()}}
                         />
                     </div>
-                </div>
+                    
             </div>
-
-             
-            {formError[name] && <p>{formError[name]}</p>}    
+            </div>
+           
          </fieldset>
      )
 }

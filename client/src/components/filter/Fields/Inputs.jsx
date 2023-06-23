@@ -23,7 +23,7 @@ const Inputs= (props) =>{
 
             const newValue = props.onChangefunc ? props.onChangefunc(value) : value
 
-            props.updateFormField(props.name, newValue) 
+            props.updateField(props.name, newValue) 
 
     }
 
@@ -33,7 +33,7 @@ const Inputs= (props) =>{
 
         let newValue = onOutFocus ? onOutFocus(value) : value
 
-        props.updateFormField(props.name, newValue)
+        props.updateField(props.name, newValue)
     }
     
      return(

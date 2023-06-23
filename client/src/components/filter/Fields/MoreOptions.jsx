@@ -13,7 +13,9 @@ const MoreOptions = (props) =>{
            formError, 
            name,
            children,
-           elementClass
+           elementClass,
+           optionsTitle, 
+           icon
             } = props
 
 
@@ -52,8 +54,8 @@ const MoreOptions = (props) =>{
                     <div className={`select-option ${inputValue.length > 0 && "has-value"}`}
                      onClick={()=>{toggleWindow()}}
                     >
-                        More 
-                       <i className="fa-solid fa-ellipsis-vertical"></i>
+                       {optionsTitle} 
+                       {icon}
                     </div>
                      
                     <div className={`option-window-container ${showStyle}`}>

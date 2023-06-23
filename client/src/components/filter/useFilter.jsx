@@ -37,23 +37,23 @@ const useFilter = () =>{
      })
 
      useEffect(()=>{
-        console.log(searchReducer)    
-        const address = getAddressValue(searchReducer)
+        // console.log(searchReducer)    
+
     
-        setFormState({...formState, city_zip: address})
+        // setFormState({...formState, city_zip: address})
      },[searchReducer])
 
      useEffect(()=>{
 
         console.log(formState)
-        // console.log(parseAddress2(formState.city_zip))
+    
      },[formState])
 
-    const updateFormField = (key, value) =>{
+    const updateField = (key, value) =>{
          
         const formFieldCopy = {...formState}
 
-        if(key = "city_zip"){
+        if(key === "city_zip"){
             const address = parseAddress2(value)
             console.log(address)
             formFieldCopy.city = address.city
@@ -77,7 +77,7 @@ const useFilter = () =>{
 
     return {
             handleSubmit,
-            updateFormField,
+            updateField,
             formState
     }
 

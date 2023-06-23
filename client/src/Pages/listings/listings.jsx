@@ -120,10 +120,6 @@ const Listings = (props) =>{
         
       }
 
-     
-
-      
-
     },[reponse])
    
 
@@ -132,7 +128,7 @@ const Listings = (props) =>{
           <div className="search-result wide-container">
     
             <PropertyFilter />
-            <TopSearchFilter/>
+            {/* <TopSearchFilter/> */}
 
            {!propertiesReducer || propertiesReducer.length === 0 ? <div style={{background: "#eef6f9",height: "87vh"}}></div> :
                <Map 

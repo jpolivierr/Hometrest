@@ -1,42 +1,23 @@
 import {useEffect, useRef, useState } from "react";
-import fieldView from "../Util/fieldView";
-import { cleanInput } from "../Util/cleanInput";
+import { cleanInput } from "../../../Util/cleanInput";
 import Buttons from "../../../lib/Buttons/button"
+import fieldView from "../../../Util/fieldView";
+import capitalizeWords from "../../../Util/capitalizedWords";
 
 const MultiSelect = (props) =>{
 
-    const [inputValue, setInputValue] = useState([])
-    const [errorMessage, setErrorMessage] = useState("")
     const [optionState, setOptionState] = useState(false)
-    const [userView, setUserView] = useState("")
     const windowRef = useRef(null);
 
-    const {required, 
-           setFormError, 
-           formError, 
-           formStatus,
-           fieldToUpdate,
-           list,
-           defaultValue,
+    const {
            name,
-           updateFormField,
-           onChangefunc,
-           elementClass
+           updateField,
+           elementClass,
+           value,
+           optionsTitle,
+           options,
+           dropDown
             } = props
-
-
-    useEffect(()=>{
-
-      if(defaultValue){
-        setUserView(fieldView(name, defaultValue))
-
-        setInputValue(defaultValue)
-      }else{
-        setInputValue([])
-        setUserView("")
-      }
-
-    },[defaultValue])
 
 
     useEffect(()=>{
@@ -54,136 +35,133 @@ const MultiSelect = (props) =>{
 
     },[])
 
-    const handleClick = ( value, funcArray) =>{
+    const handleClick = (e) =>{
+ 
+            const element = e.target
+            const id = element.id
+                
+            let valueClone = [...value]
+            
+            if(valueClone.includes(id)){
 
-      if(Array.isArray(funcArray) && funcArray.length > 0){
+                valueClone = value.filter(name => name !== id)
 
-           let newValue 
+            }else{
 
-           let inputValueClone = [...inputValue]
+                 valueClone.push(id)
+                 valueClone = valueClone
 
-           let newFieldView
+            }
 
+            updateField(name, valueClone)
 
-            funcArray.forEach((customFunction)=>{
-
-                newValue = customFunction(inputValueClone)
-
-            })
-
-            newFieldView = fieldView(name,inputValueClone)
-            setUserView(newFieldView)
-            setInputValue(inputValueClone)
-            fieldToUpdate && fieldToUpdate(inputValueClone)
-            updateFormField && updateFormField(name,inputValueClone)
-
-            listToggleWindow()
-
-        }else{
-          
-            handleOnChange(value)
-
-            listToggleWindow()
-        }
         
     }
 
-    const handleOnChange = (value) =>{
 
-        let inputValueClone = [...inputValue]
-
-        if(!inputValueClone.includes(value)){
-
-            inputValueClone.push(value)
-
-        }else{
-
-            inputValueClone = inputValueClone.filter((input) => input != value)
-
-        }
-
-
-        const newFieldView = fieldView(name,inputValueClone)
-        //  console.log(newFieldView)
-        setUserView(!newFieldView ? cleanInput(inputValueClone) : cleanInput(newFieldView) )
-        setInputValue(inputValueClone)
-        fieldToUpdate && fieldToUpdate(inputValueClone)
-        updateFormField && updateFormField(name,inputValueClone)
-
-    }
-
-    const listToggleWindow = () =>{
-        return
-}
 
     const toggleWindow = () =>{
 
         setOptionState(!optionState)
 
     }
-    
+
 
     const showStyle = optionState ? "show" : "hide"
 
      return(
         <fieldset className={`${elementClass} options`} ref={windowRef}>
+
+         {/* label */}
         {props.label && <label>{props.label}</label>}
-    
-                    <div className={`select-option ${inputValue.length > 0 && "has-value"}`}
-                     onClick={()=>{toggleWindow()}}
-                    >
-                        {inputValue.length === 0 && props.label }
-                        {userView}
+
+
+        { 
+           !dropDown && 
+                    <ul>
+                            {optionsTitle && <h3>{optionsTitle}</h3>}
+
+                            {
+                            options.map((li,index) => (
+                                <li
+                                    key={index}
+                                    id={li.id}
+                                    onClick={handleClick}
+                                >
+                                    {
+                                        !value.includes(li.id) ? 
+                                         <i className="fa-regular fa-square"></i> : 
+                                         <i className="fa-solid fa-square-check"></i>
+                                    }
+                                    { 
+                                        li.name
+                                    }
+                                </li>
+                            ))
+                            }
+                </ul>
+        
+        }
+                     
+        { dropDown && 
+        <>
+                    {/************************************************ */}
+                    {/* INPUT VALUE  */}
+                    <div className={`select-option ${value.length > 0 && "has-value"}`}
+                        onClick={()=>{toggleWindow()}} >
+                        {value.length === 0 && props.label }
+                        {capitalizeWords(fieldView(props.label, value)) }
                         {props.icon && props.icon}
                     </div>
-                     
-        
-            {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}  
 
-            
-            <div className={`option-window-container ${showStyle}`}>
-                <div onClick={()=>{toggleWindow()}} className={`select-bk`}></div>
-                  <div className={`options-window ${showStyle}`  }>
-            
-                   {/* {props.comp} */}
-                    <ul className={list.info.Class}>
-                        {list.info.title && <h3>{list.info.title}</h3>}
-
-                        {
-                          list.lists.map((li,index) => (
-                            <li
-                            style={{display: "flex"}}
-                                 key={index}
-                                 className={li.Class}
-                                 listid={li.name}
-                                 onClick={(e)=>{
-                                     handleClick(li.name,li.handleClick)
-                                     list.info.listEvent && handleClick(li.name,list.info.listEvent())
-                                }}
-                               >
-                                {
-                                    !inputValue.includes(li.name) ? <i className="fa-regular fa-square"></i> : <i className="fa-solid fa-square-check"></i>
-                                }
-                                {
-                                    
-                                    li.el && li.el
-                                }
-                            </li>
-                          ))
-                        }
-                    </ul>
-                    <div className="option-window-button-container">
-                        <Buttons 
-                            label="Done"
-                            Class="button main-btn"
-                            clickEvent={(e)=>{ e.preventDefault();toggleWindow()}}
-                        />
-                    </div>
+                    {/************************************************ */}
+                    {/* DROP DOWN  */}
+                    {/************************************************ */}
                     
-            </div>
-            </div>
+                        <div className={`option-window-container ${showStyle}`}>
+                                        <div onClick={()=>{toggleWindow()}} className={`select-bk`}></div>
+                                        <div className={`options-window ${showStyle}`  }>
+                                    
+                                        {/* {props.comp} */}
+                                            <ul>
+
+                                                {optionsTitle && <h3>{optionsTitle}</h3>}
+
+                                                {
+                                                options.map((li,index) => (
+                                                    <li
+                                                        key={index}
+                                                        id={li.id}
+                                                        onClick={handleClick}
+                                                    >
+                                                        {
+                                                            !value.includes(li.id) ? <i className="fa-regular fa-square"></i> : <i className="fa-solid fa-square-check"></i>
+                                                        }
+                                                        {
+                                                            
+                                                            li.name
+                                                        }
+                                                    </li>
+                                                ))
+                                                }
+                                            </ul>
+
+                                            <div className="option-window-button-container">
+                                                <Buttons 
+                                                    label="Done"
+                                                    Class="button main-btn"
+                                                    clickEvent={(e)=>{ e.preventDefault();toggleWindow()}}
+                                                />
+                                            </div>
+                                            
+                                    </div>
+
+                                </div>
+                            </>
+            
+        }
            
-            {formError[name] && <p>{formError[name]}</p>}    
+           
          </fieldset>
      )
 }
