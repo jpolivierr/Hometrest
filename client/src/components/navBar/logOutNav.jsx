@@ -34,15 +34,7 @@ const LogOutNav = () =>{
                                         />
 
                                         <div style={{marginLeft: "3rem"}} className="hideMobile flex-space-between gap-1x">
-
-                                 
-                                                <button 
-                                                  onClick={toggleSideModal}
-                                                className="button main-btn">
-                                                    Modal test
-                                                </button>
-                                         
-                                            
+                                                                                   
                                             <a href="/signup">
                                                 <button className="button main-btn">
                                                     Sign up

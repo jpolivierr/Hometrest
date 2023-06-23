@@ -46,8 +46,8 @@ const useRequest = () =>{
                         response = await fetch(url)
                 }
 
-                console.log(response.status)
-                console.log(response)
+                // console.log(response.status)
+                // console.log(response)
                 
 
                 switch(response.status){

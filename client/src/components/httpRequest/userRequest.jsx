@@ -24,9 +24,15 @@ export default function UserRequest() {
 
    useEffect(()=>{ 
 
-    if(serverError || !response){
+    if(serverError){
+      console.log("clear cookies...")
       clearUser()
       return
+    }
+
+    if(status === 403 || status === 409){
+      console.log("clear cookies...")
+      clearUser()
     }
 
      if(response){

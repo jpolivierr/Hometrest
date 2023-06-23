@@ -1,6 +1,16 @@
 import { ACTION_TYPE } from "../actions/searchAction"
 
-const init = {}
+const init = {
+    
+    city: "",
+    state_code: "",
+    type: [],
+    status: [],
+    list_price: {min: 0, max: 0},
+    baths: {min: 0, max: 0},
+    beds : {min: 0, max: 0}
+
+}
 
 const searchReducer = (state = init, action) =>{
     switch(action.type){

@@ -10,12 +10,13 @@ import propertiesDemo from "../../propertyDemo"
 import { getParams, updateParam } from "../../Util/urlParcer"
 import { deepSearch } from "../../Util/getValueByKey"
 import URL from "../../Config/urls"
+import PropertyFilter from "../../components/filter/propertyFilter/propertyFilter.view"
 
 const Listings = (props) =>{
 
     const {Class, id} = props
 
-    const {makeRequest, formResponse, loading } = useRequest()
+    const {makeRequest, reponse, loading, status } = useRequest()
 
     const prevData = useRef({});
     const{
@@ -59,20 +60,18 @@ const Listings = (props) =>{
 
         const currentDataJSON = JSON.stringify(searchReducer);
       
-       console.log(prevDataJSON, currentDataJSON)
+      //  console.log(prevDataJSON, currentDataJSON)
         if ((prevDataJSON !== currentDataJSON)) {
-
-            
-          
+   
             const searchReducerCloneJSON = JSON.stringify(searchReducer)
             const searchReducerClone = JSON.parse(searchReducerCloneJSON)
 
            if(!searchReducerClone.limit) searchReducerClone.limit = 50  
 
-           console.log("===================================")
-           console.log("FETCHING...")
+          //  console.log("===================================")
+          //  console.log("FETCHING...")
            prevData.current = searchReducer
-            console.log(searchReducerClone)
+            // console.log(searchReducerClone)
             setLoadingProps(true)
             makeRequest("POST", URL.SEARCH, searchReducerClone)
 
@@ -92,8 +91,8 @@ const Listings = (props) =>{
            if(!searchReducerClone.city && !searchReducerClone.postal_code){
 
              prevData.current = searchReducer
-           console.log("===================================")
-           console.log("INITIAL LOAD")
+          //  console.log("===================================")
+          //  console.log("INITIAL LOAD")
 
             searchReducerClone.city = "jacksonville"
             searchReducerClone.state_code = "FL"
@@ -107,27 +106,32 @@ const Listings = (props) =>{
 
     useEffect(()=>{
 
-      if(formResponse && formResponse.status === 200){
+      // console.log(reponse)
 
-         const homeSearch =  deepSearch(formResponse,["body","data","home_search","results"],[])
+      if(reponse && status === 200){
+
+         const homeSearch =  deepSearch(reponse,["body","data","home_search","results"],[])
 
           setPropertyList(homeSearch)
+
+           if(Object.keys(reponse).length > 0){
+        setLoadingProps(false)
+      }
         
       }
 
-      if(Object.keys(formResponse).length > 0){
-        setLoadingProps(false)
-      }
+     
 
       
 
-    },[formResponse])
+    },[reponse])
    
 
     return(
         <div id={id} className={Class}>
           <div className="search-result wide-container">
     
+            <PropertyFilter />
             <TopSearchFilter/>
 
            {!propertiesReducer || propertiesReducer.length === 0 ? <div style={{background: "#eef6f9",height: "87vh"}}></div> :

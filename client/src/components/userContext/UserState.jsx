@@ -2,13 +2,14 @@ import { createContext, useEffect, useState } from "react";
 import useSession from "../sessionManagement/useSession";
 import useRequest from "../../lib/MakeRequest/MakeRequest";
 import URL from "../../Config/urls";
+import capitalizeWords from "../../Util/capitalizedWords";
 
 const UserContext = createContext();
 
 export const UserProvider = ({children}) =>{
 
     const {makeRequest, response, loading, serverError} = useRequest()
-    const {deleteCookie, activeCookie} = useSession()
+    const {deleteCookie, getCookie, activeCookie} = useSession()
     
 
     const init = {
@@ -37,6 +38,8 @@ export const UserProvider = ({children}) =>{
     const [activeUser, setActiveUser] = useState(init)
 
     const setUser = (user) =>{
+        user.firstName = capitalizeWords(user.firstName)
+        user.lastName = capitalizeWords(user.lastName)
         setActiveUser(user)
     }
 
@@ -55,7 +58,7 @@ export const UserProvider = ({children}) =>{
     }
 
     return(
-        <UserContext.Provider value={{activeCookie, activeUser, loading, setUser, clearUser, logout, deleteAccount}}>
+        <UserContext.Provider value={{activeCookie, getCookie, activeUser, loading, setUser, clearUser, logout, deleteAccount}}>
             {children}
         </UserContext.Provider>
     )

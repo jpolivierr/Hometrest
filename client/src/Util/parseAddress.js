@@ -76,8 +76,6 @@ const states = [
 
         if(parts.length > 0){
 
-          console.log(input, parts.length )
-
              if(parts.length === 2 && input.toLowerCase() === "new york" ){
                address.city = input
                return address
