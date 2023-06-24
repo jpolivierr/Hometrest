@@ -2,11 +2,15 @@ import { useEffect, useState, useCallback, useRef } from "react"
 import useReduxMng from "../../hooks/useReduxMng"
 import { deepSearch } from "../../Util/getValueByKey";
 import { parseAddress2 } from "../../Util/parseAddress";
+import topFilter from "./propertyFilter.view";
 import getAddressValue from "../../Util/getAddressValue";
 
 
+export const TOPFILTER = "TOPFILTER"
 
-const useFilter = () =>{
+const properTyFiler = (props) =>{
+
+    const {view} = props
 
     const {
         searchReducer,
@@ -71,12 +75,24 @@ const handleSubmit = useCallback((e) =>{
     },[]) 
 
 
+    const getView = () =>{
+
+            switch(view){
+                
+                case TOPFILTER :
+                    return <topFilter />
+
+            }
+
+    }
+
+
     return {
             handleSubmit,
             updateField,
             formState
-    }
+       }
 
 }
 
-export default useFilter
+export default properTyFiler

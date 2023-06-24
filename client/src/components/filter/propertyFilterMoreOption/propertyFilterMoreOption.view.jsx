@@ -21,7 +21,7 @@ export default function PropertyFilterMoreOption() {
 
     const { updateField, formState} = useFilter()
 
-    // console.log(formState)
+     console.log(formState)
 const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOptions : salePriceOptions
 
   return (

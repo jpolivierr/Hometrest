@@ -29,80 +29,80 @@ const Listings = (props) =>{
 
     const [loadingProps, setLoadingProps] = useState(false)
 
-    useEffect( ()=>{
+    // useEffect( ()=>{
 
-            if(getParams("search")){
+    //         if(getParams("search")){
    
-                  const filterOptions = getParams("search")
+    //               const filterOptions = getParams("search")
         
-                  setSearch(filterOptions)
+    //               setSearch(filterOptions)
         
-          }
+    //       }
   
-      },[])
+    //   },[])
 
       
-      useEffect(()=>{
+      // useEffect(()=>{
 
-        if(Object.keys(searchReducer).length > 0){
+      //   if(Object.keys(searchReducer).length > 0){
           
-          updateParam(searchReducer, true, "search")
+      //     updateParam(searchReducer, true, "search")
 
-        }
+      //   }
 
-      },[searchReducer])
+      // },[searchReducer])
 
       
 
-       useEffect(()=>{
+      //  useEffect(()=>{
 
-        const prevDataJSON = JSON.stringify(prevData.current)
+      //   const prevDataJSON = JSON.stringify(prevData.current)
 
-        const currentDataJSON = JSON.stringify(searchReducer);
+      //   const currentDataJSON = JSON.stringify(searchReducer);
       
-      //  console.log(prevDataJSON, currentDataJSON)
-        if ((prevDataJSON !== currentDataJSON)) {
+      // //  console.log(prevDataJSON, currentDataJSON)
+      //   if ((prevDataJSON !== currentDataJSON)) {
    
-            const searchReducerCloneJSON = JSON.stringify(searchReducer)
-            const searchReducerClone = JSON.parse(searchReducerCloneJSON)
+      //       const searchReducerCloneJSON = JSON.stringify(searchReducer)
+      //       const searchReducerClone = JSON.parse(searchReducerCloneJSON)
 
-           if(!searchReducerClone.limit) searchReducerClone.limit = 50  
+      //      if(!searchReducerClone.limit) searchReducerClone.limit = 50  
 
-          //  console.log("===================================")
-          //  console.log("FETCHING...")
-           prevData.current = searchReducer
-            // console.log(searchReducerClone)
-            setLoadingProps(true)
-            makeRequest("POST", URL.SEARCH, searchReducerClone)
+      //     //  console.log("===================================")
+      //     //  console.log("FETCHING...")
+      //      prevData.current = searchReducer
+      //       // console.log(searchReducerClone)
+      //       setLoadingProps(true)
+      //       makeRequest("POST", URL.SEARCH, searchReducerClone)
 
-          }
+      //     }
 
-      },[searchReducer])
+      // },[searchReducer])
 
-        useEffect(()=>{
+      //   useEffect(()=>{
 
             
           
-            const searchReducerCloneJSON = JSON.stringify(searchReducer)
-            const searchReducerClone = JSON.parse(searchReducerCloneJSON)
+      //       const searchReducerCloneJSON = JSON.stringify(searchReducer)
+      //       const searchReducerClone = JSON.parse(searchReducerCloneJSON)
 
-           if(!searchReducerClone.limit) searchReducerClone.limit = 50  
+      //      if(!searchReducerClone.limit) searchReducerClone.limit = 50  
 
-           if(!searchReducerClone.city && !searchReducerClone.postal_code){
+      //      if(!searchReducerClone.city && !searchReducerClone.postal_code){
 
-             prevData.current = searchReducer
-          //  console.log("===================================")
-          //  console.log("INITIAL LOAD")
+      //        prevData.current = searchReducer
+      //     //  console.log("===================================")
+      //     //  console.log("INITIAL LOAD")
 
-            searchReducerClone.city = "jacksonville"
-            searchReducerClone.state_code = "FL"
-            setAddress({city: "jacksonville", state_code: "FL"})
-            setLoadingProps(true)
-           }
+      //       searchReducerClone.city = "jacksonville"
+      //       searchReducerClone.state_code = "FL"
+      //       setAddress({city: "jacksonville", state_code: "FL"})
+      //       setLoadingProps(true)
+      //      }
 
           
 
-      },[])
+      // },[])
 
     useEffect(()=>{
 

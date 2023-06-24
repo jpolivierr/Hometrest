@@ -71,8 +71,6 @@ const Range = (props) =>{
 
     const showPriceRangeSelected = () =>{
 
-        console.log(value)
-
         if(value.min > 0 && value.max > 0){
             return `${symbole}${abbreviateNumber(value.min)} - ${symbole}${abbreviateNumber(value.max)} ${getSuffix(value.max)}`
         }

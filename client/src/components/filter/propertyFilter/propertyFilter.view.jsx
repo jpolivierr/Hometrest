@@ -18,8 +18,6 @@ import PropertyFilterMoreOption from '../propertyFilterMoreOption/propertyFilter
 export default function PropertyFilter() {
 
   
-
-
     const {handleSubmit, updateField, formState} = useFilter()
 
     // console.log(formState)
