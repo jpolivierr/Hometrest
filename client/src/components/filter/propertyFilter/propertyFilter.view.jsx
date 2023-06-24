@@ -112,7 +112,7 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
               optionsTitle = {"More"}
               icon = {<i className="fa-solid fa-angle-down"></i>}
            >
-            <PropertyFilterMoreOption/>
+            <PropertyFilterMoreOption value={{updateField, formState}} />
           </MoreOptions>      
 
 

@@ -93,6 +93,42 @@ const Range = (props) =>{
         setOptionState(!optionState)
 
     }
+
+    const getDefaultValue = (array, input) =>{
+
+
+        if(array.includes(input) && input !== 0){
+            return (
+                <option
+                   key={0}
+                   value={input}
+                 >
+                   {symbole + abbreviateNumber(input) + " " + getSuffix(input)}
+                </option>
+            )
+        }
+
+
+    }
+
+    const renderOptions = (index, option, defaultValue) =>{
+
+        if( option === defaultValue && option !== 0) return
+
+        if(option === 0) return (<option key={0} value={0}>Any</option>)
+
+        return (
+            <option
+               key={index}
+               value={option}
+             >
+               {symbole + abbreviateNumber(option) + " " + getSuffix(option)}
+            </option>
+        )
+
+
+
+    }
     
 
     const showStyle = optionState ? "show" : "hide"
@@ -100,17 +136,8 @@ const Range = (props) =>{
      return(
         <fieldset className={`${elementClass} options`} ref={windowRef}>
 
-         {/* label */}
         {props.label && <label>{props.label}</label>}
     
-          {/* Input value
-        <div className={`select-option ${value.min > 0 || value.max > 0 ? "has-value" : ""}`}
-            onClick={()=>{toggleWindow()}}
-        >
-            {value.length === 0 && props.label }
-             {capitalizeWords(showPriceRangeSelected()) }
-            {props.icon && props.icon}
-        </div> */}
 
        {
           !dropDown && 
@@ -187,15 +214,11 @@ const Range = (props) =>{
                             <li>
                                     <h3>Minimum</h3>
                                     <select onChange={handleMinPrice}>
+                                   
+                                    {getDefaultValue(minOption, value.min)}
                                     {
                                             minOption.map((option, index) => (
-                                                <option 
-                                                key={index}
-                                                value={option}
-                                                >
-                                                {option === 0 ? "Any" : symbole + abbreviateNumber(option) + " " + getSuffix(option)}  
-                                                
-                                        </option>
+                                                renderOptions(index,option, value.min)
                                             ))
                                     }
                                     </select>
@@ -206,15 +229,12 @@ const Range = (props) =>{
                                     <h3>Maximum</h3>
                                     <select onChange={handleMaxPrice}>
 
-                                        {
-                                            maxOption.map((option, index) => (
-                                                <option 
-                                                key={index}
-                                                value={option}>
-                                                {option === 0 ? "Any" : symbole + abbreviateNumber(option) + " " + getSuffix(option)} 
-                                        </option>
+                                    {getDefaultValue(maxOption, value.max)}
+                                    {
+                                            minOption.map((option, index) => (
+                                                renderOptions(index,option, value.max)
                                             ))
-                                        }
+                                    }
                                     </select>
                             </li>
                             </ul>

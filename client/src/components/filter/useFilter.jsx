@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from "react"
+import { useEffect, useState, useCallback } from "react"
 import useReduxMng from "../../hooks/useReduxMng"
 import { deepSearch } from "../../Util/getValueByKey";
 import { parseAddress2 } from "../../Util/parseAddress";
@@ -15,7 +15,7 @@ const useFilter = () =>{
        } = useReduxMng();
 
     const [formState, setFormState] = useState({
-        city_zip : "miami",
+        city_zip : "",
         city: "",
         state_code: "",
         type: [],
@@ -25,21 +25,18 @@ const useFilter = () =>{
         beds : {min: 0, max: 0}
      })
 
-     const prevData = useRef({});
-
      
 
      useEffect(()=>{
-        //   console.log(searchReducer)    
-
-    
+         console.log(searchReducer)    
         // setFormState({...formState, city_zip: address})
      },[searchReducer])
 
      useEffect(()=>{
-  
-            // setSearch(formState)
-        
+
+        // console.log(formState)
+        setSearch(formState)
+    
      },[formState])
 
 
@@ -47,6 +44,7 @@ const useFilter = () =>{
 
  const  updateField = useCallback((key, value) =>{
          
+    console.log("ran...")
         const formFieldCopy = {...formState}
 
         if(key === "city_zip"){
@@ -60,7 +58,7 @@ const useFilter = () =>{
         formFieldCopy[key] = value
         setFormState(formFieldCopy)
 
-        },[])
+        },[formState])
 
 
 const handleSubmit = useCallback((e) =>{
@@ -68,7 +66,7 @@ const handleSubmit = useCallback((e) =>{
         e.preventDefault()
         console.log("submit..")
 
-    },[]) 
+    },[formState]) 
 
 
     return {
