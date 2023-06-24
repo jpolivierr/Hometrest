@@ -69,6 +69,7 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
                 />
 
         <Range 
+                    dropDown={true}
                     elementClass={"home_price"}
                     label={"Price"}
                     name = {"list_price"}
@@ -82,6 +83,7 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
                 />
 
            <Range 
+                    dropDown={true}
                     elementClass={"home_beds"}
                     label={"Beds"}
                     name = {"beds"}
@@ -95,7 +97,8 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
                 />
 
             <Range 
-                    elementClass={"home_beds"}
+                    dropDown={true}
+                    elementClass={"home_baths"}
                     label={"Baths"}
                     name = {"baths"}
                     optionsTitle = {"Baths"}                     

@@ -17,6 +17,7 @@
 .search-filter label{
     display: block;
     margin-bottom: .7rem;
+    font-weight: 600;
 }
 
 .search-filter h3{
@@ -25,10 +26,6 @@
     color: var(--dark-color);
     padding: 0rem;
     font-size: 1rem;
-}
-
-.search-filter .input-container{
-    margin-bottom: 1.2rem;
 }
 
 .search-filter .input-container i{
@@ -44,14 +41,36 @@
 .search-filter ul li{
     padding: 0;
 }
+
+.search-filter fieldset:nth-child(1){
+  margin: 2rem 0rem;
+}
+
+
 .search-filter fieldset:nth-child(2),
 .search-filter fieldset:nth-child(5),
 .search-filter fieldset:nth-child(6)
 {
     position: relative;
     z-index: 0;
-    margin-bottom: 1rem !important;
+    /* margin-bottom: 1rem !important; */
     font-weight: 500;
+}
+
+.search-filter .options{
+   margin-bottom: 2.5rem;
+}
+
+.search-filter .options:nth-last-child(2){
+    margin-bottom: 1rem;
+}
+
+.search-filter .options:nth-last-child(1){
+    margin-bottom: 0rem;
+}
+
+.search-filter .options h3{
+    margin-bottom: 1.5rem;    
 }
 
 .search-filter .range-options{
@@ -63,19 +82,24 @@
     font-weight: normal;
 }
 
-.more-options{
-    max-height: 600px;
-    overflow: hidden;
-    overflow-y: scroll;
+.search-filter .option-range{
+    padding: 0 !important;
+    margin: 1.6rem 0rem 1rem 0rem;
+    width: 100%;
 }
 
-
-
-.more-options .static-option h3{
-    margin-bottom: 1.5rem !important;
+.search-filter .option-range li h3{
+    font-weight: 500;
+    font-size: .9rem;
+    margin-bottom: 0rem;
 }
 
-.more-options fieldset{
-    margin-bottom: 1.5rem !important;
+.multy_choice_columns ul{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 1rem;
+}
 
+.multy_choice_columns ul li:hover{
+   background: inherit;
 }

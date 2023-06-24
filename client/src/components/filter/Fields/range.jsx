@@ -20,7 +20,8 @@ const Range = (props) =>{
            dollarSign,
            minOption,
            maxOption,
-           optionSuffix
+           optionSuffix,
+           dropDown
             } = props
 
       const symbole = dollarSign ? "$" : ""      
@@ -104,69 +105,137 @@ const Range = (props) =>{
          {/* label */}
         {props.label && <label>{props.label}</label>}
     
-          {/* Input value */}
+          {/* Input value
         <div className={`select-option ${value.min > 0 || value.max > 0 ? "has-value" : ""}`}
             onClick={()=>{toggleWindow()}}
         >
             {value.length === 0 && props.label }
              {capitalizeWords(showPriceRangeSelected()) }
             {props.icon && props.icon}
-        </div>
+        </div> */}
+
+       {
+          !dropDown && 
+          <>
+          {optionsTitle && <h3>{optionsTitle}</h3>}
+            <ul className="option-range">
+                        <li>
+                                <h3>Minimum</h3>
+                                <select onChange={handleMinPrice}>
+                                {
+                                        minOption.map((option, index) => (
+                                            <option 
+                                            key={index}
+                                            value={option}
+                                            >
+                                            {option === 0 ? "Any" : symbole + abbreviateNumber(option) + " " + getSuffix(option)}  
+                                            
+                                    </option>
+                                        ))
+                                }
+                                </select>
+                                
+                        </li>
+
+                        <li>
+                                <h3>Maximum</h3>
+                                <select onChange={handleMaxPrice}>
+
+                                    {
+                                        maxOption.map((option, index) => (
+                                            <option 
+                                            key={index}
+                                            value={option}>
+                                            {option === 0 ? "Any" : symbole + abbreviateNumber(option) + " " + getSuffix(option)} 
+                                    </option>
+                                        ))
+                                    }
+                                </select>
+                        </li>
+                        </ul>
+          </>
+                   
+       
+       } 
+
+        
                      
+        {dropDown && 
+            <>
+
+            {/************************************************ */}
+            {/* INPUT VALUE  */}
+            {/************************************************ */}
+                <div className={`select-option ${value.min > 0 || value.max > 0 ? "has-value" : ""}`}
+                        onClick={()=>{toggleWindow()}}
+                    >
+                        {value.length === 0 && props.label }
+                        {capitalizeWords(showPriceRangeSelected()) }
+                        {props.icon && props.icon}
+                </div>
+
+
+            {/************************************************ */}
+            {/* DROP DOWN  */}
+            {/************************************************ */}
+            <div className={`option-window-container ${showStyle}`}>
+                        <div onClick={()=>{toggleWindow()}} className={`select-bk`}></div>
+                        
+                        <div className={`options-window ${showStyle}`  }>
+
+                        {optionsTitle && <h3>{optionsTitle}</h3>}
+                        {/* {props.comp} */}
+                            <ul className="option-range">
+                            <li>
+                                    <h3>Minimum</h3>
+                                    <select onChange={handleMinPrice}>
+                                    {
+                                            minOption.map((option, index) => (
+                                                <option 
+                                                key={index}
+                                                value={option}
+                                                >
+                                                {option === 0 ? "Any" : symbole + abbreviateNumber(option) + " " + getSuffix(option)}  
+                                                
+                                        </option>
+                                            ))
+                                    }
+                                    </select>
+                                    
+                            </li>
+
+                            <li>
+                                    <h3>Maximum</h3>
+                                    <select onChange={handleMaxPrice}>
+
+                                        {
+                                            maxOption.map((option, index) => (
+                                                <option 
+                                                key={index}
+                                                value={option}>
+                                                {option === 0 ? "Any" : symbole + abbreviateNumber(option) + " " + getSuffix(option)} 
+                                        </option>
+                                            ))
+                                        }
+                                    </select>
+                            </li>
+                            </ul>
+                            <div className="option-window-button-container">
+                                <Buttons 
+                                    label="Done"
+                                    Class="button main-btn"
+                                    clickEvent={(e)=>{ e.preventDefault();toggleWindow()}}
+                                />
+                            </div>
+                            
+                    </div>
+                    </div>
+            </>
+                
+        }             
 
             
-            <div className={`option-window-container ${showStyle}`}>
-                <div onClick={()=>{toggleWindow()}} className={`select-bk`}></div>
-                  
-                  <div className={`options-window ${showStyle}`  }>
-
-                   {optionsTitle && <h3>{optionsTitle}</h3>}
-                   {/* {props.comp} */}
-                    <ul className="option-range">
-                       <li>
-                             <h3>Minimum</h3>
-                             <select onChange={handleMinPrice}>
-                             {
-                                    minOption.map((option, index) => (
-                                        <option 
-                                        key={index}
-                                         value={option}
-                                         >
-                                          {option === 0 ? "Any" : symbole + abbreviateNumber(option) + " " + getSuffix(option)}  
-                                         
-                                 </option>
-                                    ))
-                            }
-                             </select>
-                             
-                       </li>
-
-                       <li>
-                            <h3>Maximum</h3>
-                            <select onChange={handleMaxPrice}>
-
-                                {
-                                    maxOption.map((option, index) => (
-                                        <option 
-                                          key={index}
-                                          value={option}>
-                                         {option === 0 ? "Any" : symbole + abbreviateNumber(option) + " " + getSuffix(option)} 
-                                 </option>
-                                    ))
-                                }
-                             </select>
-                       </li>
-                    </ul>
-                    <div className="option-window-button-container">
-                        <Buttons 
-                            label="Done"
-                            Class="button main-btn"
-                            clickEvent={(e)=>{ e.preventDefault();toggleWindow()}}
-                        />
-                    </div>
-                    
-            </div>
-            </div>
+           
            
          </fieldset>
      )

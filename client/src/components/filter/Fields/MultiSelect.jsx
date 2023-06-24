@@ -75,11 +75,11 @@ const MultiSelect = (props) =>{
          {/* label */}
         {props.label && <label>{props.label}</label>}
 
-
+        {optionsTitle && <h3>{optionsTitle}</h3>}
         { 
            !dropDown && 
                     <ul>
-                            {optionsTitle && <h3>{optionsTitle}</h3>}
+                            
 
                             {
                             options.map((li,index) => (

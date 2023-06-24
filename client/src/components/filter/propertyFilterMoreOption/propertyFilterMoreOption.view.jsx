@@ -28,41 +28,36 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
     <div style={{margin: "auto"}}className="search-filter">
 
                <Inputs 
-                              elementClass={"location-field"}
-                              label={"Location"}
-                              placeHolder={"Enter city, state or zip"}
-                              name = {"city_zip"} 
-                              value = {formState.city_zip}               
-                              required = {true}
-                              icon = {<i className="fa-solid fa-location-dot"></i>}
-                              updateField = {updateField}
-                              />
-      
-
+                      elementClass={"location-field"}         
+                      placeHolder={"Enter city, state or zip"}
+                      // label={"Location"}
+                      name = {"city_zip"} 
+                      value = {formState.city_zip}               
+                      required = {true}
+                      icon = {<i className="fa-solid fa-location-dot"></i>}
+                      updateField = {updateField}
+                      />
 
           <MultiSelect  
-                  elementClass={"type-field"}
+                  elementClass={"multy_choice_columns"}
                   name = {"type"}
                   optionsTitle = {"Property Type"}                     
-                  icon = {<i className="fa-solid fa-angle-down"></i>}
                   updateField = {updateField}
                   value={formState.type}
                   options={propertyTypeList}
               />
 
          <MultiSelect 
-                    elementClass={"type-field"}
+                    elementClass={"multy_choice_columns"}
                     name = {"status"}
                     optionsTitle = {"Property status"}                     
-                    icon = {<i className="fa-solid fa-angle-down"></i>}
                     updateField = {updateField}
                     value={formState.status}
                     options={statusList}
                 />
 
-        <Range 
+            <Range 
                     elementClass={"type-field"}
-                    label={"Price"}
                     name = {"list_price"}
                     optionsTitle = {"Price Range"}                     
                     icon = {<i className="fa-solid fa-angle-down"></i>}
@@ -75,7 +70,6 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
 
            <Range 
                     elementClass={"type-field"}
-                    label={"Beds"}
                     name = {"beds"}
                     optionsTitle = {"Beds"}                     
                     icon = {<i className="fa-solid fa-angle-down"></i>}
@@ -84,14 +78,7 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
                     minOption = {numberList}
                     maxOption = {numberList}
                     optionSuffix = {"bed"}
-                />
-
-          <MoreOptions
-              optionsTitle = {"More"}
-              icon = {<i className="fa-solid fa-angle-down"></i>}
-           >
-            
-          </MoreOptions>      
+                /> 
 
 
     </div>
