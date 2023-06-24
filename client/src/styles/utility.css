@@ -3,45 +3,14 @@
     --secondary-color: #3d98c4;
     --dark-color : #212c51;
     --light-color: #eef6f9;
-    --light-silver: #586b842b;
+    --light-silver: #647c9b2b;
     --dark-text-color : #081b4b;
     --light-text-color : #232d47;
     --alt-text-color : #586b84;
     --paragraph-text-color : #2b3857;
+    --borderRadius: 5px
 }
 
-
-/* 
-=================================================
-Container
-=================================================
-*/
-
-.wide-container{
-    width: 100%;
-    margin: auto;
-    max-width: 1800px;
-}
-.container{
-    width: 90%;
-    margin: auto;
-    max-width: 1500px;
-}
-
-.container-medium{
-    width: 80%;
-    margin: auto;
-    max-width: 1080px;
-}
-
-@media (max-width: 700px){
-
-    
-.container-medium{
-    width: 90%;
-}
-
-}
 /* 
 =================================================
 TAGS
@@ -111,6 +80,74 @@ input:focus{
 fieldset{
     border: none;
 }
+/* 
+=================================================
+Buttons
+=================================================
+*/
+button{
+    border-radius: var(--borderRadius);
+    border: none;
+    font-weight: bold;
+    padding: .7rem .88rem;
+    cursor: pointer;
+    transition: .5s;
+    height: 40px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.main-btn{
+    background-color: var(--main-color);
+    color: white;
+}
+
+.main-btn:hover{
+    background: rgb(230, 0, 84);
+}
+
+
+.secondary-btn{
+    background-color: var(--light-color);
+    border: 1px solid var(--light-silver);
+}
+
+.secondary-btn:hover{
+    background-color: #181f38bf;
+}
+
+/* 
+=================================================
+Container
+=================================================
+*/
+
+.wide-container{
+    width: 100%;
+    margin: auto;
+    max-width: 2500px;
+}
+.container{
+    width: 90%;
+    margin: auto;
+    max-width: 1500px;
+}
+
+.container-medium{
+    width: 80%;
+    margin: auto;
+    max-width: 1080px;
+}
+
+@media (max-width: 700px){
+
+    
+.container-medium{
+    width: 90%;
+}
+
+}
+
 
 .input-container{
     position: relative;
@@ -124,6 +161,17 @@ fieldset{
     padding: 1rem;
 }
 
+.has-value{
+    background: #add8e62e !important;
+    border: 2px solid #0081bf29 !important;
+}
+
+.stick{
+    position: sticky;
+    top: 70.4px;
+    border-bottom: 1px solid var(--light-silver);
+}
+
 /* 
 =================================================
 Fieldset, Select, Select Options
@@ -131,9 +179,8 @@ Fieldset, Select, Select Options
 */
 
 .avalon fieldset input, .avalon fieldset select, .select-option{
-    border-radius: 10px;
+    border-radius: var(--borderRadius);
     padding: .7rem 1rem;
-    padding-right: 2rem;
     border: 1px solid #70879f78;
     width: 100%;
     height: 40px;

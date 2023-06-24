@@ -45,7 +45,7 @@ const Range = (props) =>{
         
         const s = count > 1 ? "s" : ""
 
-        return optionSuffix ? optionSuffix + s : ""
+        return optionSuffix ? capitalizeWords(optionSuffix) + s : ""
 
     }
 
@@ -105,7 +105,7 @@ const Range = (props) =>{
         {props.label && <label>{props.label}</label>}
     
           {/* Input value */}
-        <div className={`select-option ${value.length > 0 && "has-value"}`}
+        <div className={`select-option ${value.min > 0 || value.max > 0 ? "has-value" : ""}`}
             onClick={()=>{toggleWindow()}}
         >
             {value.length === 0 && props.label }
@@ -130,8 +130,10 @@ const Range = (props) =>{
                                     minOption.map((option, index) => (
                                         <option 
                                         key={index}
-                                         value={option}>
-                                    {symbole}{abbreviateNumber(option)} {getSuffix(option)}
+                                         value={option}
+                                         >
+                                          {option === 0 ? "Any" : symbole + abbreviateNumber(option) + " " + getSuffix(option)}  
+                                         
                                  </option>
                                     ))
                             }
@@ -148,7 +150,7 @@ const Range = (props) =>{
                                         <option 
                                           key={index}
                                           value={option}>
-                                    {symbole}{abbreviateNumber(option)} {getSuffix(option)}
+                                         {option === 0 ? "Any" : symbole + abbreviateNumber(option) + " " + getSuffix(option)} 
                                  </option>
                                     ))
                                 }

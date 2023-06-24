@@ -10,6 +10,7 @@ import {propertyTypeList} from "../lists/propertyType"
 import { statusList } from '../lists/statusList'
 import { salePriceOptions, rentPriceOptions } from '../lists/priceRange'
 import { numberList } from '../lists/numberList'
+import "./propertyFilterMoreOption.style.css"
 
 
 

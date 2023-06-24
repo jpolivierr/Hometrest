@@ -26,27 +26,27 @@ export default function PropertyFilter() {
 const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOptions : salePriceOptions
 
   return (
-    <form className="avalon text-left av-shadow property_filter stick" 
+    <form className="avalon property_filter stick" 
          onSubmit={handleSubmit}>
 
         <div className="location-input-style">
                <Inputs 
-                              elementClass={"location-field"}
-                              label={"Location"}
-                              placeHolder={"Enter city, state or zip"}
-                              name = {"city_zip"} 
-                              value = {formState.city_zip}               
-                              required = {true}
-                              icon = {<i className="fa-solid fa-location-dot"></i>}
-                              updateField = {updateField}
-                              />
+                      elementClass={"location-field"}
+                      label={"Location"}
+                      placeHolder={"Enter city, state or zip"}
+                      name = {"city_zip"} 
+                      value = {formState.city_zip}               
+                      required = {true}
+                      icon = {<i className="fa-solid fa-location-dot"></i>}
+                      updateField = {updateField}
+                      />
                   <i className="iicon fa-solid fa-magnifying-glass"></i>
             </div>
 
 
         <MultiSelect 
                 dropDown = {true}
-                elementClass={"type-field"}
+                elementClass={"home_type"}
                 label={"Home Type"}
                 name = {"type"}
                 optionsTitle = {"Property Type"}                     
@@ -58,7 +58,7 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
 
          <MultiSelect 
                     dropDown = {true}
-                    elementClass={"type-field"}
+                    elementClass={"home_status"}
                     label={"Property status"}
                     name = {"status"}
                     optionsTitle = {"Property status"}                     
@@ -69,7 +69,7 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
                 />
 
         <Range 
-                    elementClass={"type-field"}
+                    elementClass={"home_price"}
                     label={"Price"}
                     name = {"list_price"}
                     optionsTitle = {"Price Range"}                     
@@ -82,7 +82,7 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
                 />
 
            <Range 
-                    elementClass={"type-field"}
+                    elementClass={"home_beds"}
                     label={"Beds"}
                     name = {"beds"}
                     optionsTitle = {"Beds"}                     
@@ -92,6 +92,19 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
                     minOption = {numberList}
                     maxOption = {numberList}
                     optionSuffix = {"bed"}
+                />
+
+            <Range 
+                    elementClass={"home_beds"}
+                    label={"Baths"}
+                    name = {"baths"}
+                    optionsTitle = {"Baths"}                     
+                    icon = {<i className="fa-solid fa-angle-down"></i>}
+                    updateField = {updateField}
+                    value={formState.baths}
+                    minOption = {numberList}
+                    maxOption = {numberList}
+                    optionSuffix = {"bath"}
                 />
 
           <MoreOptions

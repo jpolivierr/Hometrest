@@ -1,5 +1,6 @@
 
- export   const salePriceOptions = [ 
+ export   const salePriceOptions = [
+       0,
       20000,
       30000,
       40000,
@@ -16,6 +17,7 @@
    ]
 
  export const rentPriceOptions = [ 
+      0,
       700,
       1000,
       1100,

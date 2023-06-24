@@ -125,10 +125,9 @@ const Listings = (props) =>{
 
     return(
         <div id={id} className={Class}>
+          <PropertyFilter />
+          {/* <TopSearchFilter/> */}
           <div className="search-result wide-container">
-    
-            <PropertyFilter />
-            {/* <TopSearchFilter/> */}
 
            {!propertiesReducer || propertiesReducer.length === 0 ? <div style={{background: "#eef6f9",height: "87vh"}}></div> :
                <Map 
