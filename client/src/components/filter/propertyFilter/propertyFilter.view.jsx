@@ -1,7 +1,6 @@
 
 
 import React from 'react'
-import useFilter from '../useFilter'
 import Inputs from '../Fields/Inputs'
 import MultiSelect from '../Fields/MultiSelect'
 import Range from '../Fields/range'
@@ -15,13 +14,14 @@ import PropertyFilterMoreOption from '../propertyFilterMoreOption/propertyFilter
 
 
 
-export default function PropertyFilter() {
+export default function PropertyFilter({value}) {
 
   
-    const {handleSubmit, updateField, formState} = useFilter()
+    const {handleSubmit, updateField, formState} = value
+    
 
     // console.log(formState)
-const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOptions : salePriceOptions
+    const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOptions : salePriceOptions
 
   return (
     <form className="avalon property_filter stick" 
@@ -39,7 +39,7 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
                       updateField = {updateField}
                       />
                   <i className="iicon fa-solid fa-magnifying-glass"></i>
-            </div>
+        </div>
 
 
         <MultiSelect 
@@ -66,7 +66,7 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
                     options={statusList}
                 />
 
-        <Range 
+            <Range 
                     dropDown={true}
                     elementClass={"home_price"}
                     label={"Price"}
@@ -112,7 +112,7 @@ const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOption
               optionsTitle = {"More"}
               icon = {<i className="fa-solid fa-angle-down"></i>}
            >
-            <PropertyFilterMoreOption value={{updateField, formState}} />
+            {/* <PropertyFilterMoreOption value={{updateField, formState}} /> */}
           </MoreOptions>      
 
 

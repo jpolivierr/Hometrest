@@ -1,7 +1,7 @@
 import { ACTION_TYPE } from "../actions/searchAction"
 
 const init = {
-    
+    city_zip : "",
     city: "",
     state_code: "",
     type: [],
@@ -15,6 +15,7 @@ const init = {
 const searchReducer = (state = init, action) =>{
     switch(action.type){
         case ACTION_TYPE.SET_SEARCH :
+            
             if(!action.payload || Object.keys(action.payload).length === 0){
                 return state
             }

@@ -10,7 +10,7 @@ import propertiesDemo from "../../propertyDemo"
 import { getParams, updateParam } from "../../Util/urlParcer"
 import { deepSearch } from "../../Util/getValueByKey"
 import URL from "../../Config/urls"
-import PropertyFilter from "../../components/filter/propertyFilter/propertyFilter.view"
+import PropertyFilter from "../../components/filter/propertyFilter/propertyFilter.component"
 
 const Listings = (props) =>{
 

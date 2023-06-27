@@ -28,13 +28,11 @@ const useFilter = () =>{
      
 
      useEffect(()=>{
-         console.log(searchReducer)    
-        // setFormState({...formState, city_zip: address})
+      
      },[searchReducer])
 
      useEffect(()=>{
 
-        // console.log(formState)
         setSearch(formState)
     
      },[formState])

@@ -69,6 +69,28 @@ export const getParams = (paramKey) =>{
 }
 
 export const updateParam = (paramObj,toJson, paramKey) =>{
+
+    
+
+    if(typeof paramObj === "object" && Object.keys(paramObj).length === 0){
+
+        const url = new URL(window.location.href);
+
+        const search_params = url.searchParams;
+  
+        search_params.delete(paramKey);
+
+        url.search = search_params.toString()
+
+        const data = search_params
+
+        const title = document.title
+        
+        const newUrl = url.toString()
+
+        window.history.replaceState(data, title, newUrl);
+
+    }
     
     if(typeof paramObj === "object" && Object.keys(paramObj).length > 0){
         
@@ -116,10 +138,6 @@ export const updateParam = (paramObj,toJson, paramKey) =>{
         
         const newUrl = url.toString()
 
-        // This will create a new entry in the browser's history, without reloading
-        // window.history.pushState(data, title, newUrl);
-
-        // This will replace the current entry in the browser's history, without reloading
         window.history.replaceState(data, title, newUrl);
 
     }
