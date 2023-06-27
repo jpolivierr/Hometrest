@@ -1,6 +1,6 @@
 import "./style.css"
 import { useEffect, useState, useRef } from "react"
-import useRequest from "../../lib/MakeRequest/MakeRequest"
+import useRequest from "../../services/MakeRequest/MakeRequest"
 import useReduxMng from "../../hooks/useReduxMng"
 import findPropertyValue from "../../Util/nestedObject"
 import TopSearchFilter from "../../components/Forms/TopSearchFilter"
@@ -9,8 +9,8 @@ import Map from "../../components/map/Map"
 import propertiesDemo from "../../Mock/propertyDemo"
 import { getParams, updateParam } from "../../Util/urlParcer"
 import { deepSearch } from "../../Util/getValueByKey"
-import URL from "../../constant/urls"
-import PropertyFilter from "../../components/filter/propertyFilter/propertyFilter.component"
+import URL from "../../constants/urls"
+import PropertyFilter from "../../features/filter/propertyFilter/propertyFilter.component"
 
 const Listings = (props) =>{
 

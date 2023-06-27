@@ -4,10 +4,10 @@ import Slider2 from "../../lib/Slider/Slider2"
 import PropertyCard2 from "../propertyCard/PropertyCard2"
 import useReduxMng from "../../hooks/useReduxMng"
 import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
-import useRequest from "../../lib/MakeRequest/MakeRequest"
+import useRequest from "../../services/MakeRequest/MakeRequest"
 import propertiesDemo from "../../Mock/propertyDemo"
 import Carousel from "../../lib/Slider/Carousel"
-import URL from "../../constant/urls"
+import URL from "../../constants/urls"
 import { deepSearch } from "../../Util/getValueByKey"
 
 const SimilarProperties = (props) =>{

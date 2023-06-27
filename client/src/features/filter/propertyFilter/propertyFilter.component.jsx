@@ -4,7 +4,7 @@ import { deepSearch } from "../../../Util/getValueByKey";
 import { parseAddress2 } from "../../../Util/parseAddress";
 import getAddressValue from "../../../Util/getAddressValue";
 import PropertyFilter from "./propertyFilter.view";
-import UrlQueryHandler from "../../urlQueryHandler/UrlQueryHandler";
+import UrlQueryHandler from "../urlQueryHandler/UrlQueryHandler";
 import { updateParam } from "../../../Util/urlParcer";
 
 

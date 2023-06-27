@@ -1,6 +1,6 @@
 import MainButton from "../buton/MainButton"
 import useReduxMng from "../../hooks/useReduxMng"
-import URL from "../../constant/urls"
+import URL from "../../constants/urls"
 import Ring from "../../lib/loadingEffect/loading/loadingEffect"
 import {  deepSearch  } from "../../Util/getValueByKey"
 import useFormCopy from "../../lib/Forms/useFormCopy"

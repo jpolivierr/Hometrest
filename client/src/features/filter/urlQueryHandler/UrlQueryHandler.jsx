@@ -1,7 +1,7 @@
 import React from 'react'
-import useReduxMng from '../../hooks/useReduxMng'
+import useReduxMng from '../../../hooks/useReduxMng'
 import { useEffect } from 'react'
-import { updateParam, getParams } from '../../Util/urlParcer'
+import { updateParam, getParams } from '../../../Util/urlParcer'
 
 export default function UrlQueryHandler() {
 

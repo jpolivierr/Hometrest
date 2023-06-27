@@ -3,7 +3,7 @@ import Inputs from "../Fields/Inputs"
 import MainButton from "../../buton/MainButton";
 import LoadingEffect from "../../../lib/loadingEffect/loading/loadingEffect";
 import useForm from "../useForm";
-import URL from "../../../constant/urls";
+import URL from "../../../constants/urls";
 
 
 const Signup= () =>{
