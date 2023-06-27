@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import useRequest from '../../lib/MakeRequest/MakeRequest'
 import UserContext from '../userContext/UserState'
 import { useContext, useLayoutEffect } from 'react'
-import URL from '../../Config/urls'
+import URL from '../../constant/urls'
 
 export default function UserRequest() {
 

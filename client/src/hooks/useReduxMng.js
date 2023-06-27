@@ -1,7 +1,7 @@
 
 import { useDispatch, useSelector } from "react-redux"
 import { bindActionCreators } from "redux"
-import {setUserAction, updateSearch, properties, clientActivityAction} from "../_state/actions/"
+import {setUserAction, updateSearch, properties, clientActivityAction} from "../Redux/actions"
 
 const useReduxMng = () =>{
 

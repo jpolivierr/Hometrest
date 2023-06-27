@@ -1,7 +1,7 @@
 import { useState } from "react"
 import useReduxMng from "../../hooks/useReduxMng"
 import useSessionMng from "../../hooks/useSessionMng"
-import { USER_AUTH_TOKEN } from "../../Config/authToken"
+import { USER_AUTH_TOKEN } from "../../constant/authToken"
 
 const useSendRequest = () =>{
 

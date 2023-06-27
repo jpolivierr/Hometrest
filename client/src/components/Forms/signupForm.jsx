@@ -5,9 +5,9 @@ import { emailValidation } from "../../lib/Forms/Util/emailValidation"
 import useForm from "../../lib/Forms/useForm"
 import MainButton from "../buton/MainButton"
 import Ring from "../../lib/loadingEffect/loading/loadingEffect"
-import URL from "../../Config/urls"
+import URL from "../../constant/urls"
 import useSessionMng from "../../hooks/useSessionMng"
-import { USER_AUTH_TOKEN } from "../../Config/authToken"
+import { USER_AUTH_TOKEN } from "../../constant/authToken"
 
 
 

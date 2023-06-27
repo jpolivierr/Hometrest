@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react'
-import { USER_AUTH_TOKEN } from '../../Config/authToken'
+import { USER_AUTH_TOKEN } from '../../constant/authToken'
 
 export default function useCookies() {
 

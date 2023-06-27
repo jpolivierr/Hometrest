@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import useSession from "../sessionManagement/useSession";
 import useRequest from "../../lib/MakeRequest/MakeRequest";
-import URL from "../../Config/urls";
+import URL from "../../constant/urls";
 import capitalizeWords from "../../Util/capitalizedWords";
 
 const UserContext = createContext();

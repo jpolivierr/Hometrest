@@ -7,7 +7,7 @@ import "./styles/index.js"
 import './App.css';
 
 import {Provider} from "react-redux";
-import {store} from './_state/store'
+import {store} from './Redux/store'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import { UserProvider } from './components/userContext/UserState';
 import { ModalProvider, modalProvider } from './components/modals/modalContext';

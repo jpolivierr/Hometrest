@@ -11,7 +11,7 @@ import { getParams } from "../../Util/urlParcer";
 import useModal from "../../lib/Modal/useModal";
 import MainButton from "../buton/MainButton";
 import { matchPassword } from "../../lib/Forms/Util/matchPassword";
-import URL from "../../Config/urls";
+import URL from "../../constant/urls";
 import useRequest from "../../lib/MakeRequest/MakeRequest";
 import { capitalizeFirstLetter } from "../propertyCard/util";
 import errorFromServer from "./FormUtil/serverError";

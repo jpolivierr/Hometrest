@@ -3,11 +3,11 @@ import { useEffect, useState } from "react"
 import useForm from "../../lib/Forms/useForm"
 import MainButton from "../buton/MainButton"
 
-import URL from "../../Config/urls"
+import URL from "../../constant/urls"
 
 import useReduxMng from "../../hooks/useReduxMng"
 import useSessionMng from "../../hooks/useSessionMng"
-import { USER_AUTH_TOKEN } from "../../Config/authToken"
+import { USER_AUTH_TOKEN } from "../../constant/authToken"
 
 
 

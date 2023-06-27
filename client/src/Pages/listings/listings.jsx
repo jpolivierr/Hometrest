@@ -6,10 +6,10 @@ import findPropertyValue from "../../Util/nestedObject"
 import TopSearchFilter from "../../components/Forms/TopSearchFilter"
 import ShowProperties from "../../components/showProperties/ShowProperties"
 import Map from "../../components/map/Map"
-import propertiesDemo from "../../propertyDemo"
+import propertiesDemo from "../../Mock/propertyDemo"
 import { getParams, updateParam } from "../../Util/urlParcer"
 import { deepSearch } from "../../Util/getValueByKey"
-import URL from "../../Config/urls"
+import URL from "../../constant/urls"
 import PropertyFilter from "../../components/filter/propertyFilter/propertyFilter.component"
 
 const Listings = (props) =>{
@@ -99,8 +99,6 @@ const Listings = (props) =>{
       //       setAddress({city: "jacksonville", state_code: "FL"})
       //       setLoadingProps(true)
       //      }
-
-          
 
       // },[])
 

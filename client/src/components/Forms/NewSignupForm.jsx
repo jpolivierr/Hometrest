@@ -11,13 +11,13 @@ import { getParams } from "../../Util/urlParcer";
 import useModal from "../../lib/Modal/useModal";
 import MainButton from "../buton/MainButton";
 import { matchPassword } from "../../lib/Forms/Util/matchPassword";
-import URL from "../../Config/urls";
+import URL from "../../constant/urls";
 import useRequest from "../../lib/MakeRequest/MakeRequest";
 import { capitalizeFirstLetter } from "../propertyCard/util";
 import errorFromServer from "./FormUtil/serverError";
 import useSessionMng from "../../hooks/useSessionMng";
 import LoadingEffect from "../../lib/loadingEffect/loading/loadingEffect";
-import { USER_AUTH_TOKEN } from "../../Config/authToken";
+import { USER_AUTH_TOKEN } from "../../constant/authToken";
 
 
 const NewSignUpForm = () =>{

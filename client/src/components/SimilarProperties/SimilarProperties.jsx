@@ -5,9 +5,9 @@ import PropertyCard2 from "../propertyCard/PropertyCard2"
 import useReduxMng from "../../hooks/useReduxMng"
 import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
 import useRequest from "../../lib/MakeRequest/MakeRequest"
-import propertiesDemo from "../../propertyDemo"
+import propertiesDemo from "../../Mock/propertyDemo"
 import Carousel from "../../lib/Slider/Carousel"
-import URL from "../../Config/urls"
+import URL from "../../constant/urls"
 import { deepSearch } from "../../Util/getValueByKey"
 
 const SimilarProperties = (props) =>{

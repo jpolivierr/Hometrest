@@ -11,7 +11,6 @@ import { updateParam } from "../../../Util/urlParcer";
 
 const Filter = () =>{
 
-    const [initialRender, setInitialRender] = useState(true)
 
     const {getUrlSearchQuery, newQueryObject} = UrlQueryHandler()
 
@@ -42,19 +41,11 @@ const Filter = () =>{
 
      useEffect(()=>{
 
-        //  console.log(getUrlSearchQuery(searchReducer))
-        // if(!initialRender){
-
             console.log(searchReducer)
 
             const newObj = newQueryObject(searchReducer)
 
-            console.log(newObj)
-
-            updateParam(newObj, true, "search")
-        // }
-
-        
+            updateParam(newObj, true, "search")   
       
      },[searchReducer])
 
@@ -77,7 +68,6 @@ const Filter = () =>{
             formFieldCopy.city = address.city
             formFieldCopy.state = address.state_code
             formFieldCopy.postal_code = address.postal_code
-            
         }
         
         formFieldCopy[key] = value
