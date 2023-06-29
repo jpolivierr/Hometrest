@@ -26,7 +26,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping(path="/api/v1/user")
+@RequestMapping(path="/api/secure/v1/user")
 public class UserController {
 
     private ApiResponse apiResponse;

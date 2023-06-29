@@ -112,7 +112,7 @@ export default function PropertyFilter({value}) {
               optionsTitle = {"More"}
               icon = {<i className="fa-solid fa-angle-down"></i>}
            >
-            {/* <PropertyFilterMoreOption value={{updateField, formState}} /> */}
+            <PropertyFilterMoreOption value={{updateField, formState}} />
           </MoreOptions>      
 
 

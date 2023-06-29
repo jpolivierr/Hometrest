@@ -1,9 +1,6 @@
 package com.appvenir.hometrest.api.login;
 
 
-import java.util.UUID;
-
-
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -6,6 +6,7 @@ import getAddressValue from "../../../Util/getAddressValue";
 import PropertyFilter from "./propertyFilter.view";
 import UrlQueryHandler from "../urlQueryHandler/UrlQueryHandler";
 import { updateParam } from "../../../Util/urlParcer";
+import PropertyRequest from "../../../services/propertyRequest/propertyRequest";
 
 
 
@@ -13,6 +14,8 @@ const Filter = () =>{
 
 
     const {getUrlSearchQuery, newQueryObject} = UrlQueryHandler()
+
+    PropertyRequest()
 
     const {searchReducer, setSearch} = useReduxMng();
 
@@ -40,8 +43,6 @@ const Filter = () =>{
      
 
      useEffect(()=>{
-
-            console.log(searchReducer)
 
             const newObj = newQueryObject(searchReducer)
 
@@ -75,9 +76,7 @@ const Filter = () =>{
 
          const newObj = newQueryObject(searchReducer)
 
-            console.log(newObj)
-
-            updateParam(newObj, true, "search")
+        updateParam(newObj, true, "search")
 
         },[formState])
 

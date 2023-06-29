@@ -1,7 +1,6 @@
 
 
 import React from 'react'
-import useFilter from '../useFilter'
 import Inputs from '../Fields/Inputs'
 import MultiSelect from '../Fields/MultiSelect'
 import Range from '../Fields/range'
@@ -19,7 +18,7 @@ export default function PropertyFilterMoreOption({value}) {
       
 
   const { updateField, formState} = value
-    // const { updateField, formState} = useFilter()
+
 
 const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOptions : salePriceOptions
 

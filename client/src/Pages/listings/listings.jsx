@@ -10,7 +10,7 @@ import propertiesDemo from "../../Mock/propertyDemo"
 import { getParams, updateParam } from "../../Util/urlParcer"
 import { deepSearch } from "../../Util/getValueByKey"
 import URL from "../../constants/urls"
-import PropertyFilter from "../../features/filter/propertyFilter/propertyFilter.component"
+import Filter from "../../features/filter"
 
 const Listings = (props) =>{
 
@@ -18,89 +18,13 @@ const Listings = (props) =>{
 
     const {makeRequest, reponse, loading, status } = useRequest()
 
-    const prevData = useRef({});
     const{
       setPropertyList,
       propertiesReducer,
-      setSearch,
-      searchReducer,
-      setAddress
     } = useReduxMng()  
 
     const [loadingProps, setLoadingProps] = useState(false)
 
-    // useEffect( ()=>{
-
-    //         if(getParams("search")){
-   
-    //               const filterOptions = getParams("search")
-        
-    //               setSearch(filterOptions)
-        
-    //       }
-  
-    //   },[])
-
-      
-      // useEffect(()=>{
-
-      //   if(Object.keys(searchReducer).length > 0){
-          
-      //     updateParam(searchReducer, true, "search")
-
-      //   }
-
-      // },[searchReducer])
-
-      
-
-      //  useEffect(()=>{
-
-      //   const prevDataJSON = JSON.stringify(prevData.current)
-
-      //   const currentDataJSON = JSON.stringify(searchReducer);
-      
-      // //  console.log(prevDataJSON, currentDataJSON)
-      //   if ((prevDataJSON !== currentDataJSON)) {
-   
-      //       const searchReducerCloneJSON = JSON.stringify(searchReducer)
-      //       const searchReducerClone = JSON.parse(searchReducerCloneJSON)
-
-      //      if(!searchReducerClone.limit) searchReducerClone.limit = 50  
-
-      //     //  console.log("===================================")
-      //     //  console.log("FETCHING...")
-      //      prevData.current = searchReducer
-      //       // console.log(searchReducerClone)
-      //       setLoadingProps(true)
-      //       makeRequest("POST", URL.SEARCH, searchReducerClone)
-
-      //     }
-
-      // },[searchReducer])
-
-      //   useEffect(()=>{
-
-            
-          
-      //       const searchReducerCloneJSON = JSON.stringify(searchReducer)
-      //       const searchReducerClone = JSON.parse(searchReducerCloneJSON)
-
-      //      if(!searchReducerClone.limit) searchReducerClone.limit = 50  
-
-      //      if(!searchReducerClone.city && !searchReducerClone.postal_code){
-
-      //        prevData.current = searchReducer
-      //     //  console.log("===================================")
-      //     //  console.log("INITIAL LOAD")
-
-      //       searchReducerClone.city = "jacksonville"
-      //       searchReducerClone.state_code = "FL"
-      //       setAddress({city: "jacksonville", state_code: "FL"})
-      //       setLoadingProps(true)
-      //      }
-
-      // },[])
 
     useEffect(()=>{
 
@@ -123,7 +47,7 @@ const Listings = (props) =>{
 
     return(
         <div id={id} className={Class}>
-          <PropertyFilter />
+          <Filter />
           {/* <TopSearchFilter/> */}
           <div className="search-result wide-container">
 

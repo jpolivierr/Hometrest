@@ -15,7 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
 
     private final String home = "/**";
-    private final String api = "/api/**";
+    private final String api = "/api/secure/**";
     // private final String logIn = "/process-login";
 
 
