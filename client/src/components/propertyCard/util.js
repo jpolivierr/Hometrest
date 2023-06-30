@@ -1,4 +1,4 @@
-import NoImage from "../../media/images/no-image.png"
+import NoImage from "../../assets/images/no-image.png"
 
 
 export const getPhoto = (str) =>{

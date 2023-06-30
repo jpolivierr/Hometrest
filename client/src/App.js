@@ -12,7 +12,6 @@ import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
 import UserRequest from './services/httpRequest/userRequest';
 
 
-
 function App() {
 
   const {loading} = UserRequest()
@@ -25,8 +24,9 @@ function App() {
                 elementClass="basic-loading"
                 type="ring"/> : 
       <div className="App">
-    
-          <TopNav />
+        
+
+    <TopNav />
           <Routes>
           <Route path="/single_property" element={<SingleProperty/>}/>
           <Route path="/signup" element={<Signup/>}/>
@@ -35,7 +35,9 @@ function App() {
             <Route path="/listings" element={<Listings/>}/>
             <Route path="/update" element={<Update/>}/>
             <Route path="/" element={<Home />}/>
-          </Routes>
+        </Routes>
+
+
 
       </div>
     }

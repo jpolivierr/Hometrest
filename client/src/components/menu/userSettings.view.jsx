@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import UserContext from '../userContext/UserState'
 import { useContext } from 'react'
 import shortenText from '../../Util/shortenText'
-import ModalContext from '../modals/modalContext'
+import ModalContext from '../../context/modals/modalContext'
 import "./userSettings.style.css"
 
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import NavList from "../list/NavList"
 import UserContext from "../userContext/UserState"
-import ModalContext from "../modals/modalContext"
+import ModalContext from "../../context/modals/modalContext"
 import { useContext } from "react"
 
 const LogInNav = () =>{

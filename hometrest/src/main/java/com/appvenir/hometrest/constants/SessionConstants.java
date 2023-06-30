@@ -1,6 +1,6 @@
-package com.appvenir.hometrest.sessionConfig;
+package com.appvenir.hometrest.constants;
 
-public class MySesionConfig {
+public class SessionConstants {
     public static final String USER_AUTH_TOKEN = "USER_AUTH_TOKEN";
     public static final String EMAIL = "EMAIL";
     public static final String COOKIE_VALUE = "COOKIE_VALUE";

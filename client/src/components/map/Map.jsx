@@ -1,7 +1,7 @@
 import "./style.css"
 import { useRef, useEffect, useState } from "react"
 import { deepSearch } from "../../Util/getValueByKey"
-import circle from "../../media/images/circle.png"
+import circle from "../../assets/images/circle.png"
 import PropertyCard from "../propertyCard/PropertyCard"
 import { getPhoto } from "../propertyCard/util"
 import { formatNumber } from "../propertyCard/util"

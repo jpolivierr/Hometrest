@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.webMvcConfig;
+package com.appvenir.hometrest.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.appvenir.hometrest.constants.AntPattern;
 
 @Configuration
 @EnableWebSecurity
@@ -51,8 +53,8 @@ public class SecurityConfig {
     public SecurityFilterChain apifilterChain(HttpSecurity http) throws Exception{
 
         http
-            .csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher(api)))
-            .securityMatcher(AntPathRequestMatcher.antMatcher(api)) 
+            .csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher(AntPattern.SECURE_API)))
+            .securityMatcher(AntPathRequestMatcher.antMatcher(AntPattern.SECURE_API)) 
             .authorizeHttpRequests((auth) ->
                       auth
                      .anyRequest()
@@ -75,21 +77,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-// @Bean
-// CorsConfigurationSource corsConfigurationSource() {
-//   CorsConfiguration configuration = new CorsConfiguration();
-//   configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-//   configuration.setAllowedMethods(Arrays.asList("GET","POST","PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"));
-//   configuration.setAllowCredentials(true);
-//   configuration.setAllowedHeaders(Arrays.asList("Authorization", "Requestor-Type"));
-//   configuration.setExposedHeaders(Arrays.asList("X-Get-Header"));
-//   configuration.setMaxAge(3600L);
-//   UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//   source.registerCorsConfiguration("/process-login", configuration);
-//   return source;
-// }
-
 
 
     

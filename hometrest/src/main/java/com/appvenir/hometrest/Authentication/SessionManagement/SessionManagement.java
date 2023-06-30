@@ -1,11 +1,11 @@
-package com.appvenir.hometrest.SessionManagement;
+package com.appvenir.hometrest.Authentication.SessionManagement;
 
 import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
 import com.appvenir.hometrest.Exceptions.SessionExistException;
-import com.appvenir.hometrest.sessionConfig.MySesionConfig;
+import com.appvenir.hometrest.constants.SessionConstants;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,9 +40,9 @@ public class SessionManagement {
 
     public void create(String email, HttpSession session, HttpServletResponse response){
        
-         String cookieValue = (String) session.getAttribute(MySesionConfig.COOKIE_VALUE);
+         String cookieValue = (String) session.getAttribute(SessionConstants.COOKIE_VALUE);
 
-         String emailFound = (String) session.getAttribute(MySesionConfig.EMAIL);
+         String emailFound = (String) session.getAttribute(SessionConstants.EMAIL);
 
          if(emailFound != null || cookieValue != null){
 
@@ -53,16 +53,16 @@ public class SessionManagement {
 
             String token = UUID.randomUUID().toString();
 
-            Cookie cookie = new Cookie(MySesionConfig.USER_AUTH_TOKEN, token);
+            Cookie cookie = new Cookie(SessionConstants.USER_AUTH_TOKEN, token);
             cookie.setHttpOnly(false);
             cookie.setSecure(false);
             cookie.setPath("/");
             response.addCookie(cookie);
       
-            session.setAttribute(MySesionConfig.EMAIL, email);
-            session.setAttribute(MySesionConfig.COOKIE_VALUE, token);
-            session.setAttribute(MySesionConfig.JSESSION_ID, session.getId());
-            session.setMaxInactiveInterval(MySesionConfig.MAX_INERVAL);
+            session.setAttribute(SessionConstants.EMAIL, email);
+            session.setAttribute(SessionConstants.COOKIE_VALUE, token);
+            session.setAttribute(SessionConstants.JSESSION_ID, session.getId());
+            session.setMaxInactiveInterval(SessionConstants.MAX_INERVAL);
 
        
 

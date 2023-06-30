@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.appvenir.hometrest.RedirectResponse.RedirectResponse;
-import com.appvenir.hometrest.SessionManagement.SessionManagement;
+import com.appvenir.hometrest.Authentication.SessionManagement.SessionManagement;
+import com.appvenir.hometrest.api.tools.RedirectResponse.RedirectResponse;
 import com.appvenir.hometrest.api.user.User;
 
 import jakarta.servlet.http.HttpServletResponse;

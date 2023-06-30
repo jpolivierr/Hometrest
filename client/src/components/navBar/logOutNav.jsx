@@ -1,98 +1,66 @@
-import useModal from "../../lib/Modal/useModal"
-import Modal from "../../lib/Modal/modal"
-import SlideWindow from "../../lib/Modal/Windows/slideWindow"
-import ModalOverlay from "../../lib/Modal/Overlays/modalOverlay"
-import MainButton from "../buton/MainButton"
-import ModalContext from "../modals/modalContext"
+import ModalContext from "../../context/modals/modalContext"
+import GlobalMessageContext from "../../context/globalMessage/globalMessageContext"
 import { useContext } from "react"
 import "./style.css"
-
-
-
-import { useState } from "react"
 import NavList from "../list/NavList"
 
 const LogOutNav = () =>{
-
-    // const {isShowing, toggle, motion } = useModal();
-    const {toggleSideModal, toggle} = useContext(ModalContext)
+    const {toggleSideModal} = useContext(ModalContext)
+    const {toggleShowMessage} = useContext(GlobalMessageContext)
 
 
     return(
 
-           <>
-                    <section className=" top-nav">
+    <>
+        <section className=" top-nav">
 
-                                <div className="container flex-space-between">
-                                            <div>
-                                                <h2><i className="fa-brands fa-pagelines"></i> HomeTrest</h2>
-                                            </div>
-                                        <div style={{display: "flex"}}>
-
-                                             <NavList 
-                                        Class="hideMobile flex-space-between gap-1x nav-list"
-                                        />
-
-                                        <div style={{marginLeft: "3rem"}} className="hideMobile flex-space-between gap-1x">
-                                                                                   
-                                            <a href="/signup">
-                                                <button className="button main-btn">
-                                                    Sign up
-                                                </button>
-                                            </a>
-
-                                            <a href="/login">
-                                                <button className="button secondary-btn">
-                                                   Log in
-                                                </button>
-                                            </a>
-                                        </div>
-                                        </div>
-                                       
-
-                                        <div className="hideDesktop">
-                                            <menu onClick={toggle}>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                            </menu>
-                                        </div>
+                    <div className="container flex-space-between">
+                                <div>
+                                    <h2><i className="fa-brands fa-pagelines"></i> HomeTrest</h2>
                                 </div>
+                            <div style={{display: "flex"}}>
 
-                        </section>
-
-
-                        <Modal
-                            // isShowing={isShowing}
-                           >
-                            <ModalOverlay
-                                toggle={toggle}
-                                // animated={{time: 200, motion: motion}}
-                                motionType="fade"
-                                seconds=".3s"
-                                from="0"
-                                to="1"
+                                    <NavList 
+                            Class="hideMobile flex-space-between gap-1x nav-list"
                             />
 
-                    <SlideWindow 
-                            toggle={toggle}
-                            Class=""
-                            // animated={{time: 200, motion: motion}}
-                            motionType="slide-left"
-                            seconds=".2s"
-                            from="-300px"
-                            to="0px"
-                        >
-                            <NavList 
-                                Class="flex-columns gap-1x nav-list"
-                                listsClass="text-center"
-                                listsClickEvent={()=>toggle(300)}
-                                />
+                            <div style={{marginLeft: "3rem"}} className="hideMobile flex-space-between gap-1x">
 
-                        </SlideWindow>
+                            
+                                <button
+                                    onClick={toggleShowMessage} 
+                                    className="button">
+                                    modal
+                                </button>
+                                
+                                                                        
+                                <a href="/signup">
+                                    <button className="button main-btn">
+                                        Sign up
+                                    </button>
+                                </a>
 
-                        </Modal>
-           </>
+                                <a href="/login">
+                                    <button className="button secondary-btn">
+                                        Log in
+                                    </button>
+                                </a>
+                            </div>
+                            </div>
+                            
+
+                            <div className="hideDesktop">
+                                <menu>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </menu>
+                            </div>
+                    </div>
+
+            </section>
+
+    </>
                 
                    
      

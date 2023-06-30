@@ -24,6 +24,7 @@ export default function PropertyRequest() {
         const newObj = removeEmptyValues(searchReducerCopy)
         const preparedObj = prepareObject(newObj)
         console.log(preparedObj)
+        makeRequest("POST",URL.SEARCH, preparedObj)
         prevState.current = searchReducer
     }
 
@@ -32,10 +33,14 @@ export default function PropertyRequest() {
 
    useEffect(()=>{ 
 
+    console.log(response)
+
     if(serverError){
       console.log("server error")
       return
     }
+
+    
 
 
    },[serverError, response])

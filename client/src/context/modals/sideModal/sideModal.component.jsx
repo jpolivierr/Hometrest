@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-import UserSettings from '../../menu/userSettings.view'
-import style from "./sideModal.style.css"
+import UserSettings from '../../../components/menu/userSettings.view'
+import SideModalView from './sideModal.view'
+import "./sideModal.style.css"
 
 export default function SideModal(props) {
 
@@ -27,40 +28,17 @@ export default function SideModal(props) {
         if(!isShowing){
             setAnimation("close_slide_left")
             setBackgroundAnimation("fade_out")
+            setTimeout(()=>{
+                setVisible("hide")
+            },100)
+            
         }
 
     },[isShowing])
-
-    const renderModal = () =>{
-
-        if(isShowing === null){
-            return
-        }
-
-        if(!isShowing){
-
-            setTimeout(()=>{
-                setVisible("hide")
-            },150)
-
-        }
-
-
-        return ( 
-            <>
-                <div ref={modalBkRef}  className={`sideModal_bk ${backgrounAnimation} ${visible}`} onClick={toggle}/>
-            <div ref={modalRef} className={`sideModal ${animation} ${visible}`}>
-                <div style={{cursor : "pointer"}} className={`close-btn close_btn`} onClick={toggle}><span>+</span>
-                </div>
-                    <UserSettings />
-            </div>
-            </>
+    
+    return ( 
+        isShowing !== null &&  <SideModalView value={{modalBkRef, backgrounAnimation, visible, toggle, modalRef, animation}} />
         
         )
-    }
-
-  return (
-          renderModal()
-  )
 
 }

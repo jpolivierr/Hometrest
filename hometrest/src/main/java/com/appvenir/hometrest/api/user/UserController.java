@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.appvenir.hometrest.ApiResponse.ApiResponse;
+import com.appvenir.hometrest.Authentication.SessionManagement.SessionManagement;
 import com.appvenir.hometrest.Exceptions.UserNotFoundException;
-import com.appvenir.hometrest.RedirectResponse.RedirectResponse;
-import com.appvenir.hometrest.SessionManagement.SessionManagement;
-import com.appvenir.hometrest.sessionConfig.MySesionConfig;
+import com.appvenir.hometrest.api.tools.ApiResponse.ApiResponse;
+import com.appvenir.hometrest.api.tools.RedirectResponse.RedirectResponse;
+import com.appvenir.hometrest.constants.SessionConstants;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -76,7 +76,7 @@ public class UserController {
     @GetMapping(path="")
     public ResponseEntity<Object> findUser(HttpSession session) throws AccessDeniedException{
 
-        String email = (String) session.getAttribute(MySesionConfig.EMAIL);
+        String email = (String) session.getAttribute(SessionConstants.EMAIL);
 
         if(email == null) throw new AccessDeniedException("UNAUTHORIZED");
 
@@ -91,7 +91,7 @@ public class UserController {
     @Transactional
     public @ResponseBody RedirectResponse  deleteUser(HttpSession session) throws AccessDeniedException{
 
-        String email = (String) session.getAttribute(MySesionConfig.EMAIL);
+        String email = (String) session.getAttribute(SessionConstants.EMAIL);
          System.out.println("=============");
          System.out.println("DELETING");
         if(email == null) throw new AccessDeniedException("UNAUTHORIZED");

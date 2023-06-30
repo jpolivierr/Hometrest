@@ -8,30 +8,32 @@ import './App.css';
 
 import {Provider} from "react-redux";
 import {store} from './Redux/store'
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import {BrowserRouter as Router} from "react-router-dom"
 import { UserProvider } from './components/userContext/UserState';
-import { ModalProvider, modalProvider } from './components/modals/modalContext';
-
-
-
+import { ModalProvider } from './context/modals/modalContext';
+import { GlobalMessageProvider } from './context/globalMessage/globalMessageContext';
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
+
+
+
+
    //  <React.StrictMode> 
-    <Provider store={store}>
-      <Router> 
-
-          <UserProvider>
-            <ModalProvider>
-               <App />
-            </ModalProvider> 
-          </UserProvider>
-
-      </Router>
-    </Provider>
+    <GlobalMessageProvider>
+      <UserProvider>
+        <ModalProvider>
+          <Provider store={store}>
+              <Router> 
+                  <App />
+               </Router>
+           </Provider>
+         </ModalProvider>
+  </UserProvider>
+  </GlobalMessageProvider>
     
    // </React.StrictMode>   
 );

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 const useRequest = () =>{
 
@@ -7,22 +7,25 @@ const useRequest = () =>{
     const [fieldError, setFieldError] = useState(null)
     const [status, setStatus] = useState(null)
     const [loading, setLoading] = useState(false)
+    // const [abortController, setAbortController] = useState(null)
 
-    let abortController = null
+    let abortController = useRef(null)
 
     const makeRequest = async (method, url, data) => {
 
-        if(abortController){
 
-            abortController.abort()
+        if(abortController.current){
+
+            abortController.current.abort()
 
         }
 
-        abortController = new AbortController()
+        abortController.current = new AbortController()
 
         const timeout = setTimeout(() => {
-            abortController.abort();
-          }, 10000);
+            console.log("timed out..")
+            abortController.current && abortController.current.abort();
+          }, 5000);
 
 
         let response
@@ -34,19 +37,21 @@ const useRequest = () =>{
             credentials: 'include',
             mode: 'cors',
             headers: requestHeaders,
-            method: method
+            method: method,
+            signal: abortController.current && abortController.current.signal
         }
 
         try {
                     switch(method){
                     case "GET" :
                     case "DELETE" :
-                        setLoading(true)
-                        response = await fetch(url,config)
-                        clearTimeout(timeout);
-                        setStatus(response.status)
-                        setLoading(false)
-                        break
+                            setLoading(true)
+                            response = await fetch(url,config)
+                            clearTimeout(timeout);
+                            setStatus(response.status)
+                            setLoading(false)
+                            abortController.current = null
+                            break
                     case "POST" :
                     case "PUT" :
                         if(data){
@@ -56,14 +61,15 @@ const useRequest = () =>{
                             clearTimeout(timeout);
                             setStatus(response.status)
                             setLoading(false)
+                            abortController.current = null
                         }         
                         break
                     default :
                         response = await fetch(url)
                 }
 
-                // console.log(response.status)
-                // console.log(response)
+                 console.log(response.status)
+                 console.log(response)
                 
 
                 switch(response.status){

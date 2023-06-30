@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.springframework.security.access.AccessDeniedException;
 
-import com.appvenir.hometrest.sessionConfig.MySesionConfig;
+import com.appvenir.hometrest.constants.SessionConstants;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -43,7 +43,7 @@ public class MyRequestFilter implements Filter {
         if( session == null ) throw new AccessDeniedException("Unauthorized here");
 
 
-        String email = (String) session.getAttribute(MySesionConfig.EMAIL);
+        String email = (String) session.getAttribute(SessionConstants.EMAIL);
 
         if( email == null){
              session.invalidate();

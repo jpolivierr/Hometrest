@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.webMvcConfig;
+package com.appvenir.hometrest.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -46,19 +46,6 @@ public class WebConfig implements WebMvcConfigurer, HandlerInterceptor {
       registry.addInterceptor(this);
 
   }
-
-  @Bean
-    public FilterRegistrationBean<MyRequestFilter> customFilterRegistration() {
-        FilterRegistrationBean<MyRequestFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new MyRequestFilter());
-        registrationBean.addUrlPatterns("/api/*");
-
-        return registrationBean;
-    }
-
-
-
-  
 
 
 }

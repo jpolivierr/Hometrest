@@ -2,7 +2,7 @@ const HOST = "http://localhost:8081"
 
 const URL = {
 
-    SEARCH : HOST + "/search",
+    SEARCH : HOST + "/api/v1/property_search/list",
     SINGLE_PROPERTY : HOST + "/single_property",
     LOGIN : HOST + "/process-login", 
     LOGOUT : HOST + "/process-login",
