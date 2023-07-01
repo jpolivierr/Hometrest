@@ -7,9 +7,8 @@ import { useContext } from "react"
 
 const ShowPropertiesView = ({value}) =>{
 
-    const {isLoading, getSearchValue, properties, likeProperty,activeUser} = value
+    const {isLoading, getSearchValue, properties} = value
     
-    const userLikes = activeUser.likedProperties
 
     const renderPropertyCard = () =>{
 
@@ -22,8 +21,6 @@ const ShowPropertiesView = ({value}) =>{
                         <PropertyCard
                             singleProperty = {property}
                             key={index}
-                            functions={{likeProperty}}
-                            value={{userLikes}}
                         />
        
                 ))

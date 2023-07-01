@@ -80,9 +80,6 @@ const [activeUser, setActiveUser] = useState(init)
 
     },[activeUser.likedProperties])
 
-    useEffect(()=>{
-          console.log(activeUser.likedProperties)
-    },[activeUser])
 
     return(
         <UserContext.Provider value={{activeCookie, likeProperty, getCookie, activeUser, loading, setUser, clearUser, logout, deleteAccount}}>

@@ -29,11 +29,7 @@ const Listings = (props) =>{
           {/* <Map properties={propertiesReducer.results} /> */}
           
             <ShowProperties 
-              isLoading = {loadingProps}
-              properties={propertiesReducer.results}
-              count ={propertiesReducer.count}
-              total = {propertiesReducer.total}
-              searchReducer={searchReducer}
+    
             />
 
           </div>

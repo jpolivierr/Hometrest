@@ -10,21 +10,20 @@ import shortenText from "../../Util/shortenText"
 import useMyModal from "../../lib/Modal/useMyModal"
 import NewLoginForm from "../Forms/NewLoginForm"
 import PropertyCardView from "./PropertyCard.view"
-
+import { useContext } from "react"
+import UserContext from "../../context/user/UserContext"
 import { useNavigate } from "react-router-dom"
 import "./PropertyCard.style.css"
 
 const PropertyCard = (props) =>{
 
-    useEffect(()=>{
-        console.log("propertyCard render..")
-    },[])
+    const {activeUser, likeProperty} = useContext(UserContext)
 
-    const {singleProperty, value, functions} = props 
-    const{likeProperty} = functions
-    const {userLikes} = value
+    const userLikes = activeUser.likedProperties
+
+    const {singleProperty} = props 
+
     const navigate = useNavigate()
-
     const propertyId = deepSearch(singleProperty,["property_id"])
     const listingId = deepSearch(singleProperty,["listing_id"])
     const status = deepSearch(singleProperty,["status"])
@@ -39,8 +38,6 @@ const PropertyCard = (props) =>{
     const state = deepSearch(singleProperty,["location","address","state"])
     const stateCode = deepSearch(singleProperty,["location","address","state_code"])
     const photo = deepSearch(singleProperty,["primary_photo","href"])
-
-    const [like] = useState(false)
 
 
     const getUserLikes = (id) =>{
@@ -69,7 +66,7 @@ const PropertyCard = (props) =>{
         <PropertyCardView 
             functions={{getUserLikes, handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,handleForRent}} 
 
-             propertyDetails={{propertyId,status,type,beds,baths,sqft,price,street,city,zip,stateCode,photo,like}} 
+             propertyDetails={{propertyId,status,type,beds,baths,sqft,price,street,city,zip,stateCode,photo}} 
 
              value={{userLikes}}
         

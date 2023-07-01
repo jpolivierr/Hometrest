@@ -8,12 +8,16 @@ import { useEffect } from "react"
 import ShowPropertiesView from "./ShowProperties.view"
 import { useContext } from "react"
 import UserContext from "../../context/user/UserContext"
+import { Reducers } from "../../Redux"
 
-const ShowProperties = (props) =>{
+const ShowProperties = () =>{
 
-    const {isLoading, properties, count, total, searchReducer} = props
 
-    const {likeProperty, activeUser} = useContext(UserContext)
+    const {propertiesReducer,searchReducer} = Reducers() 
+
+    const isLoading = ""
+
+    const properties = propertiesReducer.results
     
 
     const getSearchValue = () =>{
@@ -42,7 +46,7 @@ const ShowProperties = (props) =>{
 
 
     return(
-        <ShowPropertiesView value={{getSearchValue, properties, isLoading, likeProperty,activeUser}} />
+        <ShowPropertiesView value={{getSearchValue, properties, isLoading}} />
     )
 
 }
