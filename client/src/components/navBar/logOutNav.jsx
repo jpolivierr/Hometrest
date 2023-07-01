@@ -26,12 +26,6 @@ const LogOutNav = () =>{
 
                             <div style={{marginLeft: "3rem"}} className="hideMobile flex-space-between gap-1x">
 
-                            
-                                <button
-                                    onClick={toggleShowMessage} 
-                                    className="button">
-                                    modal
-                                </button>
                                 
                                                                         
                                 <a href="/signup">

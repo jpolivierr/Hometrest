@@ -4,6 +4,7 @@ import MainButton from "../../buton/MainButton";
 import LoadingEffect from "../../../lib/loadingEffect/loading/loadingEffect";
 import useForm from "../useForm";
 import URL from "../../../constants/urls";
+import "./Login.style.css"
 // import loginStyles from "./Login.style.css"
 
 
@@ -16,7 +17,7 @@ const Login = () =>{
     return(
 
         <form style={{margin: "auto"}}
-           className="avalon text-left av-shadow" 
+           className="login_form" 
            onSubmit={e => submit(e)}>
 
                 {formError.serverError && 

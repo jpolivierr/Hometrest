@@ -1,3 +1,5 @@
 import "./tags.css"
 import "./utility.css"
+import "./form.css"
 import "./animation.css"
+import "./modal.css"
