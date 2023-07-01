@@ -6,7 +6,7 @@ import getAddressValue from "../../../Util/getAddressValue";
 import PropertyFilter from "./propertyFilter.view";
 import UrlQueryHandler from "../urlQueryHandler/UrlQueryHandler";
 import { updateParam } from "../../../Util/urlParcer";
-import PropertyRequest from "../../../services/propertyRequest/propertyRequest";
+import PropertyRequest from "../../../httpRequest/propertyRequest/propertyRequest";
 
 
 

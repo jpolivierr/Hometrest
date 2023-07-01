@@ -2,7 +2,7 @@
 import { deepSearch } from "../../Util/getValueByKey"
 import { getStatusStyle, getTypeStyle, cleanInput, formatNumber, getPhoto } from "./util"
 import { useEffect, useRef, useState } from "react"
-import useRequest from "../../services/MakeRequest/MakeRequest"
+import useRequest from "../../httpRequest/MakeRequest/MakeRequest"
 import URL from "../../constants/urls"
 import useReduxMng from "../../hooks/useReduxMng"
 // import { likesDemo } from "../../Mock/userDemo"
@@ -16,7 +16,13 @@ import "./PropertyCard.style.css"
 
 const PropertyCard = (props) =>{
 
-    const {singleProperty} = props 
+    useEffect(()=>{
+        console.log("propertyCard render..")
+    },[])
+
+    const {singleProperty, value, functions} = props 
+    const{likeProperty} = functions
+    const {userLikes} = value
     const navigate = useNavigate()
 
     const propertyId = deepSearch(singleProperty,["property_id"])
@@ -34,64 +40,13 @@ const PropertyCard = (props) =>{
     const stateCode = deepSearch(singleProperty,["location","address","state_code"])
     const photo = deepSearch(singleProperty,["primary_photo","href"])
 
-     const {makeRequest } =  useRequest()
-
-     const {activeUserReducer, updateLikes} = useReduxMng()
-
-     const [toggle] = useState(null)
-
-    const [like, setLike] = useState(false)
-
-     useEffect(()=>{
-
-        const property_ids = deepSearch(activeUserReducer,["userInfo","likes"],[])
-
-        if(property_ids.includes(propertyId)){
-
-            setLike(!like)
-
-        }
-  
-      },[])
-
-      
+    const [like] = useState(false)
 
 
-    const likeProperty = (id) =>{
+    const getUserLikes = (id) =>{
 
-        const property_ids = deepSearch(activeUserReducer,["userInfo","likes"],[])
+        return userLikes.includes(id)
 
-        if(!activeUserReducer.token){
-
-            toggle()
-
-            return
-
-        }
-
-        if(property_ids.includes(id)){
-
-            setLike(false)
-
-            const updatedPropertyIds = property_ids.filter(propId => propId != id)
-
-            updateLikes(updatedPropertyIds)
-
-            makeRequest("POST", URL.UNLIKE_PROPS, {propertyId : id})
-
-            return
-
-        }
-
-        setLike(true)
-
-        property_ids.push(id)
-
-        updateLikes(property_ids)
-
-        makeRequest("POST", URL.LIKE_PROPS, {propertyId : id})
-
-    
     }
 
     const handlePropClick = (e, propertyId) =>{
@@ -111,7 +66,14 @@ const PropertyCard = (props) =>{
   }
     return(
  
-        <PropertyCardView functions={{handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,handleForRent}} propertyDetails={{propertyId,status,type,beds,baths,sqft,price,street,city,zip,stateCode,photo,like}} />
+        <PropertyCardView 
+            functions={{getUserLikes, handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,handleForRent}} 
+
+             propertyDetails={{propertyId,status,type,beds,baths,sqft,price,street,city,zip,stateCode,photo,like}} 
+
+             value={{userLikes}}
+        
+        />
 
     )
 }

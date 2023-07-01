@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useCallback } from "react";
 import useSession from "../../features/sessionManagement/useSession";
 import useRequest from "../../httpRequest/MakeRequest/MakeRequest";
 import URL from "../../constants/urls";
@@ -13,12 +13,13 @@ export const UserProvider = ({children}) =>{
     
 
     const init = {
-        id: null,
-        firstName : null,
-        lastName : null,
-        email : null,
-        likedProperties : null,
+        id: "",
+        firstName : "",
+        lastName : "",
+        email : "",
+        likedProperties : [],
     }
+const [activeUser, setActiveUser] = useState(init)
 
     useEffect(()=>{
 
@@ -35,8 +36,6 @@ export const UserProvider = ({children}) =>{
 
     
 
-    const [activeUser, setActiveUser] = useState(init)
-
     const setUser = (user) =>{
         user.firstName = capitalizeWords(user.firstName)
         user.lastName = capitalizeWords(user.lastName)
@@ -49,7 +48,6 @@ export const UserProvider = ({children}) =>{
     }
 
     const logout = () =>{
-
         makeRequest("GET",URL.LOGOUT)
     }
 
@@ -57,8 +55,37 @@ export const UserProvider = ({children}) =>{
         makeRequest("DELETE",URL.DELETE_ACCOUNT)
     }
 
+    const likeProperty = useCallback((id) =>{
+
+        const likePropsClone = [...activeUser.likedProperties]
+
+        if(activeUser.likedProperties.includes(id)){
+
+          const updatedateLikes = likePropsClone.filter( likesId => likesId !== id)
+
+          setActiveUser({...activeUser, likedProperties: updatedateLikes})
+
+        //   makeRequest("POST", URL.UNLIKE_PROPS, {propertyId : id})
+
+          return
+
+        }
+        
+        likePropsClone.push(id)
+
+        setActiveUser({...activeUser, likedProperties: likePropsClone})
+
+        // makeRequest("POST", URL.LIKE_PROPS, {propertyId : id})
+
+
+    },[activeUser.likedProperties])
+
+    useEffect(()=>{
+          console.log(activeUser.likedProperties)
+    },[activeUser])
+
     return(
-        <UserContext.Provider value={{activeCookie, getCookie, activeUser, loading, setUser, clearUser, logout, deleteAccount}}>
+        <UserContext.Provider value={{activeCookie, likeProperty, getCookie, activeUser, loading, setUser, clearUser, logout, deleteAccount}}>
             {children}
         </UserContext.Provider>
     )

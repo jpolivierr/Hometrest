@@ -11,7 +11,7 @@ import { matchPassword } from "./Util/matchPassword";
 import "./style/avalon.css"
 import useReduxMng from "../../hooks/useReduxMng";
 import useFormSubmit from "./Request/request";
-import useRequest from "../../services/MakeRequest/MakeRequest";
+import useRequest from "../../httpRequest/MakeRequest/MakeRequest";
 //Action
 import { useEffect, useState } from "react";
  import { validateFields } from "./Config/validateFields";

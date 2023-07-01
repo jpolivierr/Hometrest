@@ -2,7 +2,7 @@
 import { deepSearch } from "../../Util/getValueByKey"
 import { getStatusStyle, getTypeStyle, cleanInput, formatNumber, getPhoto } from "./util"
 import { useEffect, useRef, useState } from "react"
-import useRequest from "../../services/MakeRequest/MakeRequest"
+import useRequest from "../../httpRequest/MakeRequest/MakeRequest"
 import URL from "../../constants/urls"
 import useReduxMng from "../../hooks/useReduxMng"
 import { likesDemo } from "../../Mock/userDemo"

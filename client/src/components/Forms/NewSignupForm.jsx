@@ -12,7 +12,7 @@ import useModal from "../../lib/Modal/useModal";
 import MainButton from "../buton/MainButton";
 import { matchPassword } from "../../lib/Forms/Util/matchPassword";
 import URL from "../../constants/urls";
-import useRequest from "../../services/MakeRequest/MakeRequest";
+import useRequest from "../../httpRequest/MakeRequest/MakeRequest";
 import { capitalizeFirstLetter } from "../propertyCard/util";
 import errorFromServer from "./FormUtil/serverError";
 import useSessionMng from "../../hooks/useSessionMng";

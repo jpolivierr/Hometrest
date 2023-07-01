@@ -1,20 +1,20 @@
 import "./style.css"
 import PropertyCard from "../propertyCard/PropertyCard.component"
 import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
+import UserContext from "../../context/user/UserContext"
+import { useContext } from "react"
 
 
 const ShowPropertiesView = ({value}) =>{
 
-    const {isLoading, getSearchValue, properties} = value
-
+    const {isLoading, getSearchValue, properties, likeProperty,activeUser} = value
+    
+    const userLikes = activeUser.likedProperties
 
     const renderPropertyCard = () =>{
 
-        
 
         if(properties.length === 0) return
-
-        console.log("property card..")
 
         return(
             properties.map((property,index)=>(
@@ -22,6 +22,8 @@ const ShowPropertiesView = ({value}) =>{
                         <PropertyCard
                             singleProperty = {property}
                             key={index}
+                            functions={{likeProperty}}
+                            value={{userLikes}}
                         />
        
                 ))

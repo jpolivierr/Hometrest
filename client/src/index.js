@@ -9,7 +9,7 @@ import './App.css';
 import {Provider} from "react-redux";
 import {store} from './Redux/store'
 import {BrowserRouter as Router} from "react-router-dom"
-import { UserProvider } from './components/userContext/UserState';
+import { UserProvider } from './context/user/UserContext';
 import { ModalProvider } from './context/modals/modalContext';
 import { GlobalMessageProvider } from './context/globalMessage/globalMessageContext';
 

@@ -6,11 +6,14 @@ import NewLoginForm from "../Forms/NewLoginForm"
 import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
 import { useEffect } from "react"
 import ShowPropertiesView from "./ShowProperties.view"
-
+import { useContext } from "react"
+import UserContext from "../../context/user/UserContext"
 
 const ShowProperties = (props) =>{
 
     const {isLoading, properties, count, total, searchReducer} = props
+
+    const {likeProperty, activeUser} = useContext(UserContext)
     
 
     const getSearchValue = () =>{
@@ -39,7 +42,7 @@ const ShowProperties = (props) =>{
 
 
     return(
-        <ShowPropertiesView value={{getSearchValue, properties, isLoading}} />
+        <ShowPropertiesView value={{getSearchValue, properties, isLoading, likeProperty,activeUser}} />
     )
 
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import useRequest from '../MakeRequest/MakeRequest'
-import UserContext from '../../components/userContext/UserState'
+import UserContext from '../../context/user/UserContext'
 import { useContext, useLayoutEffect } from 'react'
 import URL from '../../constants/urls'
 

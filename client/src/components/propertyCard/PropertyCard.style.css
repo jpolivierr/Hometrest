@@ -154,10 +154,6 @@
     background: lightblue;
 }
 
-
-
-
-
 .type-apartment{
     background: #479d47;
 }
@@ -192,4 +188,8 @@
 
 .type-coop{
     background: #2290d3;
+}
+
+.like_style{
+    color: #ff4141;
 }

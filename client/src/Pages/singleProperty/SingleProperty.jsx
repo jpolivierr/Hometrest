@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getParams } from "../../Util/urlParcer"
-import useRequest from "../../services/MakeRequest/MakeRequest"
+import useRequest from "../../httpRequest/MakeRequest/MakeRequest"
 import URL from "../../constants/urls"
 import { singleDemo } from "../../Mock/singleDemo"
 import { deepSearch } from "../../Util/getValueByKey"

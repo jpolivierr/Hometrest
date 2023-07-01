@@ -1,6 +1,6 @@
 import "./style.css"
 import { useEffect, useState, useRef } from "react"
-import useRequest from "../../services/MakeRequest/MakeRequest"
+import useRequest from "../../httpRequest/MakeRequest/MakeRequest"
 import findPropertyValue from "../../Util/nestedObject"
 import TopSearchFilter from "../../components/Forms/TopSearchFilter"
 import ShowProperties from "../../components/showProperties/ShowProperties.component"
@@ -18,14 +18,8 @@ const Listings = (props) =>{
 
     const {propertiesReducer,searchReducer} = Reducers() 
 
-    useEffect(()=>{
-      console.log(propertiesReducer)
-    },[propertiesReducer])
-
     const [loadingProps] = useState(false)
    
-
-    console.log(propertiesReducer)
     return(
         <div id={id} className={Class}>
           <Filter />

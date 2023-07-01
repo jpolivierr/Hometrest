@@ -9,7 +9,7 @@ import Listings from './Pages/listings/listings';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import TopNav from './components/navBar/topNav';
 import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
-import UserRequest from './services/httpRequest/userRequest';
+import UserRequest from './httpRequest/userRequest/userRequest';
 
 
 function App() {

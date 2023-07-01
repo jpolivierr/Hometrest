@@ -3,7 +3,7 @@ import Inputs from "../../lib/Forms/Fields/Inputs"
 import { useEffect, useState } from "react";
 import MainButton from "../buton/MainButton";
 import URL from "../../constants/urls";
-import useRequest from "../../services/MakeRequest/MakeRequest";
+import useRequest from "../../httpRequest/MakeRequest/MakeRequest";
 import errorFromServer from "./FormUtil/serverError";
 import useSessionMng from "../../hooks/useSessionMng";
 import LoadingEffect from "../../lib/loadingEffect/loading/loadingEffect";
