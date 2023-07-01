@@ -25,7 +25,7 @@ const useRequest = () =>{
         const timeout = setTimeout(() => {
             console.log("timed out..")
             abortController.current && abortController.current.abort();
-          }, 5000);
+          }, 20000);
 
 
         let response

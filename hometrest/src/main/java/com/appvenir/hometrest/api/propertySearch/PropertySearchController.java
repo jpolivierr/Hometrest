@@ -1,29 +1,27 @@
 package com.appvenir.hometrest.api.propertySearch;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.appvenir.hometrest.api.tools.ApiResponse.ApiResponse;
+import reactor.core.publisher.Flux;
 
 @Controller
 @RequestMapping(path="/api/v1/property_search")
 public class PropertySearchController {
 
-    private ApiResponse apiResponse;
+    private PropertySearchService propertySearchService;
 
-    public PropertySearchController(ApiResponse apiResponse){
+    public PropertySearchController(PropertySearchService propertySearchService){
 
-        this.apiResponse = apiResponse;
+        this.propertySearchService = propertySearchService;
 
     }
 
 
     @PostMapping(path = "/list")
-    public  ResponseEntity<Object> search( @RequestBody PropertySearch propertySearch){
+    public  Flux<Object>  search( @RequestBody Object propertySearch){
 
     //     try {
     //     // Sleep for 5 seconds
@@ -32,7 +30,13 @@ public class PropertySearchController {
     //     e.printStackTrace();
     // }
 
-        return apiResponse.create(200, "sucess", propertySearch);
+    //    return propertySearchService.findAll(propertySearch);
+
+       Flux<Object> propertyList = propertySearchService.findAll(propertySearch);
+
+       return propertyList;
+
+        //  return apiResponse.create(200, "sucess", propertyList);
         
     }
     
