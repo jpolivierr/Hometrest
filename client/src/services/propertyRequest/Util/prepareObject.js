@@ -1,12 +1,12 @@
-const prepareObject = (newObj) =>{
+const prepareObject = (newObj, defaultCity) =>{
 
     if(Object.keys(newObj).length === 0){
-        newObj.city = "jacksonville"
+        newObj.city = defaultCity
         return newObj
     }
 
     if(!newObj.city && !newObj.postal_code){
-        newObj.city = "jacksonville"
+        newObj.city = defaultCity
         return newObj
     }
 

@@ -6,6 +6,7 @@ import compareObjects from '../../Util/compareObjects'
 import removeEmptyValues from '../../Util/removeEmptyValues'
 import prepareObject from './Util/prepareObject'
 import hardCopy from '../../Util/hardCopy'
+import { deepSearch } from '../../Util/getValueByKey'
 
 
 export default function PropertyRequest() {
@@ -22,7 +23,9 @@ export default function PropertyRequest() {
         console.log("making request")
         const searchReducerCopy = hardCopy(searchReducer)
         const newObj = removeEmptyValues(searchReducerCopy)
-        const preparedObj = prepareObject(newObj)
+        const preparedObj = prepareObject(newObj, "miami")
+        preparedObj.limit = 50
+        preparedObj.state_code = "fl"
         console.log(preparedObj)
         makeRequest("POST",URL.SEARCH, preparedObj)
         prevState.current = searchReducer
@@ -40,10 +43,13 @@ export default function PropertyRequest() {
       return
     }
 
-    
-
+    if(response){
+      const data = deepSearch(response[0],["data","home_search"],{})
+      setPropertyList(data)
+    }
 
    },[serverError, response])
+
 
 
   return {

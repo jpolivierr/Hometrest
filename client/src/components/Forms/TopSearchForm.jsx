@@ -25,7 +25,6 @@ const TopSearchForm = () =>{
 
 
       const city = deepSearch(searchReducer,["city"],"")
-
       const type = deepSearch(searchReducer,["type"],"")
       const status = deepSearch(searchReducer,["status"],"")
       const price = deepSearch(searchReducer,["list_price"])

@@ -10,6 +10,8 @@ const Map = (props) =>{
 
     const {properties} = props
 
+    console.log(properties)
+
     const mapRef = useRef(null)
 
     const getCenterCoordinate = () =>{
@@ -131,13 +133,7 @@ const Map = (props) =>{
               
                 });
 
-      
-
-
     }
-
-
-
 
     const [initialView, setInitialView] = useState({
             zoom: 11,
@@ -178,8 +174,6 @@ const Map = (props) =>{
 
     useEffect(()=>{
 
-      
-
         if(window.google && mapRef.current){
 
             const map = new window.google.maps.Map(mapRef.current, initialView);
@@ -191,9 +185,16 @@ const Map = (props) =>{
 
 
     return(
-        <div id="map" className={"the-map"} ref={mapRef}>
 
+        <>
+
+        <div id="map" 
+            className={`the-map ${properties.length === 0 && "no_map"}`} 
+            ref={mapRef}>
         </div>
+
+        </>
+        
     )
 }
 

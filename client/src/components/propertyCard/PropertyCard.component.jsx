@@ -9,9 +9,10 @@ import useReduxMng from "../../hooks/useReduxMng"
 import shortenText from "../../Util/shortenText"
 import useMyModal from "../../lib/Modal/useMyModal"
 import NewLoginForm from "../Forms/NewLoginForm"
+import PropertyCardView from "./PropertyCard.view"
 
 import { useNavigate } from "react-router-dom"
-import "./style.css"
+import "./PropertyCard.style.css"
 
 const PropertyCard = (props) =>{
 
@@ -33,26 +34,13 @@ const PropertyCard = (props) =>{
     const stateCode = deepSearch(singleProperty,["location","address","state_code"])
     const photo = deepSearch(singleProperty,["primary_photo","href"])
 
-     const {makeRequest, formResponse } =  useRequest()
+     const {makeRequest } =  useRequest()
 
      const {activeUserReducer, updateLikes} = useReduxMng()
 
      const [toggle] = useState(null)
 
-
-
     const [like, setLike] = useState(false)
-
-    useEffect(()=>{
-
-        if(formResponse.status){
-
-            console.log(formResponse)
-        }
-         
-
-    },[formResponse])
-
 
      useEffect(()=>{
 
@@ -123,37 +111,7 @@ const PropertyCard = (props) =>{
   }
     return(
  
-        <>
-                <div 
-            onClick={(e)=> handlePropClick(e,propertyId)} data-property_id = {propertyId} className="property-card av-shadow">
-            <figure style={{background : `url(${getPhoto(photo)}) no-repeat center center/cover`}}>
-
-                <div className="status-component">
-                        <div className={getStatusStyle(status)}>
-                            {cleanInput(status)}
-                        </div>
-                        <div className={getTypeStyle(type)}>
-                            {cleanInput(type)}
-                        </div>
-                </div>
-                
-            </figure>
-
-            <div className="prop-info">
-                    <div className="prop-price">${formatNumber(price)}{handleForRent(status)}</div>
-                    {!like ? <i onClick={()=>likeProperty(propertyId)} className="fa-regular fa-heart"></i> : <i onClick={()=>likeProperty(propertyId)} className="fa-solid fa-heart like-prop"></i>}
-                    <div className="prop-beds"><i className="fa-solid fa-bed"></i> {beds} <span>Beds</span></div>
-                    <div className="prop-baths"><i className="fa-solid fa-bath"></i>{baths} <span>Baths</span></div>
-                    <div className="prop-sqft"><i className="fa-brands fa-unity"></i>{formatNumber(sqft)} <span>Sqft</span></div>
-                    <div className="prop-address">
-                        {`${street}, ${city}, ${stateCode} ${zip}`}
-                    </div>
-            </div>
-            
-            
-        </div>
-
-        </>
+        <PropertyCardView functions={{handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,handleForRent}} propertyDetails={{propertyId,status,type,beds,baths,sqft,price,street,city,zip,stateCode,photo,like}} />
 
     )
 }

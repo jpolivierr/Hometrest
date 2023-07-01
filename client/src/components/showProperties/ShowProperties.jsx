@@ -9,28 +9,10 @@ import { useEffect } from "react"
 
 const ShowProperties = (props) =>{
 
-    const {isLoading} = props
+    const {isLoading, properties} = props
 
     const {propertiesReducer,searchReducer} = useReduxMng()
-
-    const {toggle, renderModal, addChildElement, isShowing} = useMyModal({
-        type: "floating",
-        windowAnimation : {
-                    start: "float",
-                    end: "close-float"
-        },
-        time: 0,
-    })
     
-
-    useEffect(()=>{
-        addChildElement(
-                        <NewLoginForm 
-                              elementClass="avalon text-left padding-top-bottom padding-bottom-2x"
-                        />
-                    )
-        
-    },[isShowing])
 
     const getSearchValue = () =>{
 
@@ -83,7 +65,6 @@ const ShowProperties = (props) =>{
             />
        
    )) : renderLoading()}
-            {renderModal()}
         </div>
     )
 

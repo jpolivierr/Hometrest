@@ -25,6 +25,5 @@ public class WebClientConfig {
 				.defaultHeader("X-RapidAPI-Host", "realtor.p.rapidapi.com");
 
 	}
-        
-    
+
 }

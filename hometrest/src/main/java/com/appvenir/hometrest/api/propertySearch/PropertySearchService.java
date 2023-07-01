@@ -17,8 +17,6 @@ public class PropertySearchService {
     }
 
     public Flux<Object> findAll(Object propertySearch){
- 
-        System.out.println(propertySearch.toString());
 
         return webClient.post()
                 .uri("/properties/v3/list")

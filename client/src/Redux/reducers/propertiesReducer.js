@@ -1,19 +1,21 @@
 import { SET_PROPERTIES } from "../actions/propertiesAction"
 import { deepSearch } from "../../Util/getValueByKey"
-const init = []
+const init = {
+            count: 0,
+            total: 0,
+            results : [],
+}
 
 const propertiesReducer = (state = init, action) =>{
 
     switch(action.type){
 
         case SET_PROPERTIES :
-            return removePropsWithNoImage(action.payload)
+            return action.payload
         default :
             return state
 
     }
-
-
 }
 
 const removePropsWithNoImage = (propArray) =>{

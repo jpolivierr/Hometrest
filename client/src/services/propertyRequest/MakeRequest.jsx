@@ -68,10 +68,6 @@ const useRequest = () =>{
                         response = await fetch(url)
                 }
 
-                 console.log(response.status)
-                 console.log(response)
-                
-
                 switch(response.status){
                      case 204 :
                      case 201 :
