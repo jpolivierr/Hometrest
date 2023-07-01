@@ -81,6 +81,14 @@ fieldset{
     border: none;
 }
 
+.av-shadow{
+    box-shadow: 0 0px 14px -2px #225a6d4f
+}
+
+.av-shadow-2{
+    box-shadow: 0 0 20px #82bbcc54;
+}
+
 /* 
 =================================================
 Buttons
@@ -317,10 +325,77 @@ MARGIN
 
 /* 
 =================================================
+MODAL
+=================================================
+*/
+
+.bk_modal{
+     background: #081b4b77;
+     width: 100%;
+     height: 100%;
+     position: fixed;
+     top: 0;
+     left: 0;
+     z-index: 10;
+}
+
+.modal_window{
+    z-index: 11;
+    max-width: max-content;
+    height: max-content;
+}
+
+.close_btn{
+    display: block;
+    position: absolute;
+    font-size: 2rem;
+    font-weight: 100;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.close_btn span{
+position: relative;
+transform: rotate(45deg);
+width: max-content;
+height: max-content;
+top: -2px;
+left: 1px;
+
+}
+
+
+
+
+/* 
+=================================================
 BACKGROUND
 =================================================
 */
 
 .light-bk{
     background: #add8e62e;
+}
+
+@media(min-width: 900px){
+
+    .hideDesktop{
+        display: none;
+    }
+    
+}
+
+@media(max-width: 900px){
+
+    .container{
+        width: 90%;
+    }
+
+    .hideMobile{
+        display: none;
+    }
+    
 }

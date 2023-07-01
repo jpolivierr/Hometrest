@@ -12,12 +12,14 @@ import NewLoginForm from "../Forms/NewLoginForm"
 import PropertyCardView from "./PropertyCard.view"
 import { useContext } from "react"
 import UserContext from "../../context/user/UserContext"
+import ModalContext from "../../context/modals/modalContext"
 import { useNavigate } from "react-router-dom"
 import "./PropertyCard.style.css"
 
 const PropertyCard = (props) =>{
 
     const {activeUser, likeProperty} = useContext(UserContext)
+    const {toggleFloatingModal} = useContext(ModalContext)
 
     const userLikes = activeUser.likedProperties
 
@@ -59,12 +61,14 @@ const PropertyCard = (props) =>{
     }
 
   const handleForRent = (status) =>{
+
     if(status === "for_rent") return (<span>/month</span>)
+
   }
     return(
  
         <PropertyCardView 
-            functions={{getUserLikes, handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,handleForRent}} 
+            functions={{getUserLikes, handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,handleForRent,toggleFloatingModal}} 
 
              propertyDetails={{propertyId,status,type,beds,baths,sqft,price,street,city,zip,stateCode,photo}} 
 

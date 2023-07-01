@@ -1,0 +1,18 @@
+.floating_modal{
+    position: fixed;
+    margin: auto;
+    top: 2rem;
+    left: 0px;
+    right: 0px;
+    background: white;
+    bottom: 0;
+    border-radius: var(--borderRadius);
+    padding: 2rem 1rem;
+    
+}
+
+.floating_modal .close_btn{
+
+    right: 2px;
+    top: 0px;
+}
