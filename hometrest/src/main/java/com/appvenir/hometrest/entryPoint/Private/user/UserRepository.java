@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.api.user;
+package com.appvenir.hometrest.entryPoint.Private.user;
 
 import java.util.Optional;
 

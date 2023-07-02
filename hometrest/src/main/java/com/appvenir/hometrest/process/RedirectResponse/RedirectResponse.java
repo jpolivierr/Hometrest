@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.api.tools.RedirectResponse;
+package com.appvenir.hometrest.process.RedirectResponse;
 
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.api.propertySearch;
+package com.appvenir.hometrest.entryPoint.Public.propertySearch;
 
 import java.util.ArrayList;
 import java.util.HashMap;

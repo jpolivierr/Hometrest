@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.api.likedProperties;
+package com.appvenir.hometrest.entryPoint.Private.likedProperties;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.api.login;
+package com.appvenir.hometrest.Authentication.login;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

@@ -1,6 +1,6 @@
-package com.appvenir.hometrest.api.likedProperties;
+package com.appvenir.hometrest.entryPoint.Private.likedProperties;
 
-import com.appvenir.hometrest.api.user.User;
+import com.appvenir.hometrest.entryPoint.Private.user.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

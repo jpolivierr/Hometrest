@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.api.likedProperties;
+package com.appvenir.hometrest.entryPoint.Private.likedProperties;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

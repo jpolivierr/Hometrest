@@ -1,9 +1,9 @@
-package com.appvenir.hometrest.api.likedProperties;
+package com.appvenir.hometrest.entryPoint.Private.likedProperties;
 
 import org.springframework.stereotype.Service;
 
-import com.appvenir.hometrest.api.user.User;
-import com.appvenir.hometrest.api.user.UserService;
+import com.appvenir.hometrest.entryPoint.Private.user.User;
+import com.appvenir.hometrest.entryPoint.Private.user.UserService;
 
 @Service
 public class LikePropertiesService {

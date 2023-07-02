@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.api.login;
+package com.appvenir.hometrest.Authentication.login;
 
 
 import org.springframework.http.HttpStatus;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appvenir.hometrest.Authentication.SessionManagement.SessionManagement;
-import com.appvenir.hometrest.api.tools.RedirectResponse.RedirectResponse;
-import com.appvenir.hometrest.api.user.User;
+import com.appvenir.hometrest.entryPoint.Private.user.User;
+import com.appvenir.hometrest.process.RedirectResponse.RedirectResponse;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

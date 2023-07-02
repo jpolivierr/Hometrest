@@ -17,7 +17,6 @@ import com.appvenir.hometrest.constants.AntPattern;
 public class SecurityConfig {
 
     private final String home = "/**";
-    private final String api = "/api/secure/**";
     // private final String logIn = "/process-login";
 
 

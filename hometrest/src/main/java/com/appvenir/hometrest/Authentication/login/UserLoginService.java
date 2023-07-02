@@ -1,11 +1,11 @@
-package com.appvenir.hometrest.api.login;
+package com.appvenir.hometrest.Authentication.login;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.appvenir.hometrest.Exceptions.UserNotFoundException;
-import com.appvenir.hometrest.api.user.User;
-import com.appvenir.hometrest.api.user.UserService;
+import com.appvenir.hometrest.entryPoint.Private.user.User;
+import com.appvenir.hometrest.entryPoint.Private.user.UserService;
 
 @Service
 public class UserLoginService {

@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.api.user;
+package com.appvenir.hometrest.entryPoint.Private.user;
 
 import java.nio.file.AccessDeniedException;
 
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.appvenir.hometrest.Authentication.SessionManagement.SessionManagement;
 import com.appvenir.hometrest.Exceptions.UserNotFoundException;
-import com.appvenir.hometrest.api.tools.ApiResponse.ApiResponse;
-import com.appvenir.hometrest.api.tools.RedirectResponse.RedirectResponse;
 import com.appvenir.hometrest.constants.SessionConstants;
+import com.appvenir.hometrest.process.ApiResponse.ApiResponse;
+import com.appvenir.hometrest.process.RedirectResponse.RedirectResponse;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

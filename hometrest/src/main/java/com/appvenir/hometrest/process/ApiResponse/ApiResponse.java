@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.api.tools.ApiResponse;
+package com.appvenir.hometrest.process.ApiResponse;
 
 import java.time.LocalDateTime;
 

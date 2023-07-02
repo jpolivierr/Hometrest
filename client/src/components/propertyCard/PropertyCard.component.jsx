@@ -18,11 +18,6 @@ import "./PropertyCard.style.css"
 
 const PropertyCard = (props) =>{
 
-    const {activeUser, likeProperty} = useContext(UserContext)
-    const {toggleFloatingModal} = useContext(ModalContext)
-
-    const userLikes = activeUser.likedProperties
-
     const {singleProperty} = props 
 
     const navigate = useNavigate()
@@ -41,10 +36,23 @@ const PropertyCard = (props) =>{
     const stateCode = deepSearch(singleProperty,["location","address","state_code"])
     const photo = deepSearch(singleProperty,["primary_photo","href"])
 
+    const {activeUser, likeProperty, isLoggedIn} = useContext(UserContext)
+
+    const {toggleFloatingModal} = useContext(ModalContext)
+
+    const userLikes = activeUser.likedProperties
 
     const getUserLikes = (id) =>{
 
         return userLikes.includes(id)
+
+    }
+
+    const handleLikes = (id) =>{
+
+        if(!isLoggedIn) toggleFloatingModal(); return
+
+        likeProperty(id)
 
     }
 
@@ -68,7 +76,7 @@ const PropertyCard = (props) =>{
     return(
  
         <PropertyCardView 
-            functions={{getUserLikes, handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,handleForRent,toggleFloatingModal}} 
+            functions={{handleLikes, getUserLikes, handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,handleForRent,toggleFloatingModal}} 
 
              propertyDetails={{propertyId,status,type,beds,baths,sqft,price,street,city,zip,stateCode,photo}} 
 

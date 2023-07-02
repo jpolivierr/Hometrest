@@ -15,7 +15,7 @@ import "./style.css"
 
 const PropertyCardView = ({functions, propertyDetails, value}) =>{
 
-    const {getUserLikes, handleForRent,handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,toggleFloatingModal} = functions
+    const {getUserLikes, handleForRent,handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,toggleFloatingModal, handleLikes} = functions
     const {propertyId,status,type, beds,baths,sqft,price,street,city,zip,stateCode,photo,like} = propertyDetails
 
     return(
@@ -40,8 +40,8 @@ const PropertyCardView = ({functions, propertyDetails, value}) =>{
                     <div className="prop-price">${formatNumber(price)}{handleForRent(status)}</div>
                     {
                     !getUserLikes(propertyId) ? 
-                      <i onClick={()=>{toggleFloatingModal();likeProperty(propertyId)}} className="fa-regular fa-heart"></i> : 
-                      <i onClick={()=>{toggleFloatingModal();likeProperty(propertyId)}} className="fa-solid fa-heart like-prop"></i>
+                      <i onClick={()=>{handleLikes(propertyId)}} className="fa-regular fa-heart"></i> : 
+                      <i onClick={()=>{handleLikes(propertyId)}} className="fa-solid fa-heart like-prop"></i>
                       }
                     <div className="prop-beds"><i className="fa-solid fa-bed"></i> {beds} <span>Beds</span></div>
                     <div className="prop-baths"><i className="fa-solid fa-bath"></i>{baths} <span>Baths</span></div>

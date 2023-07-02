@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.api.propertySearch;
+package com.appvenir.hometrest.entryPoint.Public.propertySearch;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

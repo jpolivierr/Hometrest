@@ -1,9 +1,9 @@
-package com.appvenir.hometrest.api.user;
+package com.appvenir.hometrest.entryPoint.Private.user;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.appvenir.hometrest.api.likedProperties.LikeProperties;
+import com.appvenir.hometrest.entryPoint.Private.likedProperties.LikeProperties;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;

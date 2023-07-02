@@ -8,6 +8,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({children}) =>{
 
+    const {isLoggedIn, setIsLoggedIn} = useState(false)
     const {makeRequest, response, loading, serverError} = useRequest()
     const {deleteCookie, getCookie, activeCookie} = useSession()
     
@@ -40,14 +41,17 @@ const [activeUser, setActiveUser] = useState(init)
         user.firstName = capitalizeWords(user.firstName)
         user.lastName = capitalizeWords(user.lastName)
         setActiveUser(user)
+        setIsLoggedIn(true)
     }
 
     const clearUser = () =>{
         setActiveUser(init)
         deleteCookie()
+        setIsLoggedIn(false)
     }
 
     const logout = () =>{
+        setIsLoggedIn(false)
         makeRequest("GET",URL.LOGOUT)
     }
 
@@ -82,7 +86,7 @@ const [activeUser, setActiveUser] = useState(init)
 
 
     return(
-        <UserContext.Provider value={{activeCookie, likeProperty, getCookie, activeUser, loading, setUser, clearUser, logout, deleteAccount}}>
+        <UserContext.Provider value={{isLoggedIn, activeCookie, likeProperty, getCookie, activeUser, loading, setUser, clearUser, logout, deleteAccount}}>
             {children}
         </UserContext.Provider>
     )
