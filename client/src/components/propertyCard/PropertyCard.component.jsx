@@ -14,6 +14,7 @@ import { useContext } from "react"
 import UserContext from "../../context/user/UserContext"
 import ModalContext from "../../context/modals/modalContext"
 import { useNavigate } from "react-router-dom"
+import { useUserContext } from "../../context/user/UserContext"
 import "./PropertyCard.style.css"
 
 const PropertyCard = (props) =>{
@@ -36,17 +37,11 @@ const PropertyCard = (props) =>{
     const stateCode = deepSearch(singleProperty,["location","address","state_code"])
     const photo = deepSearch(singleProperty,["primary_photo","href"])
 
-    const {activeUser, likeProperty, isLoggedIn} = useContext(UserContext)
+    const {activeUser, likeProperty, isLoggedIn, getUserLikes} = useUserContext()
 
     const {toggleFloatingModal} = useContext(ModalContext)
 
     const userLikes = activeUser.likedProperties
-
-    const getUserLikes = (id) =>{
-
-        return userLikes.includes(id)
-
-    }
 
     const handleLikes = (id) =>{
 

@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LikePropertiesRepository extends JpaRepository<LikeProperties,Integer> {
     
+    public void deleteByPropertyId(String propId);
 }

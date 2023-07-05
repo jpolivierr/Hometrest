@@ -120,31 +120,6 @@
     padding-top: 1rem;
 }
 
-.schedule-tour{
-    /* width: 200px; */
-}
-
-.schedule-tour .slider-btn-right{
-    right: -22px
-}
-
-.schedule-tour .slider-btn-left{
-    left: -22px
-}
-
-
-.schedule-time{
-    display: flex;
-    flex-flow: column;
-    gap: .5rem;
-    text-align: center;
-    border: 1px solid #586b8459;
-    border-radius: 10px;
-    padding: 1rem;
-    cursor: pointer;
-    transition: background .2s;
-}
-
 .schedule-time:hover{
     background: #3d98c421;
 }

@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.appvenir.hometrest.Authentication.SessionManagement.SessionManagement;
 import com.appvenir.hometrest.Exceptions.UserNotFoundException;
-import com.appvenir.hometrest.process.ApiResponse.ApiResponse;
+import com.appvenir.hometrest.entryPoint.Private.user.User;
+import com.appvenir.hometrest.entryPoint.Private.user.UserService;
 import com.appvenir.hometrest.process.RedirectResponse.RedirectResponse;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,18 +22,15 @@ import jakarta.validation.Valid;
 @RequestMapping(path="/process_registration")
 public class UserRegistrationController {
 
-    private ApiResponse apiResponse;
-    private UserRegistrationService userRegistrationService;
+    private UserService userService;
     private SessionManagement sessionMng;
     private RedirectResponse redirectResponse;
 
     UserRegistrationController(
-                    ApiResponse apiResponse,
-                    UserRegistrationService userRegistrationService,
+                    UserService userService,
                     SessionManagement sessionMng,
                     RedirectResponse redirectResponse){
-        this.apiResponse = apiResponse;
-        this.userRegistrationService = userRegistrationService;
+        this.userService = userService;
         this.sessionMng = sessionMng;
         this.redirectResponse = redirectResponse;
     }
@@ -40,15 +38,15 @@ public class UserRegistrationController {
     // Create a new user
     @ResponseStatus(HttpStatus.FOUND)
     @PostMapping(path="")
-    public @ResponseBody RedirectResponse addNewUser(@Valid @RequestBody UserRegistration user,
+    public @ResponseBody RedirectResponse addNewUser(@Valid @RequestBody User user,
                                     HttpSession session,
                                     HttpServletResponse response){
 
-        //  Boolean userFound = userRegistrationService.userExist(user.getEmail());
+         Boolean userFound = userService.userExist(user.getEmail());
 
-        //  if(userFound) throw new UserNotFoundException();
+          if(userFound) throw new UserNotFoundException();
 
-        userRegistrationService.createUser(user);
+        userService.createUser(user);
         
         sessionMng.create(user.getEmail(), session, response);
 

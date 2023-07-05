@@ -20,7 +20,7 @@ export default function FloatingModalView({value}) {
 
     
         const renderModal = () =>{
-            console.log(type)
+ 
             switch(type){
                 case "GALLERY" :
                     return <PhotoGallery modalPayload={modalPayload}/>

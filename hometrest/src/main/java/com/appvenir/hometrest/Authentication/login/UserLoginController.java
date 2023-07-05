@@ -1,10 +1,5 @@
 package com.appvenir.hometrest.Authentication.login;
 
-
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,6 +69,8 @@ public class UserLoginController {
                            ){
 
             User user = userLoginService.authenticate(userLogin.getEmail(), userLogin.getPassword());
+
+            System.out.println(user.getEmail());
 
             sessionMng.create(user.getEmail(), session, response);
        

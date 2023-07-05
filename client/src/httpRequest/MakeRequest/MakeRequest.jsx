@@ -27,10 +27,18 @@ const useRequest = () =>{
                     switch(method){
                     case "GET" :
                     case "DELETE" :
-                        setLoading(true)
-                        response = await fetch(url,config)
-                        setStatus(response.status)
-                        setLoading(false)
+                        if(data){
+                            config.body = JSON.stringify(data)
+                            setLoading(true)
+                            response = await fetch(url,config)
+                            setStatus(response.status)
+                            setLoading(false)
+                        } else{
+                             setLoading(true)
+                            response = await fetch(url,config)
+                            setStatus(response.status)
+                            setLoading(false)
+                        }
                         break
                     case "POST" :
                     case "PUT" :

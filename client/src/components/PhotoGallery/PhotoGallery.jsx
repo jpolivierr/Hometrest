@@ -11,8 +11,8 @@ export default function PhotoGallery({modalPayload}) {
                     <h2>Photo count: {count}</h2>
                      {count > 0 && 
                         photos.map((photo, index)=>(
-                            <figure>
-                                <img key={index} src={`${getPhoto(photo.href)}`} />
+                            <figure key={index}>
+                                <img src={`${getPhoto(photo.href)}`} />
                             </figure>
                             
                         ))

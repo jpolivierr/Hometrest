@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import com.appvenir.hometrest.entryPoint.Private.user.User;
 import com.appvenir.hometrest.entryPoint.Private.user.UserService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class LikePropertiesService {
     
@@ -26,11 +28,12 @@ public class LikePropertiesService {
     }
 
     // delete liked property
+    @Transactional
     public void delete(String email, LikeProperties likeProperties){
 
         User user = userService.findUser(email);
         likeProperties.setUser(user);
-        likePropertiesRepository.deleteById(likeProperties.getId());
+        likePropertiesRepository.deleteByPropertyId(likeProperties.getPropertyId());
 
     }
 

@@ -7,18 +7,19 @@ import { useNavigate, useLocation } from "react-router-dom"
 import SinglePropertyRequest from "../../httpRequest/SinglePropertyRequest/SinglePropertyRequest"
 import ModalContext from "../../context/modals/modalContext"
 import { useContext } from "react"
-import UserContext from "../../context/user/UserContext"
+import { useMyModal } from "../../context/modals/modalContext"
 import AgentInfo from "./AgenInfo/AgentInfo"
 import PropDescription from "./PropDescription/PropDescription"
+import { useUserContext } from "../../context/user/UserContext"
 import "./SingleProperty.style.css"
 
 const SingleProperty = () =>{
 
 const { pathname, search } = useLocation();
 
-const {toggleFloatingModal, setPayLoad} = useContext(ModalContext)
+const {toggleFloatingModal, setPayLoad} = useMyModal()
 
-const {activeUser, likeProperty, isLoggedIn} = useContext(UserContext)
+const {activeUser, likeProperty, isLoggedIn, getUserLikes} = useUserContext()
 const {singleProperty, loading} = SinglePropertyRequest()
 const mPayload = {count: singleProperty.photo_count, photos: singleProperty.photos}
 const PhotoGallery = () => toggleFloatingModal("gallery", mPayload)
@@ -37,13 +38,14 @@ const loginModal = () => toggleFloatingModal("login")
     const propertyId = deepSearch(singleProperty,["property_id"], "")
     const photos = deepSearch(singleProperty,["photos"],[])
 
-    const userLikes = activeUser.likedProperties
+    
 
-    const getUserLikes = (id) =>{
+    // const getUserLikes = (id) =>{
+    //     const userLikes = activeUser.likedProperties
+    //     const likes = userLikes.find(like => like.propertyId === id)
+    //     return likes
 
-        return userLikes.includes(id)
-
-    }
+    // }
 
     const handleLikes = (id) =>{
 
@@ -74,7 +76,7 @@ const loginModal = () => toggleFloatingModal("login")
                         <ul>
                             <li className="single_share_btn s-h-btn"><i className="fa-solid fa-share"></i> Share</li>
                             <li onClick={()=>{handleLikes(propertyId)}} className="single_like_btn s-h-btn">{!getUserLikes(propertyId) ? <i  className="fa-regular fa-heart"></i> : <i  className="fa-solid fa-heart like-prop"></i>} Favorite</li>
-                            <li className="single_share_btn s-h-btn"><i class="fa-solid fa-xmark"></i> Hide</li>
+                            <li className="single_share_btn s-h-btn"><i className="fa-solid fa-xmark"></i> Hide</li>
                         </ul>
                         
                      </div>

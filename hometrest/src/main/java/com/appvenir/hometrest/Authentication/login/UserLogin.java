@@ -3,6 +3,7 @@ package com.appvenir.hometrest.Authentication.login;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
+
 public class UserLogin {
 
     @NotBlank(message = "Email is required")

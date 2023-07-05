@@ -10,12 +10,15 @@ import com.appvenir.hometrest.entryPoint.Private.user.UserService;
 @Service
 public class UserLoginService {
 
-    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
-    public UserLoginService(UserService userService, PasswordEncoder passwordEncoder){
-        this.userService = userService;
+    public UserLoginService(
+         PasswordEncoder passwordEncoder,
+         UserService userService
+         ){
         this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
     }
 
     public User authenticate(String email, String password){

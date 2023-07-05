@@ -15,11 +15,10 @@ public class UserService {
 
     UserService(UserRepository userRepository, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
-    // Create a new user
-    public void createUser(User user){
+       // Create a new user
+             public void createUser(User user){
 
             // String userpassword = user.getPassword();
             String encodedPassword = passwordEncoder.encode(user.getPassword());
@@ -60,7 +59,7 @@ public class UserService {
         
     }
 
-    // Find user
+     // Find userDTO
     public UserDTO findUserDTO(String email){ 
 
         Optional<User> getUser = userRepository.findByEmail(email);

@@ -57,7 +57,7 @@ const ScheduleTour = () =>{
         </Slider>
         <select className="select_time">
             {
-                time.map(hours => (<option>{hours}</option>))
+                time.map((hours,index) => (<option key={index}>{hours}</option>))
             }
         </select>
         <button 
