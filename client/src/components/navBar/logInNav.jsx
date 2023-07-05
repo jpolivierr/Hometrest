@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import NavList from "../list/NavList"
-import UserContext from "../userContext/UserState"
+import UserContext from "../../context/user/UserContext"
 import ModalContext from "../../context/modals/modalContext"
 import { useContext } from "react"
 

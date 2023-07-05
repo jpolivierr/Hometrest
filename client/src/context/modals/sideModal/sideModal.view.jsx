@@ -15,12 +15,13 @@ export default function SideModalView({value}) {
 
         return ( 
            <>
-          <div ref={modalBkRef}  className={`sideModal_bk ${backgrounAnimation} ${visible}`} onClick={toggle}/>
+          <div ref={modalBkRef}  className={`bk_modal ${backgrounAnimation} ${visible}`} onClick={toggle}/>
             <div ref={modalRef} className={`sideModal ${animation} ${visible}`}>
                 <div style={{cursor : "pointer"}} className={`close-btn close_btn`} onClick={toggle}><span>+</span>
                 </div>
-                testing
-                    {/* <UserSettings /> */}
+
+             
+                    <UserSettings />
             </div>
             </>
         

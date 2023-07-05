@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import UserSettings from '../../../components/menu/userSettings.view'
 import LoginForm from "../../../components/Form/login/Login.view"
+import PhotoGallery from '../../../components/PhotoGallery/PhotoGallery'
 import style from "./floatingModal.style.css"
 
 export default function FloatingModalView({value}) {
@@ -11,7 +12,23 @@ export default function FloatingModalView({value}) {
             toggle, 
             modalRef, 
             backgrounAnimation, 
-            animation} = value
+            animation,
+            type,
+            modalPayload
+        } = value
+
+    
+        const renderModal = () =>{
+            console.log(type)
+            switch(type){
+                case "GALLERY" :
+                    return <PhotoGallery modalPayload={modalPayload}/>
+                case "LOGIN" :
+                    return <LoginForm />
+                default :
+                    return <LoginForm />
+            }
+        }
 
 
         return ( 
@@ -20,8 +37,7 @@ export default function FloatingModalView({value}) {
             <div ref={modalRef} className={`modal_window floating_modal ${animation} ${visible}`}>
                 <div style={{cursor : "pointer"}} className={`close_btn`} onClick={toggle}><span>+</span>
                 </div>
-                <LoginForm />
-                    {/* <UserSettings /> */}
+                {renderModal()}
             </div>
             </>
         

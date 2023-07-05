@@ -4,18 +4,34 @@ import MainButton from "../../buton/MainButton";
 import LoadingEffect from "../../../lib/loadingEffect/loading/loadingEffect";
 import useForm from "../useForm";
 import URL from "../../../constants/urls";
+import "./Signup.style.css"
+import { useState } from "react";
 
 
 const Signup= () =>{
 
     const {submit, updateFormField, formError, loading} = useForm(URL.SIGNUP)
 
+    const [errorClass, setErrorClass] = useState("")
+
+    useState(()=>{
+        console.log(formError)
+        if(Object.keys(formError).length > 0){
+                setErrorClass("form_error")
+                return
+        }
+
+        setErrorClass("")
+    },[formError])
+
 // console.log(formState)
+
+
 
     return(
 
         <form style={{margin: "auto"}}
-           className="avalon text-left av-shadow" 
+           className={`signup_form ${Object.keys(formError).length > 0 && "form_error"}`} 
            onSubmit={e => submit(e)}>
 
                 {formError.serverError && 

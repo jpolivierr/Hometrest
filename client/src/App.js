@@ -16,6 +16,9 @@ function App() {
 
   const {loading} = UserRequest()
 
+
+
+
   return (
     <>
         {
@@ -26,7 +29,7 @@ function App() {
       <div className="App">
         
 
-    <TopNav />
+        <TopNav />
           <Routes>
           <Route path="/single_property" element={<SingleProperty/>}/>
           <Route path="/signup" element={<Signup/>}/>
@@ -41,6 +44,7 @@ function App() {
 
       </div>
     }
+
     </>
      
   );

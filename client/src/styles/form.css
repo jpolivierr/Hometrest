@@ -1,3 +1,9 @@
+form {
+    min-width: 430px;
+    background: white;
+    border-radius: var(--borderRadius);
+    padding: 3rem 2rem;
+}
 form h2{
     margin-bottom: 2rem;
 }
@@ -31,4 +37,14 @@ form fieldset select{
 form button{
     margin-top: 1rem;
     height: 50px;
+}
+
+.form_error input{
+    border: 1px solid red;
+    background: #ff000008;
+}
+
+.form_error fieldset p{
+    color: red;
+    margin-top: 10px;
 }

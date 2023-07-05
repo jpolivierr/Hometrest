@@ -31,9 +31,7 @@ export const getParams = (paramKey) =>{
     }else{
             const paramValue = new URLSearchParams(search)
             
-
             const entries = paramValue.entries()
-
 
             if(search && entries){
 
@@ -47,15 +45,12 @@ export const getParams = (paramKey) =>{
                     if(paramObj[paramKey]){
                         return JSON.parse(paramObj[paramKey])
                     }
-
-                    
+                 
 
                 } catch (error) {
                     console.log(error)
                     return null
-                }
-
-                 
+                }             
 
             
             }else{

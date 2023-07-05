@@ -8,7 +8,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({children}) =>{
 
-    const {isLoggedIn, setIsLoggedIn} = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     const {makeRequest, response, loading, serverError} = useRequest()
     const {deleteCookie, getCookie, activeCookie} = useSession()
     
@@ -20,6 +20,7 @@ export const UserProvider = ({children}) =>{
         email : "",
         likedProperties : [],
     }
+    
 const [activeUser, setActiveUser] = useState(init)
 
     useEffect(()=>{

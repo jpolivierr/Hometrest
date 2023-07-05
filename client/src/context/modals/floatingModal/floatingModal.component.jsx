@@ -5,7 +5,7 @@ import "./floatingModal.style.css"
 
 export default function FloatingModal(props) {
 
-    const {toggle, isShowing} = props
+    const {toggle, isShowing, type, modalPayload, transitionTime} = props
     const [animation, setAnimation] = useState("")
     const [backgrounAnimation, setBackgroundAnimation] = useState("")
     const [visible, setVisible] = useState("hide")
@@ -30,16 +30,14 @@ export default function FloatingModal(props) {
             setBackgroundAnimation("fade_out")
             setTimeout(()=>{
                 setVisible("hide")
-            },100)
+            }, 0)
             
         }
-
-        console.log(isShowing)
 
     },[isShowing])
     
     return ( 
-        isShowing !== null &&  <FloatingModalView value={{modalBkRef, backgrounAnimation, visible, toggle, modalRef, animation}} />
+        isShowing !== null &&  <FloatingModalView value={{modalPayload, type, modalBkRef, backgrounAnimation, visible, toggle, modalRef, animation}} />
         
         )
 

@@ -17,6 +17,7 @@
     border-radius: 10px;
     background: var(--light-color);
     cursor: pointer;
+    width: max-content;
 }
 
 .user-nav-likes p{

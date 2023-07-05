@@ -63,10 +63,22 @@ const useRequest = () =>{
                       console.log("found 302")
                         const redirecOption = await response.json()
                         if(redirecOption.redirect){
-                            window.location.href = redirecOption.redirectLink
+
+                            const currentPath = window.location.pathname;
+                            let redirectUri
+
+                            console.log(currentPath)
+                            if(currentPath === "/login" || currentPath === "/signup"){
+                                redirectUri = redirecOption.redirectLink
+                            }else{
+                                redirectUri = window.location.href
+                            }
+
+                            window.location.href = redirectUri
                         }
                      case 400 :
-                        setFieldError(await response.json())
+                        const responseObj= await response.json()
+                        setFieldError(responseObj)
                         break
                      case 401 :
                         console.log("status 401")    

@@ -50,7 +50,10 @@ const PropertyCard = (props) =>{
 
     const handleLikes = (id) =>{
 
-        if(!isLoggedIn) toggleFloatingModal(); return
+        if(!isLoggedIn) {
+             toggleFloatingModal()
+             return
+            }
 
         likeProperty(id)
 

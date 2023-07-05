@@ -1,6 +1,10 @@
 package com.appvenir.hometrest.Authentication.login;
 
 
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +19,7 @@ import com.appvenir.hometrest.Authentication.SessionManagement.SessionManagement
 import com.appvenir.hometrest.entryPoint.Private.user.User;
 import com.appvenir.hometrest.process.RedirectResponse.RedirectResponse;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -64,13 +69,17 @@ public class UserLoginController {
         public @ResponseBody RedirectResponse login(
                            @Valid @RequestBody UserLogin userLogin, 
                              HttpSession session,
+                             HttpServletRequest request,
                              HttpServletResponse response
                            ){
 
             User user = userLoginService.authenticate(userLogin.getEmail(), userLogin.getPassword());
 
             sessionMng.create(user.getEmail(), session, response);
+       
 
+            System.out.println("=============================");
+            System.out.println("login");
             redirectResponse.setRedirect(true);
             redirectResponse.setRedirectLink("/");
             return redirectResponse;

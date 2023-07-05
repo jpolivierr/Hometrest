@@ -23,18 +23,20 @@ root.render(
 
 
    //  <React.StrictMode> 
+   <Router> 
     <GlobalMessageProvider>
       <UserProvider>
         <ModalProvider>
           <Provider store={store}>
-              <Router> 
+              
                   <App />
-               </Router>
+              
            </Provider>
          </ModalProvider>
+
   </UserProvider>
   </GlobalMessageProvider>
-    
+     </Router>
    // </React.StrictMode>   
 );
 

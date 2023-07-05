@@ -1,5 +1,5 @@
 .fade_in{
-    animation: fadeIn .1s forwards;
+    animation: fadeIn 0s forwards;
    }
 
    @keyframes fadeIn {
@@ -14,7 +14,7 @@
    }
 
    .fade_out{
-    animation: fadeOut .1s forwards;
+    animation: fadeOut 0s forwards;
    }
 
    @keyframes fadeOut {
