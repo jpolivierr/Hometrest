@@ -1,22 +1,29 @@
 .single_prop_header{
-    display: grid;
-    grid-template-columns: 1fr  max-content max-content;
-    padding: 1rem 0rem;
+    display: flex;
+    padding: 1.7rem 0rem;
     align-items: center;
-    gap: 1rem;
+    justify-content: space-between;
 }
 
-.single_prop_header li{
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: .5rem;
-  
+.single_prop_header ul {
+    display: flex;
+    gap: 2rem;
+}
+
+.single_prop_header ul li{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
 }
 
 .single_back_btn{
-    justify-self: flex-start;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
 }
 
 .s-h-btn i{
@@ -24,8 +31,8 @@
     color: var(--alt-text-color);
     background: #92a6bf17;
     border: 1px solid var(--light-silver);
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -158,7 +165,7 @@
     height: 500px;
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr .5fr;
     gap: .5rem;
     cursor: pointer;
 }

@@ -1,7 +1,20 @@
 import { useEffect, useState } from "react"
 import Slider from "../../../lib/Slider/Slider"
+import { useMyModal } from "../../../context/modals/modalContext"
+import "./Schedule.style.css"
 
 const ScheduleTour = () =>{
+
+    const [activeDate, setActiveDate] = useState(0)
+
+    const {toggleFloatingModal} = useMyModal()
+
+    const time = [
+          "11:00 AM",
+          "12:00 PM",
+          "01:00 PM",
+          "02:00 PM"
+    ]
 
     function getNextTwoWeeks() {
         
@@ -21,52 +34,39 @@ const ScheduleTour = () =>{
         return nextTwoWeeks;
       }
 
-    const week = [
-                    {
-                        day : "Mon",
-                        date : 12,
-                        month : "May"
-                    },
-                    {
-                        day : "Tues",
-                        date : 13,
-                        month : "May"
-                    },
-                    {
-                        day : "Wed",
-                        date : 14,
-                        month : "May"
-                    },
-                    {
-                        day : "Thur",
-                        date : 15,
-                        month : "May"
-                    },
-                    {
-                        day : "Fri",
-                        date : 16,
-                        month : "May"
-                    },
-                    
-
-    ]
-
-    const [thisWeek, setThisWeek] = useState([])
-
     return(
+       <>
+       <h3 style={{marginTop: "2rem"}}>
+                            Select a tour date. No obligation. Cancel at any time.</h3>
         <Slider 
           elementClass="schedule-tour"
           gap={10}
           size={1}
         >
             {getNextTwoWeeks().map((day, index)=>(
-                <div className={`schedule-time ${index === 0 && "active-time"}`} key={index}>
+                <div 
+                     className={`schedule-time ${activeDate === index && "active-time"}`} 
+                     key={index}
+                     onClick={()=> setActiveDate(index)}
+                     >
                     <h3>{day.day}</h3>
                     <h2>{day.date}</h2>
                     <h3>{day.month}</h3>
                 </div>
             ))}
         </Slider>
+        <select className="select_time">
+            {
+                time.map(hours => (<option>{hours}</option>))
+            }
+        </select>
+        <button 
+         onClick={()=> toggleFloatingModal("client_info")}
+        style={{width: "100%", height: "50px"}} className="button main-btn">
+                                                Schedule a Tour
+                        </button>
+       </>
+       
     )
 
 }

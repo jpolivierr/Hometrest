@@ -28,19 +28,15 @@ export default function AgentInfo() {
                                        
                                     </textarea>
                                 </fieldset>
-                                <button style={{width: "100%", marginBottom: "1rem", height: "50px"}} className="button secondary-btn">
+                                <button style={{background: "#92a6bf17",width: "100%", marginBottom: "1rem", height: "50px"}} className="button secondary-btn">
                                                 Ask me a question 
                         </button>
                             </form>
                                 
                         </div>
             
-                        <h3 style={{marginTop: "2rem"}}>
-                            Select a tour date. No obligation. Cancel at any time.</h3>
                         <ScheduleTour />
-                        <button style={{width: "100%"}} className="button main-btn">
-                                                Schedule a Tour
-                        </button>
+
                     </div>
   )
 }

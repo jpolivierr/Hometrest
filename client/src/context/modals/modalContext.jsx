@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import SideModal from './sideModal/sideModal.component';
 import FloatingModal from './floatingModal/floatingModal.component';
 import { createContext, useState } from "react";
+import { useContext } from 'react';
 
 const ModalContext = createContext()
 
@@ -49,7 +50,7 @@ export const ModalProvider = ({children}) => {
       if(payload){
 
         setModalPayload(payload)
-        
+
       }
 
       setShowFloatingModal(!showFloatingModal)
@@ -78,5 +79,5 @@ export const ModalProvider = ({children}) => {
     </ModalContext.Provider>
   )
 }
-
+export const useMyModal = () => useContext(ModalContext)
 export default ModalContext

@@ -77,9 +77,6 @@
     color: var(--dark-text-color);
 }
 
-.prop_description p, .prop_description .expand-btn{
-    
-}
 
 .prop_info_list{
     display: flex;
@@ -124,6 +121,3 @@
     padding: 0rem 1rem;
 }
 
-.prop_details p{
-
-}
