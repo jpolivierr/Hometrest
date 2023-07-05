@@ -2,7 +2,7 @@
 export const shortenParagraph = (id, paragraph, maxCount) =>{
 
 
-    let defaultHeight = paragraph.length >= 640 ? "100px" : "max-content"
+    let defaultHeight = paragraph.length >= 640 ? "120px" : "max-content"
 
     const style = {
         overflow: "hidden",

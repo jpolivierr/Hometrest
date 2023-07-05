@@ -1,10 +1,11 @@
 import React from 'react'
-import { formatNumber } from '../../Util/formatNumber'
-import { cleanInput } from '../../Util/cleanInput'
-import { shortenParagraph } from '../../Util/shortenParagraph'
-import { expandElement } from '../../Util/shortenParagraph'
-import { deepSearch } from '../../Util/getValueByKey'
-import map from "../../assets/images/map.jpg"
+import { formatNumber } from '../../../Util/formatNumber'
+import { cleanInput } from '../../../Util/cleanInput'
+import { shortenParagraph } from '../../../Util/shortenParagraph'
+import { expandElement } from '../../../Util/shortenParagraph'
+import { deepSearch } from '../../../Util/getValueByKey'
+import map from "../../../assets/images/map.jpg"
+import "./PropDescription.style.css"
 
 export default function PropDescription({singleProperty}) {
 

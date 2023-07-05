@@ -1,7 +1,25 @@
-import { useState } from "react"
-import Slider from "../../lib/Slider/Slider"
+import { useEffect, useState } from "react"
+import Slider from "../../../lib/Slider/Slider"
 
 const ScheduleTour = () =>{
+
+    function getNextTwoWeeks() {
+        
+        const today = new Date();
+        const nextTwoWeeks = [];
+      
+        // Iterate over the next 14 days
+        for (let i = 0; i < 14; i++) {
+          const currentDate = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
+          const day = currentDate.toLocaleString('en-US', { weekday: 'short' });
+          const date = currentDate.getDate();
+          const month = currentDate.toLocaleString('en-US', { month: 'long' });
+      
+          nextTwoWeeks.push({ day, date, month });
+        }
+      
+        return nextTwoWeeks;
+      }
 
     const week = [
                     {
@@ -29,6 +47,7 @@ const ScheduleTour = () =>{
                         date : 16,
                         month : "May"
                     },
+                    
 
     ]
 
@@ -40,7 +59,7 @@ const ScheduleTour = () =>{
           gap={10}
           size={1}
         >
-            {week.map((day, index)=>(
+            {getNextTwoWeeks().map((day, index)=>(
                 <div className={`schedule-time ${index === 0 && "active-time"}`} key={index}>
                     <h3>{day.day}</h3>
                     <h2>{day.date}</h2>
