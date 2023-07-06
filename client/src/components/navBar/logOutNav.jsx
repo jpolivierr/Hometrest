@@ -1,7 +1,6 @@
 import ModalContext from "../../context/modals/modalContext"
 import GlobalMessageContext from "../../context/globalMessage/globalMessageContext"
 import { useContext } from "react"
-import "./style.css"
 import NavList from "../list/NavList"
 
 const LogOutNav = () =>{

@@ -1,4 +1,4 @@
-import "./style.css"
+import "./topNav.style.css"
 import LogOutNav from "./logOutNav"
 import LogInNav from "./logInNav"
 

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import NavList from "../list/NavList"
-import UserContext from "../../context/user/UserContext"
+import UserContext, { useUserContext } from "../../context/user/UserContext"
 import ModalContext from "../../context/modals/modalContext"
 import { useContext } from "react"
 
 const LogInNav = () =>{
 
     // const {isShowing, toggle, motion } = useModal(); 
-   const {activeUser} = useContext(UserContext)
+   const {activeUser, userLikesCount} = useContext(UserContext)
    const {toggleSideModal} = useContext(ModalContext)
 
     return(
@@ -33,7 +33,15 @@ const LogInNav = () =>{
                                             <button className="user-nav-likes">
                                                   <i className="fa-regular fa-heart"></i>
                                                   <p>Likes</p>
+                                                  <span className="like_count">{userLikesCount()}</span>
                                             </button>
+
+                                            <button className="user-nav-bell">
+                                                 <i className="fa-regular fa-bell"></i>
+                                                  {/* <span className="like_count">{userLikesCount()}</span> */}
+                                            </button>
+
+                                            
 
                                            
                                             <button onClick={toggleSideModal} className="user-nav-account">

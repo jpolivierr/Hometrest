@@ -50,6 +50,17 @@ const [activeUser, setActiveUser] = useState(init)
         setIsLoggedIn(true)
     }
 
+    const userLikesCount = () =>{
+        const count = activeUser.likedProperties.length
+
+        if(count > 9){
+            return "+" + 9
+        }
+
+        return count
+
+    }
+
     const clearUser = () =>{
         setActiveUser(init)
         deleteCookie()
@@ -110,7 +121,8 @@ const [activeUser, setActiveUser] = useState(init)
         clearUser,
         logout,
         deleteAccount,
-        getUserLikes
+        getUserLikes,
+        userLikesCount
 
     }
 
