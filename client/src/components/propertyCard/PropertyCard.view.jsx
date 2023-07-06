@@ -1,22 +1,39 @@
 
-import { deepSearch } from "../../Util/getValueByKey"
-import { getStatusStyle, getTypeStyle, cleanInput, formatNumber, getPhoto } from "./util"
-import { useEffect, useRef, useState } from "react"
-import useRequest from "../../httpRequest/MakeRequest/MakeRequest"
-import URL from "../../constants/urls"
-import useReduxMng from "../../hooks/useReduxMng"
-// import { likesDemo } from "../../Mock/userDemo"
-import shortenText from "../../Util/shortenText"
-import useMyModal from "../../lib/Modal/useMyModal"
-import NewLoginForm from "../Forms/NewLoginForm"
+
+import {getTypeStyle} from "./util"
 
 import { useNavigate } from "react-router-dom"
-import "./style.css"
+import "./PropertyCard.style.css"
 
 const PropertyCardView = ({functions, propertyDetails, value}) =>{
 
-    const {getUserLikes, handleForRent,handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,toggleFloatingModal, handleLikes} = functions
-    const {propertyId,status,type, beds,baths,sqft,price,street,city,zip,stateCode,photo,like} = propertyDetails
+    const {
+         getUserLikes,
+         handleForRent,
+         handlePropClick,
+         getPhoto,
+         getStatusStyle,
+         cleanInput,
+         formatNumber,
+         likeProperty,
+         toggleFloatingModal,
+         handleLikes
+        } = functions
+    const {
+           propertyId,
+           status,
+           type, 
+           beds,
+           baths,
+           sqft,
+           price,
+           street,
+           city,
+           zip,
+           stateCode,
+           photo,
+           like
+        } = propertyDetails
 
     return(
  
@@ -25,11 +42,11 @@ const PropertyCardView = ({functions, propertyDetails, value}) =>{
             onClick={(e)=> handlePropClick(e,propertyId)} data-property_id = {propertyId} className="property-card av-shadow">
             <figure style={{background : `url(${getPhoto(photo)}) no-repeat center center/cover`}}>
 
-                <div className="status-component">
-                        <div className={getStatusStyle(status)}>
+                <div className="status-container">
+                        <div className={`${getStatusStyle(status)} status-component`}>
                             {cleanInput(status)}
                         </div>
-                        <div className={getTypeStyle(type)}>
+                        <div className={`${getTypeStyle(type)} status-component`}>
                             {cleanInput(type)}
                         </div>
                 </div>

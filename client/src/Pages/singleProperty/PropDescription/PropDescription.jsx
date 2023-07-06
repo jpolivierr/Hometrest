@@ -5,6 +5,8 @@ import { shortenParagraph } from '../../../Util/shortenParagraph'
 import { expandElement } from '../../../Util/shortenParagraph'
 import { deepSearch } from '../../../Util/getValueByKey'
 import map from "../../../assets/images/map.jpg"
+import { getStatusStyle, getTypeStyle } from '../../../components/propertyCard/util'
+
 import "./PropDescription.style.css"
 
 export default function PropDescription({singleProperty}) {
@@ -16,6 +18,7 @@ export default function PropDescription({singleProperty}) {
     const yearBuilt = deepSearch(singleProperty,["description", "year_built"], "")
     const details = deepSearch(singleProperty,["details"], [])
     const status = deepSearch(singleProperty,["status"],"")
+    const type = deepSearch(singleProperty,["description","type"])
     const monthlyEstimate = deepSearch(singleProperty,["mortgage","estimate","monthly_payment"],"")
     const price = deepSearch(singleProperty,["list_price"], "")
     const address = deepSearch(singleProperty,["location","address","line"],"")
@@ -26,32 +29,42 @@ export default function PropDescription({singleProperty}) {
   return (
     <div className="prop_info">
                         <div className="prop_info_header">
-                            <figure className="mini-map">
-                               <img src={map}/>
-                            </figure>
+                         
                             <div className="prop_header_details">
-                                <p>Status - {cleanInput(status)}</p>
+                            <span className='prop_status'>{cleanInput(status)}</span>
                             <h2>{`${address}, ${state}, ${zip}`}</h2>
                                 <h3>{`$${formatNumber(price)}`} <span>Est. ${formatNumber(monthlyEstimate)}/month</span></h3>
                                 
                                 <ul className="prop_info_list">
                                 <li>
-                                    <h4>Beds <span>{`${beds}`}</span></h4>
+                                <i className="fa-solid fa-bed"></i> 
+                                    <h4><span>{`${beds}`}</span> Beds </h4>
+                                </li>
+                                <li>
+                                <i className="fa-solid fa-bath"></i>
+                                    <h4><span>{`${baths}`}</span> Baths </h4>        
+                                </li>
+                                <li>
+                                <i className="fa-brands fa-unity"></i>
+                                    <h4><span>{`${formatNumber(sqft)}`}</span> Sqft </h4>
+                                </li>
 
-                                </li>
-                                <li>
-                                    <h4>Baths <span>{`${baths}`}</span></h4>        
-                                </li>
-                                <li>
-                                    <h4>Sqft <span>{`${formatNumber(sqft)}`}</span></h4>
-                                </li>
-
-                                <li>
-                                    <h4>Year built <span>{`${yearBuilt}`}</span></h4>                           
-                                </li>
+                                {/* <li>
+                                    <h4><span>{`${yearBuilt}`}</span> Year built </h4>                           
+                                </li> */}
                               
                             </ul>
+                            <div className='button_container'>
+                                <button className='button main-btn offer_button'>Make an Offer</button>
+                                <button className='button secondary-btn offer_button'>
+                                        Share this home
+                                </button>
                             </div>
+                            
+                            </div>
+                            <figure className="mini-map">
+                               <img src={map}/>
+                            </figure>
 
 
                         </div>

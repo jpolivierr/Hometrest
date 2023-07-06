@@ -10,7 +10,7 @@ import shortenText from "../../Util/shortenText"
 import useMyModal from "../../lib/Modal/useMyModal"
 import NewLoginForm from "../Forms/NewLoginForm"
 import { useNavigate } from "react-router-dom"
-import "./style.css"
+import "./PropertyCard.style.css"
 
 const PropertyCard = (props) =>{
 

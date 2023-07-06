@@ -9,7 +9,7 @@ import { singleDemo } from '../../Mock/singleDemo'
 import { getParams } from '../../Util/urlParcer'
 
 
-export default function SinglePropertyRequest() {
+export default function SimilarProperties() {
 
   const { makeRequest, response, serverError, loading, status } = useRequest()
   const [singleProperty, setSingleProperty] = useState({
@@ -28,7 +28,7 @@ export default function SinglePropertyRequest() {
     if(paramId){
 
         console.log("make request")
-        //  makeRequest("GET",URL.SINGLE_PROPERTY + "?prop_id=" + paramId)
+        // makeRequest("GET",URL.SINGLE_PROPERTY + "?prop_id=" + paramId)
 
     }
 
@@ -45,18 +45,18 @@ useEffect(()=>{
         setSingleProperty(property)
 
 
-    if(serverError){
-        console.log("server error")
-        return
-      }
+    // if(serverError){
+    //     console.log("server error")
+    //     return
+    //   }
          
-    if(response){
+    // if(response){
 
-        const property = deepSearch(response.body,["data","home"],{})
+    //     const property = deepSearch(response.body,["data","home"],{})
 
-        setSingleProperty(property)
+    //     setSingleProperty(property)
 
-    }
+    // }
 
 },[response])
 
