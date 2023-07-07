@@ -1,13 +1,5 @@
-import "./style.css"
-import useReduxMng from "../../hooks/useReduxMng"
-import PropertyCard from "../propertyCard/PropertyCard"
-import useMyModal from "../../lib/Modal/useMyModal"
-import NewLoginForm from "../Forms/NewLoginForm"
-import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
-import { useEffect } from "react"
+
 import ShowPropertiesView from "./ShowProperties.view"
-import { useContext } from "react"
-import UserContext from "../../context/user/UserContext"
 import { Reducers } from "../../Redux"
 
 const ShowProperties = () =>{

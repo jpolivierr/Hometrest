@@ -1,4 +1,3 @@
-import "./style.css"
 import useReduxMng from "../../hooks/useReduxMng"
 import PropertyCard from "../propertyCard/PropertyCard"
 import useMyModal from "../../lib/Modal/useMyModal"
@@ -55,8 +54,10 @@ const ShowProperties = (props) =>{
         {<div className="show-properties-header"> 
              {!isLoading && getSearchValue()}
             </div>}
+            <div>
+                
+            </div>
             {
-            Array.isArray(propertiesReducer) &&
             propertiesReducer.length > 0 ? propertiesReducer.map((property,index)=>(
         
             <PropertyCard

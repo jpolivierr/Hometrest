@@ -12,11 +12,7 @@ import { getParams } from '../../Util/urlParcer'
 export default function SinglePropertyRequest() {
 
   const { makeRequest, response, serverError, loading, status } = useRequest()
-  const [singleProperty, setSingleProperty] = useState({
-    count : 0,
-    photo_count: 0,
-    photos : []
-  })
+  const [singleProperty, setSingleProperty] = useState({})
   const navigate = useNavigate()
   const { pathname, search } = useLocation();
   
@@ -25,25 +21,26 @@ export default function SinglePropertyRequest() {
 
     const paramId = getParams("prop_id")
 
+    console.log(paramId)
+
     if(paramId){
 
         console.log("make request")
-        //  makeRequest("GET",URL.SINGLE_PROPERTY + "?prop_id=" + paramId)
+         makeRequest("GET",URL.SINGLE_PROPERTY + paramId)
 
     }
 
 },[pathname, search])
+
+useEffect(()=>{
+  console.log(singleProperty)
+},[singleProperty])
 
 
 
 useEffect(()=>{
 
     console.log(response)
-
-        const property = deepSearch(singleDemo,["data","home"],{})
-
-        setSingleProperty(property)
-
 
     if(serverError){
         console.log("server error")
@@ -52,7 +49,7 @@ useEffect(()=>{
          
     if(response){
 
-        const property = deepSearch(response.body,["data","home"],{})
+        const property = deepSearch(response[0],["data","home"],{})
 
         setSingleProperty(property)
 

@@ -35,14 +35,6 @@ const [activeUser, setActiveUser] = useState(init)
 
     },[response, serverError])
 
-     
-
-     useEffect(()=>{
-
-            console.log(activeUser)
-
-     },[activeUser])
-
     const setUser = (user) =>{
         user.firstName = capitalizeWords(user.firstName)
         user.lastName = capitalizeWords(user.lastName)

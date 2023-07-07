@@ -1,6 +1,7 @@
-import "./style.css"
+import "./ShowProperties.style.css"
 import PropertyCard from "../propertyCard/PropertyCard.component"
 import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
+import CardLoading from "../../lib/loadingEffect/CardLoading/CardLoading"
 import UserContext from "../../context/user/UserContext"
 import { useContext } from "react"
 
@@ -8,48 +9,33 @@ import { useContext } from "react"
 const ShowPropertiesView = ({value}) =>{
 
     const {isLoading, getSearchValue, properties} = value
-    
 
-    const renderPropertyCard = () =>{
+    return(
 
+        <div className={`show-properties ${isLoading && "props-loading"}`}>
 
-        if(properties.length === 0) return
-
-        return(
-            properties.map((property,index)=>(
-        
+         {
+             properties.length === 0 ?
+             <CardLoading/> :
+             <>
+                <div className="show-properties-header"> 
+                        {getSearchValue()}
+                </div>
+                <div className="property_list_container">
+                { 
+                    properties.map((property,index)=>(
                         <PropertyCard
                             singleProperty = {property}
                             key={index}
                         />
-       
-                ))
-        )
+                        ))
+                }
+                </div>
+             
+             </>
 
-    }
+         }   
 
-    const renderLoading = () =>{
-
-        if(isLoading || properties.length === 0){
-            return(
-                <SkeletonLoading
-              type="cards"
-              elementClass="av-loading-skeleton"
-          />
-            )
-        }
-
-    }
-
-
-    return(
-        <div className={`show-properties ${isLoading && "props-loading"}`}>
-
-        <div className="show-properties-header"> 
-             {getSearchValue()}
-        </div>
-
-        { renderPropertyCard()}
         </div>
     )
 

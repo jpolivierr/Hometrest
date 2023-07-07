@@ -1,9 +1,12 @@
 package com.appvenir.hometrest.entryPoint.Public.propertySearch;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import reactor.core.publisher.Flux;
 
@@ -23,20 +26,18 @@ public class PropertySearchController {
     @PostMapping(path = "/list")
     public  Flux<Object>  search( @RequestBody Object propertySearch){
 
-    //     try {
-    //     // Sleep for 5 seconds
-    //     Thread.sleep(10000);
-    // } catch (InterruptedException e) {
-    //     e.printStackTrace();
-    // }
-
-    //    return propertySearchService.findAll(propertySearch);
-
        Flux<Object> propertyList = propertySearchService.findAll(propertySearch);
 
        return propertyList;
+        
+    }
 
-        //  return apiResponse.create(200, "sucess", propertyList);
+     @GetMapping(path = "/details")
+    public  Flux<Object>  search(@RequestParam("id")String id){
+
+       Flux<Object> propertyList = propertySearchService.findSingle(id);
+
+       return propertyList;
         
     }
     

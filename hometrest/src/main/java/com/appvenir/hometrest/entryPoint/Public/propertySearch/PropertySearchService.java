@@ -27,5 +27,15 @@ public class PropertySearchService {
 
     }
 
+        public Flux<Object> findSingle( String id){
+
+        return webClient.get()
+                .uri("/properties/v3/detail?property_id=" + id)
+                .retrieve()
+                .bodyToFlux(Object.class);
+                      
+
+    }
+
     
 }
