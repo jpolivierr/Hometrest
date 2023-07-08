@@ -1,0 +1,22 @@
+.more_details{
+    position: absolute;
+    z-index: 1;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.more_details li{
+    background: white;
+    border-radius: var(--borderRadius);
+    padding: 1rem;
+    font-weight: 600;
+    transition: background .3s;
+    cursor: pointer;
+}
+
+.more_details li:hover{
+    background: rgb(240, 240, 240);
+}
+

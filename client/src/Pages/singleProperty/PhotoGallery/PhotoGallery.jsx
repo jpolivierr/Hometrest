@@ -2,6 +2,8 @@ import React from 'react'
 import { useMyModal } from '../../../context/modals/modalContext'
 import { deepSearch } from '../../../Util/getValueByKey'
 import { updateImageLink } from '../../../Util/updateImageLink'
+import { getClass } from './PhotoGallery.Util'
+import "./PhotoGallery.style.css"
 
 export default function PhotoGallery({singleProperty}) {
 
@@ -9,23 +11,22 @@ export default function PhotoGallery({singleProperty}) {
     const {toggleFloatingModal} = useMyModal()
     const PhotoGallery = () => toggleFloatingModal("gallery", mPayload)
     const photos = deepSearch(singleProperty,["photos"],[])
-
-    const getClass = () =>{
-
-        switch(true)
-               {
-                case photos.length === 1:
-                    return "prop_photos_1"
-                case photos.length === 2:
-                    return "prop_photos_2"
-                case photos.length >= 3:
-                    return "prop_photos"
-
-        }
-    }
+    const virtualTour = deepSearch(singleProperty,["virtual_tours", "href"],"")
+    console.log(virtualTour)
 
   return (
-    <div onClick={PhotoGallery} className={`${getClass()}`}>
+    <div style={{position: "relative"}}>
+          <ul className='more_details'>
+        <li onClick={PhotoGallery} ><i className="fa-regular fa-image"></i> Photos: {photos.length}</li>
+        {virtualTour && <a href={virtualTour} target={"_blank"}>
+            <li><i className="fa-solid fa-vr-cardboard"></i> Virtual Tour</li>
+            </a>}
+      </ul>
+
+
+        <div onClick={PhotoGallery} className={`${getClass(photos)}`}>
+
+    
 
   {photos.length === 1 && 
         photos.map((photo, index)=>(
@@ -49,5 +50,7 @@ export default function PhotoGallery({singleProperty}) {
     }
     
 </div>
+    </div>
+    
   )
 }
