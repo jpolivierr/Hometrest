@@ -6,6 +6,7 @@ import { expandElement } from '../../../Util/shortenParagraph'
 import { deepSearch } from '../../../Util/getValueByKey'
 import map from "../../../assets/images/map.jpg"
 import { getStatusStyle, getTypeStyle } from '../../../components/propertyCard/util'
+import { getStatusColor } from '../SingleProperty.Util'
 
 import "./PropDescription.style.css"
 
@@ -31,7 +32,10 @@ export default function PropDescription({singleProperty}) {
                         <div className="prop_info_header">
                          
                             <div className="prop_header_details">
-                            <span className='prop_status'>{cleanInput(status)}</span>
+                            <span className={`prop_status`}>
+                                <div className={`prop_status_marker ${getStatusColor(status)}`}></div>
+                                {cleanInput(status)}
+                            </span>
                             <h2>{`${address}, ${state}, ${zip}`}</h2>
                                 <h3>{`$${formatNumber(price)}`} <span>Est. ${formatNumber(monthlyEstimate)}/month</span></h3>
                                 

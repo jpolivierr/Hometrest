@@ -7,7 +7,7 @@ import URL from "../../constants/urls"
 import useReduxMng from "../../hooks/useReduxMng"
 // import { likesDemo } from "../../Mock/userDemo"
 import shortenText from "../../Util/shortenText"
-import useMyModal from "../../lib/Modal/useMyModal"
+import { useMyModal } from "../../context/modals/modalContext"
 import NewLoginForm from "../Forms/NewLoginForm"
 import PropertyCardView from "./PropertyCard.view"
 import { useContext } from "react"
@@ -39,14 +39,15 @@ const PropertyCard = (props) =>{
 
     const {activeUser, likeProperty, isLoggedIn, getUserLikes} = useUserContext()
 
-    const {toggleFloatingModal} = useContext(ModalContext)
+    const {toggleFloatingModal} = useMyModal()
+    const loginModal = () => toggleFloatingModal("login")
 
     const userLikes = activeUser.likedProperties
 
     const handleLikes = (id) =>{
 
         if(!isLoggedIn) {
-             toggleFloatingModal()
+            loginModal()
              return
             }
 

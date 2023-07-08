@@ -59,14 +59,14 @@
     gap: .6rem;
     color: var(--alt-text-color);
     margin-bottom: .7rem;
+    align-items: center;
 }
 
-.prop_status::before{
+.prop_status_marker{
     content: "";
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     display: block;
-    background: green;
     position: relative;
     border-radius: 5px;
 }

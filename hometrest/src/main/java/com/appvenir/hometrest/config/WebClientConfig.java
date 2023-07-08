@@ -19,7 +19,7 @@ public class WebClientConfig {
 
         return WebClient.builder()
 		        .baseUrl("https://realtor.p.rapidapi.com")
-				.codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(2 * 1024 * 1024))
+				.codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(500000))
 		        .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 				.defaultHeader("X-RapidAPI-Key", dotenv.get("RAPID_API_KEY"))
 				.defaultHeader("X-RapidAPI-Host", "realtor.p.rapidapi.com");
