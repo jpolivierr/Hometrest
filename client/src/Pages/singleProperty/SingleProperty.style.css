@@ -1,48 +1,4 @@
-.single_prop_header{
-    display: flex;
-    padding: 1.7rem 0rem;
-    align-items: center;
-    justify-content: space-between;
-}
 
-.single_prop_header ul {
-    display: flex;
-    gap: 2rem;
-}
-
-.single_prop_header ul li{
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: .5rem;
-}
-
-.single_back_btn{
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: .5rem;
-}
-
-.s-h-btn i{
-    font-size: .9rem;
-    color: var(--alt-text-color);
-    background: #92a6bf17;
-    border: 1px solid var(--light-silver);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.single_back_btn{
-    background: transparent;
-    border: none;
-}
 
 .personal_info{
     text-align: center;
