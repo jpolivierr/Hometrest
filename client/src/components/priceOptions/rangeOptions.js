@@ -62,7 +62,7 @@ const RangeOptions = (props) =>{
 
             if(isNaN(minPrice)){
 
-                console.log("ran..")
+        
 
                 const rangeClone = {...range}
 

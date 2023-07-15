@@ -12,7 +12,6 @@ export default function PhotoGallery({singleProperty}) {
     const PhotoGallery = () => toggleFloatingModal("gallery", mPayload)
     const photos = deepSearch(singleProperty,["photos"],[])
     const virtualTour = deepSearch(singleProperty,["virtual_tours", "href"],"")
-    console.log(virtualTour)
 
   return (
     <div style={{position: "relative"}}>

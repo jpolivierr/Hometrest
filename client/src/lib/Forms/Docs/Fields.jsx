@@ -668,7 +668,7 @@ const Options = (props) =>{
             return
 
         }else{
-           console.log("ran..")
+      
             setOptionState(!optionState)
 
         }

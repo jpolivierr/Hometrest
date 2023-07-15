@@ -2,9 +2,10 @@
 
 .single_prop_header{
     display: flex;
-    padding: 1.5rem 0rem;
+    padding: 1.3rem 0rem;
     align-items: center;
     justify-content: space-between;
+    background: white;
 }
 
 .single_prop_header ul {

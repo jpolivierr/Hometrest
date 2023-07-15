@@ -21,8 +21,6 @@ export default function SinglePropertyRequest() {
 
     const paramId = getParams("prop_id")
 
-    console.log(paramId)
-
     if(paramId){
 
         console.log("make request")

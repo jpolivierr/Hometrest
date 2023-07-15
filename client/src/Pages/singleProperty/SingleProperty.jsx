@@ -24,30 +24,33 @@ const {singleProperty, loading} = SinglePropertyRequest()
         }, [pathname, search]);
 
     return(
-        <div className="container-medium" style={{maxWidth: "1200px"}}>
+        <>
           {
               (!singleProperty.property_id) ?
               <PageLoading /> :
-                <div>  
-                    <PropHeader singleProperty={singleProperty} />
-                    <PhotoGalleryView singleProperty={singleProperty} />
+                  <>
+                  <PropHeader singleProperty={singleProperty} />
+                    <div className="container-medium">  
+                        
+                        <PhotoGalleryView singleProperty={singleProperty} />
 
-                    <div className="prop_info_container">
+                        <div className="prop_info_container">
 
-                    <PropDescription singleProperty={singleProperty} />
-                    <AgentInfo />
+                        <PropDescription singleProperty={singleProperty} />
+                        <AgentInfo />
+                        
+                        </div>
                     
                     </div>
-                   
-                </div>
+                  </>
+               
                 
-            
             }
             {/* <div className="similar-property">
                 <SimilarProperties propId={getParams("prop_id")}/>
             </div> */}
             
-        </div>
+        </>
     )
 
 }

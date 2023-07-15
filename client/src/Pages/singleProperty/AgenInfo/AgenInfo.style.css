@@ -1,3 +1,8 @@
+.agent_info{
+    position: sticky;
+height: max-content;
+top: 100px;
+}
 .agent form{
     /* margin: 2rem 0rem; */
     min-width: 100%;

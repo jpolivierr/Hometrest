@@ -13,7 +13,9 @@ export const getStatusColor = (status) =>{
         case "off_market" :
             return "status-off-market"
         case "new_community" :
-        return "status-new-community"
+           return "status-new-community"
+           default :
+            return ""
 
     }
 }

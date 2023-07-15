@@ -7,7 +7,6 @@
 
 }
 
-
 .prop_info h2{
     margin-bottom: 1rem;
 
@@ -181,4 +180,87 @@
     /* height: 50px; */
     max-width: 150px;
 }
+
+
+.school_option{
+  width: max-content;
+  text-align: left;
+  width: 100%;
+}
+
+.school_option tr:nth-child(1){
+    border-bottom: 1px solid black;
+    padding: 1rem;
+}
+
+.school_option tr th{
+    padding: 1rem 0rem;
+    font-weight: 600;
+}
+
+.school_option tr td{
+    border-bottom: 1px solid var(--light-silver);
+    padding: 1rem 0rem;
+    color: var(--alt-text-color);
+}
+
+.school_option tr b{
+    font-weight: 600;
+    color: var(--alt-text-color);
+}
+.school_option ul li span{
+}
+
+.property_history_container{
+    margin-top: 1rem;
+
+}
+
+.property_history{
+    padding-left: 2rem;
+    padding-bottom: 2rem;
+    position: relative;
+    margin-left: .4rem;
+}
+
+.property_history::before{
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    left: -6px;
+    top: 0;
+    background-color: #cfd9e6;
+}
+
+.property_history::after{
+    content: "";
+    position: absolute;
+    height: 90%;
+    width: 1px;
+    background-color: #cfd9e6;
+    left: 0;
+    bottom: 0;
+
+
+
+}
+
+.property_history ul{
+
+    margin-left: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    max-width: 600px;
+
+}
+
+.property_history ul li h4{
+
+    font-weight: 500;
+
+}
+
 

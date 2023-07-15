@@ -54,25 +54,6 @@
     font-size: .8rem;
 }
 
-.expand-btn{
-    cursor: pointer;
-    margin-top: 1rem;
-    font-weight: 600;
-    width: max-content;
-    /* padding: .5rem 1rem; */
-    border-radius: 100px;
-    font-size: .9rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: .3rem;
-    color: var(--secondary-color)
-}
-
-.expand-btn i{
-    color: var(--secondary-color);
-}
-
 .similar-property{
     margin-top: 4rem;
 }
@@ -83,9 +64,6 @@
     padding-top: 1rem;
 }
 
-.schedule-tour{
-    /* width: 200px; */
-}
 
 .schedule-tour .slider-btn-right{
     right: -22px

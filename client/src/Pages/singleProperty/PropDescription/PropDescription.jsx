@@ -1,12 +1,12 @@
 import React from 'react'
 import { formatNumber } from '../../../Util/formatNumber'
 import { cleanInput } from '../../../Util/cleanInput'
-import { shortenParagraph } from '../../../Util/shortenParagraph'
-import { expandElement } from '../../../Util/shortenParagraph'
 import { deepSearch } from '../../../Util/getValueByKey'
 import map from "../../../assets/images/map.jpg"
-import { getStatusStyle, getTypeStyle } from '../../../components/propertyCard/util'
 import { getStatusColor } from '../SingleProperty.Util'
+import ExpandElement from '../../../components/expandElement/ExpandElement'
+import { capitalizeFirstLetter } from '../../../Util/capitalizeFirstLetter'
+import { getGrade } from './PropDescription.script'
 
 import "./PropDescription.style.css"
 
@@ -25,10 +25,14 @@ export default function PropDescription({singleProperty}) {
     const address = deepSearch(singleProperty,["location","address","line"],"")
     const state = deepSearch(singleProperty,["location","address","state_code"],"")
     const zip = deepSearch(singleProperty,["location","address","postal_code"],"")
+    const schools = deepSearch(singleProperty,["schools", "schools"],[])
+    const propertyHistory = deepSearch(singleProperty,["property_history"],[])
+    const taxHistory = deepSearch(singleProperty,["tax_history"],[])
 
  
   return (
     <div className="prop_info">
+
                         <div className="prop_info_header">
                          
                             <div className="prop_header_details">
@@ -72,14 +76,185 @@ export default function PropDescription({singleProperty}) {
 
 
                         </div>
+
+
+
+                     {
+                        description && 
+
                         <div className="prop_description">
                             <h2>Description</h2>
                             
-                                {shortenParagraph("description", description) }
+                                {/* {shortenParagraph("description", description) } */}
+                                <ExpandElement offSet={3} paragraph={true}>
+                                    <p>
+                                        {description} 
+                                    </p>
+                                </ExpandElement>
                             
                         </div>
+
+                     }
+                       
+
+
+
+                      {
+                        details.length > 0 &&
+
+                          <div>
+                               <h2>Property Details</h2>
+                               <ExpandElement offSet={3}>
+                                    <div className="prop_details">
+                                    {
+                                        details.map((detail,index)=>(
+                                            <div key={index}>
+                                                <h3>{detail.category}</h3>
+                                                <p>{detail.text.join(", ")}</p>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                               </ExpandElement>
+
+                        </div>
+                      }
+
+                      
+
+
+
+                        {
+                           
+                           schools.length > 0 && 
+
+                           <div>
+                            <h2>Nearby Schools</h2>
                         
-                            {expandElement("details",details)}
+                                 <div className='school_options_container'>
+                                     
+                                    <table className='school_option'>
+                                        <thead>
+                                            <tr>
+                                                <th>Rating</th>
+                                                <th>Name</th>
+                                                <th>Students</th>
+                                                <th>Grades</th>
+                                                <th>Type</th>
+                                                <th>Distance</th>
+                                            </tr>
+                                            
+                                        </thead>
+                                        <tbody>
+                                               { schools.map((school, index)=>(
+                                         <tr key={index}>
+                                            <td><b>{school.rating}</b>/10</td>
+                                            <td>{school.name}</td>
+                                            <td>{formatNumber(school.student_count)}</td>
+                                            <td>{getGrade(school.grades)}</td>
+                                            <td>{capitalizeFirstLetter(school.funding_type)}</td>
+                                            <td>{school.distance_in_miles} mi</td>
+                                        </tr> 
+                                         )) }
+                                        </tbody>
+                                     
+                                    </table>
+                              
+                            </div>
+                        </div>
+
+                        }
+
+                        
+
+                       {
+                        propertyHistory.length > 0 &&
+
+                        <div>
+
+                            <h2>Property History</h2>
+                            <ExpandElement offSet={3}>
+                                   <div className='property_history_container'>
+                                {
+                                    propertyHistory.map((history, index)=>(
+                                        <div key={index} className='property_history'>
+                                            <h3>{history.date}</h3>
+                                            <ul>
+                                                <li>
+                                                    <h4>Event</h4>
+                                                    <p>{history.event_name}</p>
+                                                </li>
+                                                <li>
+                                                    <h4>Price</h4>
+                                                    <p>${formatNumber(history.price)}</p>
+                                                </li>
+                                                <li>
+                                                    <h4>Source name</h4>
+                                                    <p>{history.source_name}</p>
+                                                </li>
+                                            </ul>
+
+                                         </div>
+                                    ))
+                                }
+
+                            </div>
+                            </ExpandElement>
+                         
+
+                        </div>
+
+                       }
+
+{
+                        taxHistory.length > 0 &&
+
+                        <div>
+
+                            <h2>Tax History</h2>
+  
+                            <div className='property_history_container'>
+                            
+
+                                 <div className='school_options_container'>
+                                <ExpandElement offSet={1} setHeight={240}>
+                                     <table className='school_option'>
+                                         <thead>
+                                             <tr>
+                                                 <th>Year</th>
+                                                 <th>Price</th>
+                                                 <th>Building</th>
+                                                 <th>Land</th>
+                                                 <th>Total</th>
+                                             </tr>
+                                             
+                                         </thead>
+                                         <tbody>
+                                                { taxHistory.map((tax, index)=>(
+                                          <tr key={index}>
+                                             <td><b>{tax.year}</b></td>
+                                             <td>${tax.tax}</td>
+                                             <td>{tax.assessment.building && "$" + formatNumber(tax.assessment.building) }</td>
+                                             <td>{tax.assessment.land && "$" + formatNumber(tax.assessment.land) }</td>
+                                             <td>{tax.assessment.total && "$" + formatNumber(tax.assessment.total) }</td>
+                                               
+                                         </tr> 
+                                          )) }
+                                         </tbody>
+                                      
+                                     </table>
+                               </ExpandElement>
+                             </div>
+                            
+                           
+
+                            </div>
+                         
+
+                        </div>
+
+                       }
+                        
                     
                     </div>
   )

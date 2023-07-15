@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useMyModal } from '../../../context/modals/modalContext'
 import { useUserContext } from '../../../context/user/UserContext'
 import { useNavigate } from 'react-router-dom'
@@ -13,6 +13,28 @@ export default function PropHeader({singleProperty}) {
     const {toggleFloatingModal} = useMyModal()
     const loginModal = () => toggleFloatingModal("login")
     const [activeList, setActiveList] = useState(0)
+    const headerRef = useRef(null)
+
+    useEffect(()=>{
+      const headerElement = headerRef.current
+      const rect = headerElement.getBoundingClientRect()
+      const distanceFromTop = rect.top + window.scrollY
+
+
+      window.addEventListener('scroll', function() {
+        const distanceScrolled = window.scrollY || document.documentElement.scrollTop;
+        // console.log(distanceScrolled);
+        // console.log("header top position", distanceFromTop)
+        if(distanceFromTop <= distanceScrolled){
+          console.log("add class")
+          headerElement.classList.add("stick_top")
+        }else{
+          console.log("remove class")
+          headerElement.classList.remove("stick_top")
+        }
+      });
+
+    },[])
 
     const handleLikes = (id) =>{
 
@@ -26,8 +48,8 @@ export default function PropHeader({singleProperty}) {
     }
 
   return (
-    <div className="single_prop_header">
-
+    <div ref={headerRef}>
+      <div  className="single_prop_header container-medium">
                         <div className="single_back_btn s-h-btn" onClick={()=>navigate(-1)}>
                                     <i className="fa-solid fa-angle-left"></i>Search
                         </div>
@@ -35,22 +57,22 @@ export default function PropHeader({singleProperty}) {
                         <ul className='list_options'>
                           <li 
                             onClick={()=>setActiveList(0)}
-                            className={activeList === 0 && "active_list"}>
+                            className={activeList === 0 ? "active_list" : ""}>
                               Details
                               </li>
                           <li 
                              onClick={()=>setActiveList(1)}
-                             className={activeList === 1 && "active_list"}>
+                             className={activeList === 1 ? "active_list" : ""}>
                               Schools
                               </li>
                           <li 
                              onClick={()=>setActiveList(2)}
-                             className={activeList === 2 && "active_list"}>
-                              Property history
+                             className={activeList === 2 ? "active_list" : ""}>
+                              Property History
                               </li>
                           <li 
                              onClick={()=>setActiveList(3)}
-                             className={activeList === 3 && "active_list"}>
+                             className={activeList === 3 ? "active_list" : ""}>
                               Tax History</li>
                         </ul>
 
@@ -62,5 +84,7 @@ export default function PropHeader({singleProperty}) {
                         </ul>
                         
                      </div>
+    </div>
+    
   )
 }
