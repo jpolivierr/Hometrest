@@ -1,6 +1,6 @@
 import React from 'react'
-import ScheduleTour from '../../Schedule/Scedule'
-import jonathan from "../../../assets/images/JONATHAN.jpg"
+import ScheduleTour from '../Schedule/Scedule'
+import jonathan from "../../../../assets/images/JONATHAN.jpg"
 import "./AgenInfo.style.css"
 
 export default function AgentInfo() {

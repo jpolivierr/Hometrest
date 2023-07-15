@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useMyModal } from '../../../context/modals/modalContext'
-import { useUserContext } from '../../../context/user/UserContext'
+import { useMyModal } from '../../../../context/modals/modalContext'
+import { useUserContext } from '../../../../context/user/UserContext'
 import { useNavigate } from 'react-router-dom'
-import { deepSearch } from '../../../Util/getValueByKey'
+import { deepSearch } from '../../../../Util/getValueByKey'
 import "./PropHeader.style.css"
 
 export default function PropHeader({singleProperty}) {

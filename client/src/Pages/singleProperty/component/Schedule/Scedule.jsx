@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import Slider from "../../../lib/Slider/Slider"
-import { useMyModal } from "../../../context/modals/modalContext"
+import Slider from "../../../../lib/Slider/Slider"
+import { useMyModal } from "../../../../context/modals/modalContext"
 import "./Schedule.style.css"
 
 const ScheduleTour = () =>{

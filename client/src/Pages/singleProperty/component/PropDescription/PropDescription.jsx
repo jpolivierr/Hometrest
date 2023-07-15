@@ -1,11 +1,11 @@
 import React from 'react'
-import { formatNumber } from '../../../Util/formatNumber'
-import { cleanInput } from '../../../Util/cleanInput'
-import { deepSearch } from '../../../Util/getValueByKey'
-import map from "../../../assets/images/map.jpg"
-import { getStatusColor } from '../SingleProperty.Util'
-import ExpandElement from '../../../components/expandElement/ExpandElement'
-import { capitalizeFirstLetter } from '../../../Util/capitalizeFirstLetter'
+import { formatNumber } from '../../../../Util/formatNumber'
+import { cleanInput } from '../../../../Util/cleanInput'
+import { deepSearch } from '../../../../Util/getValueByKey'
+import map from "../../../../assets/images/map.jpg"
+import { getStatusColor } from '../../SingleProperty.Util'
+import ExpandElement from '../../../../components/expandElement/ExpandElement'
+import { capitalizeFirstLetter } from '../../../../Util/capitalizeFirstLetter'
 import { getGrade } from './PropDescription.script'
 
 import "./PropDescription.style.css"

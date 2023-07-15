@@ -1,7 +1,7 @@
 import React from 'react'
-import { useMyModal } from '../../../context/modals/modalContext'
-import { deepSearch } from '../../../Util/getValueByKey'
-import { updateImageLink } from '../../../Util/updateImageLink'
+import { useMyModal } from '../../../../context/modals/modalContext'
+import { deepSearch } from '../../../../Util/getValueByKey'
+import { updateImageLink } from '../../../../Util/updateImageLink'
 import { getClass } from './PhotoGallery.Util'
 import "./PhotoGallery.style.css"
 
