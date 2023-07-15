@@ -35,7 +35,7 @@ export default function PropDescription({singleProperty}) {
 
                         <div className="prop_info_header">
                          
-                            <div className="prop_header_details">
+                        <div id={0} className="prop_header_details">
                             <span className={`prop_status`}>
                                 <div className={`prop_status_marker ${getStatusColor(status)}`}></div>
                                 {cleanInput(status)}
@@ -70,9 +70,17 @@ export default function PropDescription({singleProperty}) {
                             </div>
                             
                             </div>
-                            <figure className="mini-map">
-                               <img src={map}/>
-                            </figure>
+                            <div className="mini-map">
+                                <figure>
+                                    <img src={map}/>
+                                </figure>
+                               
+                               <div className='commute'>
+                                    <i className="fa-solid fa-car"></i>
+                                        {/* <h3>Commute Time: </h3> */}
+                                        <p>Add a commute</p>
+                               </div>
+                            </div>
 
 
                         </div>
@@ -102,7 +110,7 @@ export default function PropDescription({singleProperty}) {
                       {
                         details.length > 0 &&
 
-                          <div>
+                          <div id={1}>
                                <h2>Property Details</h2>
                                <ExpandElement offSet={3}>
                                     <div className="prop_details">
@@ -128,7 +136,7 @@ export default function PropDescription({singleProperty}) {
                            
                            schools.length > 0 && 
 
-                           <div>
+                           <div id={2}>
                             <h2>Nearby Schools</h2>
                         
                                  <div className='school_options_container'>
@@ -170,7 +178,7 @@ export default function PropDescription({singleProperty}) {
                        {
                         propertyHistory.length > 0 &&
 
-                        <div>
+                        <div id={3}>
 
                             <h2>Property History</h2>
                             <ExpandElement offSet={3}>
@@ -209,7 +217,7 @@ export default function PropDescription({singleProperty}) {
 {
                         taxHistory.length > 0 &&
 
-                        <div>
+                        <div id={4}>
 
                             <h2>Tax History</h2>
   

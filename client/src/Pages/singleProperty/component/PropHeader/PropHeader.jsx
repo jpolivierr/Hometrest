@@ -3,9 +3,10 @@ import { useMyModal } from '../../../../context/modals/modalContext'
 import { useUserContext } from '../../../../context/user/UserContext'
 import { useNavigate } from 'react-router-dom'
 import { deepSearch } from '../../../../Util/getValueByKey'
+import {scrolly, scrollWithClass } from '../../../../Util/Scrolly'
 import "./PropHeader.style.css"
 
-export default function PropHeader({singleProperty}) {
+export default function PropHeader({singleProperty, id}) {
 
     const {likeProperty, isLoggedIn, getUserLikes} = useUserContext()
     const propertyId = deepSearch(singleProperty,["property_id"], "")
@@ -16,23 +17,13 @@ export default function PropHeader({singleProperty}) {
     const headerRef = useRef(null)
 
     useEffect(()=>{
-      const headerElement = headerRef.current
-      const rect = headerElement.getBoundingClientRect()
-      const distanceFromTop = rect.top + window.scrollY
+          
+      const scrollEffect = scrollWithClass(headerRef)
+      scrollEffect.init()
 
-
-      window.addEventListener('scroll', function() {
-        const distanceScrolled = window.scrollY || document.documentElement.scrollTop;
-        // console.log(distanceScrolled);
-        // console.log("header top position", distanceFromTop)
-        if(distanceFromTop <= distanceScrolled){
-          console.log("add class")
-          headerElement.classList.add("stick_top")
-        }else{
-          console.log("remove class")
-          headerElement.classList.remove("stick_top")
-        }
-      });
+      return () => {
+        scrollEffect.clear()
+      }
 
     },[])
 
@@ -48,32 +39,55 @@ export default function PropHeader({singleProperty}) {
     }
 
   return (
-    <div ref={headerRef}>
+    <div id={id} ref={headerRef}>
       <div  className="single_prop_header container-medium">
                         <div className="single_back_btn s-h-btn" onClick={()=>navigate(-1)}>
                                     <i className="fa-solid fa-angle-left"></i>Search
                         </div>
 
                         <ul className='list_options'>
-                          <li 
-                            onClick={()=>setActiveList(0)}
+
+                        <li   
+                            onClick={()=>{setActiveList(-1); scrolly(-1)}}
+                            className={activeList === -1 ? "active_list" : ""}>
+                              Photos
+                        </li>
+
+
+                        <li   
+                            onClick={()=>{setActiveList(0); scrolly(0)}}
                             className={activeList === 0 ? "active_list" : ""}>
+                              Overview
+                        </li>
+                    
+                            <li   
+                            onClick={()=>{setActiveList(1); scrolly(1)}}
+                            className={activeList === 1 ? "active_list" : ""}>
                               Details
-                              </li>
-                          <li 
-                             onClick={()=>setActiveList(1)}
-                             className={activeList === 1 ? "active_list" : ""}>
+                            </li>
+                        
+                          
+                              <li 
+                             onClick={()=>{setActiveList(2); scrolly(2)}}
+                             className={activeList === 2 ? "active_list" : ""}>
                               Schools
                               </li>
-                          <li 
-                             onClick={()=>setActiveList(2)}
-                             className={activeList === 2 ? "active_list" : ""}>
-                              Property History
-                              </li>
-                          <li 
-                             onClick={()=>setActiveList(3)}
+                        
+                     
+                              <li 
+                             onClick={()=>{setActiveList(3); scrolly(3)}}
                              className={activeList === 3 ? "active_list" : ""}>
-                              Tax History</li>
+                              Property History
+                            </li>
+  
+                   
+                              <li 
+                             onClick={()=>{setActiveList(4); scrolly(4)}}
+                             className={activeList === 4 ? "active_list" : ""}>
+                              Tax History
+                              </li>
+                        
+                        
                         </ul>
 
 

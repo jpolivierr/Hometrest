@@ -17,7 +17,9 @@
 TAGS
 =================================================
 */
-
+html{
+    scroll-behavior: smooth;
+}
 *{
 
     color: var(--dark-text-color);

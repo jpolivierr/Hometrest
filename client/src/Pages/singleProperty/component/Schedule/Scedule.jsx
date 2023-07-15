@@ -36,8 +36,9 @@ const ScheduleTour = () =>{
 
     return(
        <>
-       <h3 style={{marginTop: "2rem"}}>
-                            Select a tour date. No obligation. Cancel at any time.</h3>
+       <h2 className="schedule_title">
+            Select a tour date <span>No obligation. Cancel at any time.</span>
+          </h2>
         <Slider 
           elementClass="schedule-tour"
           gap={10}

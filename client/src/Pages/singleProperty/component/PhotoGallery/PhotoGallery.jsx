@@ -14,7 +14,7 @@ export default function PhotoGallery({singleProperty}) {
     const virtualTour = deepSearch(singleProperty,["virtual_tours", "href"],"")
 
   return (
-    <div style={{position: "relative"}}>
+    <div id={-1} style={{position: "relative"}}>
           <ul className='more_details'>
         <li onClick={PhotoGallery} ><i className="fa-regular fa-image"></i> Photos: {photos.length}</li>
         {virtualTour && <a href={virtualTour} target={"_blank"}>

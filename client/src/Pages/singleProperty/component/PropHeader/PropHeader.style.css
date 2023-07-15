@@ -21,13 +21,6 @@
     gap: .5rem;
 }
 
-.single_back_btn{
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: .5rem;
-}
 
 .s-h-btn i{
     font-size: .9rem;
@@ -47,8 +40,19 @@
     border: none;
 }
 
+.single_back_btn{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    color: var(--secondary-color);
+font-weight: 600;
+}
+
+
 .list_options li{
-    padding: .6rem .3rem;
+    padding: .6rem 0rem;
     transition: background .3s;
 }
 

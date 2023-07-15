@@ -6,15 +6,16 @@ import "./AgenInfo.style.css"
 export default function AgentInfo() {
   return (
     <div className="agent_info">
+         <ScheduleTour />
                         <div className="personal_info">
-                        <figure className="agent-head-shot">
+                        {/* <figure className="agent-head-shot">
                             <img src={jonathan} alt="Example" />
                         </figure>
                         <h4>Jonathan Pluviose</h4>
-                        <h5>Keller William Realty</h5>
+                        <h5>Keller William Realty</h5> */}
                         <ul className="contact-info">
                                 <li><i className="fa-solid fa-phone"></i><p>Call</p></li>
-                                <li><i className="fa-solid fa-envelope"></i><p>Message</p></li>
+                                <li><i className="fa-solid fa-envelope"></i><p>Email</p></li>
                         </ul>
                         </div>
                         
@@ -34,8 +35,6 @@ export default function AgentInfo() {
                             </form>
                                 
                         </div>
-            
-                        <ScheduleTour />
 
                     </div>
   )

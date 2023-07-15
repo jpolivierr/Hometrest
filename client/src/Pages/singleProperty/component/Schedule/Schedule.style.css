@@ -1,5 +1,11 @@
 
-
+.schedule_title span{
+  color: var(--alt-text-color);
+  font-weight: 600;
+  font-size: 1rem;
+  display: block;
+  margin-top: .5rem;
+}
 .schedule-tour .slider-btn-right{
     right: -22px
 }
