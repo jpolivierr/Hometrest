@@ -1,69 +1,69 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
-import useRequest from '../MakeRequest/MakeRequest'
+import React, { useEffect, useRef, useCallback } from 'react'
+import useRequest from './MakeRequest'
 import URL from '../../constants/urls'
 import useReduxMng from '../../hooks/useReduxMng'
+import compareObjects from '../../Util/compareObjects'
+import removeEmptyValues from '../../Util/removeEmptyValues'
+import prepareObject from './Util/prepareObject'
+import hardCopy from '../../Util/hardCopy'
 import { deepSearch } from '../../Util/getValueByKey'
-import { useNavigate, useLocation } from "react-router-dom"
 import propertiesDemo from '../../Mock/propertyDemo'
-import { singleDemo } from '../../Mock/singleDemo'
-import { getParams } from '../../Util/urlParcer'
 
 
-export default function SimilarProperties() {
+export default function SimilarPropertyRequest() {
 
   const { makeRequest, response, serverError, loading, status } = useRequest()
-  const [singleProperty, setSingleProperty] = useState({
-    count : 0,
-    photo_count: 0,
-    photos : []
-  })
-  const navigate = useNavigate()
-  const { pathname, search } = useLocation();
-  
+  const {searchReducer, setPropertyList, propertiesReducer} = useReduxMng()
+
+  let prevState = useRef({})
+
 
   useEffect(()=>{
-
-    const paramId = getParams("prop_id")
-
-    if(paramId){
-
-        console.log("make request")
-        // makeRequest("GET",URL.SINGLE_PROPERTY + "?prop_id=" + paramId)
-
+    
+    if(!compareObjects(prevState.current, searchReducer)){
+        console.log("making request")
+        const searchReducerCopy = hardCopy(searchReducer)
+        const newObj = removeEmptyValues(searchReducerCopy)
+        const preparedObj = prepareObject(newObj, "miami")
+        preparedObj.limit = 50
+        preparedObj.state_code = "fl"
+        console.log(preparedObj)
+        // makeRequest("POST",URL.SEARCH, preparedObj)
+        prevState.current = searchReducer
     }
 
-},[pathname, search])
+  },[searchReducer])
 
 
-
-useEffect(()=>{
+   useEffect(()=>{ 
 
     console.log(response)
+  // delete when you done
+  const mockObj = {
+      count: 50,
+      totoal : 3902,
+      results : propertiesDemo
+  }
+  // console.log(propertiesDemo)
+      setPropertyList(mockObj)
 
-        const property = deepSearch(singleDemo,["data","home"],{})
+    if(serverError){
+      console.log("server error")
+      return
+    }
 
-        setSingleProperty(property)
+    if(response){
+      const data = deepSearch(response[0],["data","home_search"],{})
+      setPropertyList(data)
+    }
+
+   },[serverError, response])
 
 
-    // if(serverError){
-    //     console.log("server error")
-    //     return
-    //   }
-         
-    // if(response){
-
-    //     const property = deepSearch(response.body,["data","home"],{})
-
-    //     setSingleProperty(property)
-
-    // }
-
-},[response])
 
   return {
             loading,
-            status, 
-            singleProperty
+            status
   }
   
 }

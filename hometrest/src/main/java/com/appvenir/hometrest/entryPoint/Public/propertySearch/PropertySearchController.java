@@ -33,7 +33,7 @@ public class PropertySearchController {
     }
 
      @GetMapping(path = "/details")
-    public  Flux<Object>  search(@RequestParam("id")String id){
+    public Flux<Object>  search(@RequestParam("id")String id){
 
        Flux<Object> propertyList = propertySearchService.findSingle(id);
 

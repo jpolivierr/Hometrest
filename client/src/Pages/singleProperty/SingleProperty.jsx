@@ -9,6 +9,7 @@ import PropHeader from "./component/PropHeader/PropHeader"
 import PageLoading from "../../lib/loadingEffect/PageLoading/PageLoading"
 import SimilarProperties from "../../components/SimilarProperties/SimilarProperties"
 import { getParams } from "../../Util/urlParcer"
+import ScheduleTour from "./component/Schedule/Scedule"
 import "./SingleProperty.style.css"
 
 const SingleProperty = () =>{
@@ -25,6 +26,9 @@ const {singleProperty, loading} = SinglePropertyRequest()
 
     return(
         <>
+         {/* <div className="similar-property">
+                <SimilarProperties propId={getParams("prop_id")}/>
+            </div> */}
           {
               (!singleProperty.property_id) ?
               <PageLoading /> :
@@ -37,18 +41,16 @@ const {singleProperty, loading} = SinglePropertyRequest()
                         <div className="prop_info_container">
 
                         <PropDescription singleProperty={singleProperty} />
-                        <AgentInfo />
+                         <ScheduleTour />
+                        {/* <AgentInfo /> */}
                         
                         </div>
-                    
+                   
                     </div>
                   </>
                
                 
             }
-            {/* <div className="similar-property">
-                <SimilarProperties propId={getParams("prop_id")}/>
-            </div> */}
             
         </>
     )

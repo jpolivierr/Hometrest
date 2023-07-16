@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import UserSettings from '../../../components/menu/userSettings.view'
 import LoginForm from "../../../components/Form/login/Login.view"
 import PhotoGallery from '../../../components/PhotoGallery/PhotoGallery'
-import ClientInfo from '../../../components/Form/clientInfo/ClientInfo.view'
+import ClientInfo from '../../../components/Form/schedueTour/ScheduleTour.view'
+import MessageFormView from '../../../components/Form/message/MessageForm.view'
 import style from "./floatingModal.style.css"
 
 export default function FloatingModalView({value}) {
@@ -28,6 +29,8 @@ export default function FloatingModalView({value}) {
                     return <LoginForm />
                 case "CLIENT_INFO" :
                     return <ClientInfo />
+                case "MESSAGE" :
+                    return <MessageFormView />
                 default :
                     return <LoginForm />
             }

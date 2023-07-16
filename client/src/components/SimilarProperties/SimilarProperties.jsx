@@ -10,6 +10,7 @@ import Carousel from "../../lib/Slider/Carousel"
 import URL from "../../constants/urls"
 import { deepSearch } from "../../Util/getValueByKey"
 
+
 const SimilarProperties = (props) =>{
 
     const {propId} = props

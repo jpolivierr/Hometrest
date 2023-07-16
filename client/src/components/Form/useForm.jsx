@@ -2,19 +2,27 @@
 import { useEffect, useState } from "react";
 import useRequest from "../../httpRequest/MakeRequest/MakeRequest";
 
-const FormLogin = (URL, method) =>{
+const FormLogin = (URL, method, formFields) =>{
 
        const METHOD = !method ? "POST" : method
 
      const [formError, setFormError] = useState({})
 
-       const [formState, setFormState] = useState({})
+
+       const [formState, setFormState] = useState(formFields)
        
 
-       const {makeRequest, response, fieldError, serverError, loading} = useRequest()
+       const {makeRequest, response, fieldError, serverError, loading, status} = useRequest()
+
+       const clearFormState = () =>{
+        console.log("clearing form state")
+         setFormState(formFields)
+       }
        
+
 
     const updateFormField = (key, value) =>{
+
          
               const formFieldCopy = {...formState}
 
@@ -26,21 +34,41 @@ const FormLogin = (URL, method) =>{
 
      useEffect(()=>{
 
-        if(serverError){
-            setFormError({serverError: serverError.message})
-        }
+        if(status === 200){
 
-        
-        if(fieldError){
-            setFormError(fieldError.errors)
-        }
-
-        if(response){
+            console.log("here is the response")
             console.log(response)
+            setFormError({})
+            clearFormState()
+
         }
 
+     },[status])
+
+
+
+     useEffect(()=>{
+
+        if(serverError){
+            console.log(serverError)
+            setFormError({serverError: serverError.message})
+       
+        }
+
+     },[serverError])
+
+
+
+     useEffect(()=>{
+
+        if(fieldError){
+            console.log(fieldError)
+            setFormError(fieldError.errors)
+            return
         
-     },[serverError, fieldError, response])
+        }
+
+     },[fieldError])
 
 
 
@@ -66,6 +94,7 @@ const FormLogin = (URL, method) =>{
 
         }else{
 
+
             await makeRequest(METHOD, URL, formState)
             
         }
@@ -76,9 +105,14 @@ const FormLogin = (URL, method) =>{
 
     return{
         submit,
+        status,
         updateFormField,
         formError,
-        loading
+        loading,
+        fieldError,
+        serverError,
+        response,
+        formState
     }
 
 }

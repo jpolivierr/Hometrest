@@ -124,6 +124,12 @@ button{
     background-color: #181f38bf;
 }
 
+.success_message{
+    padding: .5rem 0rem;
+    color: #189918;
+    font-weight: bold;
+}
+
 /* 
 =================================================
 Container

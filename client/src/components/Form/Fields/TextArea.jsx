@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { emptyField } from "../Util/emptyField";
 
-const Inputs= (props) =>{
+const TextArea= (props) =>{
 
   const {value} = props
     const [errorMessage, setErrorMessage] = useState("")
@@ -45,7 +45,7 @@ const Inputs= (props) =>{
         <fieldset className={`elementClass ${formError[name] && "field_error"}`} >
         {props.label && <label>{props.label}</label>}
         <div className="input-container">
-             <input 
+             <textarea 
                      type={name.includes("password") ? "password" : ""}
                      ref={inputElement}
                      placeholder={props.placeHolder} 
@@ -54,7 +54,7 @@ const Inputs= (props) =>{
                      onChange={e => handleInput(e)}
                      onBlur={(e)=>{handleBlur(e)}}
                      style={props.icon && {paddingLeft: "2.3rem"}}
-                     />
+                     ></textarea>
                      {props.icon && props.icon}
         </div>
             {formError[name] && <p>{formError[name]}</p>}         
@@ -62,4 +62,4 @@ const Inputs= (props) =>{
      )
 }
 
-export default Inputs;
+export default TextArea;

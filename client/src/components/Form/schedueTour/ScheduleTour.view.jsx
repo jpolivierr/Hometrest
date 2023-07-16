@@ -4,34 +4,47 @@ import MainButton from "../../buton/MainButton";
 import LoadingEffect from "../../../lib/loadingEffect/loading/loadingEffect";
 import useForm from "../useForm";
 import URL from "../../../constants/urls";
-import "./ClientInfo.style.css"
-import { useState } from "react";
+import "./ScheduleTour.style.css"
+import { useEffect, useState } from "react";
 
 
-const ClientInfo= () =>{
+const ScheduleTourView = () =>{
 
-    const {submit, updateFormField, formError, loading} = useForm(URL.SIGNUP)
+    const [formFields, setformFields] = useState({
+        firstName : "",
+        lastName : "",
+        email : ""
+    })
 
-    const [errorClass, setErrorClass] = useState("")
+    const [success, setSuccess] =useState(null)
 
-    useState(()=>{
-        console.log(formError)
-        if(Object.keys(formError).length > 0){
-                setErrorClass("form_error")
-                return
+    const {
+           submit, 
+           updateFormField, 
+           formError,
+           loading,
+            response,
+            formState,
+            status
+          } = useForm(URL.SCHEDULE_TOUR,"POST", formFields)
+
+
+    useEffect(()=>{
+
+        // console.log(formError)
+        if(status === 200){
+            console.log("success")
+            setSuccess(true)
         }
 
-        setErrorClass("")
-    },[formError])
 
-// console.log(formState)
-
+    },[status])
 
 
     return(
 
         <form style={{margin: "auto"}}
-           className={`signup_form ${Object.keys(formError).length > 0 && "form_error"}`} 
+           className={`signup_form`} 
            onSubmit={e => submit(e)}>
 
                 {formError.serverError && 
@@ -44,7 +57,8 @@ const ClientInfo= () =>{
                     name = {"firstName"}  
                     required = {true}
                     formError = {formError}
-                     updateFormField = {updateFormField}
+                    updateFormField = {updateFormField}
+                    value={formState.firstName}
 
                     />
 
@@ -54,6 +68,7 @@ const ClientInfo= () =>{
                     required = {true}
                     formError = {formError}
                      updateFormField = {updateFormField}
+                     value={formState.lastName}
 
                     />
 
@@ -63,8 +78,14 @@ const ClientInfo= () =>{
                     required = {true}
                     formError = {formError}
                      updateFormField = {updateFormField}
+                     value={formState.email}
 
                     />
+
+                    {success && <div className="success_message">
+                             Thank You, I will reach out to confirm the appointment
+                        </div>}
+
 
             <MainButton 
                       label="Submit"
@@ -84,4 +105,4 @@ const ClientInfo= () =>{
 
 }
 
-export default ClientInfo
+export default ScheduleTourView
