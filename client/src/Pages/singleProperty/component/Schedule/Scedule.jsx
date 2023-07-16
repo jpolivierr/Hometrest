@@ -1,39 +1,17 @@
 import { useEffect, useState } from "react"
 import Slider from "../../../../lib/Slider/Slider"
 import { useMyModal } from "../../../../context/modals/modalContext"
+import { getNextTwoWeeks, time } from "./Schedule.functions"
 import "./Schedule.style.css"
 
 const ScheduleTour = () =>{
 
     const [activeDate, setActiveDate] = useState(0)
     const [tourType, setTourType] = useState(0)
+    const [userMessage, setUserMessage] = useState("")
 
     const {toggleFloatingModal} = useMyModal()
 
-    const time = [
-          "11:00 AM",
-          "12:00 PM",
-          "01:00 PM",
-          "02:00 PM"
-    ]
-
-    function getNextTwoWeeks() {
-        
-        const today = new Date();
-        const nextTwoWeeks = [];
-      
-        // Iterate over the next 14 days
-        for (let i = 0; i < 14; i++) {
-          const currentDate = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
-          const day = currentDate.toLocaleString('en-US', { weekday: 'short' });
-          const date = currentDate.getDate();
-          const month = currentDate.toLocaleString('en-US', { month: 'long' });
-      
-          nextTwoWeeks.push({ day, date, month });
-        }
-      
-        return nextTwoWeeks;
-      }
 
     return(
        <div className="schedule">
@@ -65,8 +43,8 @@ const ScheduleTour = () =>{
 
         <ul className="tour_type">
 
-          <li onClick={()=> setTourType(0)} className={tourType === 0 && "active-time"}><i class="fa-solid fa-handshake"></i>In-person</li>
-          <li onClick={()=> setTourType(1)} className={tourType === 1 && "active-time"}><i className="fa-solid fa-video"></i> Video call</li>
+          <li onClick={()=> setTourType(0)} className={tourType === 0 ? "active-time" : ""}><i className="fa-solid fa-handshake"></i>In-person</li>
+          <li onClick={()=> setTourType(1)} className={tourType === 1 ? "active-time" : ""}><i className="fa-solid fa-video"></i> Video call</li>
 
         </ul>
         <button 
@@ -81,10 +59,14 @@ const ScheduleTour = () =>{
                 <h3 style={{marginTop: "1rem"}}>Have a Question?</h3>
 
                 <fieldset>
-                    <textarea placeholder="I'd like to learn more">
+                    <textarea 
+                        placeholder="I'd like to learn more"
+                        value={userMessage} 
+                        onChange={(e) => setUserMessage(e.target.value)}
+                        >
                     </textarea>
                 </fieldset>
-                <button onClick={()=> toggleFloatingModal("message")} style={{background: "#92a6bf17",width: "100%", marginTop: "0rem", height: "50px"}} className="button secondary-btn">
+                <button onClick={()=> toggleFloatingModal("message",{message: userMessage})} style={{background: "#92a6bf17",width: "100%", marginTop: "0rem", height: "50px"}} className="button secondary-btn">
                                 Ask me a question 
              </button>
          </form>

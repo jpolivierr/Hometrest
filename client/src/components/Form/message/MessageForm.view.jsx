@@ -10,11 +10,13 @@ import { useEffect, useState } from "react";
 
 const MessageFormView = ({payload}) =>{
 
-    const [formFields, setformFields] = useState({
-        firstName : "",
+    const {message} = payload
+
+    const [formFields] = useState({
+        fullName : "",
         mobile : "",
         email : "",
-        message : ""
+        message : message
     })
 
     const [success, setSuccess] =useState(null)
@@ -27,7 +29,8 @@ const MessageFormView = ({payload}) =>{
             response,
             formState,
             status
-          } = useForm(URL.SCHEDULE_TOUR,"POST", formFields)
+          } = useForm(URL.MESSAGING,"POST", formFields)
+
 
 
     useEffect(()=>{
@@ -55,11 +58,11 @@ const MessageFormView = ({payload}) =>{
             <h2>Send a message</h2>
             <Inputs 
                     label={"Full Name"}
-                    name = {"firstName"}  
+                    name = {"fullName"}  
                     required = {true}
                     formError = {formError}
                     updateFormField = {updateFormField}
-                    value={formState.firstName}
+                    value={formState.fullName}
 
                     />
 

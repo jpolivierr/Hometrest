@@ -30,7 +30,7 @@ export default function FloatingModalView({value}) {
                 case "CLIENT_INFO" :
                     return <ClientInfo />
                 case "MESSAGE" :
-                    return <MessageFormView />
+                    return <MessageFormView payload={modalPayload}/>
                 default :
                     return <LoginForm />
             }

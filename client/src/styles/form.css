@@ -39,7 +39,7 @@ form button{
     height: 50px;
 }
 
-.field_error input{
+.field_error input, .field_error textarea{
     border: 1px solid red;
     background: #ff000008;
 }
