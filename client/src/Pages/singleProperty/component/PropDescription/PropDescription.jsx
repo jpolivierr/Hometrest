@@ -9,6 +9,7 @@ import { capitalizeFirstLetter } from '../../../../Util/capitalizeFirstLetter'
 import { getGrade } from './PropDescription.script'
 import AgentInfo from '../AgenInfo/AgentInfo'
 import { useMyModal } from '../../../../context/modals/modalContext'
+import Map from '../../../../components/map/Map'
 
 import "./PropDescription.style.css"
 
@@ -32,11 +33,13 @@ export default function PropDescription({singleProperty}) {
     const taxHistory = deepSearch(singleProperty,["tax_history"],[])
     const {toggleFloatingModal} = useMyModal()
 
+    console.log(singleProperty)
+
  
   return (
     <div className="prop_info">
 
-                        <div className="prop_info_header">
+                        <div className="prop_info_header bottom_divider">
                          
                         <div id={0} className="prop_header_details">
                             <span className={`prop_status`}>
@@ -75,12 +78,18 @@ export default function PropDescription({singleProperty}) {
                             </div>
                             <div className="mini-map">
                                 <figure>
-                                    <img src={map}/>
+                                    <Map 
+                                        properties={[singleProperty]}
+                                        zoom={16}
+                                        disableDefaultUI={false}
+                                        streetViewControl={false}
+                                        fullscreenControl={false}
+                                        />
                                 </figure>
                                
                                <div className='commute'>
                                     <i className="fa-solid fa-car"></i>
-                                        {/* <h3>Commute Time: </h3> */}
+                                        <h3>Time</h3>
                                         <p>Add a commute</p>
                                </div>
                             </div>
@@ -116,14 +125,14 @@ export default function PropDescription({singleProperty}) {
                       {
                         details.length > 0 &&
 
-                          <div id={1}>
+                          <div id={1} className='bottom_divider'>
                                <h2>Property Details</h2>
                                <ExpandElement offSet={3}>
                                     <div className="prop_details">
                                     {
                                         details.map((detail,index)=>(
                                             <div key={index}>
-                                                <h3>{detail.category}</h3>
+                                                <h3>{detail.category}: </h3>
                                                 <p>{detail.text.join(", ")}</p>
                                             </div>
                                         ))

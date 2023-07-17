@@ -88,6 +88,11 @@ fieldset{
     box-shadow: 0 0 20px #82bbcc54;
 }
 
+.bottom_divider{
+    border-bottom: 1px solid var(--light-silver);
+    padding-bottom: 4rem;
+}
+
 /* 
 =================================================
 Buttons

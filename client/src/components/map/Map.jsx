@@ -8,9 +8,7 @@ import { formatNumber } from "../propertyCard/util"
 
 const Map = (props) =>{
 
-    const {properties} = props
-
-    console.log(properties)
+    const {properties, zoom, disableDefaultUI, streetViewControl, fullscreenControl} = props
 
     const mapRef = useRef(null)
 
@@ -136,8 +134,16 @@ const Map = (props) =>{
     }
 
     const [initialView, setInitialView] = useState({
-            zoom: 11,
-            center :getCenterCoordinate()
+            zoom: zoom,
+            center :getCenterCoordinate(),
+            options: {
+                gestureHandling: 'greedy'
+              },
+            disableDefaultUI: disableDefaultUI,
+            streetViewControl: streetViewControl,
+            fullscreenControl: fullscreenControl
+
+
     })
 
     useEffect(()=>{

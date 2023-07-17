@@ -29,7 +29,7 @@
 }
 
 .prop_info_header .mini-map{
-    max-width: 380px;
+    max-width: 400px;
     width: 100%;
     border: 1px solid var(--light-silver);
     border-radius: var(--borderRadius);
@@ -64,12 +64,14 @@
     margin: 0;
     padding-left: 1rem;
     margin-right: .5rem;
+    border-right: 1px solid var(--light-silver);
+    padding-right: 1rem;
 }
 
 .commute i{
     font-size: 1.2rem;
-    padding-right: 1rem;
-    border-right: 1px solid var(--light-silver);
+    /* padding-right: 1rem; */
+    
 }
 
 .commute p{
@@ -125,7 +127,6 @@
 .prop_header_details h4{
     margin: 0;
     font-weight: 500;
-    font-size: 1.2rem;
     color: var(--alt-text-color);
     display: flex;
     justify-content: center;
@@ -134,7 +135,7 @@
 }
 
 .prop_header_details h4 span{
-    font-weight: 800;
+    font-weight: 600;
     color: var(--dark-text-color);
 }
 
@@ -147,15 +148,16 @@
 
 .prop_info_list i{
     color: var(--alt-text-color);
-    background: var(--light-color) !important;
+    background: #92a6bf17 !important;
     width: 30px;
     height: 30px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: .9rem;
+    font-size: .7rem;
     margin-right: .4rem;
+    border: 1px solid var(--light-silver);
 }
 
 .prop_info_list li{
@@ -198,6 +200,10 @@
     grid-template-columns: 1fr 1fr;
     row-gap: 2rem;
     column-gap: 3rem;
+}
+
+.prop_details h3, .prop_details p{
+    display: inline;
 }
 
 .status-type{

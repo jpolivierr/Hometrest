@@ -1,8 +1,5 @@
 .the-map{
-    height: 89vh;
-    top: 142px !important;
-    position: sticky !important;
-    top: 0;
+    height: 100%;
 }
 
 .no_map{

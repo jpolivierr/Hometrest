@@ -11,7 +11,7 @@ export default function AgentInfo() {
     const {toggleFloatingModal} = useMyModal()
 
   return (
-    <div className="agent_info">
+    <div className="agent_info bottom_divider">
         <h2>Hi there, have a question?</h2>
          {/* <ScheduleTour /> */}
                         <div className="personal_info">
