@@ -78,13 +78,13 @@ export default function PropDescription({singleProperty}) {
                             </div>
                             <div className="mini-map">
                                 <figure>
-                                    <Map 
+                                    {/* <Map 
                                         properties={[singleProperty]}
                                         zoom={16}
                                         disableDefaultUI={false}
                                         streetViewControl={false}
                                         fullscreenControl={false}
-                                        />
+                                        /> */}
                                 </figure>
                                
                                <div className='commute'>
@@ -200,6 +200,7 @@ export default function PropDescription({singleProperty}) {
                                         <div key={index} className='property_history'>
                                             <h3>{history.date}</h3>
                                             <ul>
+                                             
                                                 <li>
                                                     <h4>Event</h4>
                                                     <p>{history.event_name}</p>

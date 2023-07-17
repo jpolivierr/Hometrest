@@ -9,45 +9,27 @@ import propertiesDemo from "../../Mock/propertyDemo"
 import Carousel from "../../lib/Slider/Carousel"
 import URL from "../../constants/urls"
 import { deepSearch } from "../../Util/getValueByKey"
+import SimilarPropertyRequest from "../../httpRequest/SimilarPropertyRequest/SimilarPropertyRequest"
 
 
 const SimilarProperties = (props) =>{
 
     const {propId} = props
 
+    const {similarListings} = SimilarPropertyRequest()
 
-   const {makeRequest, formResponse, loading } = useRequest()
 
-   const [similarListings, setSimilarListings] = useState(null)
-
-   const isLoading = false
-
-   useEffect(()=>{
-
-    if(propId){
-           makeRequest("GET", URL.SIMILAR_PROPS + "?prop_id=" + propId)
-    }
-    
-
-   },[])
-
-   useEffect(()=>{
-
-   console.log(formResponse)
-    if(formResponse.status && formResponse.status === 200){
-
-        const property = deepSearch(formResponse.body,["data","home","related_homes","results"],[])
-
-        setSimilarListings(property)
-
-    }
-
-   },[formResponse])
 
     return(
-       <>
+        <>
+         {!similarListings.length > 0 ? 
+        <SkeletonLoading 
+                            elementClass={"av-loading-skeleton av-loading-skeleton-side"} 
+                            />
+         : 
+         <div className="similar-property">
          <h2>Similar Properties</h2>
-        {similarListings ? <Slider2 
+         <Slider2 
                               gap={10}
                                   >   
             {
@@ -63,9 +45,13 @@ const SimilarProperties = (props) =>{
                 ))
                 }
           
-          </Slider2> : <SkeletonLoading 
-                            elementClass={"av-loading-skeleton av-loading-skeleton-side"} />}
-       </>
+          </Slider2>
+              </div>              
+                            }
+        
+        </>
+       
+       
        
      
     )

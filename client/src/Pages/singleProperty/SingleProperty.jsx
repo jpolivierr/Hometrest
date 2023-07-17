@@ -26,9 +26,11 @@ const {singleProperty, loading} = SinglePropertyRequest()
 
     return(
         <>
-         {/* <div className="similar-property">
+
+            <div className="container-medium">
                 <SimilarProperties propId={getParams("prop_id")}/>
-            </div> */}
+            </div>
+                
           {
               (!singleProperty.property_id) ?
               <PageLoading /> :
