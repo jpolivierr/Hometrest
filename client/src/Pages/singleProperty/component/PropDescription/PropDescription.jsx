@@ -7,6 +7,8 @@ import { getStatusColor } from '../../SingleProperty.Util'
 import ExpandElement from '../../../../components/expandElement/ExpandElement'
 import { capitalizeFirstLetter } from '../../../../Util/capitalizeFirstLetter'
 import { getGrade } from './PropDescription.script'
+import AgentInfo from '../AgenInfo/AgentInfo'
+import { useMyModal } from '../../../../context/modals/modalContext'
 
 import "./PropDescription.style.css"
 
@@ -28,6 +30,7 @@ export default function PropDescription({singleProperty}) {
     const schools = deepSearch(singleProperty,["schools", "schools"],[])
     const propertyHistory = deepSearch(singleProperty,["property_history"],[])
     const taxHistory = deepSearch(singleProperty,["tax_history"],[])
+    const {toggleFloatingModal} = useMyModal()
 
  
   return (
@@ -63,9 +66,9 @@ export default function PropDescription({singleProperty}) {
                               
                             </ul>
                             <div className='button_container'>
-                                <button className='button main-btn offer_button'>Make an Offer</button>
+                                <button onClick={()=> toggleFloatingModal("offer")} className='button main-btn offer_button'>Make an Offer</button>
                                 <button className='button secondary-btn offer_button'>
-                                        Share this home
+                                        Get Pre-approved
                                 </button>
                             </div>
                             
@@ -103,7 +106,10 @@ export default function PropDescription({singleProperty}) {
                         </div>
 
                      }
-                       
+
+
+
+                       <AgentInfo />
 
 
 
@@ -127,9 +133,6 @@ export default function PropDescription({singleProperty}) {
 
                         </div>
                       }
-
-                      
-
 
 
                         {

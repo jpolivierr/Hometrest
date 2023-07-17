@@ -4,6 +4,7 @@ import LoginForm from "../../../components/Form/login/Login.view"
 import PhotoGallery from '../../../components/PhotoGallery/PhotoGallery'
 import ClientInfo from '../../../components/Form/schedueTour/ScheduleTour.view'
 import MessageFormView from '../../../components/Form/message/MessageForm.view'
+import OfferFormView from '../../../components/Form/offerForm/OfferForm.view'
 import style from "./floatingModal.style.css"
 
 export default function FloatingModalView({value}) {
@@ -31,6 +32,8 @@ export default function FloatingModalView({value}) {
                     return <ClientInfo />
                 case "MESSAGE" :
                     return <MessageFormView payload={modalPayload}/>
+                case "OFFER" :
+                    return <OfferFormView/>
                 default :
                     return <LoginForm />
             }

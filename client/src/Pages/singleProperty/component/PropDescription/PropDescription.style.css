@@ -29,10 +29,10 @@
 }
 
 .prop_info_header .mini-map{
-    max-width: 320px;
-min-width: 320px;
-border: 1px solid var(--light-silver);
-border-radius: var(--borderRadius);
+    max-width: 380px;
+    width: 100%;
+    border: 1px solid var(--light-silver);
+    border-radius: var(--borderRadius);
 }
 
 .prop_info_header .mini-map figure{

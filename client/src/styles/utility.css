@@ -116,13 +116,10 @@ button{
 
 
 .secondary-btn{
-    background-color: var(--light-color);
+    background-color: #92a6bf17;
     border: 1px solid var(--light-silver);
 }
 
-.secondary-btn:hover{
-    background-color: #181f38bf;
-}
 
 .success_message{
     padding: .5rem 0rem;
