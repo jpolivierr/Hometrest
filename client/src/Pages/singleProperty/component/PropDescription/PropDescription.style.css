@@ -202,9 +202,9 @@
     column-gap: 3rem;
 }
 
-.prop_details h3, .prop_details p{
+/* .prop_details h3, .prop_details p{
     display: inline;
-}
+} */
 
 .status-type{
     color: white;

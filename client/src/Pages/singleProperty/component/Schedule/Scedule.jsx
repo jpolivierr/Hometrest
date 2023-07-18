@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Slider from "../../../../lib/Slider/Slider"
+import Slider from "../../../../lib/Slider/Slider2"
 import { useMyModal } from "../../../../context/modals/modalContext"
 import { getNextTwoWeeks, time } from "./Schedule.functions"
 import "./Schedule.style.css"

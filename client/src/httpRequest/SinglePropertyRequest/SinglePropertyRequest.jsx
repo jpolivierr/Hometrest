@@ -23,16 +23,12 @@ export default function SinglePropertyRequest() {
 
     if(paramId){
 
-        console.log("make request")
+        // console.log("make request")
         //  makeRequest("GET",URL.SINGLE_PROPERTY + paramId)
 
     }
 
 },[pathname, search])
-
-useEffect(()=>{
-  console.log(singleProperty)
-},[singleProperty])
 
 
 

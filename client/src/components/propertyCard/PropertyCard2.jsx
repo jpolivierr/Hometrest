@@ -5,6 +5,7 @@ import { useMyModal } from "../../context/modals/modalContext"
 import PropertyCardView from "./PropertyCard.view"
 import { useNavigate } from "react-router-dom"
 import { useUserContext } from "../../context/user/UserContext"
+import { updateImageLink } from "../../Util/updateImageLink"
 import "./PropertyCard.style.css"
 
 const PropertyCard = (props) =>{
@@ -26,6 +27,7 @@ const PropertyCard = (props) =>{
     const state = deepSearch(singleProperty,["location","address","state"])
     const stateCode = deepSearch(singleProperty,["location","address","state_code"])
     const photo = deepSearch(singleProperty,["primary_photo","href"])
+
 
     const {activeUser, likeProperty, isLoggedIn, getUserLikes} = useUserContext()
 
@@ -65,7 +67,7 @@ const PropertyCard = (props) =>{
     return(
  
         <PropertyCardView 
-            functions={{handleLikes, getUserLikes, handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,handleForRent,toggleFloatingModal}} 
+            functions={{handleLikes, getUserLikes,updateImageLink, handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,handleForRent,toggleFloatingModal}} 
 
              propertyDetails={{propertyId,status,type,beds,baths,sqft,price,street,city,zip,stateCode,photo}} 
 

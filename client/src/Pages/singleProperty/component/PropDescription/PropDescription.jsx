@@ -33,8 +33,6 @@ export default function PropDescription({singleProperty}) {
     const taxHistory = deepSearch(singleProperty,["tax_history"],[])
     const {toggleFloatingModal} = useMyModal()
 
-    console.log(singleProperty)
-
  
   return (
     <div className="prop_info">
@@ -132,7 +130,7 @@ export default function PropDescription({singleProperty}) {
                                     {
                                         details.map((detail,index)=>(
                                             <div key={index}>
-                                                <h3>{detail.category}: </h3>
+                                                <h3>{detail.category} </h3>
                                                 <p>{detail.text.join(", ")}</p>
                                             </div>
                                         ))

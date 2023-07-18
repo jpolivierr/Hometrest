@@ -1,15 +1,9 @@
 
-import { useEffect, useState } from "react"
 import Slider2 from "../../lib/Slider/Slider2"
-import PropertyCard2 from "../propertyCard/PropertyCard2"
-import useReduxMng from "../../hooks/useReduxMng"
+import PropertyCard from "../propertyCard/PropertyCard.component"
 import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
-import useRequest from "../../httpRequest/MakeRequest/MakeRequest"
-import propertiesDemo from "../../Mock/propertyDemo"
-import Carousel from "../../lib/Slider/Carousel"
-import URL from "../../constants/urls"
-import { deepSearch } from "../../Util/getValueByKey"
 import SimilarPropertyRequest from "../../httpRequest/SimilarPropertyRequest/SimilarPropertyRequest"
+import "./SimilarProperties.style.css"
 
 
 const SimilarProperties = (props) =>{
@@ -37,8 +31,9 @@ const SimilarProperties = (props) =>{
                     Array.isArray(similarListings) &&
                     similarListings.length > 0 && similarListings.map((property,index)=>(
 
-                    <PropertyCard2
+                    <PropertyCard
                     singleProperty = {property}
+                    imageKey = {"od-w1024_h768_x2.jpg"}
                     key={index}
                 />
 

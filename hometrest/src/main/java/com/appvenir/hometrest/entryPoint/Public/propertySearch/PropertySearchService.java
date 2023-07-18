@@ -37,5 +37,15 @@ public class PropertySearchService {
 
     }
 
+      public Flux<Object> findSimilar( String id){
+
+        return webClient.get()
+                .uri("/properties/v3/list-similar-homes?property_id=" + id)
+                .retrieve()
+                .bodyToFlux(Object.class);
+                      
+
+    }
+
     
 }

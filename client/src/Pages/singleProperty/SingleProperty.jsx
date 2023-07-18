@@ -26,10 +26,6 @@ const {singleProperty, loading} = SinglePropertyRequest()
 
     return(
         <>
-
-            <div className="container-medium">
-                <SimilarProperties propId={getParams("prop_id")}/>
-            </div>
                 
           {
               (!singleProperty.property_id) ?
@@ -53,6 +49,10 @@ const {singleProperty, loading} = SinglePropertyRequest()
                
                 
             }
+
+<div className="container-medium">
+                <SimilarProperties/>
+            </div>
             
         </>
     )

@@ -56,9 +56,6 @@ font-weight: 600;
     transition: background .3s;
 }
 
-.list_options li:hover{
-    background: var(--alt-silver);
-}
 
 .list_options i{
     color: var(--alt-text-color);

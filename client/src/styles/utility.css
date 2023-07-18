@@ -7,7 +7,8 @@
     --alt-silver: #92a6bf17;
     --dark-text-color : #081b4b;
     --light-text-color : #232d47;
-    --alt-text-color : #586b84;
+    /* --alt-text-color : #586b84; */
+    --alt-text-color : #0d294dd6;
     --paragraph-text-color : #2b3857;
     --borderRadius: 5px
 }

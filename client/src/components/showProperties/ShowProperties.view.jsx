@@ -26,6 +26,7 @@ const ShowPropertiesView = ({value}) =>{
                     properties.map((property,index)=>(
                         <PropertyCard
                             singleProperty = {property}
+                            imageKey = {"od-w1024_h768.jpg"}
                             key={index}
                         />
                         ))

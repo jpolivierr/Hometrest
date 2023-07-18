@@ -8,6 +8,7 @@ import prepareObject from '../../Util/prepareObject'
 import hardCopy from '../../Util/hardCopy'
 import { deepSearch } from '../../Util/getValueByKey'
 import propertiesDemo from '../../Mock/propertyDemo'
+import { getParams } from '../../Util/urlParcer'
 
 
 export default function SimilarPropertyRequest() {
@@ -15,38 +16,26 @@ export default function SimilarPropertyRequest() {
   const { makeRequest, response, serverError, loading, status } = useRequest()
   const [similarListings, setSimilarListings] = useState({})
 
-  let prevState = useRef({})
+  let prevState = useRef(null)
 
 
   useEffect(()=>{
     
     if(!compareObjects(prevState.current, similarListings)){
-        console.log("making request")
-        const similarListingsCopy = hardCopy(similarListings)
-        const newObj = removeEmptyValues(similarListingsCopy)
-        const preparedObj = prepareObject(newObj, "miami")
-        preparedObj.limit = 50
-        preparedObj.state_code = "fl"
-        console.log(preparedObj)
-        // makeRequest("POST",URL.SEARCH, preparedObj)
+      const paramId = getParams("prop_id")
+         makeRequest("GET",URL.SIMILAR_PROPS + paramId)
         prevState.current = similarListings
     }
 
-    // console.log(similarListings)
+    console.log(similarListings)
 
   },[similarListings])
 
 
    useEffect(()=>{ 
 
-  // delete when you done
-  const mockObj = {
-      count: 50,
-      totoal : 3902,
-      results : propertiesDemo
-  }
-   console.log(mockObj)
-      setSimilarListings(mockObj.results)
+  //  console.log(mockObj)
+      // setSimilarListings(propertiesDemo)
 
     if(serverError){
       console.log("server error")
@@ -54,7 +43,8 @@ export default function SimilarPropertyRequest() {
     }
 
     if(response){
-      const data = deepSearch(response[0],["data","home_search"],{})
+      console.log(response)
+      const data = deepSearch(response[0],["data","home","related_homes", "results"],[])
     
       setSimilarListings(data)
     }

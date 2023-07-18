@@ -17,7 +17,9 @@ const PropertyCardView = ({functions, propertyDetails, value}) =>{
          formatNumber,
          likeProperty,
          toggleFloatingModal,
-         handleLikes
+         handleLikes,
+         updateImageLink,
+         imageKey
         } = functions
     const {
            propertyId,
@@ -40,7 +42,7 @@ const PropertyCardView = ({functions, propertyDetails, value}) =>{
         <>
                 <div 
             onClick={(e)=> handlePropClick(e,propertyId)} data-property_id = {propertyId} className="property-card av-shadow">
-            <figure style={{background : `url(${getPhoto(photo)}) no-repeat center center/cover`}}>
+            <figure style={{background : `url(${updateImageLink(photo,imageKey)}) no-repeat center center/cover`}}>
 
                 <div className="status-container">
                         <div className={`${getStatusStyle(status)} status-component`}>

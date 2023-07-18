@@ -1,6 +1,4 @@
 package com.appvenir.hometrest.entryPoint.Public.propertySearch;
-
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +22,7 @@ public class PropertySearchController {
 
 
     @PostMapping(path = "/list")
-    public  Flux<Object>  search( @RequestBody Object propertySearch){
+    public  Flux<Object> list( @RequestBody Object propertySearch){
 
        Flux<Object> propertyList = propertySearchService.findAll(propertySearch);
 
@@ -33,9 +31,18 @@ public class PropertySearchController {
     }
 
      @GetMapping(path = "/details")
-    public Flux<Object>  search(@RequestParam("id")String id){
+    public Flux<Object>  details(@RequestParam("id")String id){
 
        Flux<Object> propertyList = propertySearchService.findSingle(id);
+
+       return propertyList;
+        
+    }
+
+    @GetMapping(path = "/similar_properties")
+    public Flux<Object>  similar(@RequestParam("id")String id){
+
+       Flux<Object> propertyList = propertySearchService.findSimilar(id);
 
        return propertyList;
         

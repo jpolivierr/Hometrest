@@ -12,7 +12,6 @@ const useRequest = () =>{
     const makeRequest = async (method, url, data) => {
 
         console.log("making request")
-        console.log(data)
 
         let response
         const requestHeaders = new Headers();
@@ -24,6 +23,10 @@ const useRequest = () =>{
             mode: 'cors',
             headers: requestHeaders,
             method: method
+        }
+
+        const get = () => {
+
         }
 
         try {
@@ -39,6 +42,7 @@ const useRequest = () =>{
                         } else{
                              setLoading(true)
                             response = await fetch(url,config)
+                            
                             setStatus(response.status)
                             setLoading(false)
                         }
