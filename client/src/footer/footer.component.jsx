@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className='footer'>
 
-        <div class="container flex-space-between">
+        <div class="container flex-space-between footer_main">
 
             <h2><i class="fa-brands fa-pagelines"></i> HomeTrest</h2>
 

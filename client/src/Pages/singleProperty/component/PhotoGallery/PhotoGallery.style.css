@@ -10,10 +10,11 @@
 .more_details li{
     background: white;
     border-radius: var(--borderRadius);
-    padding: 1rem;
+    padding: .5rem 1rem;
     font-weight: 600;
     transition: background .3s;
     cursor: pointer;
+    font-size: .9rem;
 }
 
 .more_details li:hover{
@@ -45,6 +46,14 @@
 .prop_photos figure:nth-child(3) {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+}
+
+.prop_photos figure:nth-child(2){
+    border-bottom-right-radius: 0px;
+}
+
+.prop_photos figure:nth-child(3){
+    border-top-right-radius: 0px;
 }
 
 .prop_photos_1{

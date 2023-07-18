@@ -133,6 +133,7 @@ button{
     font-weight: bold;
 }
 
+
 /* 
 =================================================
 Container
@@ -154,16 +155,6 @@ Container
     width: 80%;
     margin: auto;
     max-width: 1200px;
-}
-
-@media (max-width: 700px){
-
-    
-.container-medium{
-    width: 90%;
-    max-width: 1200px;
-}
-
 }
 
 

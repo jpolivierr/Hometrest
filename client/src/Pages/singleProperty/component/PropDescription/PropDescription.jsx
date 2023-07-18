@@ -146,7 +146,7 @@ export default function PropDescription({singleProperty}) {
                            
                            schools.length > 0 && 
 
-                           <div id={2}>
+                           <div id={2} className='table_style'>
                             <h2>Nearby Schools</h2>
                         
                                  <div className='school_options_container'>
@@ -188,7 +188,7 @@ export default function PropDescription({singleProperty}) {
                        {
                         propertyHistory.length > 0 &&
 
-                        <div id={3}>
+                        <div id={3} className='table_style'>
 
                             <h2>Property History</h2>
                             <ExpandElement offSet={3}>
@@ -228,7 +228,7 @@ export default function PropDescription({singleProperty}) {
 {
                         taxHistory.length > 0 &&
 
-                        <div id={4}>
+                        <div id={4} className='table_style'>
 
                             <h2>Tax History</h2>
   

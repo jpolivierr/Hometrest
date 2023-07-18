@@ -91,10 +91,10 @@ export default function PropHeader({singleProperty, id}) {
                         </ul>
 
 
-                        <ul>
-                            <li className="single_share_btn s-h-btn"><i className="fa-solid fa-share"></i> Share</li>
-                            <li onClick={()=>{handleLikes(propertyId)}} className="single_like_btn s-h-btn">{!getUserLikes(propertyId) ? <i  className="fa-regular fa-heart"></i> : <i  className="fa-solid fa-heart like-prop"></i>} Favorite</li>
-                            <li className="single_share_btn s-h-btn"><i className="fa-solid fa-xmark"></i> Hide</li>
+                        <ul className="share_container">
+                            <li className="single_share_btn s-h-btn"><i className="fa-solid fa-share"></i> <p>Share</p></li>
+                            <li onClick={()=>{handleLikes(propertyId)}} className="single_like_btn s-h-btn">{!getUserLikes(propertyId) ? <i  className="fa-regular fa-heart"></i> : <i  className="fa-solid fa-heart like-prop"></i>} <p>Favorite</p></li>
+                            <li className="single_share_btn s-h-btn"><i className="fa-solid fa-xmark"></i> <p>Hide</p></li>
                         </ul>
                         
                      </div>

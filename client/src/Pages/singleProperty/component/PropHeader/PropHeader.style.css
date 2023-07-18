@@ -8,11 +8,16 @@
     background: white;
 }
 
+
+
 .single_prop_header ul {
     display: flex;
     gap: 2rem;
 }
 
+.share_container{
+    
+}
 .single_prop_header ul li{
     cursor: pointer;
     display: flex;
