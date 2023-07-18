@@ -10,6 +10,7 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import TopNav from './components/navBar/topNav';
 import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
 import UserRequest from './httpRequest/userRequest/userRequest';
+import Footer from './footer/footer.component';
 
 
 function App() {
@@ -36,9 +37,12 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/about" element={<About/>}/>
             <Route path="/listings" element={<Listings/>}/>
+            <Route path="/listings/buy" element={<Listings/>}/>
+            <Route path="/listings/rent" element={<Listings/>}/>
             <Route path="/update" element={<Update/>}/>
             <Route path="/" element={<Home />}/>
         </Routes>
+        <Footer />
 
 
 

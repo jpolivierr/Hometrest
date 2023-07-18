@@ -184,6 +184,13 @@ Container
     border: 2px solid #0081bf29 !important;
 }
 
+.sticky{
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 12;
+}
+
 .stick{
     position: sticky;
     top: 70.4px;
