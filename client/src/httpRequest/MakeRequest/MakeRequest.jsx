@@ -11,8 +11,6 @@ const useRequest = () =>{
 
     const makeRequest = async (method, url, data) => {
 
-        console.log("making request")
-
         let response
         const requestHeaders = new Headers();
 

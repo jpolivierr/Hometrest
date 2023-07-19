@@ -76,13 +76,13 @@ export default function PropDescription({singleProperty}) {
                             </div>
                             <div className="mini-map">
                                 <figure>
-                                    {/* <Map 
+                                    <Map 
                                         properties={[singleProperty]}
-                                        zoom={16}
+                                        zoom={13}
                                         disableDefaultUI={false}
                                         streetViewControl={false}
                                         fullscreenControl={false}
-                                        /> */}
+                                        />
                                 </figure>
                                
                                <div className='commute'>

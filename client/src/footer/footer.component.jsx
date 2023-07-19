@@ -6,19 +6,19 @@ export default function Footer() {
   return (
     <footer className='footer'>
 
-        <div class="container flex-space-between footer_main">
+        <div className="container flex-space-between footer_main">
 
-            <h2><i class="fa-brands fa-pagelines"></i> HomeTrest</h2>
+            <h2><i  className="fa-brands fa-pagelines"></i> HomeTrest</h2>
 
-            <ul class="contact-info-footer"><li><i class="fa-solid fa-phone"></i><p>Call: (849) 9840 9449</p></li><li><i class="fa-solid fa-envelope"></i><p>Email: jprealty@kellerwilliams.com</p></li></ul>
+            <ul  className="contact-info-footer"><li><i  className="fa-solid fa-phone"></i><p>Call: (849) 9840 9449</p></li><li><i  className="fa-solid fa-envelope"></i><p>Email: jprealty@kellerwilliams.com</p></li></ul>
         
             <NavList 
-                Class="flex-space-between gap-1x nav-list nav-list-alt"
+                 className="flex-space-between gap-1x nav-list nav-list-alt"
             />
 
         </div>
 
-        <div class="container flex-space-between copy_writes">
+        <div  className="container flex-space-between copy_writes">
                <p>2023 Copy write. Developped by www.Appvenir.com</p> 
         </div>
 

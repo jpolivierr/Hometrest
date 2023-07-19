@@ -23,8 +23,8 @@ export default function SinglePropertyRequest() {
 
     if(paramId){
 
-        // console.log("make request")
-        //  makeRequest("GET",URL.SINGLE_PROPERTY + paramId)
+        console.log("make request - single property")
+        makeRequest("GET",URL.SINGLE_PROPERTY + paramId)
 
     }
 
@@ -34,11 +34,11 @@ export default function SinglePropertyRequest() {
 
 useEffect(()=>{
 
-    console.log(response)
+    // console.log(response)
 
-    const property = deepSearch(singleDemo,["data","home"],{})
+    // const property = deepSearch(singleDemo,["data","home"],{})
 
-    setSingleProperty(property)
+    // setSingleProperty(property)
 
     if(serverError){
         console.log("server error")
@@ -46,6 +46,8 @@ useEffect(()=>{
       }
          
     if(response){
+
+      console.log(response)
 
         const property = deepSearch(response[0],["data","home"],{})
 

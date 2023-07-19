@@ -1,5 +1,5 @@
 
-import Slider2 from "../../lib/Slider/Slider2"
+import Slider2 from "../../lib/Slider/Slider"
 import PropertyCard from "../propertyCard/PropertyCard.component"
 import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
 import SimilarPropertyRequest from "../../httpRequest/SimilarPropertyRequest/SimilarPropertyRequest"

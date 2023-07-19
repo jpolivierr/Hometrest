@@ -41,3 +41,12 @@ footer h2, footer i{
 .contact-info-footer li p{
     color: white;
 }
+
+.footer_main ul {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer_main ul li{
+    color: white;
+}

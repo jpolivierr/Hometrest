@@ -34,10 +34,6 @@
         grid-template-columns: 1fr 1fr !important;
          max-width: 100% !important;
     }
-
-    .the-map{
-        display: none;
-    }
     
 }
 
@@ -55,8 +51,5 @@
 
     }
 
-    .the-map{
-        display: none;
-    }
     
 }

@@ -22,28 +22,26 @@ export default function SimilarPropertyRequest() {
   useEffect(()=>{
     
     if(!compareObjects(prevState.current, similarListings)){
+
+      console.log("make request - similar properties")
       const paramId = getParams("prop_id")
          makeRequest("GET",URL.SIMILAR_PROPS + paramId)
         prevState.current = similarListings
     }
-
-    console.log(similarListings)
 
   },[similarListings])
 
 
    useEffect(()=>{ 
 
-  //  console.log(mockObj)
-      // setSimilarListings(propertiesDemo)
 
     if(serverError){
       console.log("server error")
       return
     }
 
-    if(response){
-      console.log(response)
+    if(status === 200){
+
       const data = deepSearch(response[0],["data","home","related_homes", "results"],[])
     
       setSimilarListings(data)

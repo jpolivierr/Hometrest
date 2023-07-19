@@ -50,9 +50,9 @@ const {singleProperty, loading} = SinglePropertyRequest()
                 
             }
 
-{/* <div className="container-medium">
+<div className="container-medium">
                 <SimilarProperties/>
-            </div> */}
+            </div>
             
         </>
     )

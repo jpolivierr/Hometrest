@@ -4,7 +4,7 @@ const API_VERSION = "/api/v1"
 const URL = {
 
     SEARCH : HOST + "/api/v1/property_search/list",
-    SINGLE_PROPERTY : HOST + + API_VERSION + "/property_search/details?id=",
+    SINGLE_PROPERTY : HOST + API_VERSION + "/property_search/details?id=",
     LOGIN : HOST + "/process-login", 
     LOGOUT : HOST + "/process-login",
     SIGNUP : HOST + "/process_registration",
