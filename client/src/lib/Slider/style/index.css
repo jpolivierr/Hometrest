@@ -34,12 +34,12 @@
     transition: all .3s;
 }
 
-.slider-btn
+/* .slider-btn */
 
-.slider-btn:hover{
+/* .slider-btn:hover{
     transform: scale(1.1);
     background: #343f4f13;
-}
+} */
 
 .slider-btn-right{
    right: -44px;

@@ -1,0 +1,114 @@
+
+.carousel{
+    width: 100%;
+    position: relative;
+}
+
+.carousel_container{
+    white-space: nowrap;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+.carousel_container .item{
+    
+    position: relative;
+    display: inline-block;
+    margin-left: 14px;
+
+}
+
+.carousel_container .item:first-child{
+    margin-left: 0;
+}
+
+.carousel_container .item:nth-last-child(){
+    margin-right: 0;
+}
+
+
+.carousel_container .item div:first-child{
+
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.carousel_btn{
+    border: 1px solid #343f4f38;
+    color: #343f4f;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: white;
+
+}
+
+
+.next_btn{
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    /* bottom: 0;
+    margin: auto; */
+}
+
+.prev_btn{
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    /* bottom: 0;
+    margin: auto; */
+
+}
+
+.split_4  .item{
+    width: calc(100% / 4);
+    /* aspect-ratio:  5 / 5; */
+}
+
+.split_2  .item{
+    width: calc(100% / 2.1);
+    /* aspect-ratio:  5 / 5; */
+}
+
+
+@media (max-width: 900px) {
+
+    .split_4 .item{
+        width: calc(100% / 3);
+    }
+    
+}
+
+@media (max-width: 700px) {
+
+    .split_4 .item{
+        width: calc(100% / 2);
+    }
+    
+}
+
+@media (max-width: 500px) {
+
+    .split_4 .item{
+        width: calc(100% / 2);
+    }
+    
+}
+
+@media (max-width: 400px) {
+
+    .split_4 .item{
+        width: calc(100% / 1);
+    }
+    
+}

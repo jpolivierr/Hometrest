@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Slider from "../../../../lib/Slider/Slider2"
 import { useMyModal } from "../../../../context/modals/modalContext"
 import { getNextTwoWeeks, time } from "./Schedule.functions"
+import Carousel from "../../../../lib/Carousel/Carousel.component"
 import "./Schedule.style.css"
 
 const ScheduleTour = () =>{
@@ -12,16 +13,19 @@ const ScheduleTour = () =>{
 
     const {toggleFloatingModal} = useMyModal()
 
+    const carouselSettings = {
+      aspectRatio : 5 / 4,
+      style: "split_2"
+    }
+
 
     return(
        <div className="schedule">
        <h2 className="schedule_title">
             Select a Tour Date <span>No obligation. Cancel at any time.</span>
           </h2>
-        <Slider 
-          elementClass="schedule-tour"
-          gap={10}
-          size={1}
+        <Carousel 
+          settings={carouselSettings}
         >
             {getNextTwoWeeks().map((day, index)=>(
                 <div 
@@ -34,7 +38,7 @@ const ScheduleTour = () =>{
                     <h3>{day.month}</h3>
                 </div>
             ))}
-        </Slider>
+        </Carousel>
         <select className="select_time">
             {
                 time.map((hours,index) => (<option key={index}>{hours}</option>))
