@@ -30,7 +30,7 @@
 .s-h-btn i{
     font-size: .9rem;
     color: var(--alt-text-color);
-    background: #92a6bf17;
+    background: var(--lightSilver);
     border: 1px solid var(--light-silver);
     width: 30px;
     height: 30px;

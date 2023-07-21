@@ -4,6 +4,7 @@ import PropertyCard from "../propertyCard/PropertyCard.component"
 import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
 import SimilarPropertyRequest from "../../httpRequest/SimilarPropertyRequest/SimilarPropertyRequest"
 import "./SimilarProperties.style.css"
+import Carousel from "../../lib/Carousel/Carousel.component"
 
 
 const SimilarProperties = (props) =>{
@@ -12,7 +13,11 @@ const SimilarProperties = (props) =>{
 
     const {similarListings} = SimilarPropertyRequest()
 
-
+    const carouselSettings = {
+        aspectRatio : 5 / 5,
+        split: 4,
+        style: "split_4"
+      }
 
     return(
         <>
@@ -23,8 +28,9 @@ const SimilarProperties = (props) =>{
          : 
          <div className="similar-property">
          <h2>Similar Properties</h2>
-         <Slider2 
-                              gap={10}
+         <Carousel 
+                               elementStyle={"prop_carousel"}
+                              settings={carouselSettings}
                                   >   
             {
             
@@ -40,7 +46,7 @@ const SimilarProperties = (props) =>{
                 ))
                 }
           
-          </Slider2>
+          </Carousel>
               </div>              
                             }
         

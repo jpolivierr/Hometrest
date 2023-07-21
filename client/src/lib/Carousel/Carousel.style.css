@@ -1,4 +1,5 @@
 
+
 .carousel{
     width: 100%;
     position: relative;
@@ -10,13 +11,7 @@
     scroll-behavior: smooth;
 }
 
-.carousel_container .item{
-    
-    position: relative;
-    display: inline-block;
-    margin-left: 14px;
 
-}
 
 .carousel_container .item:first-child{
     margin-left: 0;
@@ -27,17 +22,9 @@
 }
 
 
-.carousel_container .item div:first-child{
-
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-}
 
 .carousel_btn{
-    border: 1px solid #343f4f38;
+    border: 1px solid var(--borderColor);
     color: #343f4f;
     width: 40px;
     height: 40px;
@@ -70,45 +57,55 @@
 
 }
 
-.split_4  .item{
-    width: calc(100% / 4);
-    /* aspect-ratio:  5 / 5; */
+.carousel_container .item{
+    
+    position: relative;
+    display: inline-block;
+
 }
+
+.item > div{
+
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: max-content !important;
+}
+
+.prop_carousel > div{
+    padding: 1rem 0rem;
+}
+
+.split_4  .item{
+
+    padding-left: 5px;
+
+}
+
+.split_4  .item:first-child{
+    padding-left: 0px;
+}
+
 
 .split_2  .item{
-    width: calc(100% / 2.1);
-    /* aspect-ratio:  5 / 5; */
+    width: calc(100% / 2);
+    padding-left: 14px;
+}
+.split_2  .item:first-child{
+    
+    padding-left: 0px;
+
 }
 
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
 
-    .split_4 .item{
-        width: calc(100% / 3);
+    .carousel .prev_btn, .carousel .next_btn{
+        display: none !important;
     }
-    
-}
 
-@media (max-width: 700px) {
-
-    .split_4 .item{
-        width: calc(100% / 2);
+    .carousel .carousel_container{
+        overflow-x: scroll;
     }
-    
-}
-
-@media (max-width: 500px) {
-
-    .split_4 .item{
-        width: calc(100% / 2);
-    }
-    
-}
-
-@media (max-width: 400px) {
-
-    .split_4 .item{
-        width: calc(100% / 1);
-    }
-    
 }

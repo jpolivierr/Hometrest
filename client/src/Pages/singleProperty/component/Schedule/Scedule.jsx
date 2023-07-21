@@ -15,6 +15,7 @@ const ScheduleTour = () =>{
 
     const carouselSettings = {
       aspectRatio : 5 / 4,
+      split: 2,
       style: "split_2"
     }
 

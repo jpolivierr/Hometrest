@@ -5,7 +5,7 @@ import { handleSizeChange } from './Carousel.functions'
 const Carousel = (props) => {
 
     console.log(props)
-    const {children, settings} = props
+    const {children, settings, elementStyle} = props
 
 const {split, aspectRatio, transitionTime, gap, style} = settings    
 
@@ -48,7 +48,8 @@ const showHideButtons = () =>{
 
 const next = () =>{
 
-    const itemsWidth = itemElement.current.clientWidth + 13
+    const itemsWidth = (itemElement.current.clientWidth)
+    console.log(itemsWidth)
     carouselContainer.current.scrollLeft += itemsWidth 
     setTimeout(()=> showHideButtons(), 60)
 
@@ -56,7 +57,7 @@ const next = () =>{
 
 const prev = () =>{
 
-    const itemsWidth = itemElement.current.clientWidth + 13
+    const itemsWidth = (itemElement.current.clientWidth)
     carouselContainer.current.scrollLeft += -itemsWidth 
     setTimeout(()=> showHideButtons(), 60)
 
@@ -66,7 +67,7 @@ console.log(aspectRatio)
 
   return (
 
-    <div className='carousel'>
+    <div className={`carousel ${elementStyle}`}>
 
         <div ref={carouselContainer} className={`carousel_container ${style}`}>
           {
@@ -82,7 +83,6 @@ console.log(aspectRatio)
                                     <div 
                                     key={index}
                                     ref={itemElement}
-                                    style={{aspectRatio: aspectRatio}}
                                     className='item' >
                                        {element}
                                    </div>

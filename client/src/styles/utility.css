@@ -10,7 +10,10 @@
     /* --alt-text-color : #586b84; */
     --alt-text-color : #0d294dd6;
     --paragraph-text-color : #2b3857;
-    --borderRadius: 5px
+    --borderRadius: 5px;
+    --borderColor: #1b365e82;
+    --lightSilver: #92a6bf21;
+    --lightShadow : 0px 10px 25px -6px #92a2bf56;
 }
 
 /* 

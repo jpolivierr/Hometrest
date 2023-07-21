@@ -36,6 +36,7 @@
     position: relative;
     display: grid;
     grid-template-rows: 1fr auto;
+    box-shadow: var(--lightShadow);
 }
 
 .prop_info_header .mini-map figure{
@@ -57,7 +58,7 @@
     align-items: center;
     cursor: pointer;
     justify-content: center;
-    background: var(--alt-silver);
+    /* background: var(--lightSilver); */
     border-bottom-left-radius: var(--borderRadius);
     border-bottom-right-radius: var(--borderRadius);
 }
@@ -150,7 +151,7 @@
 
 .prop_info_list i{
     color: var(--alt-text-color);
-    background: #92a6bf17 !important;
+    background: var(--lightSilver) !important;
     width: 30px;
     height: 30px;
     border-radius: 50%;
