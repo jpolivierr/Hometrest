@@ -39,9 +39,7 @@ const Listings = (props) =>{
 
           {/* <Map properties={propertiesReducer.results} /> */}
           
-            <ShowProperties 
-    
-            />
+            <ShowProperties />
 
           </div>
           

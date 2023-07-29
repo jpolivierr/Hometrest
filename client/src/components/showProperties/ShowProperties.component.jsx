@@ -10,6 +10,23 @@ const ShowProperties = () =>{
     const isLoading = ""
 
     const properties = propertiesReducer.results
+    const total = propertiesReducer.total
+    const count = propertiesReducer.count
+
+    const generatePageNumber = () =>{
+
+        const pageNumber = Math.floor(total / count)
+
+        const iterationArray = Array.from({ length: pageNumber });
+
+        return (iterationArray.map((item, index) => (
+          
+                <li key={index+ 1}>{index + 1}</li>
+            )
+        ))
+
+
+    }
     
 
     const getSearchValue = () =>{
@@ -31,14 +48,23 @@ const ShowProperties = () =>{
 
         const str = `${city} ${myState} ${postal_code}`
 
-        return  (<h2>{`${properties.length} result found for "${str.trim()}"`}</h2>)
+        return  (<h2>{`${total} result found for "${str.trim()}"`}</h2>)
     
+    }
+
+    const value = {
+        getSearchValue, 
+        properties, 
+        isLoading,
+        total,
+        generatePageNumber
+        
     }
 
 
 
     return(
-        <ShowPropertiesView value={{getSearchValue, properties, isLoading}} />
+        <ShowPropertiesView value={value} />
     )
 
 }

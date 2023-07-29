@@ -64,7 +64,12 @@
 
 }
 
-.item > div{
+.carousel_container .item{
+    padding-left: 10px;
+}
+
+
+.item div{
 
     position: relative !important;
     top: 0 !important;
@@ -73,9 +78,6 @@
     height: max-content !important;
 }
 
-.prop_carousel > div{
-    padding: 1rem 0rem;
-}
 
 .split_4  .item{
 
@@ -96,6 +98,30 @@
     
     padding-left: 0px;
 
+}
+
+.pagination{
+    width: 300px;
+    
+    margin: 1rem 0rem;
+    margin-left: 1rem;
+
+}
+
+.pagination .carousel_btn{
+    border: none;
+    width: 20px;
+    height: 20px;
+    font-size: .9rem;
+}
+
+.pagination .item{
+    padding-left: 20px;
+}
+
+
+.carousel_container > .item:first-child{
+    padding-left: 0px;
 }
 
 

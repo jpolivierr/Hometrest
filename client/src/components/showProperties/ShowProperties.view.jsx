@@ -4,11 +4,16 @@ import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoa
 import CardLoading from "../../lib/loadingEffect/CardLoading/CardLoading"
 import UserContext from "../../context/user/UserContext"
 import { useContext } from "react"
+import Carousel from "../../lib/Carousel/Carousel.component"
 
 
 const ShowPropertiesView = ({value}) =>{
 
-    const {isLoading, getSearchValue, properties} = value
+    const {isLoading, getSearchValue, properties, total, generatePageNumber} = value
+
+    const carouselSettings = {
+        split: 2,
+      }
 
     return(
 
@@ -18,9 +23,21 @@ const ShowPropertiesView = ({value}) =>{
              properties.length === 0 ?
              <CardLoading/> :
              <>
+                
                 <div className="show-properties-header"> 
+
                         {getSearchValue()}
+
+
+                <Carousel 
+                    elementStyle = "pagination"
+                  settings={carouselSettings}>
+                        {generatePageNumber()}
+                </Carousel>
+
+
                 </div>
+
                 <div className="property_list_container">
                 { 
                     properties.map((property,index)=>(
