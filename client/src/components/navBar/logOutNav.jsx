@@ -26,7 +26,7 @@ const LogOutNav = () =>{
 
                             <div style={{marginLeft: "3rem"}} className="hideMobile flex-space-between gap-1x">
 
-                            <ul class="nav-contact-info"><li><i class="fa-solid fa-phone"></i><p>Call: (849) 9840 9449</p></li></ul>
+                            <ul className="nav-contact-info"><li><i className="fa-solid fa-phone"></i><p>Call: (849) 9840 9449</p></li></ul>
 
                                 
                                                                         

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { handleError, setConfiguration } from "./HttpRequest.functions"
+import { useEffect, useState, useRef } from "react"
+import { handleError, setConfiguration, setSignal } from "./HttpRequest.functions"
 
 
 const HttpRequest = (defaultUrl,config) =>{
@@ -8,13 +8,17 @@ const HttpRequest = (defaultUrl,config) =>{
     const requestHeaders = new Headers();
     requestHeaders.set("Content-Type","application/json")
 
+    let abortController = useRef(null)
 
     const [response, setResponse] = useState(null)
     const [serverError, setServerError] = useState(null)
     const [fieldError, setFieldError] = useState(null)
     const [status, setStatus] = useState(null)
     const [loading, setLoading] = useState(null)
+
     const [defaultConfig] = useState(setConfiguration(config))
+
+    
 
 
     useEffect(()=>{
@@ -23,6 +27,9 @@ const HttpRequest = (defaultUrl,config) =>{
             case status >= 200 && status <= 299 :
                 break
             case status === 404 :
+                break
+            case status >= 504 :
+                setServerError("Request timed out")
                 break
             case status >= 500 && status <= 599 :
                  setServerError("Oops something went wrong on our end. Please try again later.")
@@ -38,8 +45,6 @@ const HttpRequest = (defaultUrl,config) =>{
         if(response){
             console.log("response --> ",response)
         }
-
-        
 
     },[response])
 
@@ -82,16 +87,24 @@ const HttpRequest = (defaultUrl,config) =>{
 
             const post = async (url,data) => {
 
+                  const signal = setSignal(abortController)
+
                 try {
-                    console.log("making POST request.....")
+            
                     setLoading(true)
+                   
                     const assignUrl = url ? url : defaultUrl
-                    const assignConfig = data ?{...defaultConfig, body: JSON.stringify(data)} : defaultConfig
+
+                    const assignConfig = data ? {...defaultConfig, body: JSON.stringify(data)} : defaultConfig
+
                     assignConfig.method = "POST"
-                    console.log(assignConfig)
-                    const response = await fetch(assignUrl,assignConfig)
+
+                    assignConfig.signal = signal.abortController && signal.abortController.signal
+
+                    const response = await fetch(assignUrl,assignConfig)  
                     setStatus(response.status)
                     setResponse(await response.json())
+                    clearTimeout(signal.timeout)
                     setLoading(false)
 
                 } catch (error) {
