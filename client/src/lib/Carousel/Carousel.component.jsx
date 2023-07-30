@@ -47,7 +47,6 @@ const showHideButtons = () =>{
 const next = () =>{
 
     const itemsWidth = (itemElement.current.clientWidth)
-    console.log(itemsWidth)
     carouselContainer.current.scrollLeft += itemsWidth 
     setTimeout(()=> showHideButtons(), 60)
 
@@ -61,7 +60,6 @@ const prev = () =>{
 
 }
 
-console.log("carousel...")
 
   return (
 

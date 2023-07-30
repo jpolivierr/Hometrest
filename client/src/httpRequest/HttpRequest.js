@@ -55,7 +55,6 @@ const HttpRequest = (defaultUrl,config) =>{
 
     useEffect(()=>{
 
-        console.log("loading -->", loading)
 
     },[loading])
 

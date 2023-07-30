@@ -2,13 +2,11 @@ import { useEffect } from "react"
 
 import { useLocation } from "react-router-dom"
 import SinglePropertyRequest from "../../httpRequest/SinglePropertyRequest/SinglePropertyRequest"
-import AgentInfo from "./component/AgenInfo/AgentInfo"
 import PropDescription from "./component/PropDescription/PropDescription"
 import PhotoGalleryView from "./component/PhotoGallery/PhotoGallery"
 import PropHeader from "./component/PropHeader/PropHeader"
 import PageLoading from "../../lib/loadingEffect/PageLoading/PageLoading"
 import SimilarProperties from "../../components/SimilarProperties/SimilarProperties"
-import { getParams } from "../../Util/urlParcer"
 import ScheduleTour from "./component/Schedule/Scedule"
 import "./SingleProperty.style.css"
 

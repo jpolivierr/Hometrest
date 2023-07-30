@@ -29,11 +29,11 @@ const ShowPropertiesView = ({value}) =>{
                         {getSearchValue()}
 
 
-                <Carousel 
+                {/* <Carousel 
                     elementStyle = "pagination"
                   settings={carouselSettings}>
                         {generatePageNumber()}
-                </Carousel>
+                </Carousel> */}
 
 
                 </div>

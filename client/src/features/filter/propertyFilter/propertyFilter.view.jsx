@@ -24,7 +24,7 @@ export default function PropertyFilter({value}) {
     const priceRangeOption = formState.status.includes("for_rent") ? rentPriceOptions : salePriceOptions
 
   return (
-    <form className="avalon property_filter stick" 
+    <form className="avalon property_filter" 
          onSubmit={handleSubmit}>
 
         <div className="location-input-style">

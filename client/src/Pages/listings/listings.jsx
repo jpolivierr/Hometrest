@@ -2,9 +2,12 @@ import "./style.css"
 import ShowProperties from "../../components/showProperties/ShowProperties.component"
 import Filter from "../../features/filter"
 import Carousel from "../../lib/Carousel/Carousel.component"
+import Map from "../../components/map/Map"
+import useReduxMng from "../../hooks/useReduxMng"
 
 const Listings = (props) =>{
 
+  const { propertiesReducer} = useReduxMng()
     const {Class, id} = props
 
     const carouselSettings = {
@@ -15,29 +18,27 @@ const Listings = (props) =>{
           style: "split_4"
     }
 
-   
     return(
         <div id={id} className={Class}>
-
-          <Filter />
-          <div className="container-medium">
-             <Carousel settings={carouselSettings}>
-                
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-
-             </Carousel>
+          
+          <div className="filter_container stick"> 
+             <div className="container">
+            <Filter />
+             </div>
           </div>
+
          
           
-          {/* <TopSearchFilter/> */}
+
           <div className="search-result wide-container">
 
-          {/* <Map properties={propertiesReducer.results} /> */}
+          <Map properties={propertiesReducer.results} 
+            zoom={11}
+            disableDefaultUI={false}
+            streetViewControl={false}
+            fullscreenControl={false}
+            styleElement={"sticky_map"}
+          />
           
             <ShowProperties />
 

@@ -1,3 +1,7 @@
+.nav-list{
+    margin-left: 4rem;
+}
+
 .nav-list li{
     padding: .5rem .6rem;
     font-weight: 500;
@@ -5,6 +9,27 @@
   
   .nav-list li:hover{
       color : var(--main-color)
+  }
+
+  .nav-contact-info{
+    margin-right: 3rem;
+  }
+
+  .nav-contact-info li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .8rem;
+    
+  }
+
+  .nav-contact-info li i{
+    color: var(--alt-text-color);
+  }
+
+  .nav-contact-info li p{
+    color: var(--alt-text-color);
+    font-size: .9rem;
   }
 
 

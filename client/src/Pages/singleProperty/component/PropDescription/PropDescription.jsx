@@ -79,9 +79,7 @@ export default function PropDescription({singleProperty}) {
                                     <Map 
                                         properties={[singleProperty]}
                                         zoom={13}
-                                        disableDefaultUI={false}
-                                        streetViewControl={false}
-                                        fullscreenControl={false}
+                                    
                                         />
                                 </figure>
                                

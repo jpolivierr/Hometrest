@@ -30,7 +30,7 @@ const ShowProperties = (props) =>{
 
         const str = `${city} ${myState} ${postal_code}`
 
-        return  (<h2>{`${propertiesReducer.length} result found for "${str.trim()}"`}</h2>)
+        return  (<h2>{`Showing 50 out of${propertiesReducer.length} result found for "${str.trim()}"`}</h2>)
     
     }
 

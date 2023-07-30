@@ -10,9 +10,10 @@ Property filter
     width: 100%;
     column-gap: .7rem;
     box-shadow: none !important;
-    padding: 1rem;
+    padding: 1rem 0rem;
     background: white;
     z-index: 2;
+    width: max-content;
 }
 
 .property_filter .input-container i{

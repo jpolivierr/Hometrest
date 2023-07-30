@@ -149,9 +149,9 @@ Container
     max-width: 2500px;
 }
 .container{
-    width: 90%;
+    width: 98%;
     margin: auto;
-    max-width: 1500px;
+    max-width: 2000px;
 }
 
 .container-medium{
@@ -189,6 +189,7 @@ Container
     position: sticky;
     top: 70.4px;
     border-bottom: 1px solid var(--light-silver);
+    z-index: 10;
 }
 
 .stick_top{

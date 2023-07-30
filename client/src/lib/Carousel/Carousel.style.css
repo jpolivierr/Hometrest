@@ -69,7 +69,7 @@
 }
 
 
-.item div{
+.item > div{
 
     position: relative !important;
     top: 0 !important;
@@ -91,7 +91,7 @@
 
 
 .split_2  .item{
-    width: calc(100% / 2);
+    width: calc(100% / 3);
     padding-left: 14px;
 }
 .split_2  .item:first-child{

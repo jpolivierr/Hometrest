@@ -22,7 +22,6 @@ export default function PropertyRequest() {
   const {response, post, loading,status} = propertyRequest
 
   let prevState = useRef({})
-
   
   useEffect(()=>{
     
@@ -54,7 +53,7 @@ export default function PropertyRequest() {
     //   const data = deepSearch(response[0],["data","home_search"],{})
     //   setPropertyList(data)
     // }
-    if(response){
+    if(response && status === 200){
       const data = deepSearch(response[0],["data","home_search"],{})
       console.log(data)
       setPropertyList(data)
