@@ -7,6 +7,7 @@ import PropertyFilter from "./propertyFilter.view";
 import UrlQueryHandler from "../urlQueryHandler/UrlQueryHandler";
 import { updateParam } from "../../../Util/urlParcer";
 import PropertyRequest from "../../../httpRequest/propertyRequest/propertyRequest";
+import { Actions, Reducers } from "../../../Redux";
 
 
 
@@ -16,7 +17,8 @@ const Filter = () =>{
     const {getUrlSearchQuery, newQueryObject} = UrlQueryHandler()
 
 
-    const {searchReducer, setSearch} = useReduxMng();
+    const {setSearch} = Actions()
+    const {searchReducer} = Reducers();
 
     const [formState, setFormState] = useState({
         city_zip : "",
@@ -50,12 +52,6 @@ const Filter = () =>{
      },[searchReducer])
 
 
-     useEffect(()=>{
-
-        setSearch(formState)
-    
-     },[formState])
-
 
 
 
@@ -77,14 +73,21 @@ const Filter = () =>{
 
         updateParam(newObj, true, "search")
 
+        if(key !== "city_zip"){
+            setSearch(formFieldCopy)
+        }
+        
+
         },[formState])
 
 
-    const handleSubmit = useCallback((e) =>{
+    const handleSubmit = (e) =>{
 
-            e.preventDefault()
+        e.preventDefault()
+        const formFieldCopy = {...formState}
+           setSearch(formFieldCopy)
 
-        },[]) 
+        }
 
 
     return (

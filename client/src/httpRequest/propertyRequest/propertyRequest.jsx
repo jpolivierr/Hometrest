@@ -32,6 +32,7 @@ export default function PropertyRequest() {
         preparedObj.limit = 50
         preparedObj.state_code = "fl"
         console.log("making POST request.....")
+        console.log(preparedObj)
         post(URL.SEARCH, preparedObj)
         prevState.current = searchReducer
     }

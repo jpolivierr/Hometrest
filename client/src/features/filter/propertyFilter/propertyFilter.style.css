@@ -16,6 +16,10 @@ Property filter
     width: max-content;
 }
 
+.property_filter button{
+    display: none;
+}
+
 .property_filter .input-container i{
     position: absolute;
     top: 0;

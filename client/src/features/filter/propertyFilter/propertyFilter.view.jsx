@@ -38,9 +38,12 @@ export default function PropertyFilter({value}) {
                       icon = {<i className="fa-solid fa-location-dot"></i>}
                       updateField = {updateField}
                       />
-                  <i className="iicon fa-solid fa-magnifying-glass"></i>
+                     
+                        <i onClick={handleSubmit} className="iicon fa-solid fa-magnifying-glass"></i>
+                     <button type="submit"></button>   
         </div>
 
+        
 
         <MultiSelect 
                 dropDown = {true}
