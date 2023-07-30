@@ -3,11 +3,14 @@ import ShowProperties from "../../components/showProperties/ShowProperties.compo
 import Filter from "../../features/filter"
 import Carousel from "../../lib/Carousel/Carousel.component"
 import Map from "../../components/map/Map"
-import useReduxMng from "../../hooks/useReduxMng"
+import { Reducers } from "../../Redux"
+import PropertyRequest from "../../httpRequest/propertyRequest/propertyRequest"
 
 const Listings = (props) =>{
 
-  const { propertiesReducer} = useReduxMng()
+    const {loading} = PropertyRequest()
+
+  const { propertiesReducer} = Reducers()
     const {Class, id} = props
 
     const carouselSettings = {
@@ -38,9 +41,10 @@ const Listings = (props) =>{
             streetViewControl={false}
             fullscreenControl={false}
             styleElement={"sticky_map"}
+            loading={loading}
           />
           
-            <ShowProperties />
+            <ShowProperties loading={loading} />
 
           </div>
           

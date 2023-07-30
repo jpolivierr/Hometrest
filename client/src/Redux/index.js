@@ -24,8 +24,10 @@ export const Reducers = () =>{
 export const Actions = () =>{
 
     const {setSearch} = bindActionCreators(updateSearch, useDispatch())
+    const {setPropertyList} = bindActionCreators(properties, useDispatch())
 
     return {
-        setSearch
+        setSearch,
+        setPropertyList
       }
 }

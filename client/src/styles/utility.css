@@ -200,6 +200,10 @@ Container
     background: white;
 }
 
+.props-loading{
+    opacity: .3;
+}
+
 /* .stick_top::after{
     content: "";
     width: 100vw;

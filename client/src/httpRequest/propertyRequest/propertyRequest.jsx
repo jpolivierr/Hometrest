@@ -1,7 +1,5 @@
-import React, { useEffect, useRef, useCallback } from 'react'
-import useRequest from './MakeRequest'
+import React, { useEffect, useRef } from 'react'
 import URL from '../../constants/urls'
-import useReduxMng from '../../hooks/useReduxMng'
 import compareObjects from '../../Util/compareObjects'
 import removeEmptyValues from '../../Util/removeEmptyValues'
 import prepareObject from './Util/prepareObject'
@@ -9,11 +7,13 @@ import hardCopy from '../../Util/hardCopy'
 import { deepSearch } from '../../Util/getValueByKey'
 import propertiesDemo from '../../Mock/propertyDemo'
 import HttpRequest from '../HttpRequest'
+import { Reducers, Actions } from '../../Redux'
 
 
 export default function PropertyRequest() {
 
-  const {searchReducer, setPropertyList, propertiesReducer} = useReduxMng()
+  const {setPropertyList} = Actions()
+  const {searchReducer} = Reducers()
 
   const url = "https://jsonplaceholder.typicode.com/posts"
 
@@ -40,21 +40,13 @@ export default function PropertyRequest() {
 
    useEffect(()=>{
 
-  // delete when you done
-  // const mockObj = {
-  //     count: 50,
-  //     totoal : 3902,
-  //     results : propertiesDemo
-  // }
-
-  //   setPropertyList(mockObj)
-
-    // if(response){
-    //   const data = deepSearch(response[0],["data","home_search"],{})
-    //   setPropertyList(data)
-    // }
     if(response && status === 200){
-      const data = deepSearch(response[0],["data","home_search"],{})
+      const init = {
+        count: 0,
+        total: 0,
+        results : [],
+}
+      const data = deepSearch(response[0],["data","home_search"],init)
       console.log(data)
       setPropertyList(data)
     }

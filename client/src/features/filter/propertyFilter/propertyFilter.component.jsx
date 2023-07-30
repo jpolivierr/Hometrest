@@ -15,7 +15,6 @@ const Filter = () =>{
 
     const {getUrlSearchQuery, newQueryObject} = UrlQueryHandler()
 
-    PropertyRequest()
 
     const {searchReducer, setSearch} = useReduxMng();
 

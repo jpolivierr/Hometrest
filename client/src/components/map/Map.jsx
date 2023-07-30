@@ -9,7 +9,7 @@ import { formatNumber } from "../propertyCard/util"
 const Map = (props) =>{
 
     const {
-        styleElement, properties, zoom, disableDefaultUI, streetViewControl, fullscreenControl} = props
+        styleElement, properties, zoom, disableDefaultUI, streetViewControl, fullscreenControl, loading} = props
 
     const mapRef = useRef(null)
 
@@ -196,7 +196,7 @@ const Map = (props) =>{
         <>
 
         <div id="map" 
-            className={`the-map ${styleElement ? styleElement : ""} ${properties.length === 0 && "no_map"} ` } 
+            className={`the-map ${loading ? "props-loading" : ""} ${styleElement ? styleElement : ""} ${properties.length === 0 && "no_map"} ` } 
             ref={mapRef}>
         </div>
 

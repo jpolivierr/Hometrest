@@ -16,10 +16,6 @@
     font-weight: 500;
 }
 
-.props-loading .property-card{
-    opacity: .3;
-}
-
 .property_list_container{
     padding-bottom: 1rem;
     display: flex;

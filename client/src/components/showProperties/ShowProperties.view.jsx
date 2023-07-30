@@ -9,7 +9,7 @@ import Carousel from "../../lib/Carousel/Carousel.component"
 
 const ShowPropertiesView = ({value}) =>{
 
-    const {isLoading, getSearchValue, properties, total, generatePageNumber} = value
+    const { getSearchValue, properties, total, loading, generatePageNumber} = value
 
     const carouselSettings = {
         split: 2,
@@ -17,24 +17,15 @@ const ShowPropertiesView = ({value}) =>{
 
     return(
 
-        <div className={`show-properties ${isLoading && "props-loading"}`}>
+        <div className={`show-properties ${loading ? "props-loading" : ""}`}>
 
          {
              properties.length === 0 ?
              <CardLoading/> :
              <>
-                
                 <div className="show-properties-header"> 
 
                         {getSearchValue()}
-
-
-                {/* <Carousel 
-                    elementStyle = "pagination"
-                  settings={carouselSettings}>
-                        {generatePageNumber()}
-                </Carousel> */}
-
 
                 </div>
 

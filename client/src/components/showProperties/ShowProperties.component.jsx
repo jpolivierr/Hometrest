@@ -2,7 +2,7 @@
 import ShowPropertiesView from "./ShowProperties.view"
 import { Reducers } from "../../Redux"
 
-const ShowProperties = () =>{
+const ShowProperties = ({loading}) =>{
 
 
     const {propertiesReducer,searchReducer} = Reducers() 
@@ -57,7 +57,8 @@ const ShowProperties = () =>{
         properties, 
         isLoading,
         total,
-        generatePageNumber
+        generatePageNumber,
+        loading
         
     }
 
