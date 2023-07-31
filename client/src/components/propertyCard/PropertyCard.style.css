@@ -107,10 +107,9 @@
     border-radius: 100px;
     color: white;
     padding: .3rem .4rem;
-    font-weight: 700;
-    font-size: .55rem;
+    font-weight: 600;
+    font-size: .8rem;
     width: max-content;
-    text-transform: uppercase;
 }
 
 .info-window-prop-card{

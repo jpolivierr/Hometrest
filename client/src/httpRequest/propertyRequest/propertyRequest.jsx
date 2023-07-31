@@ -27,11 +27,9 @@ export default function PropertyRequest() {
     
     if(!compareObjects(prevState.current, searchReducer)){
         const searchReducerCopy = hardCopy(searchReducer)
-        console.log(searchReducerCopy)
         const newObj = removeEmptyValues(searchReducerCopy)
-        const preparedObj = prepareObject(newObj, "jacksonville")
+        const preparedObj = prepareObject(newObj, "jacksonville","fl")
         preparedObj.limit = 50
-        preparedObj.state_code = "fl"
         console.log("making POST request.....")
         console.log(preparedObj)
         post(URL.SEARCH, preparedObj)

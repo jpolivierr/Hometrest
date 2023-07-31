@@ -44,7 +44,6 @@ public class PropertySearchService {
                 .retrieve()
                 .bodyToFlux(Object.class);
                       
-
     }
 
     

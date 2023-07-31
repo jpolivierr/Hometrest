@@ -40,6 +40,10 @@ public class PropertySearchController {
     @PostMapping(path = "/list")
     public  Flux<Object> list( @RequestBody Object propertySearch){
 
+        System.out.println("==========================");
+        System.out.println(propertySearch);
+        System.out.println("making request");
+
        Flux<Object> propertyList = propertySearchService.findAll(propertySearch);
 
        return propertyList;

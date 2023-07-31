@@ -62,7 +62,8 @@ const Filter = () =>{
         if(key === "city_zip"){
             const address = parseAddress2(value)
             formFieldCopy.city = address.city
-            formFieldCopy.state = address.state_code
+            formFieldCopy.state = address.state
+            formFieldCopy.state_code = address.state_code
             formFieldCopy.postal_code = address.postal_code
         }
         
@@ -89,6 +90,8 @@ const Filter = () =>{
             setSearch(formFieldCopy)
 
         }
+
+        console.log(formState)
 
 
     return (
