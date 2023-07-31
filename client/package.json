@@ -17,7 +17,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && rm -r /WEBAPPS/hometrest/ROOT/static && cp -r build/* /WEBAPPS/hometrest/ROOT/",
+    "build": "react-scripts build",
+    "postbuild": "cp -r build/* /WEBAPPS/hometrest/server/src/main/resources/static/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
