@@ -1,9 +1,19 @@
 
+@media (max-width: 1643px) {
+    .search-result{
+        grid-template-columns: 1fr .8fr;
+    }
+}
+
 @media (max-width: 1385px) {
 
    .container-medium{
        width: 93%;
    }
+
+   .search-result{
+    grid-template-columns: 1fr 1fr;
+}
     
 }
 
@@ -15,7 +25,36 @@
     
 }
 
+@media (max-width: 1250px) {
+
+    .search-result{
+        grid-template-columns: 1fr .4fr;
+    }
+
+    .show-properties{
+        grid-template-columns: 1fr !important;
+
+    }
+
+    .show-properties-header{
+        grid-column: 1 !important;
+    }
+
+    .nav-contact-info{
+        display: none;
+    }
+    .property_filter .home_baths{
+        display: none;
+    }
+    
+    .property_filter .home_beds{
+        display: none;
+    }
+}
+
 @media (max-width: 1211px) {
+
+    .the-map{}
 
     .prop_info_header{
         flex-flow: column;
@@ -47,8 +86,34 @@
     
 }
 
+@media (max-width: 1163px){
+    .search-result{
+        grid-template-columns: 1fr .6fr;
+    }
+}
+
+@media (max-width: 945px){
+
+    .home_price{
+        display: none;
+    }
+
+    .home_status {
+        display: none;
+    }
+
+}
+
 
 @media (max-width: 850px){
+
+    .search-result{
+        grid-template-columns: 1fr;
+    }
+
+    .the-map{
+        display: none;
+    }
 
     .prop_info_container{
         grid-template-columns: 1fr;
@@ -97,6 +162,10 @@
 
 @media (max-width: 725px) {
 
+    .loading-page .loading-container .loading-photo{
+        height: 300px !important;
+    }
+
 
     .table_style table{
         /* border: 1px solid red; */
@@ -117,13 +186,20 @@
     
 }
 
-@media (max-width: 539px) {
+@media (max-width: 583px) {
 
 
-
+     .home_type{
+        display: none;
+     }
     .table_style .school_options_container{
         width: 320px;
     }
+
+    .property_filter{
+        width: 100%;
+    }
+    
     
 }
 

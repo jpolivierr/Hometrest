@@ -6,7 +6,6 @@ Property filter
 .property_filter{
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 100%;
     column-gap: .7rem;
     box-shadow: none !important;
@@ -310,55 +309,4 @@ Option Window
     right: 0;
 }
 
-@media (max-width: 1100px) {
 
-    .property_filter .home_baths{
-        display: none;
-    }
-    
-    .property_filter .home_beds{
-        display: none;
-    }
-    
-}
-
-@media (max-width: 921px) {
-
-    
-    .property_filter .home_price{
-        display: none;
-    }
-    .options-window{
-        position: fixed !important;
-        top: auto !important;
-        bottom: 0;
-        width: 100% !important;
-    }
-
-    .select-bk{
-        display: block;
-    }
-}
-
-
-@media (max-width: 743px) {
-
-    .property_filter .home_status{
-        display: none;
-    }
-
-    .property_filter{
-        justify-content: flex-start;
-    }
-
-}
-
-
-@media (max-width: 667px) {
-
-    .property_filter .home_type{
-        display: none;
-    }
-    
-    
-}

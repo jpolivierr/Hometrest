@@ -20,31 +20,31 @@ public class PropertySearchController {
 
     }
 
-    @PostMapping(path = "/list")
-    public String list( @RequestBody Object propertySearch){
-        System.out.println("========================");
-        System.out.println("=== hit ");
-
-        try {
-            // Sleep the thread for 3 seconds (adjust as needed)
-            Thread.sleep(8000);
-        } catch (InterruptedException e) {
-            // Handle the exception if needed
-        }
-
-        return "Response after sleeping for 3 seconds";
-        
-    }
-
-
     // @PostMapping(path = "/list")
-    // public  Flux<Object> list( @RequestBody Object propertySearch){
+    // public String list( @RequestBody Object propertySearch){
+    //     System.out.println("========================");
+    //     System.out.println("=== hit ");
 
-    //    Flux<Object> propertyList = propertySearchService.findAll(propertySearch);
+    //     try {
+    //         // Sleep the thread for 3 seconds (adjust as needed)
+    //         Thread.sleep(8000);
+    //     } catch (InterruptedException e) {
+    //         // Handle the exception if needed
+    //     }
 
-    //    return propertyList;
+    //     return "Response after sleeping for 3 seconds";
         
     // }
+
+
+    @PostMapping(path = "/list")
+    public  Flux<Object> list( @RequestBody Object propertySearch){
+
+       Flux<Object> propertyList = propertySearchService.findAll(propertySearch);
+
+       return propertyList;
+        
+    }
 
      @GetMapping(path = "/details")
     public Flux<Object>  details(@RequestParam("id")String id){

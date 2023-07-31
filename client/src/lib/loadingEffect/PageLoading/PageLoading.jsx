@@ -3,7 +3,7 @@
 const PageLoading = () =>{
 
     return(
-        <div className="av-loading-skeleton loading-page" style={{maxWidth: "1200px", margin: "auto"}}>
+        <div className="av-loading-skeleton loading-page" style={{maxWidth: "1100px", margin: "auto"}}>
             <div className="loading-container">
 
                         <div className="loading-photo">

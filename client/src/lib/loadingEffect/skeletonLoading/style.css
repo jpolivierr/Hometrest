@@ -1,6 +1,6 @@
 .av-loading-skeleton{
     display: grid;
-    grid-template-columns: max-content max-content;
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
     margin: auto;
     width: 100%;
@@ -22,9 +22,6 @@
     display: none;
 }
 
-.av-loading-skeleton .loading-container{
-    width: 250px;
-}
 
 .av-loading-skeleton .loading-container div:nth-child(1){
     margin-bottom: 1.1rem;

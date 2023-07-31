@@ -27,6 +27,7 @@ export default function PropertyRequest() {
     
     if(!compareObjects(prevState.current, searchReducer)){
         const searchReducerCopy = hardCopy(searchReducer)
+        console.log(searchReducerCopy)
         const newObj = removeEmptyValues(searchReducerCopy)
         const preparedObj = prepareObject(newObj, "jacksonville")
         preparedObj.limit = 50

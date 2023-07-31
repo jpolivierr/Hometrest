@@ -37,7 +37,7 @@ export const setSignal = (newAbortController) =>{
 
         newAbortController.current && newAbortController.current.abort();
 
-      }, 3000);
+      }, 20000);
 
 
       const abortController = newAbortController.current

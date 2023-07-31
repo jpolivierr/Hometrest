@@ -85,7 +85,8 @@ const Filter = () =>{
 
         e.preventDefault()
         const formFieldCopy = {...formState}
-           setSearch(formFieldCopy)
+        
+            setSearch(formFieldCopy)
 
         }
 
