@@ -16,48 +16,17 @@
     --lightShadow : 0px 10px 25px -6px #92a2bf56;
 }
 
-/* 
-=================================================
-TAGS
-=================================================
-*/
-html{
-    scroll-behavior: smooth;
-}
-*{
-
-    color: var(--dark-text-color);
+.white-text h1,
+.white-text h2,
+.white-text h3,
+.white-text h4,
+.white-text h5,
+.white-text h6,
+.white-text p
+{
+    color: white;
 }
 
-li{
-    list-style: none;
-    cursor: pointer;
-}
-
-a{
-    text-decoration: none;
-    color: inherit;
-}
-
-p{
-    color: var(--alt-text-color);
-    line-height: 29px;
-}
-
-h1{
-    color: var(--dark-text-color);
-}
-
-h3{
-    font-weight: 600;
-    color: var(--dark-text-color);
-    font-size: 1rem;
-}
-
-h5{
-    color: var(--alt-text-color);
-font-weight: 500;
-}
 
 menu{
     width: 20px;
@@ -155,9 +124,9 @@ Container
 }
 
 .container-medium{
-    width: 80%;
+    width: 85%;
     margin: auto;
-    max-width: 1200px;
+    max-width: 1300px;
 }
 
 
@@ -227,6 +196,25 @@ Fieldset, Select, Select Options
     height: 40px;
 }
 
+/* 
+=================================================
+Columns
+=================================================
+*/
+
+.display-flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-1{
+    flex: 1;
+}
+
+.flex-2{
+    flex: 1.2;
+}
+
 
 /* 
 =================================================
@@ -268,11 +256,35 @@ GAP
 .gap-3x{
     gap: 2rem;
 }
+
+.column-gap-5x{
+    column-gap: 5rem;
+}
+
+.column-gap-7x{
+    column-gap: 7rem;
+}
+
+.column-gap-8x{
+    column-gap: 8rem;
+}
+
+.column-gap-10x{
+    column-gap: 10rem;
+}
 /* 
 =================================================
 WITH
 =================================================
 */
+
+.w-40{
+    width: 40%;
+}
+
+.w-60{
+    width: 60%;
+}
 
 .w-100{
     width: 100%;
@@ -318,6 +330,14 @@ PADDING
     padding: 1rem 0rem;
 }
 
+.padding-top-bottom-12x{
+    padding: 12rem 0rem;
+}
+
+.padding-top-bottom-8x{
+    padding: 8rem 0rem;
+}
+
 .padding-top-bottom-2x{
     padding: 3rem 0rem;
 }
@@ -334,12 +354,20 @@ PADDING
     padding-top: 2rem;
    }
 
-   .padding-bottom{
+.padding-bottom{
     padding-bottom: 1rem;
 }
 
 .padding-bottom-2x{
     padding-bottom: 2rem;
+}
+
+.padding-bottom-3x{
+    padding-bottom: 3rem;
+}
+
+.no-padding-bottom{
+    padding-bottom: 0px;
 }
 /* 
 =================================================

@@ -4,7 +4,7 @@ import Signup from './Pages/signup';
 import Update from './Pages/update/update';
 import About from './Pages/about';
 import SingleProperty from './Pages/singleProperty/SingleProperty';
-import Home from './Pages/home';
+import Home from './Pages/home/home';
 import Listings from './Pages/listings/listings';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import TopNav from './components/navBar/topNav';

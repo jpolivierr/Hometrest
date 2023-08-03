@@ -1,0 +1,68 @@
+/* 
+=================================================
+TAGS
+=================================================
+*/
+html{
+    scroll-behavior: smooth;
+}
+*{
+
+    color: var(--dark-text-color);
+}
+
+li{
+    list-style: none;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+p{
+    color: var(--alt-text-color);
+    max-width: 550px;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+h1,h2,h3,h4,h5{
+    line-height: 1.5;
+}
+
+h1{
+    font-size: 3rem;
+    color: var(--dark-text-color);
+    margin-bottom: 1rem;
+}
+
+h2{
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+h3{
+    font-weight: 600;
+    color: var(--dark-text-color);
+    font-size: 1rem;
+}
+
+h4{
+    font-weight: 600;
+}
+
+h5{
+    color: var(--alt-text-color);
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+article button{
+    width: max-content;
+}
+
+section img{
+    width: 100%;
+}

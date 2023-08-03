@@ -107,6 +107,10 @@
 
 @media (max-width: 850px){
 
+    .padding-top-bottom-12x {
+  padding: 5rem 0rem;
+}
+
     .search-result{
         grid-template-columns: 1fr;
     }
