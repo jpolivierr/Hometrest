@@ -17,7 +17,7 @@ const LogInNav = () =>{
 
                                 <div className="container flex-space-between">
                                             <div>
-                                                <h2><i className="fa-brands fa-pagelines"></i> HomeTrest</h2>
+                                            <h2 style={{margin: "0rem",fontSize: "1.5rem"}}><i className="fa-brands fa-pagelines"></i> HomeTrest</h2>
                                             </div>
                                         
                                         <NavList 

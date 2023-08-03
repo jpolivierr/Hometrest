@@ -17,7 +17,7 @@ const TopNav = () =>{
     useEffect(()=>{
         const path = location.pathname;
 
-                    if(path === "/listings"){
+                    if(path === "/listings" || path === "/"){
                         setNavStick("sticky")
                     }else{
                         setNavStick("")

@@ -48,7 +48,7 @@ const ShowProperties = ({loading}) =>{
 
         const str = `${city} ${myState} ${postal_code}`
 
-        return  (<h2>{`Showing 50 out of ${total} result for "${str.trim()}"`}</h2>)
+        return  (<h5>{`Showing 50 out of ${total} result for "${str.trim()}"`}</h5>)
     
     }
 

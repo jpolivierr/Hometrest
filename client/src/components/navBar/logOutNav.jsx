@@ -15,7 +15,7 @@ const LogOutNav = () =>{
 
                     <div className="container flex-space-between">
                                 <div style={{display: "flex"}}>
-                                    <h2><i className="fa-brands fa-pagelines"></i> HomeTrest</h2>
+                                    <h2 style={{margin: "0rem",fontSize: "1.5rem"}}><i className="fa-brands fa-pagelines"></i> HomeTrest</h2>
                                     <NavList 
                             Class="hideMobile flex-space-between gap-1x nav-list"
                             />
@@ -26,7 +26,7 @@ const LogOutNav = () =>{
 
                             <div style={{marginLeft: "3rem"}} className="hideMobile flex-space-between gap-1x">
 
-                            <ul className="nav-contact-info"><li><i className="fa-solid fa-phone"></i><p>Call: (849) 9840 9449</p></li></ul>
+                            <ul className="nav-contact-info"><li><i className="fa-solid fa-phone"></i><span>Call: (849) 9840 9449</span></li></ul>
 
                                 
                                                                         
