@@ -1,7 +1,7 @@
 footer{
     background:#071537;
     padding: 1rem 0rem;
-    padding-top: 3rem;
+    padding-top: 2rem;
 }
 
 footer h2{
@@ -17,12 +17,15 @@ footer h2, footer i{
     text-align: center;
     margin-top: 1rem !important;
     padding-top: 1rem;
+    display: flex !important;
+    justify-content: center !important;
 }
 
 .copy_writes p{
     color: #ffffff91;
     text-align: center;
     width: 100%;
+    font-size: .8rem;
 }
 
 .contact-info-footer{
@@ -38,8 +41,9 @@ footer h2, footer i{
     gap: .5rem;
 }
 
-.contact-info-footer li p{
+.contact-info-footer li span{
     color: white;
+    font-size: .8rem;
 }
 
 .footer_main ul {
@@ -49,4 +53,5 @@ footer h2, footer i{
 
 .footer_main ul li{
     color: white;
+    font-size: .8rem;
 }

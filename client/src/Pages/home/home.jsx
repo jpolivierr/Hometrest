@@ -2,14 +2,16 @@ import { useEffect } from "react"
 
 import {urlParcer} from "../../Util/urlParcer"
 import "./home.style.css"
-import home from "../../assets/images/house.jpg"
-import decor from "../../assets/images/decor.jpg"
-import shelf from "../../assets/images/shelf.jpg"
-import tub from "../../assets/images/tub.jpg"
+import decor2 from "../../assets/images/decor-2.jpg"
 import couples from "../../assets/images/couples.jpg"
 import stylish from "../../assets/images/stylish.jpg"
 import wall from "../../assets/images/wall.jpg"
+import cart from "../../assets/images/cart.jpg"
 import womanMoving from "../../assets/images/woman-moving.jpg"
+import home3 from "../../assets/images/home-3.jpg"
+import mainHouse from "../../assets/images/main-house.png"
+import TopNav from "../../components/navBar/topNav"
+import Footer from "../../footer/footer.component"
 const Home = (props) =>{
 
     const {Class, id} = props
@@ -20,7 +22,8 @@ const Home = (props) =>{
 
     return(
       <main>
-        <section id={id} className="white-text" style={{background: `url("${home}") center center/cover`}}>
+          <TopNav elementStyle="home_nav" container="container-medium"/>
+        <section id={id} className="hero">
 
           <div className="container-medium">
               <article className="padding-top-bottom-12x">
@@ -29,19 +32,45 @@ const Home = (props) =>{
                   <p>
                     Our comprehensive platform allows you to search for properties in your desired location, 
                     using filters such as price, number of bedrooms, and square footage to find the perfect fit. 
-                    You can also see recently sold homes and get a sense of the market trends in your area.
+                    You can also see recently sold homes and get a sense of the market.
                   </p>
-                  <button className="main-btn">Find My Home</button>
+                  <div className="quick-search">
+                    <ul>
+                      <li>
+                        <h3>Location</h3>
+                        <input type="text" placeholder="Enter city or zip" />
+                      </li>
+                      <li>
+                        <h3>Type</h3>
+                        <div className="input-container"> 
+                          <input type="text" placeholder="Single Family" />
+                          <i class="fa-solid fa-angle-down"></i>
+                        </div>
+                        
+                      </li>
+                      <li>
+                        <h3>Price Range</h3>
+                        <div className="input-container">
+                          <input type="text" placeholder="$200,000 - $300,000" />
+                          <i class="fa-solid fa-angle-down"></i>
+                        </div> 
+                      </li>
+                    
+                    </ul>
+                        <button className="main-btn">Search</button>
+                  </div>
+                  
                 </div>  
               </article>
           </div>
+          <img src={mainHouse} />
           
         </section>
 
 
 
 
-        <section id={id} className="">
+        <section id={id} className="smart-search">
 
           <div className="container-medium">
               <article className="padding-top-bottom-8x padding-bottom-3x column-gap-5x display-flex">
@@ -62,7 +91,8 @@ const Home = (props) =>{
                   <span className="s-header"><div></div>Smart Search</span>
                   <h2>The smart way to find your dream home</h2>
                   <p>
-                  Search for properties in your desired location using a range of criteria. You'll be presented with a list of available homes that meet your needs, making it easy to find the perfect fit. Lorem here it is.
+                  Search for properties in your desired location using a range of criteria. 
+                  You'll be presented with a list of available homes.
                   </p>
                   <ul className="feature-list">
                     <li>
@@ -87,7 +117,7 @@ const Home = (props) =>{
                         </p>
                     </li>
                   </ul>
-                  {/* <button className="main-btn">Find My Home</button> */}
+                  <button className="main-btn">Find My Home</button>
                 </div>  
               </article>
           </div>
@@ -96,7 +126,7 @@ const Home = (props) =>{
 
 
 
-        <section id={id} className="">
+        <section id={id} className="home-sale">
 
           <div className="container-medium">
               <article className="padding-top-bottom-8x padding-bottom-3x column-gap-5x display-flex">       
@@ -105,18 +135,18 @@ const Home = (props) =>{
               <span className="s-header"><div></div>Home for sale</span>
                   <h2>Homes For Sale in the United States</h2>
                   <p>
-                  HomeTrest features homes for sale in all 50 states. HomeTrest's online search portal of property listings gives you the ability to refine your search criteria by different factors, including geographical location. If you're looking for homes for sale by owner, HomeTrest is a great resource, whether you are a buyer or a seller.
+                  HomeTrest features homes for sale in all 50 states. HomeTrest's online search portal of property listings gives you the ability to refine your search criteria by different factors, including geographical location. If you're looking for homes for sale by owner, HomeTrest is a great resource.
                   </p>
                   <button className="main-btn">Find My Home</button>
                 </div> 
                 <div className=" photo-column w-60">
-                  <figure style={{background: `url("${tub}") center center/cover`}}>
+                  <figure style={{background: `url("${home3}") center center/cover`}}>
                      
                   </figure>
-                  <figure style={{background: `url("${decor}") center center/cover`}}>
+                  <figure style={{background: `url("${decor2}") center center/cover`}}>
                      
                      </figure>
-                     <figure style={{background: `url("${shelf}") center center/cover`}}>
+                     <figure style={{background: `url("${cart}") center center/cover`}}>
                      
                      </figure>
                
@@ -131,14 +161,14 @@ const Home = (props) =>{
 
 
 
-        <section id={id} className="">
+        <section id={id} className="your-home">
 
           <div className="container-medium">
               <article className="padding-top-bottom-8x column-gap-5x display-flex">    
 
                  <div className=" w-60">
                   <figure>
-                     <img style={{maxWidth: "650px", borderRadius: "5px"}} src={womanMoving} />
+                     <img style={{maxWidth: "580px", borderRadius: "5px"}} src={womanMoving} />
                   </figure>          
                 </div>
               
@@ -151,15 +181,12 @@ const Home = (props) =>{
                   <button className="main-btn">Find My Home</button>
                 </div> 
 
-
-
-               
-                
-          
               </article>
           </div>
 
         </section>
+
+        <Footer container={"container-medium"}/>
 
       </main>
         

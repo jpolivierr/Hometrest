@@ -3,7 +3,7 @@ import GlobalMessageContext from "../../context/globalMessage/globalMessageConte
 import { useContext } from "react"
 import NavList from "../list/NavList"
 
-const LogOutNav = () =>{
+const LogOutNav = ({elementStyle, container}) =>{
     const {toggleSideModal} = useContext(ModalContext)
     const {toggleShowMessage} = useContext(GlobalMessageContext)
 
@@ -11,9 +11,9 @@ const LogOutNav = () =>{
     return(
 
     <>
-        <section className=" top-nav">
+        <section className={` top-nav ${elementStyle}`}>
 
-                    <div className="container flex-space-between">
+                    <div className={`${container} flex-space-between`}>
                                 <div style={{display: "flex"}}>
                                     <h2 style={{margin: "0rem",fontSize: "1.5rem"}}><i className="fa-brands fa-pagelines"></i> HomeTrest</h2>
                                     <NavList 
@@ -28,7 +28,11 @@ const LogOutNav = () =>{
 
                             <ul className="nav-contact-info"><li><i className="fa-solid fa-phone"></i><span>Call: (849) 9840 9449</span></li></ul>
 
-                                
+                                 <a href="/login">
+                                    <button className="button secondary-btn">
+                                        Login
+                                    </button>
+                                </a>
                                                                         
                                 <a href="/signup">
                                     <button className="button main-btn">
@@ -36,11 +40,7 @@ const LogOutNav = () =>{
                                     </button>
                                 </a>
 
-                                <a href="/login">
-                                    <button className="button secondary-btn">
-                                        Log in
-                                    </button>
-                                </a>
+                               
                             </div>
                             </div>
                             

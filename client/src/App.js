@@ -29,8 +29,6 @@ function App() {
                 type="ring"/> : 
       <div className="App">
         
-
-        <TopNav />
           <Routes>
           <Route path="/single_property" element={<SingleProperty/>}/>
           <Route path="/signup" element={<Signup/>}/>
@@ -42,7 +40,7 @@ function App() {
             <Route path="/update" element={<Update/>}/>
             <Route path="/" element={<Home />}/>
         </Routes>
-        <Footer />
+      
 
 
 

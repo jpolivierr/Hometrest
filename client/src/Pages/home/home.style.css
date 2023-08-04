@@ -1,12 +1,93 @@
+.home_nav{
+    background: transparent !important;
+    border-bottom: none !important;
+    padding: 1rem 0rem !important;
+    position: absolute;
+    width: 100%;
+}
+
+.hero{
+    background: #daeff7;
+    position: relative;
+}
+
+.hero article{
+    position: relative;
+    z-index: 1;
+}
+
+.hero img{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-width: 600px;
+
+}
+
+.quick-search{
+    background: white;
+    width: max-content;
+    border-radius: var(--borderRadius);
+    display: flex;
+    padding: 1rem;
+    align-items: flex-end;
+    gap: 1rem;
+    box-shadow: 5px 10px 20px -13px #a5c9da;
+    margin-top: 2rem;
+}
+
+.quick-search ul{
+    display: flex;
+    gap: 1rem;
+  
+}
+
+.quick-search ul li h3{
+    margin-bottom: .5rem;
+font-weight: 600;
+color: var(--alt-text-color);
+font-size: .9rem;
+}
+
+.quick-search ul li .input-container{
+    position: relative;
+}
+
+.quick-search ul li .input-container i{
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quick-search ul li input{
+    border: none;
+    background: var(--alt-silver);
+    padding: .7rem .88rem;
+    width: 100%;
+    border-radius: var(--borderRadius);
+}
+
+.quick-search ul li:nth-child(2){
+    max-width: 150px;
+}
+
+.quick-search ul li:nth-child(3){
+    max-width: 190px;
+}
+
 .feature-list{
-    margin-top: 1.2rem;
     margin-bottom: 1rem;
 }
 
 .feature-list li{
     display: grid;
     grid-template-columns: max-content 1fr;
-    column-gap: .5rem;
+    column-gap: .4rem;
 
 }
 
@@ -38,7 +119,6 @@
     width: 30px;
     height: 30px;
     display: flex;
-    justify-content: center;
     align-items: center;
     border-radius: 50%;
     font-weight: bold;
@@ -52,9 +132,9 @@
 .photo-grid{
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      max-height: 600px;
-      max-width: 700px;
+      gap: .5rem;
+      max-height: 570px;
+      max-width: 580px;
 }
 
 .content-area{
@@ -76,9 +156,9 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 1.4rem;
-    max-width: 650px;
-    height: 500px;
+    column-gap: .5rem;
+    max-width: 580px;
+    height: 450px;
 }
 
 .photo-column figure{

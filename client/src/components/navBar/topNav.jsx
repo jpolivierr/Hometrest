@@ -6,7 +6,7 @@ import UserContext from "../../context/user/UserContext"
 import { useContext, useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 
-const TopNav = () =>{
+const TopNav = ({elementStyle, container}) =>{
 
     const {activeUser, logout} = useContext(UserContext)
 
@@ -17,7 +17,7 @@ const TopNav = () =>{
     useEffect(()=>{
         const path = location.pathname;
 
-                    if(path === "/listings" || path === "/"){
+                    if(path === "/listings"){
                         setNavStick("sticky")
                     }else{
                         setNavStick("")
@@ -29,8 +29,10 @@ const TopNav = () =>{
 
      
     return(
-        <div className={navStick}>
-        {!activeUser || !activeUser.id ? <LogOutNav/> : <LogInNav/>}
+        <div className={`${navStick}`}>
+        {!activeUser || !activeUser.id ? <LogOutNav 
+                     elementStyle={elementStyle} container={container}/> : 
+                     <LogInNav elementStyle={elementStyle} container={container}/>}
         </div>
                                
      

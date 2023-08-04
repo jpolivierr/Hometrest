@@ -94,8 +94,7 @@ button{
 
 
 .secondary-btn{
-    background-color: #92a6bf17;
-    border: 1px solid var(--light-silver);
+    background-color: transparent;
 }
 
 
@@ -126,7 +125,7 @@ Container
 .container-medium{
     width: 85%;
     margin: auto;
-    max-width: 1300px;
+    max-width: 1200px;
 }
 
 
@@ -332,6 +331,10 @@ PADDING
 
 .padding-top-bottom-12x{
     padding: 12rem 0rem;
+}
+
+.padding-top-bottom-13x{
+    padding: 13rem 0rem;
 }
 
 .padding-top-bottom-8x{

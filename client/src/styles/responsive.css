@@ -27,6 +27,12 @@
 
 @media (max-width: 1250px) {
 
+
+
+.hero img{
+    right: -250px;
+}
+
     .search-result{
         grid-template-columns: 1fr .4fr;
     }
@@ -87,12 +93,36 @@
 }
 
 @media (max-width: 1163px){
+
+
     .search-result{
         grid-template-columns: 1fr .6fr;
     }
+
+    .smart-search .w-40{
+        width: 60%;
+    }
+
+    .smart-search .w-60{
+        width: 40%;
+    }
+
+    .smart-search .photo-grid{
+        min-width: 400px;
+    }
+
+    .smart-search .column-gap-5x{
+        gap: 2rem;
+    }
+
+
 }
 
 @media (max-width: 945px){
+
+    .hero img{
+        display: none;
+    }
 
     .home_price{
         display: none;
@@ -105,7 +135,56 @@
 }
 
 
-@media (max-width: 850px){
+@media (max-width: 855px){
+
+
+
+    .smart-search article{
+        padding-top: 5rem;
+        flex-flow: column;
+        flex-direction: column-reverse;
+    }
+
+    .home-sale article{
+        padding-top: 3rem;
+        flex-flow: column;
+    }
+
+    .home-sale .w-40, .home-sale .w-60{
+        width: 100%;
+    }
+
+    .home-sale .photo-column{
+        margin-top: 5rem;
+        height: 300px;
+    }
+
+    .smart-search .photo-grid{
+        width: 100%;
+        max-width: 200px;
+        height: 300px;
+        min-width: 400px;
+        margin-top: 2rem;
+    }
+
+    .smart-search .w-40{
+        width: 100%;
+    }
+
+    .your-home article{
+        padding-top: 3rem;
+        flex-flow: column;
+        flex-direction: column-reverse;
+    }
+
+    .your-home .w-40, .your-home .w-60{
+        width: 100%;
+    }
+
+    .your-home  .content-area{
+        margin-bottom: 4rem;
+    }
+
 
     .padding-top-bottom-12x {
   padding: 5rem 0rem;
@@ -166,6 +245,36 @@
 
 @media (max-width: 725px) {
 
+    .quick-search{
+        flex-flow: column;
+        align-items: center;
+        gap: 2rem;
+        width: 100%;
+    }
+
+
+    .quick-search ul{
+
+        width: 100%;
+        flex-flow: column;
+        align-items: center;
+        gap: 2rem;
+
+    }
+
+    .quick-search ul li{
+        width: 100%;
+        max-width: 100% !important;
+    }
+
+    .quick-search button{
+        width: 100%;
+    }
+
+    h1,h2{
+        font-size: 2rem;
+    }
+
     .loading-page .loading-container .loading-photo{
         height: 300px !important;
     }
@@ -208,6 +317,10 @@
 }
 
 @media (max-width: 500px) {
+
+    .smart-search .photo-grid{
+        min-width: 100%;
+    }
 
     .agent_info h2{
         text-align: center;
