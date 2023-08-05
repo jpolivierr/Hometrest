@@ -15,8 +15,9 @@ const QuickSearch = () =>{
    const {setSearch} = Actions()
 
    const [typeDrowdown, setTypeDropdown] = useState(false)
-   const [rangeDrowdown, setRangeDropdown] = useState(true)
+   const [rangeDrowdown, setRangeDropdown] = useState(false)
    const [typeValue, setTypeValue] = useState("")
+   const [priceRangeValue, setPriceRangeValue] = useState("")
    const [minPriceValue, setMinPriceValue] = useState("")
    const [minDropdown , setMinDropdown] = useState(false)
    const [maxPriceValue, setMaxPriceValue] = useState("")
@@ -69,6 +70,43 @@ const QuickSearch = () =>{
     setSearchUrl("/listings/?search=" + JSON.stringify(formState))
 
  },[formState])
+
+ useEffect(()=>{
+
+    const min = formState.list_price.min
+    const max = formState.list_price.max
+
+    if(min === 0 && max === 0){
+        setPriceRangeValue(``)
+        return
+    }
+
+    if(min > 0 && max > 0){
+        setPriceRangeValue(`$${formatNumber(min)} - ${formatNumber(max)}`)
+        return
+    }
+
+    if( (min === 0 || !min) || (max === 0 || !max)){
+
+        if(min){
+            setPriceRangeValue(`$${formatNumber(min)}`)
+            return
+        }
+
+        if(max){
+            setPriceRangeValue(`$${formatNumber(max)}`)
+            return
+        }
+        
+        return
+    }
+
+    console.log("setting balue...")
+
+    setPriceRangeValue("")
+
+
+ },[formState.list_price.min, formState.list_price.max])
 
  const  updateField = useCallback((key, value) =>{
          
@@ -172,9 +210,7 @@ const toggleRangeDropDown = () => {
     setMaxDropdown(!maxDropdown)
  }
 
-
  console.log(formState)
-
 
     return(
         <div className="quick-search">
@@ -197,6 +233,7 @@ const toggleRangeDropDown = () => {
                    type="text" 
                    placeholder="Single Family" 
                    value={typeValue}
+                   onChange={()=>{}}
                    
                    />
               <i onClick={toggleTypeDropDown}  className="fa-solid fa-angle-down"></i>
@@ -239,7 +276,9 @@ const toggleRangeDropDown = () => {
                   onClick={toggleRangeDropDown} 
                   style={{cursor: "pointer"}} 
                   type="text" 
-                  placeholder="$200,000 - $300,000" 
+                  placeholder="$200,000 - $300,000"
+                  value={priceRangeValue}
+                  onChange={()=>{}}
                   />
 
               <i 
@@ -247,7 +286,7 @@ const toggleRangeDropDown = () => {
                  className="fa-solid fa-angle-down"></i>
               {
                 rangeDrowdown && 
-                        <div className="q-dropdown">
+                        <div className="q-dropdown range-dropdown">
 
                         <h3>Price range</h3>
 
@@ -261,6 +300,7 @@ const toggleRangeDropDown = () => {
                                         type="text"
                                         value={minPriceValue}
                                         onClick={toggleMinDropdown}
+                                        onChange={()=>{}}
                                         />
                                    <i onClick={toggleMinDropdown} 
                                       className="fa-solid fa-angle-down"></i>
@@ -292,6 +332,7 @@ const toggleRangeDropDown = () => {
                                         type="text"
                                         value={maxPriceValue}
                                         onClick={toggleMaxDropdown}
+                                        onChange={()=>{}}
                                         />
                                    <i onClick={toggleMaxDropdown} 
                                       className="fa-solid fa-angle-down"></i>

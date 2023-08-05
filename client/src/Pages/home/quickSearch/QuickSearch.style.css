@@ -122,7 +122,7 @@ font-size: .9rem;
 }
 
 .range-option h3{
-    background: white;
+    background: white !important;
     padding: 0rem;
 }
 
@@ -134,10 +134,14 @@ font-size: .9rem;
 
 }
 
+.q-dropdown.range-dropdown{
+    overflow: visible !important;
+}
+
 .q-dropdown .price-list{
     width: 100%;
     max-height: 300px;
-    overflow: hidden;
+    overflow:visible;
     padding-top: 1rem;
     padding-bottom: 1rem;
     overflow-y: scroll;
