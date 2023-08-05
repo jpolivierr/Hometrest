@@ -12,6 +12,7 @@ import home3 from "../../assets/images/home-3.jpg"
 import mainHouse from "../../assets/images/main-house.png"
 import TopNav from "../../components/navBar/topNav"
 import Footer from "../../footer/footer.component"
+import QuickSearch from "./quickSearch/QuickSearch.component"
 const Home = (props) =>{
 
     const {Class, id} = props
@@ -34,31 +35,7 @@ const Home = (props) =>{
                     using filters such as price, number of bedrooms, and square footage to find the perfect fit. 
                     You can also see recently sold homes and get a sense of the market.
                   </p>
-                  <div className="quick-search">
-                    <ul>
-                      <li>
-                        <h3>Location</h3>
-                        <input type="text" placeholder="Enter city or zip" />
-                      </li>
-                      <li>
-                        <h3>Type</h3>
-                        <div className="input-container"> 
-                          <input type="text" placeholder="Single Family" />
-                          <i class="fa-solid fa-angle-down"></i>
-                        </div>
-                        
-                      </li>
-                      <li>
-                        <h3>Price Range</h3>
-                        <div className="input-container">
-                          <input type="text" placeholder="$200,000 - $300,000" />
-                          <i class="fa-solid fa-angle-down"></i>
-                        </div> 
-                      </li>
-                    
-                    </ul>
-                        <button className="main-btn">Search</button>
-                  </div>
+                <QuickSearch />
                   
                 </div>  
               </article>
@@ -96,21 +73,21 @@ const Home = (props) =>{
                   </p>
                   <ul className="feature-list">
                     <li>
-                    <i class="fa-solid fa-check"></i>
+                    <i className="fa-solid fa-check"></i>
                        <h4>Your perfect rental</h4>
                        <p>
                         Whether you're looking for a cozy apartment, a spacious house, or a vacation rental, we've got you covered.
                         </p>
                     </li>
                     <li>
-                    <i class="fa-solid fa-check"></i>
+                    <i className="fa-solid fa-check"></i>
                        <h4>Get real-time market updates</h4>
                        <p>
                        Monitoring the market to ensure that our clients have the most current data at their fingertips
                         </p>
                     </li>
                     <li>
-                    <i class="fa-solid fa-check"></i>
+                    <i className="fa-solid fa-check"></i>
                        <h4>Sell for more than the home next door</h4>
                        <p>
                        We understand that selling a home is a big decision. That's why we go above and beyond to ensure that your home.

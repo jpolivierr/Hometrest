@@ -47,7 +47,7 @@ const Filter = () =>{
 
             const newObj = newQueryObject(searchReducer)
 
-            updateParam(newObj, true, "search")   
+             updateParam(newObj, true, "search")   
       
      },[searchReducer])
 

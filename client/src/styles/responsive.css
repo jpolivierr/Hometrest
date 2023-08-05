@@ -60,8 +60,6 @@
 
 @media (max-width: 1211px) {
 
-    .the-map{}
-
     .prop_info_header{
         flex-flow: column;
     }
@@ -137,8 +135,6 @@
 
 @media (max-width: 855px){
 
-
-
     .smart-search article{
         padding-top: 5rem;
         flex-flow: column;
@@ -207,7 +203,6 @@
     }
 
 
-
     .prop_photos{
         height: 250px;
         grid-template-columns: 1fr;
@@ -262,13 +257,43 @@
 
     }
 
+
+
     .quick-search ul li{
         width: 100%;
         max-width: 100% !important;
     }
 
-    .quick-search button{
+    .quick-search button, .quick-search a{
         width: 100%;
+    }
+
+    .q-dropdown{
+            width: 100%;
+            max-height: 300px;
+            overflow: hidden;
+            overflow-y: hidden;
+            overflow-y: scroll;
+    }
+
+    .q-dropdown h3{
+        position: sticky;
+        top: 0;
+        left: 0;
+        background: #f6f6f7;
+        z-index: 3;
+    }
+
+    .q-dropdown .btn-container{
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        background: white;
+
+    }
+
+    .q-dropdown ul{
+        gap: 0rem ;
     }
 
     h1,h2{
