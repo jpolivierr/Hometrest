@@ -71,7 +71,7 @@ const ScheduleTour = () =>{
                         >
                     </textarea>
                 </fieldset>
-                <button onClick={()=> toggleFloatingModal("message",{message: userMessage})} style={{background: "#92a6bf17",width: "100%", marginTop: "0rem", height: "50px"}} className="button secondary-btn">
+                <button onClick={()=> toggleFloatingModal("message",{message: userMessage})} style={{background: "#92a6bf17",width: "100%", marginTop: "0rem", height: "50px"}} className="button alt-btn">
                                 Ask me a question 
              </button>
          </form>

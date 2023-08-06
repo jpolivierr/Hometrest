@@ -9,6 +9,9 @@ import PageLoading from "../../lib/loadingEffect/PageLoading/PageLoading"
 import SimilarProperties from "../../components/SimilarProperties/SimilarProperties"
 import ScheduleTour from "./component/Schedule/Scedule"
 import "./SingleProperty.style.css"
+import TopNav from "../../components/navBar/topNav"
+import footer from "../../footer/footer.component"
+import Footer from "../../footer/footer.component"
 
 const SingleProperty = () =>{
 
@@ -24,6 +27,8 @@ const {singleProperty, loading} = SinglePropertyRequest()
 
     return(
         <>
+
+        <TopNav container="container"/>
                 
           {
               (!singleProperty.property_id) ?
@@ -48,9 +53,11 @@ const {singleProperty, loading} = SinglePropertyRequest()
                 
             }
 
-<div className="container-medium">
+            <div className="container-medium">
                 <SimilarProperties/>
             </div>
+
+            <Footer />
             
         </>
     )

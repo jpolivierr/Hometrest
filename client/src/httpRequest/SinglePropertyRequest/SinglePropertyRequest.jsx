@@ -23,7 +23,6 @@ export default function SinglePropertyRequest() {
 
     if(paramId){
 
-        console.log("make request - single property")
         makeRequest("GET",URL.SINGLE_PROPERTY + paramId)
 
     }
@@ -46,8 +45,6 @@ useEffect(()=>{
       }
          
     if(response){
-
-      console.log(response)
 
         const property = deepSearch(response[0],["data","home"],{})
 

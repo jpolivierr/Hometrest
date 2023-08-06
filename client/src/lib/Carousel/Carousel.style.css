@@ -92,7 +92,7 @@
 
 .split_2  .item{
     width: calc(100% / 3);
-    padding-left: 14px;
+    padding-left: 6px;
 }
 .split_2  .item:first-child{
     

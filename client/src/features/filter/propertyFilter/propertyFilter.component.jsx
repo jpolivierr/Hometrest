@@ -91,7 +91,6 @@ const Filter = () =>{
 
         }
 
-        console.log(formState)
 
 
     return (

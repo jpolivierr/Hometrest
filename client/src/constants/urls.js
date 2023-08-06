@@ -1,4 +1,4 @@
-const HOST = "http://localhost:8081"
+const HOST = "http://localhost:8080"
 const API_VERSION = "/api/v1"
 
 const URL = {

@@ -22,21 +22,32 @@
 .property-card .prop-info{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    row-gap: .5rem;
+    row-gap: .7rem;
     padding: 1rem;
     /* font-size: .9rem; */
 }
+
+.property-card .prop-info i{
+    grid-column: 3;
+    align-self: center;
+    justify-self: flex-end;
+    font-size: 1.4rem;
+    border-radius: 50%;
+    transition: all .2s;
+
+}
+
 .prop-beds i, .prop-baths i, .prop-sqft i{
 
-        font-size: .8rem !important;
+        font-size: 10px !important;
         margin-right: .3rem;
         color: var(--alt-text-color);
         background: var(--lightSilver) !important;
-        width: 25px;
-        height: 25px;
+        width: 22px;
+        height: 22px;
         display: flex;
         justify-content: center;
-        align-content: center;
+        align-items: center;
 }
 
 .property-card .prop-info span{
@@ -57,21 +68,10 @@
     font-weight: 600;
 }
 
-.property-card .prop-info i{
-    grid-column: 3;
-    align-self: center;
-    justify-self: flex-end;
-    font-size: 1.4rem;
-    padding: .4rem;
-    border-radius: 50%;
-    transition: all .2s;
-
-}
-
-.prop-beds, .prop-baths, .prop-sqft{
+.prop-beds, .prop-baths, .prop-sqft, .prop-address{
     display: flex;
     align-items: center;
-    font-size: .9rem;
+    font-size: 14px;
 }
 
 .property-card .prop-info i:hover{
@@ -83,7 +83,7 @@
     grid-column: 1 / 4;
     font-weight: 500;
     line-height: 1.5;
-    font-size: .9rem;
+    /* font-size: .9rem; */
 }
 
 
@@ -108,8 +108,9 @@
     color: white;
     padding: .3rem .4rem;
     font-weight: 600;
-    font-size: .8rem;
+    font-size: 9px;
     width: max-content;
+    text-transform: uppercase;
 }
 
 .info-window-prop-card{

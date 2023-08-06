@@ -46,6 +46,7 @@ form button{
 .field_error p{
     color: red;
     margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 form textarea{

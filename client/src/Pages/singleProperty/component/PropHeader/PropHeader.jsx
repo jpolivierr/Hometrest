@@ -67,12 +67,11 @@ export default function PropHeader({singleProperty, id}) {
                             </li>
                         
                           
-                              <li 
+                              <li
                              onClick={()=>{setActiveList(2); scrolly(2)}}
                              className={activeList === 2 ? "active_list" : ""}>
                               Schools
-                              </li>
-                        
+                            </li>
                      
                               <li 
                              onClick={()=>{setActiveList(3); scrolly(3)}}
@@ -92,9 +91,9 @@ export default function PropHeader({singleProperty, id}) {
 
 
                         <ul className="share_container">
-                            <li className="single_share_btn s-h-btn"><i className="fa-solid fa-share"></i> <p>Share</p></li>
-                            <li onClick={()=>{handleLikes(propertyId)}} className="single_like_btn s-h-btn">{!getUserLikes(propertyId) ? <i  className="fa-regular fa-heart"></i> : <i  className="fa-solid fa-heart like-prop"></i>} <p>Favorite</p></li>
-                            <li className="single_share_btn s-h-btn"><i className="fa-solid fa-xmark"></i> <p>Hide</p></li>
+                            <li className="single_share_btn s-h-btn"><i className="fa-solid fa-share"></i> <span>Share</span></li>
+                            <li onClick={()=>{handleLikes(propertyId)}} className="single_like_btn s-h-btn">{!getUserLikes(propertyId) ? <i  className="fa-regular fa-heart"></i> : <i  className="fa-solid fa-heart like-prop"></i>} <span>Favorite</span></li>
+                            <li className="single_share_btn s-h-btn"><i className="fa-solid fa-xmark"></i> <span>Hide</span></li>
                         </ul>
                         
                      </div>

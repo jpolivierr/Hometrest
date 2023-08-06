@@ -1,6 +1,7 @@
 .search-result{
     display: grid;
-    grid-template-columns: 1fr .6fr;
+    grid-template-columns: 1fr .8fr;
+    margin-top: 69px !important;
 }
 
 .search-result .avalon{
@@ -9,4 +10,11 @@
 
 .filter_container{
     background: white;
+}
+
+.top-nav-stick{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
 }

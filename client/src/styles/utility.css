@@ -97,6 +97,11 @@ button{
     background-color: transparent;
 }
 
+.alt-btn{
+    background: rgba(146, 166, 191, 0.09);
+    border: 1px solid var(--light-silver);
+}
+
 
 .success_message{
     padding: .5rem 0rem;
@@ -155,7 +160,7 @@ Container
 
 .stick{
     position: sticky;
-    top: 70.4px;
+    top: 69.5px;
     border-bottom: 1px solid var(--light-silver);
     z-index: 10;
 }

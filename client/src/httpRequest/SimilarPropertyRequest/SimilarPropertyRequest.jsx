@@ -40,16 +40,16 @@ export default function SimilarPropertyRequest() {
       return
     }
 
-    if(status === 200){
+    if(status === 200 && response){
 
       const data = deepSearch(response[0],["data","home","related_homes", "results"],[])
-    
+      console.log(data)
       setSimilarListings(data)
     }
 
    },[serverError, response])
 
-
+  console.log(response)
 
   return {
             loading,

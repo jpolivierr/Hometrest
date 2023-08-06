@@ -40,7 +40,7 @@ export default function PropertyFilter({value}) {
                       />
                      
                         <i onClick={handleSubmit} className="iicon fa-solid fa-magnifying-glass"></i>
-                     <button type="submit"></button>   
+                     <button style={{display: "none"}} type="submit"></button>   
         </div>
 
         

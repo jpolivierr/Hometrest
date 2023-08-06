@@ -194,6 +194,10 @@
         display: none;
     }
 
+    .mini-map .the-map{
+        display: block;
+    }
+
     .prop_info_container{
         grid-template-columns: 1fr;
     }
@@ -342,6 +346,10 @@
 }
 
 @media (max-width: 500px) {
+
+    .s-h-btn span{
+        display: none;
+    }
 
     .smart-search .photo-grid{
         min-width: 100%;

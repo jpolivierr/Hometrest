@@ -68,7 +68,7 @@ export default function PropDescription({singleProperty}) {
                             </ul>
                             <div className='button_container'>
                                 <button onClick={()=> toggleFloatingModal("offer")} className='button main-btn offer_button'>Make an Offer</button>
-                                <button className='button secondary-btn offer_button'>
+                                <button className='button alt-btn offer_button'>
                                         Get Pre-approved
                                 </button>
                             </div>
