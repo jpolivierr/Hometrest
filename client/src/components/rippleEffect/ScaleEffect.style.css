@@ -1,0 +1,10 @@
+.scale-effect{
+    transform: scale(.9);
+    animation: scaling .5s linear;
+}
+
+@keyframes scaling {
+    to{
+        transform: scale(0);
+    }
+}

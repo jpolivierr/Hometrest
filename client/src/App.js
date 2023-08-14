@@ -7,18 +7,14 @@ import SingleProperty from './Pages/singleProperty/SingleProperty';
 import Home from './Pages/home/home';
 import Listings from './Pages/listings/listings';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
-import TopNav from './components/navBar/topNav';
 import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
 import UserRequest from './httpRequest/userRequest/userRequest';
-import Footer from './footer/footer.component';
+
 
 
 function App() {
 
   const {loading} = UserRequest()
-
-
-
 
   return (
     <>
@@ -28,17 +24,17 @@ function App() {
                 elementClass="basic-loading"
                 type="ring"/> : 
       <div className="App">
-        
           <Routes>
+           
           <Route path="/single_property" element={<SingleProperty/>}/>
           <Route path="/signup" element={<Signup/>}/>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/about" element={<About/>}/>
-            <Route path="/listings" element={<Listings/>}/>
-            <Route path="/listings/buy" element={<Listings/>}/>
-            <Route path="/listings/rent" element={<Listings/>}/>
-            <Route path="/update" element={<Update/>}/>
-            <Route path="/" element={<Home />}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/about" element={<About/>}/>
+          <Route path="/listings" element={<Listings/>}/>
+          <Route path="/listings/buy" element={<Listings/>}/>
+          <Route path="/listings/rent" element={<Listings/>}/>
+          <Route path="/update" element={<Update/>}/>
+          <Route path="/" element={<Home />}/>
         </Routes>
       
 

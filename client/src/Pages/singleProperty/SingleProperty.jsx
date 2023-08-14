@@ -12,22 +12,18 @@ import "./SingleProperty.style.css"
 import TopNav from "../../components/navBar/topNav"
 import footer from "../../footer/footer.component"
 import Footer from "../../footer/footer.component"
+import ScrollTop from "../../components/ScrollTop/ScrollTop"
+import { getParams } from "../../Util/urlParcer"
+
 
 const SingleProperty = () =>{
 
-const { pathname, search } = useLocation();
-
+const propertyFeatures = getParams("prop_features")
 const {singleProperty, loading} = SinglePropertyRequest()
-
-    useEffect(() => {
-            
-            window.scrollTo(0, 0);
-
-        }, [pathname, search]);
 
     return(
         <>
-
+         <ScrollTop />
         <TopNav container="container"/>
                 
           {
@@ -43,19 +39,26 @@ const {singleProperty, loading} = SinglePropertyRequest()
 
                         <PropDescription singleProperty={singleProperty} />
                          <ScheduleTour />
-                        {/* <AgentInfo /> */}
                         
                         </div>
                    
                     </div>
+
                   </>
                
-                
             }
 
-            <div className="container-medium">
-                <SimilarProperties/>
-            </div>
+             {/* <SimilarProperties propFeatures={singleProperty}/> */}
+
+             {
+             
+               (propertyFeatures) ? 
+               <SimilarProperties propFeatures={propertyFeatures}/> :
+               (singleProperty.property_id) && 
+               <SimilarProperties propFeatures={singleProperty}/>
+            
+            }
+
 
             <Footer />
             

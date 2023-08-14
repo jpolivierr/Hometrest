@@ -7,6 +7,7 @@ import { Reducers } from "../../Redux"
 import PropertyRequest from "../../httpRequest/propertyRequest/propertyRequest"
 import TopNav from "../../components/navBar/topNav"
 import Footer from "../../footer/footer.component"
+import ScrollTop from "../../components/ScrollTop/ScrollTop"
 
 const Listings = (props) =>{
 
@@ -26,6 +27,7 @@ const Listings = (props) =>{
 
     return(
       <>
+      <ScrollTop />
         <TopNav  
         elementStyle={"top-nav-stick"}
          container="container"

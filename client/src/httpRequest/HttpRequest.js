@@ -42,9 +42,6 @@ const HttpRequest = (defaultUrl,config) =>{
     
     useEffect(()=>{
 
-        if(response){
-            console.log("response --> ",response)
-        }
 
     },[response])
 

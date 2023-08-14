@@ -10,7 +10,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 
 @Configuration
-public class WebClientConfig {
+public class HttpClientConfig {
 
     @Bean
     public WebClient.Builder webClientBuilder(){
@@ -25,5 +25,6 @@ public class WebClientConfig {
 				.defaultHeader("X-RapidAPI-Host", "realty-in-us.p.rapidapi.com");
 
 	}
+
 
 }

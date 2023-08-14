@@ -210,7 +210,6 @@ const toggleRangeDropDown = () => {
     setMaxDropdown(!maxDropdown)
  }
 
- console.log(formState)
 
     return(
         <div className="quick-search">

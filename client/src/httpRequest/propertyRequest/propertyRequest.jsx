@@ -15,8 +15,6 @@ export default function PropertyRequest() {
   const {setPropertyList} = Actions()
   const {searchReducer} = Reducers()
 
-  const url = "https://jsonplaceholder.typicode.com/posts"
-
   const propertyRequest = HttpRequest(URL.SEARCH)
 
   const {response, post, loading,status} = propertyRequest

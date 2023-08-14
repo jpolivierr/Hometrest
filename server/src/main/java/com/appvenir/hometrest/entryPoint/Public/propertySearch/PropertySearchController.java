@@ -59,10 +59,11 @@ public class PropertySearchController {
         
     }
 
-    @GetMapping(path = "/similar_properties")
-    public Flux<Object>  similar(@RequestParam("id")String id){
-
-       Flux<Object> propertyList = propertySearchService.findSimilar(id);
+    @PostMapping(path = "/similar_properties")
+    public Flux<Object>  similar(@RequestBody Object propertySearch){
+        System.out.println("============= Similar Properties =============");
+        System.out.println(propertySearch);
+       Flux<Object> propertyList = propertySearchService.findSimilar(propertySearch);
 
        return propertyList;
         

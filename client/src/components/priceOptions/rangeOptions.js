@@ -26,7 +26,12 @@ const RangeOptions = (props) =>{
         350000,
         400000,
         450000,
-        500000
+        500000,
+        600000,
+        700000,
+        800000,
+        900000,
+        1000000,
        ]
 
        const [range, setRange] = useState({})

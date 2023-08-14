@@ -13,6 +13,11 @@ import mainHouse from "../../assets/images/main-house.png"
 import TopNav from "../../components/navBar/topNav"
 import Footer from "../../footer/footer.component"
 import QuickSearch from "./quickSearch/QuickSearch.component"
+import ScrollTop from "../../components/ScrollTop/ScrollTop"
+import RippleEffect from "../../components/rippleEffect/RippleEffect"
+import PrimaryButton from "../../components/buton/PrimaryButton"
+
+
 const Home = (props) =>{
 
     const {Class, id} = props
@@ -23,11 +28,12 @@ const Home = (props) =>{
 
     return(
       <main>
+        <ScrollTop />
           <TopNav elementStyle="home_nav" container="container-medium"/>
         <section id={id} className="hero">
 
           <div className="container-medium">
-              <article className="padding-top-bottom-12x">
+              <article className="padding-top-bottom-11x">
                 <div>
                   <h1>Find your dream home</h1>
                   <p>
@@ -94,7 +100,10 @@ const Home = (props) =>{
                         </p>
                     </li>
                   </ul>
-                  <button className="main-btn">Find My Home</button>
+            
+                    <PrimaryButton label={"Find My Home"} />
+           
+                  
                 </div>  
               </article>
           </div>
@@ -114,7 +123,7 @@ const Home = (props) =>{
                   <p>
                   HomeTrest features homes for sale in all 50 states. HomeTrest's online search portal of property listings gives you the ability to refine your search criteria by different factors, including geographical location. If you're looking for homes for sale by owner, HomeTrest is a great resource.
                   </p>
-                  <button className="main-btn">Find My Home</button>
+                  <PrimaryButton label={"Find My Home"} />
                 </div> 
                 <div className=" photo-column w-60">
                   <figure style={{background: `url("${home3}") center center/cover`}}>
@@ -155,7 +164,7 @@ const Home = (props) =>{
                   <p>
                   HomeTrest features homes for sale in all 50 states. HomeTrest's online search portal of property listings gives you the ability to refine your search criteria by different factors, including geographical location. If you're looking for homes for sale by owner, HomeTrest is a great resource, whether you are a buyer or a seller.
                   </p>
-                  <button className="main-btn">Find My Home</button>
+                  <PrimaryButton label={"Find My Home"} />
                 </div> 
 
               </article>

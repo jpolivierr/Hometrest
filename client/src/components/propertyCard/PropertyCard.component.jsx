@@ -23,9 +23,9 @@ const PropertyCard = (props) =>{
     const price = deepSearch(singleProperty,["list_price"])
     const street = deepSearch(singleProperty,["location","address","line"])
     const city = deepSearch(singleProperty,["location","address","city"])
-    const zip = deepSearch(singleProperty,["location","address","postal_code"])
+    const postal_code = deepSearch(singleProperty,["location","address","postal_code"])
     const state = deepSearch(singleProperty,["location","address","state"])
-    const stateCode = deepSearch(singleProperty,["location","address","state_code"])
+    const state_code = deepSearch(singleProperty,["location","address","state_code"])
     const photo = deepSearch(singleProperty,["primary_photo","href"])
 
     const {activeUser, likeProperty, isLoggedIn, getUserLikes} = useUserContext()
@@ -46,7 +46,7 @@ const PropertyCard = (props) =>{
 
     }
 
-    const handlePropClick = (e, propertyId) =>{
+    const handlePropClick = (e, propertyId, propFeatures) =>{
 
         const targetClassName = e.target.className
 
@@ -54,7 +54,7 @@ const PropertyCard = (props) =>{
             return
         }
 
-        navigate(`/single_property?prop_id=${propertyId}`)
+        navigate(`/single_property?prop_id=${propertyId}&prop_features=${JSON.stringify(propFeatures)}`)
 
     }
 
@@ -68,7 +68,7 @@ const PropertyCard = (props) =>{
         <PropertyCardView 
             functions={{handleLikes, getUserLikes,updateImageLink, imageKey, handlePropClick,getPhoto,getStatusStyle,cleanInput,formatNumber,likeProperty,handleForRent,toggleFloatingModal}} 
 
-             propertyDetails={{propertyId,status,type,beds,baths,sqft,price,street,city,zip,stateCode,photo}} 
+             propertyDetails={{propertyId,status,type,beds,baths,sqft,price,street,city,postal_code,state_code,photo}} 
 
              value={{userLikes}}
         

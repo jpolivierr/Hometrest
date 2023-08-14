@@ -1,31 +1,62 @@
 
 import Slider2 from "../../lib/Slider/Slider"
 import PropertyCard from "../propertyCard/PropertyCard.component"
-import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
+import LoadingSkeleton from "../../lib/loadingEffect/CardLoading/CardLoading"
 import SimilarPropertyRequest from "../../httpRequest/SimilarPropertyRequest/SimilarPropertyRequest"
 import "./SimilarProperties.style.css"
 import Carousel from "../../lib/Carousel/Carousel.component"
+import { deepSearch } from "../../Util/getValueByKey"
+import { useEffect } from "react"
 
 
-const SimilarProperties = (props) =>{
+const SimilarProperties = ({propFeatures}) =>{
+    
 
-    const {propId} = props
+    const status = deepSearch(propFeatures,["status"],"")
+    const type = propFeatures.type || deepSearch(propFeatures,["description","type"])
+    const price = propFeatures.price || deepSearch(propFeatures,["list_price"], "")
+    const city = propFeatures.city || deepSearch(propFeatures,["location","address","city"],"")
+    const state_code = propFeatures.state_code || deepSearch(propFeatures,["location","address","state_code"],"")
+    const postal_code = propFeatures.postal_code || deepSearch(propFeatures,["location","address","postal_code"],"")
 
-    const {similarListings} = SimilarPropertyRequest()
+    const pricePercentage = (num) =>{
+
+        const number = num; 
+        const percentage = 12.5;
+        return (percentage / 100) * number;
+
+    }
+    const preparedObj = {
+        limit: 20,
+        city,
+        postal_code,
+        state_code,
+        type: [type],
+        status : [status],
+        list_price: price && {
+                      min: price - pricePercentage(price), 
+                      max: price + pricePercentage(price)
+                    }
+
+    }
+
+
+    const {similarListings} = SimilarPropertyRequest(preparedObj)
 
     const carouselSettings = {
         aspectRatio : 5 / 5,
         split: 4,
-        style: "split_4"
+        style: "split_4",
       }
 
     return(
-        <>
+        <div className="container-medium">
          {!similarListings.length > 0 ? 
-        <SkeletonLoading 
-                            elementClass={"av-loading-skeleton av-loading-skeleton-side"} 
+
+        <LoadingSkeleton elementStyle={"horizontal-cards"}  
                             />
          : 
+
          <div className="similar-property">
          <h2>Similar Properties</h2>
          <Carousel 
@@ -47,10 +78,13 @@ const SimilarProperties = (props) =>{
                 }
           
           </Carousel>
-              </div>              
+
+              </div>    
+              
+              
                             }
         
-        </>
+        </div>
        
        
        

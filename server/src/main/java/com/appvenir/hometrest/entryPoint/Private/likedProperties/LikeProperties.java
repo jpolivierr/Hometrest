@@ -24,7 +24,6 @@ public class LikeProperties {
     @JoinColumn(name = "user_id")
     private User user;
     
-
     @Column(name = "property_id")
     private String propertyId;
 

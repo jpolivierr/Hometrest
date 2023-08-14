@@ -31,8 +31,8 @@ const PropertyCardView = ({functions, propertyDetails, value}) =>{
            price,
            street,
            city,
-           zip,
-           stateCode,
+           postal_code,
+           state_code,
            photo,
            like
         } = propertyDetails
@@ -41,7 +41,9 @@ const PropertyCardView = ({functions, propertyDetails, value}) =>{
  
         <>
                 <div 
-            onClick={(e)=> handlePropClick(e,propertyId)} data-property_id = {propertyId} className="property-card av-shadow">
+                  onClick={(e)=> handlePropClick(e,propertyId,{status,price,type,city,postal_code,state_code})} 
+                  data-property_id = {propertyId} className="property-card av-shadow"
+                  >
             <figure style={{background : `url(${updateImageLink(photo,imageKey)}) no-repeat center center/cover`}}>
 
                 <div className="status-container">
@@ -66,7 +68,7 @@ const PropertyCardView = ({functions, propertyDetails, value}) =>{
                     <div className="prop-baths"><i className="fa-solid fa-bath"></i>{baths} <span>Baths</span></div>
                     <div className="prop-sqft"><i className="fa-brands fa-unity"></i>{formatNumber(sqft)} <span>Sqft</span></div>
                     <div className="prop-address">
-                        {`${street}, ${city}, ${stateCode} ${zip}`}
+                        {`${street}, ${city}, ${state_code} ${postal_code}`}
                     </div>
             </div>
             
