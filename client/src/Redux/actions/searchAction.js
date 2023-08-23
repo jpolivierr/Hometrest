@@ -14,6 +14,7 @@ export const ACTION_TYPE = {
         INPUT_VALUE : "set_input_value"
 }
 
+
 export const setSearch = (data) =>{
     return{
         type: ACTION_TYPE.SET_SEARCH,

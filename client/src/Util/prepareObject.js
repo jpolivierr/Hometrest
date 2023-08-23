@@ -1,6 +1,5 @@
 const prepareObject = (newObj, defaultCity, stateCode) =>{
 
-    console.log("new object --->",newObj)
 
     if(Object.keys(newObj).length === 0){
         newObj.city = defaultCity

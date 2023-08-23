@@ -4,6 +4,7 @@ import { useUserContext } from '../../../../context/user/UserContext'
 import { useNavigate } from 'react-router-dom'
 import { deepSearch } from '../../../../Util/getValueByKey'
 import {scrolly, scrollWithClass } from '../../../../Util/Scrolly'
+import { Link } from 'react-router-dom'
 import "./PropHeader.style.css"
 
 export default function PropHeader({singleProperty, id}) {
@@ -41,9 +42,13 @@ export default function PropHeader({singleProperty, id}) {
   return (
     <div id={id} ref={headerRef}>
       <div  className="single_prop_header container-medium">
-                        <div className="single_back_btn s-h-btn" onClick={()=>navigate(-1)}>
+
+                       <Link to={"/listings"}>
+                       <div className="single_back_btn s-h-btn">
                                     <i className="fa-solid fa-angle-left"></i>Search
                         </div>
+                       </Link>
+                        
 
                         <ul className='list_options'>
 

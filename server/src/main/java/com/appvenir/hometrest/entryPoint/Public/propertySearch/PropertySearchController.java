@@ -40,7 +40,7 @@ public class PropertySearchController {
     @PostMapping(path = "/list")
     public  Flux<Object> list( @RequestBody Object propertySearch){
 
-        System.out.println("==========================");
+        System.out.println("============ Search Listings ==============");
         System.out.println(propertySearch);
         System.out.println("making request");
 
@@ -53,6 +53,7 @@ public class PropertySearchController {
      @GetMapping(path = "/details")
     public Flux<Object>  details(@RequestParam("id")String id){
 
+        System.out.println("============ Property Details ==============");
        Flux<Object> propertyList = propertySearchService.findSingle(id);
 
        return propertyList;
@@ -64,7 +65,6 @@ public class PropertySearchController {
         System.out.println("============= Similar Properties =============");
         System.out.println(propertySearch);
        Flux<Object> propertyList = propertySearchService.findSimilar(propertySearch);
-
        return propertyList;
         
     }

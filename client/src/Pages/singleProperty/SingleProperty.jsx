@@ -27,7 +27,7 @@ const {singleProperty, loading} = SinglePropertyRequest()
         <TopNav container="container"/>
                 
           {
-              (!singleProperty.property_id) ?
+              (!singleProperty.property_id || loading) ?
               <PageLoading /> :
                   <>
                   <PropHeader singleProperty={singleProperty} />
@@ -45,7 +45,6 @@ const {singleProperty, loading} = SinglePropertyRequest()
                     </div>
 
                   </>
-               
             }
 
              {/* <SimilarProperties propFeatures={singleProperty}/> */}

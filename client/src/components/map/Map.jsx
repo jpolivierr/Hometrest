@@ -196,7 +196,7 @@ const Map = (props) =>{
         <>
 
         <div id="map" 
-            className={`the-map ${loading ? "props-loading" : ""} ${styleElement ? styleElement : ""} ${properties.length === 0 && "no_map"} ` } 
+            className={`the-map ${loading || properties.length === 0  ? "props-loading" : ""} ${styleElement ? styleElement : ""} ${properties.length === 0 && "no_map"} ` } 
             ref={mapRef}>
         </div>
 

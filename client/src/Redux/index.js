@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { bindActionCreators } from "redux"
-import {setUserAction, updateSearch, properties, clientActivityAction} from "./actions"
+import {setUserAction, searchAction, properties, clientActivityAction} from "./actions"
 
 
 export const Reducers = () =>{
@@ -23,11 +23,12 @@ export const Reducers = () =>{
 
 export const Actions = () =>{
 
-    const {setSearch} = bindActionCreators(updateSearch, useDispatch())
+    const {setSearch, setCity} = bindActionCreators(searchAction, useDispatch())
     const {setPropertyList} = bindActionCreators(properties, useDispatch())
 
     return {
         setSearch,
-        setPropertyList
+        setPropertyList,
+        setCity
       }
 }

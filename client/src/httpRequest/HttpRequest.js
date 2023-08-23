@@ -12,7 +12,7 @@ const HttpRequest = (defaultUrl,config) =>{
 
     const [response, setResponse] = useState(null)
     const [serverError, setServerError] = useState(null)
-    const [fieldError, setFieldError] = useState(null)
+    const [fieldError] = useState(null)
     const [status, setStatus] = useState(null)
     const [loading, setLoading] = useState(null)
 
@@ -20,15 +20,19 @@ const HttpRequest = (defaultUrl,config) =>{
 
     
 
-
+    // Handle status
     useEffect(()=>{
+
+        // console.log(status)
 
         switch(true){
             case status >= 200 && status <= 299 :
+                console.log("Success")
                 break
             case status === 404 :
+                console.log("Page not found")
                 break
-            case status >= 504 :
+            case status === 504 :
                 setServerError("Request timed out")
                 break
             case status >= 500 && status <= 599 :
@@ -40,39 +44,47 @@ const HttpRequest = (defaultUrl,config) =>{
 
     },[status])
     
-    useEffect(()=>{
+
+ const PrepareRequest = (url,method,data) =>{
+
+        setLoading(true)
+        const assignUrl = url ? url : defaultUrl
+        const signal = setSignal(abortController)
+        defaultConfig.method = method
+        const assignConfig = data ? 
+                           {
+                            ...defaultConfig, 
+                            body: JSON.stringify(data)
+                           } : 
+                            defaultConfig
+
+       assignConfig.signal = signal.abortController && signal.abortController.signal
+
+       return{assignUrl,assignConfig}
+
+    }
 
 
-    },[response])
-
-    useEffect(()=>{
-
-        if(serverError){
-            console.log("server error -->", serverError)
-        }
-
+    const postResponse = async(response, signal) =>{
         
+                    setStatus(response.status)
+                    setResponse(await response.json())
+                    clearTimeout(signal.timeout)
+                    setLoading(false)
 
-    },[serverError])
-
-    useEffect(()=>{
-
-
-    },[loading])
+    }
 
 
     const get = async (url) => {
 
                 try {
-                    
                     console.log("making GET request.....")
-                    setLoading(true)
-                    const assignUrl = url ? url : defaultUrl
-                    defaultConfig.method = "GET"
-                    const response = await fetch(assignUrl,defaultConfig)
-                    setStatus(response.status)
-                    setResponse(await response.json())
-                    setLoading(false)
+
+                    const {assignUrl,assignConfig} = PrepareRequest(url,"GET")
+
+                    const response = await fetch(assignUrl,assignConfig)
+
+                    postResponse(response, assignConfig.signal) 
 
                 } catch (error) {
 
@@ -84,25 +96,14 @@ const HttpRequest = (defaultUrl,config) =>{
 
             const post = async (url,data) => {
 
-                  const signal = setSignal(abortController)
-
                 try {
             
-                    setLoading(true)
-                   
-                    const assignUrl = url ? url : defaultUrl
+                    const {assignUrl,assignConfig} = PrepareRequest(url,"POST",data)
 
-                    const assignConfig = data ? {...defaultConfig, body: JSON.stringify(data)} : defaultConfig
+                    const response = await fetch(assignUrl,assignConfig)
 
-                    assignConfig.method = "POST"
+                    postResponse(response, assignConfig.signal)  
 
-                    assignConfig.signal = signal.abortController && signal.abortController.signal
-
-                    const response = await fetch(assignUrl,assignConfig)  
-                    setStatus(response.status)
-                    setResponse(await response.json())
-                    clearTimeout(signal.timeout)
-                    setLoading(false)
 
                 } catch (error) {
 
@@ -116,7 +117,6 @@ const HttpRequest = (defaultUrl,config) =>{
     return{
         get,
         post,
-        // makeRequest,
         serverError,
         fieldError,
         loading,

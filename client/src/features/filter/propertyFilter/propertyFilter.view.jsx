@@ -36,6 +36,7 @@ export default function PropertyFilter({value}) {
                       value = {formState.city_zip}               
                       required = {true}
                       icon = {<i className="fa-solid fa-location-dot"></i>}
+                      onBlur ={handleSubmit}
                       updateField = {updateField}
                       />
                      

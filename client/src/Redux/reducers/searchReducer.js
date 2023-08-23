@@ -1,9 +1,11 @@
+import { act } from "react-dom/test-utils"
 import { ACTION_TYPE } from "../actions/searchAction"
 
 const init = {
     city_zip : "",
     city: "",
     state_code: "",
+    postal_code: "",
     type: [],
     status: [],
     list_price: {min: 0, max: 0},
@@ -14,6 +16,8 @@ const init = {
 
 const searchReducer = (state = init, action) =>{
     switch(action.type){
+        case ACTION_TYPE.CITY :
+            return {...state, city: action.payload}
         case ACTION_TYPE.SET_SEARCH :
             
             if(!action.payload || Object.keys(action.payload).length === 0){

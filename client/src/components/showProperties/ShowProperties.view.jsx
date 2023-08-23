@@ -17,7 +17,7 @@ const ShowPropertiesView = ({value}) =>{
 
     return(
 
-        <div className={`show-properties ${loading ? "props-loading" : ""}`}>
+        <div className={`show-properties ${loading && properties.length > 0 ? "props-loading" : ""}`}>
 
          {
              properties.length === 0 ?

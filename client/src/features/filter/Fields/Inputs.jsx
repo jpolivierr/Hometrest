@@ -12,7 +12,8 @@ const Inputs= (props) =>{
            formError,
            defaultValue,
            onOutFocus,
-           elementClass
+           elementClass,
+           onBlur
             } = props
 
 
@@ -29,11 +30,14 @@ const Inputs= (props) =>{
 
     const handleBlur = (e) =>{
 
-        const value = e.target.value
+        onBlur(e)
+        // console.log("blurrr")
 
-        let newValue = onOutFocus ? onOutFocus(value) : value
+        // const value = e.target.value
 
-        props.updateField(props.name, newValue)
+        // let newValue = onOutFocus ? onOutFocus(value) : value
+
+        // props.updateField(props.name, newValue)
     }
     
      return(

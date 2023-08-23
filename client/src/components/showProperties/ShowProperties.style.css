@@ -8,8 +8,12 @@
 }
 
 .show-properties-header{
-    padding: 1rem 0rem;
+    padding: .5rem 0rem;
     padding-top: 0rem;
+}
+
+.show-properties-header h5{
+    font-size: 1rem;
 }
 
 .show-properties-header h2{

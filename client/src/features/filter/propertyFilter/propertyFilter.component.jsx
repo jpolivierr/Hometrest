@@ -24,6 +24,7 @@ const Filter = () =>{
         city_zip : "",
         city: "",
         state_code: "",
+        postal_code: "",
         type: [],
         status: [],
         list_price: {min: 0, max: 0},
@@ -44,6 +45,8 @@ const Filter = () =>{
      
 
      useEffect(()=>{
+
+        window.scrollTo(0, 0);
 
             const newObj = newQueryObject(searchReducer)
 

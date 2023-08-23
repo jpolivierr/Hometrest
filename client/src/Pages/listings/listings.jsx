@@ -15,6 +15,7 @@ const Listings = (props) =>{
     // let loading = false
 
   const { propertiesReducer} = Reducers()
+
     const {Class, id} = props
 
     const carouselSettings = {
@@ -24,6 +25,8 @@ const Listings = (props) =>{
           gap : 13,
           style: "split_4"
     }
+    console.log(loading)
+    console.log(propertiesReducer)
 
     return(
       <>
@@ -36,11 +39,16 @@ const Listings = (props) =>{
             
             <div className="filter_container stick"> 
               <div className="container">
+
               <Filter />
+                {loading !== null && loading === false && propertiesReducer.count === 0 &&
+               <h4 className="no-result" >No results found. Please try a different search </h4>
+          }
               </div>
+             
             </div>
 
-          
+         
             
 
             <div className="search-result wide-container">

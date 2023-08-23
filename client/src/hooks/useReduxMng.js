@@ -1,7 +1,7 @@
 
 import { useDispatch, useSelector } from "react-redux"
 import { bindActionCreators } from "redux"
-import {setUserAction, updateSearch, properties, clientActivityAction} from "../Redux/actions"
+import {setUserAction, searchAction, properties, clientActivityAction} from "../Redux/actions"
 
 const useReduxMng = () =>{
 
@@ -25,7 +25,7 @@ const useReduxMng = () =>{
            setAddress,
            setInputValue
         
-        } = bindActionCreators(updateSearch, useDispatch())
+        } = bindActionCreators(searchAction, useDispatch())
 
     const {setPropertyList} = bindActionCreators(properties, useDispatch())
 

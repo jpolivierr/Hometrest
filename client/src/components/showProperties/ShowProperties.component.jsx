@@ -1,7 +1,8 @@
 
 import ShowPropertiesView from "./ShowProperties.view"
 import { Reducers } from "../../Redux"
-
+import capitalizeFirstLetter from "../Forms/FormUtil/capitalizeFirstLetter"
+import { formatNumber } from "../../Util/formatNumber"
 const ShowProperties = ({loading}) =>{
 
 
@@ -33,6 +34,7 @@ const ShowProperties = ({loading}) =>{
 
         if(isLoading) return
 
+        const limit = searchReducer.limit || ""
         const city = searchReducer.city || ""
         const postal_code = searchReducer.postal_code || ""
         const state_code = searchReducer.state_code || ""
@@ -48,7 +50,12 @@ const ShowProperties = ({loading}) =>{
 
         const str = `${city} ${myState} ${postal_code}`
 
-        return  (<h5>{`Showing 50 out of ${total} result for "${str.trim()}"`}</h5>)
+        return  (<h5>{`Showing `} <b style={{fontWeight: "600"}}>{`${formatNumber(limit)}`}</b> 
+         {` out of `}
+         <b style={{fontWeight: "600"}}>{`${formatNumber(total)}`}</b> 
+          {` result for `}
+          <span style={{fontStyle: "italic"}}>{`"${capitalizeFirstLetter(str.trim())}"`}</span></h5>
+          )
     
     }
 

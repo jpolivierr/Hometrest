@@ -1,10 +1,10 @@
 export const propertyTypeList = [
     {
-       id: "Single_Family",
+       id: "single_family",
        name: "Single Family",
     },
     {
-       id: "Multi_Family",
+       id: "multi_family",
        name: "Multi-Family"
     },
     {

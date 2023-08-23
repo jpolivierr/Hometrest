@@ -18,3 +18,22 @@
     left: 0px;
     width: 100%;
 }
+
+.no-result{
+padding: 0.8rem;
+font-weight: normal;
+font-size: .9rem;
+color: rgb(247, 0, 0);
+border: 1px solid red;
+width: max-content;
+border-radius: var(--borderRadius);
+margin: auto;
+  margin-bottom: auto;
+margin-bottom: auto;
+margin-bottom: 1rem;
+position: absolute;
+left: 0;
+right: 0;
+top: 120%;
+background: white;
+}

@@ -25,7 +25,6 @@ function App() {
                 type="ring"/> : 
       <div className="App">
           <Routes>
-           
           <Route path="/single_property" element={<SingleProperty/>}/>
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/login" element={<Login/>}/>
