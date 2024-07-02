@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.appvenir.hometrest.Authentication.SessionManagement.SessionManagement;
-import com.appvenir.hometrest.Exceptions.UserNotFoundException;
 import com.appvenir.hometrest.entryPoint.Private.user.User;
 import com.appvenir.hometrest.entryPoint.Private.user.UserService;
+import com.appvenir.hometrest.exception.user.UserNotFoundException;
 import com.appvenir.hometrest.process.RedirectResponse.RedirectResponse;
 
 import jakarta.servlet.http.HttpServletResponse;

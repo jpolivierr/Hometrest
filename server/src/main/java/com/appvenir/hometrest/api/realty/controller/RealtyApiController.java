@@ -44,8 +44,8 @@ public class RealtyApiController {
 
 
     @PostMapping(path = "/list")
-    public  CompletableFuture<String> list( @RequestBody Object propertySearch){
-       return realtyApi.findAll(propertySearch);
+    public  CompletableFuture<String> findPropertyList( @RequestBody Object propertySearch){
+       return realtyApi.findPropertyList(propertySearch);
     }
 
     @GetMapping(path = "/details")

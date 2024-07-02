@@ -71,7 +71,7 @@ public class RealtyApiServiceProxy implements RealtyApi{
     }
 
     @Override
-    public CompletableFuture<String> findAll(Object propertySearch) {
+    public CompletableFuture<String> findPropertyList(Object propertySearch) {
 
         String currentPath = IO.currentPath("/api/realty/data/propertyList.json");
 
@@ -85,7 +85,7 @@ public class RealtyApiServiceProxy implements RealtyApi{
     
         } else {
 
-            CompletableFuture<String> property = realtyApiService.findAll(propertySearch);
+            CompletableFuture<String> property = realtyApiService.findPropertyList(propertySearch);
 
             property.thenAccept( (response) -> {
 

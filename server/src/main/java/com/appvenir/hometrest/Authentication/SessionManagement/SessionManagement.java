@@ -4,8 +4,8 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
-import com.appvenir.hometrest.Exceptions.SessionExistException;
 import com.appvenir.hometrest.constants.SessionConstants;
+import com.appvenir.hometrest.exception.session.SessionExistException;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

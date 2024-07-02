@@ -18,8 +18,6 @@ import io.github.cdimascio.dotenv.Dotenv;
 @Configuration
 public class HttpClientConfig {
 
-	private final String REALTY_URI = "https://realty-in-us.p.rapidapi.com";
-
     @Bean
     public WebClient.Builder webClientBuilder(){
 

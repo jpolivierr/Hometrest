@@ -8,6 +8,6 @@ public interface RealtyApi {
 
     public CompletableFuture<String> findSimilarProperties(String id);
 
-    public CompletableFuture<String> findAll(Object propertySearch);
+    public CompletableFuture<String> findPropertyList(Object propertySearch);
     
 }

@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.Exceptions.realtyApiException;
+package com.appvenir.hometrest.exception.realtyApiException;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.appvenir.hometrest.Exceptions.ErrorResponse;
+import com.appvenir.hometrest.exception.ErrorResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
 

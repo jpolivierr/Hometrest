@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.Exceptions.realtyApiException;
+package com.appvenir.hometrest.exception.realtyApiException;
 
 import java.util.HashMap;
 

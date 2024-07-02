@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.appvenir.hometrest.Exceptions.UserNotFoundException;
+import com.appvenir.hometrest.exception.user.UserNotFoundException;
 
 @Service
 public class UserService {
