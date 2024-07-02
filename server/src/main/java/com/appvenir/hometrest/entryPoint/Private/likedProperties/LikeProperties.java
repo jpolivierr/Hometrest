@@ -11,9 +11,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Table(name = "like_properties")
+@Data
 public class LikeProperties {
 
     @Id
@@ -26,39 +28,5 @@ public class LikeProperties {
     
     @Column(name = "property_id")
     private String propertyId;
-
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getPropertyId() {
-        return this.propertyId;
-    }
-
-    public void setPropertyId(String propertyId) {
-        this.propertyId = propertyId;
-    }
-
-    public User getUser() {
-        return this.user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", propertyId='" + getPropertyId() + "'" +
-            ", user='" + getUser() + "'" +
-            "}";
-    }
     
 }

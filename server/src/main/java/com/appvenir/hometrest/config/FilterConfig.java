@@ -10,7 +10,7 @@ import com.appvenir.hometrest.filter.MyRequestFilter;
 @Configuration
 public class FilterConfig {
 
-      @Bean
+    @Bean
     public FilterRegistrationBean<MyRequestFilter> customFilterRegistration() {
         FilterRegistrationBean<MyRequestFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new MyRequestFilter());
