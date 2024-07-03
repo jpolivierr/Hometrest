@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appvenir.hometrest.api.realty.RealtyApi;
-import com.appvenir.hometrest.api.realty.service.RealtyApiService;
-import com.appvenir.hometrest.api.realty.service.RealtyApiServiceProxy;
-
-import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping(path="/api/v1/property_search")
@@ -44,7 +39,10 @@ public class RealtyApiController {
 
 
     @PostMapping(path = "/list")
-    public  CompletableFuture<String> findPropertyList( @RequestBody Object propertySearch){
+    public  CompletableFuture<String> findPropertyList( 
+                                        @RequestBody Object propertySearch
+                                    )
+    {
        return realtyApi.findPropertyList(propertySearch);
     }
 

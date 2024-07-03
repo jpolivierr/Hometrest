@@ -1,11 +1,9 @@
 package com.appvenir.hometrest.exception.dataSource;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

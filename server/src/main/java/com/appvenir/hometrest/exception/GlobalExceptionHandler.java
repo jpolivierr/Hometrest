@@ -11,12 +11,26 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.appvenir.hometrest.exception.makeRequest.MakeRequestException;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+        @ExceptionHandler(MakeRequestException.class)
+        public ResponseEntity<Object> handleMakeRequestException(MakeRequestException e, HttpServletRequest request){
+
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                                        .timestamp(LocalDateTime.now())
+                                        .status(HttpStatus.BAD_REQUEST.value())
+                                        .error(e.getMessage())
+                                        .message(e.getCause() != null ? e.getCause().getMessage() : "No cause available")
+                                        .path(request.getRequestURI())
+                                        .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+
+        }
 
         @ExceptionHandler(MethodArgumentNotValidException.class)
         public ResponseEntity<Object> handleValidationExceptions(

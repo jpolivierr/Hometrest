@@ -4,17 +4,16 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 
 import org.apache.hc.core5.net.URIBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import com.appvenir.hometrest.api.realty.RealtyApi;
 import com.appvenir.hometrest.exception.realtyApiException.RealtyApiException;
+import com.appvenir.hometrest.helper.httpResponseHandler.MakeRequest;
 import com.appvenir.hometrest.helper.httpResponseHandler.ResponseHandler;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,46 +25,24 @@ public class RealtyApiService implements RealtyApi {
     private HttpClient httpClient;
     private HttpRequest.Builder realtyRequestBuilder;
     private final String REALTY_URI = "https://realty-in-us.p.rapidapi.com";
-    private final ObjectMapper objectMapper;
+    private final MakeRequest makeRequest;
 
-    public RealtyApiService(WebClient.Builder webClientBuilder, HttpRequest.Builder realtyRequestBuilder, HttpClient httpClient){
-
+    public RealtyApiService( HttpRequest.Builder realtyRequestBuilder, HttpClient httpClient, MakeRequest makeRequest){
         this.realtyRequestBuilder = realtyRequestBuilder;
         this.httpClient = httpClient;
-        this.objectMapper = new ObjectMapper();
-
+        this.makeRequest = makeRequest;
     }
 
     public CompletableFuture<String> findPropertyList(Object propertySearch){
 
-        try {
-                String requestBody = objectMapper.writeValueAsString(propertySearch);    
-                String uri = new URIBuilder(REALTY_URI)
-                                        .setPath("/properties/v3/list")
-                                        .build()
-                                        .toString();
+            String uri = REALTY_URI + "/properties/v3/list";
 
-                HttpRequest request = realtyRequestBuilder
-                                                .uri(URI.create(uri))
-                                                .POST(BodyPublishers.ofString(requestBody))
-                                                .build();
-
-                return httpClient.sendAsync(request, BodyHandlers.ofString())
-                                .thenApply( response -> {
-
-                                    HashMap<String,String> errors = handleErrorResponse(response.body());
-
-                                    if(errors.size() > 0) throw new RealtyApiException(errors);
-
-                                    return ResponseHandler.onSuccess(response, (body) -> body);
-
-                                });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-
+            return makeRequest.asyncPost(uri, propertySearch, BodyHandlers.ofString())
+                        .thenApply( response -> {
+                            HashMap<String,String> errors = handleErrorResponse(response.body());
+                            if(errors.size() > 0) throw new RealtyApiException(errors);
+                            return ResponseHandler.onSuccess(response, (body) -> body);
+            });
         
     }
 
