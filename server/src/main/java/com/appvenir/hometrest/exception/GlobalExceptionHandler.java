@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = ErrorResponse.builder()
                                         .timestamp(LocalDateTime.now())
                                         .status(HttpStatus.BAD_REQUEST.value())
-                                        .error(e.getMessage())
+                                        .error(e.getCause().getMessage())
                                         .message(e.getCause() != null ? e.getCause().getMessage() : "No cause available")
                                         .path(request.getRequestURI())
                                         .build();
@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
 
         @ExceptionHandler(MethodArgumentNotValidException.class)
         public ResponseEntity<Object> handleValidationExceptions(
-MethodArgumentNotValidException e, HttpServletRequest request) {
+                                                MethodArgumentNotValidException e, HttpServletRequest request) {
 
             Map<String, String> errors = new HashMap<>();
             
@@ -50,7 +50,7 @@ MethodArgumentNotValidException e, HttpServletRequest request) {
             ErrorResponse errorResponse = ErrorResponse.builder()
                                             .timestamp(LocalDateTime.now())
                                             .status(HttpStatus.NOT_FOUND.value())
-                                            .error(e.getMessage())
+                                            .error(e.getCause() != null ? e.getCause().getMessage() : null)
                                             .message(e.getMessage())
                                             .path(request.getRequestURI())
                                             .data(errors)

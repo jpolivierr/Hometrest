@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.helper.httpResponseHandler;
+package com.appvenir.hometrest.helper.httpHandler;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -52,6 +52,19 @@ public class MakeRequest {
 
     }
 
+    public <T> CompletableFuture<HttpResponse<T>> asyncGet(String uri, HttpResponse.BodyHandler<T> responseBodyHandler){
+
+        return handleRequest(() -> {
+                    new URI(uri);
+                    HttpRequest request = realtyRequestBuilder
+                                            .uri(URI.create(uri))
+                                            .GET()
+                                            .build();
+                    return httpClient.sendAsync(request, responseBodyHandler);
+        });
+
+    }
+
     public <T> CompletableFuture<HttpResponse<T>> handleRequest(CheckedSupplier<CompletableFuture<HttpResponse<T>>> checkedSupplier){
 
         try {
@@ -68,15 +81,6 @@ public class MakeRequest {
             return CompletableFuture.failedFuture(new MakeRequestException("Unexpected error occurred", e));
         }
 
-    }
-
-    public static <T> T onSuccess(HttpResponse<T> response, Function<T,T> handleResponse){
-
-        if(HttpStatus.Series.valueOf(response.statusCode()) == HttpStatus.Series.SUCCESSFUL){
-            return handleResponse.apply(response.body());
-        }else{
-            throw new RuntimeException("Request failed with status code: " + response.statusCode());
-        }
     }
     
 }

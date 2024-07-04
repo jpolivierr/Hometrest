@@ -6,15 +6,18 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.StreamSupport;
 
 import org.apache.hc.core5.net.URIBuilder;
 import org.springframework.stereotype.Service;
 
 import com.appvenir.hometrest.api.realty.RealtyApi;
+import com.appvenir.hometrest.api.realty.dto.RealtyErrorResponseDto;
 import com.appvenir.hometrest.exception.realtyApiException.RealtyApiException;
-import com.appvenir.hometrest.helper.httpResponseHandler.MakeRequest;
-import com.appvenir.hometrest.helper.httpResponseHandler.ResponseHandler;
+import com.appvenir.hometrest.helper.httpHandler.MakeRequest;
+import com.appvenir.hometrest.helper.httpHandler.ResponseHandler;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -39,9 +42,12 @@ public class RealtyApiService implements RealtyApi {
 
             return makeRequest.asyncPost(uri, propertySearch, BodyHandlers.ofString())
                         .thenApply( response -> {
-                            HashMap<String,String> errors = handleErrorResponse(response.body());
-                            if(errors.size() > 0) throw new RealtyApiException(errors);
-                            return ResponseHandler.onSuccess(response, (body) -> body);
+                    ResponseHandler.onFailure(response, 
+                    () ->  new RealtyApiException("Realty api failure",response.statusCode(), response.body()));
+                    return ResponseHandler.onSuccess(response, (body) -> {
+                        handleErrorFromData(body);
+                        return body;
+                    });
             });
         
     }
@@ -50,88 +56,76 @@ public class RealtyApiService implements RealtyApi {
 
         var uri = REALTY_URI + "/properties/v3/detail?property_id=" + id;
 
-        HttpRequest request = realtyRequestBuilder
-                                        .uri(URI.create(uri))
-                                        .GET()
-                                        .build();
-                                    
-        return httpClient.sendAsync(request, BodyHandlers.ofString())
-                         .thenApply( response -> {
-
-                            HashMap<String,String> errors = handleErrorResponse(response.body());
-
-                            if(errors.size() > 0) throw new RealtyApiException(errors);
-
-                            return ResponseHandler.onSuccess(response, (body) -> body);
-                        });
+        return makeRequest.asyncGet(uri, BodyHandlers.ofString())
+                        .thenApply( response -> {
+                    ResponseHandler.onFailure(response, 
+                    () ->  new RealtyApiException("Realty api failure",response.statusCode(), response.body()));
+                    return ResponseHandler.onSuccess(response, (body) -> {
+                        handleErrorFromData(body);
+                        return body;
+                    });
+            });
 
     }
 
       public CompletableFuture<String> findSimilarProperties(String id){
+        
+        String uri = REALTY_URI + "/properties/v3/list-similar-homes?property_id=" + id;
 
-        try {
-
-        String uri = new URIBuilder(REALTY_URI)
-                                    .setPath("/properties/v3/list-similar-homes")
-                                    .addParameter("property_id", id)
-                                    .build()
-                                    .toString();
-
-         HttpRequest request = realtyRequestBuilder
-                                .uri(URI.create(uri))
-                                .GET()
-                                .build();
-
-        return httpClient.sendAsync(request, BodyHandlers.ofString())
-                         .thenApply( response -> {
-
-                            HashMap<String,String> errors = handleErrorResponse(response.body());
-
-                            if(errors.size() > 0) throw new RealtyApiException(errors);
-
-                            return ResponseHandler.onSuccess(response, (body) -> body);
-
-                         });                      
-            
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-            return null;
-        }
+        return makeRequest.asyncGet(uri, BodyHandlers.ofString())
+                        .thenApply( response -> {
+                    ResponseHandler.onFailure(response, 
+                    () ->  new RealtyApiException("Realty api failure",response.statusCode(), response.body()));
+                    return ResponseHandler.onSuccess(response, (body) -> {
+                        handleErrorFromData(body);
+                        return body;
+                    });
+            });                      
                       
     }
 
-    public HashMap<String,String> handleErrorResponse(String body){
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        HashMap<String,String> errors = new HashMap<>();
+ public void handleErrorFromData(String body) {
 
         try {
+            ObjectMapper objectMapper = new ObjectMapper();
 
             JsonNode rootNode = objectMapper.readTree(body);
 
-            if(rootNode.has("errors") && rootNode.get("errors").isArray()){
-                
-                JsonNode errorNode = rootNode.path("errors").get(0);
+            if (rootNode.has("errors") && rootNode.get("errors").isArray()) {
+                JsonNode errorsNode = rootNode.get("errors");
+                RealtyErrorResponseDto dto = new RealtyErrorResponseDto();
+                StreamSupport.stream(errorsNode.spliterator(), false).forEach(errorNode -> {
+                    String name = errorNode.path("name").asText(null);
+                    String timeThrown = errorNode.path("time_thrown").asText(null);
+                    String message = errorNode.path("message").asText(null);
 
-                errors.put("message", errorNode.path("message").asText());
-                errors.put("name", errorNode.path("name").asText());
-                errors.put("time_thrown", errorNode.path("time_thrown").asText());
-                errors.put("errorCode", errorNode.path("data").path("errorCode").asText());
+                    dto.setName(name);
+                    dto.setTimeThrown(timeThrown);
+                    dto.setMessage(message);
 
+                    JsonNode dataNode = errorNode.path("data");
+                    if (dataNode.isObject()) {
+                        dto.setErrorCode(dataNode.path("errorCode").asText(null));
+                        dto.setCode(dataNode.path("code").asText(null));
+                        dto.setECode(dataNode.path("eCode").asText(null));
+                        dto.setError(dataNode.path("error").asText(null));
+                        if(dto.getMessage() == null){
+                            dto.setMessage(dataNode.path("message").asText(null));
+                        }
+                        dto.setDescription(dataNode.path("description").asText(null));
+                    }
+
+                });
+                throw new RealtyApiException(dto.getMessage(), dto.getCodeAsInt(), dto);
             }
-
-            
-        } catch (IOException e) {
-
-            e.printStackTrace();
-
+        } 
+        catch(RealtyApiException e){
+            throw e;
         }
-
-        return errors;
-
+        catch (Exception e) {
+            e.printStackTrace();
+            throw new RealtyApiException("Something went wrong handling errors from data", 500, e.getCause());
+        }
     }
 
     

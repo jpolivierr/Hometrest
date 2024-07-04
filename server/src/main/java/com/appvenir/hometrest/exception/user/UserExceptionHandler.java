@@ -24,7 +24,7 @@ public class UserExceptionHandler {
         ErrorResponse errorResponse = ErrorResponse.builder()
                                             .timestamp(LocalDateTime.now())
                                             .status(HttpStatus.UNAUTHORIZED.value())
-                                            .error(e.getMessage())
+                                            .error(e.getCause() != null ? e.getCause().getMessage() : null)
                                             .message(e.getMessage())
                                             .path(request.getRequestURI())
                                             .build();

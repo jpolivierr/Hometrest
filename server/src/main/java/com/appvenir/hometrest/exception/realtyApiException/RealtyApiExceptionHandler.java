@@ -1,10 +1,10 @@
 package com.appvenir.hometrest.exception.realtyApiException;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,21 +20,20 @@ import jakarta.servlet.http.HttpServletRequest;
 public class RealtyApiExceptionHandler {
 
     @ExceptionHandler(RealtyApiException.class)
-    public ResponseEntity<Object> handleRealtyApiException(RealtyApiException ex, HttpServletRequest request){
+    public ResponseEntity<Object> handleRealtyApiException(RealtyApiException e, HttpServletRequest request){
 
-        HashMap<String,String> errors = ex.getErrors();
-        int errorStatus = Integer.parseInt(errors.get("errorCode"));
+        int apiStatus = e.getStatus() == 0 ? HttpStatus.BAD_REQUEST.value() : e.getStatus();
 
         ErrorResponse errorResponse = ErrorResponse.builder()
                                             .timestamp(LocalDateTime.now())
-                                            .status(errorStatus)
-                                            .error(errors.get("message"))
-                                            .message(errors.get("message"))
+                                            .status(apiStatus)
+                                            .error(e.getCause() != null ? e.getCause().getMessage() : null)
+                                            .message(e.getMessage())
                                             .path(request.getRequestURI())
-                                            .data(errors)
+                                            .data(e.getData())
                                             .build();
 
-        return new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(errorStatus));
+        return new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(apiStatus));
 
     }
     

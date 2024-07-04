@@ -17,7 +17,7 @@ public class RealtyApiController {
 
     private final RealtyApi realtyApi;
 
-    public RealtyApiController(@Qualifier("realtyApiServiceProxy") RealtyApi realtyApi) {
+    public RealtyApiController(@Qualifier("realtyApiService") RealtyApi realtyApi) {
         this.realtyApi = realtyApi;
     }
 

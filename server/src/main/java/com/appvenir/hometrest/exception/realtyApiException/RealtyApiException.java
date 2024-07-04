@@ -1,20 +1,27 @@
 package com.appvenir.hometrest.exception.realtyApiException;
 
-import java.util.HashMap;
 
 import lombok.Getter;
 
 @Getter
 public class RealtyApiException extends RuntimeException {
 
-    private HashMap<String,String> errors;
-
-    public RealtyApiException(HashMap<String,String> errors){
-        this.errors = errors;
-    }
+    private int status = 0;
+    private Object data;
 
     public RealtyApiException(String message){
         super(message);
+    }
+
+    public RealtyApiException(String message, int status){
+        super(message);
+        this.status = status;
+    }
+
+    public RealtyApiException(String message, int status, Object data){
+        super(message);
+        this.status = status;
+        this.data = data;
     }
     
 }
