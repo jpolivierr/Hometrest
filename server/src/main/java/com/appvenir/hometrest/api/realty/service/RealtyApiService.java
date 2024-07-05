@@ -1,16 +1,11 @@
 package com.appvenir.hometrest.api.realty.service;
 
-import java.io.IOException;
-import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse.BodyHandlers;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.StreamSupport;
 
-import org.apache.hc.core5.net.URIBuilder;
 import org.springframework.stereotype.Service;
 
 import com.appvenir.hometrest.api.realty.RealtyApi;
@@ -25,14 +20,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class RealtyApiService implements RealtyApi {
 
-    private HttpClient httpClient;
-    private HttpRequest.Builder realtyRequestBuilder;
+
     private final String REALTY_URI = "https://realty-in-us.p.rapidapi.com";
     private final MakeRequest makeRequest;
 
     public RealtyApiService( HttpRequest.Builder realtyRequestBuilder, HttpClient httpClient, MakeRequest makeRequest){
-        this.realtyRequestBuilder = realtyRequestBuilder;
-        this.httpClient = httpClient;
         this.makeRequest = makeRequest;
     }
 

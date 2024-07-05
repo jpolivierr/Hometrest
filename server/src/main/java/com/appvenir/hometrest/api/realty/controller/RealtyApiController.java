@@ -17,31 +17,12 @@ public class RealtyApiController {
 
     private final RealtyApi realtyApi;
 
-    public RealtyApiController(@Qualifier("realtyApiService") RealtyApi realtyApi) {
+    public RealtyApiController(@Qualifier("realtyApiServiceProxy") RealtyApi realtyApi) {
         this.realtyApi = realtyApi;
     }
 
-    // @PostMapping(path = "/list")
-    // public String list( @RequestBody Object propertySearch){
-    //     System.out.println("========================");
-    //     System.out.println("=== hit ");
-
-    //     try {
-    //         // Sleep the thread for 3 seconds (adjust as needed)
-    //         Thread.sleep(8000);
-    //     } catch (InterruptedException e) {
-    //         // Handle the exception if needed
-    //     }
-
-    //     return "Response after sleeping for 3 seconds";
-        
-    // }
-
-
     @PostMapping(path = "/list")
-    public  CompletableFuture<String> findPropertyList( 
-                                        @RequestBody Object propertySearch
-                                    )
+    public  CompletableFuture<String> findPropertyList(@RequestBody Object propertySearch)
     {
        return realtyApi.findPropertyList(propertySearch);
     }

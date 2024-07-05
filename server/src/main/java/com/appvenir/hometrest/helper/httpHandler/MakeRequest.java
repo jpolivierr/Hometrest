@@ -7,15 +7,9 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
-
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-
 import com.appvenir.hometrest.exception.makeRequest.MakeRequestException;
-import com.appvenir.hometrest.exception.realtyApiException.RealtyApiException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
