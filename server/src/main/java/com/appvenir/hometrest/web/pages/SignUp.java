@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.appvenir.hometrest.domain.user.dto.UserRegistrationDto;
+import com.appvenir.hometrest.domain.user.service.UserService;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/signup")
+@RequiredArgsConstructor
 public class SignUp {
+
+    private final UserService userService;
 
     @GetMapping
     public String signup(Model model) {
@@ -24,21 +29,26 @@ public class SignUp {
 
     @PostMapping
     public String signup(
-                        @ModelAttribute("userRegistration") 
+                         @ModelAttribute("userRegistration") 
                          @Valid UserRegistrationDto userRegistration,
                          BindingResult bindingResult,
                          Model model
                          )
     {
+        model.addAttribute("user", userRegistration);
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("user", userRegistration);
             return "signup";
         }
 
-        model.addAttribute("user", userRegistration);
+        if(userService.userExist(userRegistration.getEmail())) {
+            bindingResult.rejectValue("email", "error.userRegistration", "Email already exists");
+            return "signup";
+        }
 
-        return "signup";
+        userService.saveUser(userRegistration);
+
+        return "login";
         
     }
     

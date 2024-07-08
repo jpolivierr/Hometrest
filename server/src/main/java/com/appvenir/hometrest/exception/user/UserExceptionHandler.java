@@ -31,5 +31,18 @@ public class UserExceptionHandler {
 
         return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }
+
+    @ExceptionHandler(value = {EmailExistException.class})
+    public ResponseEntity<Object> handleEmailAlreadyExistException(EmailExistException e, HttpServletRequest request) {
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                                            .timestamp(LocalDateTime.now())
+                                            .status(HttpStatus.BAD_REQUEST.value())
+                                            .error(e.getCause() != null ? e.getCause().getMessage() : null)
+                                            .message(e.getMessage())
+                                            .path(request.getRequestURI())
+                                            .build();
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
     
 }

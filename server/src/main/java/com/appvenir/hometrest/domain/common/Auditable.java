@@ -23,7 +23,7 @@ public abstract class Auditable {
     private Long id;
 
     @CreationTimestamp
-    @Column(name = "date_create", nullable = false)
+    @Column(name = "date_created", nullable = false)
     private LocalDateTime dateCreated;
 
     @UpdateTimestamp
