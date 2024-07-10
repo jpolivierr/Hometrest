@@ -2,6 +2,7 @@ package com.appvenir.hometrest.domain.user.service;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.appvenir.hometrest.domain.user.dto.UserDto;
@@ -19,12 +20,15 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public UserDto saveUser(UserRegistrationDto userRegistrationDto){
 
         userRepository.findByEmail(userRegistrationDto.getEmail()).ifPresent( (u) -> {
             throw new EmailExistException();
-        });;
+        });
+
+        userRegistrationDto.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
 
         User user = UserMapper.toModel(userRegistrationDto);
 

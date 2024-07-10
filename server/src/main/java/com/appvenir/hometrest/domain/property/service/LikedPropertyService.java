@@ -1,5 +1,7 @@
 package com.appvenir.hometrest.domain.property.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.appvenir.hometrest.domain.property.dto.LikedPropertyDto;
@@ -54,6 +56,17 @@ public class LikedPropertyService {
         );
 
         likedPropertyRepository.delete(likedProperty);    
+
+    }
+
+    public List<LikedPropertyDto> getUserLikedProperties(UserDto userDto){
+
+        User user = userRepository.findByEmail(userDto.getEmail())
+        .orElseThrow(() -> new UserNotFoundException());
+
+        return likedPropertyRepository.findAllByUser(user).stream()
+                                                        .map(LikedPropertyMapper::toDto)
+                                                        .toList();
 
     }
     

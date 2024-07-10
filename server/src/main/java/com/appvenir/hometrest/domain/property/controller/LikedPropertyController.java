@@ -1,8 +1,11 @@
 package com.appvenir.hometrest.domain.property.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +27,17 @@ public class LikedPropertyController {
     private final LikedPropertyService likedPropertyService;
     private final UserService userService;
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<List<LikedPropertyDto>> getUserLikedProperties(){
+
+        UserDto user = userService.getUserByEmail("kp@gmail.com");
+        return ResponseEntity.ok(likedPropertyService.getUserLikedProperties(user));
+    }
+
     @PostMapping("/{propertyId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<LikedPropertyDto> saveUserProperty(@PathVariable("propertyId") String propertyId){
+    public ResponseEntity<LikedPropertyDto> getUserProperties(@PathVariable("propertyId") String propertyId){
 
         UserDto user = userService.getUserByEmail("kp@gmail.com");
 
@@ -37,11 +48,8 @@ public class LikedPropertyController {
     @DeleteMapping("/{propertyId}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteUserProperty(@PathVariable("propertyId") String propertyId){
-
         UserDto user = userService.getUserByEmail("kp@gmail.com");
-
         likedPropertyService.deleteUserProperty(user, propertyId);
-
     }
     
 }

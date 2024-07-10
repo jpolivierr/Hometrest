@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <form th:action="@{/login}" th:object="${userRegistration}" method="post">
+    <form th:action="@{/login}" th:object="${userLogin}" method="post">
         <div>
             <label for="email">Email</label>
             <input type="email" id="email" th:field="*{email}">

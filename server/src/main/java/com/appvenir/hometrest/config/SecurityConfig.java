@@ -1,27 +1,53 @@
 package com.appvenir.hometrest.config;
 
-// import org.springframework.context.annotation.Bean;
-// import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-// import org.springframework.security.crypto.password.PasswordEncoder;
-// import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
+import com.appvenir.hometrest.auth.provider.JpaAuthenticationProvider;
+
+import lombok.RequiredArgsConstructor;
+
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    // @Bean
-    // SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-    //     return http
-    //             .csrf( csrf -> csrf.disable())
-    //             .authorizeHttpRequests( auth -> auth
-    //                                 .anyRequest().permitAll()              
-    //             )
-    //             .build();
-    // }
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        return http
+                .csrf( csrf -> csrf.disable())
+                .authorizeHttpRequests( auth -> auth
+                                    .requestMatchers(allowedPath()).permitAll()
+                                    .anyRequest().authenticated()              
+                )
+                .formLogin( login -> {
+                    login.loginPage("/login")
+                    .usernameParameter("email");
+                })
+                .build();
+    }
 
-    // @Bean
-    // public PasswordEncoder passwordEncoder(){
-    //     return new BCryptPasswordEncoder();
-    // }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    public String[] allowedPath(){
+        return new String[]{
+                            "/error",
+                            "/logout?**",
+                            "/signup/**",
+                            "/login/**",
+                            "/assets/**",
+                            "/api/users/**",
+                            "/"
+                        };
+    }
 
     
 }
