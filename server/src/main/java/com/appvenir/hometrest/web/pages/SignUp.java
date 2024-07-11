@@ -16,13 +16,20 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/signup")
-@RequiredArgsConstructor
 public class SignUp {
 
-    private final UserService userService;
+    private UserService userService;
+
+    private String title;
+
+    public SignUp(UserService userService){
+        this.title = "Sign up";
+        this.userService = userService;
+    }
 
     @GetMapping
     public String signup(Model model) {
+        model.addAttribute("title", title);
         model.addAttribute("userRegistration", new UserRegistrationDto());
         return "signup";
     }
@@ -35,6 +42,7 @@ public class SignUp {
                          Model model
                          )
     {
+        model.addAttribute("title", title);
         model.addAttribute("user", userRegistration);
 
         if (bindingResult.hasErrors()) {

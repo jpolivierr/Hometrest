@@ -7,8 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import com.appvenir.hometrest.auth.provider.JpaAuthenticationProvider;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import com.appvenir.hometrest.filter.exception.GlobalExceptionFilter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,17 +17,27 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final GlobalExceptionFilter globalExceptionFilter;
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
                 .csrf( csrf -> csrf.disable())
+                .addFilterBefore(globalExceptionFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests( auth -> auth
                                     .requestMatchers(allowedPath()).permitAll()
                                     .anyRequest().authenticated()              
                 )
                 .formLogin( login -> {
                     login.loginPage("/login")
-                    .usernameParameter("email");
+                    .usernameParameter("email")
+                    .defaultSuccessUrl("/dashboard");
+                })
+                .logout( logout -> {
+                    logout.logoutUrl("/logout")
+                          .logoutSuccessUrl("/login?logout")
+                          .deleteCookies("JSESSIONID")
+                          .invalidateHttpSession(true);
                 })
                 .build();
     }
@@ -40,7 +50,7 @@ public class SecurityConfig {
     public String[] allowedPath(){
         return new String[]{
                             "/error",
-                            "/logout?**",
+                            "/logout/**",
                             "/signup/**",
                             "/login/**",
                             "/assets/**",

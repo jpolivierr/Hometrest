@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class UserLoginDto {
 
-    @NotBlank(message = "Email is required")
+    @NotBlank(message = "Email cannot be empty")
     @Email(message = "Invalid email")
     private String email;
 
