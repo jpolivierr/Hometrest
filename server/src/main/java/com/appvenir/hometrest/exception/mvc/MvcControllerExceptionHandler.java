@@ -3,7 +3,6 @@ package com.appvenir.hometrest.exception.mvc;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,7 +17,6 @@ public class MvcControllerExceptionHandler {
 
     @ExceptionHandler(value = {UserNotFoundException.class})
     public String handleUserNotFoundException(UserNotFoundException ex){
-        System.out.println("==============================");
         return "redirect:/login?error=true&message=" + ex.getMessage();
     }
 

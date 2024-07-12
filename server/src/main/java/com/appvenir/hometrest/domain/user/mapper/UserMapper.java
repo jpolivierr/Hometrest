@@ -42,4 +42,14 @@ public class UserMapper {
 
         return userDto;
     }
+
+    public static UserRegistrationDto toUserRegistrotionDto(User user){
+        UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
+        userRegistrationDto.setFirstName(user.getFirstName());
+        userRegistrationDto.setLastName(user.getLastName());
+        userRegistrationDto.setEmail(user.getEmail());
+        userRegistrationDto.setPassword(user.getPassword());
+
+        return userRegistrationDto;
+    }
 }

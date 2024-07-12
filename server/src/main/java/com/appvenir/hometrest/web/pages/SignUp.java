@@ -12,7 +12,6 @@ import com.appvenir.hometrest.domain.user.dto.UserRegistrationDto;
 import com.appvenir.hometrest.domain.user.service.UserService;
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/signup")

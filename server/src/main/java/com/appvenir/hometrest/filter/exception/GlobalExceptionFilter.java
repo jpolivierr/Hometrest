@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import com.appvenir.hometrest.exception.user.UserNotFoundException;
 import com.appvenir.hometrest.helper.paramBuilder.QueryParamBuilder;
@@ -48,6 +47,4 @@ public class GlobalExceptionFilter extends HttpFilter{
         }
     }
 
-
-    
 }
