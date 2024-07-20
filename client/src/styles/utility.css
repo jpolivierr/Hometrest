@@ -1,5 +1,6 @@
 :root{
-    --main-color: rgb(255, 9, 101);
+    --main-color: rgb(245, 65, 132);
+    --main-color: rgb(232, 84, 84);
     --secondary-color: #3d98c4;
     --dark-color : #212c51;
     --light-color: #eef6f9;
@@ -89,7 +90,7 @@ button{
 }
 
 .main-btn:hover{
-    background: rgb(230, 0, 84);
+    background: rgb(219, 49, 49);
 }
 
 
