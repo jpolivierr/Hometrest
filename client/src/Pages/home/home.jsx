@@ -28,8 +28,6 @@ const Home = (props) =>{
 
     return(
       <main>
-        <ScrollTop />
-          <TopNav elementStyle="home_nav" container="container-medium"/>
         <section id={id} className="hero">
 
           <div className="container-medium">
@@ -143,8 +141,6 @@ const Home = (props) =>{
           </div>
 
         </section>
-
-
 
 
         <section id={id} className="your-home">

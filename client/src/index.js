@@ -18,22 +18,15 @@ import { GlobalMessageProvider } from './context/globalMessage/globalMessageCont
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
-
-
-
-
    //  <React.StrictMode> 
    <Router> 
     <GlobalMessageProvider>
       <UserProvider>
         <ModalProvider>
           <Provider store={store}>
-              
                   <App />
-              
            </Provider>
          </ModalProvider>
-
   </UserProvider>
   </GlobalMessageProvider>
      </Router>

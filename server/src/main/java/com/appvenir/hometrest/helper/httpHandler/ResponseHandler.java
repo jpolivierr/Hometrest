@@ -15,7 +15,6 @@ public class ResponseHandler {
         if(HttpStatus.Series.valueOf(response.statusCode()) == HttpStatus.Series.SUCCESSFUL){
             return handleResponse.apply(response.body());
         }else{
-            System.out.println(response.body());
             throw new RealtyApiException("Request failed with status code: ", response.statusCode(), response.body());
         }
     }

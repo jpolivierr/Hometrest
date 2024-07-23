@@ -3,6 +3,7 @@ import ShowPropertiesView from "./ShowProperties.view"
 import { Reducers } from "../../Redux"
 import capitalizeFirstLetter from "../Forms/FormUtil/capitalizeFirstLetter"
 import { formatNumber } from "../../Util/formatNumber"
+
 const ShowProperties = ({loading}) =>{
 
 

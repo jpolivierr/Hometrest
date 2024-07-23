@@ -1,77 +1,123 @@
 import "./style.css"
-import ShowProperties from "../../components/showProperties/ShowProperties.component"
-import Filter from "../../features/filter"
-import Carousel from "../../lib/Carousel/Carousel.component"
-import Map from "../../components/map/Map"
-import { Reducers } from "../../Redux"
-import PropertyRequest from "../../httpRequest/propertyRequest/propertyRequest"
-import TopNav from "../../components/navBar/topNav"
-import Footer from "../../footer/footer.component"
-import ScrollTop from "../../components/ScrollTop/ScrollTop"
+import OldFilter from "../../features/filter"
+import Filter from "../../components/filter/Filter"
+import { formatNumber } from "../../Util/formatNumber"
+import URL from "../../constants/urls"
+import HttpRequest from "../../httpRequest/HttpRequest"
+import { useState, useEffect, useRef } from "react"
+import { deepSearch } from "../../Util/getValueByKey"
+import CardLoading from "../../lib/loadingEffect/CardLoading/CardLoading"
+import PropertyCard from "../../components/propertyCard/PropertyCard.component"
+
 
 const Listings = (props) =>{
+  
+  const [search, setSearch] = useState({
+                        city_zip : "",
+                        city: "",
+                        state_code: "",
+                        postal_code: "",
+                        type: [],
+                        status: [],
+                        list_price: {min: 0, max: 0},
+                        baths: {min: 0, max: 0},
+                        beds : {min: 0, max: 0},
+                        limit : 50
+                      })
+  const init = {
+              count: 0,
+              total: 0,
+              results : [],
+  }
+  const httpRequest = HttpRequest(URL.SEARCH)
+  const {post, loading} = httpRequest
+  const [properties, setProperties] = useState([])
+  const [total, setTotal] = useState(0)
+  const [count, setCount] = useState(0)
+  const {Class, id} = props
 
-    const {loading} = PropertyRequest()
-    // let loading = false
 
-  const { propertiesReducer} = Reducers()
+  useEffect( () => {
 
-    const {Class, id} = props
+    fetchProperties()
 
-    const carouselSettings = {
-          split: 4,
-          aspectRatio: 5 / 5,
-          transitionTime : .3,
-          gap : 13,
-          style: "split_4"
+  },[])
+
+  const prevSearchRef = useRef();
+
+  useEffect(() => {
+    if (prevSearchRef.current && !deepEqual(prevSearchRef.current, search)) {
+
     }
-    console.log(loading)
-    console.log(propertiesReducer)
+    prevSearchRef.current = search;
+  }, [search]);
 
-    return(
-      <>
-      <ScrollTop />
-        <TopNav  
-        elementStyle={"top-nav-stick"}
-         container="container"
-        />
-          <div id={id} className={Class}>
-            
-            <div className="filter_container stick"> 
-              <div className="container">
 
-              <Filter />
-                {loading !== null && loading === false && propertiesReducer.count === 0 &&
-               <h4 className="no-result" >No results found. Please try a different search </h4>
-          }
+  async function fetchProperties (){
+
+    const response = await post(URL.SEARCH, search)
+
+    if(response.status === 200 && response.body){
+      const propertyData = deepSearch(response.body,["data","home_search"],init)
+      setCount(propertyData.count)
+      setTotal(propertyData.total)
+      setProperties(propertyData.results)
+    }
+
+  }
+  
+  const deepEqual = (obj1, obj2) => {
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
+  };
+
+  return (
+    <>
+      <div id={id} className={Class}>
+ 
+            <OldFilter />
+            <Filter data={search} setData={setSearch}/>
+
+        <div className="search-result wide-container">
+          {/* <Map properties={propertiesReducer.results} 
+            zoom={10}
+            disableDefaultUI={false}
+            streetViewControl={false}
+            fullscreenControl={false}
+            styleElement={"sticky_map"}
+            loading={loading}
+          /> */}
+          
+          <div className={`show-properties ${loading && properties.length > 0 ? "props-loading" : ""}`}>
+            {
+                properties.length === 0 ? <CardLoading/> :
+                <div>
+                  <div className="show-properties-header"> 
+                  <h5>
+                    {`Showing `} <b style={{fontWeight: "600"}}>{`${formatNumber(search.limit)}`}</b>  {` out of `}
+                    <b style={{fontWeight: "600"}}>{`${formatNumber(total)}`}</b>{` result for `}
+                        <span style={{fontStyle: "italic"}}>
+                          {`"${search.city}"`}
+                        </span>
+                    </h5>
+                  </div>
+
+                  <div className="property_list_container">
+                    { 
+                      properties.map((property,index)=>(
+                          <PropertyCard
+                              singleProperty = {property}
+                              imageKey = {"od-w1024_h768.jpg"}
+                              key={index}
+                          />
+                          ))
+                    }
+                  </div>
               </div>
-             
-            </div>
-
-         
-            
-
-            <div className="search-result wide-container">
-
-            <Map properties={propertiesReducer.results} 
-              zoom={10}
-              disableDefaultUI={false}
-              streetViewControl={false}
-              fullscreenControl={false}
-              styleElement={"sticky_map"}
-              loading={loading}
-            />
-            
-              <ShowProperties loading={loading} />
-
-            </div>
-            
-          </div>
-
-          <Footer container="container" />
-      </>
-
-        
+            }   
+        </div>
+      </div>
+    </div>
+    </>
     )
 }
 

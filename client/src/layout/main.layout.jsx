@@ -1,0 +1,19 @@
+import TopNav from "../components/navBar/topNav";
+import ScrollTop from "../components/ScrollTop/ScrollTop";
+import Footer from "../footer/footer.component";
+
+const MainLayout = ({ children }) => {
+    return (
+    <>
+    <ScrollTop />
+        <TopNav  
+            elementStyle={"top-nav-stick"}
+            container="container"
+        />
+            {children}
+    <Footer container="container" />
+    </>
+    );
+  };
+  
+  export default MainLayout;

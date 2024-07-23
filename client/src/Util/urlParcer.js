@@ -77,13 +77,13 @@ export const updateParam = (paramObj,toJson, paramKey) =>{
 
         url.search = search_params.toString()
 
-        const data = search_params
+        const data = { params: search_params.toString() }; 
 
         const title = document.title
         
         const newUrl = url.toString()
 
-        window.history.replaceState(data, title, newUrl);
+         window.history.replaceState(data, title, newUrl);
 
     }
     
@@ -127,7 +127,7 @@ export const updateParam = (paramObj,toJson, paramKey) =>{
 
         url.search = search_params.toString()
 
-        const data = search_params
+        const data = { params: search_params.toString() }; 
 
         const title = document.title
         

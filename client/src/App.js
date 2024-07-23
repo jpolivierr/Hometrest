@@ -9,7 +9,7 @@ import Listings from './Pages/listings/listings';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
 import UserRequest from './httpRequest/userRequest/userRequest';
-
+import MainLayout from './layout/main.layout';
 
 
 function App() {
@@ -19,11 +19,9 @@ function App() {
   return (
     <>
         {
-        loading ? <LoadingEffect 
-                isShowing = {loading} 
-                elementClass="basic-loading"
-                type="ring"/> : 
+        loading ? <LoadingEffect isShowing = {loading} elementClass="basic-loading" type="ring"/> : 
       <div className="App">
+        <MainLayout>
           <Routes>
           <Route path="/single_property" element={<SingleProperty/>}/>
           <Route path="/signup" element={<Signup/>}/>
@@ -35,10 +33,7 @@ function App() {
           <Route path="/update" element={<Update/>}/>
           <Route path="/" element={<Home />}/>
         </Routes>
-      
-
-
-
+       </MainLayout>
       </div>
     }
 

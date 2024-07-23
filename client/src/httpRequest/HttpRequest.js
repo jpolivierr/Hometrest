@@ -27,10 +27,8 @@ const HttpRequest = (defaultUrl,config) =>{
 
         switch(true){
             case status >= 200 && status <= 299 :
-                console.log("Success")
                 break
             case status === 404 :
-                console.log("Page not found")
                 break
             case status === 504 :
                 setServerError("Request timed out")
@@ -46,8 +44,6 @@ const HttpRequest = (defaultUrl,config) =>{
     
 
  const PrepareRequest = (url,method,data) =>{
-
-        setLoading(true)
         const assignUrl = url ? url : defaultUrl
         const signal = setSignal(abortController)
         defaultConfig.method = method
@@ -76,7 +72,6 @@ const HttpRequest = (defaultUrl,config) =>{
 
 
     const get = async (url) => {
-
                 try {
                     console.log("making GET request.....")
 
@@ -94,24 +89,29 @@ const HttpRequest = (defaultUrl,config) =>{
 
             }
 
-            const post = async (url,data) => {
+    const post = async (url,data) => {
 
-                try {
+        try {
             
-                    const {assignUrl,assignConfig} = PrepareRequest(url,"POST",data)
+            const {assignUrl,assignConfig} = PrepareRequest(url,"POST",data)
+            setLoading(true) 
+            const response = await fetch(assignUrl,assignConfig)
 
-                    const response = await fetch(assignUrl,assignConfig)
-
-                    postResponse(response, assignConfig.signal)  
-
-
-                } catch (error) {
-
-                    handleError(error, setStatus)
-                    
-                }
-
+            clearTimeout(assignConfig.signal.timeout)
+            setLoading(false)
+            return {
+                status: response.status,
+                body : await response.json(),
             }
+
+
+        } catch (error) {
+
+            handleError(error, setStatus)
+            
+        }
+
+    }
 
 
     return{

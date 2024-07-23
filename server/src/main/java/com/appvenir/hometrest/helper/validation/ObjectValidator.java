@@ -22,7 +22,6 @@ public class ObjectValidator {
     }
 
     public <T> void validate(T userRegistration) throws ValidationException {
-        System.out.println("Validating.........................================");
         Set<ConstraintViolation<T>> violations = validator.validate(userRegistration);
         checkErrors(violations);
     }

@@ -11,7 +11,6 @@ public class ValidationException extends RuntimeException {
     
     public ValidationException(Map<String,String> errors){
         this.errors = errors;
-        System.out.println(this.errors);
     }
 
     public ValidationException(String message, Map<String,String> errors){

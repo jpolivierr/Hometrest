@@ -8,6 +8,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
 import com.appvenir.hometrest.filter.exception.GlobalExceptionFilter;
 
 import lombok.RequiredArgsConstructor;
@@ -18,11 +23,13 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig {
 
     private final GlobalExceptionFilter globalExceptionFilter;
+    private final CorsConfigurationSource corsConfigurationSource;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
                 .csrf( csrf -> csrf.disable())
+                .cors( cors -> cors.configurationSource(corsConfigurationSource))
                 .addFilterBefore(globalExceptionFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests( auth -> auth
                                     .requestMatchers(allowedPath()).permitAll()
@@ -55,6 +62,7 @@ public class SecurityConfig {
                             "/login/**",
                             "/assets/**",
                             "/api/users/**",
+                            "/api/v1/**",
                             "/"
                         };
     }

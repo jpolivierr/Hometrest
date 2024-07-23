@@ -1,33 +1,27 @@
 import "./ShowProperties.style.css"
 import PropertyCard from "../propertyCard/PropertyCard.component"
-import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
 import CardLoading from "../../lib/loadingEffect/CardLoading/CardLoading"
-import UserContext from "../../context/user/UserContext"
-import { useContext } from "react"
-import Carousel from "../../lib/Carousel/Carousel.component"
 
+const ShowPropertiesView = ({ properties, loading, total}) =>{
 
-const ShowPropertiesView = ({value}) =>{
-
-    const { getSearchValue, properties, total, loading, generatePageNumber} = value
+    // const {generatePageNumber} = value
 
     const carouselSettings = {
         split: 2,
       }
 
     return(
-
         <div className={`show-properties ${loading && properties.length > 0 ? "props-loading" : ""}`}>
 
          {
              properties.length === 0 ?
              <CardLoading/> :
              <>
-                <div className="show-properties-header"> 
+                {/* <div className="show-properties-header"> 
 
                         {getSearchValue()}
 
-                </div>
+                </div> */}
 
                 <div className="property_list_container">
                 { 

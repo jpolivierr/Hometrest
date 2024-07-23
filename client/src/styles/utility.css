@@ -15,6 +15,7 @@
     --borderColor: #1b365e82;
     --lightSilver: #92a6bf21;
     --lightShadow : 0px 10px 25px -6px #92a2bf56;
+    --shadow : 0 0 20px #82bbcc54;
 }
 
 .white-text h1,
@@ -75,7 +76,6 @@ Buttons
 button{
     border-radius: var(--borderRadius);
     border: none;
-    font-weight: bold;
     padding: .7rem .88rem;
     cursor: pointer;
     transition: .5s;

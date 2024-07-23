@@ -1,24 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import URL from '../../constants/urls'
 import compareObjects from '../../Util/compareObjects'
 import removeEmptyValues from '../../Util/removeEmptyValues'
 import prepareObject from './Util/prepareObject'
 import hardCopy from '../../Util/hardCopy'
 import { deepSearch } from '../../Util/getValueByKey'
-import propertiesDemo from '../../Mock/propertyDemo'
 import HttpRequest from '../HttpRequest'
 import { Reducers, Actions } from '../../Redux'
-import useScale from '../../lib/ClickEvents/scale/Scale'
 
 
 export default function PropertyRequest() {
 
   const {setPropertyList, setSearch} = Actions()
+
   const {searchReducer} = Reducers()
 
-  const propertyRequest = HttpRequest(URL.SEARCH)
+  const httpRequest = HttpRequest(URL.SEARCH)
 
-  const {response, post, loading,status} = propertyRequest
+  const {response, post, loading, status} = httpRequest
 
   let prevState = useRef({})
   
@@ -29,14 +28,11 @@ export default function PropertyRequest() {
   useEffect(()=>{
 
     // if(!searchReducer.city && !searchReducer.state_code) return
-    
     if(!compareObjects(prevState.current, searchReducer)){
         const searchReducerCopy = hardCopy(searchReducer)
         const preparedObj = prepareObject(searchReducerCopy, "jacksonville","fl")
         preparedObj.limit = 50
         setSearch(preparedObj)
-        console.log("making POST request.....")
-        console.log(preparedObj)
         post(URL.SEARCH, removeEmptyValues(preparedObj))
         prevState.current = searchReducer
     }
@@ -51,8 +47,9 @@ export default function PropertyRequest() {
         count: 0,
         total: 0,
         results : [],
-}
-      const data = deepSearch(response[0],["data","home_search"],init)
+      }
+      console.log(response)
+      const data = deepSearch(response,["data","home_search"],init)
       console.log(data)
       setPropertyList(data)
     }
