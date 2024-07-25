@@ -7,8 +7,9 @@ import HttpRequest from "../../httpRequest/HttpRequest"
 import { useState, useEffect, useRef } from "react"
 import { deepSearch } from "../../Util/getValueByKey"
 import CardLoading from "../../lib/loadingEffect/CardLoading/CardLoading"
-import PropertyCard from "../../components/propertyCard/PropertyCard.component"
-
+import PropertyCard from "../../components/propertyCard/PropertyCard"
+import { updateParam, getParams } from "../../Util/urlParcer"
+import removeEmptyValues from "../../Util/removeEmptyValues"
 
 const Listings = (props) =>{
   
@@ -36,45 +37,57 @@ const Listings = (props) =>{
   const [count, setCount] = useState(0)
   const {Class, id} = props
 
-
+  useEffect(() => {
+    const params = getParams("search");
+    if (params) {
+      // Update search state with keys from params
+      setSearch((prevSearch) => ({
+        ...prevSearch,
+        ...Object.keys(params).reduce((acc, key) => {
+          if (key in prevSearch) {
+            acc[key] = params[key];
+          }
+          return acc;
+        }, {})
+      }));
+    }
+  }, []);
+  
   useEffect( () => {
-
     fetchProperties()
-
   },[])
 
   const prevSearchRef = useRef();
 
   useEffect(() => {
-    if (prevSearchRef.current && !deepEqual(prevSearchRef.current, search)) {
-
+    if (prevSearchRef.current && !deepEqual(prevSearchRef.current, search)){
+      const searchCopy = {...search}
+      updateParam(removeEmptyValues(searchCopy), true, "search") 
+      fetchProperties()
     }
     prevSearchRef.current = search;
   }, [search]);
 
+  const deepEqual = (obj1, obj2) => {
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
+  };
 
-  async function fetchProperties (){
 
-    const response = await post(URL.SEARCH, search)
-
+  const fetchProperties = async () =>{
+    const response = await post(URL.SEARCH, removeEmptyValues({...search}, true))
     if(response.status === 200 && response.body){
       const propertyData = deepSearch(response.body,["data","home_search"],init)
       setCount(propertyData.count)
       setTotal(propertyData.total)
       setProperties(propertyData.results)
     }
-
   }
-  
-  const deepEqual = (obj1, obj2) => {
-    return JSON.stringify(obj1) === JSON.stringify(obj2);
-  };
 
   return (
     <>
       <div id={id} className={Class}>
  
-            <OldFilter />
+            {/* <OldFilter /> */}
             <Filter data={search} setData={setSearch}/>
 
         <div className="search-result wide-container">

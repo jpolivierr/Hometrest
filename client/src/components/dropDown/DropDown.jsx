@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react';
 
-export default function DropDown({ children, value, Class }) {
+export default function DropDown({ children, value, Class, arrow }) {
   const [isOpen, setIsOpen] = useState(value);
   const dropdownRef = useRef(null);
 
@@ -15,7 +15,7 @@ export default function DropDown({ children, value, Class }) {
   };
 
   const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target) || event.target.hasAttribute("data-close-on-click")) {
         setIsOpen(false);
     }
    };
@@ -27,6 +27,18 @@ export default function DropDown({ children, value, Class }) {
     };
 }, []);
 
+ const arrows = () => {
+
+  if(!arrow) return
+
+  return (
+      isOpen ? 
+      <i className="fa-solid fa-angle-up"></i> :
+      <i className="fa-solid fa-angle-down"></i>
+    )
+
+ }
+
   return (
       <div ref={dropdownRef} className={`drop-down ${Class} ${isOpen ? 'open' : 'close'}`}>
           {React.Children.map(children, (child, index) => {
@@ -37,15 +49,18 @@ export default function DropDown({ children, value, Class }) {
                       <>
                          {child.props.children}
                          {
-                          isOpen ? 
-                          <i className="fa-solid fa-angle-up"></i> :
-                          <i className="fa-solid fa-angle-down"></i>
+                          arrows()
                           }
                       </>
                     )
                   
                   });
               }
+              if (index === 1 && React.isValidElement(child)) {
+                return React.cloneElement(child, { 
+                  className: `${child.props.className} drop-down-window`
+                });
+            }
               return child;
           })}
       </div>

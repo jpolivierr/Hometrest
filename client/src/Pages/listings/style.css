@@ -72,17 +72,23 @@ right: 0;
 top: 120%;
 background: white;
 }
+
 .drop-down{
     position: relative;
 }
-.drop-down.close div:nth-child(2){
-    display: none;
+
+.drop-down .drop-down-window{
+    position: absolute;
+    background: white;
 }
 
-.drop-down.open div:nth-child(2){
+.drop-down.open .drop-down-window{
     display: inherit;
 }
 
+.drop-down.close .drop-down-window{
+    display: none;
+}
 .filter-dropdown .drop-down-button{
     background: white;
     border: 1px solid #70879f78;
@@ -94,6 +100,44 @@ background: white;
 
 .filter-dropdown .drop-down-button i{
     margin-left: .3rem;
+}
+
+.drop-down-input {
+    position: relative;
+}
+
+.drop-down-input input{
+    cursor: pointer;
+    max-width: 130px;
+}
+
+.drop-down-input i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20px;
+  margin: auto;
+  height: max-content;
+}
+
+.input-filter-dropdown{
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.input-drop-down-window{
+    position: absolute;
+    left: 0;
+    top: 110%;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    width: max-content;
+    background: white;
+    border: 1px solid rgb(228, 227, 227);
+    z-index: 1;
+    min-width: 230px;
+
 }
 
 .filter-dropdown .filter-dropdown-window{
@@ -138,4 +182,26 @@ background: white;
 
 .home-type-option{
     min-width: 155px;
+}
+
+.status-option{
+    min-width: 185px;
+}
+
+.drop-down-min-height{
+    max-height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.bed-option{
+    min-width: 130px;
+}
+
+.bed-option-button{
+    min-width: 105px;
+}
+
+.bed-count-option{
+    min-width: 130px !important;
 }

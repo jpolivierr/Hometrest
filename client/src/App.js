@@ -14,12 +14,8 @@ import MainLayout from './layout/main.layout';
 
 function App() {
 
-  const {loading} = UserRequest()
-
   return (
     <>
-        {
-        loading ? <LoadingEffect isShowing = {loading} elementClass="basic-loading" type="ring"/> : 
       <div className="App">
         <MainLayout>
           <Routes>
@@ -35,8 +31,6 @@ function App() {
         </Routes>
        </MainLayout>
       </div>
-    }
-
     </>
      
   );

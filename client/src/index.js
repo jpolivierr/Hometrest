@@ -20,15 +20,15 @@ root.render(
 
    //  <React.StrictMode> 
    <Router> 
-    <GlobalMessageProvider>
-      <UserProvider>
-        <ModalProvider>
+    {/* <GlobalMessageProvider> */}
+      {/* <UserProvider> */}
+        {/* <ModalProvider> */}
           <Provider store={store}>
                   <App />
            </Provider>
-         </ModalProvider>
-  </UserProvider>
-  </GlobalMessageProvider>
+         {/* </ModalProvider> */}
+  {/* </UserProvider> */}
+  {/* </GlobalMessageProvider> */}
      </Router>
    // </React.StrictMode>   
 );

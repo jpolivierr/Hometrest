@@ -8,8 +8,6 @@
     max-height: 360px;
 }
 
-
-
 .property-card figure{
     position: relative;
     width: 100%;
@@ -104,13 +102,22 @@
 }
 
 .status-component{
-    border-radius: 100px;
     color: white;
     padding: .3rem .4rem;
     font-weight: 600;
     font-size: 9px;
     width: max-content;
     text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+.status-component div{
+    border-radius: 100px;
+    padding: .3rem .5rem;
+    font-weight: bold;
 }
 
 .info-window-prop-card{

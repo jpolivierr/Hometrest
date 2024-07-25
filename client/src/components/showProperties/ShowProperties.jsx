@@ -1,74 +1,74 @@
-import useReduxMng from "../../hooks/useReduxMng"
-import PropertyCard from "../propertyCard/PropertyCard"
-import useMyModal from "../../lib/Modal/useMyModal"
-import NewLoginForm from "../Forms/NewLoginForm"
-import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
-import { useEffect } from "react"
+// import useReduxMng from "../../hooks/useReduxMng"
+// import PropertyCard from "../propertyCard/PropertyCard"
+// import useMyModal from "../../lib/Modal/useMyModal"
+// import NewLoginForm from "../Forms/NewLoginForm"
+// import SkeletonLoading from "../../lib/loadingEffect/skeletonLoading/skeletonLoading"
+// import { useEffect } from "react"
 
 
-const ShowProperties = (props) =>{
+// const ShowProperties = (props) =>{
 
-    const {isLoading, properties} = props
+//     const {isLoading, properties} = props
 
-    const {propertiesReducer,searchReducer} = useReduxMng()
+//     const {propertiesReducer,searchReducer} = useReduxMng()
     
 
-    const getSearchValue = () =>{
+//     const getSearchValue = () =>{
 
-        const city = searchReducer.city || ""
-        const postal_code = searchReducer.postal_code || ""
-        const state_code = searchReducer.state_code || ""
-        const state = searchReducer.state || ""
+//         const city = searchReducer.city || ""
+//         const postal_code = searchReducer.postal_code || ""
+//         const state_code = searchReducer.state_code || ""
+//         const state = searchReducer.state || ""
 
-        let myState
+//         let myState
 
-        if(state_code && state){
-            myState = state_code
-        }else{
-            myState = state_code ? state_code : state
-        }
+//         if(state_code && state){
+//             myState = state_code
+//         }else{
+//             myState = state_code ? state_code : state
+//         }
 
-        const str = `${city} ${myState} ${postal_code}`
+//         const str = `${city} ${myState} ${postal_code}`
 
-        return  (<h2>{`Showing 50 out of${propertiesReducer.length} result found for "${str.trim()}"`}</h2>)
+//         return  (<h2>{`Showing 50 out of${propertiesReducer.length} result found for "${str.trim()}"`}</h2>)
     
-    }
+//     }
 
-    const renderLoading = () =>{
+//     const renderLoading = () =>{
 
-        if(isLoading || propertiesReducer.length === 0){
-            return(
-                <SkeletonLoading
-              type="cards"
-              elementClass="av-loading-skeleton"
-          />
-            )
-        }
+//         if(isLoading || propertiesReducer.length === 0){
+//             return(
+//                 <SkeletonLoading
+//               type="cards"
+//               elementClass="av-loading-skeleton"
+//           />
+//             )
+//         }
 
-    }
+//     }
 
 
-    return(
-        <div className={`show-properties ${isLoading && "props-loading"}`}>
+//     return(
+//         <div className={`show-properties ${isLoading && "props-loading"}`}>
 
-        {<div className="show-properties-header"> 
-             {!isLoading && getSearchValue()}
-            </div>}
-            <div>
+//         {<div className="show-properties-header"> 
+//              {!isLoading && getSearchValue()}
+//             </div>}
+//             <div>
                 
-            </div>
-            {
-            propertiesReducer.length > 0 ? propertiesReducer.map((property,index)=>(
+//             </div>
+//             {
+//             propertiesReducer.length > 0 ? propertiesReducer.map((property,index)=>(
         
-            <PropertyCard
-               singleProperty = {property}
-               key={index}
-            />
+//             <PropertyCard
+//                singleProperty = {property}
+//                key={index}
+//             />
        
-   )) : renderLoading()}
-        </div>
-    )
+//    )) : renderLoading()}
+//         </div>
+//     )
 
-}
+// }
 
-export default ShowProperties
+// export default ShowProperties

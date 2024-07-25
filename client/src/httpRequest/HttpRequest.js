@@ -108,7 +108,7 @@ const HttpRequest = (defaultUrl,config) =>{
         } catch (error) {
 
             handleError(error, setStatus)
-            
+            return {status: 500, body: null}
         }
 
     }

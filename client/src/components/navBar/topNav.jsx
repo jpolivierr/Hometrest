@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom"
 
 const TopNav = ({elementStyle, container}) =>{
 
-    const {activeUser, logout} = useContext(UserContext)
+    // const {activeUser, logout} = useContext(UserContext)
 
     const location = useLocation();
 
@@ -30,9 +30,7 @@ const TopNav = ({elementStyle, container}) =>{
      
     return(
         <div className={`${navStick}`}>
-        {!activeUser || !activeUser.id ? <LogOutNav 
-                     elementStyle={elementStyle} container={container}/> : 
-                     <LogInNav elementStyle={elementStyle} container={container}/>}
+            <LogOutNav elementStyle={elementStyle} container={container}/>
         </div>
                                
      

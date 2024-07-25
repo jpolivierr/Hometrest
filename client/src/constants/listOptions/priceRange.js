@@ -22,7 +22,6 @@
    ]
 
  export const rentPriceOptions = [ 
-      0,
       700,
       1000,
       1100,

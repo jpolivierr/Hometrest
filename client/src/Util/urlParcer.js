@@ -23,11 +23,9 @@ export const urlParcer = () =>{
 export const getParams = (paramKey) =>{
  
     const search = window.location.search
-    
+
     if(!search){
-
         return null
-
     }else{
             const paramValue = new URLSearchParams(search)
             
@@ -63,78 +61,33 @@ export const getParams = (paramKey) =>{
     
 }
 
-export const updateParam = (paramObj,toJson, paramKey) =>{
+export const updateParam = (paramObj, toJson, paramKey) => {
+    const url = new URL(window.location.href);
+    const searchParams = url.searchParams;
 
-    
-
-    if(typeof paramObj === "object" && Object.keys(paramObj).length === 0){
-
-        const url = new URL(window.location.href);
-
-        const search_params = url.searchParams;
-  
-        search_params.delete(paramKey);
-
-        url.search = search_params.toString()
-
-        const data = { params: search_params.toString() }; 
-
-        const title = document.title
-        
-        const newUrl = url.toString()
-
-         window.history.replaceState(data, title, newUrl);
-
-    }
-    
-    if(typeof paramObj === "object" && Object.keys(paramObj).length > 0){
-        
-        const url = new URL(window.location.href)
-
-        const search_params = url.searchParams
-
-        if(!toJson){
-
-                    for( const key in paramObj){
-
-                    const keyValue = paramObj[key]
-
-                    
-                        if(
-                            typeof keyValue === "object" && 
-                            Object.keys(keyValue).length > 0)
-                            {
-
-                                const myArr = Object.entries(keyValue)
-
-                                search_params.set(key,myArr + "&")
-
-                        }else if(keyValue !== "") {
-
-                            search_params.set(key,keyValue)
-
-                        }   
-                        
+    if (typeof paramObj === "object" && Object.keys(paramObj).length === 0) {
+        searchParams.delete(paramKey);
+    } else if (typeof paramObj === "object" && Object.keys(paramObj).length > 0) {
+        if (toJson) {
+            searchParams.set(paramKey, JSON.stringify(paramObj));
+        } else {
+            for (const key in paramObj) {
+                const keyValue = paramObj[key];
+                if (typeof keyValue === "object" && Object.keys(keyValue).length > 0) {
+                    searchParams.set(key, JSON.stringify(keyValue));
+                } else if (keyValue !== "") {
+                    searchParams.set(key, keyValue);
                 }
-
-          }else{
-
-              search_params.set(paramKey, JSON.stringify(paramObj) )
-
-          }
-
-      
-
-        url.search = search_params.toString()
-
-        const data = { params: search_params.toString() }; 
-
-        const title = document.title
-        
-        const newUrl = url.toString()
-
-        window.history.replaceState(data, title, newUrl);
-
+            }
+        }
     }
-}
+
+    url.search = searchParams.toString();
+    const newUrl = url.toString();
+    const title = document.title;
+    const data = { params: searchParams.toString() };
+
+    window.history.replaceState(data, title, newUrl);
+};
+
 

@@ -4,8 +4,8 @@ import { useContext } from "react"
 import NavList from "../list/NavList"
 
 const LogOutNav = ({elementStyle, container}) =>{
-    const {toggleSideModal} = useContext(ModalContext)
-    const {toggleShowMessage} = useContext(GlobalMessageContext)
+    // const {toggleSideModal} = useContext(ModalContext)
+    // const {toggleShowMessage} = useContext(GlobalMessageContext)
 
 
     return(
