@@ -1,15 +1,13 @@
-function removeEmptyValues(obj, removeZeros) {
+export default function removeEmptyValues(obj, removeZeros = false) {
   for (let key in obj) {
     if (typeof obj[key] === 'object' && obj[key] !== null) {
-      removeEmptyValues(obj[key])
-      if (Array.isArray(obj[key]) && obj[key].length === 0 || Object.keys(obj[key]).length === 0) {
-        delete obj[key]
+      obj[key] = removeEmptyValues(obj[key], removeZeros);
+      if (Object.keys(obj[key]).length === 0) {
+        delete obj[key];
       }
     } else if ((removeZeros && obj[key] === 0) || obj[key] === '') {
-      delete obj[key]
+      delete obj[key];
     }
   }
   return obj;
 }
-
-  export default removeEmptyValues

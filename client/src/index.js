@@ -19,17 +19,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
    //  <React.StrictMode> 
-   <Router> 
-    {/* <GlobalMessageProvider> */}
-      {/* <UserProvider> */}
-        {/* <ModalProvider> */}
-          <Provider store={store}>
-                  <App />
-           </Provider>
-         {/* </ModalProvider> */}
-  {/* </UserProvider> */}
-  {/* </GlobalMessageProvider> */}
-     </Router>
+    <Router> 
+      <UserProvider>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </UserProvider>
+    </Router>
    // </React.StrictMode>   
 );
 

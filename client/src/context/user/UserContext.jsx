@@ -3,119 +3,60 @@ import useSession from "../../features/sessionManagement/useSession";
 import useRequest from "../../httpRequest/MakeRequest/MakeRequest";
 import URL from "../../constants/urls";
 import capitalizeWords from "../../Util/capitalizedWords";
+import deepCopy from "../../Util/deepCopy";
 
 const UserContext = createContext();
 
-export const UserProvider = ({children}) =>{
+export const UserProvider = ({children}) => {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const {makeRequest, response, loading, serverError} = useRequest()
-    const {deleteCookie, getCookie, activeCookie} = useSession()
-    
+    // const [isLoggedIn, setIsLoggedIn] = useState(false)
+    // const {makeRequest, response, loading, serverError} = useRequest()
+    // const {deleteCookie, getCookie, activeCookie} = useSession()
+    const [user, setUser] = useState({
+        name: "Frederic"
+    })
 
-    const init = {
-        id: "",
-        firstName : "",
-        lastName : "",
-        email : "",
-        likedProperties : [],
-    }
-    
-const [activeUser, setActiveUser] = useState(init)
-
-    useEffect(()=>{
-
-        if(serverError){
-            console.log(serverError)
-        }
-
-        if(response){
-            console.log(response)
-        }
-
-    },[response, serverError])
-
-    const setUser = (user) =>{
-        user.firstName = capitalizeWords(user.firstName)
-        user.lastName = capitalizeWords(user.lastName)
-        setActiveUser(user)
-        setIsLoggedIn(true)
-    }
-
-    const userLikesCount = () =>{
-        const count = activeUser.likedProperties.length
+    const favoritePropertyCount = () =>{
+        const count = user.likedProperties.length
 
         if(count > 9){
             return "+" + 9
         }
 
         return count
-
-    }
-
-    const clearUser = () =>{
-        setActiveUser(init)
-        deleteCookie()
-        setIsLoggedIn(false)
     }
 
     const logout = () =>{
-        setIsLoggedIn(false)
-        makeRequest("GET",URL.LOGOUT)
+ 
+        setUser(null)
     }
 
     const deleteAccount = () =>{
-        makeRequest("DELETE",URL.DELETE_ACCOUNT)
+  
+        setUser(null)
     }
 
-    const getUserLikes = useCallback((id) =>{
-        const userLikes = activeUser.likedProperties
+    const getUserFavoritePropertyById = (id) => {
+        const userLikes = user.likedProperties
         const likes = userLikes.find(like => like.propertyId === id)
         return likes
+    }
 
-    },[activeUser.likedProperties])
+    const getUserFavoriteProperties = (id) => {
+        return user.likedProperties
+    }
 
-    const likeProperty = useCallback((id) =>{
-
-        const likePropsClone = [...activeUser.likedProperties]
-        const propsId= likePropsClone.find(propId => propId.propertyId === id)
-
-        if(propsId){
-
-          const updatedateLikes = likePropsClone.filter( likesId => likesId.propertyId !== id)
-
-          setActiveUser({...activeUser, likedProperties: updatedateLikes})
-
-          makeRequest("DELETE", URL.LIKE_PROPS, propsId)
-
-          return
-
-        }
-        
-        likePropsClone.push({propertyId: id})
-
-        setActiveUser({...activeUser, likedProperties: likePropsClone})
-
-        makeRequest("POST", URL.LIKE_PROPS, {propertyId: id})
-
-
-    },[activeUser.likedProperties])
+    const getUser = () => {
+        return deepCopy(user)
+    }
 
     const userContextValue = {
-
-        isLoggedIn,
-        activeCookie, 
-        likeProperty, 
-        getCookie, 
-        activeUser, 
-        loading, 
-        setUser,
-        clearUser,
+        getUser,
+        favoritePropertyCount,
         logout,
         deleteAccount,
-        getUserLikes,
-        userLikesCount
-
+        getUserFavoritePropertyById,
+        getUserFavoriteProperties
     }
 
 
@@ -129,4 +70,4 @@ const [activeUser, setActiveUser] = useState(init)
 
 export const useUserContext = () => useContext(UserContext)
 
-export default UserContext
+// export default UserContext

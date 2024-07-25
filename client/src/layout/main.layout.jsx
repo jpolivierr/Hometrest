@@ -1,8 +1,13 @@
 import TopNav from "../components/navBar/topNav";
 import ScrollTop from "../components/ScrollTop/ScrollTop";
 import Footer from "../footer/footer.component";
+import { useUserContext } from "../context/user/UserContext";
 
 const MainLayout = ({ children }) => {
+
+    const {getUser} = useUserContext();
+    console.log(getUser())
+
     return (
     <>
     <ScrollTop />

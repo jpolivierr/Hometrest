@@ -30,17 +30,13 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<UserDto> createUser(@RequestBody UserRegistrationDto userRegistrationDto){
-        
          return ResponseEntity.ok(userService.saveUser(userRegistrationDto));
-
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto){
-        
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto){   
          return ResponseEntity.ok(userService.updateUser(userDto));
-
     }
 
     @GetMapping

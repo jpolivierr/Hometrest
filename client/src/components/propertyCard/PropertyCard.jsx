@@ -2,7 +2,6 @@
 import { deepSearch } from "../../Util/getValueByKey"
 import { getStatusStyle, getTypeStyle, cleanInput, formatNumber, getPhoto } from "./util"
 import { useState } from "react"
-import "./PropertyCard.style.css"
 import { useNavigate } from "react-router-dom"
 
 const PropertyCard = (props) =>{

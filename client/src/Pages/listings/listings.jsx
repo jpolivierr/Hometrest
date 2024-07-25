@@ -1,5 +1,4 @@
 import "./style.css"
-import OldFilter from "../../features/filter"
 import Filter from "../../components/filter/Filter"
 import { formatNumber } from "../../Util/formatNumber"
 import URL from "../../constants/urls"
@@ -10,6 +9,7 @@ import CardLoading from "../../lib/loadingEffect/CardLoading/CardLoading"
 import PropertyCard from "../../components/propertyCard/PropertyCard"
 import { updateParam, getParams } from "../../Util/urlParcer"
 import removeEmptyValues from "../../Util/removeEmptyValues"
+import deepCopy from "../../Util/deepCopy.js"
 
 const Listings = (props) =>{
   
@@ -40,7 +40,6 @@ const Listings = (props) =>{
   useEffect(() => {
     const params = getParams("search");
     if (params) {
-      // Update search state with keys from params
       setSearch((prevSearch) => ({
         ...prevSearch,
         ...Object.keys(params).reduce((acc, key) => {
@@ -61,8 +60,8 @@ const Listings = (props) =>{
 
   useEffect(() => {
     if (prevSearchRef.current && !deepEqual(prevSearchRef.current, search)){
-      const searchCopy = {...search}
-      updateParam(removeEmptyValues(searchCopy), true, "search") 
+      const searchCopy = deepCopy(search)
+      updateParam(removeEmptyValues(searchCopy, true), true, "search") 
       fetchProperties()
     }
     prevSearchRef.current = search;
@@ -72,9 +71,9 @@ const Listings = (props) =>{
     return JSON.stringify(obj1) === JSON.stringify(obj2);
   };
 
-
   const fetchProperties = async () =>{
-    const response = await post(URL.SEARCH, removeEmptyValues({...search}, true))
+    const searchCopy = deepCopy(search)
+    const response = await post(URL.SEARCH, removeEmptyValues(searchCopy, true))
     if(response.status === 200 && response.body){
       const propertyData = deepSearch(response.body,["data","home_search"],init)
       setCount(propertyData.count)
@@ -84,27 +83,23 @@ const Listings = (props) =>{
   }
 
   return (
-    <>
-      <div id={id} className={Class}>
+      <div>
  
-            {/* <OldFilter /> */}
-            <Filter data={search} setData={setSearch}/>
+          <Filter data={search} setData={setSearch}/>
 
-        <div className="search-result wide-container">
-          {/* <Map properties={propertiesReducer.results} 
-            zoom={10}
-            disableDefaultUI={false}
-            streetViewControl={false}
-            fullscreenControl={false}
-            styleElement={"sticky_map"}
-            loading={loading}
-          /> */}
-          
-          <div className={`show-properties ${loading && properties.length > 0 ? "props-loading" : ""}`}>
-            {
-                properties.length === 0 ? <CardLoading/> :
-                <div>
-                  <div className="show-properties-header"> 
+          <div style={{marginTop: "5rem"}}>
+              {
+                /* <Map properties={propertiesReducer.results} 
+                  zoom={10}
+                  disableDefaultUI={false}
+                  streetViewControl={false}
+                  fullscreenControl={false}
+                  styleElement={"sticky_map"}
+                  loading={loading}
+                /> */
+              }
+
+              <div className="show-properties-header"> 
                   <h5>
                     {`Showing `} <b style={{fontWeight: "600"}}>{`${formatNumber(search.limit)}`}</b>  {` out of `}
                     <b style={{fontWeight: "600"}}>{`${formatNumber(total)}`}</b>{` result for `}
@@ -112,25 +107,27 @@ const Listings = (props) =>{
                           {`"${search.city}"`}
                         </span>
                     </h5>
-                  </div>
-
-                  <div className="property_list_container">
-                    { 
-                      properties.map((property,index)=>(
-                          <PropertyCard
-                              singleProperty = {property}
-                              imageKey = {"od-w1024_h768.jpg"}
-                              key={index}
-                          />
-                          ))
-                    }
-                  </div>
               </div>
-            }   
-        </div>
-      </div>
+
+              {
+                  properties.length === 0 ? 
+                  <CardLoading/> :
+                    <div className="property_list_container">
+                      { 
+                        properties.map((property,index)=>(
+                            <PropertyCard
+                                singleProperty = {property}
+                                imageKey = {"od-w1024_h768.jpg"}
+                                key={index}
+                            />
+                            ))
+                      }
+                    </div>
+              } 
+          </div>
+
+  
     </div>
-    </>
     )
 }
 

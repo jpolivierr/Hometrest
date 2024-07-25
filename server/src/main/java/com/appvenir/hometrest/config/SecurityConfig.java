@@ -8,11 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
+import com.appvenir.hometrest.auth.RequestAuthenticationFailureHandler;
+import com.appvenir.hometrest.auth.RequestAuthenticationSuccessHandler;
 import com.appvenir.hometrest.filter.exception.GlobalExceptionFilter;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +23,8 @@ public class SecurityConfig {
 
     private final GlobalExceptionFilter globalExceptionFilter;
     private final CorsConfigurationSource corsConfigurationSource;
+    private final RequestAuthenticationSuccessHandler requestAuthenticationSuccessHandler;
+    private final RequestAuthenticationFailureHandler requestAuthenticationFailureHandler;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
@@ -38,7 +39,9 @@ public class SecurityConfig {
                 .formLogin( login -> {
                     login.loginPage("/login")
                     .usernameParameter("email")
-                    .defaultSuccessUrl("/dashboard");
+                    .successHandler(requestAuthenticationSuccessHandler)
+                    .failureHandler(requestAuthenticationFailureHandler);
+                    
                 })
                 .logout( logout -> {
                     logout.logoutUrl("/logout")
@@ -62,7 +65,7 @@ public class SecurityConfig {
                             "/login/**",
                             "/assets/**",
                             "/api/users/**",
-                            "/api/v1/**",
+                            "/api/v1/property_search/**",
                             "/"
                         };
     }

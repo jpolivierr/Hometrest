@@ -1,6 +1,40 @@
+.show-properties{
+    display: flex;
+    flex-flow: column;
+    gap: .4rem;
+    padding: 0rem .5rem;
+    margin-top: 1rem;
+    height: max-content;
+}
+
+.show-properties-header{
+    padding: .5rem 0rem;
+    padding-top: 0rem;
+}
+
+.show-properties-header h5{
+    font-size: 1rem;
+}
+
+.show-properties-header h2{
+    font-weight: 500;
+}
+
+.property_list_container{
+    padding-bottom: 1rem;
+    display: flex;
+    flex-flow: wrap;
+    gap: .5rem;
+
+}
+
+.property_list_container .property-card{
+    width: 49%;
+}
+
 
 .property-card{
-    max-width: 350px;
+    max-width: 340px;
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid #d6dde4;
@@ -199,4 +233,13 @@
 
 .like_style{
     color: #ff4141;
+}
+
+
+@media (max-width: 1257px) {
+
+    .property_list_container .property-card{
+        width: 100%;
+    }
+    
 }

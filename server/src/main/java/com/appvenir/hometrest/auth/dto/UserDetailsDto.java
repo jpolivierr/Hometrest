@@ -8,9 +8,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.appvenir.hometrest.domain.user.model.User;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @RequiredArgsConstructor
+@ToString
+@Getter
 public class UserDetailsDto implements UserDetails {
 
     private final User user;
