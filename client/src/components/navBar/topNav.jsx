@@ -3,7 +3,7 @@ import { useUserContext } from "../../context/user/UserContext"
 
 const TopNav = () =>{
 
-const {getUser, isAuthenticated} = useUserContext()
+const {getUser, isAuthenticated, getPropertyCount} = useUserContext()
 
 return(
 
@@ -24,7 +24,7 @@ return(
                     <button className="user-nav-likes">
                         <i className="fa-regular fa-heart"></i>
                         <span>Likes</span>
-                        <span className="like_count">{20}</span>
+                        <span className="like_count">{getPropertyCount()}</span>
                     </button>
                     <button className="user-nav-account">
                         <i className="fa-regular fa-user"></i>

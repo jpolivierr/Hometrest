@@ -4,9 +4,8 @@ import { getStatusStyle, getTypeStyle, cleanInput, formatNumber, getPhoto } from
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-const PropertyCard = (props) =>{
+const PropertyCard = ({singleProperty, likeProperty, isFavorite}) =>{
 
-    const {singleProperty} = props 
     const navigate = useNavigate()
 
     const propertyId = deepSearch(singleProperty,["property_id"])
@@ -41,9 +40,7 @@ const PropertyCard = (props) =>{
     if(status === "for_rent") return (<span>/month</span>)
   }
     return(
- 
-        <>
-                <div 
+        <div 
             onClick={(e)=> handlePropClick(e,propertyId)} data-property_id = {propertyId} className="property-card av-shadow">
             <figure style={{background : `url(${getPhoto(photo)}) no-repeat center center/cover`}}>
 
@@ -61,9 +58,9 @@ const PropertyCard = (props) =>{
             <div className="prop-info">
                     <div className="prop-price">${formatNumber(price)}{handleForRent(status)}</div>
                     {
-                        !like ? 
-                        <i onClick={()=>{}} className="fa-regular fa-heart"></i> : 
-                        <i onClick={()=>{}} className="fa-solid fa-heart like-prop"></i>
+                        !isFavorite(propertyId) ? 
+                        <i onClick={()=>{likeProperty(propertyId)}} className="fa-regular fa-heart"></i> : 
+                        <i onClick={()=>{likeProperty(propertyId)}} className="fa-solid fa-heart like-prop"></i>
                     }
                     <div className="prop-beds"><i className="fa-solid fa-bed"></i> {beds} <span>Beds</span></div>
                     <div className="prop-baths"><i className="fa-solid fa-bath"></i>{baths} <span>Baths</span></div>
@@ -73,8 +70,6 @@ const PropertyCard = (props) =>{
                     </div>
             </div>
         </div>
-
-        </>
 
     )
 }

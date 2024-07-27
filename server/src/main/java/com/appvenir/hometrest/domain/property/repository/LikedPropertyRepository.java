@@ -20,4 +20,6 @@ public interface LikedPropertyRepository extends JpaRepository<LikedProperty, Lo
     @Query("SELECT lp FROM LikedProperty lp JOIN lp.users u WHERE u = :user")    
     List<LikedProperty> findAllByUser(@Param("user") User user);
 
+    Optional<LikedProperty> findByPropertyId(String propertyId);
+
 } 

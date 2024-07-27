@@ -1,4 +1,3 @@
-import "./style.css"
 import Filter from "../../components/filter/Filter"
 import { formatNumber } from "../../Util/formatNumber"
 import URL from "../../constants/urls"
@@ -10,8 +9,12 @@ import PropertyCard from "../../components/propertyCard/PropertyCard"
 import { updateParam, getParams } from "../../Util/urlParcer"
 import removeEmptyValues from "../../Util/removeEmptyValues"
 import deepCopy from "../../Util/deepCopy.js"
+import { useUserContext } from "../../context/user/UserContext.jsx"
 
 const Listings = (props) =>{
+
+
+  const {userAuthenticated, getUserFavoriteProperties, updateProperty} = useUserContext()
   
   const [search, setSearch] = useState({
                         city_zip : "",
@@ -31,11 +34,9 @@ const Listings = (props) =>{
               results : [],
   }
   const httpRequest = HttpRequest(URL.SEARCH)
-  const {post, loading} = httpRequest
+  const {post, del, loading} = httpRequest
   const [properties, setProperties] = useState([])
   const [total, setTotal] = useState(0)
-  const [count, setCount] = useState(0)
-  const {Class, id} = props
 
   useEffect(() => {
     const params = getParams("search");
@@ -76,10 +77,49 @@ const Listings = (props) =>{
     const response = await post(URL.SEARCH, removeEmptyValues(searchCopy, true))
     if(response.status === 200 && response.body){
       const propertyData = deepSearch(response.body,["data","home_search"],init)
-      setCount(propertyData.count)
       setTotal(propertyData.total)
       setProperties(propertyData.results)
     }
+  }
+
+  const saveProperty = async (id) => {
+    const response = await post(URL.LIKE_PROPERTY + "/" + id);
+    if(response.status === 200){
+        console.log(response.body)
+        updateProperty(response.body)
+    }else{
+      console.error("Could not save property")
+    }
+  }
+
+  const deleteProperty = async (id) => {
+    const response = await del(URL.LIKE_PROPERTY + "/" + id);
+    if(response.status === 200){
+        console.log(response.body)
+        updateProperty(response.body)
+    }else{
+      console.error("Could not delete property")
+    }
+  }
+
+  const likeProperty = (id) => {
+    if(!userAuthenticated()) return
+    console.log(id)
+    const properties = getUserFavoriteProperties()
+    const exist = properties.some(property => property.propertyId === id)
+    console.log(exist)
+    if(exist){
+      deleteProperty(id)
+    }else{
+      saveProperty(id)
+    }
+    
+  }
+
+  const isFavorite = (id) => {
+    if(!userAuthenticated()) return
+    const properties = getUserFavoriteProperties()
+    return properties.some(property => property.propertyId === id)
   }
 
   return (
@@ -119,6 +159,8 @@ const Listings = (props) =>{
                                 singleProperty = {property}
                                 imageKey = {"od-w1024_h768.jpg"}
                                 key={index}
+                                likeProperty={likeProperty}
+                                isFavorite={isFavorite}
                             />
                             ))
                       }

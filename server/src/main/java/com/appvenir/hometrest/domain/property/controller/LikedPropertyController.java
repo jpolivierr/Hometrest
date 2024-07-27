@@ -1,21 +1,18 @@
 package com.appvenir.hometrest.domain.property.controller;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.appvenir.hometrest.auth.UserContext;
 import com.appvenir.hometrest.domain.property.dto.LikedPropertyDto;
 import com.appvenir.hometrest.domain.property.service.LikedPropertyService;
-import com.appvenir.hometrest.domain.user.dto.UserDto;
-import com.appvenir.hometrest.domain.user.service.UserService;
+import com.appvenir.hometrest.exception.user.UserNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,31 +22,20 @@ import lombok.RequiredArgsConstructor;
 public class LikedPropertyController {
 
     private final LikedPropertyService likedPropertyService;
-    private final UserService userService;
-
-    @GetMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<List<LikedPropertyDto>> getUserLikedProperties(){
-
-        UserDto user = userService.getUserByEmail("kp@gmail.com");
-        return ResponseEntity.ok(likedPropertyService.getUserLikedProperties(user));
-    }
 
     @PostMapping("/{propertyId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<LikedPropertyDto> getUserProperties(@PathVariable("propertyId") String propertyId){
-
-        UserDto user = userService.getUserByEmail("kp@gmail.com");
-
+    public ResponseEntity<LikedPropertyDto> saveProperties(@PathVariable("propertyId") String propertyId){
+        var user = UserContext.getPrincipalDto();
         return ResponseEntity.ok(likedPropertyService.saveUserProperty(user, propertyId));
-
     }
 
     @DeleteMapping("/{propertyId}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteUserProperty(@PathVariable("propertyId") String propertyId){
-        UserDto user = userService.getUserByEmail("kp@gmail.com");
+        var user =UserContext.getPrincipalDto();
         likedPropertyService.deleteUserProperty(user, propertyId);
+        throw new UserNotFoundException(); 
     }
     
 }

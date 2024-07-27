@@ -98,7 +98,7 @@ const responseHandler = async (response) => {
         headers: response.headers
     }
 
-    if (response.headers.get('Content-Type').includes('application/json')) {
+    if (response.headers.get('Content-Type') && response.headers.get('Content-Type').includes('application/json')) {
         body = await response.json();
         setLoading(false)
         payload.status = response.status
@@ -106,7 +106,6 @@ const responseHandler = async (response) => {
     } else {
         body = await response.text();
         setLoading(false)
-        console.log(body)
         payload.status = 500
         payload.body = body
     }
@@ -149,10 +148,29 @@ const get = async (url) => {
         }
     }
 
+    const del = async (url,data) => {
+        try {
+            setLoading(true) 
+            const postConfig = deepCopy(config)
+            postConfig.body = data
+            postConfig.method = "DELETE"
+            PrepareSignal(postConfig)
+            const response = await fetch(url,postConfig)   
+            clearTimeout(postConfig.timeout)
+            return responseHandler(response)
+        } catch (error) {
+            handleError(error, setStatus)
+            setLoading(false)
+            console.error(error, error.message)
+            return {status: 500, body: null, error: error}
+        }
+    }
+
 
     return{
         get,
         post,
+        del,
         serverError,
         fieldError,
         loading,

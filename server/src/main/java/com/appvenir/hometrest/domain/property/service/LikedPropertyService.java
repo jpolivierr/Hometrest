@@ -26,48 +26,35 @@ public class LikedPropertyService {
     private final UserRepository userRepository;
 
     @Transactional
-    public LikedPropertyDto saveUserProperty(UserDto userDto, String propertyId){
-
+    public LikedPropertyDto saveUserProperty(UserDto userDto, String propertyId) {
         User user = userRepository.findByEmail(userDto.getEmail())
-            .orElseThrow(() -> new UserNotFoundException());
-
-        likedPropertyRepository.findByUserAndPropertyId(user, propertyId).ifPresent( u -> {
-            throw new EntityExistsException("User already like this property");
-        });  
-
-        LikedProperty property = new LikedProperty();
-        property.setPropertyId(propertyId);
+            .orElseThrow(UserNotFoundException::new);
+        LikedProperty property = likedPropertyRepository.findByPropertyId(propertyId)
+            .orElseGet(() -> {
+                LikedProperty newProperty = new LikedProperty();
+                newProperty.setPropertyId(propertyId);
+                return newProperty;
+        });
         property.addUser(user);
-        
-        LikedProperty likedProperty = likedPropertyRepository.save(property);
-
-        return LikedPropertyMapper.toDto(likedProperty);
-
+        user.getLikedProperties().add(property);
+        userRepository.save(user);
+        return LikedPropertyMapper.toDto(property);
     }
+
 
     @Transactional
-    public void deleteUserProperty(UserDto userDto, String propertyId){
-
+    public void deleteUserProperty(UserDto userDto, String propertyId) {
         User user = userRepository.findByEmail(userDto.getEmail())
             .orElseThrow(() -> new UserNotFoundException());
-
-        LikedProperty likedProperty = likedPropertyRepository.findByUserAndPropertyId(user, propertyId).orElseThrow( 
-            () -> new EntityNotFoundException("A liked property was not found for the user")
-        );
-
-        likedPropertyRepository.delete(likedProperty);    
-
+        LikedProperty property = likedPropertyRepository.findByPropertyId(propertyId)
+            .orElseThrow(EntityNotFoundException::new);
+        user.getLikedProperties().remove(property);
+        property.getUsers().remove(user);
+        userRepository.save(user);
+        if (property.getUsers().isEmpty()) {
+            likedPropertyRepository.delete(property);
+        }
     }
 
-    public List<LikedPropertyDto> getUserLikedProperties(UserDto userDto){
-
-        User user = userRepository.findByEmail(userDto.getEmail())
-        .orElseThrow(() -> new UserNotFoundException());
-
-        return likedPropertyRepository.findAllByUser(user).stream()
-                                                        .map(LikedPropertyMapper::toDto)
-                                                        .toList();
-
-    }
     
 }

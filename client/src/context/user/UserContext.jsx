@@ -29,6 +29,8 @@ export const UserProvider = ({children}) => {
         })()
     },[])
 
+    console.log(user)
+
     const authenticate = (user) => {
         setIsAuthenticated(true)
     }
@@ -58,15 +60,46 @@ export const UserProvider = ({children}) => {
         return likes
     }
 
-    const getUserFavoriteProperties = (id) => {
+    const getUserFavoriteProperties = () => {
+        if(!user) return
         return user.likedProperties
+    }
+
+    const getPropertyCount = () => {
+        if(!user) return
+        return user.likedProperties.length
     }
 
     const getUser = () => {
         return deepCopy(user)
     }
 
+    const userAuthenticated = () => {
+        return user && isAuthenticated;
+    }
+
+    const updateProperty = (property) => {
+        if (!user) return
+        setUser((prevUser) => {
+            const propertyExists = prevUser.likedProperties.find(p => p.id === property.id)
+            let updatedLikedProperties;
+            if (propertyExists) {
+                updatedLikedProperties = prevUser.likedProperties.filter(p => p.id !== property.id)
+            } else {
+                updatedLikedProperties = [...prevUser.likedProperties, property]
+            }
+            return {
+                ...prevUser,
+                likedProperties: updatedLikedProperties
+            };
+        });
+    };
+    
+
     const userContextValue = {
+        updateProperty,
+        getPropertyCount,
+        userAuthenticated,
         isAuthenticated,
         authenticate,
         getUser,
