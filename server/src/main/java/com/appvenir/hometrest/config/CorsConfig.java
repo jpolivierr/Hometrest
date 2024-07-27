@@ -16,6 +16,7 @@ public class CorsConfig {
         configuration.addAllowedOriginPattern("*"); // Use addAllowedOriginPattern to allow any origin
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
+        configuration.addExposedHeader("hs-user-authenticate");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

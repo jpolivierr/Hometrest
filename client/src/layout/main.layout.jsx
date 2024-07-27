@@ -1,21 +1,19 @@
-import TopNav from "../components/navBar/topNav";
 import ScrollTop from "../components/ScrollTop/ScrollTop";
 import Footer from "../footer/footer.component";
 import { useUserContext } from "../context/user/UserContext";
+import TopNav from "../components/navBar/topNav";
 
 const MainLayout = ({ children }) => {
 
     const {getUser} = useUserContext();
-    console.log(getUser())
 
     return (
     <>
     <ScrollTop />
-        <TopNav  
-            elementStyle={"top-nav-stick"}
-            container="container"
-        />
+        <TopNav />
+        <div style={{marginTop: "69px"}}>
             {children}
+        </div> 
     <Footer container="container" />
     </>
     );

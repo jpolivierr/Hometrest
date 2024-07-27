@@ -1,12 +1,9 @@
 import { useEffect, useState, useRef } from "react"
-import { handleError, setConfiguration, setSignal } from "./HttpRequest.functions"
+import deepCopy from "../Util/deepCopy"
 
 
-const HttpRequest = (defaultUrl,config) =>{
+const HttpRequest = (userConfig) =>{
 
-
-    const requestHeaders = new Headers();
-    requestHeaders.set("Content-Type","application/json")
 
     let abortController = useRef(null)
 
@@ -15,15 +12,57 @@ const HttpRequest = (defaultUrl,config) =>{
     const [fieldError] = useState(null)
     const [status, setStatus] = useState(null)
     const [loading, setLoading] = useState(null)
+    const [config] = useState({
+        credentials: 'include',
+        mode: 'cors',
+        cache: "no-cache",
+        signal: false,
+        ...userConfig
+      });
 
-    const [defaultConfig] = useState(setConfiguration(config))
+const setSignal = () =>{
 
-    
+    if(abortController.current){
+        abortController.current.abort();
+    }
+
+    abortController.current = new AbortController()
+
+    const timeout = setTimeout(() => {
+        if (abortController.current) {
+            abortController.current.abort();
+        }
+    }, 20000);
+
+    const signal = abortController.current.signal;
+    return { signal, timeout };
+
+}
+
+const handleError = (error, setStatus) =>{
+
+    if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
+          setStatus(500)
+         // This error occurs when the request is blocked by CORS
+         console.error('CORS error: Make sure the server allows cross-origin requests.');
+         return
+       }
+
+       if (error.name === 'AbortError') {
+         setStatus(504)
+         console.log('Request aborted');
+         return
+       }
+
+       setStatus(500)
+
+       console.log(error)
+
+}
+
 
     // Handle status
     useEffect(()=>{
-
-        // console.log(status)
 
         switch(true){
             case status >= 200 && status <= 299 :
@@ -43,74 +82,71 @@ const HttpRequest = (defaultUrl,config) =>{
     },[status])
     
 
- const PrepareRequest = (url,method,data) =>{
-        const assignUrl = url ? url : defaultUrl
-        const signal = setSignal(abortController)
-        defaultConfig.method = method
-        const assignConfig = data ? 
-                           {
-                            ...defaultConfig, 
-                            body: JSON.stringify(data)
-                           } : 
-                            defaultConfig
-
-       assignConfig.signal = signal.abortController && signal.abortController.signal
-
-       return{assignUrl,assignConfig}
-
+const PrepareSignal = (config) =>{
+        const { signal, timeout } = setSignal();
+        config.signal = signal
+        config.timeout = timeout;
+        return config
     }
 
+const responseHandler = async (response) => {
 
-    const postResponse = async(response, signal) =>{
-        
-                    setStatus(response.status)
-                    setResponse(await response.json())
-                    clearTimeout(signal.timeout)
-                    setLoading(false)
-
+    let body;
+    const payload = {
+        status: null,
+        body: null,
+        headers: response.headers
     }
 
+    if (response.headers.get('Content-Type').includes('application/json')) {
+        body = await response.json();
+        setLoading(false)
+        payload.status = response.status
+        payload.body = body
+    } else {
+        body = await response.text();
+        setLoading(false)
+        console.log(body)
+        payload.status = 500
+        payload.body = body
+    }
 
-    const get = async (url) => {
-                try {
-                    console.log("making GET request.....")
+    return payload
 
-                    const {assignUrl,assignConfig} = PrepareRequest(url,"GET")
+} 
 
-                    const response = await fetch(assignUrl,assignConfig)
-
-                    postResponse(response, assignConfig.signal) 
-
-                } catch (error) {
-
-                    handleError(error, setStatus)
-                    
-                }
-
-            }
+const get = async (url) => {
+    try {
+        setLoading(true) 
+        const getConfig = deepCopy(config)
+        PrepareSignal(getConfig)
+        const response = await fetch(url,getConfig)
+        clearTimeout(getConfig.timeout)
+        return responseHandler(response)
+    } catch (error) {
+        setLoading(false)
+        handleError(error, setStatus)
+        console.error(error, error.message)
+        return {status: 500, body: null, error: error}
+    }
+}
 
     const post = async (url,data) => {
-
         try {
-            
-            const {assignUrl,assignConfig} = PrepareRequest(url,"POST",data)
             setLoading(true) 
-            const response = await fetch(assignUrl,assignConfig)
-
-            clearTimeout(assignConfig.signal.timeout)
-            setLoading(false)
-            return {
-                status: response.status,
-                body : await response.json(),
-            }
-
-
+            const postConfig = deepCopy(config)
+            postConfig.body = data
+            postConfig.method = "POST"
+            PrepareSignal(postConfig)
+            const response = await fetch(url,postConfig)   
+            clearTimeout(postConfig.timeout)
+            return responseHandler(response)
         } catch (error) {
-
             handleError(error, setStatus)
-            return {status: 500, body: null}
+            setLoading(false)
+            console.error(error, error.message)
+            return {status: 500, body: null, error: error}
         }
-
     }
 
 
@@ -121,7 +157,7 @@ const HttpRequest = (defaultUrl,config) =>{
         fieldError,
         loading,
         status,
-        response,
+        response
     }
 
 }

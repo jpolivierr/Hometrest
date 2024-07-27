@@ -87,7 +87,7 @@ const Listings = (props) =>{
  
           <Filter data={search} setData={setSearch}/>
 
-          <div style={{marginTop: "5rem"}}>
+          <div>
               {
                 /* <Map properties={propertiesReducer.results} 
                   zoom={10}

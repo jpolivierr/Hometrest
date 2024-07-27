@@ -10,23 +10,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appvenir.hometrest.api.realty.RealtyApi;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping(path="/api/v1/property_search")
 public class RealtyApiController {
 
     private final RealtyApi realtyApi;
+        private final ObjectMapper objectMapper;
 
-    public RealtyApiController(@Qualifier("realtyApiServiceProxy") RealtyApi realtyApi) {
+    public RealtyApiController(
+      @Qualifier("realtyApiServiceProxy") RealtyApi realtyApi,
+      ObjectMapper objectMapper
+      ) {
         this.realtyApi = realtyApi;
+        this.objectMapper = objectMapper;
     }
 
     @PostMapping(path = "/list")
-    public  CompletableFuture<String> findPropertyList(@RequestBody String propertySearch)
+    public  CompletableFuture<Object> findPropertyList(@RequestBody String propertySearch)
     {
-      System.out.println("==========================");
-      System.out.println(propertySearch);
-       return realtyApi.findPropertyList(propertySearch);
+      return realtyApi.findPropertyList(propertySearch)
+                .thenApplyAsync(response -> {
+                    try {
+                        // Convert the JSON string to a Java object
+                        return objectMapper.readValue(response, Object.class);
+                    } catch (Exception e) {
+                        throw new RuntimeException("Failed to convert JSON string to Object", e);
+                    }
+                });
     }
 
     @GetMapping(path = "/details")

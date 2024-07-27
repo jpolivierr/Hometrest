@@ -3,6 +3,7 @@ background: white;
 border-radius: var(--borderRadius);
 padding: 3rem 2rem;
 }
+
 form h2{
     margin-bottom: 2rem;
 }
@@ -43,9 +44,10 @@ form button{
 }
 
 .field_error p{
-    color: red;
-    margin-top: 10px;
+    color: rgb(237, 80, 80);
+    margin-top: 5px;
     margin-bottom: 0px;
+    font-size: 12px;
 }
 
 form textarea{
@@ -56,6 +58,9 @@ form textarea{
     padding: .5rem;
 }
 
+.main-form{
+    max-width: 420px;
+}
 
 
 /* .form_error fieldset p{

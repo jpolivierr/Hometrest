@@ -10,6 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import com.appvenir.hometrest.auth.RequestAuthenticationEntryPoint;
 import com.appvenir.hometrest.auth.RequestAuthenticationFailureHandler;
 import com.appvenir.hometrest.auth.RequestAuthenticationSuccessHandler;
 import com.appvenir.hometrest.filter.exception.GlobalExceptionFilter;
@@ -25,6 +26,7 @@ public class SecurityConfig {
     private final CorsConfigurationSource corsConfigurationSource;
     private final RequestAuthenticationSuccessHandler requestAuthenticationSuccessHandler;
     private final RequestAuthenticationFailureHandler requestAuthenticationFailureHandler;
+    private final RequestAuthenticationEntryPoint requestAuthenticationEntryPoint;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
@@ -36,6 +38,7 @@ public class SecurityConfig {
                                     .requestMatchers(allowedPath()).permitAll()
                                     .anyRequest().authenticated()              
                 )
+                .exceptionHandling( ex -> ex.authenticationEntryPoint(requestAuthenticationEntryPoint))
                 .formLogin( login -> {
                     login.loginPage("/login")
                     .usernameParameter("email")
@@ -64,7 +67,6 @@ public class SecurityConfig {
                             "/signup/**",
                             "/login/**",
                             "/assets/**",
-                            "/api/users/**",
                             "/api/v1/property_search/**",
                             "/"
                         };
