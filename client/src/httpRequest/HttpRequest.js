@@ -55,11 +55,17 @@ const responseHandler = async (response) => {
         headers: response.headers
     }
 
-    if (response.ok && response.headers.get('Content-Type') && response.headers.get('Content-Type').includes('application/json')) {
+    if (
+        (response.ok && response.headers.get('Content-Type') && 
+        response.headers.get('Content-Type').includes('application/json')) ||
+        (!response.ok && response.headers.get('Content-Type') && 
+        response.headers.get('Content-Type').includes('application/json'))
+    ) {
         body = await response.json();
         setLoading(false)
         payload.body = body
-    } else if (response.ok && response.headers.get('Content-Type') && !response.headers.get('Content-Type').includes('application/json')) {
+    } 
+    else if (response.ok && response.headers.get('Content-Type') && !response.headers.get('Content-Type').includes('application/json')) {
         body = await response.text();
         setLoading(false)
         payload.status = 500
@@ -89,7 +95,7 @@ const get = async (url) => {
     }
 }
 
-    const post = async (url,data, isFormData = false) => {
+    const post = async (url,data = {}, isFormData = false) => {
         try {
             setLoading(true) 
             const postConfig = deepCopy(config)

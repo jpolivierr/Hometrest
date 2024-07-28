@@ -31,14 +31,18 @@ const Login = () =>{
                 formData.append('email', data.email);
                 formData.append('password', data.password);
                 const response = await post(URL.LOGIN, formData, true);
+                console.log(response)
                 if (response.status === 200 && response.body) {
-                    authenticate(response.body)
+                    authenticate(response)
                     const currentPath = window.location.pathname;
                     if(currentPath.startsWith("/login")){
                         window.location.href="/listings"
+                    }else{
+                        window.location.reload();
                     }
                     clearFields();
                 } else if (response.status === 401 && response.body) {
+                    console.log("is 401")
                     setFormError(response.body.message);
                     clearFields();
                 }

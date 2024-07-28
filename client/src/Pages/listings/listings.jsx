@@ -10,8 +10,10 @@ import { updateParam, getParams } from "../../Util/urlParcer"
 import removeEmptyValues from "../../Util/removeEmptyValues"
 import deepCopy from "../../Util/deepCopy.js"
 import { useUserContext } from "../../context/user/UserContext.jsx"
+import Modal from "../../components/modal/Modal.jsx"
+import Login from "../../components/Form/login/Login.jsx"
 
-const Listings = (props) =>{
+const Listings = () =>{
 
 
   const {userAuthenticated, getUserFavoriteProperties, updateProperty} = useUserContext()
@@ -33,10 +35,13 @@ const Listings = (props) =>{
               total: 0,
               results : [],
   }
-  const httpRequest = HttpRequest(URL.SEARCH)
+  const httpRequest = HttpRequest({headers: {
+    'Content-Type': 'application/json'
+  }})
   const {post, del, loading} = httpRequest
   const [properties, setProperties] = useState([])
   const [total, setTotal] = useState(0)
+  const [loginModal, setLoginModal] =useState (false)
 
   useEffect(() => {
     const params = getParams("search");
@@ -82,36 +87,35 @@ const Listings = (props) =>{
     }
   }
 
-  const saveProperty = async (id) => {
-    const response = await post(URL.LIKE_PROPERTY + "/" + id);
+  const saveProperty = async (likedPropertyData) => {
+    const response = await post(URL.LIKE_PROPERTY, likedPropertyData);
     if(response.status === 200){
-        console.log(response.body)
         updateProperty(response.body)
     }else{
       console.error("Could not save property")
     }
   }
 
-  const deleteProperty = async (id) => {
-    const response = await del(URL.LIKE_PROPERTY + "/" + id);
+  const deleteProperty = async (likedPropertyData) => {
+    const response = await del(URL.LIKE_PROPERTY, likedPropertyData);
     if(response.status === 200){
-        console.log(response.body)
-        updateProperty(response.body)
+        updateProperty(likedPropertyData)
     }else{
       console.error("Could not delete property")
     }
   }
 
-  const likeProperty = (id) => {
-    if(!userAuthenticated()) return
-    console.log(id)
+  const likeProperty = (likedPropertyData) => {
+    if(!userAuthenticated()) {
+      setLoginModal(true)
+      return
+    }
     const properties = getUserFavoriteProperties()
-    const exist = properties.some(property => property.propertyId === id)
-    console.log(exist)
+    const exist = properties.some(property => property.propertyId === likedPropertyData.propertyId)
     if(exist){
-      deleteProperty(id)
+      deleteProperty(likedPropertyData)
     }else{
-      saveProperty(id)
+      saveProperty(likedPropertyData)
     }
     
   }
@@ -168,7 +172,9 @@ const Listings = (props) =>{
               } 
           </div>
 
-  
+        <Modal isOpen={loginModal} setModalState={setLoginModal}>
+           <Login/>
+        </Modal>
     </div>
     )
 }
