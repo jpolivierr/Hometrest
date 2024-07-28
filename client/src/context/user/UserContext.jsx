@@ -27,9 +27,7 @@ export const UserProvider = ({children}) => {
                 setUser(null)
             }
         })()
-    },[])
-
-    console.log(user)
+    },[user])
 
     const authenticate = (user) => {
         setIsAuthenticated(true)
@@ -78,15 +76,15 @@ export const UserProvider = ({children}) => {
         return user && isAuthenticated;
     }
 
-    const updateProperty = (property) => {
+    const updateProperty = (likedPropertyData) => {
         if (!user) return
         setUser((prevUser) => {
-            const propertyExists = prevUser.likedProperties.find(p => p.id === property.id)
+            const propertyExists = prevUser.likedProperties.find(p => p.propertyId === likedPropertyData.propertyId)
             let updatedLikedProperties;
             if (propertyExists) {
-                updatedLikedProperties = prevUser.likedProperties.filter(p => p.id !== property.id)
+                updatedLikedProperties = prevUser.likedProperties.filter(p => p.propertyId !== likedPropertyData.propertyId)
             } else {
-                updatedLikedProperties = [...prevUser.likedProperties, property]
+                updatedLikedProperties = [...prevUser.likedProperties, likedPropertyData]
             }
             return {
                 ...prevUser,

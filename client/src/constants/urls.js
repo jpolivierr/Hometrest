@@ -3,7 +3,7 @@ const API_VERSION = "/api/v1"
 
 const URL = {
     LOGIN : HOST + "/login",
-    LOGOUT : HOST + "/process-login",
+    LOGOUT : HOST + "/logout",
     GET_USER : HOST + "/api/users",
     SEARCH : HOST + "/api/v1/property_search/list",
     SINGLE_PROPERTY : HOST + API_VERSION + "/property_search/details?id=", 

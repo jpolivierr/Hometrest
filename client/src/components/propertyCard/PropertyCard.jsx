@@ -9,7 +9,6 @@ const PropertyCard = ({singleProperty, likeProperty, isFavorite}) =>{
     const navigate = useNavigate()
 
     const propertyId = deepSearch(singleProperty,["property_id"])
-    const listingId = deepSearch(singleProperty,["listing_id"])
     const status = deepSearch(singleProperty,["status"])
     const type = deepSearch(singleProperty,["description","type"])
     const beds = deepSearch(singleProperty,["description","beds"])
@@ -22,9 +21,19 @@ const PropertyCard = ({singleProperty, likeProperty, isFavorite}) =>{
     const state = deepSearch(singleProperty,["location","address","state"])
     const stateCode = deepSearch(singleProperty,["location","address","state_code"])
     const photo = deepSearch(singleProperty,["primary_photo","href"])
-    
-    const [like, setLike] = useState(false)
 
+    const likedPropertyData = {
+        propertyId,
+        price,
+        beds,
+        baths,
+        sqft,
+        street,
+        city,
+        stateCode,
+        zip
+    }
+    
     const handlePropClick = (e, propertyId) =>{
 
         const targetClassName = e.target.className
@@ -59,8 +68,8 @@ const PropertyCard = ({singleProperty, likeProperty, isFavorite}) =>{
                     <div className="prop-price">${formatNumber(price)}{handleForRent(status)}</div>
                     {
                         !isFavorite(propertyId) ? 
-                        <i onClick={()=>{likeProperty(propertyId)}} className="fa-regular fa-heart"></i> : 
-                        <i onClick={()=>{likeProperty(propertyId)}} className="fa-solid fa-heart like-prop"></i>
+                        <i onClick={()=>{likeProperty(likedPropertyData)}} className="fa-regular fa-heart"></i> : 
+                        <i onClick={()=>{likeProperty(likedPropertyData)}} className="fa-solid fa-heart like-prop"></i>
                     }
                     <div className="prop-beds"><i className="fa-solid fa-bed"></i> {beds} <span>Beds</span></div>
                     <div className="prop-baths"><i className="fa-solid fa-bath"></i>{baths} <span>Baths</span></div>

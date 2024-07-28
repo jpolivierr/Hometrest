@@ -1,29 +1,26 @@
 import React from 'react'
-import { useMyModal } from '../../../../context/modals/modalContext'
 import { deepSearch } from '../../../../Util/getValueByKey'
 import { updateImageLink } from '../../../../Util/updateImageLink'
-import { getClass } from './PhotoGallery.Util'
 import "./PhotoGallery.style.css"
 
 export default function PhotoGallery({singleProperty}) {
 
     const mPayload = {count: singleProperty.photo_count, photos: singleProperty.photos}
-    const {toggleFloatingModal} = useMyModal()
-    const PhotoGallery = () => toggleFloatingModal("gallery", mPayload)
+    // const PhotoGallery = () => toggleFloatingModal("gallery", mPayload)
     const photos = deepSearch(singleProperty,["photos"],[])
     const virtualTour = deepSearch(singleProperty,["virtual_tours", "href"],"")
 
   return (
     <div id={-1} style={{position: "relative"}}>
           <ul className='more_details'>
-        <li onClick={PhotoGallery} ><i className="fa-regular fa-image"></i> Photos: {photos.length}</li>
+        <li onClick={() => {}} ><i className="fa-regular fa-image"></i> Photos: {photos.length}</li>
         {virtualTour && <a href={virtualTour} target={"_blank"}>
             <li><i className="fa-solid fa-vr-cardboard"></i> Virtual Tour</li>
             </a>}
       </ul>
 
 
-        <div onClick={PhotoGallery} className={`${getClass(photos)}`}>
+        <div onClick={() => {}} className={``}>
 
     
 

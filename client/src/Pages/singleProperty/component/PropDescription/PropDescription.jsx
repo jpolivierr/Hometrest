@@ -8,7 +8,6 @@ import ExpandElement from '../../../../components/expandElement/ExpandElement'
 import { capitalizeFirstLetter } from '../../../../Util/capitalizeFirstLetter'
 import { getGrade } from './PropDescription.script'
 import AgentInfo from '../AgenInfo/AgentInfo'
-import { useMyModal } from '../../../../context/modals/modalContext'
 import Map from '../../../../components/map/Map'
 
 import "./PropDescription.style.css"
@@ -31,7 +30,6 @@ export default function PropDescription({singleProperty}) {
     const schools = deepSearch(singleProperty,["schools", "schools"],[])
     const propertyHistory = deepSearch(singleProperty,["property_history"],[])
     const taxHistory = deepSearch(singleProperty,["tax_history"],[])
-    const {toggleFloatingModal} = useMyModal()
 
  
   return (
@@ -67,7 +65,7 @@ export default function PropDescription({singleProperty}) {
                               
                             </ul>
                             <div className='button_container'>
-                                <button onClick={()=> toggleFloatingModal("offer")} className='button main-btn offer_button'>Make an Offer</button>
+                                <button onClick={()=> {"offer"}} className='button main-btn offer_button'>Make an Offer</button>
                                 <button className='button alt-btn offer_button'>
                                         Get Pre-approved
                                 </button>

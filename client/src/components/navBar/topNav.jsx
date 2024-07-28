@@ -1,9 +1,16 @@
 import NavList from "../list/NavList"
 import { useUserContext } from "../../context/user/UserContext"
+import HttpRequest from "../../httpRequest/HttpRequest"
+import URL from "../../constants/urls"
 
 const TopNav = () =>{
-
+const {get} = HttpRequest()
 const {getUser, isAuthenticated, getPropertyCount} = useUserContext()
+
+const logout = async () => {
+    const response = await get(URL.LOGOUT)
+    window.location.href ="/login"
+}
 
 return(
 
@@ -21,6 +28,9 @@ return(
                     <h3 className="user-greeting">
                         Hello, Frederic
                     </h3>
+                    <button onClick={logout} className="user-nav-likes">
+                        <span>Logout</span>
+                    </button>
                     <button className="user-nav-likes">
                         <i className="fa-regular fa-heart"></i>
                         <span>Likes</span>

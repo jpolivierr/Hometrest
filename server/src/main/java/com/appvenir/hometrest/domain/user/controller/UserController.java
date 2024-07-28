@@ -49,10 +49,8 @@ public class UserController {
 
      if (principal instanceof UserDetailsDto) {
           User user = ((UserDetailsDto) principal).getUser();
-
           if(user == null) throw new UserNotFoundException();
-
-          return ResponseEntity.ok(UserMapper.toDto(user));
+          return ResponseEntity.ok(userService.getUserByEmail(user.getEmail()));
      }
 
       throw new UserNotFoundException();    

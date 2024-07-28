@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import Slider from "../../../../lib/Slider/Slider2"
-import { useMyModal } from "../../../../context/modals/modalContext"
 import { getNextTwoWeeks, time } from "./Schedule.functions"
 import Carousel from "../../../../lib/Carousel/Carousel.component"
 import "./Schedule.style.css"
@@ -10,8 +9,6 @@ const ScheduleTour = () =>{
     const [activeDate, setActiveDate] = useState(0)
     const [tourType, setTourType] = useState(0)
     const [userMessage, setUserMessage] = useState("")
-
-    const {toggleFloatingModal} = useMyModal()
 
     const carouselSettings = {
       aspectRatio : 5 / 4,
@@ -53,7 +50,7 @@ const ScheduleTour = () =>{
 
         </ul>
         <button 
-         onClick={()=> toggleFloatingModal("client_info")}
+         onClick={()=> {}}
         style={{width: "100%", height: "50px"}} className="button main-btn">
                                                 Schedule a Tour
                         </button>
@@ -71,7 +68,7 @@ const ScheduleTour = () =>{
                         >
                     </textarea>
                 </fieldset>
-                <button onClick={()=> toggleFloatingModal("message",{message: userMessage})} style={{background: "#92a6bf17",width: "100%", marginTop: "0rem", height: "50px"}} className="button alt-btn">
+                <button onClick={()=> {}} style={{background: "#92a6bf17",width: "100%", marginTop: "0rem", height: "50px"}} className="button alt-btn">
                                 Ask me a question 
              </button>
          </form>

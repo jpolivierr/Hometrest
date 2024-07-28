@@ -2,13 +2,11 @@ import React from 'react'
 import ScheduleTour from '../Schedule/Scedule'
 import jonathan from "../../../../assets/images/JONATHAN.jpg"
 import "./AgenInfo.style.css"
-import { useMyModal } from '../../../../context/modals/modalContext'
 import { useState } from 'react'
 
 export default function AgentInfo() {
 
     const [userMessage, setUserMessage] = useState("")
-    const {toggleFloatingModal} = useMyModal()
 
   return (
     <div className="agent_info bottom_divider">
@@ -38,7 +36,7 @@ export default function AgentInfo() {
                                     >
                                     </textarea>
                                 </fieldset>
-                                <div onClick={()=> toggleFloatingModal("message",{message: userMessage})} className='btn-container'>
+                                <div onClick={() => {}} className='btn-container'>
                                     <button  className="button main-btn">
                                                 Send Message
                                   </button>

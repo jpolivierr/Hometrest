@@ -1,7 +1,5 @@
 package com.appvenir.hometrest.domain.property.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.appvenir.hometrest.domain.property.dto.LikedPropertyDto;
@@ -12,8 +10,6 @@ import com.appvenir.hometrest.domain.user.dto.UserDto;
 import com.appvenir.hometrest.domain.user.model.User;
 import com.appvenir.hometrest.domain.user.repository.UserRepository;
 import com.appvenir.hometrest.exception.user.UserNotFoundException;
-
-import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -26,15 +22,16 @@ public class LikedPropertyService {
     private final UserRepository userRepository;
 
     @Transactional
-    public LikedPropertyDto saveUserProperty(UserDto userDto, String propertyId) {
+    public LikedPropertyDto saveUserProperty(UserDto userDto, LikedPropertyDto likedPropertyDto) {
         User user = userRepository.findByEmail(userDto.getEmail())
             .orElseThrow(UserNotFoundException::new);
-        LikedProperty property = likedPropertyRepository.findByPropertyId(propertyId)
+
+        LikedProperty property = likedPropertyRepository.findByPropertyId(likedPropertyDto.getPropertyId())
             .orElseGet(() -> {
-                LikedProperty newProperty = new LikedProperty();
-                newProperty.setPropertyId(propertyId);
-                return newProperty;
+                
+                return LikedPropertyMapper.toModel(likedPropertyDto);
         });
+
         property.addUser(user);
         user.getLikedProperties().add(property);
         userRepository.save(user);
@@ -43,10 +40,10 @@ public class LikedPropertyService {
 
 
     @Transactional
-    public void deleteUserProperty(UserDto userDto, String propertyId) {
+    public void deleteUserProperty(UserDto userDto, LikedPropertyDto likedPropertyDto) {
         User user = userRepository.findByEmail(userDto.getEmail())
             .orElseThrow(() -> new UserNotFoundException());
-        LikedProperty property = likedPropertyRepository.findByPropertyId(propertyId)
+        LikedProperty property = likedPropertyRepository.findByPropertyId(likedPropertyDto.getPropertyId())
             .orElseThrow(EntityNotFoundException::new);
         user.getLikedProperties().remove(property);
         property.getUsers().remove(user);

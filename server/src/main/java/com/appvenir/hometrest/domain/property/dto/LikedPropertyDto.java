@@ -9,6 +9,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LikedPropertyDto {
     private String propertyId;
+    private int price;
+    private int beds;
+    private int baths;
+    private int sqft;
+    private String street;
+    private String city;
+    private String stateCode;
+    private String zip;
     private LocalDateTime dateCreated;
     private LocalDateTime lastUpdated;
 }

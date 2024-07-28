@@ -37,73 +37,29 @@ const setSignal = () =>{
     const signal = abortController.current.signal;
     return { signal, timeout };
 
-}
-
-const handleError = (error, setStatus) =>{
-
-    if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
-          setStatus(500)
-         // This error occurs when the request is blocked by CORS
-         console.error('CORS error: Make sure the server allows cross-origin requests.');
-         return
-       }
-
-       if (error.name === 'AbortError') {
-         setStatus(504)
-         console.log('Request aborted');
-         return
-       }
-
-       setStatus(500)
-
-       console.log(error)
-
-}
-
-
-    // Handle status
-    useEffect(()=>{
-
-        switch(true){
-            case status >= 200 && status <= 299 :
-                break
-            case status === 404 :
-                break
-            case status === 504 :
-                setServerError("Request timed out")
-                break
-            case status >= 500 && status <= 599 :
-                 setServerError("Oops something went wrong on our end. Please try again later.")
-                 break
-            default :
-                return
-        }
-
-    },[status])
-    
+}    
 
 const PrepareSignal = (config) =>{
         const { signal, timeout } = setSignal();
         config.signal = signal
         config.timeout = timeout;
         return config
-    }
+}
 
 const responseHandler = async (response) => {
 
     let body;
     const payload = {
-        status: null,
+        status: response.status,
         body: null,
         headers: response.headers
     }
 
-    if (response.headers.get('Content-Type') && response.headers.get('Content-Type').includes('application/json')) {
+    if (response.ok && response.headers.get('Content-Type') && response.headers.get('Content-Type').includes('application/json')) {
         body = await response.json();
         setLoading(false)
-        payload.status = response.status
         payload.body = body
-    } else {
+    } else if (response.ok && response.headers.get('Content-Type') && !response.headers.get('Content-Type').includes('application/json')) {
         body = await response.text();
         setLoading(false)
         payload.status = 500
@@ -113,6 +69,10 @@ const responseHandler = async (response) => {
     return payload
 
 } 
+
+const prepareRequest = () => {
+    
+}
 
 const get = async (url) => {
     try {
@@ -124,42 +84,40 @@ const get = async (url) => {
         return responseHandler(response)
     } catch (error) {
         setLoading(false)
-        handleError(error, setStatus)
         console.error(error, error.message)
         return {status: 500, body: null, error: error}
     }
 }
 
-    const post = async (url,data) => {
+    const post = async (url,data, isFormData = false) => {
         try {
             setLoading(true) 
             const postConfig = deepCopy(config)
-            postConfig.body = data
+            postConfig.body = isFormData ? data : JSON.stringify(data)
             postConfig.method = "POST"
             PrepareSignal(postConfig)
             const response = await fetch(url,postConfig)   
             clearTimeout(postConfig.timeout)
             return responseHandler(response)
         } catch (error) {
-            handleError(error, setStatus)
             setLoading(false)
             console.error(error, error.message)
             return {status: 500, body: null, error: error}
         }
     }
 
-    const del = async (url,data) => {
+    const del = async (url,data = {}, isFormData = false) => {
         try {
             setLoading(true) 
             const postConfig = deepCopy(config)
-            postConfig.body = data
+            postConfig.body = isFormData ? data : JSON.stringify(data)
             postConfig.method = "DELETE"
             PrepareSignal(postConfig)
             const response = await fetch(url,postConfig)   
             clearTimeout(postConfig.timeout)
-            return responseHandler(response)
+            const responseBody = responseHandler(response)
+            return responseBody
         } catch (error) {
-            handleError(error, setStatus)
             setLoading(false)
             console.error(error, error.message)
             return {status: 500, body: null, error: error}

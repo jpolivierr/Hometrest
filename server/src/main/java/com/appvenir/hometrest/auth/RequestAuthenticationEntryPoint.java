@@ -28,8 +28,7 @@ public class RequestAuthenticationEntryPoint implements AuthenticationEntryPoint
     public void commence(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException authException) throws IOException, ServletException 
     {
-         try {
-            
+         try {            
             ErrorResponse errorResponse = ErrorResponse.builder()
                                     .timestamp(LocalDateTime.now())
                                     .status(HttpStatus.UNAUTHORIZED.value())

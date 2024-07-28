@@ -25,6 +25,32 @@ public class LikedProperty extends Auditable {
     @Column(name = "property_id", nullable = false)
     String propertyId;
 
+    @Column(name = "price")
+    Integer price;
+
+    @Column(name = "beds")
+    Integer beds;
+
+    @Column(name = "baths")
+    Integer baths;
+
+    @Column(name = "sqft")
+    Integer sqft;
+
+    @Column(name = "street")
+    String street;
+
+    @Column(name = "city")
+    String city;
+
+    @Column(name = "state_code")
+    String stateCode;
+
+    @Column(name = "zip")
+    String zip;
+
+
+
     @JsonIgnore
     @ManyToMany(mappedBy = "likedProperties", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();

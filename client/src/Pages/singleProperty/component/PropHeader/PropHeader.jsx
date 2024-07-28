@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useMyModal } from '../../../../context/modals/modalContext'
 import { useUserContext } from '../../../../context/user/UserContext'
 import { useNavigate } from 'react-router-dom'
 import { deepSearch } from '../../../../Util/getValueByKey'
@@ -12,8 +11,6 @@ export default function PropHeader({singleProperty, id}) {
     const {likeProperty, isLoggedIn, getUserLikes} = useUserContext()
     const propertyId = deepSearch(singleProperty,["property_id"], "")
     const navigate = useNavigate()
-    const {toggleFloatingModal} = useMyModal()
-    const loginModal = () => toggleFloatingModal("login")
     const [activeList, setActiveList] = useState(0)
     const headerRef = useRef(null)
 
@@ -31,7 +28,6 @@ export default function PropHeader({singleProperty, id}) {
     const handleLikes = (id) =>{
 
         if(!isLoggedIn) {
-             loginModal()
              return
             }
 

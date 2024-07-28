@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class Error {
 
     @GetMapping
-    public String index(){
-        return "500";
+    public String handleError() {
+        // Return the custom error view
+        return "error";
     }
     
 }

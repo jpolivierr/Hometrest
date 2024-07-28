@@ -30,7 +30,7 @@ const Login = () =>{
                 const formData = new FormData();
                 formData.append('email', data.email);
                 formData.append('password', data.password);
-                const response = await post(URL.LOGIN, formData);
+                const response = await post(URL.LOGIN, formData, true);
                 if (response.status === 200 && response.body) {
                     authenticate(response.body)
                     const currentPath = window.location.pathname;
