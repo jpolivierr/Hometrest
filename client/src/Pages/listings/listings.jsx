@@ -35,10 +35,9 @@ const Listings = () =>{
               total: 0,
               results : [],
   }
-  const httpRequest = HttpRequest({headers: {
+  const {post, del} = HttpRequest({headers: {
     'Content-Type': 'application/json'
   }})
-  const {post, del, loading} = httpRequest
   const [properties, setProperties] = useState([])
   const [total, setTotal] = useState(0)
   const [loginModal, setLoginModal] =useState (false)

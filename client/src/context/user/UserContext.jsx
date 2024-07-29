@@ -53,9 +53,9 @@ export const UserProvider = ({children}) => {
     }
 
     const getUserFavoritePropertyById = (id) => {
+        if(!user) return null
         const userLikes = user.likedProperties
-        const likes = userLikes.find(like => like.propertyId === id)
-        return likes
+        return userLikes.find(like => like.propertyId === id)
     }
 
     const getUserFavoriteProperties = () => {

@@ -23,7 +23,7 @@ a{
 p{
     color: var(--alt-text-color);
     max-width: 550px;
-    margin-bottom: 1.5rem;
+    margin-bottom: .6rem;
     line-height: 1.8;
 }
 
