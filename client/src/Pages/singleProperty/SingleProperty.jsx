@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react"
 import PropDescription from "../../components/PropDescription/PropDescription"
 import PhotoGalleryView from "../../components/PhotoGallery/PhotoGallery"
 import PageLoading from "../../lib/loadingEffect/PageLoading/PageLoading"
-// import SimilarProperties from "../../components/SimilarProperties/SimilarProperties"
+import SimilarProperties from "../../components/SimilarProperties/SimilarProperties"
 import ScheduleTour from "../../components/Schedule/Scedule"
 import "./SingleProperty.style.css"
 import { getParams } from "../../Util/urlParcer"
@@ -21,8 +21,9 @@ const SingleProperty = () =>{
 const propertyFeatures = getParams("prop_features")
 const {isFavorite, likeProperty, userAuthenticated} = LikePropertyService()
 
+const loading = true
 
-const {get, loading} = HttpRequest({headers: {
+const {get,} = HttpRequest({headers: {
     'Content-Type': 'application/json'
   }})
 
@@ -73,6 +74,9 @@ console.log(loading)
   useEffect(()=>{
           
     const scrollEffect = scrollWithClass(headerRef)
+
+    if(!scrollEffect) return 
+    
     scrollEffect.init()
 
     return () => {
@@ -97,6 +101,9 @@ console.log(loading)
         <Login/>
       </Modal>
 
+      {
+          loading ? 
+          <PageLoading /> :
       <div id={"23"} ref={headerRef} className="container-medium">
         <div  className="single_prop_header">
               <Link to={"/listings"}>
@@ -160,18 +167,18 @@ console.log(loading)
           <ScheduleTour />   
           </div>
 
-          {/* <SimilarProperties propFeatures={singleProperty}/> */}
-
-          {/* {
-          
-          (propertyFeatures) ? 
-          <SimilarProperties propFeatures={propertyFeatures}/> :
-          (singleProperty.property_id) && 
           <SimilarProperties propFeatures={singleProperty}/>
-      
-      }             */}
-      </div>
 
+          {
+          
+          // (propertyFeatures) ? 
+          // <SimilarProperties propFeatures={propertyFeatures}/> :
+          // (singleProperty.property_id) && 
+          // <SimilarProperties propFeatures={singleProperty}/>
+      
+      }            
+      </div>
+    }
     </>  
    
     )

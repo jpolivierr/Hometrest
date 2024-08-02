@@ -70,10 +70,6 @@ const responseHandler = async (response) => {
 
 } 
 
-const prepareRequest = () => {
-    
-}
-
 const get = async (url) => {
     try {
         setLoading(true) 
