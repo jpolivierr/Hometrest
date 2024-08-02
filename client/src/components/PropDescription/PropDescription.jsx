@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { formatNumber } from '../../Util/formatNumber'
 import { cleanInput } from '../../Util/cleanInput'
 import { deepSearch } from '../../Util/getValueByKey'
@@ -25,7 +25,6 @@ export default function PropDescription({singleProperty}) {
     const schools = deepSearch(singleProperty,["schools", "schools"],[])
     const propertyHistory = deepSearch(singleProperty,["property_history"],[])
     const taxHistory = deepSearch(singleProperty,["tax_history"],[])
-    const [offerModal, setOfferModal] = useState(false)
 
  
   return (
@@ -59,13 +58,13 @@ export default function PropDescription({singleProperty}) {
                 </ul>
                 
                 </div>
-                {/* <div className="mini-map">
+                <div className="mini-map">
                     <figure>
-                        <Map 
+                        {/* <Map 
                             properties={[singleProperty]}
                             zoom={13}
                         
-                            />
+                            /> */}
                     </figure>
                     
                     <div className='commute'>
@@ -73,7 +72,7 @@ export default function PropDescription({singleProperty}) {
                             <h3>Time</h3>
                             <p>Add a commute</p>
                     </div>
-                </div> */}
+                </div>
 
 
             </div>

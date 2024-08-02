@@ -1,17 +1,11 @@
-import { useEffect, useState, useRef } from "react"
+import {useState, useRef } from "react"
 import deepCopy from "../Util/deepCopy"
 
 
 const HttpRequest = (userConfig) =>{
 
-
     let abortController = useRef(null)
-
-    const [response, setResponse] = useState(null)
-    const [serverError, setServerError] = useState(null)
-    const [fieldError] = useState(null)
-    const [status, setStatus] = useState(null)
-    const [loading, setLoading] = useState(null)
+    const [loading, setLoading] = useState(false)
     const [config] = useState({
         credentials: 'include',
         mode: 'cors',
@@ -135,11 +129,7 @@ const get = async (url) => {
         get,
         post,
         del,
-        serverError,
-        fieldError,
-        loading,
-        status,
-        response
+        loading
     }
 
 }

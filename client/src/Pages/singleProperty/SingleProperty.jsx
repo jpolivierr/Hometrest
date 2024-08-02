@@ -22,7 +22,7 @@ const propertyFeatures = getParams("prop_features")
 const {isFavorite, likeProperty, userAuthenticated} = LikePropertyService()
 
 
-const {get} = HttpRequest({headers: {
+const {get, loading} = HttpRequest({headers: {
     'Content-Type': 'application/json'
   }})
 
@@ -57,6 +57,8 @@ const {get} = HttpRequest({headers: {
     stateCode,
     zip
 }
+
+console.log(loading)
 
   useEffect(()=>{
     (async () => {

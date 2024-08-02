@@ -372,14 +372,15 @@
 }
 
 .prop_info_header .mini-map{
-    max-width: 400px;
+    max-width: 380px;
+    height: 250px;
     width: 100%;
     border: 1px solid var(--light-silver);
     border-radius: var(--borderRadius);
     position: relative;
     display: grid;
     grid-template-rows: 1fr auto;
-    box-shadow: var(--lightShadow);
+    box-shadow: 0px 20px 25px -6px #ccd1d973;
 }
 
 .prop_info_header .mini-map figure{
@@ -408,7 +409,7 @@
 
 .commute h3{
     margin: 0;
-    padding-left: 1rem;
+    padding-left: .3rem;
     margin-right: .5rem;
     border-right: 1px solid var(--light-silver);
     padding-right: 1rem;
@@ -421,9 +422,7 @@
 }
 
 .commute p{
-    text-decoration: underline;
-    font-weight: 600;
-    padding-left: 1rem;
+    padding-left: .5rem;
     color: var(--secondary-color);
     margin-bottom: 0rem;
 }
