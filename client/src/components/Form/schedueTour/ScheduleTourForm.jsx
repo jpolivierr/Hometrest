@@ -4,11 +4,10 @@ import MainButton from "../../buton/MainButton";
 import LoadingEffect from "../../../lib/loadingEffect/loading/loadingEffect";
 import useForm from "../useForm";
 import URL from "../../../constants/urls";
-import "./ScheduleTour.style.css"
 import { useEffect, useState } from "react";
 
 
-const ScheduleTourView = () =>{
+const ScheduleTourForm = () =>{
 
     const [formFields, setformFields] = useState({
         firstName : "",
@@ -23,7 +22,6 @@ const ScheduleTourView = () =>{
            updateFormField, 
            formError,
            loading,
-            response,
             formState,
             status
           } = useForm(URL.SCHEDULE_TOUR,"POST", formFields)
@@ -31,10 +29,12 @@ const ScheduleTourView = () =>{
 
     useEffect(()=>{
 
-        // console.log(formError)
         if(status === 200){
-            console.log("success")
             setSuccess(true)
+            setformFields({...formFields, firstName: "", lastName: "", email: ""})
+            setTimeout(() => {
+                setSuccess(false)
+            }, 3000)
         }
 
 
@@ -91,9 +91,9 @@ const ScheduleTourView = () =>{
                       label="Submit"
                       Class=" button main-btn"
                       type="submit"
-                       loadingEffect={<LoadingEffect 
-                        isShowing = {loading} 
-                        elementClass="av-loading"
+                      loadingEffect={<LoadingEffect 
+                      isShowing = {loading} 
+                       elementClass="av-loading"
                         type="ring"
                         />}
                   />
@@ -105,4 +105,4 @@ const ScheduleTourView = () =>{
 
 }
 
-export default ScheduleTourView
+export default ScheduleTourForm

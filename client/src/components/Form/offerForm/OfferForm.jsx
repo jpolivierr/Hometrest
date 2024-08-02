@@ -8,10 +8,10 @@ import URL from "../../../constants/urls";
 import { useEffect, useState } from "react";
 
 
-const OfferFormView = () =>{
+const OfferForm = () =>{
 
 
-    const [formFields] = useState({
+    const [formFields, setformFields] = useState({
         fullName : "",
         mobile : "",
         email : "",
@@ -26,19 +26,26 @@ const OfferFormView = () =>{
            updateFormField, 
            formError,
            loading,
-            response,
             formState,
             status
-          } = useForm(URL.MESSAGING,"POST", formFields)
+          } = useForm(URL.OFFER,"POST", formFields)
 
 
 
     useEffect(()=>{
 
-        // console.log(formError)
         if(status === 200){
-            console.log("success")
             setSuccess(true)
+            setformFields({...formFields, 
+                            fullName: "",
+                            mobile: "",
+                            email: "",
+                            price: "",
+                            message: ""
+                        })
+            setTimeout(() => {
+                setSuccess(false)
+            }, 3000)
         }
 
 
@@ -130,4 +137,4 @@ const OfferFormView = () =>{
 
 }
 
-export default OfferFormView
+export default OfferForm

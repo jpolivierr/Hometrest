@@ -341,6 +341,11 @@
     .property_filter{
         width: 100%;
     }
+
+    .photo-gallery{
+        padding: 0rem;
+        grid-template-columns: 1fr;
+    }
     
     
 }

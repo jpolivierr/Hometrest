@@ -35,12 +35,8 @@ const FormLogin = (URL, method, formFields) =>{
      useEffect(()=>{
 
         if(status === 200){
-
-            console.log("here is the response")
-            console.log(response)
             setFormError({})
             clearFormState()
-
         }
 
      },[status])
@@ -89,14 +85,9 @@ const FormLogin = (URL, method, formFields) =>{
         e.preventDefault()
          
         if(validateFields().errors){
-
             console.log("error found")
-
         }else{
-
-
             await makeRequest(METHOD, URL, formState)
-            
         }
                 
 }

@@ -1,7 +1,5 @@
 import React from 'react'
-import ScheduleTour from '../Schedule/Scedule'
-import jonathan from "../../../../assets/images/JONATHAN.jpg"
-import "./AgenInfo.style.css"
+import jonathan from "../../assets/images/JONATHAN.jpg"
 import { useState } from 'react'
 
 export default function AgentInfo() {

@@ -68,6 +68,8 @@ public class SecurityConfig {
                             "/login/**",
                             "/assets/**",
                             "/api/v1/property_search/**",
+                            "/schedule_tour",
+                            "/offer",
                             "/"
                         };
     }

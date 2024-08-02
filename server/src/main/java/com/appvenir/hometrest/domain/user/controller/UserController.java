@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.appvenir.hometrest.auth.dto.UserDetailsDto;
 import com.appvenir.hometrest.domain.user.dto.UserDto;
 import com.appvenir.hometrest.domain.user.dto.UserRegistrationDto;
-import com.appvenir.hometrest.domain.user.mapper.UserMapper;
 import com.appvenir.hometrest.domain.user.model.User;
 import com.appvenir.hometrest.domain.user.service.UserService;
 import com.appvenir.hometrest.exception.user.UserNotFoundException;

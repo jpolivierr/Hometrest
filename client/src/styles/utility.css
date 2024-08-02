@@ -6,15 +6,15 @@
     --light-color: #eef6f9;
     --light-silver: #647c9b2b;
     --alt-silver: #92a6bf17;
-    --dark-text-color : #122339;
+    --dark-text-color : #2b3644;
     --light-text-color : #232d47;
     /* --alt-text-color : #586b84; */
     /* --alt-text-color : #0d294dd6; */
     --alt-text-color: #63758c;
     --paragraph-text-color : #2b3857;
     --borderRadius: 5px;
-    --borderColor: #1b365e82;
-    --lightSilver: #92a6bf21;
+    --borderColor: #b6b7b982;
+    --lightSilver: #edeeee52;
     --lightShadow : 0px 10px 25px -6px #92a2bf56;
     --shadow : 0 0 20px #82bbcc54;
 }
@@ -66,7 +66,7 @@ fieldset{
 
 .bottom_divider{
     border-bottom: 1px solid var(--light-silver);
-    padding-bottom: rem;
+    padding-bottom: 2rem;
 }
 
 /* 

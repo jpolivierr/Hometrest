@@ -11,10 +11,10 @@ MODAL
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 20;
+    z-index: 100;
 }
 .modal-window{
-   z-index: 30;
+   z-index: 101;
    max-width: max-content;
    width: max-content;
    height: max-content;

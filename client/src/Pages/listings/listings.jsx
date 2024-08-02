@@ -1,13 +1,13 @@
-import Filter from "../../components/filter/Filter"
-import { formatNumber } from "../../Util/formatNumber"
-import URL from "../../constants/urls"
-import HttpRequest from "../../httpRequest/HttpRequest"
+import Filter from "../../components/filter/Filter.jsx"
+import { formatNumber } from "../../Util/formatNumber.js"
+import URL from "../../constants/urls.js"
+import HttpRequest from "../../httpRequest/HttpRequest.js"
 import { useState, useEffect, useRef } from "react"
-import { deepSearch } from "../../Util/getValueByKey"
-import CardLoading from "../../lib/loadingEffect/CardLoading/CardLoading"
-import PropertyCard from "../../components/propertyCard/PropertyCard"
-import { updateParam, getParams } from "../../Util/urlParcer"
-import removeEmptyValues from "../../Util/removeEmptyValues"
+import { deepSearch } from "../../Util/getValueByKey.js"
+import CardLoading from "../../lib/loadingEffect/CardLoading/CardLoading.jsx"
+import PropertyCard from "../../components/propertyCard/PropertyCard.jsx"
+import { updateParam, getParams } from "../../Util/urlParcer.js"
+import removeEmptyValues from "../../Util/removeEmptyValues.js"
 import deepCopy from "../../Util/deepCopy.js"
 import { useUserContext } from "../../context/user/UserContext.jsx"
 import Modal from "../../components/modal/Modal.jsx"
@@ -116,7 +116,6 @@ const Listings = () =>{
     }else{
       saveProperty(likedPropertyData)
     }
-    
   }
 
   const isFavorite = (id) => {
