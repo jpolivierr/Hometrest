@@ -21,8 +21,9 @@ const SingleProperty = () =>{
 const propertyFeatures = getParams("prop_features")
 const {isFavorite, likeProperty, userAuthenticated} = LikePropertyService()
 
+const loading = true
 
-const {get, loading} = HttpRequest({headers: {
+const {get,} = HttpRequest({headers: {
     'Content-Type': 'application/json'
   }})
 
@@ -73,6 +74,9 @@ console.log(loading)
   useEffect(()=>{
           
     const scrollEffect = scrollWithClass(headerRef)
+
+    if(!scrollEffect) return 
+    
     scrollEffect.init()
 
     return () => {
@@ -97,6 +101,9 @@ console.log(loading)
         <Login/>
       </Modal>
 
+      {
+          loading ? 
+          <PageLoading /> :
       <div id={"23"} ref={headerRef} className="container-medium">
         <div  className="single_prop_header">
               <Link to={"/listings"}>
@@ -171,7 +178,7 @@ console.log(loading)
       
       }             */}
       </div>
-
+    }
     </>  
    
     )

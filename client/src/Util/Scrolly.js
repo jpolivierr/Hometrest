@@ -22,6 +22,9 @@ export const scrollWithClass = (headerRef) =>{
     if(!headerRef) return
 
     const headerElement = headerRef.current
+
+    if(!headerElement) return
+    
     const rect = headerElement.getBoundingClientRect()
     const distanceFromTop = rect.top + window.scrollY
 
