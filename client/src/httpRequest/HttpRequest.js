@@ -5,7 +5,7 @@ import deepCopy from "../Util/deepCopy"
 const HttpRequest = (userConfig) =>{
 
     let abortController = useRef(null)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [config] = useState({
         credentials: 'include',
         mode: 'cors',

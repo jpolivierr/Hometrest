@@ -1,5 +1,3 @@
-
-import Slider2 from "../../lib/Slider/Slider"
 import PropertyCard from "../propertyCard/PropertyCard"
 import LoadingSkeleton from "../../lib/loadingEffect/CardLoading/CardLoading"
 import "./SimilarProperties.style.css"
@@ -9,16 +7,17 @@ import { useEffect } from "react"
 import HttpRequest from "../../httpRequest/HttpRequest"
 import deepCopy from "../../Util/deepCopy"
 import { useState } from "react"
+import URL from "../../constants/urls"
+import LikePropertyService from "../../service/property/LikePropertyService"
 
 
 const SimilarProperties = ({propFeatures}) =>{
 
-    const {post, del} = HttpRequest({headers: {
+    const {post} = HttpRequest({headers: {
         'Content-Type': 'application/json'
       }})
+    const {isFavorite, likeProperty} = LikePropertyService()
     
-      console.log(propFeatures)
-
     const status = deepSearch(propFeatures,["status"],"")
     const type = propFeatures.type || deepSearch(propFeatures,["description","type"])
     const price = propFeatures.price || deepSearch(propFeatures,["list_price"], "")
@@ -44,8 +43,7 @@ const SimilarProperties = ({propFeatures}) =>{
         list_price: price && {
                       min: price - pricePercentage(price), 
                       max: price + pricePercentage(price)
-                    }
-
+            }
     }
 
     const init = {
@@ -65,7 +63,7 @@ const SimilarProperties = ({propFeatures}) =>{
             }
           } 
         )()
-      },[])
+      },[propFeatures])
 
 
 
@@ -94,6 +92,8 @@ const SimilarProperties = ({propFeatures}) =>{
                                 singleProperty = {property}
                                 imageKey = {"od-w1024_h768_x2.jpg"}
                                 key={index}
+                                likeProperty={likeProperty}
+                                isFavorite={isFavorite}
                             />
                         ))
                     }

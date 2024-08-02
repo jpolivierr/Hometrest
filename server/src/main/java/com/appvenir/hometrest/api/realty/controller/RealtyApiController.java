@@ -52,11 +52,11 @@ public class RealtyApiController {
                             } catch (Exception e) {
                                 throw new RuntimeException("Failed to convert JSON string to Object", e);
                             }
-                         });
+        });
     }
 
     @GetMapping(path = "/property_id")
-    public CompletableFuture<String> findSimilarProperties(@RequestParam("property_id") String propertyId){
+    public CompletableFuture<String> findSimilarProperties(@RequestParam("property_id") String propertyId) throws InterruptedException{
        return realtyApi.findSimilarProperties(propertyId);
     }
     
