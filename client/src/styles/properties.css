@@ -1008,5 +1008,29 @@ margin-bottom: 1rem;
 }
 
 
+.show_button{
+    cursor: pointer;
+}
 
+.show_button{
+    cursor: pointer;
+    margin-top: 1rem;
+    font-weight: 500;
+    width: max-content;
+    border-radius: 100px;
+    font-size: .9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .3rem;
+    
+}
+
+.show_button span{
+    color: var(--secondary-color) 
+}
+
+.show_button i{
+    color: var(--secondary-color);
+}
 

@@ -18,12 +18,9 @@ import LikePropertyService from "../../service/property/LikePropertyService"
 
 const SingleProperty = () =>{
 
-const propertyFeatures = getParams("prop_features")
+// const propertyFeatures = getParams("prop_features")
 const {isFavorite, likeProperty, userAuthenticated} = LikePropertyService()
-
-const loading = true
-
-const {get,} = HttpRequest({headers: {
+const {get, loading} = HttpRequest({headers: {
     'Content-Type': 'application/json'
   }})
 
@@ -35,8 +32,6 @@ const {get,} = HttpRequest({headers: {
   const [loginModal, setLoginModal] =useState (false)
 
   const propertyId = deepSearch(singleProperty,["property_id"])
-  // const status = deepSearch(singleProperty,["status"])
-  // const type = deepSearch(singleProperty,["description","type"])
   const beds = deepSearch(singleProperty,["description","beds"])
   const baths = deepSearch(singleProperty,["description","baths"])
   const sqft = deepSearch(singleProperty,["description","sqft"])
@@ -58,8 +53,6 @@ const {get,} = HttpRequest({headers: {
     stateCode,
     zip
 }
-
-console.log(loading)
 
   useEffect(()=>{
     (async () => {
@@ -101,84 +94,75 @@ console.log(loading)
         <Login/>
       </Modal>
 
-      {
-          loading ? 
-          <PageLoading /> :
+    {
+      loading ? 
+      <PageLoading /> :
       <div id={"23"} ref={headerRef} className="container-medium">
         <div  className="single_prop_header">
-              <Link to={"/listings"}>
-              <div className="single_back_btn ">
-                          <i className="fa-solid fa-angle-left"></i>Search
-              </div>
-              </Link>           
-              <ul className='list_options'>
-              <li   
-                  onClick={()=>{setActiveList(-1); scrolly(-1)}}
-                  className={activeList === -1 ? "active_list" : ""}>
-                    Photos
-              </li>
-              <li   
-                  onClick={()=>{setActiveList(0); scrolly(0)}}
-                  className={activeList === 0 ? "active_list" : ""}>
-                    Overview
-              </li>
-              <li   
-                  onClick={()=>{setActiveList(1); scrolly(1)}}
-                  className={activeList === 1 ? "active_list" : ""}>
-                    Details
-              </li>
-              <li
-                    onClick={()=>{setActiveList(2); scrolly(2)}}
-                    className={activeList === 2 ? "active_list" : ""}>
-                    Schools
-              </li>
-                  <li 
-                    onClick={()=>{setActiveList(3); scrolly(3)}}
-                    className={activeList === 3 ? "active_list" : ""}>
-                    Property History
-                  </li>
-              <li 
-                  onClick={()=>{setActiveList(4); scrolly(4)}}
-                  className={activeList === 4 ? "active_list" : ""}>
-                  Tax History
-              </li>
-              </ul>
+          <Link to={"/listings"}>
+            <div className="single_back_btn ">
+                <i className="fa-solid fa-angle-left"></i>Search
+            </div>
+          </Link>           
+          <ul className='list_options'>
+            <li   
+                onClick={()=>{setActiveList(-1); scrolly(-1)}}
+                className={activeList === -1 ? "active_list" : ""}>
+                  Photos
+            </li>
+            <li   
+                onClick={()=>{setActiveList(0); scrolly(0)}}
+                className={activeList === 0 ? "active_list" : ""}>
+                  Overview
+            </li>
+            <li   
+                onClick={()=>{setActiveList(1); scrolly(1)}}
+                className={activeList === 1 ? "active_list" : ""}>
+                  Details
+            </li>
+            <li
+                  onClick={()=>{setActiveList(2); scrolly(2)}}
+                  className={activeList === 2 ? "active_list" : ""}>
+                  Schools
+            </li>
+                <li 
+                  onClick={()=>{setActiveList(3); scrolly(3)}}
+                  className={activeList === 3 ? "active_list" : ""}>
+                  Property History
+                </li>
+            <li 
+                onClick={()=>{setActiveList(4); scrolly(4)}}
+                className={activeList === 4 ? "active_list" : ""}>
+                Tax History
+            </li>
+          </ul>
 
-              <ul className="share_container">
-                  <li className="single_share_btn s-h-btn"><i className="fa-solid fa-share"></i> <span>Share</span></li>
-                  <li onClick={()=>userLikeProperty()} className="single_like_btn s-h-btn">
-                    {
-                      !isFavorite(propertyId)? 
-                      <i  className="fa-regular fa-heart"></i> :
-                      <i  className="fa-solid fa-heart like-prop"></i>
-                    } 
-                      
-                      <span>Favorite</span></li>
-                  <li className="single_share_btn s-h-btn"><i className="fa-solid fa-xmark"></i> <span>Hide</span></li>
-              </ul>        
-          </div>
+            <ul className="share_container">
+                <li className="single_share_btn s-h-btn"><i className="fa-solid fa-share"></i> <span>Share</span></li>
+                <li onClick={()=>userLikeProperty()} className="single_like_btn s-h-btn">
+                  {
+                    !isFavorite(propertyId)? 
+                    <i  className="fa-regular fa-heart"></i> :
+                    <i  className="fa-solid fa-heart like-prop"></i>
+                  } 
+                    <span>Favorite</span></li>
+                <li className="single_share_btn s-h-btn"><i className="fa-solid fa-xmark"></i> <span>Hide</span></li>
+            </ul>        
+        </div>
 
           <PhotoGalleryView photos={photos} virtualTour={virtualTour}/>
 
           <div className="prop_info_container">
-
-          <PropDescription singleProperty={singleProperty} />
-
-          <ScheduleTour />   
+             <PropDescription singleProperty={singleProperty} />
+             <ScheduleTour />   
           </div>
 
-          <SimilarProperties propFeatures={singleProperty}/>
-
-          {
           
-          // (propertyFeatures) ? 
-          // <SimilarProperties propFeatures={propertyFeatures}/> :
-          // (singleProperty.property_id) && 
-          // <SimilarProperties propFeatures={singleProperty}/>
-      
-      }            
       </div>
     }
+
+      <SimilarProperties propFeatures={singleProperty}/>
+    
     </>  
    
     )
