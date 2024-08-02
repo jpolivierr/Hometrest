@@ -7,10 +7,7 @@ import { getStatusColor } from '../../Pages/singleProperty/SingleProperty.Util'
 import ExpandElement from '../expandElement/ExpandElement'
 import { capitalizeFirstLetter } from '../../Util/capitalizeFirstLetter'
 import { getGrade } from './PropDescription.script'
-import AgentInfo from '../AgenInfo/AgentInfo'
 import Map from '../map/Map'
-import OfferForm from '../Form/offerForm/OfferForm'
-import Modal from '../modal/Modal'
 
 export default function PropDescription({singleProperty}) {
 
@@ -33,9 +30,6 @@ export default function PropDescription({singleProperty}) {
  
   return (
     <>
-    <Modal isOpen={offerModal} setModalState={setOfferModal}>
-        <OfferForm />
-    </Modal>
         <div className="prop_info">
             <div className="prop_info_header bottom_divider">
                 
@@ -63,13 +57,6 @@ export default function PropDescription({singleProperty}) {
 
                     
                 </ul>
-                <div className='button_container'>
-                    <button onClick={()=> setOfferModal(true)} 
-                        className='button main-btn offer_button'>Make an Offer</button>
-                    <button className='button alt-btn offer_button'>
-                            Get Pre-approved
-                    </button>
-                </div>
                 
                 </div>
                 {/* <div className="mini-map">
@@ -108,7 +95,7 @@ export default function PropDescription({singleProperty}) {
 
             }
 
-            <AgentInfo />
+            {/* <AgentInfo /> */}
 
             {
             details.length > 0 &&
