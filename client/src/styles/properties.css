@@ -270,9 +270,7 @@
     gap: 2rem;
 }
 
-.share_container{
-    
-}
+
 .single_prop_header ul li{
     cursor: pointer;
     display: flex;
@@ -955,9 +953,6 @@ margin-bottom: 1rem;
     font-size: 1rem;
 }
 
-.agent_info{
-
-}
 .agent form{
     /* margin: 2rem 0rem; */
     min-width: 100%;
