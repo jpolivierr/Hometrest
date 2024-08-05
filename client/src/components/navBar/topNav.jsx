@@ -66,7 +66,7 @@ return(
             </div>
             }
                 
-            <div className="hideDesktop">
+            <div className="hideDesktop burger-menu">
                 <menu>
                     <div></div>
                     <div></div>

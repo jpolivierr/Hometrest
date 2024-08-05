@@ -69,6 +69,14 @@ fieldset{
     padding-bottom: 2rem;
 }
 
+.burger-menu{
+    width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* 
 =================================================
 Buttons
@@ -163,7 +171,7 @@ Container
 
 .stick{
     position: sticky;
-    top: 69.5px;
+    top: 60.2px;
     border-bottom: 1px solid var(--light-silver);
     z-index: 10;
 }
@@ -490,9 +498,7 @@ BACKGROUND
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: .9rem 0rem;
-    min-height: 69.7px;
-
+    padding: .6rem 0rem;
 }
 
 .user-greeting{
@@ -516,7 +522,6 @@ BACKGROUND
 }
 
 .user-nav-bell{
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -584,7 +589,7 @@ BACKGROUND
 }
 
 .property-filter{
-    padding: 1rem 1rem;
+    padding: .6rem 1rem;
     display: flex;
     gap: .5rem;
 }
@@ -805,8 +810,9 @@ background: white;
 
 .sticky_map{
     position: sticky !important;
-    top: 8.9rem;
+    top: 7.8rem;
     left: 0;
-    height: 85vh;
+    height: 91.5vh;
+    flex: 1;
 }
 

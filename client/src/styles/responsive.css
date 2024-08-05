@@ -60,6 +60,7 @@
 
 @media (max-width: 1211px) {
 
+
     .prop_info_header{
         flex-flow: column;
     }
@@ -113,6 +114,10 @@
         gap: 2rem;
     }
 
+    .property-filter .bed-option{
+        display: none;
+    } 
+
 
 }
 
@@ -129,6 +134,10 @@
     .home_status {
         display: none;
     }
+
+    .property-filter .bath-option{
+        display: none;
+    } 
 
 }
 
@@ -242,6 +251,11 @@
         }
 }
 
+@media (max-width: 806px) {
+    .property-filter .price-option{
+        display: none;
+    } 
+}
 @media (max-width: 725px) {
 
     .quick-search{
@@ -328,8 +342,27 @@
     
 }
 
+@media (max-width: 670px) {
+
+    .property_list_container{
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+    .property-card{
+        max-width: 100%;
+    }
+
+}
+
 @media (max-width: 583px) {
 
+    .property-filter .status-option,.property-filter  .home-type-option{
+        display: none;
+    } 
+
+    .property-filter .field-city-zip{
+        width: 100%;
+    }
 
      .home_type{
         display: none;

@@ -219,13 +219,7 @@ export default function Filter({data, setData}) {
 
             <fieldset className='field-city-zip'>
                 <i className="fa-solid fa-location-dot"></i>
-                {/* <Autocomplete setLocation={setLocation} data={data}/> */}
-                {/* <input 
-                    placeholder="Enter city, state or zip" 
-                    name="city_zip"
-                    onChange={setCityZip}
-                    value={data.city}
-                    /> */}
+                <Autocomplete setLocation={setLocation} data={data}/>
                 <i className="iicon fa-solid fa-magnifying-glass"></i>
 
             </fieldset>
@@ -299,7 +293,7 @@ export default function Filter({data, setData}) {
             </fieldset>
 
             <fieldset >
-                <DropDown value={false} Class={"filter-dropdown status-option"} arrow={true}>
+                <DropDown value={false} Class={"filter-dropdown price-option"} arrow={true}>
                     <button className={`drop-down-button ${!isPriceSelected() ? "" : "has-value"}`}>
                         <h4>{getPriceLabel()}</h4>
                     </button>
@@ -459,7 +453,7 @@ export default function Filter({data, setData}) {
             </fieldset>
 
             <fieldset >
-                <DropDown value={false} Class={"filter-dropdown bed-option"} arrow={true}>
+                <DropDown value={false} Class={"filter-dropdown bath-option"} arrow={true}>
                     <button className={`drop-down-button ${!isBathSelected() ? "" : "has-value"}`}>
                         <h4>{getBathLabel()}</h4>
                     </button>
@@ -469,7 +463,7 @@ export default function Filter({data, setData}) {
                         </header>
                         <div className={"input-filter-dropdown"}>
                            <DropDown value={false} arrow={true}>
-                           <button className={`drop-down-button bed-option-button`}>
+                           <button className={`drop-down-button bath-option-button`}>
                                 {       
                                     `
                                     ${data.baths.min === 0 ? "Any" : data.baths.min}
@@ -499,7 +493,7 @@ export default function Filter({data, setData}) {
                         </DropDown> 
 
                         <DropDown value={false} arrow={true}>
-                           <button className={`drop-down-button bed-option-button`}>
+                           <button className={`drop-down-button bath-option-button`}>
                            {       
                                 `
                                 ${data.baths.max === 0 ? "Any" : data.baths.max}
@@ -508,7 +502,7 @@ export default function Filter({data, setData}) {
                                 ` 
                             }
                            </button>
-                            <div className='filter-dropdown-window bed-count-option'>
+                            <div className='filter-dropdown-window bath-count-option'>
                             <ul className='drop-down-min-height'>
                                 <li id={0} onClick={() => setMaxBath(0)}>
                                     Any

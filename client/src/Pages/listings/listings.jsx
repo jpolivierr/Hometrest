@@ -128,11 +128,11 @@ const Listings = () =>{
   }
 
   return (
-      <div>
+      <>
  
           <Filter data={search} setData={setSearch}/>
 
-          <div style={{marginTop: "85px"}}>
+          <div className="listing-layout">
               {
                 <Map properties={properties} 
                   zoom={10}
@@ -143,7 +143,7 @@ const Listings = () =>{
                 /> 
               }
 
-              <div className="show-properties-header"> 
+              {/* <div className="show-properties-header"> 
                   <h5>
                     {`Showing `} <b style={{fontWeight: "600"}}>{`${formatNumber(search.limit)}`}</b>  {` out of `}
                     <b style={{fontWeight: "600"}}>{`${formatNumber(total)}`}</b>{` result for `}
@@ -151,7 +151,7 @@ const Listings = () =>{
                           {`"${search.address}"`}
                         </span>
                     </h5>
-              </div>
+              </div> */}
 
               {
                   properties.length === 0 ? 
@@ -175,7 +175,7 @@ const Listings = () =>{
         <Modal isOpen={loginModal} setModalState={setLoginModal}>
            <Login/>
         </Modal>
-    </div>
+    </>
     )
 }
 
