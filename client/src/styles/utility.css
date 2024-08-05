@@ -83,6 +83,7 @@ button{
     height: 40px;
     font-size: 14px;
     width: 100%;
+    font-weight: 600;
 }
 
 .main-btn{
@@ -150,7 +151,7 @@ Container
 
 .has-value{
     background: #add8e62e !important;
-    border: 2px solid #0081bf29 !important;
+    border: 2px solid var(--secondary-color) !important;
 }
 
 .sticky{
@@ -583,8 +584,13 @@ BACKGROUND
 }
 
 .property-filter{
-    padding: 0 1rem;
+    padding: 1rem 1rem;
     display: flex;
+    gap: .5rem;
+}
+
+.property-filter .field-city-zip{
+    width: 25%;
 }
 
 .property-filter fieldset{
@@ -597,6 +603,7 @@ BACKGROUND
 
 .field-city-zip input{
     padding-left: 2rem;
+    height: 46px;
 }
 
 .field-city-zip .fa-location-dot{
@@ -612,7 +619,7 @@ BACKGROUND
     position: absolute;
     top: 0;
     bottom: 0;
-    right: 30px;
+    right: 20px;
     margin: auto;
     height: max-content;
 }
@@ -675,6 +682,7 @@ background: white;
     justify-content: center;
     align-items: center;
     gap: .3rem;
+    height: 46px;
 }
 
 .filter-dropdown .drop-down-button i{
@@ -784,3 +792,21 @@ background: white;
 .bed-count-option{
     min-width: 130px !important;
 }
+
+.the-map{
+    height: 100%;
+}
+
+.no_map{
+    background: #eef6f9;
+    height: 87vh;
+}
+
+
+.sticky_map{
+    position: sticky !important;
+    top: 8.9rem;
+    left: 0;
+    height: 85vh;
+}
+

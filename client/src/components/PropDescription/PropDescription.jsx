@@ -2,8 +2,6 @@ import React from 'react'
 import { formatNumber } from '../../Util/formatNumber'
 import { cleanInput } from '../../Util/cleanInput'
 import { deepSearch } from '../../Util/getValueByKey'
-import map from "../../assets/images/map.jpg"
-import { getStatusColor } from '../../Pages/singleProperty/SingleProperty.Util'
 import ExpandElement from '../expandElement/ExpandElement'
 import { capitalizeFirstLetter } from '../../Util/capitalizeFirstLetter'
 import { getGrade } from './PropDescription.script'
@@ -25,6 +23,27 @@ export default function PropDescription({singleProperty}) {
     const schools = deepSearch(singleProperty,["schools", "schools"],[])
     const propertyHistory = deepSearch(singleProperty,["property_history"],[])
     const taxHistory = deepSearch(singleProperty,["tax_history"],[])
+
+   const getStatusColor = (status) =>{
+
+        switch(status){
+            case "for_sale" :
+                return "status-for-sale"
+            case "for_rent" :
+                return "status-for-rent"
+            case "sold" :
+                return "status-sold"
+            case "ready_to_build" :
+                return "status-ready-to-build"
+            case "off_market" :
+                return "status-off-market"
+            case "new_community" :
+               return "status-new-community"
+               default :
+                return ""
+    
+        }
+    }
 
  
   return (
@@ -53,18 +72,14 @@ export default function PropDescription({singleProperty}) {
                     <i className="fa-brands fa-unity"></i>
                         <h4><span>{`${formatNumber(sqft)}`}</span> Sqft </h4>
                     </li>
-
-                    
                 </ul>
                 
                 </div>
                 <div className="mini-map">
                     <figure>
-                        {/* <Map 
+                        <Map 
                             properties={[singleProperty]}
-                            zoom={13}
-                        
-                            /> */}
+                            zoom={13}/>
                     </figure>
                     
                     <div className='commute'>
@@ -73,28 +88,19 @@ export default function PropDescription({singleProperty}) {
                             <p>Add a commute</p>
                     </div>
                 </div>
-
-
             </div>
 
             {
-            description && 
-
-            <div className="prop_description">
-                <h2>Description</h2>
-                
-                    {/* {shortenParagraph("description", description) } */}
-                    <ExpandElement offSet={3} paragraph={true}>
-                        <p>
-                            {description} 
-                        </p>
-                    </ExpandElement>
-                
-            </div>
-
+                description && 
+                <div className="prop_description">
+                    <h2>Description</h2>
+                        <ExpandElement offSet={3} paragraph={true}>
+                            <p>
+                                {description} 
+                            </p>
+                        </ExpandElement>          
+                </div>
             }
-
-            {/* <AgentInfo /> */}
 
             {
             details.length > 0 &&
@@ -113,20 +119,15 @@ export default function PropDescription({singleProperty}) {
                         }
                     </div>
                     </ExpandElement>
-
             </div>
             }
 
 
             {
-                
                 schools.length > 0 && 
-
                 <div id={2} className='table_style'>
                 <h2>Nearby Schools</h2>
-            
-                        <div className='school_options_container'>
-                            
+                    <div className='school_options_container'>
                         <table className='school_option'>
                             <thead>
                                 <tr>
@@ -137,7 +138,6 @@ export default function PropDescription({singleProperty}) {
                                     <th>Type</th>
                                     <th>Distance</th>
                                 </tr>
-                                
                             </thead>
                             <tbody>
                                     { schools.map((school, index)=>(
@@ -150,16 +150,11 @@ export default function PropDescription({singleProperty}) {
                                 <td>{school.distance_in_miles} mi</td>
                             </tr> 
                                 )) }
-                            </tbody>
-                            
+                            </tbody>                    
                         </table>
-                    
                 </div>
             </div>
-
             }
-
-            
 
             {
             propertyHistory.length > 0 &&
@@ -192,26 +187,17 @@ export default function PropDescription({singleProperty}) {
                                 </div>
                         ))
                     }
-
                 </div>
                 </ExpandElement>
-                
-
             </div>
-
             }
 
     {
             taxHistory.length > 0 &&
-
             <div id={4} className='table_style'>
-
                 <h2>Tax History</h2>
-
                 <div className='property_history_container'>
-                
-
-                        <div className='school_options_container'>
+                    <div className='school_options_container'>
                     <ExpandElement offSet={1} setHeight={240}>
                             <table className='school_option'>
                                 <thead>
@@ -240,17 +226,9 @@ export default function PropDescription({singleProperty}) {
                             </table>
                     </ExpandElement>
                     </div>
-                
-                
-
                 </div>
-                
-
             </div>
-
-            }
-            
-        
+            } 
     </div>
     </>
     

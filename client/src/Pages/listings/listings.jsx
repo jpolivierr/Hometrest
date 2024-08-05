@@ -12,6 +12,7 @@ import deepCopy from "../../Util/deepCopy.js"
 import { useUserContext } from "../../context/user/UserContext.jsx"
 import Modal from "../../components/modal/Modal.jsx"
 import Login from "../../components/Form/login/Login.jsx"
+import Map from "../../components/map/Map.jsx"
 
 const Listings = () =>{
 
@@ -41,7 +42,7 @@ const Listings = () =>{
   const [properties, setProperties] = useState([])
   const [total, setTotal] = useState(0)
   const [loginModal, setLoginModal] =useState (false)
-
+  
   useEffect(() => {
     const params = getParams("search");
     if (params) {
@@ -64,6 +65,7 @@ const Listings = () =>{
   const prevSearchRef = useRef();
 
   useEffect(() => {
+    console.log(search)
     if (prevSearchRef.current && !deepEqual(prevSearchRef.current, search)){
       const searchCopy = deepCopy(search)
       updateParam(removeEmptyValues(searchCopy, true), true, "search") 
@@ -129,7 +131,7 @@ const Listings = () =>{
  
           <Filter data={search} setData={setSearch}/>
 
-          <div>
+          <div style={{marginTop: "85px"}}>
               {
                 /* <Map properties={propertiesReducer.results} 
                   zoom={10}

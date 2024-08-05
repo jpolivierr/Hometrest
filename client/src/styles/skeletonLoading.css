@@ -9,6 +9,10 @@
     margin-bottom: 5rem;
 }
 
+.loading-container{
+    max-width: 250px;
+}
+
 .horizontal-cards{
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }

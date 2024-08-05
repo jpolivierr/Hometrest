@@ -5,11 +5,12 @@ import { salePriceOptions } from '../../constants/listOptions/priceRange';
 import { numberList } from '../../constants/listOptions/numberList';
 import { statusList } from '../../features/filter/lists/statusList';
 import { convertToDollars, abbreviateNumber, removeNoneNumericValue } from '../../Util/ConvertToDollars';
+import Autocomplete from '../map/AutoComplete';
 
 export default function Filter({data, setData}) {
 
-    const setCityZip =(e) =>{
-        setData(({ ...data, city: e.target.value}));
+    const setLocation =(location) =>{
+        setData(({ ...data, ...location}));
     }
 
     const setPropertyType = (type) => {
@@ -218,13 +219,15 @@ export default function Filter({data, setData}) {
 
             <fieldset className='field-city-zip'>
                 <i className="fa-solid fa-location-dot"></i>
-                <input 
+                <Autocomplete setLocation={setLocation}/>
+                {/* <input 
                     placeholder="Enter city, state or zip" 
                     name="city_zip"
                     onChange={setCityZip}
                     value={data.city}
-                    />
+                    /> */}
                 <i className="iicon fa-solid fa-magnifying-glass"></i>
+
             </fieldset>
 
             <fieldset >

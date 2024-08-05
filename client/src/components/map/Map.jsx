@@ -1,12 +1,19 @@
-import "./style.css"
 import { useRef, useEffect, useState } from "react"
 import { deepSearch } from "../../Util/getValueByKey"
 import circle from "../../assets/images/circle.png"
-import PropertyCard from "../propertyCard/PropertyCard"
 import { getPhoto } from "../propertyCard/util"
 import { formatNumber } from "../propertyCard/util"
+import useLoadMapScript from "./useLoadMapScript"
 
 const Map = (props) =>{
+    const mapUrl = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&v=weekly`
+    const scriptLoaded = useLoadMapScript(mapUrl)
+    useEffect(()=>{
+        if(scriptLoaded){
+             const map = new window.google.maps.Map(mapRef.current, initialView);
+             processMarkers(map)
+        }
+     },[scriptLoaded])
 
     const {
         styleElement, properties, zoom, disableDefaultUI, streetViewControl, fullscreenControl, loading} = props
@@ -148,35 +155,10 @@ const Map = (props) =>{
     })
 
     useEffect(()=>{
-        // console.log(getCenterCoordinate())
            
         setInitialView({...initialView, center : getCenterCoordinate()})
          
         },[properties])
-
-
-    useEffect(()=>{
-
-        const theMap = document.querySelector("#the-map")
-
-        if(!theMap){
-    
-            const script = document.createElement("script")
-            script.id="the-map"
-            script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&callback=initMap&v=weekly`
-            script.defer = true
-            script.async = true
-            document.body.appendChild(script)
-
-            window.initMap = () => {
-                            const map = new window.google.maps.Map(mapRef.current, initialView);
-                            processMarkers(map)
-                
-                        }
-
-        }
-        
-    },[])
 
 
     useEffect(()=>{
