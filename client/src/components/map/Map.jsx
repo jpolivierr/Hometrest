@@ -16,7 +16,13 @@ const Map = (props) =>{
      },[scriptLoaded])
 
     const {
-        styleElement, properties, zoom, disableDefaultUI, streetViewControl, fullscreenControl, loading} = props
+        styleElement, 
+        properties, 
+        zoom, 
+        disableDefaultUI, 
+        streetViewControl, 
+        fullscreenControl
+    } = props
 
     const mapRef = useRef(null)
 
@@ -174,16 +180,10 @@ const Map = (props) =>{
 
 
     return(
-
-        <>
-
         <div id="map" 
-            className={`the-map ${loading || properties.length === 0  ? "props-loading" : ""} ${styleElement ? styleElement : ""} ${properties.length === 0 && "no_map"} ` } 
+            className={`the-map${styleElement ? styleElement : ""} ${properties.length === 0 && "no_map"} ` } 
             ref={mapRef}>
-        </div>
-
-        </>
-        
+        </div>        
     )
 }
 

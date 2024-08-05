@@ -134,14 +134,13 @@ const Listings = () =>{
 
           <div style={{marginTop: "85px"}}>
               {
-                /* <Map properties={propertiesReducer.results} 
+                <Map properties={properties} 
                   zoom={10}
                   disableDefaultUI={false}
                   streetViewControl={false}
                   fullscreenControl={false}
                   styleElement={"sticky_map"}
-                  loading={loading}
-                /> */
+                /> 
               }
 
               <div className="show-properties-header"> 
