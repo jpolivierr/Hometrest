@@ -16,20 +16,21 @@ const HttpRequest = (userConfig) =>{
 
 const setSignal = () =>{
 
-    if(abortController.current){
-        abortController.current.abort();
-    }
-
-    abortController.current = new AbortController()
-
-    const timeout = setTimeout(() => {
-        if (abortController.current) {
+        if(abortController.current){
             abortController.current.abort();
         }
-    }, 20000);
 
-    const signal = abortController.current.signal;
-    return { signal, timeout };
+        abortController.current = new AbortController()
+
+        const timeout = setTimeout(() => {
+            if (abortController.current) {
+                abortController.current.abort();
+            }
+        }, 20000);
+
+        const signal = abortController.current.signal;
+        return { signal, timeout };
+
 
 }    
 

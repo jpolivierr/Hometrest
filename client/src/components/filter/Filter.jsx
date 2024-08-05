@@ -219,7 +219,7 @@ export default function Filter({data, setData}) {
 
             <fieldset className='field-city-zip'>
                 <i className="fa-solid fa-location-dot"></i>
-                <Autocomplete setLocation={setLocation}/>
+                <Autocomplete setLocation={setLocation} data={data}/>
                 {/* <input 
                     placeholder="Enter city, state or zip" 
                     name="city_zip"

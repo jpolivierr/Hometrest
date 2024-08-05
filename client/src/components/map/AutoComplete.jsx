@@ -8,6 +8,12 @@ const Autocomplete = ({setLocation, data}) => {
   const [address, setAddress] = useState('')
   const scriptLoaded = useLoadMapScript(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&libraries=places`)
 
+  useEffect(() => {
+    if(data.address){
+        setAddress(data.address)
+    }
+  },[data])
+
   const extractAddressComponents = (place) => {
     const addressComponents = place.address_components
     const components = {
@@ -62,10 +68,10 @@ const Autocomplete = ({setLocation, data}) => {
     <>
       <input 
         ref={inputRef}
-        placeholder="Enter city, state or zip" 
+        placeholder="Enter Address, city, state or zip" 
         name="city_zip"
-        onChange={() => {}}
-        // value={data.city}
+        onChange={(e) => setAddress(e.target.value)}
+        value={address}
             />
     </>
   )

@@ -24,6 +24,7 @@ const Listings = () =>{
                         city: "",
                         state_code: "",
                         postal_code: "",
+                        address: "",
                         type: [],
                         status: [],
                         list_price: {min: 0, max: 0},
@@ -148,7 +149,7 @@ const Listings = () =>{
                     {`Showing `} <b style={{fontWeight: "600"}}>{`${formatNumber(search.limit)}`}</b>  {` out of `}
                     <b style={{fontWeight: "600"}}>{`${formatNumber(total)}`}</b>{` result for `}
                         <span style={{fontStyle: "italic"}}>
-                          {`"${search.city}"`}
+                          {`"${search.address}"`}
                         </span>
                     </h5>
               </div>
