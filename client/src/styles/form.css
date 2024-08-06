@@ -79,6 +79,9 @@ form textarea{
     color: var(--dark-text-color)
 }
 
+.login-form a{
+    cursor: pointer;
+}
 .login-form fieldset{
 
     margin-bottom: 1rem;
@@ -95,8 +98,8 @@ form textarea{
 }
 
 .login-form fieldset input::placeholder {
-    color: #929397; /* Change this to your desired color */
-    font-weight: 300;
+    color: #97a1ae;
+    font-weight: 400;
 }
 
 .login-form button{

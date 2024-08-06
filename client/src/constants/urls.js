@@ -7,7 +7,7 @@ const URL = {
     GET_USER : HOST + "/api/users",
     SEARCH : HOST + "/api/v1/property_search/list",
     SINGLE_PROPERTY : HOST + "/api/v1/property_search/details", 
-    SIGNUP : HOST + "/process_registration",
+    SIGNUP : HOST + "/signup",
     SCHEDULE_TOUR : HOST +  "/schedule_tour",
     OFFER : HOST + "/offer",
     GET_ACCOUNT : HOST + "/api/secure/v1/user",

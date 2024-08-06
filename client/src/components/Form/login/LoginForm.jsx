@@ -1,12 +1,12 @@
 import URL from "../../../constants/urls";
-// import loginStyles from "./Login.style.css"
 import HttpRequest from "../../../httpRequest/HttpRequest";
 import { useState, useEffect } from "react";
 import { isEmpty } from "../../../Util/validation";
 import { useUserContext } from "../../../context/user/UserContext";
+import { Link } from "react-router-dom";
 
 
-const Login = () =>{
+const LoginForm = () =>{
 
 // console.log(formState)
 
@@ -111,7 +111,6 @@ const Login = () =>{
     return(
 
         <form className="main-form login-form center" onSubmit={e => submit(e)} >
-
             {
                 formError && 
                 <p className="server-error">
@@ -120,7 +119,10 @@ const Login = () =>{
             }
 
             <h3>Login</h3>
-            <p className="form-descr">Don't have and account yet? <a className="signup-link">Sign up</a></p>
+            <p className="form-descr">Don't have and account yet? 
+            <Link to="/signup">
+                <span className="signup-link"> Sign up</span>
+            </Link> </p>
 
             <fieldset className={errors.email ? "field_error" : ""}>
                 <p>Email Address</p>
@@ -155,13 +157,11 @@ const Login = () =>{
 
                 <a className="signup-link forgot-password" >Forgot Password?</a>
             </div>
-
             <button className="main-btn">Login</button>           
-        
         </form>
 
     )
 
 }
 
-export default Login
+export default LoginForm

@@ -1,4 +1,4 @@
-import LoginForm from "../components/Form/login/Login"
+import LoginForm from "../components/Form/login/LoginForm"
 import house from "../assets/images/house6.jpg"
 import LoginTopNav from "../components/navBar/topNav.login"
 

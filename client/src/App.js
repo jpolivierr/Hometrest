@@ -19,15 +19,15 @@ function App() {
     <>
       <div className="App">  
             <Routes>
+              <Route path="/signup" element={<SpliLayout><Signup/></SpliLayout>}/>
+              <Route path="/login" element={<SpliLayout><Login/></SpliLayout>}/>
               <Route path="/single_property" element={<MainLayout><SingleProperty/></MainLayout>}/>
-              <Route path="/signup" element={<Signup/>}/>
               <Route path="/about" element={<MainLayout><About/></MainLayout>}/>
               <Route path="/listings" element={<MainLayout><Listings/></MainLayout>}/>
               <Route path="/listings/buy" element={<MainLayout><Listings/></MainLayout>}/>
               <Route path="/listings/rent" element={<MainLayout><Listings/></MainLayout>}/>
               <Route path="/update" element={<MainLayout><Update/></MainLayout>}/>
               <Route path="/" element={<MainLayout><Home /></MainLayout>}/>
-              <Route path="/login" element={<SpliLayout><Login/></SpliLayout>}/>
             </Routes>   
       </div>
     </>

@@ -12,7 +12,7 @@ import { deepSearch } from "../../Util/getValueByKey"
 import { scrolly, scrollWithClass } from "../../Util/Scrolly"
 import { Link } from 'react-router-dom'
 import Modal from "../../components/modal/Modal"
-import Login from "../../components/Form/login/Login"
+import Login from "../../components/Form/login/LoginForm"
 import LikePropertyService from "../../service/property/LikePropertyService"
 
 const SingleProperty = () =>{

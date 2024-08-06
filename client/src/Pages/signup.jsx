@@ -1,45 +1,19 @@
-import { useEffect } from "react"
-import {urlParcer} from "../Util/urlParcer"
-// import SignupForm from "../components/Forms/signupForm"
-import useReduxMng from "../hooks/useReduxMng"
-import NewSignUpForm from "../components/Forms/NewSignupForm"
-import SignupForm from "../components/Form/signup/Signup.view"
+import SignupForm from "../components/Form/signup/SignupForm"
+import house from "../assets/images/house6.jpg"
+import LoginTopNav from "../components/navBar/topNav.login"
 
+const Signup = () =>{
 
-const Signup = (props) =>{
-
-    const {Class, id} = props
-
-    const {activeUserReducer} = useReduxMng()
-
-    const userToken = activeUserReducer.token
-
-    useEffect(()=>{
-
-        urlParcer()
-
-    },[])
-
-
-
-    return(
-    
-        // !userToken && 
-        <>
-            <div id={id} className={`${Class} light-bk`}>
-                
-                <div className="container center-content padding-bottom-2x">
-                    <div style={{}}>
-                    {/* <SignupForm/> */}
-                    <SignupForm />
-                    </div>
-                
-            </div>
-            </div>
-        </>
-          
+   return(
+    <>
+        <section className="container-medium">
+            <LoginTopNav />
+            <SignupForm/>  
+        </section>
+        <section style={{background: `url(${house}) center center/cover`}}>
+        </section>   
+    </>
     )
-    
 }
 
 export default Signup
