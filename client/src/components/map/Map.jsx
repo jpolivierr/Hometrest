@@ -81,7 +81,6 @@ const Map = (props) =>{
                     position : {lat: lat, lng: lng},
                     map,
                     icon: circle
-
                 })
 
                 processInfoWindow(property, marker, map)

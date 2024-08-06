@@ -53,8 +53,8 @@
 .property-card .prop-info{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    row-gap: .7rem;
     padding: 1rem;
+    row-gap: .4rem;
     /* font-size: .9rem; */
 }
 
@@ -79,12 +79,12 @@
 
 .prop-beds i, .prop-baths i, .prop-sqft i{
 
-        font-size: 10px !important;
-        margin-right: .3rem;
+        font-size: 12px !important;
+        margin-right: 0rem;
         color: var(--alt-text-color);
-        background: var(--lightSilver) !important;
-        width: 22px;
-        height: 22px;
+        /* background: #e9f0f5ab !important; */
+        width: 26px;
+        height: 26px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -93,6 +93,7 @@
 .property-card .prop-info span{
     color: var(--alt-text-color);
     font-weight: 500;
+    margin-left: 3px;
 }
 
 .property-card .prop-price{

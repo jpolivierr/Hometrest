@@ -20,7 +20,7 @@ export default function Footer({container}) {
         </div>
 
         <div  className="container flex-space-between copy_writes">
-               <p>2023 Copy write. Developped by www.Appvenir.com</p> 
+               <p>2024 Copy write. Developped by www.Appvenir.com</p> 
         </div>
 
     </footer>

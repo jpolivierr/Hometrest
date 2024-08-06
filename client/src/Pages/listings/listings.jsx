@@ -135,7 +135,7 @@ const Listings = () =>{
           <div className="listing-layout">
               {
                 <Map properties={properties} 
-                  zoom={10}
+                  zoom={14}
                   disableDefaultUI={false}
                   streetViewControl={false}
                   fullscreenControl={false}
