@@ -15,7 +15,7 @@ const logout = async () => {
 
 return(
 
-    <section className={` top-nav ${useLocation().pathname.startsWith("/single_property") ? '' : 'top-nav-stick'}`}>
+    <section className={` top-nav ${useLocation().pathname.startsWith("/listings") ? 'top-nav-stick' : ''}`}>
         <div className={`container flex-space-between`}>
             <div style={{display: "flex"}}>
                 <h2 style={{margin: "0rem",fontSize: "1.5rem"}}><i className="fa-brands fa-pagelines"></i> HomeTrest

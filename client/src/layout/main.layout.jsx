@@ -11,7 +11,7 @@ const MainLayout = ({ children }) => {
     <>
     <ScrollTop />
         <TopNav />
-        <div>
+        <div className="main-window">
             {children}
         </div> 
     <Footer container="container" />

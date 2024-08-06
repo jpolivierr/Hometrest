@@ -30,6 +30,10 @@
     color: white;
 }
 
+.main-window{
+    min-height: 79.5vh;
+}
+
 
 menu{
     width: 20px;

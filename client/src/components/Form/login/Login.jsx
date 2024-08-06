@@ -110,7 +110,7 @@ const Login = () =>{
 
     return(
 
-        <form className="main-form center" onSubmit={e => submit(e)} >
+        <form className="main-form login-form center" onSubmit={e => submit(e)} >
 
             {
                 formError && 
@@ -118,32 +118,43 @@ const Login = () =>{
                     {formError}
                 </p>
             }
-            
 
-            <h2>Login</h2>
+            <h3>Login</h3>
+            <p className="form-descr">Don't have and account yet? <a className="signup-link">Sign up</a></p>
 
             <fieldset className={errors.email ? "field_error" : ""}>
+                <p>Email Address</p>
                 <input 
                     onChange={setEmail}
                     onBlur={emailValidation}
                     value={data.email} 
                     name="email" 
                     type="text" 
-                    placeholder="Email" 
+                    placeholder="you@example.com" 
                     />
-                {errors.email && <p>{errors.email}</p>}
+                {errors.email && <p className="error-message">{errors.email}</p>}
             </fieldset>
 
             <fieldset className={errors.password ? "field_error" : ""}>
+            <p>Password</p>
                 <input 
                     onChange={setPassword}
                     onBlur={passwordValidation}
                     value={data.password} 
                     name="password" 
                     type="password" 
-                    placeholder="Password" />
-                {errors.password && <p>{errors.password}</p>}
+                    placeholder="Enter your password" />
+                {errors.password && <p className="error-message">{errors.password}</p>}
             </fieldset>
+
+            <div className="form-option">
+                <div className="remember-me">
+                    <input type="checkbox" />
+                    <p>Remember me</p>
+                </div>
+
+                <a className="signup-link forgot-password" >Forgot Password?</a>
+            </div>
 
             <button className="main-btn">Login</button>           
         
