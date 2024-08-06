@@ -12,6 +12,7 @@ import deepCopy from "../../Util/deepCopy.js"
 import { useUserContext } from "../../context/user/UserContext.jsx"
 import Modal from "../../components/modal/Modal.jsx"
 import Login from "../../components/Form/login/Login.jsx"
+import Map from "../../components/map/Map.jsx"
 
 const Listings = () =>{
 
@@ -23,6 +24,7 @@ const Listings = () =>{
                         city: "",
                         state_code: "",
                         postal_code: "",
+                        address: "",
                         type: [],
                         status: [],
                         list_price: {min: 0, max: 0},
@@ -41,7 +43,7 @@ const Listings = () =>{
   const [properties, setProperties] = useState([])
   const [total, setTotal] = useState(0)
   const [loginModal, setLoginModal] =useState (false)
-
+  
   useEffect(() => {
     const params = getParams("search");
     if (params) {
@@ -64,6 +66,7 @@ const Listings = () =>{
   const prevSearchRef = useRef();
 
   useEffect(() => {
+    console.log(search)
     if (prevSearchRef.current && !deepEqual(prevSearchRef.current, search)){
       const searchCopy = deepCopy(search)
       updateParam(removeEmptyValues(searchCopy, true), true, "search") 
@@ -129,7 +132,7 @@ const Listings = () =>{
  
           <Filter data={search} setData={setSearch}/>
 
-          <div>
+          <div style={{marginTop: "85px"}}>
               {
                 /* <Map properties={propertiesReducer.results} 
                   zoom={10}
@@ -146,7 +149,7 @@ const Listings = () =>{
                     {`Showing `} <b style={{fontWeight: "600"}}>{`${formatNumber(search.limit)}`}</b>  {` out of `}
                     <b style={{fontWeight: "600"}}>{`${formatNumber(total)}`}</b>{` result for `}
                         <span style={{fontStyle: "italic"}}>
-                          {`"${search.city}"`}
+                          {`"${search.address}"`}
                         </span>
                     </h5>
               </div>

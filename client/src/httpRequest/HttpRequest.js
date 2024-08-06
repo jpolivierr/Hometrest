@@ -1,17 +1,11 @@
-import { useEffect, useState, useRef } from "react"
+import {useState, useRef } from "react"
 import deepCopy from "../Util/deepCopy"
 
 
 const HttpRequest = (userConfig) =>{
 
-
     let abortController = useRef(null)
-
-    const [response, setResponse] = useState(null)
-    const [serverError, setServerError] = useState(null)
-    const [fieldError] = useState(null)
-    const [status, setStatus] = useState(null)
-    const [loading, setLoading] = useState(null)
+    const [loading, setLoading] = useState(true)
     const [config] = useState({
         credentials: 'include',
         mode: 'cors',
@@ -22,20 +16,21 @@ const HttpRequest = (userConfig) =>{
 
 const setSignal = () =>{
 
-    if(abortController.current){
-        abortController.current.abort();
-    }
-
-    abortController.current = new AbortController()
-
-    const timeout = setTimeout(() => {
-        if (abortController.current) {
+        if(abortController.current){
             abortController.current.abort();
         }
-    }, 20000);
 
-    const signal = abortController.current.signal;
-    return { signal, timeout };
+        abortController.current = new AbortController()
+
+        const timeout = setTimeout(() => {
+            if (abortController.current) {
+                abortController.current.abort();
+            }
+        }, 20000);
+
+        const signal = abortController.current.signal;
+        return { signal, timeout };
+
 
 }    
 
@@ -75,10 +70,6 @@ const responseHandler = async (response) => {
     return payload
 
 } 
-
-const prepareRequest = () => {
-    
-}
 
 const get = async (url) => {
     try {
@@ -135,11 +126,7 @@ const get = async (url) => {
         get,
         post,
         del,
-        serverError,
-        fieldError,
-        loading,
-        status,
-        response
+        loading
     }
 
 }

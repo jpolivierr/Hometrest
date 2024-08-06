@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useRef } from 'react';
-import "./ExpandElement.style.css"
 
 
 export default function ExpandElement({children, setHeight, elementClass, offSet, paragraph}) {

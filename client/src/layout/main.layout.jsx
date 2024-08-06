@@ -11,7 +11,7 @@ const MainLayout = ({ children }) => {
     <>
     <ScrollTop />
         <TopNav />
-        <div style={{marginTop: "69px"}}>
+        <div>
             {children}
         </div> 
     <Footer container="container" />

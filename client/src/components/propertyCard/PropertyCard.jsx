@@ -18,7 +18,6 @@ const PropertyCard = ({singleProperty, likeProperty, isFavorite}) =>{
     const street = deepSearch(singleProperty,["location","address","line"])
     const city = deepSearch(singleProperty,["location","address","city"])
     const zip = deepSearch(singleProperty,["location","address","postal_code"])
-    const state = deepSearch(singleProperty,["location","address","state"])
     const stateCode = deepSearch(singleProperty,["location","address","state_code"])
     const photo = deepSearch(singleProperty,["primary_photo","href"])
 
