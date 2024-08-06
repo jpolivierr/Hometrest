@@ -1,12 +1,11 @@
 import { useState, useCallback, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
-import { parseAddress2 } from "../../../Util/parseAddress"
-import { propertyTypeList } from "../../../features/filter/lists/propertyType"
-import "./QuickSearch.style.css"
-import { Actions } from "../../../Redux"
-import { cleanInput } from "../../../Util/cleanInput"
-import { salePriceOptions } from "../../../features/filter/lists/priceRange"
-import { formatNumber } from "../../../Util/formatNumber"
+import { parseAddress2 } from "../../Util/parseAddress"
+import { propertyTypeList } from "../../features/filter/lists/propertyType"
+import { Actions } from "../../Redux"
+import { cleanInput } from "../../Util/cleanInput"
+import { salePriceOptions } from "../../features/filter/lists/priceRange"
+import { formatNumber } from "../../Util/formatNumber"
 
 
 const QuickSearch = () =>{

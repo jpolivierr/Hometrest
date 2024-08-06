@@ -3,9 +3,9 @@ import Login from './Pages/login';
 import Signup from './Pages/signup';
 import Update from './Pages/update/update';
 import About from './Pages/about';
-import SingleProperty from './Pages/singleProperty/SingleProperty';
-import Home from './Pages/home/home';
-import Listings from './Pages/listings/listings';
+import SingleProperty from './Pages/SingleProperty';
+import Home from './Pages/home';
+import Listings from './Pages/listings';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
 import UserRequest from './httpRequest/userRequest/userRequest';

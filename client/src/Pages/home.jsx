@@ -1,21 +1,16 @@
 import { useEffect } from "react"
 
-import {urlParcer} from "../../Util/urlParcer"
-import "./home.style.css"
-import decor2 from "../../assets/images/decor-2.jpg"
-import couples from "../../assets/images/couples.jpg"
-import stylish from "../../assets/images/stylish.jpg"
-import wall from "../../assets/images/wall.jpg"
-import cart from "../../assets/images/cart.jpg"
-import womanMoving from "../../assets/images/woman-moving.jpg"
-import home3 from "../../assets/images/home-3.jpg"
-import mainHouse from "../../assets/images/main-house.png"
-import TopNav from "../../components/navBar/topNav"
-import Footer from "../../footer/footer.component"
-import QuickSearch from "./quickSearch/QuickSearch.component"
-import ScrollTop from "../../components/ScrollTop/ScrollTop"
-import RippleEffect from "../../components/rippleEffect/RippleEffect"
-import PrimaryButton from "../../components/buton/PrimaryButton"
+import {urlParcer} from "../Util/urlParcer"
+import decor2 from "../assets/images/decor-2.jpg"
+import couples from "../assets/images/couples.jpg"
+import stylish from "../assets/images/stylish.jpg"
+import wall from "../assets/images/wall.jpg"
+import cart from "../assets/images/cart.jpg"
+import womanMoving from "../assets/images/woman-moving.jpg"
+import home3 from "../assets/images/home-3.jpg"
+import mainHouse from "../assets/images/main-house.png"
+import QuickSearch from "../components/quickSearch/QuickSearch.component"
+import PrimaryButton from "../components/buton/PrimaryButton"
 
 
 const Home = (props) =>{
@@ -167,8 +162,6 @@ const Home = (props) =>{
           </div>
 
         </section>
-
-        <Footer container={"container-medium"}/>
 
       </main>
         

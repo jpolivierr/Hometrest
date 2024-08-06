@@ -1,19 +1,19 @@
 import { useEffect, useState, useRef } from "react"
 
-import PropDescription from "../../components/PropDescription/PropDescription"
-import PhotoGalleryView from "../../components/PhotoGallery/PhotoGallery"
-import PageLoading from "../../lib/loadingEffect/PageLoading/PageLoading"
-import SimilarProperties from "../../components/SimilarProperties/SimilarProperties"
-import ScheduleTour from "../../components/Schedule/Scedule"
-import { getParams } from "../../Util/urlParcer"
-import HttpRequest from "../../httpRequest/HttpRequest"
-import URL from "../../constants/urls"
-import { deepSearch } from "../../Util/getValueByKey"
-import { scrolly, scrollWithClass } from "../../Util/Scrolly"
+import PropDescription from "../components/PropDescription/PropDescription"
+import PhotoGalleryView from "../components/PhotoGallery/PhotoGallery"
+import PageLoading from "../lib/loadingEffect/PageLoading/PageLoading"
+import SimilarProperties from "../components/SimilarProperties/SimilarProperties"
+import ScheduleTour from "../components/Schedule/Scedule"
+import { getParams } from "../Util/urlParcer"
+import HttpRequest from "../httpRequest/HttpRequest"
+import URL from "../constants/urls"
+import { deepSearch } from "../Util/getValueByKey"
+import { scrolly, scrollWithClass } from "../Util/Scrolly"
 import { Link } from 'react-router-dom'
-import Modal from "../../components/modal/Modal"
-import Login from "../../components/Form/login/LoginForm"
-import LikePropertyService from "../../service/property/LikePropertyService"
+import Modal from "../components/modal/Modal"
+import Login from "../components/Form/login/LoginForm"
+import LikePropertyService from "../service/property/LikePropertyService"
 
 const SingleProperty = () =>{
 

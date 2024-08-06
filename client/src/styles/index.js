@@ -1,3 +1,4 @@
+import "./main.css"
 import "./tags.css"
 import "./utility.css"
 import "./form.css"

@@ -10,7 +10,7 @@ const {get} = HttpRequest()
 const {getUser, isAuthenticated, getPropertyCount} = useUserContext()
 
 const logout = async () => {
-    const response = await get(URL.LOGOUT)
+    await get(URL.LOGOUT)
     window.location.href ="/login"
 }
 

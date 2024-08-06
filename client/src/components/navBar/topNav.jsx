@@ -3,26 +3,34 @@ import { useUserContext } from "../../context/user/UserContext"
 import HttpRequest from "../../httpRequest/HttpRequest"
 import URL from "../../constants/urls"
 import { useLocation } from 'react-router-dom'
+import Logo from "../../assets/images/logo.png"
 
 const TopNav = () =>{
 const {get} = HttpRequest()
 const {getUser, isAuthenticated, getPropertyCount} = useUserContext()
+
+const location = useLocation()
 
 const logout = async () => {
     const response = await get(URL.LOGOUT)
     window.location.href ="/login"
 }
 
+const isListingPage = () => {
+    return location.pathname.startsWith("/listings")
+}
+
 return(
 
-    <section className={` top-nav border-bottom padding-top-bottom-small ${useLocation().pathname.startsWith("/listings") ? 'top-nav-stick' : ''}`}>
-        <div className={`container flex-space-between`}>
-            <div style={{display: "flex"}}>
-                <h2 style={{margin: "0rem",fontSize: "1.5rem"}}><i className="fa-brands fa-pagelines"></i> HomeTrest
-                </h2>
-                <NavList Class="hideMobile flex-space-between gap-1x nav-list"/>
-            </div>
-
+    <section className={` top-nav border-bottom padding-top-bottom-small ${isListingPage() ? 'top-nav-stick' : ''}`}>
+        <div className={`${isListingPage() ? 'container' : 'container-medium'} flex-space-between`}>
+            <di style={{display: "flex", alignItems: "center"}}>
+                  <div className="logo">
+                    <img src={Logo} />
+                  </div>
+                  <NavList Class="hideMobile flex-space-between gap-1x nav-list"/>
+            </di>
+          
             {
             getUser() !== null && isAuthenticated ?
                 <div className="hideMobile flex-space-between gap-3x user-nav-info">                      
