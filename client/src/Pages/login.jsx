@@ -1,11 +1,19 @@
 import LoginForm from "../components/Form/login/Login"
+import house from "../assets/images/house6.jpg"
+import LoginTopNav from "../components/navBar/topNav.login"
 
 const Login = () =>{
 
    return(
-    <div style={{paddingTop: "3rem"}}>
-        <LoginForm/>           
-    </div>
+    <>
+        <section className="container-medium">
+            <LoginTopNav />
+             
+            <LoginForm/>  
+        </section>
+        <section style={{background: `url(${house}) center center/cover`}}>
+        </section>   
+    </>
     )
 }
 

@@ -62,6 +62,7 @@ form textarea{
 }
 
 .main-form{
+    width: 100%;
     max-width: 420px;
     width: 350px;
 }

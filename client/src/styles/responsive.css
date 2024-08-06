@@ -144,6 +144,10 @@
 
 @media (max-width: 855px){
 
+    .split-window{
+        grid-template-columns: 1fr .5fr;
+    }
+
     .smart-search article{
         padding-top: 5rem;
         flex-flow: column;
@@ -344,6 +348,14 @@
 
 @media (max-width: 670px) {
 
+    .split-window{
+        grid-template-columns: 1fr;
+    }
+
+    .split-window section:nth-child(2){
+        display: none;
+    }
+
     .property_list_container{
         grid-template-columns: 1fr;
         width: 100%;
@@ -411,6 +423,9 @@
         grid-template-columns: 1fr;
     }
 
+    form{
+        width: 100% !important;
+    }
 
     
 }

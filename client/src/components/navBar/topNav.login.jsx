@@ -2,9 +2,10 @@ import NavList from "../list/NavList"
 import { useUserContext } from "../../context/user/UserContext"
 import HttpRequest from "../../httpRequest/HttpRequest"
 import URL from "../../constants/urls"
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import Logo from "../../assets/images/logo.png"
 
-const TopNav = () =>{
+const LoginTopNav = () =>{
 const {get} = HttpRequest()
 const {getUser, isAuthenticated, getPropertyCount} = useUserContext()
 
@@ -15,12 +16,10 @@ const logout = async () => {
 
 return(
 
-    <section className={` top-nav border-bottom padding-top-bottom-small ${useLocation().pathname.startsWith("/listings") ? 'top-nav-stick' : ''}`}>
-        <div className={`container flex-space-between`}>
-            <div style={{display: "flex"}}>
-                <h2 style={{margin: "0rem",fontSize: "1.5rem"}}><i className="fa-brands fa-pagelines"></i> HomeTrest
-                </h2>
-                <NavList Class="hideMobile flex-space-between gap-1x nav-list"/>
+    <section className={`top-nav margin-bottom-4x padding-top-bottom`}>
+        <div className={`flex-space-between with-full`}>
+            <div className="logo" style={{display: "flex"}}>
+                <img src={Logo} />
             </div>
 
             {
@@ -42,27 +41,18 @@ return(
                     </button>                       
                 </div>
                 :
-                <div style={{display: "flex"}}>
-                <div style={{marginLeft: "3rem"}} className="hideMobile flex-space-between gap-1x">
-                    <ul className="nav-contact-info">
+                <div className="hideMobile flex-space-between gap-3x">
+                <ul>
+                    <Link  to="/" target="">
                         <li>
-                            <i className="fa-solid fa-phone"></i>
-                            <span>Call: (849) 9840 9449</span>
+                            Home
                         </li>
-                    </ul>
-
-                    <a href="/login">
-                        <button className="button secondary-btn">
-                            Login
-                        </button>
-                    </a>
-                                                            
+                    </Link>
+                </ul>
+                                
                     <a href="/signup">
-                        <button className="button main-btn">
-                            Sign up
-                        </button>
+                            Join
                     </a>
-                </div>
             </div>
             }
                 
@@ -78,4 +68,4 @@ return(
  )
 }
 
-export default TopNav
+export default LoginTopNav

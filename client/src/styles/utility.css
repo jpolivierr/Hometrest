@@ -144,7 +144,7 @@ Container
 
 .container-medium{
     width: 85%;
-    margin: auto;
+    margin: 0rem auto;
     max-width: 1200px;
 }
 
@@ -271,6 +271,16 @@ text alignment
 .hide{
     display: none;
 }
+
+/* 
+=================================================
+WIDTH
+=================================================
+*/
+
+.with-full{
+    width: 100%;
+}
 /* 
 =================================================
 GAP
@@ -361,6 +371,10 @@ Content Position
 PADDING
 =================================================
 */
+.padding-top-bottom-small{
+    padding: .6rem 0rem;
+}
+
 .padding-top-bottom{
     padding: 1rem 0rem;
 }
@@ -426,6 +440,13 @@ MARGIN
     margin-top: 2rem;
 }
 
+.margin-bottom-3x{
+    margin-bottom: 3rem;
+}
+
+.margin-bottom-4x{
+    margin-bottom: 4rem;
+}
 
 
 /* 
@@ -494,15 +515,21 @@ BACKGROUND
 
 
 .top-nav{
-
+    width: 100%;
     top: 0;
     z-index: 12;
     background: white;
-    border-bottom: 1px solid var(--light-silver);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: .6rem 0rem;
+}
+
+.top-nav .logo img{
+    max-width: 120px;
+}
+
+.border-bottom{
+    border-bottom: 1px solid var(--light-silver);
 }
 
 .user-greeting{
@@ -818,5 +845,11 @@ background: white;
     left: 0;
     height: 91.5vh;
     flex: 1;
+}
+
+.split-window{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
 }
 
