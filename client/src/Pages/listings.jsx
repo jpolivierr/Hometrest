@@ -66,7 +66,6 @@ const Listings = () =>{
   const prevSearchRef = useRef();
 
   useEffect(() => {
-    console.log(search)
     if (prevSearchRef.current && !deepEqual(prevSearchRef.current, search)){
       const searchCopy = deepCopy(search)
       updateParam(removeEmptyValues(searchCopy, true), true, "search") 

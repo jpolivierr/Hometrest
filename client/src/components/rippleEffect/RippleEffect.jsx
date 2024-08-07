@@ -23,9 +23,6 @@ const RippleEffect = ({children}) =>{
              }, 400);
 
         })
-        console.log(button)
-    
-
      },[])
 
      return (

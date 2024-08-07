@@ -19,7 +19,9 @@ return(
     <section className={`top-nav margin-bottom-4x padding-top-bottom`}>
         <div className={`flex-space-between with-full`}>
             <div className="logo" style={{display: "flex"}}>
-                <img src={Logo} />
+                <Link to="/">
+                    <img src={Logo} />
+                </Link>
             </div>
 
             {

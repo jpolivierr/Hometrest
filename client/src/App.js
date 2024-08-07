@@ -11,9 +11,12 @@ import LoadingEffect from './lib/loadingEffect/loading/loadingEffect';
 import UserRequest from './httpRequest/userRequest/userRequest';
 import MainLayout from './layout/main.layout';
 import SpliLayout from './layout/split.layout';
+import useLoadMapScript from './components/map/useLoadMapScript';
 
 
 function App() {
+
+  useLoadMapScript()
 
   return (
     <>

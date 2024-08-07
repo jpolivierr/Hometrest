@@ -4,6 +4,7 @@ import HttpRequest from "../../httpRequest/HttpRequest"
 import URL from "../../constants/urls"
 import { useLocation } from 'react-router-dom'
 import Logo from "../../assets/images/logo.png"
+import { Link } from "react-router-dom"
 
 const TopNav = () =>{
 const {get} = HttpRequest()
@@ -24,12 +25,14 @@ return(
 
     <section className={` top-nav border-bottom padding-top-bottom-small ${isListingPage() ? 'top-nav-stick' : ''}`}>
         <div className={`${isListingPage() ? 'container' : 'container-medium'} flex-space-between`}>
-            <di style={{display: "flex", alignItems: "center"}}>
+            <div style={{display: "flex", alignItems: "center"}}>
                   <div className="logo">
-                    <img src={Logo} />
+                    <Link to="/">
+                        <img src={Logo} />
+                    </Link>
                   </div>
                   <NavList Class="hideMobile flex-space-between gap-1x nav-list"/>
-            </di>
+            </div>
           
             {
             getUser() !== null && isAuthenticated ?

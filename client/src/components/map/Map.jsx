@@ -6,8 +6,7 @@ import { formatNumber } from "../propertyCard/util"
 import useLoadMapScript from "./useLoadMapScript"
 
 const Map = (props) =>{
-    const mapUrl = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&v=weekly`
-    const scriptLoaded = useLoadMapScript(mapUrl)
+    const scriptLoaded = useLoadMapScript()
     useEffect(()=>{
         if(scriptLoaded){
              const map = new window.google.maps.Map(mapRef.current, initialView);

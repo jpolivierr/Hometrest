@@ -7,10 +7,10 @@ export default function Footer({container}) {
   return (
     <footer className='footer'>
 
-        <div className={`${container} container flex-space-between footer_main`}>
+        <div className={`${container} container-medium flex-space-between footer_main`}>
 
             <div style={{margin: "0rem", fontSize: "1.5rem", maxWidth: "250px"}}>
-              <img src={WhiteLogo} />
+              <img style={{width: "100%"}}src={WhiteLogo} />
             </div>
 
             <ul  className="contact-info-footer"><li><i  className="fa-solid fa-phone"></i><span>Call: (849) 9840 9449</span></li>

@@ -6,7 +6,7 @@ import useLoadMapScript from './useLoadMapScript'
 const Autocomplete = ({setLocation, data}) => {
   const inputRef = useRef(null)
   const [address, setAddress] = useState('')
-  const scriptLoaded = useLoadMapScript(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPS_API_KEY}&libraries=places`)
+  const scriptLoaded = useLoadMapScript()
 
   useEffect(() => {
     if(data.address){
