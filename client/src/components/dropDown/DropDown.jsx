@@ -15,8 +15,9 @@ export default function DropDown({ children, value, Class, arrow }) {
   };
 
   const handleClickOutside = (event) => {
+    
     if (dropdownRef.current && !dropdownRef.current.contains(event.target) || event.target.hasAttribute("data-close-on-click")) {
-        setIsOpen(false);
+      setIsOpen(false);
     }
    };
 

@@ -35,6 +35,7 @@ public class RealtyApiController {
                 .thenApplyAsync(response -> {
                     try {
                         // Convert the JSON string to a Java object
+                        Thread.sleep(3000);
                         return objectMapper.readValue(response, Object.class);
                     } catch (Exception e) {
                         throw new RuntimeException("Failed to convert JSON string to Object", e);

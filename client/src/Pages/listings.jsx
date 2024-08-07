@@ -37,7 +37,7 @@ const Listings = () =>{
               total: 0,
               results : [],
   }
-  const {post, del} = HttpRequest({headers: {
+  const {loading, post, del} = HttpRequest({headers: {
     'Content-Type': 'application/json'
   }})
   const [properties, setProperties] = useState([])
@@ -64,14 +64,25 @@ const Listings = () =>{
   },[])
 
   const prevSearchRef = useRef();
-
+  const timeoutRef = useRef(null)
   useEffect(() => {
     if (prevSearchRef.current && !deepEqual(prevSearchRef.current, search)){
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
       const searchCopy = deepCopy(search)
       updateParam(removeEmptyValues(searchCopy, true), true, "search") 
-      fetchProperties()
+      timeoutRef.current = setTimeout(() => {
+        fetchProperties()
+      }, 600)
+      
     }
     prevSearchRef.current = search;
+    return () => {
+      if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current)
+      }
+  }
   }, [search]);
 
   const deepEqual = (obj1, obj2) => {
@@ -81,6 +92,7 @@ const Listings = () =>{
   const fetchProperties = async () =>{
     const searchCopy = deepCopy(search)
     const response = await post(URL.SEARCH, removeEmptyValues(searchCopy, true))
+    console.log(response.body)
     if(response.status === 200 && response.body){
       const propertyData = deepSearch(response.body,["data","home_search"],init)
       setTotal(propertyData.total)
@@ -128,10 +140,9 @@ const Listings = () =>{
 
   return (
       <>
- 
-          <Filter data={search} setData={setSearch}/>
+          <Filter data={search} setData={setSearch} fetchProperties={fetchProperties}/>
 
-          <div className="listing-layout">
+          <div className={`listing-layout ${properties.length !== 0 && loading ? 'loading-overlay' : ''}`}>
               {
                 <Map properties={properties} 
                   zoom={14}

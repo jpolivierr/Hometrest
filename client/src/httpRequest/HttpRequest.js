@@ -12,9 +12,9 @@ const HttpRequest = (userConfig) =>{
         cache: "no-cache",
         signal: false,
         ...userConfig
-      });
+      });   
 
-const setSignal = () =>{
+const PrepareSignal = (config) =>{
 
         if(abortController.current){
             abortController.current.abort();
@@ -23,19 +23,13 @@ const setSignal = () =>{
         abortController.current = new AbortController()
 
         const timeout = setTimeout(() => {
-            if (abortController.current) {
+    
+                if (abortController.current) {
                 abortController.current.abort();
             }
         }, 20000);
 
         const signal = abortController.current.signal;
-        return { signal, timeout };
-
-
-}    
-
-const PrepareSignal = (config) =>{
-        const { signal, timeout } = setSignal();
         config.signal = signal
         config.timeout = timeout;
         return config
@@ -69,7 +63,18 @@ const responseHandler = async (response) => {
 
     return payload
 
-} 
+}
+
+const errorHandler = (error) => {
+    if (error.name === 'AbortError') {
+        console.error('Fetch aborted:', error.message)
+        return {status: 500, body: null, error: error}
+    } else {
+        setLoading(false)
+        console.error('Unexpected error:', error.message)
+        return {status: 500, body: null, error: error}
+    }
+}
 
 const get = async (url) => {
     try {
@@ -80,9 +85,7 @@ const get = async (url) => {
         clearTimeout(getConfig.timeout)
         return responseHandler(response)
     } catch (error) {
-        setLoading(false)
-        console.error(error, error.message)
-        return {status: 500, body: null, error: error}
+        return errorHandler(error)
     }
 }
 
@@ -97,9 +100,7 @@ const get = async (url) => {
             clearTimeout(postConfig.timeout)
             return responseHandler(response)
         } catch (error) {
-            setLoading(false)
-            console.error(error, error.message)
-            return {status: 500, body: null, error: error}
+            return errorHandler(error)
         }
     }
 
@@ -115,9 +116,7 @@ const get = async (url) => {
             const responseBody = responseHandler(response)
             return responseBody
         } catch (error) {
-            setLoading(false)
-            console.error(error, error.message)
-            return {status: 500, body: null, error: error}
+            return errorHandler(error)
         }
     }
 

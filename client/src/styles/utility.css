@@ -834,8 +834,20 @@ background: white;
 }
 
 .no_map{
-    background: #eef6f9;
+    background: #f8f9f9;
     height: 87vh;
+    animation : loading-map .6s linear infinite alternate;
+}
+
+@keyframes loading-map {
+
+    0%{
+        background: #f8f8f88c;
+    }
+    100%{
+        background: #f4f4f4;
+    }
+    
 }
 
 
@@ -851,5 +863,18 @@ background: white;
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: 100vh;
+}
+
+.loading-overlay{
+    position: relative;
+}
+
+.loading-overlay::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fbfbfbcb;
+    z-index: 2;
 }
 

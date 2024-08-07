@@ -7,7 +7,7 @@ import { statusList } from '../../features/filter/lists/statusList';
 import { convertToDollars, abbreviateNumber, removeNoneNumericValue } from '../../Util/ConvertToDollars';
 import Autocomplete from '../map/AutoComplete';
 
-export default function Filter({data, setData}) {
+export default function Filter({data, setData, fetchProperties}) {
 
     const setLocation =(location) =>{
         setData(({ ...data, ...location}));
@@ -97,7 +97,6 @@ export default function Filter({data, setData}) {
       };
 
       const setMaxBed = (maxBed) => {
-        console.log(maxBed)
         setData((prevSearch) => ({
           ...prevSearch,
           beds: { ...prevSearch.beds, max: maxBed },
@@ -211,7 +210,10 @@ export default function Filter({data, setData}) {
     };
 
     const submit = (e) => {
+        console.log(e)
         e.preventDefault();
+        console.log("Fetching property")
+        fetchProperties()
     }
 
     return (
