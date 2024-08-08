@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react';
 
-export default function DropDown({ children, value, Class, arrow }) {
+export default function DropDown({ children, setOpen, value, Class, arrow }) {
   const [isOpen, setIsOpen] = useState(value);
   const dropdownRef = useRef(null);
 
@@ -11,6 +11,10 @@ export default function DropDown({ children, value, Class, arrow }) {
 
   const toggleIsOpen = (e) => {
       e.preventDefault();
+      if(typeof setOpen === "function"){
+        setOpen(value)
+        return
+      }
       setIsOpen(prevIsOpen => !prevIsOpen);
   };
 

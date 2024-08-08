@@ -270,7 +270,7 @@
 
 .single_prop_header ul {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 
@@ -375,19 +375,19 @@
     max-width: 380px;
     height: 250px;
     width: 100%;
-    border: 1px solid var(--light-silver);
-    border-radius: var(--borderRadius);
+    border-radius: 5px;
     position: relative;
     display: grid;
     grid-template-rows: 1fr auto;
-    box-shadow: 0px 20px 25px -6px #ccd1d973;
+    box-shadow: 0px 5px 35px 16px #c9cfd936;
+    overflow: hidden;
 }
 
 .prop_info_header .mini-map figure{
     overflow: hidden;
-    border-radius: var(--borderRadius);
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .prop_info_header .mini-map figure img{
@@ -408,8 +408,8 @@
     cursor: pointer;
     justify-content: center;
     /* background: var(--lightSilver); */
-    border-bottom-left-radius: var(--borderRadius);
-    border-bottom-right-radius: var(--borderRadius);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .commute h3{
@@ -801,7 +801,7 @@ max-width: 300px;
 
 .tour_type{
     display: flex;
-    column-gap: 1rem;
+    column-gap: .5rem;
     justify-content: space-between;
     margin-bottom: 1rem;
 }
@@ -810,7 +810,7 @@ max-width: 300px;
 width: 100%;
 padding: 1rem;
 border: 1px solid var(--borderColor);
-border-radius: 10px;
+border-radius: 100px;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -829,11 +829,42 @@ gap: .5rem;
 height: 50px;
 background: white;
 border: 1px solid var(--borderColor);
-border-radius: 10px;
+border-radius: 5px;
 padding: 0rem 1rem;
 cursor: pointer;
 margin-top: 1rem;
 margin-bottom: 1rem;
+}
+
+.time-option button{
+    background: white;
+    border: 1px solid var(--borderColor);
+    padding: 1rem 1rem;
+    margin: 1rem 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.time-option .drop-down-window{
+  position: absolute;
+  left: 0;
+  top: 110%;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  background: white;
+  border: 1px solid rgb(228, 227, 227);
+  z-index: 1;
+  min-width: 230px;
+  padding:  1rem;
+  padding-bottom: 0rem;
+
+}
+
+.time-option .drop-down-window ul li{
+    cursor: pointer;
+    margin-bottom: .8rem;
 }
 
 .schedule-time{
@@ -881,7 +912,7 @@ margin-bottom: 1rem;
 }
 
 .ask_question_form textarea{
-    border-radius: var(--borderRadius);
+    border-radius: 5px;
     border: 1px solid var(--borderColor);
     width: 100%;
     height: 80px;

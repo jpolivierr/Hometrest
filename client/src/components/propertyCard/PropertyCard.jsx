@@ -41,7 +41,7 @@ const PropertyCard = ({singleProperty, likeProperty, isFavorite}) =>{
             return
         }
 
-        navigate(`/single_property?prop_id=${propertyId}`)
+        navigate(`/single_property?property_id=${propertyId}`)
     }
 
   const handleForRent = (status) =>{

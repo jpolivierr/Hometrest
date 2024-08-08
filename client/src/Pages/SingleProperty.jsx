@@ -17,7 +17,12 @@ import LikePropertyService from "../service/property/LikePropertyService"
 
 const SingleProperty = () =>{
 
-// const propertyFeatures = getParams("prop_features")
+const searchedPropertyId = getParams("property_id")
+
+useEffect(() => {
+  if(!searchedPropertyId) window.location.href = "/listings"
+},[searchedPropertyId])
+
 const {isFavorite, likeProperty, userAuthenticated} = LikePropertyService()
 const {get, loading} = HttpRequest({headers: {
     'Content-Type': 'application/json'
@@ -53,13 +58,18 @@ const {get, loading} = HttpRequest({headers: {
     zip
 }
 
+  const prevPropId = useRef(null);
   useEffect(()=>{
     (async () => {
-        const response = await get(URL.SINGLE_PROPERTY + "/9809809")
+      if (prevPropId.current != searchedPropertyId){
+        const response = await get(URL.SINGLE_PROPERTY + "/" + searchedPropertyId)
         if(response.status === 200 && response.body) {
             const singleProperty = deepSearch(response.body,["data","home"],{})
             setSingleProperty(singleProperty)
         }
+      }
+      prevPropId.current = searchedPropertyId
+        
     })()
   },[])
 
@@ -160,7 +170,7 @@ const {get, loading} = HttpRequest({headers: {
       </div>
     }
 
-      <SimilarProperties propFeatures={singleProperty}/>
+      {/* <SimilarProperties propFeatures={singleProperty}/> */}
     
     </>  
    

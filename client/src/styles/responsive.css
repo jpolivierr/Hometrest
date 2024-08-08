@@ -226,7 +226,7 @@
     }
 
     .prop_photos figure:nth-child(1){
-        border-radius: var(--borderRadius);
+        border-radius: 5px;
     }
 
     .prop_photos figure:nth-child(2){

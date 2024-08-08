@@ -6,9 +6,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
-import java.net.http.HttpResponse.BodyHandler;
 import java.net.http.HttpResponse.BodyHandlers;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
@@ -17,7 +15,6 @@ import com.appvenir.hometrest.api.realty.RealtyApi;
 import com.appvenir.hometrest.api.realty.dto.RealtyErrorResponseDto;
 import com.appvenir.hometrest.exception.realtyApiException.RealtyApiException;
 import com.appvenir.hometrest.helper.httpHandler.MakeRequest;
-import com.appvenir.hometrest.helper.httpHandler.ResponseHandler;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -61,36 +58,31 @@ public class RealtyApiService implements RealtyApi {
                 }
     }
 
-    public CompletableFuture<String>findPropertyById(String id){
+    public Object findPropertyById(String id){
 
         var uri = REALTY_URI + "/properties/v3/detail?property_id=" + id;
 
-        return makeRequest.asyncGet(uri, BodyHandlers.ofString())
-                        .thenApply( response -> {
-                    ResponseHandler.onFailure(response, 
-                    () ->  new RealtyApiException("Realty api failure",response.statusCode(), response.body()));
-                    return ResponseHandler.onSuccess(response, (body) -> {
-                        handleErrorFromData(body);
-                        return body;
-                    });
-            });
+        try {
 
-    }
+            HttpRequest request = realtyRequestBuilder
+            .uri(URI.create(uri))
+            .GET()
+            .build();
 
-      public CompletableFuture<String> findSimilarProperties(String id){
+            HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
+            System.out.println(response.statusCode());
+            System.out.println(response.body());
+            return objectMapper.readValue(response.body(), Object.class);
+        } catch (IOException e) {
+           
+            e.printStackTrace();
+            return "";
+        } catch (InterruptedException e) {
         
-        String uri = REALTY_URI + "/properties/v3/list-similar-homes?property_id=" + id;
+            e.printStackTrace();
+            return "";
+        }
 
-        return makeRequest.asyncGet(uri, BodyHandlers.ofString())
-                        .thenApply( response -> {
-                    ResponseHandler.onFailure(response, 
-                    () ->  new RealtyApiException("Realty api failure",response.statusCode(), response.body()));
-                    return ResponseHandler.onSuccess(response, (body) -> {
-                        handleErrorFromData(body);
-                        return body;
-                    });
-            });                      
-                      
     }
 
  public void handleErrorFromData(String body) {

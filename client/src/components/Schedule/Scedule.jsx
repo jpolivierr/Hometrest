@@ -1,20 +1,24 @@
 import {useState } from "react"
 import Carousel from "../../lib/Carousel/Carousel.component"
-import Modal from "../modal/Modal"
-import ScheduleTourForm from "../Form/schedueTour/ScheduleTourForm"
+import DropDown from "../dropDown/DropDown"
 
 const ScheduleTour = () =>{
 
     const [activeDate, setActiveDate] = useState(0)
     const [tourType, setTourType] = useState(0)
     const [userMessage, setUserMessage] = useState("")
-    const [scheduleTourModal, setScheduleTourModal] = useState(false)
+    const [istimeDropDownOpen, setIsTimeDropDownOpen] = useState(false)
+    const [selectedTime, setSelectedTime] = useState("11:00 AM")
 
     const carouselSettings = {
       aspectRatio : 5 / 4,
       split: 2,
       style: "split_2"
     }
+const setTime = (time) => {
+  setSelectedTime(time)
+  setIsTimeDropDownOpen(false)
+}
 
  const getNextTwoWeeks =()=> {
         
@@ -43,9 +47,6 @@ const ScheduleTour = () =>{
 
     return(
       <>
-      <Modal isOpen={scheduleTourModal} setModalState={setScheduleTourModal}>
-        <ScheduleTourForm />
-      </Modal>
           <div className="schedule">
           <h2 className="schedule_title">
                 Select a Tour Date <span>No obligation. Cancel at any time.</span>
@@ -65,11 +66,21 @@ const ScheduleTour = () =>{
                     </div>
                 ))}
             </Carousel>
-            <select className="select_time">
-                {
-                    time.map((hours,index) => (<option key={index}>{hours}</option>))
+            <DropDown value={istimeDropDownOpen} arrow={true} Class={`filter-dropdown time-option`}>
+              <button>
+                  {selectedTime}
+              </button>
+              <div>
+                <ul>
+                  {
+                  time.map((hours,index) => (
+                  <li onClick={() => {setTime(hours)}} key={index}>{hours}</li>
+                ))
                 }
-            </select>
+                </ul>
+                
+              </div>
+            </DropDown>
 
             <ul className="tour_type">
 
@@ -78,9 +89,8 @@ const ScheduleTour = () =>{
 
             </ul>
             <button 
-            onClick={()=> setScheduleTourModal(true)}
             style={{width: "100%", height: "50px"}} className="button main-btn">
-                      Schedule a Tour
+                Schedule a Tour
             </button>
 
                         

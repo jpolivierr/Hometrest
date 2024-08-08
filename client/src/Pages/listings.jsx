@@ -59,7 +59,7 @@ const Listings = () =>{
     }
   }, []);
 
-  const prevSearchRef = useRef();
+  const prevSearchRef = useRef(null);
   const timeoutRef = useRef(null)
   useEffect(() => {
     if (prevSearchRef.current && !deepEqual(prevSearchRef.current, search)){
@@ -67,16 +67,13 @@ const Listings = () =>{
         clearTimeout(timeoutRef.current)
       }
       const searchCopy = deepCopy(search)
-      console.log(searchCopy)
       updateParam(removeEmptyValues(searchCopy, true), true, "search") 
       timeoutRef.current = setTimeout(() => {
         fetchProperties()
       }, 1000)
       
     }else if(!deepEqual(prevSearchRef.current, search)){
-      console.log("Fetching propertyeis")
       const searchCopy = deepCopy(search)
-      console.log(searchCopy)
       updateParam(removeEmptyValues(searchCopy, true), true, "search") 
       fetchProperties()
     }
@@ -93,7 +90,6 @@ const Listings = () =>{
   };
 
   const fetchProperties = async () =>{
-    console.log("Property function")
     const searchCopy = deepCopy(search)
     if (searchCopy.hasOwnProperty('address')) {
       delete searchCopy.address

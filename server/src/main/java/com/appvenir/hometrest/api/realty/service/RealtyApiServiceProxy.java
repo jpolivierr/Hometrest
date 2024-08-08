@@ -1,23 +1,26 @@
 package com.appvenir.hometrest.api.realty.service;
 
-import java.util.concurrent.CompletableFuture;
-
 import org.springframework.stereotype.Component;
 
 import com.appvenir.hometrest.api.realty.RealtyApi;
 import com.appvenir.hometrest.system.io.IO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Component
-@RequiredArgsConstructor
 @Getter
-public class RealtyApiServiceProxy {
+public class RealtyApiServiceProxy implements RealtyApi{
 
-    private final RealtyApiService realtyApiService;
+    private final ObjectMapper objectMapper;
 
-    public CompletableFuture<String> findPropertyById(String id){
+    public RealtyApiServiceProxy(ObjectMapper objectMapper){
+        this.objectMapper = new ObjectMapper();
+    }
+
+    @Override
+    public Object findPropertyById(String id){
 
         String currentPath = IO.currentPath("/api/realty/data/property.json");
 
@@ -27,25 +30,23 @@ public class RealtyApiServiceProxy {
 
             String fileContent = IO.getFileContent(currentPath);
 
-            return CompletableFuture.completedFuture(fileContent);
+            try {
+                return objectMapper.readValue(fileContent, Object.class);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+                return "";
+            }
     
-        } else {
-
-            CompletableFuture<String> property = realtyApiService.findPropertyById(id);
-
-            property.thenAccept( (response) -> {
-
-                IO.writeToFile(currentPath, response);
-
-            });
-
-            return property;
         }
+
+        return "";
 
     }
 
-    public CompletableFuture<String> findSimilarProperties(String id) {
-        String currentPath = IO.currentPath("/api/realty/data/similarProperties.json");
+    @Override
+    public Object findPropertyList(String propertySearch) {
+
+        String currentPath = IO.currentPath("/api/realty/data/propertyList.json");
 
         if(IO.fileExist(currentPath)){
 
@@ -53,47 +54,17 @@ public class RealtyApiServiceProxy {
 
             String fileContent = IO.getFileContent(currentPath);
 
-            return CompletableFuture.completedFuture(fileContent);
+            try {
+                return objectMapper.readValue(fileContent, Object.class);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+                return "";
+            }
     
-        } else {
-
-            CompletableFuture<String> property = realtyApiService.findSimilarProperties(id);
-
-            property.thenAccept( (response) -> {
-
-                IO.writeToFile(currentPath, response);
-
-            });
-
-            return property;
         }
-    }
-
-    // public CompletableFuture<String> findPropertyList(Object propertySearch) {
-
-    //     String currentPath = IO.currentPath("/api/realty/data/propertyList.json");
-
-    //     if(IO.fileExist(currentPath)){
-
-    //         System.out.println("returned from cache");
-
-    //         String fileContent = IO.getFileContent(currentPath);
-
-    //         return CompletableFuture.completedFuture(fileContent);
-    
-    //     } else {
-
-    //         CompletableFuture<String> property = realtyApiService.findPropertyList(propertySearch);
-
-    //         property.thenAccept( (response) -> {
-
-    //             IO.writeToFile(currentPath, response);
-
-    //         });
-
-    //         return property;
-    //     }
         
-    // }
+        return "";
+    }
+  
 
 }

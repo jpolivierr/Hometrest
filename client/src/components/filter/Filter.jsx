@@ -230,7 +230,7 @@ export default function Filter({data, setData}) {
                     <button className={`drop-down-button ${data.type.length === 0 ? "" : "has-value"}`}>
                         <h4>Home Type</h4> <span>{data.type.length === 0 ? "" : `(${data.type.length})`}</span>
                     </button>
-                    <div className='filter-dropdown-window'>
+                    <div className=''>
                         <header >
                             <h3>Home Type</h3>
                         </header>
