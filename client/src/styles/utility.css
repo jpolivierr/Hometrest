@@ -87,7 +87,7 @@ Buttons
 button{
     border-radius: var(--borderRadius);
     border: none;
-    padding: .7rem .88rem;
+    padding: .7rem 1.2rem;
     cursor: pointer;
     transition: .5s;
     font-size: 14px;
@@ -774,12 +774,14 @@ background: white;
 }
 
 .filter-dropdown-window header{
-    background: var(--light-color) ;
+    background: var(--alt-silver) ;
     padding: 1rem;
 }
 
 .filter-dropdown-window header h3{
     color: var(--alt-text-color);
+  font-weight: 550;
+  font-size: 14px;
 }
 
 .filter-dropdown-window ul{
