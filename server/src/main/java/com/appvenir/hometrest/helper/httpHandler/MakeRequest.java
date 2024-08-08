@@ -37,6 +37,9 @@ public class MakeRequest {
         return handleRequest(() -> {
                     new URI(uri);
                     String requestBody = objectMapper.writeValueAsString(body); 
+                    System.out.println(uri);
+                    System.out.println("********************************");    
+                    System.out.println(requestBody);
                     HttpRequest request = realtyRequestBuilder
                                             .uri(URI.create(uri))
                                             .POST(BodyPublishers.ofString(requestBody))

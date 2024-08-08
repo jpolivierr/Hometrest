@@ -21,7 +21,7 @@ public class RealtyApiController {
         private final ObjectMapper objectMapper;
 
     public RealtyApiController(
-      @Qualifier("realtyApiServiceProxy") RealtyApi realtyApi,
+      @Qualifier("realtyApiService") RealtyApi realtyApi,
       ObjectMapper objectMapper
       ) {
         this.realtyApi = realtyApi;
@@ -29,18 +29,11 @@ public class RealtyApiController {
     }
 
     @PostMapping(path = "/list")
-    public  CompletableFuture<Object> findPropertyList(@RequestBody String propertySearch)
+    public Object findPropertyList(@RequestBody String propertySearch)
     {
-      return realtyApi.findPropertyList(propertySearch)
-                .thenApplyAsync(response -> {
-                    try {
-                        // Convert the JSON string to a Java object
-                        Thread.sleep(3000);
-                        return objectMapper.readValue(response, Object.class);
-                    } catch (Exception e) {
-                        throw new RuntimeException("Failed to convert JSON string to Object", e);
-                    }
-                });
+        System.out.println("==========================");
+        System.out.println(propertySearch);
+      return realtyApi.findPropertyList(propertySearch);
     }
 
     @GetMapping(path = "/details/{property_id}")

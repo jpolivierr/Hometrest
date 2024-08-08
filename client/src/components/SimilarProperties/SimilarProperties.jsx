@@ -1,5 +1,5 @@
 import PropertyCard from "../propertyCard/PropertyCard"
-import LoadingSkeleton from "../../lib/loadingEffect/CardLoading/CardLoading"
+import CardLoading from "../../lib/loadingEffect/CardLoading/CardLoading"
 import "./SimilarProperties.style.css"
 import Carousel from "../../lib/Carousel/Carousel.component"
 import { deepSearch } from "../../Util/getValueByKey"
@@ -77,7 +77,7 @@ const SimilarProperties = ({propFeatures}) =>{
     <div className="container-medium">
         {
             properties.length === 0 ? 
-            <LoadingSkeleton elementStyle={"horizontal-cards"}/>
+            <CardLoading layout={"horizontal-cards"}/>
             : 
             <div className="similar-property">
             <h2>Similar Properties</h2>

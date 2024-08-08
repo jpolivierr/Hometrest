@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 @Getter
-public class RealtyApiServiceProxy implements RealtyApi{
+public class RealtyApiServiceProxy {
 
     private final RealtyApiService realtyApiService;
 
@@ -44,7 +44,6 @@ public class RealtyApiServiceProxy implements RealtyApi{
 
     }
 
-    @Override
     public CompletableFuture<String> findSimilarProperties(String id) {
         String currentPath = IO.currentPath("/api/realty/data/similarProperties.json");
 
@@ -70,32 +69,31 @@ public class RealtyApiServiceProxy implements RealtyApi{
         }
     }
 
-    @Override
-    public CompletableFuture<String> findPropertyList(Object propertySearch) {
+    // public CompletableFuture<String> findPropertyList(Object propertySearch) {
 
-        String currentPath = IO.currentPath("/api/realty/data/propertyList.json");
+    //     String currentPath = IO.currentPath("/api/realty/data/propertyList.json");
 
-        if(IO.fileExist(currentPath)){
+    //     if(IO.fileExist(currentPath)){
 
-            System.out.println("returned from cache");
+    //         System.out.println("returned from cache");
 
-            String fileContent = IO.getFileContent(currentPath);
+    //         String fileContent = IO.getFileContent(currentPath);
 
-            return CompletableFuture.completedFuture(fileContent);
+    //         return CompletableFuture.completedFuture(fileContent);
     
-        } else {
+    //     } else {
 
-            CompletableFuture<String> property = realtyApiService.findPropertyList(propertySearch);
+    //         CompletableFuture<String> property = realtyApiService.findPropertyList(propertySearch);
 
-            property.thenAccept( (response) -> {
+    //         property.thenAccept( (response) -> {
 
-                IO.writeToFile(currentPath, response);
+    //             IO.writeToFile(currentPath, response);
 
-            });
+    //         });
 
-            return property;
-        }
+    //         return property;
+    //     }
         
-    }
+    // }
 
 }

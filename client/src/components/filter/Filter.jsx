@@ -7,7 +7,7 @@ import { statusList } from '../../features/filter/lists/statusList';
 import { convertToDollars, abbreviateNumber, removeNoneNumericValue } from '../../Util/ConvertToDollars';
 import Autocomplete from '../map/AutoComplete';
 
-export default function Filter({data, setData, fetchProperties}) {
+export default function Filter({data, setData}) {
 
     const setLocation =(location) =>{
         setData(({ ...data, ...location}));
@@ -213,7 +213,6 @@ export default function Filter({data, setData, fetchProperties}) {
         console.log(e)
         e.preventDefault();
         console.log("Fetching property")
-        fetchProperties()
     }
 
     return (

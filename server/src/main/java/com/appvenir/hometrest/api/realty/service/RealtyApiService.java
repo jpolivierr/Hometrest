@@ -1,7 +1,12 @@
 package com.appvenir.hometrest.api.realty.service;
 
+import java.io.IOException;
+import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.http.HttpRequest.BodyPublishers;
+import java.net.http.HttpResponse.BodyHandler;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.StreamSupport;
@@ -20,28 +25,40 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class RealtyApiService implements RealtyApi {
 
-
+    private final ObjectMapper objectMapper;
     private final String REALTY_URI = "https://realty-in-us.p.rapidapi.com";
     private final MakeRequest makeRequest;
+    private HttpClient httpClient;
+    private HttpRequest.Builder realtyRequestBuilder;
 
     public RealtyApiService( HttpRequest.Builder realtyRequestBuilder, HttpClient httpClient, MakeRequest makeRequest){
         this.makeRequest = makeRequest;
+        this.objectMapper = new ObjectMapper();
+        this.httpClient = httpClient;
+        this.realtyRequestBuilder = realtyRequestBuilder;
     }
 
-    public CompletableFuture<String> findPropertyList(Object propertySearch){
+    public Object findPropertyList(String propertySearch){
 
-            String uri = REALTY_URI + "/properties/v3/list";
+                try {
+                    String uri = REALTY_URI + "/properties/v3/list";
 
-            return makeRequest.asyncPost(uri, propertySearch, BodyHandlers.ofString())
-                        .thenApply( response -> {
-                    ResponseHandler.onFailure(response, 
-                    () ->  new RealtyApiException("Realty api failure",response.statusCode(), response.body()));
-                    return ResponseHandler.onSuccess(response, (body) -> {
-                        handleErrorFromData(body);
-                        return body;
-                    });
-            });
-        
+                    HttpRequest request = realtyRequestBuilder
+                    .uri(URI.create(uri))
+                    .POST(BodyPublishers.ofString(propertySearch))
+                    .build();
+
+                    HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
+                    return objectMapper.readValue(response.body(), Object.class);
+                } catch (IOException e) {
+                   
+                    e.printStackTrace();
+                    return "";
+                } catch (InterruptedException e) {
+                
+                    e.printStackTrace();
+                    return "";
+                }
     }
 
     public CompletableFuture<String>findPropertyById(String id){

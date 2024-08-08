@@ -323,7 +323,7 @@
     }
 
     .loading-page .loading-container .loading-photo{
-        height: 300px !important;
+        height: 300px;
     }
 
 
@@ -390,6 +390,14 @@
     .photo-gallery{
         padding: 0rem;
         grid-template-columns: 1fr;
+    }
+
+    .loading-photo{
+        height: 250px !important;
+    }
+
+    .horizontal-cards{
+        grid-template-columns: 1fr 1fr
     }
     
     

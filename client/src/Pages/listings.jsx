@@ -21,8 +21,8 @@ const Listings = () =>{
   
   const [search, setSearch] = useState({
                         city_zip : "",
-                        city: "",
-                        state_code: "",
+                        city: "jacksonville",
+                        state_code: "FL",
                         postal_code: "",
                         address: "",
                         type: [],
@@ -58,10 +58,6 @@ const Listings = () =>{
       }));
     }
   }, []);
-  
-  useEffect( () => {
-    fetchProperties()
-  },[])
 
   const prevSearchRef = useRef();
   const timeoutRef = useRef(null)
@@ -71,11 +67,18 @@ const Listings = () =>{
         clearTimeout(timeoutRef.current)
       }
       const searchCopy = deepCopy(search)
+      console.log(searchCopy)
       updateParam(removeEmptyValues(searchCopy, true), true, "search") 
       timeoutRef.current = setTimeout(() => {
         fetchProperties()
-      }, 600)
+      }, 1000)
       
+    }else if(!deepEqual(prevSearchRef.current, search)){
+      console.log("Fetching propertyeis")
+      const searchCopy = deepCopy(search)
+      console.log(searchCopy)
+      updateParam(removeEmptyValues(searchCopy, true), true, "search") 
+      fetchProperties()
     }
     prevSearchRef.current = search;
     return () => {
@@ -90,9 +93,12 @@ const Listings = () =>{
   };
 
   const fetchProperties = async () =>{
+    console.log("Property function")
     const searchCopy = deepCopy(search)
+    if (searchCopy.hasOwnProperty('address')) {
+      delete searchCopy.address
+    }
     const response = await post(URL.SEARCH, removeEmptyValues(searchCopy, true))
-    console.log(response.body)
     if(response.status === 200 && response.body){
       const propertyData = deepSearch(response.body,["data","home_search"],init)
       setTotal(propertyData.total)
@@ -140,16 +146,17 @@ const Listings = () =>{
 
   return (
       <>
-          <Filter data={search} setData={setSearch} fetchProperties={fetchProperties}/>
+          <Filter data={search} setData={setSearch}/>
 
           <div className={`listing-layout ${properties.length !== 0 && loading ? 'loading-overlay' : ''}`}>
               {
                 <Map properties={properties} 
-                  zoom={14}
+                  zoom={10}
                   disableDefaultUI={false}
                   streetViewControl={false}
                   fullscreenControl={false}
                   styleElement={"sticky_map"}
+                  loading={loading}
                 /> 
               }
 
@@ -165,7 +172,7 @@ const Listings = () =>{
 
               {
                   properties.length === 0 ? 
-                  <CardLoading/> :
+                  <CardLoading layout={"grid-layout"}/> :
                     <div className="property_list_container">
                       { 
                         properties.map((property,index)=>(

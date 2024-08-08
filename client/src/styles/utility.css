@@ -12,7 +12,7 @@
     /* --alt-text-color : #0d294dd6; */
     --alt-text-color: #63758c;
     --paragraph-text-color : #2b3857;
-    --borderRadius: 5px;
+    --borderRadius: 100px;
     --borderColor: #b6b7b982;
     --lightSilver: #edeeee52;
     --lightShadow : 0px 10px 25px -6px #92a2bf56;
@@ -811,6 +811,11 @@ background: white;
     min-width: 185px;
 }
 
+.price-option{
+    min-width: 135px;
+}
+
+
 .drop-down-min-height{
     max-height: 300px;
     overflow: hidden;
@@ -834,8 +839,19 @@ background: white;
 }
 
 .no_map{
-    background: #f8f9f9;
+    position: relative;
     height: 87vh;
+}
+
+.no_map::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background: #f8f9f9;
     animation : loading-map .6s linear infinite alternate;
 }
 

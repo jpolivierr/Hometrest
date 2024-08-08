@@ -23,6 +23,7 @@ public class HttpClientConfig {
 		return HttpRequest.newBuilder()
 						  .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 						  .header("X-RapidAPI-Key", dotenv.get("RAPID_API_KEY"))
+						  .header("Content-Type", "application/json")
 						  .header("X-RapidAPI-Host", "realty-in-us.p.rapidapi.com");					
 	}
 	

@@ -179,7 +179,7 @@ const Map = (props) =>{
 
     return(
         <div id="map" 
-            className={`the-map ${styleElement ? styleElement : ""} ${properties.length === 0 || "no_map"} ` } 
+            className={`the-map ${styleElement ? styleElement : ""} ${properties.length === 0 ? "no_map" : ''} ` } 
             ref={mapRef}>
         </div>        
     )
