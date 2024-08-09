@@ -15,7 +15,7 @@ import { Link } from "react-router-dom"
 
 const Home = (props) =>{
 
-    const {Class, id} = props
+    const { id} = props
 
     useEffect(()=>{
         urlParcer()
@@ -39,7 +39,7 @@ const Home = (props) =>{
                 </div>  
               </article>
           </div>
-          <img src={mainHouse} />
+          <img src={mainHouse} alt="Main house" />
           
         </section>
 
@@ -146,7 +146,7 @@ const Home = (props) =>{
 
                  <div className=" w-60">
                   <figure>
-                     <img style={{maxWidth: "580px", borderRadius: "5px"}} src={womanMoving} />
+                     <img style={{maxWidth: "580px", borderRadius: "5px"}} src={womanMoving} alt="Woman moving"/>
                   </figure>          
                 </div>
               

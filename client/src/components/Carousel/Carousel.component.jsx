@@ -1,28 +1,19 @@
-import React, { useEffect, useRef, useState, useLayoutEffect } from 'react'
+import React, { useRef, useLayoutEffect } from 'react'
 import "./Carousel.style.css"
-import { handleSizeChange } from './Carousel.functions'
 
 const Carousel = (props) => {
 
     const {children, settings, elementStyle} = props
 
-const {split, aspectRatio, transitionTime, gap, style} = settings    
+const {style} = settings    
 
 const carouselContainer = useRef(null)
 const itemElement = useRef(null)
 const nextButton = useRef(null)
 const prevButton = useRef(null)
 
-const [itemWidth, setItemWidth] = useState(100 / split)
-const [itemPaddingTop, setItemPaddingTop] = useState(aspectRatio)
-const [configComplete, setConfigComplete] = useState(false)
-const [isDragStart, setIsDragStart] = useState(false)
-
-const [moveBy, setMoveBy] = useState(0)
-
 useLayoutEffect(()=>{
 
-const carousel = carouselContainer.current
 
 showHideButtons()
 

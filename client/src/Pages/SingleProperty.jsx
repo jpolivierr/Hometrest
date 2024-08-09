@@ -43,7 +43,6 @@ const {get, loading} = HttpRequest({headers: {
   const city = deepSearch(singleProperty,["location","address","city"])
   const zip = deepSearch(singleProperty,["location","address","postal_code"])
   const stateCode = deepSearch(singleProperty,["location","address","state_code"])
-  const photo = deepSearch(singleProperty,["primary_photo","href"])
 
   const likedPropertyData = {
     propertyId,
@@ -60,7 +59,7 @@ const {get, loading} = HttpRequest({headers: {
   const prevPropId = useRef(null);
   useEffect(()=>{
     (async () => {
-      if (prevPropId.current != searchedPropertyId){
+      if (prevPropId.current !== searchedPropertyId){
         const response = await get(URL.SINGLE_PROPERTY + "/" + searchedPropertyId)
         if(response.status === 200 && response.body) {
             const singleProperty = deepSearch(response.body,["data","home"],{})
@@ -70,7 +69,7 @@ const {get, loading} = HttpRequest({headers: {
       prevPropId.current = searchedPropertyId
         
     })()
-  },[])
+  },[get, searchedPropertyId])
 
   useEffect(()=>{
           
@@ -168,8 +167,6 @@ const {get, loading} = HttpRequest({headers: {
           
       </div>
     }
-
-      {/* <SimilarProperties propFeatures={singleProperty}/> */}
     
     </>  
    

@@ -12,6 +12,7 @@ import { useUserContext } from "../context/user/UserContext.jsx"
 import Modal from "../components/modal/Modal.jsx"
 import Login from "../components/Form/login/LoginForm.jsx"
 import Map from "../components/map/Map.jsx"
+import { formatNumber } from "../Util/formatNumber.js"
 
 const Listings = () =>{
 
@@ -155,19 +156,22 @@ const Listings = () =>{
                 /> 
               }
 
-              {/* <div className="show-properties-header"> 
-                  <h5>
-                    {`Showing `} <b style={{fontWeight: "600"}}>{`${formatNumber(search.limit)}`}</b>  {` out of `}
-                    <b style={{fontWeight: "600"}}>{`${formatNumber(total)}`}</b>{` result for `}
-                        <span style={{fontStyle: "italic"}}>
-                          {`"${search.address}"`}
-                        </span>
-                    </h5>
-              </div> */}
+              
 
               {
                   properties.length === 0 ? 
                   <CardLoading layout={"grid-layout"}/> :
+                  <div>
+
+                    <div className="show-properties-header"> 
+                      <h5>
+                        {`Showing `} <b style={{fontWeight: "600"}}>{`${formatNumber(search.limit)}`}</b>  {` out of `}
+                        <b style={{fontWeight: "600"}}>{`${formatNumber(total)}`}</b>{` result for `}
+                            <span style={{fontStyle: "italic"}}>
+                              {`"${search.address}"`}
+                            </span>
+                        </h5>
+                   </div>
                     <div className="property_list_container">
                       { 
                         properties.map((property,index)=>(
@@ -181,6 +185,8 @@ const Listings = () =>{
                             ))
                       }
                     </div>
+                  </div>
+                    
               } 
           </div>
 

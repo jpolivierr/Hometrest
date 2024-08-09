@@ -94,9 +94,6 @@ const Map = (props) =>{
     const processInfoWindow = (singleProperty, marker, map) =>{
 
         const propertyId = deepSearch(singleProperty,["property_id"])
-        const listingId = deepSearch(singleProperty,["listing_id"])
-        const status = deepSearch(singleProperty,["status"])
-        const type = deepSearch(singleProperty,["description","type"])
         const beds = deepSearch(singleProperty,["description","beds"])
         const baths = deepSearch(singleProperty,["description","baths"])
         const sqft = deepSearch(singleProperty,["description","sqft"])
@@ -104,7 +101,6 @@ const Map = (props) =>{
         const street = deepSearch(singleProperty,["location","address","line"])
         const city = deepSearch(singleProperty,["location","address","city"])
         const zip = deepSearch(singleProperty,["location","address","postal_code"])
-        const state = deepSearch(singleProperty,["location","address","state"])
         const stateCode = deepSearch(singleProperty,["location","address","state_code"])
         const photo = deepSearch(singleProperty,["primary_photo","href"])
 

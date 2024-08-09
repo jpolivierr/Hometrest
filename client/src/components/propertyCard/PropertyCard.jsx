@@ -9,7 +9,6 @@ const PropertyCard = ({singleProperty, likeProperty, isFavorite}) =>{
 
     const propertyId = deepSearch(singleProperty,["property_id"])
     const status = deepSearch(singleProperty,["status"])
-    const type = deepSearch(singleProperty,["description","type"])
     const beds = deepSearch(singleProperty,["description","beds"])
     const baths = deepSearch(singleProperty,["description","baths"])
     const sqft = deepSearch(singleProperty,["description","sqft"])
@@ -70,7 +69,7 @@ const PropertyCard = ({singleProperty, likeProperty, isFavorite}) =>{
                     <div className="prop-baths"><i className="fa-solid fa-bath"></i>{baths} <span>Baths</span></div>
                     <div className="prop-sqft"><i className="fa-brands fa-unity"></i>{formatNumber(sqft)} <span>Sqft</span></div>
                     <div className="prop-address">
-                        {`${street}, ${city}, ${stateCode} ${zip}`}
+                        <p>{`${street}, ${city}, ${stateCode} ${zip}`}</p>
                     </div>
             </div>
         </div>

@@ -8,8 +8,8 @@
 }
 
 .show-properties-header{
-    padding: .5rem 0rem;
-    padding-top: 0rem;
+    padding: .5rem 1rem;
+    padding-bottom: 0;
 }
 
 .show-properties-header h5{
@@ -98,7 +98,7 @@
 
 .property-card .prop-price{
     font-weight: 600;
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     position: relative;
     grid-column: 1 / 3;
     align-self: center;
@@ -125,6 +125,11 @@
     font-weight: 500;
     line-height: 1.5;
     /* font-size: .9rem; */
+}
+
+.property-card .prop-address p{
+  color: var(--dark-text-color);
+  line-height: 1.5;
 }
 
 

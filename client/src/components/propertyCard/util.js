@@ -28,7 +28,8 @@ export const getStatusStyle = (status) =>{
         case "off_market" :
             return "status-off-market"
         case "new_community" :
-        return "status-new-community"
+        default :
+            return "status-new-community"
 
     }
 }
@@ -53,7 +54,8 @@ export const getTypeStyle = (type) =>{
         case "single_family" :
             return "type-single_family"
         case "coop" :
-        return "type-coop"
+        default :
+            return "type-coop"
 
     }
 
