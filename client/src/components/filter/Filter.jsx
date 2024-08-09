@@ -54,7 +54,7 @@ export default function Filter({data, setData}) {
             });
           }
 
-      },[data, maximum, minimum])
+      },[data])
 
       const setMinPrice = (minPrice) => {
         setData((prevSearch) => ({

@@ -256,6 +256,9 @@
 }
 
 @media (max-width: 806px) {
+    .padding-top-bottom-11x{
+        padding: 4rem 0rem;
+    }
     .property-filter .price-option{
         display: none;
     } 
@@ -267,6 +270,8 @@
         align-items: center;
         gap: 2rem;
         width: 100%;
+        border-radius: 20px;
+        padding: 2rem;
     }
 
 

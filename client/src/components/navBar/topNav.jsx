@@ -13,7 +13,7 @@ const {getUser, isAuthenticated, getPropertyCount} = useUserContext()
 const location = useLocation()
 
 const logout = async () => {
-    const response = await get(URL.LOGOUT)
+    await get(URL.LOGOUT)
     window.location.href ="/login"
 }
 
@@ -28,7 +28,7 @@ return(
             <div style={{display: "flex", alignItems: "center"}}>
                   <div className="logo">
                     <Link to="/">
-                        <img src={Logo} />
+                        <img src={Logo} alt="Appvenir logo" />
                     </Link>
                   </div>
                   <NavList Class="hideMobile flex-space-between gap-1x nav-list"/>
@@ -55,12 +55,6 @@ return(
                 :
                 <div style={{display: "flex"}}>
                 <div style={{marginLeft: "3rem"}} className="hideMobile flex-space-between gap-1x">
-                    <ul className="nav-contact-info">
-                        <li>
-                            <i className="fa-solid fa-phone"></i>
-                            <span>Call: (849) 9840 9449</span>
-                        </li>
-                    </ul>
 
                     <a href="/login">
                         <button className="button secondary-btn">

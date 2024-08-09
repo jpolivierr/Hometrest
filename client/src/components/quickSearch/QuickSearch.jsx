@@ -4,6 +4,7 @@ import { propertyTypeList } from "../../constants/listOptions/propertyType"
 import { cleanInput } from "../../Util/cleanInput"
 import { salePriceOptions } from "../../constants/listOptions/priceRange"
 import { formatNumber } from "../../Util/formatNumber"
+import Autocomplete from "../map/AutoComplete"
 
 
 const QuickSearch = () =>{
@@ -22,7 +23,7 @@ const QuickSearch = () =>{
    const typeWindowRef = useRef(null);
    const rangeWindowRef = useRef(null);
 
-   const [formState, setFormState] = useState({
+   const [search, setSearch] = useState({
     city_zip : "",
     city: "",
     state_code: "",
@@ -62,14 +63,14 @@ const QuickSearch = () =>{
 
  useEffect(()=>{
 
-    setSearchUrl("/listings/?search=" + JSON.stringify(formState))
+    setSearchUrl("/listings/?search=" + JSON.stringify(search))
 
- },[formState])
+ },[search])
 
  useEffect(()=>{
 
-    const min = formState.list_price.min
-    const max = formState.list_price.max
+    const min = search.list_price.min
+    const max = search.list_price.max
 
     if(min === 0 && max === 0){
         setPriceRangeValue(``)
@@ -95,17 +96,13 @@ const QuickSearch = () =>{
         
         return
     }
-
-    console.log("setting balue...")
-
     setPriceRangeValue("")
 
-
- },[formState.list_price.min, formState.list_price.max])
+ },[search.list_price.min, search.list_price.max])
 
  const  updateField = useCallback((key, value) =>{
          
-    const formFieldCopy = {...formState}
+    const formFieldCopy = {...search}
     const types = formFieldCopy.type
 
     if(key === "type"){
@@ -116,21 +113,10 @@ const QuickSearch = () =>{
                 formFieldCopy.type.push(value)
             }
             setTypeValue(handleTypeValue(formFieldCopy.type))
-            setFormState(formFieldCopy)
+            setSearch(formFieldCopy)
         }
 
-    },[formState])
-
-
-
-    const handleInput = (e) =>{
-
-        const value = e.target.value
-
-        updateField("city_zip", value) 
-    }
-
-
+    },[search])
 
     const handleTypeValue = (array) =>{
 
@@ -152,7 +138,7 @@ const QuickSearch = () =>{
 
 const selectedType = (value) =>{
  
-    if(formState.type.includes(value)) return true
+    if(search.type.includes(value)) return true
 
     return false
 
@@ -168,13 +154,13 @@ const toggleRangeDropDown = () => {
 
  const setPrice = (type,value) =>{
 
-    const formFieldCopy = {...formState}
+    const formFieldCopy = {...search}
 
     if(type === "min") {
        
         formFieldCopy.list_price.min = value
         setMinPriceValue("$" + formatNumber(value) )
-        setFormState(formFieldCopy)
+        setSearch(formFieldCopy)
 
 
     } 
@@ -182,7 +168,7 @@ const toggleRangeDropDown = () => {
     if(type === "max") {
         formFieldCopy.list_price.max = value
         setMaxPriceValue("$" + formatNumber(value) )
-        setFormState(formFieldCopy)
+        setSearch(formFieldCopy)
      } 
 
  }
@@ -195,16 +181,16 @@ const toggleRangeDropDown = () => {
     setMaxDropdown(!maxDropdown)
  }
 
+ const setLocation =(location) =>{
+    setSearch(({ ...search, ...location}));
+}
 
     return(
         <div className="quick-search">
         <ul>
           <li>
             <h3>Location</h3>
-            <input 
-                 onChange={e => handleInput(e)}
-                 type="text" 
-                 placeholder="Enter city or zip" />
+            <Autocomplete setLocation={setLocation} data={search}/>
           </li>
           <li>
 

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import com.appvenir.hometrest.api.realty.RealtyApi;
 import com.appvenir.hometrest.api.realty.dto.RealtyErrorResponseDto;
 import com.appvenir.hometrest.exception.realtyApiException.RealtyApiException;
-import com.appvenir.hometrest.helper.httpHandler.MakeRequest;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -24,12 +23,10 @@ public class RealtyApiService implements RealtyApi {
 
     private final ObjectMapper objectMapper;
     private final String REALTY_URI = "https://realty-in-us.p.rapidapi.com";
-    private final MakeRequest makeRequest;
     private HttpClient httpClient;
     private HttpRequest.Builder realtyRequestBuilder;
 
-    public RealtyApiService( HttpRequest.Builder realtyRequestBuilder, HttpClient httpClient, MakeRequest makeRequest){
-        this.makeRequest = makeRequest;
+    public RealtyApiService( HttpRequest.Builder realtyRequestBuilder, HttpClient httpClient){
         this.objectMapper = new ObjectMapper();
         this.httpClient = httpClient;
         this.realtyRequestBuilder = realtyRequestBuilder;

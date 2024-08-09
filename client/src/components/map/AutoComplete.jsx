@@ -50,9 +50,9 @@ const Autocomplete = ({setLocation, data}) => {
 
     return components
   }
-
   useEffect(() => {
     if (scriptLoaded) {
+      console.log(scriptLoaded)
       const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current)
       autocomplete.addListener('place_changed', () => {
         const place = autocomplete.getPlace()
@@ -62,13 +62,13 @@ const Autocomplete = ({setLocation, data}) => {
         setAddress(place.formatted_address || '')
       })
     }
-  }, [scriptLoaded])
+  }, [scriptLoaded, address])
 
   return (
     <>
       <input 
         ref={inputRef}
-        placeholder="Enter Address, city, state or zip" 
+        placeholder="Enter city, state or zip" 
         name="city_zip"
         onChange={(e) => setAddress(e.target.value)}
         value={address}

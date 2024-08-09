@@ -125,7 +125,7 @@
     width: max-content;
     border-radius: var(--borderRadius);
     display: flex;
-    padding: 1rem;
+    padding: 1.5rem 3rem;
     align-items: flex-end;
     gap: 1rem;
     box-shadow: 5px 10px 20px -13px #a5c9da;
@@ -181,10 +181,11 @@ font-size: .9rem;
     position: absolute;
     left: 0;
     top: 120%;
-    border-radius: var(--borderRadius);
+    border-radius: 15px;
     box-shadow: 0px -2px 50px -20px #8e9da496;
     border: 1px solid var(--light-silver);
    z-index: 2;
+   width: 200px;
    max-width: 350px;
 }
 
@@ -257,6 +258,7 @@ font-size: .9rem;
 
 .q-dropdown.range-dropdown{
     overflow: visible !important;
+    width: 300px;
 }
 
 .q-dropdown .price-list{

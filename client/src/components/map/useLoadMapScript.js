@@ -6,7 +6,10 @@ const useLoadMapScript = () => {
 
   useEffect(() => {
     const mapElement = document.querySelector("#google-map")
-    if(mapElement) return
+    if(mapElement) {
+      setScriptLoaded(true)
+      return
+    }
     const script = document.createElement('script')
     script.id="google-map"
     script.src = url
@@ -15,7 +18,7 @@ const useLoadMapScript = () => {
     script.onload = () => setScriptLoaded(true)
     script.onerror = () => console.error('Error loading script')
     document.body.appendChild(script)
-  }, [])
+  }, [scriptLoaded])
 
   return scriptLoaded
 }

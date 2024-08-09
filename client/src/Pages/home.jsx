@@ -9,7 +9,7 @@ import cart from "../assets/images/cart.jpg"
 import womanMoving from "../assets/images/woman-moving.jpg"
 import home3 from "../assets/images/home-3.jpg"
 import mainHouse from "../assets/images/main-house.png"
-import QuickSearch from "../components/quickSearch/QuickSearch.component"
+import QuickSearch from "../components/quickSearch/QuickSearch"
 import { Link } from "react-router-dom"
 
 

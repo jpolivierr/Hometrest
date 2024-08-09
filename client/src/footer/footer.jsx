@@ -1,6 +1,7 @@
 import React from 'react'
 import NavList from '../components/list/NavList'
 import WhiteLogo from "../assets/images/logo-white.png"
+import { Link } from 'react-router-dom'
 
 export default function Footer({container}) {
   return (
@@ -9,7 +10,10 @@ export default function Footer({container}) {
         <div className={`${container} container-medium flex-space-between footer_main`}>
 
             <div style={{margin: "0rem", fontSize: "1.5rem", maxWidth: "250px"}}>
-              <img style={{width: "100%"}}src={WhiteLogo} alt="Logo" />
+              <Link to="/"> 
+                 <img style={{width: "100%"}}src={WhiteLogo} alt="Logo" />
+              </Link>
+             
             </div>
 
             <ul  className="contact-info-footer"><li><i  className="fa-solid fa-phone"></i><span>Call: (849) 9840 9449</span></li>
