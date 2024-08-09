@@ -6,8 +6,6 @@ import "./styles/fonts/Inter Font Family/style.css"
 import "./styles/index.js"
 import './App.css';
 
-import {Provider} from "react-redux";
-import {store} from './Redux/store'
 import {BrowserRouter as Router} from "react-router-dom"
 import { UserProvider } from './context/user/UserContext';
 
@@ -19,9 +17,7 @@ root.render(
    //  <React.StrictMode> 
     <Router> 
       <UserProvider>
-        <Provider store={store}>
           <App />
-        </Provider>
       </UserProvider>
     </Router>
    // </React.StrictMode>   

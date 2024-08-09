@@ -1,7 +1,6 @@
 
 import { deepSearch } from "../../Util/getValueByKey"
-import { getStatusStyle, getTypeStyle, cleanInput, formatNumber, getPhoto } from "./util"
-import { useState } from "react"
+import { getStatusStyle, cleanInput, formatNumber, getPhoto } from "./util"
 import { useNavigate } from "react-router-dom"
 
 const PropertyCard = ({singleProperty, likeProperty, isFavorite}) =>{
@@ -55,9 +54,6 @@ const PropertyCard = ({singleProperty, likeProperty, isFavorite}) =>{
                 <div className="status-component">
                         <div className={getStatusStyle(status)}>
                             {cleanInput(status)}
-                        </div>
-                        <div className={getTypeStyle(type)}>
-                            {cleanInput(type)}
                         </div>
                 </div>
                 

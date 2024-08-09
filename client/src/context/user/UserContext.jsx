@@ -1,8 +1,5 @@
-import { createContext, useEffect, useState, useCallback, useContext, useLayoutEffect } from "react";
-import useSession from "../../features/sessionManagement/useSession";
-import useRequest from "../../httpRequest/MakeRequest/MakeRequest";
+import { createContext, useState, useContext, useLayoutEffect } from "react";
 import URL from "../../constants/urls";
-import capitalizeWords from "../../Util/capitalizedWords";
 import deepCopy from "../../Util/deepCopy";
 import HttpRequest from "../../httpRequest/HttpRequest";
 
@@ -118,5 +115,3 @@ export const UserProvider = ({children}) => {
 }
 
 export const useUserContext = () => useContext(UserContext)
-
-// export default UserContext

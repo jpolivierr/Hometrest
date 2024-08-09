@@ -1,5 +1,4 @@
 import React from 'react'
-import "./footer.style.css"
 import NavList from '../components/list/NavList'
 import WhiteLogo from "../assets/images/logo-white.png"
 

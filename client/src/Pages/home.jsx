@@ -10,7 +10,7 @@ import womanMoving from "../assets/images/woman-moving.jpg"
 import home3 from "../assets/images/home-3.jpg"
 import mainHouse from "../assets/images/main-house.png"
 import QuickSearch from "../components/quickSearch/QuickSearch.component"
-import PrimaryButton from "../components/buton/PrimaryButton"
+import { Link } from "react-router-dom"
 
 
 const Home = (props) =>{
@@ -93,10 +93,9 @@ const Home = (props) =>{
                         </p>
                     </li>
                   </ul>
-            
-                    <PrimaryButton label={"Find My Home"} />
-           
-                  
+                  <Link to="/listings">
+                    <button className="main-btn">Find My Home</button>
+                  </Link>
                 </div>  
               </article>
           </div>
@@ -116,7 +115,9 @@ const Home = (props) =>{
                   <p>
                   HomeTrest features homes for sale in all 50 states. HomeTrest's online search portal of property listings gives you the ability to refine your search criteria by different factors, including geographical location. If you're looking for homes for sale by owner, HomeTrest is a great resource.
                   </p>
-                  <PrimaryButton label={"Find My Home"} />
+                  <Link to="/listings">
+                    <button className="main-btn">Find My Home</button>
+                  </Link>
                 </div> 
                 <div className=" photo-column w-60">
                   <figure style={{background: `url("${home3}") center center/cover`}}>
@@ -155,7 +156,10 @@ const Home = (props) =>{
                   <p>
                   HomeTrest features homes for sale in all 50 states. HomeTrest's online search portal of property listings gives you the ability to refine your search criteria by different factors, including geographical location. If you're looking for homes for sale by owner, HomeTrest is a great resource, whether you are a buyer or a seller.
                   </p>
-                  <PrimaryButton label={"Find My Home"} />
+                  <Link to="/listings">
+                    <button className="main-btn">Find My Home</button>
+                  </Link>
+                  
                 </div> 
 
               </article>

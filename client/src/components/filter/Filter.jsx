@@ -3,7 +3,7 @@ import DropDown from '../dropDown/DropDown';
 import { propertyTypeList } from '../../constants/listOptions/propertyType';
 import { salePriceOptions } from '../../constants/listOptions/priceRange';
 import { numberList } from '../../constants/listOptions/numberList';
-import { statusList } from '../../features/filter/lists/statusList';
+import { statusList } from '../../constants/listOptions/statusList';
 import { convertToDollars, abbreviateNumber, removeNoneNumericValue } from '../../Util/ConvertToDollars';
 import Autocomplete from '../map/AutoComplete';
 

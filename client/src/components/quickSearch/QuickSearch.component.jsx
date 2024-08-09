@@ -1,17 +1,14 @@
 import { useState, useCallback, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
-import { parseAddress2 } from "../../Util/parseAddress"
-import { propertyTypeList } from "../../features/filter/lists/propertyType"
-import { Actions } from "../../Redux"
+import { propertyTypeList } from "../../constants/listOptions/propertyType"
 import { cleanInput } from "../../Util/cleanInput"
-import { salePriceOptions } from "../../features/filter/lists/priceRange"
+import { salePriceOptions } from "../../constants/listOptions/priceRange"
 import { formatNumber } from "../../Util/formatNumber"
 
 
 const QuickSearch = () =>{
 
    const [searchUrl, setSearchUrl] =  useState("listings/")
-   const {setSearch} = Actions()
 
    const [typeDrowdown, setTypeDropdown] = useState(false)
    const [rangeDrowdown, setRangeDropdown] = useState(false)
@@ -65,7 +62,6 @@ const QuickSearch = () =>{
 
  useEffect(()=>{
 
-    setSearch(formState)
     setSearchUrl("/listings/?search=" + JSON.stringify(formState))
 
  },[formState])
@@ -111,16 +107,6 @@ const QuickSearch = () =>{
          
     const formFieldCopy = {...formState}
     const types = formFieldCopy.type
-
-    if(key === "city_zip"){
-        const address = parseAddress2(value)
-        formFieldCopy.city = address.city
-        formFieldCopy.state = address.state
-        formFieldCopy.state_code = address.state_code
-        formFieldCopy.postal_code = address.postal_code
-        formFieldCopy[key] = value
-        setFormState(formFieldCopy)
-    }
 
     if(key === "type"){
 

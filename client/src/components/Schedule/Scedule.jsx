@@ -1,5 +1,5 @@
 import {useState } from "react"
-import Carousel from "../../lib/Carousel/Carousel.component"
+import Carousel from "../Carousel/Carousel.component"
 import DropDown from "../dropDown/DropDown"
 
 const ScheduleTour = () =>{

@@ -1,5 +1,5 @@
 import ScrollTop from "../components/ScrollTop/ScrollTop";
-import Footer from "../footer/footer.component";
+import Footer from "../footer/footer";
 import TopNav from "../components/navBar/topNav";
 
 const MainLayout = ({ children }) => {
