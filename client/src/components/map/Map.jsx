@@ -8,7 +8,7 @@ import useLoadMapScript from "./useLoadMapScript"
 const Map = (props) =>{
     const scriptLoaded = useLoadMapScript()
     useEffect(()=>{
-        if(scriptLoaded){
+        if(scriptLoaded && window.google){
              const map = new window.google.maps.Map(mapRef.current, initialView);
              processMarkers(map)
         }

@@ -1,8 +1,13 @@
-import "./style.css"
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 
 const NavList = (props) =>{
+
+    const buyPath = "/listings/buy?search="
+    const buyUrl = buyPath + JSON.stringify({status: ["for_sale"]})
+
+    const rentPath = "/listings/rent?search="
+    const rentUrl = rentPath + JSON.stringify({status: ["for_rent"]})
 
     const {Class, listsClass, listsClickEvent} = props
 
@@ -42,13 +47,13 @@ const NavList = (props) =>{
                 </li>
             </Link> 
 
-            <Link  to="/listings/buy" target="">
+            <Link  to={buyUrl} target="">
                 <li onClick={(e)=>{listClickEvent(e)}} 
                     className={`${listsClass} ${activeClass(pathname,"/listings/buy")}` }>Buy
                 </li>
             </Link>
 
-            <Link  to="/listings/rent" target="">
+            <Link  to={rentUrl} target="">
                 <li onClick={(e)=>{listClickEvent(e)}} 
                     className={`${listsClass} ${activeClass(pathname,"/listings/rent")}` }>Rent
                 </li>

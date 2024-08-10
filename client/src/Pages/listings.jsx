@@ -13,11 +13,14 @@ import Modal from "../components/modal/Modal.jsx"
 import Login from "../components/Form/login/LoginForm.jsx"
 import Map from "../components/map/Map.jsx"
 import { formatNumber } from "../Util/formatNumber.js"
+import { useLocation } from "react-router"
 
 const Listings = () =>{
 
 
   const {userAuthenticated, getUserFavoriteProperties, updateProperty} = useUserContext()
+  const location = useLocation();
+  const { pathname } = location
   
   const [search, setSearch] = useState({
                         city_zip : "",
@@ -57,7 +60,7 @@ const Listings = () =>{
         }, {})
       }));
     }
-  }, []);
+  }, [pathname]);
 
   const prevSearchRef = useRef(null);
   const timeoutRef = useRef(null)

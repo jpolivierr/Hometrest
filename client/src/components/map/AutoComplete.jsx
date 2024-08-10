@@ -51,8 +51,7 @@ const Autocomplete = ({setLocation, data}) => {
     return components
   }
   useEffect(() => {
-    if (scriptLoaded) {
-      console.log(scriptLoaded)
+    if(scriptLoaded && window.google) {
       const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current)
       autocomplete.addListener('place_changed', () => {
         const place = autocomplete.getPlace()
