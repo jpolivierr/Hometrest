@@ -209,12 +209,6 @@ export default function Filter({data, setData}) {
         return data.status.includes(type);
     };
 
-    const submit = (e) => {
-        console.log(e)
-        e.preventDefault();
-        console.log("Fetching property")
-    }
-
     return (
         <form className="property-filter stick">
 
@@ -253,7 +247,7 @@ export default function Filter({data, setData}) {
                             }
                         </ul>
                         <div className='filter-drop-down-footer'>
-                            <button onClick={submit} data-close-on-click className='button main-btn'>Done</button>
+                            <button data-close-on-click className='button main-btn'>Done</button>
                         </div>
                     </div>
                 </DropDown>
@@ -287,7 +281,7 @@ export default function Filter({data, setData}) {
                             }
                         </ul>
                         <div className='filter-drop-down-footer'>
-                            <button onClick={submit} data-close-on-click className='button main-btn'>Done</button>
+                            <button  data-close-on-click className='button main-btn'>Done</button>
                         </div>
                     </div>
                 </DropDown>
@@ -370,7 +364,7 @@ export default function Filter({data, setData}) {
                         </DropDown> 
                         </div>    
                         <div className='filter-drop-down-footer'>
-                            <button onClick={submit} data-close-on-click className='button main-btn close-on-click'>Done</button>
+                            <button data-close-on-click className='button main-btn close-on-click'>Done</button>
                         </div>
                     </div>
                 </DropDown>
@@ -447,7 +441,7 @@ export default function Filter({data, setData}) {
                         </DropDown> 
                         </div>    
                         <div className='filter-drop-down-footer'>
-                            <button onClick={submit} data-close-on-click className='button main-btn close-on-click'>Done</button>
+                            <button data-close-on-click className='button main-btn close-on-click'>Done</button>
                         </div>
                     </div>
                 </DropDown>
@@ -524,7 +518,7 @@ export default function Filter({data, setData}) {
                         </DropDown> 
                         </div>    
                         <div className='filter-drop-down-footer'>
-                            <button onClick={submit} data-close-on-click className='button main-btn close-on-click'>Done</button>
+                            <button data-close-on-click className='button main-btn close-on-click'>Done</button>
                         </div>
                     </div>
                 </DropDown>

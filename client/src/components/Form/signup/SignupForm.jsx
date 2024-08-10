@@ -45,7 +45,6 @@ const SignupForm = () =>{
                     }
                     clearFields();
                 } else if (response.status === 401 && response.body) {
-                    console.log("is 401")
                     setFormError(response.body.message);
                     clearFields();
                 }

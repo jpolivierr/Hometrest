@@ -96,8 +96,6 @@ const QuickSearch = () =>{
         return
     }
 
-    console.log("setting balue...")
-
     setPriceRangeValue("")
 
 
