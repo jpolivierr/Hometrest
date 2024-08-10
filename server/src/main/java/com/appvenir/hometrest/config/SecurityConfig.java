@@ -76,7 +76,7 @@ public class SecurityConfig {
                             "/listings/**",
                             "/favicon.ico",
                             "/favicon.icon",
-                            "/manifest.json"
+                            "/manifest.json",
                         };
     }
 

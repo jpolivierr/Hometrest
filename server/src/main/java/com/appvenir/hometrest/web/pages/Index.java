@@ -10,5 +10,15 @@ public class Index {
     public String home(){
         return "forward:/index.html";
     }
+
+    @GetMapping(value = "/listings/buy")
+    public String listingsBuy(){
+        return "forward:/index.html";
+    }
+
+    @GetMapping(value = "/listings/rent")
+    public String listingsRent(){
+        return "forward:/index.html";
+    }
     
 }
