@@ -63,7 +63,7 @@ const QuickSearch = () =>{
 
  useEffect(()=>{
 
-    setSearchUrl("/listings/?search=" + JSON.stringify(search))
+    setSearchUrl("/listings?search=" + JSON.stringify(search))
 
  },[search])
 
