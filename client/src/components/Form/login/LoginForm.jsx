@@ -8,8 +8,6 @@ import { Link } from "react-router-dom";
 
 const LoginForm = () =>{
 
-// console.log(formState)
-
     const {authenticate} = useUserContext()
     const httpRequest = HttpRequest()
     const {post, loading} = httpRequest
@@ -31,7 +29,6 @@ const LoginForm = () =>{
                 formData.append('email', data.email);
                 formData.append('password', data.password);
                 const response = await post(URL.LOGIN, formData, true);
-                console.log(response)
                 if (response.status === 200 && response.body) {
                     authenticate(response)
                     const currentPath = window.location.pathname;
@@ -42,7 +39,6 @@ const LoginForm = () =>{
                     }
                     clearFields();
                 } else if (response.status === 401 && response.body) {
-                    console.log("is 401")
                     setFormError(response.body.message);
                     clearFields();
                 }

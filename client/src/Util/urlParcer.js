@@ -46,7 +46,7 @@ export const getParams = (paramKey) =>{
                  
 
                 } catch (error) {
-                    console.log(error)
+                    console.error(error)
                     return null
                 }             
 
@@ -55,9 +55,6 @@ export const getParams = (paramKey) =>{
                 return null
             }
     }
-
-
-    
     
 }
 

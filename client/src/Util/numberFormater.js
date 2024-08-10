@@ -15,7 +15,7 @@ class Format{
                 }
         }
       } catch (error) {
-        console.log(error)
+        console.error(error)
         return 0
       }
       
@@ -26,13 +26,12 @@ class Format{
 
        try {
               if(!this.checkIfNum(num)){
-                console.log("not a number")
               }else{
                   const floatNum = parseFloat(num)
               const floatDeci = floatNum.toFixed(2)
               }
        } catch (error) {
-           console.log(error)
+           console.error(error)
            return 0
        }
         
@@ -68,7 +67,7 @@ class Format{
         }
         return parseFloat(str) * 1000;
         } catch (error) {
-           console.log(error)
+           console.error(error)
            return 0;
         }
         
@@ -90,7 +89,7 @@ class Format{
       
         return formattedString;
         } catch (error) {
-          console.log(error)
+          console.error(error)
           return 0
         }
         

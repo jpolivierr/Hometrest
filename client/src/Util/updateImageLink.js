@@ -11,7 +11,6 @@ export const updateImageLink = (image, code) =>{
     const index = image.lastIndexOf("xd-w300_h300_q80.jpg");
 
     return image.slice(0,index) + code
-        //  console.log("true")
     }
     
 

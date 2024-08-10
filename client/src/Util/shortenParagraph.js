@@ -33,7 +33,7 @@ export const shortenParagraph = (id, paragraph, maxCount) =>{
 
     return(
         <>
-            <p id={id} onClick={()=>{console.log("here")}} style={style} className="">
+            <p id={id} style={style} className="">
                     {paragraph}
             </p>
             <div className="expand-btn" onClick={expand}>Show more <i className="fa-solid fa-angle-down"></i></div>

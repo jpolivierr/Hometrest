@@ -7,6 +7,6 @@ export const numValidate = (key, value) =>{
             return false
         }
     } catch (error) {
-        console.log(error.message())
+        console.error(error.message())
     }
 }

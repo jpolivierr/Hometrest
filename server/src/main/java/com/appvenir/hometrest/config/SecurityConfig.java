@@ -68,9 +68,15 @@ public class SecurityConfig {
                             "/login/**",
                             "/assets/**",
                             "/api/v1/property_search/**",
-                            "/schedule_tour",
-                            "/offer",
-                            "/"
+                            "/",
+                            "/index.html",
+                            "/static/js/**",
+                            "/static/css/**",
+                            "/static/media/**",
+                            "/listings/**",
+                            "/favicon.ico",
+                            "/favicon.icon",
+                            "/manifest.json"
                         };
     }
 
