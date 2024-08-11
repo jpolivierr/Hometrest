@@ -172,7 +172,7 @@ Container
 
 .stick{
     position: sticky;
-    top: 60.2px;
+    top: 59.7px;
     border-bottom: 1px solid var(--light-silver);
     z-index: 10;
 }
