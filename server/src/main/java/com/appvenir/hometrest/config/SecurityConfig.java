@@ -74,6 +74,7 @@ public class SecurityConfig {
                             "/static/css/**",
                             "/static/media/**",
                             "/listings/**",
+                            "/single_property/**",
                             "/favicon.ico",
                             "/favicon.icon",
                             "/manifest.json",
