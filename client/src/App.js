@@ -7,12 +7,9 @@ import Listings from './Pages/listings';
 import {Routes, Route} from "react-router-dom"
 import MainLayout from './layout/main.layout';
 import SpliLayout from './layout/split.layout';
-import useLoadMapScript from './components/map/useLoadMapScript';
 
 
 function App() {
-
-  useLoadMapScript()
   
   return (
     <>

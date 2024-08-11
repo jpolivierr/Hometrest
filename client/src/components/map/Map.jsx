@@ -3,16 +3,14 @@ import { deepSearch } from "../../Util/getValueByKey"
 import circle from "../../assets/images/circle.png"
 import { getPhoto } from "../propertyCard/util"
 import { formatNumber } from "../propertyCard/util"
-import useLoadMapScript from "./useLoadMapScript"
 
 const Map = (props) =>{
-    const scriptLoaded = useLoadMapScript()
     useEffect(()=>{
-        if(scriptLoaded && window.google){
+        if(window.google){
              const map = new window.google.maps.Map(mapRef.current, initialView);
              processMarkers(map)
         }
-     },[scriptLoaded])
+     },[])
 
     const {
         styleElement, 

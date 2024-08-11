@@ -1,12 +1,10 @@
 // src/Autocomplete.js
 
 import React, { useEffect, useRef, useState } from 'react'
-import useLoadMapScript from './useLoadMapScript'
 
 const Autocomplete = ({setLocation, data}) => {
   const inputRef = useRef(null)
   const [address, setAddress] = useState('')
-  const scriptLoaded = useLoadMapScript()
 
   useEffect(() => {
     if(data.address){
@@ -51,7 +49,7 @@ const Autocomplete = ({setLocation, data}) => {
     return components
   }
   useEffect(() => {
-    if(scriptLoaded && window.google) {
+    if(window.google) {
       const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current)
       autocomplete.addListener('place_changed', () => {
         const place = autocomplete.getPlace()
@@ -61,7 +59,7 @@ const Autocomplete = ({setLocation, data}) => {
         setAddress(place.formatted_address || '')
       })
     }
-  }, [scriptLoaded, address])
+  }, [address])
 
   return (
     <>
