@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { NotificationProvider } from './context/notification/Notification.jsx';
 import "./styles/fonts/Inter Font Family/style.css"
 import "./styles/index.js"
 import './App.css';
@@ -17,7 +18,9 @@ root.render(
    //  <React.StrictMode> 
     <Router> 
       <UserProvider>
-          <App />
+      <NotificationProvider>
+        <App />
+      </NotificationProvider>
       </UserProvider>
     </Router>
    // </React.StrictMode>   

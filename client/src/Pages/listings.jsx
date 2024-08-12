@@ -14,11 +14,13 @@ import Login from "../components/Form/login/LoginForm.jsx"
 import Map from "../components/map/Map.jsx"
 import { formatNumber } from "../Util/formatNumber.js"
 import { useLocation } from "react-router"
+import { useMessageContext } from "../context/notification/Notification.jsx"
 
 const Listings = () =>{
 
 
   const {userAuthenticated, getUserFavoriteProperties, updateProperty} = useUserContext()
+  const {info, error} = useMessageContext()
   const location = useLocation();
   const { pathname } = location
   
@@ -64,6 +66,7 @@ const Listings = () =>{
 
   const prevSearchRef = useRef(null);
   const timeoutRef = useRef(null)
+
   useEffect(() => {
     if (prevSearchRef.current && !deepEqual(prevSearchRef.current, search)){
       if (timeoutRef.current) {
