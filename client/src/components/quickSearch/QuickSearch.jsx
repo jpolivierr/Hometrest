@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect, useRef } from "react"
-import { Link } from "react-router-dom"
 import { propertyTypeList } from "../../constants/listOptions/propertyType"
 import { cleanInput } from "../../Util/cleanInput"
 import { salePriceOptions } from "../../constants/listOptions/priceRange"
@@ -342,9 +341,9 @@ const toggleRangeDropDown = () => {
         
         </ul>
            
-           <Link to={searchUrl}>
+           <a href={searchUrl}>
                <button className="main-btn">Search</button>
-           </Link>
+           </a>
             
       </div>
     )

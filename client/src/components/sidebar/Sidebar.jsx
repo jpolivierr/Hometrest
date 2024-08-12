@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import NavList from '../list/NavList'
-import { Link } from 'react-router-dom'
 export default function Sidebar({isOpen, setState}) {
 
     const [initialLoad, setInitialLoad] = useState(true)
@@ -43,11 +42,11 @@ export default function Sidebar({isOpen, setState}) {
                 <header className='border-bottom'>
                     <div className='nav-user-option'>
                         <button className='secondary-btn'>
-                            <Link to="/login">Log in</Link>
+                            <a href="/login">Log in</a>
                         </button>
 
                         <button className='main-btn'>
-                            <Link to="/signup">Sign Up</Link>
+                            <a href="/signup">Sign Up</a>
                         </button>
                     </div>
                     <span onClick={() => setState(false)} className='side-bar-close-btn'>+</span>

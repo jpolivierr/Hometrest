@@ -4,11 +4,10 @@ import HttpRequest from "../../httpRequest/HttpRequest"
 import URL from "../../constants/urls"
 import { useLocation } from 'react-router-dom'
 import Logo from "../../assets/images/logo.png"
-import { Link } from "react-router-dom"
 import Sidebar from "../sidebar/Sidebar"
 import { useState } from "react"
 
-const TopNav = () =>{
+const TopNav = ({Class}) =>{
 const {get} = HttpRequest()
 const {getUser, isAuthenticated, getPropertyCount} = useUserContext()
 const [openSideBar, setOpenSideBar] = useState(false)
@@ -31,9 +30,9 @@ return(
                     <div className={`${isListingPage() ? 'container' : 'container-medium'} flex-space-between`}>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <div className="logo">
-                                <Link to="/">
+                                <a href="/">
                                     <img src={Logo} alt="Appvenir logo" />
-                                </Link>
+                                </a>
                             </div>
                             <NavList Class="hideMobile flex-space-between gap-1x nav-list"/>
                         </div>
@@ -77,7 +76,7 @@ return(
                             
                         <div 
                          onClick={() => setOpenSideBar(true)}
-                         className=" burger-menu">
+                         className="hideDesktop burger-menu">
                             <menu>
                                 <div></div>
                                 <div></div>

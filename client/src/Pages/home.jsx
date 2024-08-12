@@ -10,7 +10,6 @@ import womanMoving from "../assets/images/woman-moving.jpg"
 import home3 from "../assets/images/home-3.jpg"
 import mainHouse from "../assets/images/main-house.png"
 import QuickSearch from "../components/quickSearch/QuickSearch"
-import { Link } from "react-router-dom"
 
 
 const Home = (props) =>{
@@ -93,9 +92,9 @@ const Home = (props) =>{
                         </p>
                     </li>
                   </ul>
-                  <Link to="/listings">
+                  <a href="/listings">
                     <button className="main-btn">Find My Home</button>
-                  </Link>
+                  </a>
                 </div>  
               </article>
           </div>
@@ -115,9 +114,9 @@ const Home = (props) =>{
                   <p>
                   HomeTrest features homes for sale in all 50 states. HomeTrest's online search portal of property listings gives you the ability to refine your search criteria by different factors, including geographical location. If you're looking for homes for sale by owner, HomeTrest is a great resource.
                   </p>
-                  <Link to="/listings">
+                  <a href="/listings">
                     <button className="main-btn">Find My Home</button>
-                  </Link>
+                  </a>
                 </div> 
                 <div className=" photo-column w-60">
                   <figure style={{background: `url("${home3}") center center/cover`}}>
@@ -156,9 +155,9 @@ const Home = (props) =>{
                   <p>
                   HomeTrest features homes for sale in all 50 states. HomeTrest's online search portal of property listings gives you the ability to refine your search criteria by different factors, including geographical location. If you're looking for homes for sale by owner, HomeTrest is a great resource, whether you are a buyer or a seller.
                   </p>
-                  <Link to="/listings">
+                  <a href="/listings">
                     <button className="main-btn">Find My Home</button>
-                  </Link>
+                  </a>
                   
                 </div> 
 

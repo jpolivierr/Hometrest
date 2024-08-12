@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import {useLocation } from "react-router-dom";
 
 
 const NavList = (props) =>{
@@ -34,30 +34,30 @@ const NavList = (props) =>{
     return(
         <ul className={Class}>
 
-            <Link  to="/" target="" >
+            <a  href="/" target="" >
                 <li onClick={(e)=>{listClickEvent(e)}} 
                     className={`${listsClass} ${activeClass(pathname,"/")}`}>Home
                 </li>
-            </Link>
+            </a>
 
             
-            <Link  to="/listings" target="">
+            <a  href="/listings" target="">
                 <li onClick={(e)=>{listClickEvent(e)}} 
                     className={`${listsClass} ${activeClass(pathname,"/listings")}` }>Listings
                 </li>
-            </Link> 
+            </a> 
 
-            <Link  to={buyUrl} target="">
+            <a  href={buyUrl} target="">
                 <li onClick={(e)=>{listClickEvent(e)}} 
                     className={`${listsClass} ${activeClass(pathname,"/listings/buy")}` }>Buy
                 </li>
-            </Link>
+            </a>
 
-            <Link  to={rentUrl} target="">
+            <a  href={rentUrl} target="">
                 <li onClick={(e)=>{listClickEvent(e)}} 
                     className={`${listsClass} ${activeClass(pathname,"/listings/rent")}` }>Rent
                 </li>
-            </Link> 
+            </a> 
             
         </ul>
     )

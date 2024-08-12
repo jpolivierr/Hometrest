@@ -3,7 +3,6 @@ import HttpRequest from "../../../httpRequest/HttpRequest";
 import { useState, useEffect } from "react";
 import { isEmpty } from "../../../Util/validation";
 import { useUserContext } from "../../../context/user/UserContext";
-import { Link } from "react-router-dom";
 
 
 const SignupForm = () =>{
@@ -161,9 +160,9 @@ const SignupForm = () =>{
 
             <h3>Sign up</h3>
             <p className="form-descr">Already have an account?  
-                <Link to="/login">
+                <a href="/login">
                     <span className="signup-link"> Login</span>
-                </Link>
+                </a>
             </p>
 
             <fieldset className={errors.firstName ? "field_error" : ""}>
