@@ -1,5 +1,35 @@
-.fade_in{
-    animation: fadeIn 0s forwards;
+.slide-out-left{
+    animation: slideOutLeft .2s forwards;
+   }
+
+   @keyframes slideOutLeft {
+
+        from{
+            right: -500px;
+        }
+        to{
+            right: 0;
+        }
+    
+   }
+
+.slide-in-right{
+    animation: slideInRight .2s forwards;
+   }
+
+   @keyframes slideInRight {
+
+        from{
+            right: 0;
+        }
+        to{
+            right: -800px;
+        }
+    
+   }
+
+.fade-in{
+    animation: fadeIn .2s forwards;
    }
 
    @keyframes fadeIn {
@@ -13,8 +43,8 @@
     
    }
 
-   .fade_out{
-    animation: fadeOut 0s forwards;
+   .fade-out{
+    animation: fadeOut .2s forwards;
    }
 
    @keyframes fadeOut {

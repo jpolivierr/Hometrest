@@ -27,12 +27,6 @@
 
 @media (max-width: 1250px) {
 
-
-
-.hero img{
-    right: -250px;
-}
-
     .search-result{
         grid-template-columns: 1fr .4fr;
     }
@@ -353,6 +347,10 @@
 
 @media (max-width: 670px) {
 
+    .side-bar-window{
+        width: 90%;
+        min-width: 90%;
+    }
     .split-window{
         grid-template-columns: 1fr;
     }

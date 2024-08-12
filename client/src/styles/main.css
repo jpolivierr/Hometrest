@@ -122,7 +122,7 @@
 
 .quick-search{
     background: white;
-    width: max-content;
+    max-width: 772.8px;
     border-radius: var(--borderRadius);
     display: flex;
     padding: 1.5rem 3rem;
@@ -326,4 +326,59 @@ footer h2, footer i{
 .footer_main ul li{
     color: white;
     font-size: .8rem;
+}
+
+.side-bar-window{
+    background: white;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 400px;
+    min-width: 300px;
+    z-index: 101;
+    padding: .5rem 0rem;
+}
+
+
+.side-bar-list{
+ display: flex;
+ flex-flow: column;
+ gap: 1.5rem;
+ padding: 2rem 1rem;
+}
+
+.side-bar-list li{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.side-bar header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem;
+    padding-top: .5rem ;
+}
+
+.side-bar-close-btn{
+   font-size: 2rem;
+   font-weight: 100;
+   border-radius: 50%;
+   transform: rotate(45deg);
+   cursor: pointer;
+}
+
+.nav-user-option{
+    display: flex;
+    gap: .5rem;
+    border-radius: var(--borderRadius);
+    border: 1px solid var(--alt-silver);
+    background: var(--alt-silver);
+    padding: .3rem;
+}
+
+.nav-user-option button{
+    padding: .7rem 1.3rem;
+    width: max-content;
 }
