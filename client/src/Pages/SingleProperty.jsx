@@ -13,6 +13,10 @@ import { Link } from 'react-router-dom'
 import Modal from "../components/modal/Modal"
 import Login from "../components/Form/login/LoginForm"
 import LikePropertyService from "../service/property/LikePropertyService"
+import { useMessageContext } from "../context/notification/Notification.jsx"
+import { SingleDemo } from "../Mock/singleDemo.js"
+
+
 
 const SingleProperty = () =>{
 
@@ -23,6 +27,7 @@ useEffect(() => {
 },[searchedPropertyId])
 
 const {isFavorite, likeProperty, userAuthenticated} = LikePropertyService()
+const {info, error} = useMessageContext()
 const {get, loading} = HttpRequest({headers: {
     'Content-Type': 'application/json'
   }})
@@ -61,15 +66,23 @@ const {get, loading} = HttpRequest({headers: {
     (async () => {
       if (prevPropId.current !== searchedPropertyId){
         const response = await get(URL.SINGLE_PROPERTY + "/" + searchedPropertyId)
+        if(response.status >= 500 && response.status <= 599){
+          error("Something went wrong on our end. Please try again later.")
+          setSingleProperty(deepSearch(SingleDemo, ["data", "home"], {}))
+        }
+        if(response.status === 200 && (!response.body)){
+          error("We couldn't find a property with the provided id. Please try a different id.")
+          setSingleProperty(deepSearch(SingleDemo, ["data", "home"], {}))
+        }
         if(response.status === 200 && response.body) {
             const singleProperty = deepSearch(response.body,["data","home"],{})
             setSingleProperty(singleProperty)
         }
       }
       prevPropId.current = searchedPropertyId
-        
     })()
-  },[get, searchedPropertyId])
+  },[searchedPropertyId])
+
 
   useEffect(()=>{
           

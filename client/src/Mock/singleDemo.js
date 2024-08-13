@@ -1,4 +1,4 @@
-export const singleDemo = {
+export const SingleDemo = {
     "data": {
       "home": {
         "__typename": "Home",

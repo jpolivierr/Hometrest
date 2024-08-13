@@ -41,11 +41,11 @@ export function NotificationProvider({children}) {
     const getMessageicon = () => {
         switch(message.type){
             case MESSAGE_TYPE.INFO :
-                return (<i class="fa-solid fa-circle-info"></i>)
+                return (<i className="fa-solid fa-circle-info"></i>)
             case MESSAGE_TYPE.ERROR :
-                return (<i class="fa-solid fa-circle-exclamation"></i>)
+                return (<i className="fa-solid fa-circle-exclamation"></i>)
             default :
-            return (<i class="fa-solid fa-circle-info"></i>)
+            return (<i className="fa-solid fa-circle-info"></i>)
         }
     }
 

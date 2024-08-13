@@ -15,12 +15,13 @@ import Map from "../components/map/Map.jsx"
 import { formatNumber } from "../Util/formatNumber.js"
 import { useLocation } from "react-router"
 import { useMessageContext } from "../context/notification/Notification.jsx"
+import { propertiesDemo } from "../Mock/propertyDemo.js"
 
 const Listings = () =>{
 
 
   const {userAuthenticated, getUserFavoriteProperties, updateProperty} = useUserContext()
-  const {info, error} = useMessageContext()
+  const {error} = useMessageContext()
   const location = useLocation();
   const { pathname } = location
   
@@ -37,14 +38,17 @@ const Listings = () =>{
                         beds : {min: 0, max: 0},
                         limit : 50
                       })
+
   const init = {
-              count: 0,
-              total: 0,
-              results : [],
+        count: 0,
+        total: 0,
+        results : [],
   }
+
   const {loading, post, del} = HttpRequest({headers: {
     'Content-Type': 'application/json'
   }})
+
   const [properties, setProperties] = useState([])
   const [total, setTotal] = useState(0)
   const [loginModal, setLoginModal] =useState (false)
@@ -101,6 +105,16 @@ const Listings = () =>{
       delete searchCopy.address
     }
     const response = await post(URL.SEARCH, removeEmptyValues(searchCopy, true))
+    if(response.status >= 500 && response.status <= 599){
+      error("Something went wrong on our end. Please try again later.")
+      setTotal(propertiesDemo.length)
+      setProperties(propertiesDemo)
+    }
+    if(response.status === 200 && (!response.body || deepSearch(response.body,["data","home_search"],init).total === 0)){
+      error("We couldn't find properties with the provided location. Please try a different location.")
+      setTotal(propertiesDemo.length)
+      setProperties(propertiesDemo)
+    }
     if(response.status === 200 && response.body){
       const propertyData = deepSearch(response.body,["data","home_search"],init)
       setTotal(propertyData.total)

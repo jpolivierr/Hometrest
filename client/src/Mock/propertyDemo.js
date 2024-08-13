@@ -1,4 +1,4 @@
-const propertiesDemo = [
+export const propertiesDemo = [
   {
     "__typename": "SearchHome",
     "property_id": "5242686095",
@@ -2690,5 +2690,3 @@ const propertiesDemo = [
     }
   }
 ]
-
-export default propertiesDemo

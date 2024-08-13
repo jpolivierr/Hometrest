@@ -386,7 +386,7 @@ footer h2, footer i{
 .message-service{
   position: relative;
   background: white;
-  z-index: 20;
+  z-index: 50;
   position: fixed;
   margin: auto;
   left: 0;
