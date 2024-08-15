@@ -1,7 +1,7 @@
 import URL from "../../../constants/urls";
 import HttpRequest from "../../../httpRequest/HttpRequest";
 import { useState, useEffect } from "react";
-import { isEmpty } from "../../../Util/validation";
+import { isEmpty, passwordDoNotMatch } from "../../../Util/validation";
 import { useUserContext } from "../../../context/user/UserContext";
 
 
@@ -9,18 +9,20 @@ const SignupForm = () =>{
 
     const {authenticate} = useUserContext()
     const httpRequest = HttpRequest()
-    const {post, loading} = httpRequest
+    const {post} = httpRequest
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
         email: "",
-        password: ""
+        password: "",
+        confirmPassword: ""
     })
     const [errors, setErrors] = useState({
         firstName: "",
         lastName: "",
         email: null,
-        password: null
+        password: null,
+        confirmPassword: null
     })
     const [formError, setFormError] = useState(null)
     const [shouldSubmit, setShouldSubmit] = useState(false);
@@ -100,6 +102,14 @@ const SignupForm = () =>{
         }))
     }
 
+    const setConfirmPassword = (e) =>{
+        const value = e.target.value
+        setData((prevData) => ({
+            ...prevData,
+            confirmPassword: value
+        }))
+    }
+
     const firstNameValidation = () => {
         return isEmpty(
                 data.firstName, 
@@ -132,11 +142,20 @@ const SignupForm = () =>{
               )
     }
 
+    const confirMpasswordValidation = () => {
+        return passwordDoNotMatch(
+                [data.password, data.confirmPassword], 
+                () => setErrors((prevErrors) =>({...prevErrors, confirmPassword: "Password do not match"})),
+                () => setErrors((prevErrors) => ({...prevErrors, confirmPassword: null}))
+              )
+    }
+
     const validateForm = () => {
         firstNameValidation()
         lastNameValidation()
         emailValidation()
         passwordValidation()
+        confirMpasswordValidation()
     }
 
     const clearFields = () => {
@@ -216,16 +235,16 @@ const SignupForm = () =>{
                 {errors.password && <p className="error-message">{errors.password}</p>}
             </fieldset>
 
-            <fieldset className={errors.password ? "field_error" : ""}>
+            <fieldset className={errors.confirmPassword ? "field_error" : ""}>
             <p>Confirm Password</p>
                 <input 
-                    onChange={setPassword}
-                    onBlur={passwordValidation}
-                    value={data.password} 
+                    onChange={setConfirmPassword}
+                    onBlur={confirMpasswordValidation}
+                    value={data.confirmPassword} 
                     name="password" 
                     type="password" 
                     placeholder="Confirm your password" />
-                {errors.password && <p className="error-message">{errors.password}</p>}
+                {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
             </fieldset>
 
             <button className="main-btn">Sign up</button>           
