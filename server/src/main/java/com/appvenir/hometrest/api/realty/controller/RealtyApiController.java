@@ -1,6 +1,5 @@
 package com.appvenir.hometrest.api.realty.controller;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appvenir.hometrest.api.realty.RealtyApi;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping(path="/api/v1/property_search")
@@ -17,9 +15,7 @@ public class RealtyApiController {
 
     private final RealtyApi realtyApi;
 
-    public RealtyApiController(
-      @Qualifier("realtyApiServiceProxy") RealtyApi realtyApi,
-      ObjectMapper objectMapper
+    public RealtyApiController(RealtyApi realtyApi
       ) {
         this.realtyApi = realtyApi;
     }

@@ -105,6 +105,7 @@ const Listings = () =>{
       delete searchCopy.address
     }
     const response = await post(URL.SEARCH, removeEmptyValues(searchCopy, true))
+    console.log(response)
     if(response.status >= 500 && response.status <= 599){
       error("Something went wrong on our end. Please try again later.")
       setTotal(propertiesDemo.length)
@@ -112,6 +113,8 @@ const Listings = () =>{
     }
     if(response.status === 200 && (!response.body || deepSearch(response.body,["data","home_search"],init).total === 0)){
       error("We couldn't find properties with the provided location. Please try a different location.")
+      console.log(propertiesDemo)
+      console.log(propertiesDemo.length)
       setTotal(propertiesDemo.length)
       setProperties(propertiesDemo)
     }

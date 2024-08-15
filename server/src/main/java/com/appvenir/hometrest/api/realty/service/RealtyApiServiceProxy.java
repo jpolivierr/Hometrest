@@ -45,7 +45,6 @@ public class RealtyApiServiceProxy implements RealtyApi{
 
     @Override
     public Object findPropertyList(String propertySearch) {
-
         String currentPath = IO.currentPath("/api/realty/data/propertyList.json");
 
         if(IO.fileExist(currentPath)){

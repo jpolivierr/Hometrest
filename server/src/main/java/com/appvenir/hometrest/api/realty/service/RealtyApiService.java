@@ -33,26 +33,25 @@ public class RealtyApiService implements RealtyApi {
     }
 
     public Object findPropertyList(String propertySearch){
+        try {
+            String uri = REALTY_URI + "/properties/v3/list";
 
-                try {
-                    String uri = REALTY_URI + "/properties/v3/list";
+            HttpRequest request = realtyRequestBuilder
+            .uri(URI.create(uri))
+            .POST(BodyPublishers.ofString(propertySearch))
+            .build();
 
-                    HttpRequest request = realtyRequestBuilder
-                    .uri(URI.create(uri))
-                    .POST(BodyPublishers.ofString(propertySearch))
-                    .build();
-
-                    HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
-                    return objectMapper.readValue(response.body(), Object.class);
-                } catch (IOException e) {
-                   
-                    e.printStackTrace();
-                    return "";
-                } catch (InterruptedException e) {
-                
-                    e.printStackTrace();
-                    return "";
-                }
+            HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
+            return objectMapper.readValue(response.body(), Object.class);
+        } catch (IOException e) {
+        
+            e.printStackTrace();
+            return "";
+        } catch (InterruptedException e) {
+        
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public Object findPropertyById(String id){
