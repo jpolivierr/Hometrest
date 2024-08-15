@@ -35,6 +35,7 @@ const SignupForm = () =>{
                 formData.append('last_name', data.lastName);
                 formData.append('email', data.email);
                 formData.append('password', data.password);
+                console.log(formData)
                 const response = await post(URL.SIGNUP, formData, true);
                 if (response.status === 200 && response.body) {
                     authenticate(response)
@@ -45,7 +46,18 @@ const SignupForm = () =>{
                         window.location.reload();
                     }
                     clearFields();
-                } else if (response.status === 401 && response.body) {
+                } 
+                else if (response.status === 400 && response.body) {
+                    setFormError(response.body.message);
+                }
+                else if (response.status === 404 && response.body) {
+                    if(response.body.data && Object.keys(response.body.data).length !== 0){
+                        setErrors({...errors, ...response.body.data})
+                    }else{
+                        setFormError(response.body.message);
+                    }
+                }
+                else if (response.status === 401 && response.body) {
                     setFormError(response.body.message);
                     clearFields();
                 }

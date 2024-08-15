@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -50,12 +51,29 @@ public class GlobalExceptionHandler {
             ErrorResponse errorResponse = ErrorResponse.builder()
                                             .timestamp(LocalDateTime.now())
                                             .status(HttpStatus.NOT_FOUND.value())
-                                            .error(e.getCause() != null ? e.getCause().getMessage() : null)
-                                            .message(e.getMessage())
+                                            .error("Error validading form")
+                                            .message("Error validading form")
                                             .path(request.getRequestURI())
                                             .data(errors)
                                             .build();
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        }
+
+        @ExceptionHandler(DataIntegrityViolationException.class)
+        public ResponseEntity<Object> handleDataIntegrityViolationException(
+            DataIntegrityViolationException e, HttpServletRequest request) {
+
+            Map<String, String> errors = new HashMap<>();
+
+            ErrorResponse errorResponse = ErrorResponse.builder()
+                                            .timestamp(LocalDateTime.now())
+                                            .status(HttpStatus.BAD_REQUEST.value())
+                                            .error("Something went wrong. Please try again later")
+                                            .message("Something went wrong. Please try again later")
+                                            .path(request.getRequestURI())
+                                            .data(errors)
+                                            .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
         }
 
     

@@ -37,7 +37,8 @@ const LoginForm = () =>{
                         window.location.reload();
                     }
                     clearFields();
-                } else if (response.status === 401 && response.body) {
+                } 
+                else if (response.status === 401 && response.body) {
                     setFormError(response.body.message);
                     clearFields();
                 }
