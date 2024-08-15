@@ -45,6 +45,7 @@ const Listings = () =>{
         results : [],
   }
 
+  const [loadingOverlay, setLoadingOverlay] = useState(false)
   const {loading, post, del} = HttpRequest({headers: {
     'Content-Type': 'application/json'
   }})
@@ -82,7 +83,7 @@ const Listings = () =>{
         fetchProperties()
       }, 1000)
       
-    }else if(!deepEqual(prevSearchRef.current, search)){
+    }else if(!prevSearchRef.current && !deepEqual(prevSearchRef.current, search)){
       const searchCopy = deepCopy(search)
       updateParam(removeEmptyValues(searchCopy, true), true, "search") 
       fetchProperties()
@@ -100,12 +101,15 @@ const Listings = () =>{
   };
 
   const fetchProperties = async () =>{
+    if(properties.length !== 0){
+      setLoadingOverlay(true)
+    }
     const searchCopy = deepCopy(search)
     if (searchCopy.hasOwnProperty('address')) {
       delete searchCopy.address
     }
     const response = await post(URL.SEARCH, removeEmptyValues(searchCopy, true))
-    console.log(response)
+    setLoadingOverlay(false)
     if(response.status >= 500 && response.status <= 599){
       error("Something went wrong on our end. Please try again later.")
       setTotal(propertiesDemo.length)
@@ -113,8 +117,6 @@ const Listings = () =>{
     }
     if(response.status === 200 && (!response.body || deepSearch(response.body,["data","home_search"],init).total === 0)){
       error("We couldn't find properties with the provided location. Please try a different location.")
-      console.log(propertiesDemo)
-      console.log(propertiesDemo.length)
       setTotal(propertiesDemo.length)
       setProperties(propertiesDemo)
     }
@@ -167,7 +169,7 @@ const Listings = () =>{
       <>
           <Filter data={search} setData={setSearch}/>
 
-          <div className={`listing-layout ${properties.length !== 0 && loading ? 'loading-overlay' : ''}`}>
+          <div className={`listing-layout ${loadingOverlay ? 'loading-overlay' : ''}`}>
               {
                 <Map properties={properties} 
                   zoom={10}
@@ -178,8 +180,6 @@ const Listings = () =>{
                   loading={loading}
                 /> 
               }
-
-              
 
               {
                   properties.length === 0 ? 
