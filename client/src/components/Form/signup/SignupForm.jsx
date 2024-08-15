@@ -31,8 +31,8 @@ const SignupForm = () =>{
         if (shouldSubmit && !hasErrors()) {
             (async () => {
                 const formData = new FormData();
-                formData.append('first_name', data.firstName);
-                formData.append('last_name', data.lastName);
+                formData.append('firstName', data.firstName);
+                formData.append('lastName', data.lastName);
                 formData.append('email', data.email);
                 formData.append('password', data.password);
                 console.log(formData)
