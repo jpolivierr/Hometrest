@@ -131,7 +131,11 @@ const Listings = () =>{
     const response = await post(URL.LIKE_PROPERTY, likedPropertyData);
     if(response.status === 200){
         updateProperty(response.body)
-    }else{
+    }
+    else if(response.status === 401){
+      window.location.reload()
+    }
+    else{
       console.error("Could not save property")
     }
   }
@@ -140,7 +144,11 @@ const Listings = () =>{
     const response = await del(URL.LIKE_PROPERTY, likedPropertyData);
     if(response.status === 200){
         updateProperty(likedPropertyData)
-    }else{
+    }
+    else if(response.status === 401){
+      window.location.reload()
+    }
+    else{
       console.error("Could not delete property")
     }
   }
