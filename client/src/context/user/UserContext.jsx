@@ -26,7 +26,7 @@ export const UserProvider = ({children}) => {
         })()
     },[user])
 
-    const authenticate = (user) => {
+    const authenticate = () => {
         setIsAuthenticated(true)
     }
 

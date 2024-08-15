@@ -34,7 +34,7 @@
 
 
 menu{
-    width: 20px;
+    width: 25px;
     height: 14px;
     position: relative;
     display: flex;
@@ -48,7 +48,23 @@ menu div{
     width: 100%;
     height: 2px;
     background: var(--dark-color);
+    position: absolute;
 }
+
+menu div:nth-child(2){
+    width: 80%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+menu div:nth-child(3){
+    width: 50%;
+    bottom: 0;
+    right: 0;
+}
+
 
 input:focus{
     outline: 2px solid #43b6ecb0;
@@ -172,7 +188,7 @@ Container
 
 .stick{
     position: sticky;
-    top: 59.7px;
+    top: 73.4px;
     border-bottom: 1px solid var(--light-silver);
     z-index: 10;
 }
@@ -471,7 +487,7 @@ BACKGROUND
     }
 
     .hideMobile{
-        display: none;
+        display: none !important;
     }
     
 }
@@ -519,6 +535,7 @@ BACKGROUND
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1rem 0rem;
 }
 
 .top-nav .logo img{
@@ -530,7 +547,7 @@ BACKGROUND
 }
 
 .user-greeting{
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .user-nav-likes{
@@ -538,15 +555,18 @@ BACKGROUND
     justify-content: center;
     align-items: center;
     gap: .3rem;
-    padding: .5rem .5rem;
+    padding: .6rem .8rem;
     font-size: .9rem;
     border: none;
-    border-radius: 10px;
-    background: #92a6bf17;
+    border-radius: 100px;
+    background: #f7f7f7;
     cursor: pointer;
     width: max-content;
-    border: 1px solid var(--light-silver);
     position: relative;
+}
+
+.user-nav-likes span{
+    font-weight: 500;
 }
 
 .user-nav-bell{
@@ -584,6 +604,11 @@ BACKGROUND
     font-weight: 400;
 }
 
+.user-nav-info{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
 
 
 .user-nav-account{
@@ -594,16 +619,16 @@ BACKGROUND
     padding: .5rem .5rem;
     border: none;
     font-size: 1rem;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     background: white;
-    background: var(--main-color);
     color: white;
     cursor: pointer;
+    border: 1px solid var(--light-silver);
 }
 
 .user-nav-account i{
-    color: white;
+   color: var(--alt-text-color);;
 }
 
 .nav-list-alt li{
@@ -892,4 +917,3 @@ background: white;
     background: #fbfbfbcb;
     z-index: 2;
 }
-

@@ -15,6 +15,7 @@ const logout = async () => {
     window.location.href ="/login"
 }
 
+
 return(
 <>
     <Sidebar isOpen={openSideBar}  setState={setOpenSideBar}/>

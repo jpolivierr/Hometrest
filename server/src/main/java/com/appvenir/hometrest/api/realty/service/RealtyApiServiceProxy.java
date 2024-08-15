@@ -36,11 +36,8 @@ public class RealtyApiServiceProxy implements RealtyApi{
                 e.printStackTrace();
                 return "";
             }
-    
         }
-
         return "";
-
     }
 
     @Override
