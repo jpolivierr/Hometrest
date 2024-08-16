@@ -34,25 +34,16 @@ const QuickSearch = () =>{
  })
 
  useEffect(()=>{
-    
     const addTypeEvent = (e) =>{
-
         if(typeWindowRef.current && !typeWindowRef.current.contains(e.target)){
-
             setTypeDropdown(false)
-
         }
-
     }
 
     const addRangeEvent = (e) =>{
-
         if(rangeWindowRef.current && !rangeWindowRef.current.contains(e.target)){
-
             setRangeDropdown(false)
-
         }
-
     }
 
     document.addEventListener("click",addTypeEvent, true)
@@ -61,9 +52,8 @@ const QuickSearch = () =>{
 },[])
 
  useEffect(()=>{
-
-    setSearchUrl("/listings?search=" + JSON.stringify(search))
-
+    const encodedSearch = encodeURIComponent(JSON.stringify(search))
+    setSearchUrl("/listings?search=" + encodedSearch)
  },[search])
 
  useEffect(()=>{
