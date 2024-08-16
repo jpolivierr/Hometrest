@@ -6,18 +6,14 @@ import { useLocation } from 'react-router-dom'
 import Logo from "../../assets/images/logo.png"
 import Sidebar from "../sidebar/Sidebar"
 import { useState, useEffect, useCallback } from "react"
+import DropDown from "../dropDown/DropDown"
 
 const TopNav = () =>{
 const {get} = HttpRequest()
-const {getUser, isAuthenticated, getPropertyCount} = useUserContext()
+const {getUser, logout, isAuthenticated, getPropertyCount} = useUserContext()
 const [openSideBar, setOpenSideBar] = useState(false)
 
 const location = useLocation()
-
-const logout = async () => {
-    await get(URL.LOGOUT)
-    window.location.href ="/login"
-}
 
 const isListingPage = () => {
     return location.pathname.startsWith("/listings")
@@ -44,14 +40,29 @@ return(
                     
                         {
                         fetchUser() !== null && isAuthenticated ?
-                            <div className="user-nav-info">                      
+                            <div className="user-nav-info">  
+
+                            <DropDown Class={"account-drop-down"}>
+                                <div className="account-container">
+                                 <button className="user-nav-account">
+                                    <i className="fa-regular fa-user"></i>
+                                </button> 
                                 <h3 className="user-greeting hideMobile">
-                                    Hello, {fetchUser().firstName}
+                                        {fetchUser().firstName} {fetchUser().lastName}     
                                 </h3>
-                                {/* <button onClick={logout} className="user-nav-likes">
-                                    <span>Logout</span>
-                                </button> */}
-                                <button className="user-nav-likes">
+                                <i className="fa-solid fa-caret-down"></i>
+                              </div>
+                              <div className="account-drop-down-window">
+                                <ul>
+                                    <li><i className="fa-regular fa-pen-to-square"></i>Edit Account</li>
+                                    <li> <i className="fa-regular fa-heart"></i>Likes</li>
+                                    <li onClick={async () => await logout()}><i className="fa-solid fa-arrow-right-from-bracket"></i>Logout</li>
+                                    <li className="delete-acc"><i className="fa-regular fa-trash-can"></i>Delete Account</li>
+                                </ul>
+                              </div>
+                            </DropDown>
+                              
+                                <button className="user-nav-likes hideMobile">
                                     <i className="fa-regular fa-heart"></i>
                                     <span>Likes</span>
                                     <span className="like_count">{getPropertyCount()}</span>
@@ -89,7 +100,7 @@ return(
                             !fetchUser() !== null && !isAuthenticated &&
                             <div 
                          onClick={() => setOpenSideBar(true)}
-                         className=" burger-menu">
+                         className="hideDesktop burger-menu">
                             <menu>
                                 <div></div>
                                 <div></div>

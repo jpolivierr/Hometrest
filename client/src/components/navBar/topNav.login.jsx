@@ -6,14 +6,8 @@ import Sidebar from "../sidebar/Sidebar"
 import { useState } from "react"
 
 const LoginTopNav = () =>{
-const {get} = HttpRequest()
-const {getUser, isAuthenticated, getPropertyCount} = useUserContext()
+const {getUser, logout, isAuthenticated, getPropertyCount} = useUserContext()
 const [openSideBar, setOpenSideBar] = useState(false)
-
-const logout = async () => {
-    await get(URL.LOGOUT)
-    window.location.href ="/login"
-}
 
 
 return(

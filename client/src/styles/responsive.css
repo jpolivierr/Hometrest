@@ -117,6 +117,10 @@
 
 @media (max-width: 945px){
 
+    .drop-down .drop-down-window{
+        left: -100px;
+    }
+    
     .hero img{
         display: none;
     }
@@ -137,6 +141,7 @@
 
 
 @media (max-width: 855px){
+
 
     .split-window{
         grid-template-columns: 1fr .5fr;

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import NavList from '../list/NavList'
+import { useUserContext } from '../../context/user/UserContext'
 export default function Sidebar({isOpen, setState}) {
 
     const [initialLoad, setInitialLoad] = useState(true)
-    const [isSideBarOpen, setIsSideBarOpen] = useState(false)
     const [sideBarBkAnimation, setSideBarBkAnimation] = useState("hide")
     const [sideBarWindowAnimation, setSideBarWindowAnimation] = useState("hide")
+    const {getUser, isAuthenticated} = useUserContext()
     const animationTime = 200
 
     useEffect(() => {
@@ -39,7 +40,9 @@ export default function Sidebar({isOpen, setState}) {
         {
             <div className={`side-bar-window ${sideBarWindowAnimation}`}>
                 <div className='side-bar'>
-                <header className='border-bottom'>
+                {
+                    !isAuthenticated ?
+                    <header className='border-bottom'>
                     <div className='nav-user-option'>
                         <button className='secondary-btn'>
                             <a href="/login">Log in</a>
@@ -50,7 +53,13 @@ export default function Sidebar({isOpen, setState}) {
                         </button>
                     </div>
                     <span onClick={() => setState(false)} className='side-bar-close-btn'>+</span>
+                </header> :
+                <header>
+                    <span onClick={() => setState(false)} className='side-bar-close-btn'>+</span>
                 </header>
+                 
+                }    
+                
                     <div>
                         <NavList Class={"side-bar-list"}/>
                     </div>

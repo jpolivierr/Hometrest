@@ -14,7 +14,7 @@ export const UserProvider = ({children}) => {
 
     useLayoutEffect(() => {
         (async () => {
-            if(isAuthenticated) return
+            if(isAuthenticated && user !== null) return
             const response = await get(URL.GET_USER)
             if(response.status === 200){
                 setIsAuthenticated(true)
@@ -40,8 +40,10 @@ export const UserProvider = ({children}) => {
         return count
     }
 
-    const logout = () =>{
-        setUser(null)
+    const logout = async () =>{
+        const response = await get(URL.LOGOUT)
+        console.log(response)
+        // window.location.reload()
     }
 
     const deleteAccount = () =>{
