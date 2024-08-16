@@ -22,12 +22,12 @@ public class UserExceptionHandler {
     @ExceptionHandler(value = {UserNotFoundException.class})
     public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException e, HttpServletRequest request) {
         ErrorResponse errorResponse = ErrorResponse.builder()
-                                            .timestamp(LocalDateTime.now())
-                                            .status(HttpStatus.UNAUTHORIZED.value())
-                                            .error(e.getCause() != null ? e.getCause().getMessage() : null)
-                                            .message(e.getMessage())
-                                            .path(request.getRequestURI())
-                                            .build();
+                            .timestamp(LocalDateTime.now())
+                            .status(HttpStatus.UNAUTHORIZED.value())
+                            .error(e.getCause() != null ? e.getCause().getMessage() : null)
+                            .message(e.getMessage())
+                            .path(request.getRequestURI())
+                            .build();
 
         return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }
