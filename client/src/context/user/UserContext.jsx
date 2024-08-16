@@ -43,7 +43,10 @@ export const UserProvider = ({children}) => {
     const logout = async () =>{
         const response = await get(URL.LOGOUT)
         console.log(response)
-        // window.location.reload()
+        if(response.status === 200){
+            window.location.reload()
+        }
+        
     }
 
     const deleteAccount = () =>{

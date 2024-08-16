@@ -9,7 +9,7 @@ const LoginForm = () =>{
 
     const {authenticate} = useUserContext()
     const httpRequest = HttpRequest()
-    const {post, loading} = httpRequest
+    const {post} = httpRequest
     const [data, setData] = useState({
         email: "",
         password: ""
@@ -153,7 +153,7 @@ const LoginForm = () =>{
 
                 <a className="signup-link forgot-password" >Forgot Password?</a>
             </div>
-            <button className="main-btn">Login</button>           
+            <button onClick={e => submit(e)} className="main-btn">Login</button>           
         </form>
 
     )
