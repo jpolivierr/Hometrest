@@ -1,4 +1,4 @@
-const HOST = "http://localhost:8080"
+const HOST = process.env.REACT_APP_HOST_NAME
 const API_VERSION = "/api/v1"
 
 const URL = {
