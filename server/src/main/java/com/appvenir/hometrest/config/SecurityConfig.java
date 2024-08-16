@@ -13,6 +13,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import com.appvenir.hometrest.auth.RequestAuthenticationEntryPoint;
 import com.appvenir.hometrest.auth.RequestAuthenticationFailureHandler;
 import com.appvenir.hometrest.auth.RequestAuthenticationSuccessHandler;
+import com.appvenir.hometrest.auth.UserLogoutSuccessHandler;
 import com.appvenir.hometrest.filter.exception.GlobalExceptionFilter;
 
 import lombok.RequiredArgsConstructor;
@@ -48,7 +49,7 @@ public class SecurityConfig {
                 })
                 .logout( logout -> {
                     logout.logoutUrl("/logout")
-                          .logoutSuccessUrl("/login?logout")
+                          .logoutSuccessHandler(new UserLogoutSuccessHandler())
                           .deleteCookies("JSESSIONID")
                           .invalidateHttpSession(true);
                 })
