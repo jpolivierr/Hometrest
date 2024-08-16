@@ -4,9 +4,9 @@ import {useLocation } from "react-router-dom";
 const NavList = (props) =>{
 
     const listingPath = "/listings?search="
-    const buyUrl = listingPath + JSON.stringify({status: ["for_sale"]})
+    const buyUrl = listingPath + encodeURIComponent(JSON.stringify({status: ["for_sale"]}))
 
-    const rentUrl = listingPath + JSON.stringify({status: ["for_rent"]})
+    const rentUrl = listingPath + encodeURIComponent(JSON.stringify({status: ["for_rent"]}))
 
     const {Class, listsClass, listsClickEvent} = props
 
