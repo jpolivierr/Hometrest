@@ -8,7 +8,7 @@
 }
 
 .show-properties-header{
-    padding: .5rem 1rem;
+    padding: 1rem;
     padding-bottom: 0;
 }
 
@@ -402,7 +402,7 @@
 
 .listing-layout{
     display: flex;
-    margin-top: 74.2px;
+    margin-top: 71.2px;
 }
 
 .commute{

@@ -188,7 +188,7 @@ Container
 
 .stick{
     position: sticky;
-    top: 73.4px;
+    top: 71.4px;
     border-bottom: 1px solid var(--light-silver);
     z-index: 10;
 }
@@ -689,7 +689,7 @@ BACKGROUND
 }
 
 .property-filter{
-    padding: .6rem 1rem;
+    padding: 1rem;
     display: flex;
     gap: .5rem;
 }

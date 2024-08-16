@@ -14,7 +14,7 @@ import com.appvenir.hometrest.auth.RequestAuthenticationEntryPoint;
 import com.appvenir.hometrest.auth.RequestAuthenticationFailureHandler;
 import com.appvenir.hometrest.auth.RequestAuthenticationSuccessHandler;
 import com.appvenir.hometrest.auth.UserLogoutSuccessHandler;
-import com.appvenir.hometrest.filter.exception.GlobalExceptionFilter;
+import com.appvenir.hometrest.filter.GlobalExceptionFilter;
 
 import lombok.RequiredArgsConstructor;
 
