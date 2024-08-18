@@ -30,11 +30,9 @@ public class HttpClientConfig {
 
 	@Bean
 	public HttpClient httpClient(){
-
 		return HttpClient.newBuilder()
 						 .connectTimeout(Duration.ofSeconds(10))
 						 .build();
-
 	}
 
 }
