@@ -12,8 +12,13 @@ import lombok.RequiredArgsConstructor;
 public class RequestTracker {
 
     private final JdbcTemplate jdbcTemplate;
+    private final int REQUEST_PER_DAY = 5;
+    private final int MAX_REQUEST = 5;
 
     public int incrementRequestCount(String clientIp) {
+
+        if(getTotalRequestCount() == MAX_REQUEST) throw new RequestLimitReachedException();
+
         Optional<Integer> currentCount = getRequestCount(clientIp);
         if (currentCount.isPresent()) {
             int newCount = currentCount.get() + 1;
@@ -26,6 +31,16 @@ public class RequestTracker {
             return 1;
         }
     }
+
+    public int getTotalRequestCount() {
+        try {
+            Integer totalCount = jdbcTemplate.queryForObject("SELECT SUM(count) FROM request_count", Integer.class);
+            return totalCount != null ? totalCount : 0;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+    
 
     public Optional<Integer> getRequestCount(String clientId) {
         try {

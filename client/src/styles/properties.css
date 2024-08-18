@@ -286,6 +286,10 @@
     align-items: center;
 }
 
+.single_prop_header .list_options{
+    gap: 2rem;
+}
+
 
 .s-h-btn i{
     font-size: .9rem;

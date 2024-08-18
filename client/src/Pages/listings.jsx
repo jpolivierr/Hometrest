@@ -110,20 +110,31 @@ const Listings = () =>{
     }
     const response = await post(URL.SEARCH, removeEmptyValues(searchCopy, true))
     setLoadingOverlay(false)
+    
     if(response.status >= 500 && response.status <= 599){
       error("Something went wrong on our end. Please try again later.")
       setTotal(propertiesDemo.length)
       setProperties(propertiesDemo)
     }
-    if(response.status === 200 && (!response.body || deepSearch(response.body,["data","home_search"],init).total === 0)){
+    else if(response.status !== 200 && response.body){
+      error(response.body.message)
+      setTotal(propertiesDemo.length)
+      setProperties(propertiesDemo)
+    }
+    else if(response.status === 200 && (!response.body || deepSearch(response.body,["data","home_search"],init).total === 0)){
       error("We couldn't find properties with the provided location. Please try a different location.")
       setTotal(propertiesDemo.length)
       setProperties(propertiesDemo)
     }
-    if(response.status === 200 && response.body){
+    else if(response.status === 200 && response.body){
       const propertyData = deepSearch(response.body,["data","home_search"],init)
       setTotal(propertyData.total)
       setProperties(propertyData.results)
+    }
+    else {
+      error("Something went wrong on our end. Please try again later.")
+      setTotal(propertiesDemo.length)
+      setProperties(propertiesDemo)
     }
   }
 

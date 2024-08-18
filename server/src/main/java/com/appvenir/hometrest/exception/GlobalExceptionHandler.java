@@ -13,12 +13,24 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.appvenir.hometrest.exception.makeRequest.MakeRequestException;
+import com.appvenir.hometrest.helper.requestTracker.RequestLimitReachedException;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(RequestLimitReachedException.class)
+    public ResponseEntity<?> handleRequestLimitReachedException(RequestLimitReachedException e, HttpServletRequest request)
+  {
+            ErrorResponse errorResponse = ErrorResponse.builder()
+            .timestamp(LocalDateTime.now())
+            .status(HttpStatus.TOO_MANY_REQUESTS.value())
+            .message(e.getMessage())
+            .path(request.getRequestURI())
+            .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.TOO_MANY_REQUESTS);
+  }
         @ExceptionHandler(MakeRequestException.class)
         public ResponseEntity<Object> handleMakeRequestException(MakeRequestException e, HttpServletRequest request){
 

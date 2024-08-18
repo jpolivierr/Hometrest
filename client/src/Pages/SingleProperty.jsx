@@ -70,13 +70,20 @@ const {get, loading} = HttpRequest({headers: {
           error("Something went wrong on our end. Please try again later.")
           setSingleProperty(deepSearch(SingleDemo, ["data", "home"], {}))
         }
-        if(response.status === 200 && (!response.body)){
+        else if(response.status !== 200 && response.body){
+          error(response.body.message)
+          setSingleProperty(deepSearch(SingleDemo, ["data", "home"], {}))
+        }
+        else if(response.status === 200 && (!response.body)){
           error("We couldn't find a property with the provided id. Please try a different id.")
           setSingleProperty(deepSearch(SingleDemo, ["data", "home"], {}))
         }
-        if(response.status === 200 && response.body) {
+        else if(response.status === 200 && response.body) {
             const singleProperty = deepSearch(response.body,["data","home"],{})
             setSingleProperty(singleProperty)
+        }else {
+          error("Something went wrong on our end. Please try again later.")
+          setSingleProperty(deepSearch(SingleDemo, ["data", "home"], {}))
         }
       }
       prevPropId.current = searchedPropertyId
