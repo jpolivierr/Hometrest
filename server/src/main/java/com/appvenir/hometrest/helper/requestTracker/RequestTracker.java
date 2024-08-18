@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -12,8 +13,14 @@ import lombok.RequiredArgsConstructor;
 public class RequestTracker {
 
     private final JdbcTemplate jdbcTemplate;
-    private final int REQUEST_PER_DAY = 5;
-    private final int MAX_REQUEST = 5;
+
+    private final int MAX_REQUEST = getMaxRequestCount();
+
+    private int getMaxRequestCount() {
+        Dotenv dotenv = Dotenv.configure().load();
+        String count = dotenv.get("REQUEST_TRACKER_MAX_REQUEST");
+        return count != null ? Integer.parseInt(count) : 100;
+    }
 
     public int incrementRequestCount(String clientIp) {
 
@@ -23,11 +30,9 @@ public class RequestTracker {
         if (currentCount.isPresent()) {
             int newCount = currentCount.get() + 1;
             jdbcTemplate.update("UPDATE request_count SET count = ? WHERE client_ip = ?", newCount, clientIp);
-            System.out.println("Client IP: " + clientIp + " Visits: " + newCount);
             return newCount;
         } else {
             jdbcTemplate.update("INSERT INTO request_count (client_ip, count) VALUES (?, ?)", clientIp, 1);
-            System.out.println("Client IP: " + clientIp + " Visits: " + 1);
             return 1;
         }
     }
