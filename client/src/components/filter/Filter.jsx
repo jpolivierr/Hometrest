@@ -9,8 +9,11 @@ import Autocomplete from '../map/AutoComplete';
 
 export default function Filter({data, setData}) {
 
-    const setLocation =(location) =>{
-        setData(({ ...data, ...location}));
+    const setLocation =(location) => {
+        setData((prevData) => {
+            return {...prevData,
+            ...location}
+    })
     }
 
     const setPropertyType = (type) => {
@@ -220,7 +223,6 @@ export default function Filter({data, setData}) {
                 <i className="fa-solid fa-location-dot"></i>
                 <Autocomplete setLocation={setLocation} data={data}/>
                 <i className="iicon fa-solid fa-magnifying-glass"></i>
-
             </fieldset>
 
             <fieldset >

@@ -68,7 +68,7 @@ const Listings = () =>{
         }, {})
       }));
     }
-  }, [pathname]);
+  }, []);
 
   const prevSearchRef = useRef(null);
   const timeoutRef = useRef(null)
@@ -79,10 +79,11 @@ const Listings = () =>{
         clearTimeout(timeoutRef.current)
       }
       const searchCopy = deepCopy(search)
+      
       updateParam(removeEmptyValues(searchCopy, true), true, "search") 
       timeoutRef.current = setTimeout(() => {
         fetchProperties()
-      }, 1000)
+      }, 600)
       
     }else if(!prevSearchRef.current && !deepEqual(prevSearchRef.current, search)){
       const searchCopy = deepCopy(search)
@@ -91,7 +92,7 @@ const Listings = () =>{
     }
     prevSearchRef.current = search;
     return () => {
-      if (timeoutRef.current) {
+      if (timeoutRef.current && (!deepEqual(prevSearchRef.current, search))) {
           clearTimeout(timeoutRef.current)
       }
   }
@@ -111,7 +112,10 @@ const Listings = () =>{
     }
     const response = await post(URL.SEARCH, removeEmptyValues(searchCopy, true))
     setLoadingOverlay(false)
-    
+    console.log(response)
+    if(response && response.error && response.error.code === 20){
+     return
+    }
     if(response.status >= 500 && response.status <= 599){
       error("Something went wrong on our end. Please try again later.")
       setTotal(propertiesDemo.length)

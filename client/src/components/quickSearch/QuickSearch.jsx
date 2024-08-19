@@ -24,8 +24,8 @@ const QuickSearch = () =>{
 
    const [search, setSearch] = useState({
     city_zip : "",
-    city: "",
-    state_code: "",
+    city: "Jacksonville",
+    state_code: "FL",
     type: [],
     status: [],
     list_price: {min: 0, max: 0},
