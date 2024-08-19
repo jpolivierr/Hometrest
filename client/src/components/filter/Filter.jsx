@@ -209,8 +209,12 @@ export default function Filter({data, setData}) {
         return data.status.includes(type);
     };
 
+    const submit = (e) => {
+        e.preventDefault()
+    }
+
     return (
-        <form className="property-filter stick">
+        <div className="property-filter stick" >
 
             <fieldset className='field-city-zip'>
                 <i className="fa-solid fa-location-dot"></i>
@@ -525,6 +529,6 @@ export default function Filter({data, setData}) {
             </fieldset>
 
 
-        </form>
+        </div>
       )
 }
