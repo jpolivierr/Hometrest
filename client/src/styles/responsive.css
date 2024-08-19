@@ -201,8 +201,11 @@
     .search-result{
         grid-template-columns: 1fr;
     }
-
+    .properties-section{
+        width: 100%;
+    }
     .the-map{
+        
         display: none;
     }
 

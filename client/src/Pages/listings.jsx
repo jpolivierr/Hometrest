@@ -16,6 +16,7 @@ import { formatNumber } from "../Util/formatNumber.js"
 import { useLocation } from "react-router"
 import { useMessageContext } from "../context/notification/Notification.jsx"
 import { propertiesDemo } from "../Mock/propertyDemo.js"
+import Footer from "../footer/footer.jsx"
 
 const Listings = () =>{
 
@@ -203,7 +204,7 @@ const Listings = () =>{
               {
                   properties.length === 0 ? 
                   <CardLoading layout={"grid-layout"}/> :
-                  <div>
+                  <div className="properties-section">
 
                     <div className="show-properties-header"> 
                       <h5>
@@ -227,6 +228,7 @@ const Listings = () =>{
                             ))
                       }
                     </div>
+                    <Footer Class={"listing-footer"} />
                   </div>
                     
               } 

@@ -2,9 +2,9 @@ import React from 'react'
 import NavList from '../components/list/NavList'
 import WhiteLogo from "../assets/images/logo-white.png"
 
-export default function Footer({container}) {
+export default function Footer({container, Class}) {
   return (
-    <footer className='footer'>
+    <footer className={`footer ${Class ? Class : ''}`}>
 
         <div className={`${container} container-medium flex-space-between footer_main`}>
 

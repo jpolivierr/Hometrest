@@ -442,3 +442,8 @@ footer h2, footer i{
     transform: rotate(45deg);
     cursor: pointer;
 }
+
+.listing-footer .footer_main{
+    flex-flow: column;
+    gap: 1rem;
+}

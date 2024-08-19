@@ -6,6 +6,12 @@
     margin-top: 1rem;
     height: max-content;
 }
+.properties-section{
+    overflow: hidden;
+    overflow-y: hidden;
+    height: calc(100vh - 151px);
+    overflow-y: scroll;
+}
 
 .show-properties-header{
     padding: 1rem;
