@@ -1,0 +1,40 @@
+CREATE TABLE IF NOT EXISTS users(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(250) NOT NULL,
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE (email)
+);
+
+CREATE TABLE IF NOT EXISTS liked_properties(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    property_id VARCHAR(100) NOT NULL,
+    price INT DEFAULT 0,
+    beds INT DEFAULT 0,
+    baths INT DEFAULT 0,
+    sqft INT DEFAULT 0,
+    street VARCHAR(100) NULL,
+    city VARCHAR(100) NULL,
+    state_code VARCHAR(10) NULL,
+    zip VARCHAR(20) NULL,
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS user_liked_properties(
+    user_id BIGINT NOT NULL,
+    property_id BIGINT NOT NULL,
+    CONSTRAINT fk_userLikedProperties_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_userLikedProperties_likedProperties FOREIGN KEY (property_id) REFERENCES liked_properties(id) ON DELETE CASCADE,
+    CONSTRAINT unique_user_property UNIQUE (user_id, property_id)
+);
+
+CREATE TABLE IF NOT EXISTS request_count(
+    client_ip VARCHAR(100) PRIMARY KEY NOT NULL,
+    count INT NOT NULL,
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
