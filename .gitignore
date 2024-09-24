@@ -94,7 +94,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-server/src/main/resources/static/
+src/main/resources/static/
 
 HELP.md
 target/
@@ -105,3 +105,4 @@ target/
 #React build folder in java
 static/
 
+application-secret.properties
