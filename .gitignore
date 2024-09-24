@@ -104,3 +104,5 @@ target/
 
 #React build folder in java
 static/
+
+application-secret.properties
