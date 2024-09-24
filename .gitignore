@@ -1,6 +1,5 @@
 *web.xml
 *.class
-application.properties
 
 # ignore ALL files in ANY directory named temp
 temp/ 
@@ -96,3 +95,12 @@ yarn-error.log*
 next-env.d.ts
 
 server/src/main/resources/static/
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+#React build folder in java
+static/
