@@ -20,6 +20,9 @@
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <client.basedir>${project.basedir}/src/main/client</client.basedir>
+        <client.build.dir>${client.basedir}/build</client.build.dir>
+        <project.static.dir>${project.basedir}/src/main/resources/static</project.static.dir>
     </properties>
 
     <dependencies>
@@ -126,13 +129,86 @@
 
     <build>
         <plugins>
+            <!-- Plugin to handle npm commands -->
             <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.15.1</version>
+                <executions>
+
+                    <!-- Install npm and Node.js -->
+                    <execution>
+                        <id>install-node-and-npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            <!-- <skip-install>true</skip-install> -->
+                            <nodeVersion>v20.15.1</nodeVersion>
+                            <npmVersion>10.7.0</npmVersion>
+                            <installDirectory>${client.basedir}</installDirectory>
+                        </configuration>
+                    </execution>
+                    
+                    <!-- Run npm install -->
+                    <execution>
+                        <id>npm-install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                            <workingDirectory>${client.basedir}</workingDirectory>
+                        </configuration>
+                    </execution>
+                    
+                    <!-- Run npm build -->
+                    <execution>
+                        <id>npm-build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>run build</arguments>
+                            <workingDirectory>${client.basedir}</workingDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/classes/static</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${client.build.dir}</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+             <!-- Spring Boot Maven plugin for packaging -->
+               <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <finalName>app</finalName>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>
