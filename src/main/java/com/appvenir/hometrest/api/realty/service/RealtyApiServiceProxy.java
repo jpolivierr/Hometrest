@@ -1,7 +1,4 @@
 package com.appvenir.hometrest.api.realty.service;
-
-import org.springframework.stereotype.Component;
-
 import com.appvenir.hometrest.api.realty.RealtyApi;
 import com.appvenir.hometrest.system.io.IO;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.Getter;
 
-@Component
 @Getter
 public class RealtyApiServiceProxy implements RealtyApi{
 

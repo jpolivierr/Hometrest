@@ -9,8 +9,6 @@ import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.util.stream.StreamSupport;
 
-import org.springframework.stereotype.Service;
-
 import com.appvenir.hometrest.api.realty.RealtyApi;
 import com.appvenir.hometrest.api.realty.dto.RealtyErrorResponseDto;
 import com.appvenir.hometrest.exception.realtyApiException.RealtyApiException;
@@ -18,7 +16,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-@Service
 public class RealtyApiService implements RealtyApi {
 
     private final ObjectMapper objectMapper;

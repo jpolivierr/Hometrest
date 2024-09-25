@@ -1,14 +1,14 @@
-package com.appvenir.hometrest.config;
+package com.appvenir.hometrest.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfigurationSource;
 
 import com.appvenir.hometrest.auth.RequestAuthenticationEntryPoint;
 import com.appvenir.hometrest.auth.RequestAuthenticationFailureHandler;
@@ -21,10 +21,10 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@Profile("prod")
 public class SecurityConfig {
 
     private final GlobalExceptionFilter globalExceptionFilter;
-    private final CorsConfigurationSource corsConfigurationSource;
     private final RequestAuthenticationSuccessHandler requestAuthenticationSuccessHandler;
     private final RequestAuthenticationFailureHandler requestAuthenticationFailureHandler;
     private final RequestAuthenticationEntryPoint requestAuthenticationEntryPoint;
@@ -32,11 +32,9 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
-                .csrf( csrf -> csrf.disable())
-                .cors( cors -> cors.configurationSource(corsConfigurationSource))
                 .addFilterBefore(globalExceptionFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests( auth -> auth
-                                    .requestMatchers(allowedPath()).permitAll()
+                                    .requestMatchers(SecurityProps.allowedPath()).permitAll()
                                     .anyRequest().authenticated()              
                 )
                 .exceptionHandling( ex -> ex.authenticationEntryPoint(requestAuthenticationEntryPoint))
@@ -61,26 +59,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    public String[] allowedPath(){
-        return new String[]{
-                            "/error",
-                            "/logout/**",
-                            "/signup/**",
-                            "/login/**",
-                            "/assets/**",
-                            "/api/v1/property_search/**",
-                            "/",
-                            "/index.html",
-                            "/static/js/**",
-                            "/static/css/**",
-                            "/static/media/**",
-                            "/listings/**",
-                            "/single_property/**",
-                            "/favicon.ico",
-                            "/favicon.icon",
-                            "/manifest.json",
-                        };
-    }
 
     
 }
