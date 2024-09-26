@@ -20,6 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Order(1)
 public class UrlDecodingFilter extends OncePerRequestFilter {
 
+    @SuppressWarnings("null")
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
