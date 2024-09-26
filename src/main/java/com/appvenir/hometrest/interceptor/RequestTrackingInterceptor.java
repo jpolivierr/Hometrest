@@ -15,6 +15,7 @@ public class RequestTrackingInterceptor implements HandlerInterceptor{
 
     private final RequestTracker requestTracker;
 
+    @SuppressWarnings("null")
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String clientIp = request.getRemoteAddr();

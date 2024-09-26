@@ -31,6 +31,7 @@ public class GlobalExceptionFilter extends OncePerRequestFilter {
         this.objectMapper = objectMapper;
     }
 
+    @SuppressWarnings("null")
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {

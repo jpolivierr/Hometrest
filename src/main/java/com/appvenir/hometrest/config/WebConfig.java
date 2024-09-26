@@ -14,6 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     private final RequestTrackingInterceptor requestTrackingInterceptor;
 
+    @SuppressWarnings("null")
     @Override
     public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(requestTrackingInterceptor)
