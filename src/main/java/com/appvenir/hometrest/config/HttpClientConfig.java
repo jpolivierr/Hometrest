@@ -21,9 +21,9 @@ public class HttpClientConfig {
 	public HttpRequest.Builder realtyRequestBuilder(){
 		return HttpRequest.newBuilder()
 						  .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-						  .header("X-RapidAPI-Key", rapidApiKey)
-						  .header("Content-Type", "application/json")
-						  .header("X-RapidAPI-Host", "realty-in-us.p.rapidapi.com");					
+						  .header("x-rapidapi-key", rapidApiKey)
+						  .header("x-rapidapi-host", "realty-in-us.p.rapidapi.com")
+						  .header("Content-Type", "application/json");					
 	}
 	
 
