@@ -23,6 +23,7 @@
         <client.basedir>${project.basedir}/src/main/client</client.basedir>
         <client.build.dir>${client.basedir}/build</client.build.dir>
         <project.static.dir>${project.basedir}/src/main/resources/static</project.static.dir>
+        <skip.npm.install>false</skip.npm.install>
     </properties>
 
     <dependencies>
@@ -159,6 +160,7 @@
                         <configuration>
                             <arguments>install</arguments>
                             <workingDirectory>${client.basedir}</workingDirectory>
+                            <skip>${skip.npm.install}</skip>
                         </configuration>
                     </execution>
                     

@@ -2,10 +2,10 @@ package com.appvenir.hometrest.helper.requestTracker;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -16,10 +16,15 @@ public class RequestTracker {
 
     private final int MAX_REQUEST = getMaxRequestCount();
 
+    @Value("${request.tracker.max.count}")
+    private String maxRequestCount;
+
     private int getMaxRequestCount() {
-        Dotenv dotenv = Dotenv.configure().load();
-        String count = dotenv.get("REQUEST_TRACKER_MAX_REQUEST");
-        return count != null ? Integer.parseInt(count) : 100;
+        try {
+            return Integer.parseInt(maxRequestCount);
+        } catch (NumberFormatException e) {
+            return 10;
+        }
     }
 
     public int incrementRequestCount(String clientIp) {

@@ -9,20 +9,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
-import io.github.cdimascio.dotenv.Dotenv;
-
+import org.springframework.beans.factory.annotation.Value;
 
 @Configuration
 public class HttpClientConfig {
 
+	@Value("${rapidApi.api.key}")
+	private String rapidApiKey;
+
 	@Bean
 	public HttpRequest.Builder realtyRequestBuilder(){
-
-		Dotenv dotenv = Dotenv.configure().load();
-
 		return HttpRequest.newBuilder()
 						  .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-						  .header("X-RapidAPI-Key", dotenv.get("RAPID_API_KEY"))
+						  .header("X-RapidAPI-Key", rapidApiKey)
 						  .header("Content-Type", "application/json")
 						  .header("X-RapidAPI-Host", "realty-in-us.p.rapidapi.com");					
 	}
