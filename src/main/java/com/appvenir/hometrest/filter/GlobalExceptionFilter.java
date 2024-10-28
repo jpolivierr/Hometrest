@@ -13,7 +13,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.appvenir.hometrest.exception.ErrorResponse;
 import com.appvenir.hometrest.exception.user.UserNotFoundException;
-import com.appvenir.hometrest.helper.validation.exception.ValidationException;
+import com.appvenir.hometrest.utils.validation.exception.ValidationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.FilterChain;

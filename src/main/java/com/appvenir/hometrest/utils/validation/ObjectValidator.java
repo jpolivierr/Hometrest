@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.helper.validation;
+package com.appvenir.hometrest.utils.validation;
 
 import jakarta.validation.Validator;
 
@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.appvenir.hometrest.helper.validation.exception.ValidationException;
+import com.appvenir.hometrest.utils.validation.exception.ValidationException;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;

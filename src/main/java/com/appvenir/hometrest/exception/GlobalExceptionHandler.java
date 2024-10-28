@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.appvenir.hometrest.exception.makeRequest.MakeRequestException;
-import com.appvenir.hometrest.helper.requestTracker.RequestLimitReachedException;
+import com.appvenir.hometrest.utils.requestTracker.RequestLimitReachedException;
 
 import jakarta.servlet.http.HttpServletRequest;
 

@@ -12,6 +12,7 @@ import com.appvenir.hometrest.domain.user.model.User;
 import com.appvenir.hometrest.domain.user.repository.UserRepository;
 import com.appvenir.hometrest.exception.user.EmailExistException;
 import com.appvenir.hometrest.exception.user.UserNotFoundException;
+import com.appvenir.hometrest.utils.nullcheck.NullCheck;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +24,8 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public UserDto saveUser(UserRegistrationDto userRegistrationDto){
+
+        NullCheck.check(userRegistrationDto, () -> new IllegalArgumentException("Registration Dto cannot be null"));
 
         userRepository.findByEmail(userRegistrationDto.getEmail()).ifPresent( (u) -> {
             throw new EmailExistException();
@@ -37,6 +40,8 @@ public class UserService {
     }
 
     public UserDto updateUser(UserDto userDto){
+
+        NullCheck.check(userDto, () -> new IllegalArgumentException("User Dto cannot be null"));
 
         User user = userRepository.findByEmail(userDto.getEmail()).orElseThrow(() -> new UserNotFoundException());
 

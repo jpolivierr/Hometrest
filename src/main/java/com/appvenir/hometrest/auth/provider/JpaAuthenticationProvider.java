@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.appvenir.hometrest.auth.service.UserAuthService;
 import com.appvenir.hometrest.domain.user.dto.UserLoginDto;
-import com.appvenir.hometrest.helper.validation.ObjectValidator;
+import com.appvenir.hometrest.utils.validation.ObjectValidator;
+
 import lombok.RequiredArgsConstructor;
 
 @Service

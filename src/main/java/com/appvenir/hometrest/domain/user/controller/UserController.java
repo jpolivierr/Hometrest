@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.appvenir.hometrest.auth.dto.UserDetailsDto;
 import com.appvenir.hometrest.domain.user.dto.UserDto;
+import com.appvenir.hometrest.domain.user.dto.UserRegistrationDto;
 import com.appvenir.hometrest.domain.user.model.User;
 import com.appvenir.hometrest.domain.user.service.UserService;
 import com.appvenir.hometrest.exception.user.UserNotFoundException;
@@ -26,6 +28,13 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 
     private final UserService userService;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<UserDto> createUser(@RequestBody UserRegistrationDto userRegistrationDto)
+    {
+          return ResponseEntity.ok(userService.saveUser(userRegistrationDto));
+    }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
