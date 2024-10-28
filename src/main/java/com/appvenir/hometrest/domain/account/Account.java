@@ -44,5 +44,10 @@ public class Account extends AuditableTimeStamp{
             this.accountId = UUID.randomUUID().toString();
         }
     }
+
+    public Account(AccountType accountType)
+    {
+        this.accountType = accountType;
+    }
     
 }
