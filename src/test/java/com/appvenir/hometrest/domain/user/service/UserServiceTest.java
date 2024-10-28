@@ -12,6 +12,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,6 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.appvenir.hometrest.domain.account.AccountType;
 import com.appvenir.hometrest.domain.user.dto.UserDto;
 import com.appvenir.hometrest.domain.user.factory.UserFactory;
 import com.appvenir.hometrest.domain.user.mapper.UserMapper;
@@ -55,6 +57,13 @@ public class UserServiceTest {
         var userRegistrationDto = UserMapper.toUserRegistrotionDto(user);
 
         UserDto userDto = userService.saveUser(userRegistrationDto);
+
+        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
+        verify(userRepository).save(userCaptor.capture());
+
+        User capturedUser = userCaptor.getValue();
+        assertNotNull(capturedUser.getAccount(), "Account should be created and associated with the user");
+        assertEquals(AccountType.DEFAULT, capturedUser.getAccount().getAccountType(), "Account type should be DEFAULT");
 
         verify(userRepository).findByEmail(user.getEmail());
         verify(userRepository).save(any(User.class));

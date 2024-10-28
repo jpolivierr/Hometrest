@@ -1,4 +1,4 @@
-CREATE TABLES IF NOT EXISTS accounts(
+CREATE TABLE IF NOT EXISTS accounts(
     account_id CHAR(36) NOT NULL PRIMARY KEY,
     user_id BIGINT NOT NULL UNIQUE,
     account_typ VARCHAR(20) NOT NULL,
