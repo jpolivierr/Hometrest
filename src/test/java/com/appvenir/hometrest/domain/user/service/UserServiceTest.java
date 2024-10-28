@@ -2,7 +2,9 @@ package com.appvenir.hometrest.domain.user.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -18,9 +20,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.appvenir.hometrest.domain.user.dto.UserDto;
+import com.appvenir.hometrest.domain.user.factory.UserFactory;
 import com.appvenir.hometrest.domain.user.mapper.UserMapper;
 import com.appvenir.hometrest.domain.user.model.User;
 import com.appvenir.hometrest.domain.user.repository.UserRepository;
+import com.appvenir.hometrest.exception.user.EmailExistException;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -40,13 +44,9 @@ public class UserServiceTest {
     }
 
     @Test
-    void saved_user_should_return_user_object(){
+    void saveUser_should_save_user_and_return_userDto_object(){
 
-        var user = new User();
-        user.setFirstName("Frederic");
-        user.setLastName("Olivier");
-        user.setEmail("emapl@example.com");
-        user.setPassword("4082098");
+        var user = UserFactory.getUser();
 
         when(userRepository.findByEmail(any(String.class))).thenReturn(Optional.empty());
 
@@ -63,6 +63,41 @@ public class UserServiceTest {
         assertEquals(user.getFirstName(), userDto.getFirstName());
         assertEquals(user.getLastName(), userDto.getLastName());
         assertEquals(user.getEmail(), userDto.getEmail());
+
+    }
+
+    @Test
+    void saveUser_should_throw_IllegalArgementException()
+    {
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            userService.saveUser(null);
+        });
+
+        assertEquals("Registration Dto cannot be null", exception.getMessage());
+
+        verify(userRepository, never()).findByEmail(any(String.class));
+        verify(userRepository, never()).save(any(User.class));
+
+    }
+
+    @Test
+    void saveUser_should_throw_EmailExistException()
+    {
+
+        var userRegistrationDto = UserFactory.getUserRegistrationDto();
+
+        var user = UserFactory.getUser();
+
+        when(userRepository.findByEmail(userRegistrationDto.getEmail())).thenReturn(Optional.of(user));
+
+        EmailExistException exception = assertThrows(EmailExistException.class, () -> {
+            userService.saveUser(userRegistrationDto);
+        });
+
+        assertEquals("This email address is already in use.", exception.getMessage());
+
+        verify(userRepository, never()).save(any(User.class));
 
     }
     
