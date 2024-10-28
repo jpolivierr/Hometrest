@@ -3,6 +3,7 @@ package com.appvenir.hometrest.domain.user.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.appvenir.hometrest.domain.account.Account;
 import com.appvenir.hometrest.domain.common.Auditable;
 import com.appvenir.hometrest.domain.property.model.LikedProperty;
 
@@ -13,6 +14,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class User extends Auditable {
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    private Account account;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -50,6 +55,12 @@ public class User extends Auditable {
     public void addLikedProperty(LikedProperty likedProperty) {
         likedProperties.add(likedProperty);
         likedProperty.getUsers().add(this);
+    }
+
+    public void setAccount(Account account)
+    {
+        account.setUser(this);
+        this.account = account;
     }
 }
 

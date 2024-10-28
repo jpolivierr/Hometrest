@@ -1,0 +1,26 @@
+package com.appvenir.hometrest.domain.common;
+
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
+
+@MappedSuperclass
+@Getter
+@Setter
+public abstract class AuditableTimeStamp {
+
+    @CreationTimestamp
+    @Column(name = "date_created", nullable = false)
+    private LocalDateTime dateCreated;
+
+    @UpdateTimestamp
+    @Column(name = "last_updated", nullable = false)
+    private LocalDateTime lastUpdated;
+    
+}

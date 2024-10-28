@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.appvenir.hometrest.domain.account.Account;
+import com.appvenir.hometrest.domain.account.AccountType;
 import com.appvenir.hometrest.domain.user.dto.UserDto;
 import com.appvenir.hometrest.domain.user.dto.UserRegistrationDto;
 import com.appvenir.hometrest.domain.user.mapper.UserMapper;
@@ -34,7 +36,8 @@ public class UserService {
         userRegistrationDto.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
 
         User user = UserMapper.toModel(userRegistrationDto);
-
+        Account account = new Account(AccountType.DEFAULT);
+        user.setAccount(account);
         return UserMapper.toDto(userRepository.save(user));
         
     }
