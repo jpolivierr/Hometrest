@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.helper.paramBuilder;
+package com.appvenir.hometrest.utils.paramBuilder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

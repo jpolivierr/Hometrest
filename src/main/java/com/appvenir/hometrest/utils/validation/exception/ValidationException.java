@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.helper.validation.exception;
+package com.appvenir.hometrest.utils.validation.exception;
 
 import java.util.Map;
 

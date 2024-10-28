@@ -1,4 +1,4 @@
-package com.appvenir.hometrest.helper.httpHandler;
+package com.appvenir.hometrest.utils.httpHandler;
 
 import java.net.URI;
 import java.net.URISyntaxException;

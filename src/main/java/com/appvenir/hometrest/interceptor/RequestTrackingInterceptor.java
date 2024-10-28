@@ -3,7 +3,7 @@ package com.appvenir.hometrest.interceptor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.appvenir.hometrest.helper.requestTracker.RequestTracker;
+import com.appvenir.hometrest.utils.requestTracker.RequestTracker;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
