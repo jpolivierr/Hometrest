@@ -1,41 +1,44 @@
 package com.appvenir.hometrest.config.security;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import com.appvenir.hometrest.auth.RequestAuthenticationEntryPoint;
 import com.appvenir.hometrest.auth.RequestAuthenticationFailureHandler;
 import com.appvenir.hometrest.auth.RequestAuthenticationSuccessHandler;
 import com.appvenir.hometrest.auth.UserLogoutSuccessHandler;
 import com.appvenir.hometrest.filter.GlobalExceptionFilter;
+import com.appvenir.hometrest.filter.JwtAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-@Profile("prod")
 public class SecurityConfig {
 
     private final GlobalExceptionFilter globalExceptionFilter;
+    private final CorsConfigurationSource corsConfigurationSource;
     private final RequestAuthenticationSuccessHandler requestAuthenticationSuccessHandler;
     private final RequestAuthenticationFailureHandler requestAuthenticationFailureHandler;
     private final RequestAuthenticationEntryPoint requestAuthenticationEntryPoint;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
                 .csrf( csrf -> csrf.disable())
+                .cors( cors -> cors.configurationSource(corsConfigurationSource))
                 .addFilterBefore(globalExceptionFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthenticationFilter, GlobalExceptionFilter.class)
                 .authorizeHttpRequests( auth -> auth
-                                    .requestMatchers(SecurityProps.allowedPath()).permitAll()
+                                    .requestMatchers(Paths.ALLOWED).permitAll()
                                     .anyRequest().authenticated()              
                 )
                 .exceptionHandling( ex -> ex.authenticationEntryPoint(requestAuthenticationEntryPoint))
@@ -44,7 +47,6 @@ public class SecurityConfig {
                     .usernameParameter("email")
                     .successHandler(requestAuthenticationSuccessHandler)
                     .failureHandler(requestAuthenticationFailureHandler);
-                    
                 })
                 .logout( logout -> {
                     logout.logoutUrl("/logout")
@@ -60,6 +62,4 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
-    
 }

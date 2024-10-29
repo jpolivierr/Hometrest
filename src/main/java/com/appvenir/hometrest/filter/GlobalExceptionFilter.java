@@ -22,7 +22,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
 public class GlobalExceptionFilter extends OncePerRequestFilter {
 
     private final ObjectMapper objectMapper;
